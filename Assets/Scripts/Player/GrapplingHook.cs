@@ -7,6 +7,8 @@ using TMPro;
 public class GrapplingHook : MonoBehaviour
 {
 
+    public LayerMask layermask;
+
     public float grappleDistance = 100;
     public float grappleSpeed = 1;
     public Transform barrel;
@@ -29,6 +31,7 @@ public class GrapplingHook : MonoBehaviour
 
     void Start()
     {
+        layermask = ~layermask;
         rb = GetComponent<Rigidbody>();
         locomotion = GetComponent<Locomotion>();
         betterJump = GetComponent<BetterJump>();
@@ -40,10 +43,10 @@ public class GrapplingHook : MonoBehaviour
     {
         GrappleInfo();
         
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
             StartGrapple();
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(1))
             StopGrapple();
 
         if (grappling)
@@ -54,7 +57,7 @@ public class GrapplingHook : MonoBehaviour
     {
 
         RaycastHit hit;
-        if(Physics.Raycast(barrel.transform.position, barrel.transform.forward, out hit, grappleDistance))
+        if(Physics.Raycast(barrel.transform.position, barrel.transform.forward, out hit, grappleDistance, layermask))
         {
             Debug.DrawLine(barrel.transform.position, barrel.transform.forward * 999, Color.red, 1);
             grapplePoint = hit.point;
@@ -133,7 +136,7 @@ public class GrapplingHook : MonoBehaviour
     public void GrappleInfo()
     {
         RaycastHit hit;
-        if(Physics.Raycast(barrel.transform.position, barrel.transform.forward, out hit, 999))
+        if(Physics.Raycast(barrel.transform.position, barrel.transform.forward, out hit, 999, layermask))
         {
 
             float distance = Vector3.Distance(barrel.transform.position, hit.point);
