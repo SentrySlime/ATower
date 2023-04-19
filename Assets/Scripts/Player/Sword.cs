@@ -81,7 +81,8 @@ public class Sword : MonoBehaviour
     {
         targetRotation = startRotation * Quaternion.Euler(0, -recoilAmount, 0);
 
-        targetPosition = new Vector3(startPos.x, startPos.y, startPos.z + moveAmount);
+        //targetPosition = new Vector3(startPos.x, startPos.y, startPos.z + moveAmount);
+        targetPosition = new Vector3(startPos.x + moveAmount, startPos.y , startPos.z );
 
         if (timeElapsed < lerpDuration)
         {
