@@ -160,7 +160,6 @@ public class Locomotion : MonoBehaviour
             }
             else if (extraJumps > 0)
             {
-                extraJumps--;
                 readyToJump = false;
                 Jump();
 
@@ -242,9 +241,13 @@ public class Locomotion : MonoBehaviour
         }
         else
         {
+            
+            if(!grounded)
+                extraJumps--;
             canCoyoteJump = false;
             rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
             rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+
         }
 
 
@@ -355,7 +358,6 @@ public class Locomotion : MonoBehaviour
         appliedForce = rb.velocity.magnitude * 1.5f;
         appliedForce = Mathf.Clamp(appliedForce, 0, flyingMaxSpeed);
         speedLoss = appliedForce / 4;
-        print(appliedForce);
     }
 
     private void Velocity()

@@ -23,7 +23,7 @@ public class Settings : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        psxEffects = mainCamera.GetComponent<PSXEffects>();
+        psxEffects = mainCamera.GetComponentInChildren<PSXEffects>();
         fishEyeEffect = mainCamera.GetComponent<WideCameraProjector>();
 
         SetSliders();
