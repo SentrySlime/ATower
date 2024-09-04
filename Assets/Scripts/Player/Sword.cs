@@ -5,6 +5,9 @@ using UnityEngine;
 public class Sword : MonoBehaviour
 {
     [Header("RaycastStuff")]
+    int damage = 5;
+
+    [Header("RaycastStuff")]
     public float raycastLength = 1;
     public LayerMask layerMask;
     public float rayCastDuration = 0.1f;
@@ -139,8 +142,9 @@ public class Sword : MonoBehaviour
         Debug.DrawLine(transform.position, transform.position +  transform.forward * raycastLength, Color.red, 1);
         if (Physics.Raycast(transform.position, transform.forward * raycastLength,  out hit, raycastLength, ~layerMask))
         {
-            if(hit.transform.CompareTag("Enemy"))
-                Destroy(hit.transform.gameObject);
+            if (hit.transform.CompareTag("Enemy"))
+                hit.transform.gameObject.GetComponent<Health>().TakeDamage(damage);
+                //Destroy(hit.transform.gameObject);
         }
     }
 

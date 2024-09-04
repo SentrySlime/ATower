@@ -5,3 +5,4 @@ There are two example scenes here.
 - Sky for walkable FPC using Wide Camera Projector.
 
 You no longer need standard assets.
+

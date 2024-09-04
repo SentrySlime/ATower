@@ -6,6 +6,8 @@ using TMPro;
 public class Locomotion : MonoBehaviour
 {
     public float velocity;
+    public float velocityX;
+    public float velocityZ;
 
 
     [Header("Movement")]
@@ -85,6 +87,9 @@ public class Locomotion : MonoBehaviour
     private void Update()
     {
         velocity = rb.velocity.y;
+        velocityX = rb.velocity.x;
+        velocityZ = rb.velocity.z;
+
         CoyoteTime();
         GroundCheck();
         MyInput();
@@ -172,7 +177,7 @@ public class Locomotion : MonoBehaviour
 
     private void MovePlayer()
     {
-        if(playerState.moveState == PlayerState.StateMachine.freeze) { return; }
+        //if(playerState.moveState == PlayerState.StateMachine.freeze) { return; }
         // calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         moveDirection = new Vector3(moveDirection.x, 0, moveDirection.z);
@@ -195,7 +200,9 @@ public class Locomotion : MonoBehaviour
 
         // in air
         else if (!grounded)
+        {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
     }
 
     private void SpeedControl()
@@ -213,14 +220,17 @@ public class Locomotion : MonoBehaviour
     private void FlyingSpeedControl()
     {
 
-        Vector3 flatVel = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z);
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+
 
         // limit velocity if needed
         if (flatVel.magnitude > appliedForce)
         {
-
             Vector3 limitedVel = flatVel.normalized * appliedForce;
-            rb.velocity = new Vector3(limitedVel.x, flatVel.y, limitedVel.z);
+
+
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+            
 
         }
 
@@ -267,6 +277,7 @@ public class Locomotion : MonoBehaviour
             {
                 grounded = true;
                 extraJumps = maxJumps;
+                //transform.SetParent(hit.transform);
                 //if (landSFX && !landSFX.isPlaying)
                 //    landSFX.Play();
             }
