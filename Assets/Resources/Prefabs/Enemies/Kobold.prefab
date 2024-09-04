@@ -47,20 +47,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f62242947bcb804c98fa0c285b6e8dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 100
+  maxHealth: 200
+  currentHealth: 200
   moneyAmount: 100
-  money: {fileID: 0}
+  explodeOnDeath: 0
+  explosionDamage: 100
+  moneyPrefab: {fileID: 0}
   dieSFX: {fileID: 4964101775347663484, guid: 57d9e00357cc8f44c9703fedb68cbd04, type: 3}
   deathParticles: {fileID: 8240258288333259156, guid: 1a0db613e426fd549a341b5179eb5de8, type: 3}
   deathParticleSize: 1
   moneySpawnPoint: {fileID: 3639223469683857148}
-  hitMarkerLogic: {fileID: 0}
   killMarker: {fileID: 0}
   homingTarget: {fileID: 1503445920806744871}
   itemPrefab: {fileID: 0}
   dropChance: 0.5
   projectileChildren: []
+  damagedPS: {fileID: 0}
 --- !u!114 &5594027182741467194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,8 +81,8 @@ MonoBehaviour:
     m_Bits: 0
   interactDistance_: 125
   firingRate: 2
-  rangedAttack: 0
-  rangedProjectile: {fileID: 0}
+  rangedAttack: 1
+  rangedProjectile: {fileID: 7929977615501413461, guid: aaa211e7b9418704d8e7f3733954f506, type: 3}
   rangedDistance_: 75
   meleeAttack: 0
   meleeObj: {fileID: 0}
@@ -209,7 +211,7 @@ Transform:
   m_GameObject: {fileID: 981597340537944516}
   m_LocalRotation: {x: -0.19290102, y: -0.0008051237, z: -0.0057788105, w: 0.9812009}
   m_LocalPosition: {x: -2.9084734e-13, y: 0.0010070073, z: 3.9629876e-11}
-  m_LocalScale: {x: 0.99999994, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8769174094087113003}
   m_Father: {fileID: 4390975560830133104}
@@ -1043,20 +1045,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f62242947bcb804c98fa0c285b6e8dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 100
+  maxHealth: 150
+  currentHealth: 150
   moneyAmount: 100
-  money: {fileID: 0}
+  explodeOnDeath: 0
+  explosionDamage: 100
+  moneyPrefab: {fileID: 0}
   dieSFX: {fileID: 4964101775347663484, guid: 57d9e00357cc8f44c9703fedb68cbd04, type: 3}
   deathParticles: {fileID: 6730801598990464917, guid: 9a8bdae820786d24b86805e7c0ce8149, type: 3}
   deathParticleSize: 1
-  moneySpawnPoint: {fileID: 0}
-  hitMarkerLogic: {fileID: 0}
+  moneySpawnPoint: {fileID: 9124457959747447762}
   killMarker: {fileID: 0}
   homingTarget: {fileID: 1503445920806744871}
   itemPrefab: {fileID: 0}
   dropChance: 0
   projectileChildren: []
+  damagedPS: {fileID: 0}
 --- !u!65 &1903837400
 BoxCollider:
   m_ObjectHideFlags: 0
