@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class LevelGeneration : MonoBehaviour
 {
+    
+    [SerializeField]
+    NavMeshSurface[] navMeshSurfaces;
 
     public List<GameObject> rooms = new List<GameObject>();
     GameObject spawnTransform;
@@ -18,32 +21,41 @@ public class LevelGeneration : MonoBehaviour
     public List<GameObject> allSurfaces = new List<GameObject>();
     //public List<> allSurfaces = new List<GameObject>();
 
+    NavMeshManager navMeshManager;
+
+    bool hasBuilt = false;
+
     void Start()
     {
+        navMeshManager = GetComponent<NavMeshManager>();
         allRoomCount = rooms.Count;
+
+        
     }
 
 
     void Update()
     {
-        if (timer1 < rate1)
+        
+        if (roomCount < allRoomCount)
         {
-            timer1 += Time.deltaTime;
-        }
-        else
-        {
-            if (roomCount < allRoomCount)
+            if (timer1 < rate1)
+            {
+                timer1 += Time.deltaTime;
+            }
+            else
             {
                 GenerateLevel();
                 timer1 = 0;
             }
-            else
-            {
-
-            }
-
-
         }
+        //else if(!hasBuilt)
+        //{
+
+        //    //GenerateNavmesh here
+        //    GenerateNavMesh();
+        //    hasBuilt = true;    
+        //}
 
     }
 
@@ -79,7 +91,14 @@ public class LevelGeneration : MonoBehaviour
 
     private void GenerateNavMesh()
     {
+        //allSurfaces[0].GetComponent<Material>().color = Color.red;
+        navMeshManager.NavMeshBuilder(allSurfaces[0].GetComponent<NavMeshSurface>());
         //Generate navmesh here
+        //for (int i = 0; i < allSurfaces.Count; i++)
+        //{
+        //    // build navmesh here
+        //    navMeshManager.NavMeshBuilder(allSurfaces[i].GetComponent<NavMeshSurface>());
+        //}
 
     }
 

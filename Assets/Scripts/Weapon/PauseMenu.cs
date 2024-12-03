@@ -54,32 +54,32 @@ public class PauseMenu : MonoBehaviour
         }
 
 
-        RaycastHit hit;
-        if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.forward, out hit, 5))
-        {
-            if (hit.transform.CompareTag("Item"))
-            {
-                dissapearTimer = 0;
-                var tempItem = hit.transform.GetComponent<ItemPickUp>();
-                if (tempItem)
-                {
-                    if (!panel.activeInHierarchy)
-                        panel.SetActive(true);
+        //RaycastHit hit;
+        //if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.forward, out hit, 5))
+        //{
+        //    if (hit.transform.CompareTag("Item"))
+        //    {
+        //        dissapearTimer = 0;
+        //        var tempItem = hit.transform.GetComponent<ItemPickUp>();
+        //        if (tempItem)
+        //        {
+        //            if (!panel.activeInHierarchy)
+        //                panel.SetActive(true);
 
-                    itemName.text = tempItem.itemName;
-                    itemDescription.text = tempItem.itemDescription;
-                    image.sprite = tempItem.itemIcon;
+        //            itemName.text = tempItem.itemName;
+        //            itemDescription.text = tempItem.itemDescription;
+        //            image.sprite = tempItem.itemIcon;
 
-                }
+        //        }
 
 
-            }
-            else
-            {
+        //    }
+        //    else
+        //    {
 
-            }
+        //    }
 
-        }
+        //}
 
 
         if (Input.GetKeyDown(KeyCode.Escape))

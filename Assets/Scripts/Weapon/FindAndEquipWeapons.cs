@@ -10,13 +10,29 @@ public class FindAndEquipWeapons : MonoBehaviour
     [SerializeField] public BaseWeapon baseWeapon;
     [SerializeField] WeaponSocket weaponSocket;
     [SerializeField] GameObject weaponParent;
+    [SerializeField] float interactDistance;
+
     GameObject lastHitObj;
 
     public GameObject startWeapon;
-    public GameObject itemPanel;
+
+    
+
+    float dissapearTimer;
 
     Inventory inventory;
 
+    [HideInInspector] private Transform shootPoint;
+
+    [Header("Panel")]
+    public GameObject panel;
+    public CanvasGroup itemGroup2;
+    public TextMeshProUGUI itemName2;
+    public TextMeshProUGUI itemDescription2;
+    public Image image2;
+
+    [Header("Item panel")]
+    public GameObject itemPanel;
     [HideInInspector] public CanvasGroup itemGroup;
     [HideInInspector] public TextMeshProUGUI itemName;
     [HideInInspector] public TextMeshProUGUI itemDescription;
@@ -30,6 +46,7 @@ public class FindAndEquipWeapons : MonoBehaviour
         baseWeapon = GetComponent<BaseWeapon>();
         Mcamera = Camera.main;
         inventory = GetComponent<Inventory>();
+        shootPoint = GameObject.FindGameObjectWithTag("ShootPoint").transform;
     }
 
     void Start()
@@ -40,12 +57,13 @@ public class FindAndEquipWeapons : MonoBehaviour
 
     void Update()
     {
+        CheckForItems();
+        
         if (Input.GetKeyDown(KeyCode.E))
         {
 
-
             RaycastHit hit;
-            if (Physics.Raycast(Mcamera.transform.position, Mcamera.transform.forward * 5, out hit, 5) && hit.transform.gameObject.CompareTag("Item"))
+            if (Physics.Raycast(Mcamera.transform.position, Mcamera.transform.forward * interactDistance, out hit, interactDistance) && hit.transform.gameObject.CompareTag("Item"))
             {
 
                 if (!equipSFX.isPlaying)
@@ -135,4 +153,42 @@ public class FindAndEquipWeapons : MonoBehaviour
         if (lastHitObj != null)
             weaponSocket.SetUpWeapon(lastHitObj);
     }
+
+    private void CheckForItems()
+    {
+        if (dissapearTimer < .25f)
+        {
+            dissapearTimer += Time.deltaTime;
+        }
+        else
+        {
+            panel.SetActive(false);
+        }
+
+        RaycastHit hit;
+        if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.forward, out hit, interactDistance))
+        {
+            if (hit.transform.CompareTag("Item"))
+            {
+                dissapearTimer = 0;
+                var tempItem = hit.transform.GetComponent<ItemPickUp>();
+                if (tempItem)
+                {
+                    if (!panel.activeInHierarchy)
+                        panel.SetActive(true);
+
+                    itemName2.text = tempItem.itemName;
+                    itemDescription2.text = tempItem.itemDescription;
+                    image2.sprite = tempItem.itemIcon;
+
+                }
+            }
+            else
+            {
+
+            }
+
+        }
+    }
+
 }

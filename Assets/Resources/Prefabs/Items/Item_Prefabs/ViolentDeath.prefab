@@ -43,13 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 933177ba83eb1aa40be6edd48a6ad452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Eruption
-  itemDescription: Exnemies you kill explode
-  itemIcon: {fileID: 21300000, guid: 5026ff32eaa228c4889a84cc0bffd1fc, type: 3}
+  itemName: ViolentDeath
+  itemDescription: Enemies you kill explode
+  itemIcon: {fileID: 21300000, guid: 3600bc37874a8ba44aa416a2ce0e9a92, type: 3}
   itemMesh: {fileID: -2432090755550338912, guid: b557593f5f2a27640b9b5cb8879bbc73, type: 3}
   itemMaterial: {fileID: 2100000, guid: 08d5c6dcf8540184b98e47e52d4cdd8f, type: 2}
   playerStats: {fileID: 0}
-  includeExplosion: 1
-  canExplodeEnemies: 1
+  includeExplosion: 0
+  canExplodeEnemies: 0
   ammoRefills: 0
   reloadAmount: 0

@@ -11,6 +11,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     public int moneyAmount = 100;
 
     [Header("Explosion")]
+    public bool canExplode = false;
     public bool explodeOnDeath = false;
     public int explosionDamage = 100;
 
@@ -159,6 +160,10 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
 
     private bool CanExplode()
     {
+
+        if(!canExplode)
+            return false;
+
         bool shouldExplode = false;
 
         
