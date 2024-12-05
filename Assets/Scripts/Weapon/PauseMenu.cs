@@ -44,14 +44,14 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (dissapearTimer < .25f)
-        {
-            dissapearTimer += Time.deltaTime;
-        }
-        else
-        {
-            panel.SetActive(false);
-        }
+        //if (dissapearTimer < .25f)
+        //{
+        //    dissapearTimer += Time.deltaTime;
+        //}
+        //else
+        //{
+        //    panel.SetActive(false);
+        //}
 
 
         //RaycastHit hit;

@@ -6,13 +6,16 @@ public class ItemManager : MonoBehaviour
 {
 
     public GameObject itemTemplate;
-    public List<ItemBase> items = new List<ItemBase>();
+    //public List<ItemBase> items = new List<ItemBase>();
+
+    public ItemBase[] items;
 
     GameObject player;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        items = Resources.LoadAll<ItemBase>("Prefabs/Items/Item_Prefabs");
     }
 
     
@@ -35,7 +38,7 @@ public class ItemManager : MonoBehaviour
 
     private ItemBase GetRandomItem()
     {
-        int itemIndex = Random.Range(0, items.Count);
+        int itemIndex = Random.Range(0, items.Length);
         return items[itemIndex];
     }
 }

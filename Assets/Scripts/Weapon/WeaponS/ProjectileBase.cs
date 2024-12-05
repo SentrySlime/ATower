@@ -118,9 +118,6 @@ public class ProjectileBase : MonoBehaviour
 
         if (other.CompareTag("Enemy"))
         {
-
-            print("1");
-            //if (!other.CompareTag("Enemy")) { return; }
             if (isExplosive)
             {
                 ExplosiveShot(other.transform.root.gameObject);
@@ -132,7 +129,6 @@ public class ProjectileBase : MonoBehaviour
         }
         else if(other.CompareTag("Breakable"))
         {
-            print("2");
             if (isExplosive)
             {
                 ExplosiveShot(other.gameObject);
