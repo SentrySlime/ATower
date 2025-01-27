@@ -89,9 +89,7 @@ public class WeaponSocket : MonoBehaviour
 
     void Update()
     {
-
-
-        if (pauseMenu.paused) { return; }
+        if (pauseMenu.paused || equippedWeapon == null) { return; }
 
         if (equippedWeapon)
         {
@@ -108,7 +106,6 @@ public class WeaponSocket : MonoBehaviour
         }
         else
         {
-
             if (fireMode == FireMode.fullAuto)
             {
                 if (Input.GetMouseButton(0))
@@ -137,7 +134,8 @@ public class WeaponSocket : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButton(1))
+        
+        if (Input.GetMouseButton(1) )
         {
             if (adsProgress < 0.1)
             {
@@ -178,6 +176,7 @@ public class WeaponSocket : MonoBehaviour
 
     public void Fire()
     {
+        StopReload();
         if (equippedWeapon == null || reloadIcon.isActiveAndEnabled) { return; }
 
         if (equippedWeapon.currentMagazine >= equippedWeapon.ammoPerShot)
@@ -196,7 +195,6 @@ public class WeaponSocket : MonoBehaviour
             if (!noAmmo.isPlaying)
                 noAmmo.Play();
         }
-        //Else click click
 
     }
 
@@ -243,6 +241,7 @@ public class WeaponSocket : MonoBehaviour
         if (!wSwitch_SFX.isPlaying)
             wSwitch_SFX.Play();
         InitalizeItem(incomingObj);
+        SetFOVnSens();
 
         if (equippedWeapon != null)
             hipPos = equippedWeapon.hipPos;

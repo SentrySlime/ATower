@@ -32,6 +32,8 @@ public class PauseMenu : MonoBehaviour
     public CanvasGroup damageVignette;
     public CanvasGroup shieldVignette;
 
+    [Header("Settings")]
+    public Slider sensitivitySlider;
 
     void Start()
     {
@@ -165,8 +167,11 @@ public class PauseMenu : MonoBehaviour
     {
         playerHP.damageVignette = damageVignette;
         playerHP.shieldVignette = shieldVignette;
+    }
 
-
+    public void Settings()
+    {
+        
     }
 
 }

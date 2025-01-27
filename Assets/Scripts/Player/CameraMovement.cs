@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.PlayerLoop;
 
 public class CameraMovement : MonoBehaviour
 {
     public GameObject rootObj;
+    public bool paused = false;
+
+    [Header("Sensitivity")]
     public Slider sensslider;
     public TextMeshProUGUI sensValue;
     private float currentSens = 0;
     private float previousSens = 0;
-    public bool paused = false;
     public float Sensitivity
     {
         get { return sensitivity; }
@@ -36,11 +39,16 @@ public class CameraMovement : MonoBehaviour
     const string yAxis = "Mouse Y";
 
     Transform playerPos;
+    public WeaponSocket weaponSocket;
 
     private void Start()
     {
         playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        weaponSocket = GameObject.FindObjectOfType<WeaponSocket>();
 
+        if (sensslider == null) { return; }
+        sensslider.maxValue = 10;
+        sensslider.value = sensitivity;
     }
 
     private void LateUpdate()
@@ -74,6 +82,9 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
+        UpdateSensitivity();
+
+        #region
         //------Change sens -----\\
 
         //currentSens = sensslider.value;
@@ -99,5 +110,25 @@ public class CameraMovement : MonoBehaviour
         ///*transform.localRotation = xQuat * yQuat;*/ //Quaternions seem to rotate more consistently than EulerAngles. Sensitivity seemed to change slightly at certain degrees using Euler. transform.localEulerAngles = new Vector3(-rotation.y, rotation.x, 0);
         //transform.localRotation = yQuat;
         //rootObj.transform.localRotation = xQuat;
+        #endregion
+    }
+
+    private void UpdateSensitivity()
+    {
+        sensitivity = sensslider.value;
+        sensslider.value = Mathf.Round(sensslider.value * 100f) / 100f;
+        sensValue.text = sensslider.value.ToString();
+        weaponSocket.baseSensitivity = sensitivity;
+        //weaponSocket.SetFOVnSens();
+        //sensValue.text = sensitivity.ToString();
+
+        //currentSens = sensslider.value;
+        //if (currentSens != previousSens)
+        //{
+        //    previousSens = currentSens;
+        //    sensitivity = sensslider.value;
+        //    sensslider.value = Mathf.Round(sensslider.value * 100f) / 100f;
+        //    sensValue.text = "Sensitivity: " + sensslider.value.ToString();
+        //}
     }
 }

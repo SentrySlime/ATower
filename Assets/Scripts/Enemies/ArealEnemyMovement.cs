@@ -1,46 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ArealEnemyMovement : MonoBehaviour
 {
 
+
     [Header("Movement")]
-    public float minDistance = 20;
-    public float movementSpeed = 0.5f;
-    public GameObject player;
+    public NavMeshAgent agent;
+    public float movementSpeed = 0.1f;
+    float minDistance = 1;
+    GameObject player;
+    Vector3 previousPlayerPosition;
+    float turnRadius = 3;
+    float maxDelta = 3;
 
-    public float turnRadius = 1;
-    public float maxDelta = 1;
-
-    [Header("Attack Stats")]
-    public float timer;
+    [Header("Duration & Timers")]
+    public float attackRate = 4;
     public float attackTimer = 0;
+
+    public float beamDuration = 4;
+    public float beamTimer = 0;
+
+    public float projectileDuration = 2;
+    public float projectileTimer = 0;
+
     public AudioSource attackSFX;
     public float rangedAttackDist = 10;
 
     [Header("Projectile Attack")]
-    public bool beamAttacking = false;
-    public float attackDuration = 1;
+    public bool projectileAttacking = false;
+    public float projectileCooldown = 3;
+    public float projectileCooldownTimer = 0;
 
-    public float attackRate;
-    public float projectileAmount;
-    public float projectileForce;
-    public float Accuracy = 0;
+    public float projectileFireRate = 0.25f;
+    public float projectileFireRateTimer = 0;
+
+    float projectileAmount = 1;
+    float projectileForce = 35;
+    float Accuracy = 5;
     public GameObject shootPoint;
     public GameObject projectile;
 
     [Header("Beam Attack")]
-    public float beamDamage = 1;
-    public float beamFollowSpeed = 1;
-    public float maxBeamFollowSpeed = 1;
+    public bool beamAttacking = false;
     public float beamCooldown = 10;
-    float beamCooldownTimer = 0;
-    LineRenderer lineRenderer;
-
-    
-
+    public float beamCooldownTimer = 0;
     public GameObject partToRotate;
+
+    float beamDamage = 10;
+    float beamFollowSpeed = 0.26f;
+    float maxBeamFollowSpeed = 0.26f;
+    LineRenderer lineRenderer;
 
     [Header("Melee Attack")]
     public GameObject telegraphVFX;
@@ -49,6 +61,14 @@ public class ArealEnemyMovement : MonoBehaviour
     public float meleeRadius = 1;
     public int meleeDamage = 10;
     public bool meleeAttacking = false;
+
+    [Header("Notice player")]
+    public bool foundPlayer = false;
+    public float noticePlayerRange = 75;
+
+    [Header("Avoidance")]
+    Vector3 frontPosition;
+    public float avoidanceDistance = 15;
 
     [Header("Misc")]
     int burstCount = 0;
@@ -62,68 +82,88 @@ public class ArealEnemyMovement : MonoBehaviour
         player = GameObject.Find("PlayerTargetPoint");
         aMainSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AMainSystem>();
         lineRenderer = GetComponent<LineRenderer>();
+        previousPlayerPosition = transform.position;
     }
 
     void Update()
     {
+        if(!foundPlayer)
+            IdleBehaviour();
 
-        Vector3 playerDirection = player.transform.position - transform.position;
-        Vector3 newDirection = Vector3.RotateTowards(transform.forward, playerDirection, turnRadius * Time.deltaTime, maxDelta);
-        newDirection = new Vector3(newDirection.x, 0, newDirection.z);
-        transform.rotation = Quaternion.LookRotation(newDirection);
+        
 
         //timer += Time.deltaTime;
         //if (timer < fireRate && !beamAttacking && !meleeAttacking)
         //    timer += Time.deltaTime;
 
-        if (beamCooldownTimer < beamCooldown)
+        if (beamCooldownTimer < beamCooldown && !beamAttacking)
             beamCooldownTimer += Time.deltaTime;
+
+        if(projectileCooldownTimer < projectileCooldown && !projectileAttacking)
+            projectileCooldownTimer += Time.deltaTime;
 
         float distanceToPlayer = Vector3.Distance(player.transform.position, shootPoint.transform.position);
 
-
         if (distanceToPlayer > rangedAttackDist && !beamAttacking && !meleeAttacking)
         {
-            MoveToPlayer();
+            NavMeshMove();
+            //MoveToPlayer();
         }
-        else if (timer < attackRate && !beamAttacking && !meleeAttacking)
+        else if (attackTimer < attackRate && !beamAttacking && !meleeAttacking)
         {
-            timer += Time.deltaTime;
+            attackTimer += Time.deltaTime;
         }
-        else if (timer >= attackRate && !beamAttacking)
+        else if (attackTimer >= attackRate && !beamAttacking)
         {
             if(distanceToPlayer <= meleeRange)
             {
                 meleeAttacking = true;
                 MeeleAttack();
-                timer = 0;
+                attackTimer = 0;
             }
             else if (distanceToPlayer <= rangedAttackDist)
             {
-                
-                
-
                 if(beamCooldownTimer >= beamCooldown)
                 {
                     beamCooldownTimer = 0;
                     beamAttacking = true;
-                    StartAttacking();
+                    StartBeamAttack();
                 }
                 else
                 {
-                    Shootshotgun();
-                    timer = 0;
+                    
+                    projectileAttacking = true;
+                    //Shootshotgun();
+                    //attackTimer = 0;
                 }
-
-
             }
         }
-        else if(beamAttacking)
+
+
+        if(projectileAttacking)
         {
-            
-            if (attackTimer < attackDuration)
+            if (projectileTimer < projectileDuration)
             {
-                attackTimer += Time.deltaTime;
+                attackTimer = 0;
+                projectileTimer += Time.deltaTime;
+                Shootshotgun();
+            } 
+            else
+            {
+                projectileAttacking = false;
+                projectileTimer = 0;
+                shootPoint.transform.rotation = gameObject.transform.root.rotation;
+            }
+
+        }
+
+        
+        if(beamAttacking)
+        {
+            if (beamTimer < beamDuration)
+            {
+                attackTimer = 0;
+                beamTimer += Time.deltaTime;
                 BeamAttack();
                 //Shootshotgun();
             }
@@ -131,20 +171,39 @@ public class ArealEnemyMovement : MonoBehaviour
             {
                 StopAttacking();
                 beamAttacking = false;
-                attackTimer = 0;
-                timer = 0;
+                beamTimer = 0;
                 shootPoint.transform.rotation = gameObject.transform.root.rotation;
                 //shootPoint.transform.rotation = partToRotate.transform.rotation;
             }
-
-
         }
+    }
 
+    private void IdleBehaviour()
+    {
+        float playerDist = Vector3.Distance(transform.position, player.transform.position);
+        if (playerDist < noticePlayerRange)
+        {
+            Vector3 directionToPlayer = player.transform.position - shootPoint.transform.position;
+
+            RaycastHit hit;
+            if (Physics.Raycast(shootPoint.transform.position, directionToPlayer, out hit))
+            {
+                if (hit.transform.CompareTag("Player"))
+                {
+                    previousPlayerPosition = hit.transform.position;
+                    foundPlayer = true;
+                }
+            }
+        }
+    }
+
+    private void NavMeshMove()
+    {
+        agent.SetDestination(player.transform.position);
     }
 
     private void MoveToPlayer()
     {
-        
         Vector3 directionToPlayer = player.transform.position - shootPoint.transform.position;
 
         RaycastHit hit;
@@ -152,12 +211,118 @@ public class ArealEnemyMovement : MonoBehaviour
         {
             if (hit.transform.CompareTag("Player"))
             {
+                Avoidance();
+                TurnToPosition(player.transform.position);
+                previousPlayerPosition = hit.transform.position;
                 transform.position += directionToPlayer * movementSpeed * Time.deltaTime;
             }
+            //else
+            //{
+            //    TurnToPosition(previousPlayerPosition);
+            //    Vector3 directionToPreviousPosition = previousPlayerPosition - shootPoint.transform.position;
+            //    transform.position += directionToPreviousPosition * movementSpeed * Time.deltaTime;
+            //}
         }
     }
 
-    private void StartAttacking()
+    private void Avoidance()
+    {
+        Vector3 rightDirection = Quaternion.Euler(0, 45, 0) * shootPoint.transform.forward;
+        Vector3 leftDirection = Quaternion.Euler(0, -45, 0) * shootPoint.transform.forward;
+        Vector3 upDirection = Quaternion.Euler(45, 0, 0) * shootPoint.transform.forward;
+        Vector3 downDirection = Quaternion.Euler(-45, 0, 0) * shootPoint.transform.forward;
+        RaycastHit hit;
+
+
+        #region Right
+        if (Physics.Raycast(shootPoint.transform.position, rightDirection, out hit, avoidanceDistance))
+        {
+            Debug.DrawLine(shootPoint.transform.position, hit.point, Color.red);
+            if (hit.transform.CompareTag("Player"))
+            {
+
+            }
+        }
+        else
+        {
+            
+            Debug.DrawLine(shootPoint.transform.position, shootPoint.transform.position + rightDirection * avoidanceDistance, Color.red);
+        }
+        #endregion
+
+        #region Left
+        if (Physics.Raycast(shootPoint.transform.position, leftDirection, out hit, avoidanceDistance))
+        {
+            Debug.DrawLine(shootPoint.transform.position, hit.point, Color.red);
+            if (hit.transform.CompareTag("Player"))
+            {
+
+            }
+        }
+        else
+        {
+
+            Debug.DrawLine(shootPoint.transform.position, shootPoint.transform.position + leftDirection * avoidanceDistance, Color.red);
+        }
+        #endregion
+
+        #region Downwards
+        if (Physics.Raycast(shootPoint.transform.position, downDirection, out hit, avoidanceDistance))
+        {
+            Debug.DrawLine(shootPoint.transform.position, hit.point, Color.red);
+            if (hit.transform.CompareTag("Player"))
+            {
+
+            }
+        }
+        else
+        {
+            Debug.DrawLine(shootPoint.transform.position, shootPoint.transform.position + downDirection * avoidanceDistance, Color.red);
+        }
+        #endregion
+
+        #region Upwards
+        if (Physics.Raycast(shootPoint.transform.position, upDirection, out hit, avoidanceDistance))
+        {
+            Debug.DrawLine(shootPoint.transform.position, hit.point, Color.red);
+            if (hit.transform.CompareTag("Player"))
+            {
+
+            }
+        }
+        else
+        {
+            Debug.DrawLine(shootPoint.transform.position, shootPoint.transform.position + upDirection * avoidanceDistance, Color.red);
+        }
+        #endregion
+
+        #region Forward
+        if (Physics.Raycast(shootPoint.transform.position, transform.forward, out hit, avoidanceDistance))
+        {
+            Debug.DrawLine(shootPoint.transform.position, hit.point, Color.red);
+            if (hit.transform.CompareTag("Player"))
+            {
+                
+            }
+        }
+        else
+        {
+            Debug.DrawLine(shootPoint.transform.position, shootPoint.transform.position + shootPoint.transform.forward * avoidanceDistance, Color.red);
+        }
+        #endregion
+
+    }
+
+
+    private void TurnToPosition(Vector3 position)
+    {
+        Vector3 playerDirection = position - transform.position;
+        Vector3 newDirection = Vector3.RotateTowards(transform.forward, playerDirection, turnRadius * Time.deltaTime, maxDelta);
+        newDirection = new Vector3(newDirection.x, 0, newDirection.z);
+        transform.rotation = Quaternion.LookRotation(newDirection);
+    }
+    
+    private void StartBeamAttack()
     {
         StartCoroutine(fade());
         turnRadius = beamFollowSpeed;
@@ -243,7 +408,17 @@ public class ArealEnemyMovement : MonoBehaviour
 
     private void Shootshotgun()
     {
+        if (projectileFireRateTimer >= projectileFireRate)
+        {
+            FireShotgun();
+            projectileFireRateTimer = 0;
+        }
+        else
+            projectileFireRateTimer += Time.deltaTime;
+    }
 
+    private void FireShotgun()
+    {
         Vector3 directionToPlayer = player.transform.position - shootPoint.transform.position;
 
         RaycastHit hit;
@@ -255,7 +430,6 @@ public class ArealEnemyMovement : MonoBehaviour
 
                 for (int i = 0; i < projectileAmount; i++)
                 {
-
                     #region RandomNumbers Accuracy
 
 
@@ -306,7 +480,5 @@ public class ArealEnemyMovement : MonoBehaviour
                 }
             }
         }
-
-        
     }
 }

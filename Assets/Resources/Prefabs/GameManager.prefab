@@ -64,6 +64,8 @@ MonoBehaviour:
   - {fileID: 6952844890914244580, guid: 53ee614294fe7bd40984f6032008952e, type: 3}
   - {fileID: 6952844890914244580, guid: 520e8d8d69205634bbfbdf44cac4d933, type: 3}
   - {fileID: 6952844890914244580, guid: f33da1b3a62dfa249b09a139e73d12d1, type: 3}
+  - {fileID: 6952844890914244580, guid: da0782fcf73d9c44392ccc187a60dff7, type: 3}
+  - {fileID: 6952844890914244580, guid: 32be05b989b007044829d2923610cd45, type: 3}
   pickUps: []
   s_Tier: []
   a_Tier: []
@@ -137,12 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemTemplate: {fileID: 6883399814758267453, guid: 80ccf9e572c334e48841cb85ad2fa64e, type: 3}
-  items:
-  - {fileID: -5632439633080939399, guid: cce41cb53a9d56049a91794973b7ebd3, type: 3}
-  - {fileID: -5632439633080939399, guid: f4ed12529ec7ba14e9929bf47991f69b, type: 3}
-  - {fileID: 6176981142002305572, guid: aff72311c0ff30943a06b568c4bea429, type: 3}
-  - {fileID: -5632439633080939399, guid: 4c925eea350d5624eafdf0e88bc9be33, type: 3}
-  - {fileID: -1360962866377924859, guid: 8eb3ae63ee636da479f3ddefcba286f7, type: 3}
+  items: []
 --- !u!114 &1170188831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,14 +161,14 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7614514148234217134}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 6edb301405e04c64ca549dc58a781be0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4b4138605e5299849a9d1a5bfe36a82e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.07
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

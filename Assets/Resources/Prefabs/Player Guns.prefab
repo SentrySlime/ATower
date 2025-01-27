@@ -6027,7 +6027,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5004350295349168960}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b416fbce5a38cc47a3a1e709f95f5e3, type: 3}
   m_Name: 
@@ -6126,7 +6126,13 @@ MonoBehaviour:
   baseWeapon: {fileID: 0}
   weaponSocket: {fileID: 5004350295439402695}
   weaponParent: {fileID: 5004350294145823629}
+  interactDistance: 5
   startWeapon: {fileID: 0}
+  popUpPanel: {fileID: 0}
+  popUpItemGroup: {fileID: 0}
+  popUpItemName: {fileID: 0}
+  popUpItemDescription: {fileID: 0}
+  image2: {fileID: 0}
   itemPanel: {fileID: 2080928488862453808, guid: 481c4b478a64a6d4398ecb442b644773, type: 3}
   itemGroup: {fileID: 0}
   itemName: {fileID: 0}
@@ -6181,8 +6187,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInvincible: 0
-  maxHP: 100
-  currentHP: 100
+  maxHP: 1000
+  currentHP: 1000
   barHP: {fileID: 0}
   damageVignette: {fileID: 0}
   vignetteAlpha: 0
@@ -6205,13 +6211,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ebc49a4a1c0a3449ec25d26d1f3846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponIndex: 0
+  Money: 0
   heldWeapons: []
   baseWeapon: {fileID: 0}
   recoil: {fileID: 0}
   reloadIcon: {fileID: 0}
   heldItems: []
-  Money: 0
 --- !u!114 &5004350295439402690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6279,12 +6284,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 0}
-  maxHealth: 100
+  maxHealth: 500
   damageReductionPercent: 1
   damageIgnoreChance: 0
   criticalChance: 5
   criticalMultiplier: 2
-  moveSpeed: 22
+  moveSpeed: 19
   extraJumps: 0
   reloadAmount: 0
   rocketChance: 0
@@ -6505,7 +6510,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1791
+    m_Bits: 3839
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6564,10 +6569,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rootObj: {fileID: 5004350295882963667}
+  paused: 0
   sensslider: {fileID: 0}
   sensValue: {fileID: 0}
-  paused: 0
-  sensitivity: 2
+  sensitivity: 1
   yRotationLimit: 88
   rotation: {x: 0, y: 0}
   moveSpeed: 1
@@ -6577,6 +6582,7 @@ MonoBehaviour:
   pos2: {x: 0, y: 0, z: 0}
   image3: {fileID: 0}
   pos3: {x: 0, y: 0, z: 0}
+  weaponSocket: {fileID: 0}
 --- !u!1 &5004350295631796941
 GameObject:
   m_ObjectHideFlags: 0

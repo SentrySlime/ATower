@@ -25,10 +25,10 @@ public class FindAndEquipWeapons : MonoBehaviour
     [HideInInspector] private Transform shootPoint;
 
     [Header("Panel")]
-    public GameObject panel;
-    public CanvasGroup itemGroup2;
-    public TextMeshProUGUI itemName2;
-    public TextMeshProUGUI itemDescription2;
+    public GameObject popUpPanel;
+    public CanvasGroup popUpItemGroup;
+    public TextMeshProUGUI popUpItemName;
+    public TextMeshProUGUI popUpItemDescription;
     public Image image2;
 
     [Header("Item panel")]
@@ -156,13 +156,15 @@ public class FindAndEquipWeapons : MonoBehaviour
 
     private void CheckForItems()
     {
+
+
         if (dissapearTimer < .25f)
         {
             dissapearTimer += Time.deltaTime;
         }
-        else
+        else if(popUpPanel)
         {
-            panel.SetActive(false);
+            popUpPanel.SetActive(false);
         }
 
         RaycastHit hit;
@@ -174,11 +176,11 @@ public class FindAndEquipWeapons : MonoBehaviour
                 var tempItem = hit.transform.GetComponent<ItemPickUp>();
                 if (tempItem)
                 {
-                    if (!panel.activeInHierarchy)
-                        panel.SetActive(true);
+                    if (!popUpPanel.activeInHierarchy)
+                        popUpPanel.SetActive(true);
 
-                    itemName2.text = tempItem.itemName;
-                    itemDescription2.text = tempItem.itemDescription;
+                    popUpItemName.text = tempItem.itemName;
+                    popUpItemDescription.text = tempItem.itemDescription;
                     image2.sprite = tempItem.itemIcon;
 
                 }

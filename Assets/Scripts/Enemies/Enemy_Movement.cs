@@ -49,7 +49,7 @@ public class Enemy_Movement : MonoBehaviour
 
         float playerDistance = Vector3.Distance(transform.position, player.transform.position);
 
-        if(agent)
+        if(agent && agent.isOnNavMesh)
         EnemyMove();
 
         if (timer < firingRate)

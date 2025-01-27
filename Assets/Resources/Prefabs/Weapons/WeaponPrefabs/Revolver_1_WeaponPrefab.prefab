@@ -4976,11 +4976,11 @@ MonoBehaviour:
   ammoPerShot: 1
   infinteAmmo: 0
   reloadType: 1
-  maxMagazine: 8
-  currentMagazine: 8
-  reloadTime: 0.5
+  maxMagazine: 10
+  currentMagazine: 10
+  reloadTime: 1
   reloadAmount: 1
-  damage: 250
+  damage: 200
   fireRate: 0.02
   burstDelay: 1
   burstAmount: 1
@@ -5008,13 +5008,13 @@ MonoBehaviour:
   - {fileID: 5352461095775856614}
   hitDistance: 0
   hitmarker: {fileID: 0}
+  isShotgun: 0
   shootAmount: 1
   shotSize: 1
   pierceAmount: 4
   ShouldExplode: 0
   explosiveDamage: 1
   explosiveRadius: 1
-  isShotgun: 0
   SFXList: []
   shootSFX: {fileID: 4964101775347663484, guid: 0f2c1ad0607fd94458f7da48dad9c000, type: 3}
   hitSFX: {fileID: 4964101775347663484, guid: b244e633c20fdda4895818242ba7786b, type: 3}

@@ -44,7 +44,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     //Felix was here
     [Header("Loot")]
     public GameObject itemPrefab;
-    public float dropChance = 0.5f;
+    float dropChance = 0.05f;
     bool dead = false;
 
     public List<GameObject> projectileChildren = new List<GameObject>();
@@ -120,7 +120,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
 
         DetachProjectileChildren();
 
-        lootSystem.DropLoot(transform.position, dropChance);
+        lootSystem.DropLoot(moneySpawnPoint.position, dropChance);
 
         dead = true;
         enemyManager.ReportDeath(moneyAmount);

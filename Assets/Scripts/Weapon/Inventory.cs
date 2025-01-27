@@ -70,6 +70,25 @@ public class Inventory : MonoBehaviour
             weaponIndex = 2;
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            weaponIndex = 3;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            weaponIndex = 4;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            weaponIndex = 5;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            weaponIndex = 6;
+        }
 
         if (weaponIndex < 0)
             weaponIndex = heldWeapons.Count - 1;
