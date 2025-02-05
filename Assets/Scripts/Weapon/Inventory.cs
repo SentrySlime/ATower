@@ -21,6 +21,7 @@ public class Inventory : MonoBehaviour
     [HideInInspector] public BaseWeapon baseWeapon;
     [HideInInspector] public Recoil recoil;
     [HideInInspector] public Image reloadIcon;
+    
 
     [Header("Items")]
     public List<GameObject> heldItems = new List<GameObject>();
@@ -41,6 +42,7 @@ public class Inventory : MonoBehaviour
         pauseMenu = GameObject.FindGameObjectWithTag("Canvas").GetComponent<PauseMenu>();
         weaponSocket = GetComponent<WeaponSocket>();
         reloadIcon = GameObject.FindGameObjectWithTag("ReloadImage").GetComponent<Image>();
+        
     }
 
 
@@ -106,6 +108,7 @@ public class Inventory : MonoBehaviour
 
             heldWeapons[previousIndex].GetComponent<Recoil>().DisableWeapon();
             heldWeapons[weaponIndex].GetComponent<Recoil>().EnableWeapon();
+            
 
             findAndEquipWeapons.SetWeapon(heldWeapons[weaponIndex]);
             previousIndex = weaponIndex;
@@ -118,6 +121,8 @@ public class Inventory : MonoBehaviour
         Money += incomingAmount;
         //Money++;
     }
+
+    
 
     //Do something about longer reloads here
 

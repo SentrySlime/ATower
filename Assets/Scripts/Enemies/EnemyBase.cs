@@ -140,10 +140,11 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
             }
         }
 
+        
         if(dieSFX)
             Instantiate(dieSFX);
 
-
+        playerHealth.HealOnKill();
 
         //gameObject.SetActive(false);
         Destroy(gameObject);

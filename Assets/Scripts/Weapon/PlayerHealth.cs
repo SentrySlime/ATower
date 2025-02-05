@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour, IDamageInterface
 {
@@ -13,10 +14,12 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
     [Header("Health stuff")]
     public int maxHP;
     public int currentHP;
-    public Slider barHP;
-    private Vector3 startPos;
+    
     float iFrameDuration = 0.2f;
-
+    private Vector3 startPos;
+    
+    public Slider barHP;
+    public TextMeshProUGUI textHP;
 
     [Header("DamageVignetteStuff")]
     public CanvasGroup damageVignette;
@@ -26,6 +29,7 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
     public float vignetteThreshold = 0;
 
     [Header("ShieldVignetteStuff")]
+    public PlayerStats playerStats;
     public CanvasGroup shieldVignette;
     public float shieldvignetteAlpha = 0;
     float shieldVignetteTimer = 0;
@@ -38,25 +42,29 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
     float iFrameTimer = 0;
     bool canBeDamaged = true;
 
+    public float hpRegenCooldown = 0;
+    float hpRegenTimer = 0;
+
     void Start()
     {
         startPos = transform.position;
+        playerStats = GetComponent<PlayerStats>();
         pauseMenu = GameObject.Find("Canvas").GetComponent<PauseMenu>();
         pauseMenu.GetVignettes(this);
         barHP = GameObject.FindGameObjectWithTag("HPBar").GetComponent<Slider>();
         currentHP = maxHP;
         barHP.maxValue = maxHP;
-
+        UpdateHP();
+        HealthRegen();
+        UpdateHPRegen();
     }
 
 
     void Update()
-    {
-
-
-
-        barHP.value = currentHP;
-
+       {
+            
+        HealthRegen();
+     
         if (iFrameTimer < iFrameDuration)
         {
             iFrameTimer += Time.deltaTime;
@@ -79,11 +87,38 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
     }
 
+    #region HP // ---------------
+
+    public void HealOnKill()
+    {
+        Heal(playerStats.healPerKill);
+    }
+
+    private void HealthRegen()
+    {
+        if(hpRegenTimer < hpRegenCooldown)
+            hpRegenTimer += Time.deltaTime;
+        else
+        {
+           Heal(1);
+           hpRegenTimer = 0;
+        }
+    }
+
     public void Heal(float incomingHealth)
     {
         currentHP += ((int)incomingHealth);
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+        UpdateHP();
     }
+    private void UpdateHPRegen()
+    {
+        hpRegenCooldown = 1 / playerStats.hpRegen;
+    }
+
+    #endregion
+
+    #region Damage
 
     public void Damage(float damage)
     {
@@ -95,9 +130,6 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
             shieldVignetteTimer = 0;
             return;
         }
-
-
-
 
         if (DamageChance())
         {
@@ -111,10 +143,10 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
             currentHP -= ((int)damage);
         }
 
+        UpdateHP();
+
         canBeDamaged = false;
         iFrameTimer = 0;
-
-
 
         if (currentHP <= 0)
             PlayerDeath();
@@ -124,9 +156,7 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
     {
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
-        //print("You dead");
         //Insert death logic
-
     }
 
     private bool DamageChance()
@@ -136,7 +166,6 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
         if (damageIgnoreChance > ignoreChance)
         {
             return true;
-
         }
         else
             return false;
@@ -146,7 +175,6 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
     private void DamageVignette()
     {
         damageVignette.alpha = 1;
-        //vignetteAlpha = 1;
         if (vignetteTimer < vignetteRate)
         {
             vignetteTimer += Time.deltaTime * 2;
@@ -165,6 +193,14 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
             shieldvignetteAlpha -= Time.deltaTime * 3;
             shieldVignette.alpha = shieldvignetteAlpha;
         }
+    }
+
+    #endregion
+
+    private void UpdateHP()
+    {
+        barHP.value = currentHP;
+        textHP.text = currentHP.ToString() + " / " + maxHP;
     }
 
 }

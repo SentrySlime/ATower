@@ -10,6 +10,11 @@ public class PlayerStats : MonoBehaviour
     public float damageReductionPercent = 1.1f;
     public int damageIgnoreChance = 0;
 
+    [Header("Healing")]
+    public float hpRegen = 1;
+    public int healPerKill = 5;
+
+
     [Header("Damage")]
     public float criticalChance = 5;
     public float criticalMultiplier = 2;

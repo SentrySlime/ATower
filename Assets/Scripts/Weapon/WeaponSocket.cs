@@ -36,18 +36,25 @@ public class WeaponSocket : MonoBehaviour
     public AudioSource wSwitch_SFX;
     public AudioSource reload_SFX;
 
-    public Vector3 hipPos;
-    public Vector3 adsPos;
 
     //public Quaternion hipRot;
     //public Quaternion adsRot;
 
+    [Header("Aiming")]
+    public Vector3 hipPos;
+    public Vector3 adsPos;
     public float adsProgress = 0;
     public float adsSpeed = 6;
     public CanvasGroup crosshair;
-    public Image reloadIcon;
-    PauseMenu pauseMenu;
 
+    [Header("Reload")]
+    public CanvasGroup reloadGroup;
+    public Image reloadIcon;
+    public Image reloadFinish;
+
+    [Header("Misc")]
+    PauseMenu pauseMenu;
+    public Image weaponIcon;
     public bool interupptedBool = false;
 
     float maxTimer = 0.08f;
@@ -67,7 +74,7 @@ public class WeaponSocket : MonoBehaviour
         GameObject tempObj = GameObject.FindGameObjectWithTag("ShootPoint");
         cameraMovement = GetComponentInChildren<CameraMovement>();
         reloadIcon = GameObject.FindGameObjectWithTag("ReloadImage").GetComponent<Image>();
-
+        weaponIcon = GameObject.FindGameObjectWithTag("WeaponIcon").GetComponent<Image>();
         crosshair = GameObject.FindGameObjectWithTag("Crosshair").GetComponent<CanvasGroup>();
         reloadIcon.enabled = false;
         pauseMenu = GameObject.FindGameObjectWithTag("Canvas").GetComponent<PauseMenu>();
@@ -75,7 +82,7 @@ public class WeaponSocket : MonoBehaviour
 
     void Start()
     {
-
+        reloadFinish.enabled = false;
 
 
         SetFOVnSens();
@@ -240,8 +247,10 @@ public class WeaponSocket : MonoBehaviour
     {
         if (!wSwitch_SFX.isPlaying)
             wSwitch_SFX.Play();
+        if(!equippedWeapon)
+            SetFOVnSens();
+        
         InitalizeItem(incomingObj);
-        SetFOVnSens();
 
         if (equippedWeapon != null)
             hipPos = equippedWeapon.hipPos;
@@ -255,11 +264,19 @@ public class WeaponSocket : MonoBehaviour
         equippedWeapon.screenShake = screenShake;
         recoilScript = incomingObj.GetComponent<Recoil>();
         equippedWeapon.Initialize(cameraObj);
+        SetWeaponIcon();
+    }
+
+    private void SetWeaponIcon()
+    {
+        weaponIcon.sprite = equippedWeapon.weaponIcon;
+        //weaponIcon.sprite = weaponSocket.equippedWeapon.weaponIcon;
     }
 
     public void StopReload()
     {
         StopCoroutine(Reloading());
+        reloadGroup.alpha = 0;
         reloadIcon.fillAmount = 0f;
         reloadIcon.enabled = false;
     }
@@ -268,6 +285,7 @@ public class WeaponSocket : MonoBehaviour
     {
         reloadIcon.fillAmount = 0f;
         reloadIcon.enabled = true;
+        reloadGroup.alpha = 1;
 
         while (reloadIcon.fillAmount < 1 && reloadIcon.isActiveAndEnabled)
         {
@@ -277,8 +295,12 @@ public class WeaponSocket : MonoBehaviour
 
         if (reloadIcon.fillAmount >= 1)
         {
-            reloadIcon.enabled = false;
             equippedWeapon.ReloadWeapon();
+            if(equippedWeapon.HasFullMagazine() || equippedWeapon.OutOfAmmo())
+                StartCoroutine(ReloadFinish());
+            else
+                StartCoroutine(PartialReloadFinish());
+
         }
 
 
@@ -287,15 +309,27 @@ public class WeaponSocket : MonoBehaviour
 
     public void SetFOVnSens()
     {
-
         baseCameraFOV = cameraObj.fieldOfView;
         zoomedCameraFOV = baseCameraFOV * 0.7f;
 
         baseSensitivity = cameraMovement.Sensitivity;
         zoomedSensitivity = cameraMovement.Sensitivity * 0.7f;
-
     }
 
+    public IEnumerator ReloadFinish()
+    {
+        reloadFinish.enabled = true;
+        yield return new WaitForSeconds(0.1f);
+        reloadGroup.alpha = 0;
+        reloadFinish.enabled = false;
+        reloadIcon.enabled = false;
+    }
 
+    public IEnumerator PartialReloadFinish()
+    {
+        reloadFinish.enabled = true;
+        yield return new WaitForSeconds(0.1f);
+        reloadFinish.enabled = false;
+    }
 
 }

@@ -52,8 +52,8 @@ MonoBehaviour:
   pierceObjects: 0
   pierceAmount: 0
   isExplosive: 1
-  explosiveRadius: 8
-  explosiveDamage: 500
+  explosiveRadius: 10
+  explosiveDamage: 600
   explosiveImpactSFX: {fileID: 0}
   homing: 0
   turnSpeed: 12
@@ -109,6 +109,18 @@ PrefabInstance:
     - target: {fileID: 4836675779974994, guid: 46bf08350ee566542b0bb087e35a1020, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4836675779974994, guid: 46bf08350ee566542b0bb087e35a1020, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4836675779974994, guid: 46bf08350ee566542b0bb087e35a1020, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4836675779974994, guid: 46bf08350ee566542b0bb087e35a1020, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4836675779974994, guid: 46bf08350ee566542b0bb087e35a1020, type: 3}
       propertyPath: m_LocalPosition.x

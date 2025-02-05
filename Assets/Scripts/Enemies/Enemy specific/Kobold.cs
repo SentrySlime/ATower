@@ -10,6 +10,8 @@ public class Kobold : MonoBehaviour
 {
     public AudioSource audioSource;
 
+    public AudioSource shootAudioSource;
+
     public enum CurrentState
     {
         idle,
@@ -18,6 +20,8 @@ public class Kobold : MonoBehaviour
     }
 
     public CurrentState currentState;
+
+    public LayerMask layerMask;
 
     public Animator animator;
     public NavMeshAgent agent;
@@ -44,7 +48,7 @@ public class Kobold : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         firingRate = UnityEngine.Random.Range(0.3f, 0.5f);
-
+        layerMask = ~layerMask;
     }
 
     private void Logging()
@@ -64,6 +68,15 @@ public class Kobold : MonoBehaviour
 
     void Update()
     {
+        playerDist = Vector3.Distance(transform.position, player.transform.position);
+        
+        if(agent.isOnOffMeshLink)
+        {
+            StartAgent();
+            MoveToPlayer();
+            return;
+        }
+
         if(agent.velocity.magnitude > 0)
         {
             animator.SetBool("Moving", true);
@@ -74,31 +87,17 @@ public class Kobold : MonoBehaviour
             animator.SetBool("Moving", false);
             audioSource.Pause();
         }
-            
-
-
-        playerDist = Vector3.Distance(transform.position, player.transform.position);
-
-        Logging();
-
-        //print(agent.pathStatus);
 
         if (currentState == CurrentState.idle)
         {
-
-            //Idle action
             IdleBehaviour();
         }
         else if (currentState == CurrentState.canSeePlayer)
         {
-
-            //See player, shoot at player
             SeePlayerBehaviour();
         }
         else if (currentState == CurrentState.canReachPlayer)
         {
-
-            //Go to player
             ReachPlayerBehaviour();
         }
 
@@ -107,9 +106,6 @@ public class Kobold : MonoBehaviour
     public void IdleBehaviour()
     {
         animator.SetBool("CloseToAttack", false);
-        //animator.SetBool("Moving", false);
-
-        //NavMeshPath path = new NavMeshPath();
 
         if (playerDist < seePlayerRangedDistance)
         {
@@ -157,14 +153,10 @@ public class Kobold : MonoBehaviour
 
     public void ReachPlayerBehaviour()
     {
-        //print("1");
-
         if (agent.pathStatus == NavMeshPathStatus.PathComplete)
         {
-            //print("2");
             if (playerDist < rangedDistance)
             {
-                //animator.SetBool("Moving", true);
                 Stop();
 
                 if (timer < firingRate && !animator.GetBool("CloseToAttack"))
@@ -173,6 +165,7 @@ public class Kobold : MonoBehaviour
                 }
                 else
                 {
+                    if (!HasLineOfSight()) { return; }
                     animator.SetBool("CloseToAttack", true);
                     timer = 0;
                 }
@@ -180,13 +173,11 @@ public class Kobold : MonoBehaviour
             else
             {
                 StartAgent();
-                //animator.SetBool("Moving", true);
                 MoveToPlayer();
             }
         }
         else if (agent.pathStatus == NavMeshPathStatus.PathPartial)
         {
-            //print("3");
             if (playerDist < incompletRangedDistance)
             {
                 animator.SetBool("Moving", true);
@@ -198,6 +189,7 @@ public class Kobold : MonoBehaviour
                 }
                 else
                 {
+                    if(!HasLineOfSight()) { return; }
                     animator.SetBool("CloseToAttack", true);
                     timer = 0;
                 }
@@ -205,9 +197,6 @@ public class Kobold : MonoBehaviour
             else
             {
                 SeePlayerBehaviour();
-                //StartAgent();
-                //animator.SetBool("Moving", true);
-                //MoveToPlayer();
             }
         }
         else
@@ -218,9 +207,7 @@ public class Kobold : MonoBehaviour
 
     public void RangedAttack()
     {
-
-        Console.WriteLine("We attacked");
-
+        shootAudioSource.Play();
         agent.speed = 0;
         agent.isStopped = true;
 
@@ -245,7 +232,6 @@ public class Kobold : MonoBehaviour
     public void StartAgent()
     {
         animator.SetFloat("EnemySpeed", 7);
-        //animator.SetBool("Moving", true);
         agent.speed = moveSpeed;
     }
 
@@ -266,6 +252,25 @@ public class Kobold : MonoBehaviour
         agent.speed = moveSpeed;
         agent.isStopped = false;
 
+    }
+
+    private bool HasLineOfSight()
+    {
+        Vector3 directionToPlayer = player.transform.position - shootPoint.transform.position;
+        float distance = Vector3.Distance(player.transform.position, transform.position);
+
+        RaycastHit hit;
+        if (Physics.Raycast(shootPoint.transform.position, directionToPlayer, out hit, distance, layerMask))
+        {
+            if (hit.transform.CompareTag("Player"))
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
+        return false;
     }
 
 }

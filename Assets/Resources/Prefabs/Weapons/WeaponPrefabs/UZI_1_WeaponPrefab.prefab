@@ -4971,8 +4971,9 @@ MonoBehaviour:
   shootPoint: {fileID: 0}
   barrel: {fileID: 1856004530348900990}
   objectToRecoil: {fileID: 6593228928422068522}
-  maxAmmo: 250
-  currentAmmo: 250
+  weaponIcon: {fileID: 21300000, guid: d852d0aa18af1ed47aa189cca5bddd95, type: 3}
+  maxAmmo: 355
+  currentAmmo: 355
   ammoPerShot: 1
   infinteAmmo: 0
   reloadType: 0
@@ -5008,13 +5009,13 @@ MonoBehaviour:
   - {fileID: 5740748131621819047}
   hitDistance: 0
   hitmarker: {fileID: 0}
+  isShotgun: 0
   shootAmount: 1
   shotSize: 0.6
   pierceAmount: 1
   ShouldExplode: 0
   explosiveDamage: 25
   explosiveRadius: 0.5
-  isShotgun: 0
   SFXList: []
   shootSFX: {fileID: 4964101775347663484, guid: 09b38970b3c237b47b9cbb4020d7b368, type: 3}
   hitSFX: {fileID: 4964101775347663484, guid: b244e633c20fdda4895818242ba7786b, type: 3}

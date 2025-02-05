@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1745589072951350241}
   - component: {fileID: 1745589072951350240}
+  - component: {fileID: 1745589071282283977}
   m_Layer: 0
   m_Name: LevelGenerator
   m_TagString: Untagged
@@ -43,9 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fbe407f440ddc74f92a2808db7a8d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  navMeshSurfaces: []
   rooms:
-  - {fileID: 2907005474927290681, guid: 8f124deb12d422f41bf9046a3daf123f, type: 3}
   - {fileID: 8583784883065936237, guid: 4b8f154f8037b1c49a55909f461db222, type: 3}
+  - {fileID: 2907005474927290681, guid: 8f124deb12d422f41bf9046a3daf123f, type: 3}
   - {fileID: 6078762585981084057, guid: 941f42b3214e66b42896936d6018b653, type: 3}
   - {fileID: 4950569275665757569, guid: 9b6d8c1d0fe8bd246a5e4072b8e66abc, type: 3}
   - {fileID: 5311570134026486668, guid: 553255c4a6d304e4a90193f21ac57896, type: 3}
@@ -55,3 +57,15 @@ MonoBehaviour:
   rate1: 0
   timer1: 0
   allSurfaces: []
+--- !u!114 &1745589071282283977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745589072951350242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74f7afb11c59eb44b8142b5c0f8c8fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

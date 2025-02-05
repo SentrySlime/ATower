@@ -18,8 +18,8 @@ public class BaseWeapon : MonoBehaviour
     public Sprite sprite;
     public GameObject shootPoint;
     public GameObject barrel;
-
     public GameObject objectToRecoil;
+    public Sprite weaponIcon;
 
     public enum WeaponType
     {
@@ -238,6 +238,14 @@ public class BaseWeapon : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public bool OutOfAmmo()
+    {
+        if(currentAmmo == 0)
+            return true;
+        else
+            return false;
     }
 
     //This is called everytime you shot, as it takes ammo 

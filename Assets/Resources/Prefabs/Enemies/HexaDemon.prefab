@@ -11,7 +11,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.43
+  m_Radius: 1.12
   m_Center: {x: 0, y: 2.02, z: -0.24}
 --- !u!1 &1710239320598269243
 GameObject:
@@ -89,7 +89,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: fb46640f453850a4ca1b63cfbc9c30e5, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.06
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -309,6 +309,7 @@ GameObject:
   - component: {fileID: 6897983572955493786}
   - component: {fileID: 1700837247}
   - component: {fileID: 1700837248}
+  - component: {fileID: 2050647442}
   m_Layer: 9
   m_Name: HexaDemon
   m_TagString: Enemy
@@ -371,24 +372,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f01a3bac0b0f2784d86e4ee17d0021cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 2050647442}
   movementSpeed: 0.5
-  attackRate: 3
+  angularSpeed: 2000
+  turnRadius: 3
+  maxDelta: 3
+  attackRate: 2
   attackTimer: 0
   beamDuration: 4
   beamTimer: 0
-  projectileDuration: 3
+  projectileDuration: 3.5
   projectileTimer: 0
   attackSFX: {fileID: 1734333881}
-  rangedAttackDist: 40
+  rangedAttackDist: 50
   projectileAttacking: 0
-  projectileCooldown: 3
+  projectileCooldown: 3.5
   projectileCooldownTimer: 0
   projectileFireRate: 0.06
   projectileFireRateTimer: 0
   shootPoint: {fileID: 2127446042881441319}
   projectile: {fileID: 7929977615501413461, guid: 84fcd8f269dbc3c419dd096f9d9c23ef, type: 3}
   beamAttacking: 0
-  beamCooldown: 11
+  beamCooldown: 9.5
   beamCooldownTimer: 0
   partToRotate: {fileID: 1710239320598269243}
   telegraphVFX: {fileID: 150362, guid: 8906de79e38d722448ed84e0c648ed37, type: 3}
@@ -397,10 +402,15 @@ MonoBehaviour:
   meleeRadius: 20
   meleeDamage: 30
   meleeAttacking: 0
+  meleeCooldown: 5.5
+  meleeCooldownTimer: 0
   foundPlayer: 0
+  canSeePlayer: 0
   noticePlayerRange: 75
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 3908
   avoidanceDistance: 15
-  turnSpeed: 2
   burstTimer: 0
 --- !u!82 &1700837247
 AudioSource:
@@ -412,9 +422,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 1433ce7db03be5f4a9882c0274877c40, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 394edede05f423242b6be4d13273eea8, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.05
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -425,7 +435,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 75
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -433,22 +443,31 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.013333334
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.95080566
+      value: 0.5695343
+      inSlope: -1.0366739
+      outSlope: -1.0366739
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 1
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -5.537634
+      outSlope: -5.537634
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.7772153
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -517,7 +536,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4ff01e089cbaea84ab21e308fef2929d, type: 2}
+  - {fileID: 2100000, guid: 841d467819e15104f909254f5adeef35, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -563,7 +582,7 @@ LineRenderer:
       serializedVersion: 2
       key0: {r: 0.7092304, g: 0, b: 1, a: 1}
       key1: {r: 0.55237484, g: 0, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key2: {r: 0, g: 0, b: 0, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -579,7 +598,7 @@ LineRenderer:
       ctime7: 0
       atime0: 0
       atime1: 65535
-      atime2: 0
+      atime2: 65535
       atime3: 0
       atime4: 0
       atime5: 0
@@ -589,13 +608,35 @@ LineRenderer:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
-    numCapVertices: 0
+    numCapVertices: 4
     alignment: 0
     textureMode: 1
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!195 &2050647442
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6897983572955493780}
+  m_Enabled: 1
+  m_AgentTypeID: -902729914
+  m_Radius: 3
+  m_Speed: 11
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 99999
+  m_StoppingDistance: 8
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 10.12
+  m_BaseOffset: 5.92
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &7393697944660179889
 GameObject:
   m_ObjectHideFlags: 0

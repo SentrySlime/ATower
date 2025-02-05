@@ -41,7 +41,7 @@ public class ShootRaycast : BaseWeapon
     public List<AudioSource> SFXList = new List<AudioSource>();
     int soundCount;
 
-
+    [Header("SFX & VFX")]
     public GameObject shootSFX;
     public GameObject hitSFX;
 
@@ -52,11 +52,15 @@ public class ShootRaycast : BaseWeapon
     public GameObject hitVFX;
     public GameObject hitEnemyVFX;
 
-    //PlayerStats playerStats;
-
     public ParticleSystem casingVFX;
 
     public Animation mantleAnimation;
+
+    
+
+    //PlayerStats playerStats;
+
+
 
     private void Awake()
     {

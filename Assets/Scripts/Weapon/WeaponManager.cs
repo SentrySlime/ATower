@@ -35,8 +35,9 @@ public class WeaponManager : MonoBehaviour
     private GameObject GetRandomWeapon()
     {
         int weaponIndex = Random.Range(0, weapons.Count);
-
-        return weapons[weaponIndex];
+        GameObject weapon = weapons[weaponIndex];
+        weapons.RemoveAt(weaponIndex);
+        return weapon;
     }
 
     //public GameObject GetRandomWeapon(bool S, bool A, bool B, bool C, bool D)
