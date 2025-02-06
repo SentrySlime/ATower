@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class BaseWeapon : MonoBehaviour
 {
+
+
     public enum ReloadType
     {
         Magazine,
@@ -20,6 +22,7 @@ public class BaseWeapon : MonoBehaviour
     public GameObject barrel;
     public GameObject objectToRecoil;
     public Sprite weaponIcon;
+    public GameObject iconPrefab;
 
     public enum WeaponType
     {

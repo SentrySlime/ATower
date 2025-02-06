@@ -74,7 +74,7 @@ public class WeaponSocket : MonoBehaviour
         GameObject tempObj = GameObject.FindGameObjectWithTag("ShootPoint");
         cameraMovement = GetComponentInChildren<CameraMovement>();
         reloadIcon = GameObject.FindGameObjectWithTag("ReloadImage").GetComponent<Image>();
-        weaponIcon = GameObject.FindGameObjectWithTag("WeaponIcon").GetComponent<Image>();
+        //weaponIcon = GameObject.FindGameObjectWithTag("WeaponIcon").GetComponent<Image>();
         crosshair = GameObject.FindGameObjectWithTag("Crosshair").GetComponent<CanvasGroup>();
         reloadIcon.enabled = false;
         pauseMenu = GameObject.FindGameObjectWithTag("Canvas").GetComponent<PauseMenu>();
@@ -269,7 +269,7 @@ public class WeaponSocket : MonoBehaviour
 
     private void SetWeaponIcon()
     {
-        weaponIcon.sprite = equippedWeapon.weaponIcon;
+        //weaponIcon.sprite = equippedWeapon.weaponIcon;
         //weaponIcon.sprite = weaponSocket.equippedWeapon.weaponIcon;
     }
 

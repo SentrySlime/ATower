@@ -8,8 +8,8 @@ public class Inventory : MonoBehaviour
     [Header("Money")]
     public int Money;
 
-    int weaponIndex = 0;
-    private int previousIndex = 0;
+    public int weaponIndex = 0;
+    public int previousIndex = 0;
 
     FindAndEquipWeapons findAndEquipWeapons;
     WeaponSocket weaponSocket;
@@ -57,6 +57,7 @@ public class Inventory : MonoBehaviour
 
 
         weaponIndex += Mathf.RoundToInt(Input.mouseScrollDelta.y);
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             weaponIndex = 0;
@@ -99,19 +100,7 @@ public class Inventory : MonoBehaviour
 
         if (previousIndex != weaponIndex)
         {
-            weaponSocket.adsProgress = 1;
-            weaponSocket.StopReload();
-            weaponSocket.currentTimer = 0;
-            reloadIcon.enabled = false;
-            recoil.rotating = false;
-            baseWeapon.gameObject.transform.localRotation = Quaternion.identity;
-
-            heldWeapons[previousIndex].GetComponent<Recoil>().DisableWeapon();
-            heldWeapons[weaponIndex].GetComponent<Recoil>().EnableWeapon();
-            
-
-            findAndEquipWeapons.SetWeapon(heldWeapons[weaponIndex]);
-            previousIndex = weaponIndex;
+            SwitchWeapon();
         }
 
     }
@@ -122,7 +111,22 @@ public class Inventory : MonoBehaviour
         //Money++;
     }
 
-    
+    public void SwitchWeapon()
+    {
+        weaponSocket.adsProgress = 1;
+        weaponSocket.StopReload();
+        weaponSocket.currentTimer = 0;
+        reloadIcon.enabled = false;
+        recoil.rotating = false;
+        baseWeapon.gameObject.transform.localRotation = Quaternion.identity;
+
+        heldWeapons[previousIndex].GetComponent<Recoil>().DisableWeapon();
+        heldWeapons[weaponIndex].GetComponent<Recoil>().EnableWeapon();
+
+
+        findAndEquipWeapons.SetWeapon(heldWeapons[weaponIndex]);
+        previousIndex = weaponIndex;
+    }
 
     //Do something about longer reloads here
 

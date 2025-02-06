@@ -6,6 +6,14 @@ using TMPro;
 
 public class FindAndEquipWeapons : MonoBehaviour
 {
+    [Header("WeaponIcons")]
+    public GameObject weaponIcon;
+    public GameObject iconParent;
+    public List<WeaponIcon> weaponIcons;
+    public WeaponIcon previousIcon;
+    public WeaponIcon currentIcon;
+
+    [Header("Camera & Stuff")]
     public Camera Mcamera;
     [SerializeField] public BaseWeapon baseWeapon;
     [SerializeField] WeaponSocket weaponSocket;
@@ -13,13 +21,8 @@ public class FindAndEquipWeapons : MonoBehaviour
     [SerializeField] float interactDistance;
 
     GameObject lastHitObj;
-
     public GameObject startWeapon;
-
-    
-
     float dissapearTimer;
-
     Inventory inventory;
 
     [HideInInspector] private Transform shootPoint;
@@ -58,7 +61,15 @@ public class FindAndEquipWeapons : MonoBehaviour
     void Update()
     {
         CheckForItems();
-        
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+
+            
+            //obj.GetComponent<RectTransform>().SetSib;
+            //obj.transform.SetAsFirstSibling
+        }
+
         if (Input.GetKeyDown(KeyCode.E))
         {
 
@@ -72,21 +83,25 @@ public class FindAndEquipWeapons : MonoBehaviour
                 WeaponPickUp test = hit.collider.gameObject.GetComponent<WeaponPickUp>();
                 if (test != null)
                 {
-                    GameObject tempObj = hit.collider.gameObject.GetComponent<WeaponPickUp>().returnWeapon();
+                    GameObject weaponObj = hit.collider.gameObject.GetComponent<WeaponPickUp>().returnWeapon();
+                    SetNewWeaponIcon(weaponObj);
 
+
+                    inventory.weaponIndex = inventory.heldWeapons.Count;
+
+                    //SetActiveWeaponIcon(weaponObj);
                     Destroy(hit.collider.gameObject);
-                    inventory.heldWeapons.Add(tempObj);
+                    inventory.heldWeapons.Add(weaponObj);
 
                     if (baseWeapon != null)
                     {
-                        tempObj.GetComponent<Recoil>().DisableWeapon();
+                        weaponObj.GetComponent<Recoil>().DisableWeapon();
                         //tempObj.SetActive();
                         //hit.transform.gameObject.SetActive(false);
-
                     }
                     else
                     {
-                        SetWeapon(tempObj);
+                        SetWeapon(weaponObj);
                         //SetWeapon(hit.transform.gameObject);
                     }
 
@@ -123,11 +138,8 @@ public class FindAndEquipWeapons : MonoBehaviour
                     tempPanel.itemDescription = itemDescription;
                     tempPanel.image = image;
                 }
-
             }
-
         }
-
     }
 
     private void StartUpWeapon()
@@ -139,8 +151,6 @@ public class FindAndEquipWeapons : MonoBehaviour
 
     public void SetWeapon(GameObject hitObj)
     {
-
-
         baseWeapon = hitObj.GetComponentInChildren<BaseWeapon>();
 
         inventory.baseWeapon = baseWeapon;
@@ -151,13 +161,14 @@ public class FindAndEquipWeapons : MonoBehaviour
         baseWeapon.transform.parent.transform.localPosition = new Vector3(0, 0, 0);
         lastHitObj = hitObj;
         if (lastHitObj != null)
+        {
             weaponSocket.SetUpWeapon(lastHitObj);
+            SetActiveWeaponIcon();
+        }
     }
 
     private void CheckForItems()
     {
-
-
         if (dissapearTimer < .25f)
         {
             dissapearTimer += Time.deltaTime;
@@ -191,6 +202,38 @@ public class FindAndEquipWeapons : MonoBehaviour
             }
 
         }
+    }
+
+    private void SetNewWeaponIcon(GameObject weaponObj)
+    {
+        
+        //Spawn the new weaponIcon
+        GameObject obj = Instantiate(weaponIcon, iconParent.transform);
+        WeaponIcon weaponIconObj = obj.GetComponent<WeaponIcon>();
+        //Set the icon to resemble the weapon we picked up
+        weaponIconObj.SetIcon(weaponObj.GetComponentInChildren<BaseWeapon>().weaponIcon);
+        //Add it to the list of weaponIcons
+        weaponIcons.Add(weaponIconObj);
+        weaponObj.GetComponentInChildren<BaseWeapon>().iconPrefab = obj;
+        SetActiveWeaponIcon(weaponObj);
+    }
+
+    private void SetActiveWeaponIcon(GameObject obj)
+    {
+        foreach (WeaponIcon icon in weaponIcons)
+        {
+            icon.SetInactive();
+        }
+        obj.GetComponentInChildren<BaseWeapon>().iconPrefab.GetComponent<WeaponIcon>().Activate();
+    }
+
+    private void SetActiveWeaponIcon()
+    {
+        foreach (WeaponIcon icon in weaponIcons)
+        {
+            icon.SetInactive();
+        }
+        weaponSocket.equippedWeapon.iconPrefab.GetComponent<WeaponIcon>().Activate();
     }
 
 }
