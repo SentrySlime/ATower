@@ -152,6 +152,9 @@ MonoBehaviour:
   audioSource: {fileID: 6261519859023998162}
   shootAudioSource: {fileID: 747920691}
   currentState: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   animator: {fileID: 1732250578}
   agent: {fileID: 915999531}
   FoundPlayer: 0
@@ -161,7 +164,7 @@ MonoBehaviour:
   timer: 0
   rangedAttack: 1
   rangedProjectile: {fileID: 7929977615501413461, guid: aaa211e7b9418704d8e7f3733954f506, type: 3}
-  rangedDistance: 30
+  rangedDistance: 50
   incompletRangedDistance: 75
   seePlayerRangedDistance: 115
   shootPoint: {fileID: 1953697717}
@@ -2145,6 +2148,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9e989a75407c25f4fb9a54da587fe179, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e989a75407c25f4fb9a54da587fe179, type: 3}
 --- !u!4 &8769174094607328405 stripped
@@ -2310,6 +2317,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 758b37c5f3f546c44b43b215e901151e, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 758b37c5f3f546c44b43b215e901151e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 758b37c5f3f546c44b43b215e901151e, type: 3}
       propertyPath: m_TagString

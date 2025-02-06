@@ -78,6 +78,7 @@ public class WeaponSocket : MonoBehaviour
         crosshair = GameObject.FindGameObjectWithTag("Crosshair").GetComponent<CanvasGroup>();
         reloadIcon.enabled = false;
         pauseMenu = GameObject.FindGameObjectWithTag("Canvas").GetComponent<PauseMenu>();
+        reloadGroup.alpha = 0;
     }
 
     void Start()
@@ -117,7 +118,6 @@ public class WeaponSocket : MonoBehaviour
             {
                 if (Input.GetMouseButton(0))
                 {
-                    //StopCoroutine(Reloading());
                     Fire();
                     currentTimer = 0;
                 }
@@ -126,7 +126,6 @@ public class WeaponSocket : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    //StopCoroutine(Reloading());
                     Fire();
                     currentTimer = 0;
                 }
@@ -135,7 +134,6 @@ public class WeaponSocket : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    //StopCoroutine(Reloading());
                     StartCoroutine(BurstFire());
                 }
             }
@@ -183,8 +181,8 @@ public class WeaponSocket : MonoBehaviour
 
     public void Fire()
     {
-        StopReload();
         if (equippedWeapon == null || reloadIcon.isActiveAndEnabled) { return; }
+        StopReload();
 
         if (equippedWeapon.currentMagazine >= equippedWeapon.ammoPerShot)
         {
@@ -264,13 +262,6 @@ public class WeaponSocket : MonoBehaviour
         equippedWeapon.screenShake = screenShake;
         recoilScript = incomingObj.GetComponent<Recoil>();
         equippedWeapon.Initialize(cameraObj);
-        SetWeaponIcon();
-    }
-
-    private void SetWeaponIcon()
-    {
-        //weaponIcon.sprite = equippedWeapon.weaponIcon;
-        //weaponIcon.sprite = weaponSocket.equippedWeapon.weaponIcon;
     }
 
     public void StopReload()

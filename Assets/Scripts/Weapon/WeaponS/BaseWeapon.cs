@@ -102,8 +102,7 @@ public class BaseWeapon : MonoBehaviour
 
     public virtual void Start()
     {
-
-        //DefaultLayer();
+        //This is a virtual "override start function" so the children inherit and use this (So don't remove)
     }
 
     void Update()
@@ -226,9 +225,6 @@ public class BaseWeapon : MonoBehaviour
 
         //Text based elements for ammo
         SetAmmoInfo();
-
-
-
     }
 
     public bool HasFullMagazine()

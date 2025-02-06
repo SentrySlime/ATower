@@ -26,16 +26,6 @@ public class Inventory : MonoBehaviour
     [Header("Items")]
     public List<GameObject> heldItems = new List<GameObject>();
 
-
-    // weaponIndex++
-    // current weapon index = 0
-    // weaponIndex--
-
-    // Increase or decrease depending on if scrolling up or down
-
-    //PreviousWeaponIndex = weaponIndex
-    //Update weapon index
-
     void Start()
     {
         findAndEquipWeapons = GetComponent<FindAndEquipWeapons>();
@@ -44,7 +34,6 @@ public class Inventory : MonoBehaviour
         reloadIcon = GameObject.FindGameObjectWithTag("ReloadImage").GetComponent<Image>();
         
     }
-
 
     void Update()
     {
@@ -91,6 +80,21 @@ public class Inventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
             weaponIndex = 6;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            weaponIndex = 7;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            weaponIndex = 8;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            weaponIndex = 9;
         }
 
         if (weaponIndex < 0)

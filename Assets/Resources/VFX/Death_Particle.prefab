@@ -9685,8 +9685,16 @@ PrefabInstance:
       value: GibTrail
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
+      propertyPath: lengthInSec
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: SizeModule.enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.size

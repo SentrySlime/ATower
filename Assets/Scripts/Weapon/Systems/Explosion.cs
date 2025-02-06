@@ -27,6 +27,8 @@ public class Explosion : MonoBehaviour, IExplosionInterface
     public GameObject mesh;
     public Material myMaterial;
     public float alpha = 1;
+    private float alphaFadeRate = 2;
+    
 
     float destroyTimer;
 
@@ -129,7 +131,7 @@ public class Explosion : MonoBehaviour, IExplosionInterface
     private void UpdateAlpha()
     {
         if (alpha > 0 && myMaterial)
-            alpha -= Time.deltaTime;
+            alpha -= Time.deltaTime * alphaFadeRate;
 
         //pointLight.intensity = alpha;
         myMaterial.color = new Color(myMaterial.color.r, myMaterial.color.g, myMaterial.color.b, alpha);

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,17 +9,7 @@ public class WeaponIcon : MonoBehaviour
 
     public Image borderImage;
     public Image iconImage;
-
-    void Start()
-    {
-        
-    }
-
-    
-    void Update()
-    {
-        
-    }
+    public TextMeshProUGUI hotkeyIndex;
 
     private void SetHeirarchy()
     {
@@ -33,11 +24,16 @@ public class WeaponIcon : MonoBehaviour
     public void Activate()
     {
         borderImage.color = Color.red;
-        SetHeirarchy();
+        //SetHeirarchy();
     }
 
     public void SetInactive()
     {
         borderImage.color = Color.white;
+    }
+
+    public void SetHotKeyIndex(int index)
+    {
+        hotkeyIndex.text = index.ToString();
     }
 }

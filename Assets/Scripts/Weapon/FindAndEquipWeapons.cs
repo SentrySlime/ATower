@@ -54,21 +54,13 @@ public class FindAndEquipWeapons : MonoBehaviour
 
     void Start()
     {
-        if (startWeapon != null)
-            StartUpWeapon();
+        if (startWeapon)
+            InitializeWeapon(startWeapon);
     }
 
     void Update()
     {
         CheckForItems();
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-
-            
-            //obj.GetComponent<RectTransform>().SetSib;
-            //obj.transform.SetAsFirstSibling
-        }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -76,77 +68,57 @@ public class FindAndEquipWeapons : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(Mcamera.transform.position, Mcamera.transform.forward * interactDistance, out hit, interactDistance) && hit.transform.gameObject.CompareTag("Item"))
             {
-
-                if (!equipSFX.isPlaying)
-                    equipSFX.Play();
-
-                WeaponPickUp test = hit.collider.gameObject.GetComponent<WeaponPickUp>();
-                if (test != null)
-                {
-                    GameObject weaponObj = hit.collider.gameObject.GetComponent<WeaponPickUp>().returnWeapon();
-                    SetNewWeaponIcon(weaponObj);
-
-
-                    inventory.weaponIndex = inventory.heldWeapons.Count;
-
-                    //SetActiveWeaponIcon(weaponObj);
-                    Destroy(hit.collider.gameObject);
-                    inventory.heldWeapons.Add(weaponObj);
-
-                    if (baseWeapon != null)
-                    {
-                        weaponObj.GetComponent<Recoil>().DisableWeapon();
-                        //tempObj.SetActive();
-                        //hit.transform.gameObject.SetActive(false);
-                    }
-                    else
-                    {
-                        SetWeapon(weaponObj);
-                        //SetWeapon(hit.transform.gameObject);
-                    }
-
-                    //inventory.heldWeapons.Add(hit.transform.gameObject);
-
-                    //hit.transform.GetComponent<Collider>().enabled = false;
-
-                    //if (baseWeapon != null)
-                    //{
-                    //    hit.transform.gameObject.SetActive(false);
-
-                    //}
-                    //else
-                    //{
-                    //    SetWeapon(hit.transform.gameObject);
-                    //}
-                }
-                else
-                {
-                    ItemPickUp test2 = hit.collider.gameObject.GetComponent<ItemPickUp>();
-
-                    if (!test2) return;
-
-                    Vector3 SpawnPos = new Vector3(-9999, -9999, -9999);
-                    ItemBase tempObj = Instantiate(hit.collider.gameObject.GetComponent<ItemPickUp>().itemPrefab, SpawnPos, Quaternion.identity);
-                    tempObj.EquipItem();
-                    Destroy(hit.collider.gameObject);
-                    //tempObj.GetComponent<ItemBase>().EquipItem();
-
-                    GameObject itemObj = Instantiate(itemPanel, itemGroup.transform);
-                    ItemPanel tempPanel = itemObj.GetComponent<ItemPanel>();
-                    tempPanel.SetPanel(test2);
-                    tempPanel.itemName = itemName;
-                    tempPanel.itemDescription = itemDescription;
-                    tempPanel.image = image;
-                }
+                InitializeWeapon(hit.collider.gameObject);
+                
             }
         }
     }
 
-    private void StartUpWeapon()
+    private void InitializeWeapon(GameObject IncomingWeaponObj)
     {
-        inventory.heldWeapons.Add(startWeapon);
-        //startWeapon.transform.GetComponent<Collider>().enabled = false;
-        SetWeapon(startWeapon);
+        if (!equipSFX.isPlaying)
+            equipSFX.Play();
+
+        WeaponPickUp test = IncomingWeaponObj.GetComponent<WeaponPickUp>();
+        if (test != null)
+        {
+            GameObject weaponObj = IncomingWeaponObj.GetComponent<WeaponPickUp>().returnWeapon();
+            SetNewWeaponIcon(weaponObj);
+
+
+            inventory.weaponIndex = inventory.heldWeapons.Count;
+
+            Destroy(IncomingWeaponObj);
+            inventory.heldWeapons.Add(weaponObj);
+
+            if (baseWeapon != null)
+            {
+                weaponObj.GetComponent<Recoil>().DisableWeapon();
+            }
+            else
+            {
+                SetWeapon(weaponObj);
+            }
+
+        }
+        else
+        {
+            ItemPickUp test2 = IncomingWeaponObj.GetComponent<ItemPickUp>();
+
+            if (!test2) return;
+
+            Vector3 SpawnPos = new Vector3(-9999, -9999, -9999);
+            ItemBase tempObj = Instantiate(IncomingWeaponObj.GetComponent<ItemPickUp>().itemPrefab, SpawnPos, Quaternion.identity);
+            tempObj.EquipItem();
+            Destroy(IncomingWeaponObj);
+
+            GameObject itemObj = Instantiate(itemPanel, itemGroup.transform);
+            ItemPanel tempPanel = itemObj.GetComponent<ItemPanel>();
+            tempPanel.SetPanel(test2);
+            tempPanel.itemName = itemName;
+            tempPanel.itemDescription = itemDescription;
+            tempPanel.image = image;
+        }
     }
 
     public void SetWeapon(GameObject hitObj)
@@ -196,11 +168,6 @@ public class FindAndEquipWeapons : MonoBehaviour
 
                 }
             }
-            else
-            {
-
-            }
-
         }
     }
 
@@ -212,6 +179,8 @@ public class FindAndEquipWeapons : MonoBehaviour
         WeaponIcon weaponIconObj = obj.GetComponent<WeaponIcon>();
         //Set the icon to resemble the weapon we picked up
         weaponIconObj.SetIcon(weaponObj.GetComponentInChildren<BaseWeapon>().weaponIcon);
+        //Setting the hotkey number for what to press
+        weaponIconObj.SetHotKeyIndex(inventory.weaponIndex = inventory.heldWeapons.Count + 1);
         //Add it to the list of weaponIcons
         weaponIcons.Add(weaponIconObj);
         weaponObj.GetComponentInChildren<BaseWeapon>().iconPrefab = obj;

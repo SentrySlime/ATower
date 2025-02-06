@@ -9,7 +9,7 @@ public class LootSystem : MonoBehaviour
 
     void Start()
     {
-        weaponManager.DropWeapon(transform.position);
+
     }
 
     void Update()
