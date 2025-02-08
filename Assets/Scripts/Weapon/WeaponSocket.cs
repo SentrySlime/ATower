@@ -181,8 +181,8 @@ public class WeaponSocket : MonoBehaviour
 
     public void Fire()
     {
-        if (equippedWeapon == null || reloadIcon.isActiveAndEnabled) { return; }
         StopReload();
+        if (equippedWeapon == null || reloadIcon.isActiveAndEnabled) { return; }
 
         if (equippedWeapon.currentMagazine >= equippedWeapon.ammoPerShot)
         {

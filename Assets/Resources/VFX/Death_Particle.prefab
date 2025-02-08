@@ -5255,7 +5255,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -5308,7 +5308,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -5361,8 +5361,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotation:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
+      minMaxState: 3
+      scalar: 6.283185
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -9580,7 +9580,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f3a73bd9573a8af4da8de6ac0efcf8b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9689,12 +9689,28 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
+      propertyPath: ShapeModule.type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: SizeModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
+      propertyPath: ShapeModule.randomDirectionAmount
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
+      propertyPath: ShapeModule.sphericalDirectionAmount
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.size

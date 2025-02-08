@@ -5847,7 +5847,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5004350295349168960}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b416fbce5a38cc47a3a1e709f95f5e3, type: 3}
   m_Name: 
@@ -5873,7 +5873,7 @@ MonoBehaviour:
   ditherIntensity: 6
   maxDarkness: 20
   subtractFade: 0
-  favorRed: 0.9
+  favorRed: 0.3
   worldSpaceSnapping: 1
   postProcessing: 1
   verticalScanlines: 0
@@ -5942,6 +5942,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01f4e522cb8d1304dab3d293ac27346b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponIcon: {fileID: 2691291429182025842, guid: 6b31017705733f04aa07e8875d95a5ba, type: 3}
+  iconParent: {fileID: 0}
+  weaponIcons: []
+  previousIcon: {fileID: 0}
+  currentIcon: {fileID: 0}
   Mcamera: {fileID: 0}
   baseWeapon: {fileID: 0}
   weaponSocket: {fileID: 5004350295439402695}
@@ -6038,6 +6043,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Money: 0
+  weaponIndex: 0
+  previousIndex: 0
   heldWeapons: []
   baseWeapon: {fileID: 0}
   recoil: {fileID: 0}
