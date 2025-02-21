@@ -19,6 +19,7 @@ public class Explosion : MonoBehaviour, IExplosionInterface
     List<GameObject> hitEnemies = new List<GameObject>();
     HitmarkerLogic hitMarkerLogic;
     ScreenShake screenShake;
+    public AMainSystem mainSystem;
 
     [Header("Light")]
     public Light pointLight;
@@ -37,18 +38,17 @@ public class Explosion : MonoBehaviour, IExplosionInterface
         myMaterial = mesh.GetComponent<MeshRenderer>().material;
     }
 
-    public void InitiateExplosion(float explosionRadius, int damage, bool enemyOwned)
+    //Interface function
+    public void InitiateExplosion(AMainSystem incomingMainSystem, float explosionRadius, int damage, bool enemyOwned)
     {
-        
+        mainSystem = incomingMainSystem;
         screenShake = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ScreenShake>();
 
         eDamage = damage;
         eRadius = explosionRadius;
         eEnemyOwned = enemyOwned;
 
-        
         transform.localScale = new Vector3(eRadius, eRadius, eRadius);
-
 
         //hitMarkerLogic = GameObject.FindGameObjectWithTag("HitMarker").GetComponent<HitmarkerLogicd>();
         if (sfxToSpawn)
@@ -73,11 +73,8 @@ public class Explosion : MonoBehaviour, IExplosionInterface
 
     void Update()
     {
-
-        
         UpdateAlpha();
 
-        
         destroyTimer += Time.deltaTime;
 
         if (destroyTimer > 0.5)
@@ -86,45 +83,55 @@ public class Explosion : MonoBehaviour, IExplosionInterface
         if (destroyTimer < 2)
             ResizeSphere();
         else
-            //gameObject.SetActive(false);
             Destroy(gameObject);
     }
 
     private void ResizeSphere()
     {
-
-            sphereSize += Time.deltaTime * SphereScaleSpeed;
-        //if (destroyTimer < 0.2 && sphereSize < 1.5)
-        //else if (sphereSize > 0)
-        //    sphereSize -= Time.deltaTime * SphereScaleSpeed;
-
+        sphereSize += Time.deltaTime * SphereScaleSpeed;
         sphere.transform.localScale = new Vector3(sphereSize, sphereSize, sphereSize);
     }
 
     private void DealDamage(Collider[] enemies)
     {
-
         for (int i = 0; i < enemies.Length; i++)
         {
-            if (!hitEnemies.Contains(enemies[i].transform.root.gameObject))
-            {
+            if (enemies[i].CompareTag("Player")) { return; }
 
-                if (enemies[i].GetComponentInParent<IDamageInterface>() != null)
+
+            if (!hitEnemies.Contains(enemies[i].transform.gameObject))
+            {
+                if (enemies[i].transform.CompareTag("Breakable"))
                 {
-                    //hitMarkerLogic.EnableHitMarker();
-                    enemies[i].GetComponentInParent<IDamageInterface>().Damage(eDamage);
-                    hitEnemies.Add(enemies[i].transform.root.gameObject);
+                    
+
+                    if(mainSystem)
+                        mainSystem.DealDamage(enemies[i].transform.gameObject, eDamage, true);
+                    
+                    hitEnemies.Add(enemies[i].transform.gameObject);
                 }
 
+            }
+
+            if (!hitEnemies.Contains(enemies[i].transform.root.gameObject))
+            {
+                if (enemies[i].transform.CompareTag("Enemy"))
+                {
+                    if (mainSystem)
+                        mainSystem.DealDamage(enemies[i].transform.root.gameObject, eDamage, true);
+                    
+                    hitEnemies.Add(enemies[i].transform.root.gameObject);
+                }
             }
         }
 
     }
 
+
     private void DealDamageToPlayer(Collider player)
     {
-        player.gameObject.GetComponent<IDamageInterface>().Damage(eDamage);
-        
+        if (mainSystem)
+            mainSystem.DealDamage(player.gameObject, eDamage, false);
     }
 
 
@@ -133,7 +140,6 @@ public class Explosion : MonoBehaviour, IExplosionInterface
         if (alpha > 0 && myMaterial)
             alpha -= Time.deltaTime * alphaFadeRate;
 
-        //pointLight.intensity = alpha;
         myMaterial.color = new Color(myMaterial.color.r, myMaterial.color.g, myMaterial.color.b, alpha);
     }
 

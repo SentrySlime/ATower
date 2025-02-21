@@ -4982,7 +4982,7 @@ MonoBehaviour:
   currentMagazine: 2
   reloadTime: 2
   reloadAmount: 1
-  damage: 50
+  damage: 25
   fireRate: 0.1
   burstDelay: 1
   burstAmount: 1
@@ -5078,6 +5078,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d877e294147e686448a8a7c53832b543, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7f7ac469a7166f54b8cdd5a822fdcc66, type: 2}
     - target: {fileID: 919132149155446097, guid: d877e294147e686448a8a7c53832b543, type: 3}
       propertyPath: m_Name
       value: classic shotgun
@@ -5147,7 +5151,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4074934030344262, guid: f54bb1ec5b694b74ba4f1ff9c5556eee, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.416
+      value: 0.44800007
       objectReference: {fileID: 0}
     - target: {fileID: 4074934030344262, guid: f54bb1ec5b694b74ba4f1ff9c5556eee, type: 3}
       propertyPath: m_LocalRotation.w

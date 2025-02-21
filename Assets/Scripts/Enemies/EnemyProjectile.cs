@@ -22,7 +22,9 @@ public class EnemyProjectile : MonoBehaviour
 
     [Header("SineWave movement")]
     public bool sineMove = false;
+    [Tooltip("Decides the speed of the waves")]
     public float frequency = 20.0f;  // Speed of sine movement
+    [Tooltip("Decides how large the waves will be")]
     public float magnitude = 0.5f;   // Size of sine movement
     public bool horizontal = true;
     private Vector3 axis;
@@ -38,6 +40,7 @@ public class EnemyProjectile : MonoBehaviour
     public float turnSpeed = 12;
     public float nonHomingDuration = 0.35f;
 
+    [Tooltip("Will not home when within this range")]
     public float minHomingDistance = 10;
     public float maxHomeDistance = 200;
 
@@ -53,7 +56,13 @@ public class EnemyProjectile : MonoBehaviour
     GameObject player;
     PlayerHealth playerHealth;
     PlayerStats playerStats;
+    AMainSystem mainSystem;
     float lifeTimer = 0;
+
+    private void Awake()
+    {
+        mainSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AMainSystem>();
+    }
 
     void Start()
     {
@@ -100,7 +109,8 @@ public class EnemyProjectile : MonoBehaviour
         
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<IDamageInterface>().Damage(damage);
+            mainSystem.DealDamage(other.transform.gameObject, damage, false);
+            //other.GetComponent<IDamageInterface>().Damage(damage);
             DestroyProjectile();
         }
         else if (explode)
@@ -117,23 +127,15 @@ public class EnemyProjectile : MonoBehaviour
 
     public void ArcMovement()
     {
-
-
         velocity += Physics.gravity * gravityScale * Time.deltaTime;
-
         transform.position += velocity * Time.deltaTime;
-
         transform.position += transform.forward * projectileSpeed * Time.deltaTime;
-        //transform.position += transform.forward * projectileSpeed * Time.deltaTime;
-        //transform.position += -transform.up * gravityScale * Time.deltaTime;
     }
 
 
     public void MoveForward()
     {
-
         transform.position += transform.forward * projectileSpeed * Time.deltaTime;
-
     }
 
     private void MoveSine()
@@ -144,8 +146,6 @@ public class EnemyProjectile : MonoBehaviour
 
     public virtual void HomingLogic()
     {
-
-
         if (homingTimer < nonHomingDuration)
         {
             homingTimer += Time.deltaTime;
@@ -177,18 +177,29 @@ public class EnemyProjectile : MonoBehaviour
     {
         if (player)
         {
-
+            //Get distance to player
             float distanceApart = Vector3.Distance(transform.position, player.transform.position);
+            
+            // If we are too close to the player we stop homing
             if (distanceApart <= minHomingDistance)
+            {
                 cantHome = true;
+                return;
+            }
+
+            //We map the turning speed depending on how far away the target is
             float lerp = MapValue(distanceApart, 0, maxHomeDistance, 1f, 0f);
             float newTurnSpeed = turnSpeed * lerp;
-
             newTurnSpeed = Mathf.Clamp(newTurnSpeed, minTurnSpeed, maxTurnSpeed);
 
+            //Calculating rotation towards target
             var lookPos = target.transform.position - transform.position;
             var rotation = Quaternion.LookRotation(lookPos);
+            
+            //Smoothing the rotation
             transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * newTurnSpeed);
+            
+            //Moving forward towards the target
             transform.position += transform.forward * projectileSpeed * Time.deltaTime;
         }
     }

@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     
     void Start()
     {
-        Instantiate(enemyToSpawn, transform.position, transform.rotation);
+        StartCoroutine(SpawnEnemy());
     }
 
     
@@ -16,4 +16,11 @@ public class EnemySpawner : MonoBehaviour
     {
         
     }
+
+    IEnumerator SpawnEnemy()
+    {
+        yield return new WaitForSeconds(0.8f);
+        Instantiate(enemyToSpawn, transform.position, transform.rotation);
+    }
+
 }

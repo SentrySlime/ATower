@@ -12,11 +12,16 @@ public class ItemPlayerHealth : ItemBase
     [Tooltip("One point is equal to one max HP")]
     [Range(-200, 200f)] public int maxHp;
 
+    [Tooltip("1 point is equal to 1 extra health gained over 1 sec")]
+    [Range(-90f, 90f)] public int hpRegen;
+
     [Tooltip(" 0.1 point is equal to 10% less damage taken from each attack")]
     [Range(-0.9f, 0.9f)] public float damageReductionPercent;
 
     [Tooltip("1 point is equal to 1% chance to take no damage")]
     [Range(-90f, 90f)] public int damageIgnoreChance;
+
+
 
     private void Awake()
     {
@@ -31,6 +36,7 @@ public class ItemPlayerHealth : ItemBase
     public override void EquipItem()
     {
         playerStats.maxHealth += maxHp;
+        playerStats.hpRegen += hpRegen;
         playerStats.damageReductionPercent += damageReductionPercent;
         playerStats.damageIgnoreChance += damageIgnoreChance;
         playerStats.StartPlayerHP();
@@ -39,6 +45,7 @@ public class ItemPlayerHealth : ItemBase
     public override void UnEquipItem()
     {
         playerStats.maxHealth -= maxHp;
+        playerStats.hpRegen -= hpRegen;
         playerStats.damageReductionPercent -= damageReductionPercent;
         playerStats.damageIgnoreChance -= damageIgnoreChance;
         playerStats.StartPlayerHP();

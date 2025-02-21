@@ -45,7 +45,7 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
     public float hpRegenCooldown = 0;
     float hpRegenTimer = 0;
 
-    void Start()
+    private void Awake()
     {
         startPos = transform.position;
         playerStats = GetComponent<PlayerStats>();
@@ -57,6 +57,10 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
         UpdateHP();
         HealthRegen();
         UpdateHPRegen();
+    }
+
+    void Start()
+    {
     }
 
 
@@ -111,7 +115,7 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
         UpdateHP();
     }
-    private void UpdateHPRegen()
+    public void UpdateHPRegen()
     {
         hpRegenCooldown = 1 / playerStats.hpRegen;
     }
@@ -197,8 +201,9 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
     #endregion
 
-    private void UpdateHP()
+    public void UpdateHP()
     {
+        barHP.maxValue = maxHP;
         barHP.value = currentHP;
         textHP.text = currentHP.ToString() + " / " + maxHP;
     }

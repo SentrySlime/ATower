@@ -6,12 +6,18 @@ public class ExplosionSystem : MonoBehaviour
 {
 
     public GameObject standardExplosion;
-    private GameObject tempExplosions;    
+    private GameObject tempExplosions;   
+    private AMainSystem mainSystem;
+
+    private void Awake()
+    {
+        mainSystem = GetComponent<AMainSystem>();
+    }
 
     public void SpawnExplosion(Vector3 explosionPos, float explosionRadius, int damage)
     {
         tempExplosions = Instantiate(standardExplosion, explosionPos, Quaternion.identity);
-        tempExplosions.GetComponent<IExplosionInterface>().InitiateExplosion(explosionRadius, damage, false);
+        tempExplosions.GetComponent<IExplosionInterface>().InitiateExplosion(mainSystem, explosionRadius, damage, false);
     }
 
     public void SpawnExplosion(Vector3 explosionPos, float explosionRadius, int damage, GameObject parent)
@@ -21,7 +27,7 @@ public class ExplosionSystem : MonoBehaviour
         if(parent.GetComponent<EnemyBase>())
             parent.GetComponent<EnemyBase>().SetProjetile(tempExplosions);
         
-        tempExplosions.GetComponent<IExplosionInterface>().InitiateExplosion(explosionRadius, damage, false);
+        tempExplosions.GetComponent<IExplosionInterface>().InitiateExplosion(mainSystem, explosionRadius, damage, false);
     }
 
     public void SpawnExplosion(Vector3 explosionPos, float explosionRadius, int damage, GameObject parent, bool enemyOwned)
@@ -31,7 +37,7 @@ public class ExplosionSystem : MonoBehaviour
         if (parent.GetComponent<EnemyBase>())
             parent.GetComponent<EnemyBase>().SetProjetile(tempExplosions);
 
-        tempExplosions.GetComponent<IExplosionInterface>().InitiateExplosion(explosionRadius, damage, true);
+        tempExplosions.GetComponent<IExplosionInterface>().InitiateExplosion(mainSystem, explosionRadius, damage, true);
     }
 
 }

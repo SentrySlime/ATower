@@ -114,32 +114,39 @@ public class WeaponSocket : MonoBehaviour
         }
         else
         {
-            if (fireMode == FireMode.fullAuto)
+            if (Input.GetMouseButtonDown(0))
             {
-                if (Input.GetMouseButton(0))
+                if(reloadIcon.enabled) 
+                { 
+                    StopReload(); 
+                    
+                    if(equippedWeapon.currentMagazine < equippedWeapon.ammoPerShot)
+                        return; 
+                }
+
+                if (fireMode == FireMode.semi)
                 {
                     Fire();
                     currentTimer = 0;
                 }
-            }
-            else if (fireMode == FireMode.semi)
-            {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    Fire();
-                    currentTimer = 0;
-                }
-            }
-            else if (fireMode == FireMode.burst)
-            {
-                if (Input.GetMouseButtonDown(0))
+                else if (fireMode == FireMode.burst)
                 {
                     StartCoroutine(BurstFire());
                 }
             }
+            else if (Input.GetMouseButton(0))
+            {
+                if (fireMode == FireMode.fullAuto)
+                {
+                    if (Input.GetMouseButton(0))
+                    {
+                        Fire();
+                        currentTimer = 0;
+                    }
+                }
+            }
         }
 
-        
         if (Input.GetMouseButton(1) )
         {
             if (adsProgress < 0.1)
@@ -176,12 +183,11 @@ public class WeaponSocket : MonoBehaviour
             cameraMovement.Sensitivity = Mathf.Lerp(zoomedSensitivity, baseSensitivity, adsProgress);
             crosshair.alpha = adsProgress;
         }
-
     }
 
     public void Fire()
     {
-        StopReload();
+        
         if (equippedWeapon == null || reloadIcon.isActiveAndEnabled) { return; }
 
         if (equippedWeapon.currentMagazine >= equippedWeapon.ammoPerShot)

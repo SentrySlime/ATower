@@ -33,11 +33,14 @@ public class PlayerStats : MonoBehaviour
     public bool canExplode = false;
     public int ammoRefills = 0;
 
+    private void Awake()
+    {
+        GetAllScripts();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        GetAllScripts();
-
         StartLocomotion();
         StartPlayerHP();
         StartWeaponSocket();
@@ -47,14 +50,18 @@ public class PlayerStats : MonoBehaviour
     public void StartLocomotion()
     {
         locomotion.moveSpeed = moveSpeed;
-        locomotion.maxJumps = extraJumps;
+        locomotion.UpdateJumps(extraJumps);
+
+        //locomotion.maxJumps = extraJumps;
     }
 
     public void StartPlayerHP()
     {
         playerHealth.maxHP = maxHealth;
+        playerHealth.UpdateHPRegen();
         playerHealth.damageReductionPercent = damageReductionPercent;
         playerHealth.damageIgnoreChance = damageIgnoreChance;
+        playerHealth.UpdateHP();
     }
 
     public void StartWeaponSocket()

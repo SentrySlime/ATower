@@ -8,13 +8,14 @@ public class ECdestroyMe : MonoBehaviour
     public float deathtimer = 1;
     float currentTimer = 0;
     GameObject player;
+    AMainSystem mainSystem;
     public float minimumRadius;
     // Use this for initialization
     void Start () 
     {
         player = GameObject.FindGameObjectWithTag("Player");
-	
-	}
+	    mainSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AMainSystem>();
+    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -23,7 +24,8 @@ public class ECdestroyMe : MonoBehaviour
             float distance = Vector3.Distance(transform.position, other.transform.position);
             if (distance >= minimumRadius)
             {
-                player.GetComponent<IDamageInterface>().Damage(30);
+                mainSystem.DealDamage(player, 30, false);
+                //player.GetComponent<IDamageInterface>().Damage(30);
 
             }
 

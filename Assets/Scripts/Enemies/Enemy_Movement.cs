@@ -27,8 +27,10 @@ public class Enemy_Movement : MonoBehaviour
     public GameObject meleeObj;
     public float meleeDistance_ = 10;
 
-
-
+    [Header("Movement")]
+    public bool roam = false;
+    private float newDestinationRate = 0.5f;
+    private float newDestinationTimer = 0;
 
     void Start()
     {
@@ -42,7 +44,12 @@ public class Enemy_Movement : MonoBehaviour
 
     void Update()
     {        
-        
+        if(roam)
+        {
+            Roam();
+            return;
+        }
+
         NoticePlayer();
 
         if (!foundPlayer) { return; }
@@ -191,4 +198,22 @@ public class Enemy_Movement : MonoBehaviour
 
     }
 
+    public void Roam()
+    {
+        if(newDestinationTimer < newDestinationRate)
+        {
+            newDestinationTimer += Time.deltaTime;
+        }
+        else
+        {
+            Vector3 randomDirection = Random.insideUnitSphere * 10;
+            randomDirection += transform.position;
+            NavMeshHit hit;
+            NavMesh.SamplePosition(randomDirection, out hit, 10, 1);
+            Vector3 finalPosition = hit.position;
+            newDestinationTimer = 0;
+            agent.SetDestination(finalPosition);
+        }
+
+    }
 }

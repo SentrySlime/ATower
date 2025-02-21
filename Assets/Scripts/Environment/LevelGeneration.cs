@@ -9,14 +9,18 @@ public class LevelGeneration : MonoBehaviour
     [SerializeField]
     NavMeshSurface[] navMeshSurfaces;
 
+    public NavMeshSurface surfaCE;
+
     public List<GameObject> rooms = new List<GameObject>();
     GameObject spawnTransform;
     int allRoomCount;
 
     public int roomCount = 0;
 
+    [Header("Timer")]
+    public bool hasTimer = false;
     public float rate1 = 1.5f;
-    public float timer1 = 0;
+    float timer1 = 0;
 
     public List<GameObject> allSurfaces = new List<GameObject>();
     //public List<> allSurfaces = new List<GameObject>();
@@ -37,8 +41,14 @@ public class LevelGeneration : MonoBehaviour
     void Update()
     {
         
-        if (roomCount < allRoomCount)
+        if (roomCount < 12)
         {
+            if(!hasTimer)
+            {
+                GenerateLevel();
+                return;
+            }
+
             if (timer1 < rate1)
             {
                 timer1 += Time.deltaTime;
@@ -49,34 +59,44 @@ public class LevelGeneration : MonoBehaviour
                 timer1 = 0;
             }
         }
+        else if(!hasBuilt)
+        {
+            surfaCE.BuildNavMesh();
+            hasBuilt = true;    
+
+        }
         //else if(!hasBuilt)
         //{
 
         //    //GenerateNavmesh here
         //    GenerateNavMesh();
-        //    hasBuilt = true;    
         //}
 
     }
 
+    private int GetRandomRoom()
+    {
+        return Random.Range(0, 3);
+    }
+
     private void GenerateLevel()
     {
-        int newNumber = Random.Range(0, rooms.Count);
-        GetChildren(newNumber);
+        int newNumber = Random.Range(0, roomCount);
+        //GetChildren(newNumber);
         if (roomCount == 0)
         {
 
-            RoomScript newRoom = Instantiate(rooms[newNumber], transform.position, Quaternion.identity).GetComponent<RoomScript>();
+            RoomScript newRoom = Instantiate(rooms[GetRandomRoom()], transform.position, Quaternion.identity).GetComponent<RoomScript>();
             spawnTransform = newRoom.point2.gameObject;
         }
         else
         {
 
-            RoomScript newRoom = Instantiate(rooms[newNumber], spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
+            RoomScript newRoom = Instantiate(rooms[GetRandomRoom()], spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
             spawnTransform = newRoom.point2.gameObject;
         }
 
-        rooms.RemoveAt(newNumber);
+        //rooms.RemoveAt(newNumber);
         roomCount++;
     }
 

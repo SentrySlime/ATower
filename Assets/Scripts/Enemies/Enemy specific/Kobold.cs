@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
 
-public class Kobold : MonoBehaviour
+public class Kobold : MonoBehaviour, INoticePlayer
 {
     public AudioSource audioSource;
 
@@ -27,6 +27,9 @@ public class Kobold : MonoBehaviour
     public NavMeshAgent agent;
     GameObject player;
 
+    private float idleBehaviourRate = 0.5f;
+    private float idleBehaviourTimer = 0;
+
     [Header("Misc")]
     public bool FoundPlayer = false;
     public float moveSpeed = 7;
@@ -39,33 +42,26 @@ public class Kobold : MonoBehaviour
     [Header("Ranged")]
     public bool rangedAttack;
     public GameObject rangedProjectile;
-    public float rangedDistance = 30;
+    public float rangedDistance1 = 20;
+    public float rangedDistance2 = 50;
+    public float finalRangedDistance = 30;
     public float incompletRangedDistance = 50;
     public float seePlayerRangedDistance = 75;
     public Transform shootPoint;
+    [Header("RangedTelegraph")]
+    public GameObject telegraphSphere;
+
+
+
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        firingRate = UnityEngine.Random.Range(0.3f, 0.5f);
+        SetRandomStats();
         layerMask = ~layerMask;
     }
 
-    private void Logging()
-    {
-
-        NavMeshHit hit;
-        if (!NavMesh.Raycast(agent.transform.position, player.transform.position, out hit, NavMesh.AllAreas))
-        {
-            Debug.Log("Agent and target are connected on the NavMesh.");
-        }
-        else
-        {
-            Debug.Log("Agent and target are not directly connected on the NavMesh.");
-        }
-
-    }
-
+    
     void Update()
     {
         playerDist = Vector3.Distance(transform.position, player.transform.position);
@@ -105,9 +101,17 @@ public class Kobold : MonoBehaviour
 
     public void IdleBehaviour()
     {
+        if (idleBehaviourTimer < idleBehaviourRate)
+        {
+            idleBehaviourTimer += Time.deltaTime;
+            return;
+        }
+        
+        idleBehaviourTimer = 0;
+
         animator.SetBool("CloseToAttack", false);
 
-        if (playerDist < seePlayerRangedDistance)
+        if (playerDist < seePlayerRangedDistance && HasLineOfSight())
         {
             if (agent.CalculatePath(player.transform.position, agent.path))
             {
@@ -155,7 +159,7 @@ public class Kobold : MonoBehaviour
     {
         if (agent.pathStatus == NavMeshPathStatus.PathComplete)
         {
-            if (playerDist < rangedDistance)
+            if (playerDist < finalRangedDistance)
             {
                 Stop();
 
@@ -166,8 +170,17 @@ public class Kobold : MonoBehaviour
                 else
                 {
                     if (!HasLineOfSight()) { return; }
-                    animator.SetBool("CloseToAttack", true);
-                    timer = 0;
+
+                    if (IsPlayerInfront())
+                    {
+                        animator.SetBool("CloseToAttack", true);
+                        timer = 0;
+                    }
+                    else
+                    {
+                        StartAgent();
+                        MoveToPlayer();
+                    }
                 }
             }
             else
@@ -190,8 +203,17 @@ public class Kobold : MonoBehaviour
                 else
                 {
                     if(!HasLineOfSight()) { return; }
-                    animator.SetBool("CloseToAttack", true);
-                    timer = 0;
+
+                    if (IsPlayerInfront())
+                    {
+                        animator.SetBool("CloseToAttack", true);
+                        timer = 0;
+                    }
+                    else
+                    {
+                        StartAgent();
+                        MoveToPlayer();
+                    }
                 }
             }
             else
@@ -207,6 +229,7 @@ public class Kobold : MonoBehaviour
 
     public void RangedAttack()
     {
+        telegraphSphere.SetActive(true);
         shootAudioSource.Play();
         agent.speed = 0;
         agent.isStopped = true;
@@ -251,16 +274,17 @@ public class Kobold : MonoBehaviour
 
         agent.speed = moveSpeed;
         agent.isStopped = false;
+        telegraphSphere.SetActive(false);
 
     }
 
     private bool HasLineOfSight()
     {
-        Vector3 directionToPlayer = player.transform.position - shootPoint.transform.position;
+        Vector3 directionToPlayer = player.transform.position - transform.position;
         float distance = Vector3.Distance(player.transform.position, transform.position);
 
         RaycastHit hit;
-        if (Physics.Raycast(shootPoint.transform.position, directionToPlayer, out hit, distance, layerMask))
+        if (Physics.Raycast(transform.position, directionToPlayer, out hit, distance, layerMask))
         {
             if (hit.transform.CompareTag("Player"))
             {
@@ -273,4 +297,41 @@ public class Kobold : MonoBehaviour
         return false;
     }
 
+    private bool IsPlayerInfront()
+    {
+        Vector3 enemyforward = transform.forward;
+
+        Vector3 toPlayer = (player.transform.position - transform.position).normalized;
+
+        float dot = Vector3.Dot(enemyforward, toPlayer);
+
+        if(dot > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    public void NoticePlayer()
+    {
+        currentState = CurrentState.canSeePlayer;
+    }
+
+    private void SetRandomStats()
+    {
+        //Setting random range
+        float randomRange = UnityEngine.Random.Range(1, 100);
+        if(randomRange >= 50)
+            finalRangedDistance = UnityEngine.Random.Range(35, 40);
+        else
+            finalRangedDistance = UnityEngine.Random.Range(20, 25);
+
+        //Setting random firerate
+        firingRate = UnityEngine.Random.Range(0.1f, 0.7f);
+        timer = firingRate;
+    }
 }

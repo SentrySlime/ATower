@@ -6,6 +6,8 @@ public class LootSystem : MonoBehaviour
 {
     public WeaponManager weaponManager;
     public ItemManager itemManager;
+    
+
 
     void Start()
     {
@@ -25,25 +27,15 @@ public class LootSystem : MonoBehaviour
         //}
     }
 
-    public bool DropCheck(float dropChance)
-    {
-        float number = Random.Range(0f, 1f);
-
-        if (number <= dropChance)
-            return true;
-        else
-            return false;
-    }
 
     public void DropLoot(Vector3 spawnPos, float dropChance)
     {
         if (!DropCheck(dropChance))
             return;
 
-
-        int randomChance = Random.Range(0, 2);
+        int weaponOrItem = Random.Range(0, 2);
      
-        if (randomChance == 1)
+        if (weaponOrItem == 1)
         {
             weaponManager.DropWeapon(spawnPos);
         }
@@ -54,14 +46,24 @@ public class LootSystem : MonoBehaviour
 
     }
 
-    //public GameObject DropWeapon()
-    //{
-    //    return weaponManager.GetRandomWeapon();
-    //}
+    public bool DropCheck(float dropChance)
+    {
+        float number = Random.Range(0f, 1f);
 
-    //public GameObject DropItem()
-    //{
-    //    return itemManager.GetRandomItem();
-    //}
+        if (number <= dropChance)
+            return true;
+        else
+            return false;
+    }
+
+    public void DropWeapon(Vector3 pos)
+    {
+        weaponManager.DropWeapon(pos);
+    }
+
+    public void DropItem(Vector3 pos)
+    {
+        itemManager.DropItem(pos);
+    }
 
 }

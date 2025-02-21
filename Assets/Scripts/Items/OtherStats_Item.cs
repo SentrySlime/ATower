@@ -12,6 +12,9 @@ public class OtherStats_Item : ItemBase
     public bool canExplodeEnemies;
 
 
+    [Header("Crit")]
+    [Range(-25, 25f)] public int critChance = 0;
+
     [Header("Ammo")]
     [Tooltip("One point is equal to one max ammo refill")]
     [Range(-4, 4f)] public int ammoRefills = 0;
@@ -36,9 +39,9 @@ public class OtherStats_Item : ItemBase
             playerStats.canExplode = canExplodeEnemies;
         }
 
+        playerStats.criticalChance += critChance;
         playerStats.ammoRefills += ammoRefills;
         playerStats.reloadAmount += reloadAmount;
-        //playerStats.StartWeaponSocket();
     }
 
     public override void UnEquipItem()
@@ -48,8 +51,9 @@ public class OtherStats_Item : ItemBase
             playerStats.canExplode = canExplodeEnemies;
         }
 
+        playerStats.criticalChance -= critChance;
         playerStats.ammoRefills -= ammoRefills;
         playerStats.reloadAmount -= reloadAmount;
-        //playerStats.StartWeaponSocket();
+        
     }
 }

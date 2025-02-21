@@ -4,84 +4,75 @@ using UnityEngine;
 
 public class DonutExplosion : MonoBehaviour
 {
+    public float damage = 20;
+
     public float scaleSpeed = 1;
+    public float psScaleSpeed = 1;
+
     public float currentRadius = 1;
-    public float explosionScale = 1;
+    float explosionScale = 1;
+
+    float damageRate = 0.75f;
+    float damageTimer = 0;
 
     public float maxRadius = 50;
 
-    public PlayerHealth playerhp;
-    public ParticleSystem ps;
+    PlayerHealth playerhp;
+
     public GameObject collidingObj;
+    public ParticleSystem ps;
+    ParticleSystem.MainModule psMain;
+    ParticleSystem.ShapeModule donut;
 
     Vector3 currentScale = new Vector3(6.5f, 0, 6.5f);
 
-
     void Start()
     {
+        psMain = ps.main;
+        donut = ps.shape;
         transform.root.transform.localScale = new Vector3(explosionScale, 1, explosionScale);
-
-        ps.startLifetime = maxRadius * 0.05f;
-
         playerhp = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        psMain.startLifetime = maxRadius * 0.05f;
     }
-
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (damageTimer < damageRate) { return; }
+        if (!other.CompareTag("Player")) { return; }
+
+        float distance = Vector3.Distance(transform.position, other.transform.position);
+        float tempRadius = (currentRadius - 1) * 0.5f;
+
+        if (distance >= tempRadius)
         {
-            float distance = Vector3.Distance(transform.position, other.transform.position);
-            float tempRadius = (currentRadius - 1) * 0.5f;
-
-            if (distance >= tempRadius)
-            {
-                playerhp.Damage(30);
-            }
+            damageTimer = 0;
+            playerhp.Damage(damage);
         }
-    }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-
-    //    //print("Triggered");
         
-    //    if (other.CompareTag("Player"))
-    //    {
-
-    //        float distance = Vector3.Distance(transform.position, other.transform.position);
-
-
-    //        float tempRadius = (minimumRadius -1) * 0.5f;
-    //        print(tempRadius + " + " + minimumRadius);
-            
-    //        //print(distance + "+" + tempRadius);
-
-    //        if (distance >= tempRadius)
-    //        {
-    //            playerhp.Damage(30, false);
-    //            print(distance + "+" + tempRadius);
-    //        }
-    //    }
-    //}
+    }
 
     void Update()
     {
+
+        if(damageTimer < damageRate)
+        {
+            damageTimer += Time.deltaTime;
+        }
 
         if (currentRadius < maxRadius -2)
         {
             collidingObj.transform.localScale += currentScale * Time.deltaTime * scaleSpeed;
             currentRadius = collidingObj.transform.localScale.z;
+            donut.radius += Time.deltaTime * psScaleSpeed;
         }
         else if(currentRadius > maxRadius - 2)
         {
+            psMain.startColor = Color.clear;
             collidingObj.SetActive(false);
-
         }
         else if (currentRadius > maxRadius + 7)
         {
             Destroy(gameObject);
         }
-
     }
 }

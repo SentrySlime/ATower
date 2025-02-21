@@ -164,15 +164,16 @@ public class ProjectileBase : MonoBehaviour
         {
             if (hitEnemy.GetComponent<IDamageInterface>() != null)
             {
-                ImpactEffect(hitEnemy);
+                DealDamage(hitEnemy);
             }
         }
     }
 
-    public virtual void ImpactEffect(GameObject enemyRoot)
+    public virtual void DealDamage(GameObject enemyRoot)
     {
         //hitMarkerLogic.EnableHitMarker();
-        enemyRoot.GetComponentInParent<IDamageInterface>().Damage(damage);
+        aMainSysteM.DealDamage(enemyRoot, damage, true);
+        //enemyRoot.GetComponentInParent<IDamageInterface>().Damage(damage);
         hitEnemies.Add(enemyRoot);
         CheckPierce();
     }
@@ -269,12 +270,10 @@ public class ProjectileBase : MonoBehaviour
     {
         if (!target)
         {
-            
             GetTarget();
         }
         else
         {
-            
             var lookPos = target.transform.position - transform.position;
             var rotation = Quaternion.LookRotation(lookPos);
             transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * turnSpeed);

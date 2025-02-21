@@ -56,17 +56,16 @@ public class ShootRaycast : BaseWeapon
 
     public Animation mantleAnimation;
 
-    
-
-    //PlayerStats playerStats;
-
-
 
     private void Awake()
     {
-
+        //This layermask sends a single raycast and should basically only hit terrain
         layermask = LayerMask.GetMask("Player", "Enemy", "Projectile", "Items", "Breakable");
-        layermask2 = LayerMask.GetMask("Enemy", "Items", "WeaponLayer", "Breakable");
+        
+        //This actually only tries to get the enemies in the way
+        layermask2 = LayerMask.GetMask("Enemy", "WeaponLayer", "Breakable");
+        
+        //This layermask is only for shotguns
         layermask3 = LayerMask.GetMask("Player", "Projectile", "Items");
 
         //shootPoint = GameObject.Find("FX").GetComponent<GameObject>();
@@ -256,7 +255,7 @@ public class ShootRaycast : BaseWeapon
                         Vector3 hitDirection = transform.position - raycastHit.point;
                         Instantiate(hitVFX, hits[i].point, Quaternion.LookRotation(hitDirection), alreadyDamaged[i].transform);
 
-                        break;
+                        
                     }
                 }
                 else if (alreadyDamaged[i].transform.CompareTag("Ground"))
@@ -341,14 +340,13 @@ public class ShootRaycast : BaseWeapon
         if (incomingObj.GetComponent<IDamageInterface>() != null)
         {
             //hitMarkLogic.EnableHitMarker();
-            if (hitSFX != null)
-                Instantiate(hitSFX.GetComponent<AudioSource>());
+            //if (hitSFX != null)
+            //    Instantiate(hitSFX.GetComponent<AudioSource>());
 
-            incomingObj.GetComponent<IDamageInterface>().Damage(damage);
+            aMainSystem.DealDamage(incomingObj, damage, true);
+
+
+            //incomingObj.GetComponent<IDamageInterface>().Damage(damage);
         }
-
     }
-
-
-
 }

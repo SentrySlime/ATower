@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 166862883}
   - component: {fileID: 166862882}
   - component: {fileID: 166862881}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: VFX (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4817,6 +4817,7 @@ GameObject:
   - component: {fileID: 3985920950576589782}
   - component: {fileID: 3985920950576589783}
   - component: {fileID: 3985920950576589780}
+  - component: {fileID: 3250440516824335138}
   m_Layer: 11
   m_Name: Explosive_Barrel
   m_TagString: Breakable
@@ -4905,7 +4906,7 @@ MonoBehaviour:
   moneyAmount: 0
   canExplode: 1
   explodeOnDeath: 1
-  explosionDamage: 100
+  explosionDamage: 200
   moneyPrefab: {fileID: 0}
   dieSFX: {fileID: 0}
   deathParticles: {fileID: 0}
@@ -4913,9 +4914,9 @@ MonoBehaviour:
   moneySpawnPoint: {fileID: 3985920950576589768}
   killMarker: {fileID: 0}
   homingTarget: {fileID: 3985920950576589781}
+  dropLoot: 0
   itemPrefab: {fileID: 0}
-  dropChance: 0.5
-  projectileChildren: []
+  dropChance: 0.05
   damagedPS: {fileID: 166862882}
 --- !u!136 &3985920950576589780
 CapsuleCollider:
@@ -4931,3 +4932,19 @@ CapsuleCollider:
   m_Height: 2.973954
   m_Direction: 1
   m_Center: {x: 0, y: 0.4826206, z: 0}
+--- !u!208 &3250440516824335138
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3985920950576589781}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1, y: 1.4870001, z: 1}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.483, z: 0}
+  m_TimeToStationary: 0.5

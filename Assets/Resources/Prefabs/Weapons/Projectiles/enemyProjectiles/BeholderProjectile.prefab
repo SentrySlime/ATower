@@ -158,18 +158,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 159
   damage: 5
-  projectileSpeed: 80
-  lifeDuration: 3
+  projectileSpeed: 50
+  lifeDuration: 2
   sineMove: 0
-  frequency: 20
-  magnitude: 0.5
+  frequency: 15
+  magnitude: 3
   horizontal: 0
   homing: 1
-  minTurnSpeed: 5
-  maxTurnSpeed: 11
-  turnSpeed: 18
+  minTurnSpeed: 90
+  maxTurnSpeed: 100
+  turnSpeed: 95
   nonHomingDuration: 0.2
-  minHomingDistance: 10
+  minHomingDistance: 5
   maxHomeDistance: 200
 --- !u!54 &8231575315747541460
 Rigidbody:

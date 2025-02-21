@@ -43,13 +43,16 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     GameObject player;
     //Felix was here
     [Header("Loot")]
+    public bool dropLoot;
     public GameObject itemPrefab;
-    float dropChance = 0.05f;
+    public float dropChance = 0.05f;
     bool dead = false;
 
-    public List<GameObject> projectileChildren = new List<GameObject>();
+    public bool gauranteeItemDrop;
+
     [Header("Extra")]
     public ParticleSystem damagedPS;
+    List<GameObject> projectileChildren = new List<GameObject>();
 
     void Start()
     {
@@ -87,10 +90,15 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
 
     public void Damage(float damage)
     {
+        if(currentHealth == maxHealth)
+        {
+            if(gameObject.GetComponent<INoticePlayer>() != null)
+                gameObject.GetComponent<INoticePlayer>().NoticePlayer();
+        }
 
         currentHealth -= CalculateDamage(damage);
 
-        hitMarkerLogic.EnableHitMarker();
+        //hitMarkerLogic.EnableHitMarker();
         if (damagedPS != null)
         {
             damagedPS.emissionRate += damage;
@@ -105,14 +113,13 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     {
         float finalDamage = damage;
 
-        int critChance = Random.Range(0, 100);
-        if(playerStats.criticalChance > critChance)
-        {
-            finalDamage *= playerStats.criticalMultiplier;
-        }
+        //int critChance = Random.Range(0, 100);
+        //if(playerStats.criticalChance > critChance)
+        //{
+        //    finalDamage *= playerStats.criticalMultiplier;
+        //}
 
         return finalDamage;
-
     }
 
     private void Die()
@@ -120,7 +127,10 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
 
         DetachProjectileChildren();
 
-        lootSystem.DropLoot(moneySpawnPoint.position, dropChance);
+        if (gauranteeItemDrop)
+            lootSystem.DropItem(moneySpawnPoint.position);
+        else
+            lootSystem.DropLoot(moneySpawnPoint.position, dropChance);
 
         dead = true;
         enemyManager.ReportDeath(moneyAmount);
@@ -146,7 +156,6 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
 
         playerHealth.HealOnKill();
 
-        //gameObject.SetActive(false);
         Destroy(gameObject);
 
         //Felix was here
@@ -156,7 +165,6 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
                 Instantiate(itemPrefab, moneySpawnPoint.transform.position, Quaternion.identity);   
         }
 
-        //HealPlayer();
     }
 
     private bool CanExplode()
@@ -166,23 +174,15 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
             return false;
 
         bool shouldExplode = false;
-
         
         if (explodeOnDeath)
             shouldExplode = true;
-            //return true;
         else if (playerStats.canExplode)
             shouldExplode = true;
-            //return true;
 
         return shouldExplode;
 
     }
-
-    //private void CheckDeathEffects()
-    //{
-    //    if(CanExplode(canExplode))
-    //}
 
     private void OnDeathEffect()
     {
@@ -207,28 +207,15 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
         float newDistance = DistanceToPlayer();
         if (newDistance < 17)
         {
-            //newDistance = newDistance * 0.1f;
-
-            //float newHeal = healPercentage - newDistance;
-
             float newHeal = MapValue(newDistance, 1, 21, 1f, 0f);
-
-
-
-
             newHeal *= newHeal * (maxHealth / 10);
-
             newHeal = Mathf.Clamp(newHeal, 5, 20);
-
-
             playerHealth.Heal(newHeal);
-
         }
     }
 
     float MapValue(float mainValue, float inValueMin, float inValueMax, float outValueMin, float outValueMax)
     {
-
         return (mainValue - inValueMin) * (outValueMax - outValueMin) / (inValueMax - inValueMin) + outValueMin;
     }
 
@@ -241,11 +228,8 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     {
         for (int i = 0; i < projectileChildren.Count; i++)
         {
-
             if(projectileChildren[i])
                 projectileChildren[i].transform.SetParent(null, true);
-
         }
     }
-
 }

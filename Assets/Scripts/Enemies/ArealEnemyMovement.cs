@@ -21,59 +21,78 @@ public class ArealEnemyMovement : MonoBehaviour
     public float maxDelta = 3;
 
     [Header("Duration & Timers")]
+    [Tooltip("The over time between any type of attack")]
     public float attackRate = 4;
-    public float attackTimer = 0;
+    float attackTimer = 0;
 
     public float beamDuration = 4;
-    public float beamTimer = 0;
+    float beamTimer = 0;
 
     public float projectileDuration = 2;
-    public float projectileTimer = 0;
+    float projectileTimer = 0;
 
-    public AudioSource attackSFX;
     public float rangedAttackDist = 10;
 
-    [Header("Projectile Attack")]
-    public bool projectileAttacking = false;
+    [Header("Projectile Attack")] // Projectiles
     public float projectileCooldown = 3;
-    public float projectileCooldownTimer = 0;
+    float projectileCooldownTimer = 0;
 
     public float projectileFireRate = 0.25f;
-    public float projectileFireRateTimer = 0;
+    float projectileFireRateTimer = 0;
 
-    float projectileAmount = 1;
-    float projectileForce = 35;
-    float Accuracy = 5;
+    [Tooltip("Increase to shoot lower, Decrease to shoot higher")]
+    public float yOffset = 0;
+
+    [Tooltip("Decides how many projectiles to shoot")]
+    public float projectileAmount = 1;
+
+    [Tooltip("When shooting a shotgun, decides the distance between the projectiles")]
+    public float projectileSpacing = 10;
+
     public GameObject shootPoint;
     public GameObject projectile;
+    
+    bool projectileAttacking = false;
+    float Accuracy = 5;
 
-    [Header("Beam Attack")]
-    public bool beamAttacking = false;
+    [Header("Beam Attack")] //Beams
     public float beamCooldown = 10;
-    public float beamCooldownTimer = 0;
+    float beamCooldownTimer = 0;
+    
     public GameObject partToRotate;
+    public GameObject telegraphVFX;
+    public GameObject telegraphPosition;
+    
+    bool beamAttacking = false;
 
     float beamDamage = 10;
-    float beamFollowSpeed = 0.26f;
-    float maxBeamFollowSpeed = 0.26f;
+    public float beamFollowSpeed = 0.26f;
+    public float maxBeamFollowSpeed = 0.26f;
     LineRenderer lineRenderer;
 
-    [Header("Melee Attack")]
-    public GameObject telegraphVFX;
-    public GameObject attackVFX;
-    public float meleeRange = 1;
-    public float meleeRadius = 1;
-    public int meleeDamage = 10;
-    public bool meleeAttacking = false;
 
+    [Header("Melee Attack")] //Melee
     public float meleeCooldown = 4;
-    public float meleeCooldownTimer = 0;
+    float meleeCooldownTimer = 0;
+    
+    public float telegraphScaleSpeed = 5;
+    public float meleeRange = 10;
+
+    float meleeRadius = 1;
+    public int meleeDamage = 10;
+    public GameObject attackVFX;
+    public GameObject telegraphVFX2;
+    public GameObject expandingAttackPosition;
+
+    public LayerMask meleeLayerMask;
+
+    bool meleeAttacking = false;
 
     [Header("Notice player")]
-    public bool foundPlayer = false;
-    public bool canSeePlayer = false;
     public float noticePlayerRange = 75;
     public LayerMask layerMask;
+    bool foundPlayer = false;
+    bool canSeePlayer = false;
 
     [Header("Avoidance")]
     Vector3 frontPosition;
@@ -86,6 +105,8 @@ public class ArealEnemyMovement : MonoBehaviour
     bool burst = false;
     AMainSystem aMainSystem;
 
+    public AudioSource attackSFX;
+
     void Start()
     {
         player = GameObject.Find("PlayerTargetPoint");
@@ -93,20 +114,13 @@ public class ArealEnemyMovement : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
         previousPlayerPosition = transform.position;
-        layerMask = ~layerMask;
+        //layerMask = ~layerMask;
     }
 
     void Update()
     {
-        if(!foundPlayer)
+        if (!foundPlayer)
             IdleBehaviour();
-
-
-        //print(agent.isOnOffMeshLink);
-
-        //timer += Time.deltaTime;
-        //if (timer < fireRate && !beamAttacking && !meleeAttacking)
-        //    timer += Time.deltaTime;
 
         if (beamCooldownTimer < beamCooldown && !beamAttacking)
             beamCooldownTimer += Time.deltaTime;
@@ -117,9 +131,7 @@ public class ArealEnemyMovement : MonoBehaviour
         if (meleeCooldownTimer < meleeCooldown && !meleeAttacking)
             meleeCooldownTimer += Time.deltaTime;
 
-
         float distanceToPlayer = Vector3.Distance(player.transform.position, shootPoint.transform.position);
-
         Vector3 directionToPlayer = player.transform.position - shootPoint.transform.position;
 
         RaycastHit hit;
@@ -137,7 +149,6 @@ public class ArealEnemyMovement : MonoBehaviour
         if (distanceToPlayer > rangedAttackDist && !beamAttacking && !meleeAttacking || !canSeePlayer)
         {
             NavMeshMove();
-            //MoveToPlayer();
         }
         else if (attackTimer < attackRate && !beamAttacking && !meleeAttacking)
         {
@@ -145,34 +156,34 @@ public class ArealEnemyMovement : MonoBehaviour
         }
         else if (attackTimer >= attackRate && !beamAttacking)
         {
-            //Stop();
-            if(distanceToPlayer <= meleeRange && meleeCooldownTimer >= meleeCooldown)
+            if (distanceToPlayer <= meleeRange && meleeCooldownTimer >= meleeCooldown)
             {
                 meleeAttacking = true;
-                MeeleAttack();
                 attackTimer = 0;
                 meleeCooldownTimer = 0;
+                telegraphVFX2.transform.localScale = Vector3.one;
+                telegraphVFX2.SetActive(true);
             }
             else if (distanceToPlayer <= rangedAttackDist)
             {
-                if(beamCooldownTimer >= beamCooldown)
+                if (beamCooldownTimer >= beamCooldown)
                 {
-                    beamCooldownTimer = 0;
-                    beamAttacking = true;
                     StartBeamAttack();
                 }
                 else
                 {
-                    
+
                     projectileAttacking = true;
-                    //Shootshotgun();
-                    //attackTimer = 0;
                 }
             }
         }
 
+        if (meleeAttacking)
+        {
+            StartMeeleAttack();
+        }
 
-        if(projectileAttacking)
+        if (projectileAttacking)
         {
             ProjectileMovementSpeed();
             //Stop();
@@ -180,7 +191,7 @@ public class ArealEnemyMovement : MonoBehaviour
             {
                 attackTimer = 0;
                 projectileTimer += Time.deltaTime;
-                Shootshotgun();
+                ShootProjectile();
             } 
             else
             {
@@ -191,7 +202,6 @@ public class ArealEnemyMovement : MonoBehaviour
 
         }
 
-        
         if(beamAttacking)
         {
             BeamMovementSpeed();
@@ -204,7 +214,6 @@ public class ArealEnemyMovement : MonoBehaviour
             }
             else
             {
-                lineRenderer.enabled = false;
                 StopAttacking();
                 beamAttacking = false;
                 beamTimer = 0;
@@ -240,37 +249,12 @@ public class ArealEnemyMovement : MonoBehaviour
         agent.angularSpeed = angularSpeed;
     }
 
-    private void BeamMovementSpeed ()
-    {
-        agent.speed = 2;
-        agent.angularSpeed = 400;
-    }
-
-
-    private void ProjectileMovementSpeed()
-    {
-        agent.speed = 7;
-        agent.angularSpeed = angularSpeed;
-    }
-
-
     public void Stop()
     {
-        //agent.isStopped = true;
-        //agent.velocity = Vector3.zero;
-        //agent.ResetPath();
-        //print("Stopped");
         agent.speed = 2;
         agent.angularSpeed = angularSpeed;
     }
     
-    private void StartBeamAttack()
-    {
-        StartCoroutine(fade());
-        turnRadius = beamFollowSpeed;
-        maxDelta = maxBeamFollowSpeed;
-    }
-
     IEnumerator fade()
     {
         yield return new WaitForSeconds(.1f);
@@ -286,35 +270,66 @@ public class ArealEnemyMovement : MonoBehaviour
         maxDelta = 6;
     }
 
-    private void MeeleAttack()
-    {
-        GameObject tempObj = Instantiate(telegraphVFX, transform.position, Quaternion.identity, gameObject.transform);
-        tempObj.transform.localScale = new Vector3(3, 3, 3);
+    #region Melee
 
-        StartCoroutine(StopTelegraph(tempObj));
+    private void StartMeeleAttack()
+    {
+        if (telegraphVFX2.transform.localScale.y < 10)
+        {
+            telegraphVFX2.transform.localScale += Vector3.one * Time.deltaTime * telegraphScaleSpeed;
+        }
+        else
+        {
+            DoMeleeAttack();
+        }
     }
 
-    IEnumerator StopTelegraph(GameObject ps)
+    private void DoMeleeAttack()
     {
-
-        ParticleSystem[] temp = ps.GetComponentsInChildren<ParticleSystem>();
-        
-        yield return new WaitForSeconds(1);
-
-
+        MeleeDealDamage();
+        Instantiate(attackVFX, expandingAttackPosition.transform.position, expandingAttackPosition.transform.rotation, transform);
         meleeAttacking = false;
-        for (int i = 0; i < temp.Length; i++)
+        telegraphVFX2.SetActive(false);
+    }
+
+    private void MeleeDealDamage()
+    {
+        float distanceToPlayer = Vector3.Distance(player.transform.position, shootPoint.transform.position);
+
+        if(distanceToPlayer >= 25) { return; }
+
+        Vector3 playerDirection = player.transform.position - shootPoint.transform.position;
+
+
+        RaycastHit hit;
+        if (Physics.Raycast(shootPoint.transform.position, playerDirection, out hit, distanceToPlayer + 1, meleeLayerMask))
         {
-            temp[i].Stop();
+
+            print(hit.transform.name);
+
+            if (hit.transform.CompareTag("Player"))
+            {
+                aMainSystem.DealDamage(hit.transform.gameObject, meleeDamage, false);
+                //hit.collider.gameObject.GetComponent<IDamageInterface>().Damage(meleeDamage);
+            }
         }
+    }
 
-        yield return new WaitForSeconds(1);
+    #endregion
 
-        aMainSystem.SpawnExplosion(transform.position, meleeRadius, meleeDamage, gameObject, true);
+    #region Beam
+    private void StartBeamAttack()
+    {
+        beamCooldownTimer = 0;
+        beamAttacking = true;
+        StartCoroutine(fade());
+        turnRadius = beamFollowSpeed;
+        maxDelta = maxBeamFollowSpeed;
     }
 
     private void BeamAttack()
     {
+        RotateTowardsPlayer();
 
         Vector3 playerDirection = player.transform.position - shootPoint.transform.position;
         Vector3 newDirection = Vector3.RotateTowards(shootPoint.transform.forward, playerDirection, beamFollowSpeed * Time.deltaTime, maxBeamFollowSpeed);
@@ -324,14 +339,15 @@ public class ArealEnemyMovement : MonoBehaviour
         Vector3 hitPosition = shootPoint.transform.position + shootPoint.transform.forward * 200;
 
         RaycastHit hit;
-        if (Physics.SphereCast(shootPoint.transform.position, 1.7f, shootPoint.transform.forward, out hit))
+        if (Physics.SphereCast(shootPoint.transform.position, 1.7f, shootPoint.transform.forward, out hit, 999, layerMask))
 
         if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.forward, out hit))
         {
             hitPosition = hit.point;
             if (hit.transform.CompareTag("Player"))
             {
-                    hit.collider.gameObject.GetComponent<IDamageInterface>().Damage(beamDamage);
+                    aMainSystem.DealDamage(hit.transform.gameObject, meleeDamage, false);
+                    //hit.collider.gameObject.GetComponent<IDamageInterface>().Damage(beamDamage);
             }
 
         }
@@ -342,83 +358,57 @@ public class ArealEnemyMovement : MonoBehaviour
         lineRenderer.SetPosition(1, hitPosition);
     }
 
-
-    private void Shootshotgun()
+    private void BeamMovementSpeed()
     {
-        Vector3 playerDirection = player.transform.position - shootPoint.transform.position;
-        Vector3 newDirection = Vector3.RotateTowards(shootPoint.transform.forward, playerDirection, beamFollowSpeed * Time.deltaTime, maxBeamFollowSpeed);
+        agent.speed = 2;
+        agent.angularSpeed = 400;
+    }
+
+    #endregion
+
+    #region Projectiles
+
+    private void ShootProjectile()
+    {
+        RotateTowardsPlayer();
 
         if (projectileFireRateTimer >= projectileFireRate)
         {
-            FireShotgun();
+            ShootFan();
             projectileFireRateTimer = 0;
         }
         else
             projectileFireRateTimer += Time.deltaTime;
     }
 
-    private void FireShotgun()
+    public void ShootFan()
     {
-        Vector3 directionToPlayer = player.transform.position - shootPoint.transform.position;
+        Vector3 directionToPlayer = (player.transform.position - shootPoint.transform.position).normalized;
+        Quaternion baseRotation = Quaternion.LookRotation(directionToPlayer) * Quaternion.Euler(yOffset, 0, 0); // Apply Y offset
 
-        RaycastHit hit;
-        if (Physics.Raycast(shootPoint.transform.position, directionToPlayer, out hit))
+        float startAngle = -(projectileAmount - 1) / 2f * projectileSpacing;
+
+        for (int i = 0; i < projectileAmount; i++)
         {
-            if (hit.transform.CompareTag("Player"))
-            {
-
-                for (int i = 0; i < projectileAmount; i++)
-                {
-                    Vector3 dir = player.transform.position - shootPoint.transform.position;
-                    Quaternion rotation = Quaternion.LookRotation(dir); // Create a rotation that looks in the direction of dir
-                    Instantiate(projectile, shootPoint.transform.position, rotation);
-
-                    #region RandomNumbers Accuracy
-
-
-                    //float minYOffset = Random.Range(-Accuracy, 0);
-                    //float maxYOffset = Random.Range(Accuracy, 0);
-
-                    //float minXoffset = Random.Range(-Accuracy, 0);
-                    //float maxXoffset = Random.Range(Accuracy, 0);
-
-
-                    //shootPoint.transform.LookAt(player.transform.position);
-                    //shootPoint.transform.Rotate(((minXoffset + maxXoffset / 1.5f) + 0.2f), ((minYOffset + maxYOffset / 1.5f) + 0.2f), 0);
-
-                    //Debug.DrawLine(player.transform.position, shootPoint.transform.forward * 999, Color.red, .2f);
-
-
-
-
-                    //Rigidbody rb = Instantiate(projectile, shootPoint.transform.position, shootPoint.transform.rotation).GetComponent<Rigidbody>();
-
-                    //rb.AddForce(shootPoint.transform.forward * projectileForce, ForceMode.Impulse);
-
-
-
-                    //------------------
-
-
-
-
-                    //------------
-
-                    //RaycastHit hit;
-                    //if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.forward, out hit, weaponRange, layermask2))
-                    //{
-                    //    Debug.LogError("Hit");
-                    //    DealDamage(hit.transform.gameObject);
-                    //    hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
-                    //    Instantiate(hitVFX, hit.point, Quaternion.Inverse(transform.rotation));
-                    //}
-
-                    //shootPoint.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                    #endregion
-
-                    shootPoint.transform.rotation = gameObject.transform.root.rotation;
-                }
-            }
+            float angle = startAngle + (i * projectileSpacing);
+            Quaternion rotation = Quaternion.Euler(0, angle, 0) * baseRotation; // Apply horizontal spread
+            Instantiate(projectile, shootPoint.transform.position, rotation);
         }
+    }
+
+    #endregion
+
+    private void ProjectileMovementSpeed()
+    {
+        agent.speed = 7;
+        agent.angularSpeed = angularSpeed;
+    }
+
+    private void RotateTowardsPlayer()
+    {
+        
+
+        Vector3 newDirection1 = Vector3.RotateTowards(transform.forward, player.transform.position, 1 * Time.deltaTime, 0);
+        transform.rotation = Quaternion.LookRotation(newDirection1);
     }
 }

@@ -331,4 +331,18 @@ public class Locomotion2 : MonoBehaviour
         }
     }
 
+    public void UpdateJumps(float incomingJumps)
+    {
+        maxJumps = incomingJumps;
+        
+        if(grounded)
+        {
+            extraJumps = maxJumps;
+        }
+        else
+        {
+            extraJumps += incomingJumps;
+        }
+
+    }
 }
