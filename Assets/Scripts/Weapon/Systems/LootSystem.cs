@@ -35,14 +35,14 @@ public class LootSystem : MonoBehaviour
 
         int weaponOrItem = Random.Range(0, 2);
      
-        if (weaponOrItem == 1)
-        {
-            weaponManager.DropWeapon(spawnPos);
-        }
-        else
-        {
             itemManager.DropItem(spawnPos);
-        }
+        //if (weaponOrItem == 1)
+        //{
+        //    weaponManager.DropWeapon(spawnPos);
+        //}
+        //else
+        //{
+        //}
 
     }
 
