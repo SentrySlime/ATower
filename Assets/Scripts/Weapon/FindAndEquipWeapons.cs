@@ -44,12 +44,15 @@ public class FindAndEquipWeapons : MonoBehaviour
     [Header("SFX")]
     public AudioSource equipSFX;
 
+    PlayerStats playerStats;
+
     private void Awake()
     {
         baseWeapon = GetComponent<BaseWeapon>();
         Mcamera = Camera.main;
         inventory = GetComponent<Inventory>();
         shootPoint = GameObject.FindGameObjectWithTag("ShootPoint").transform;
+        playerStats = GetComponent<PlayerStats>();
     }
 
     void Start()
@@ -79,17 +82,21 @@ public class FindAndEquipWeapons : MonoBehaviour
         if (!equipSFX.isPlaying)
             equipSFX.Play();
 
-        WeaponPickUp test = IncomingWeaponObj.GetComponent<WeaponPickUp>();
-        if (test != null)
+        WeaponPickUp weaponPickUp = IncomingWeaponObj.GetComponent<WeaponPickUp>();
+        if (weaponPickUp != null)
         {
             GameObject weaponObj = IncomingWeaponObj.GetComponent<WeaponPickUp>().returnWeapon();
             SetNewWeaponIcon(weaponObj);
 
-
             inventory.weaponIndex = inventory.heldWeapons.Count;
 
             Destroy(IncomingWeaponObj);
+
             inventory.heldWeapons.Add(weaponObj);
+
+            playerStats.AddStatsToPickedUpWeapon(weaponObj);
+
+            
 
             if (baseWeapon != null)
             {

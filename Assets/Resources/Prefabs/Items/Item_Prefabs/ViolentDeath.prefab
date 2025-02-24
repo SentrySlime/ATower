@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2239080014955014833}
-  - component: {fileID: -1360962866377924859}
+  - component: {fileID: 9046290321474250322}
   m_Layer: 0
   m_Name: ViolentDeath
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1360962866377924859
+--- !u!114 &9046290321474250322
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,7 +40,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4773962672540810127}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 933177ba83eb1aa40be6edd48a6ad452, type: 3}
+  m_Script: {fileID: 11500000, guid: d3c27a65a8f09c64eb7ec27436106a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: ViolentDeath
@@ -48,8 +48,15 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 3600bc37874a8ba44aa416a2ce0e9a92, type: 3}
   itemMesh: {fileID: -2432090755550338912, guid: b557593f5f2a27640b9b5cb8879bbc73, type: 3}
   itemMaterial: {fileID: 2100000, guid: 08d5c6dcf8540184b98e47e52d4cdd8f, type: 2}
-  playerStats: {fileID: 0}
+  maxHp: 0
+  hpRegen: 0
+  damageReductionPercent: 0
+  damageIgnoreChance: 0
+  moveSpeed: 0
+  extraJumps: 0
   includeExplosion: 1
   canExplodeEnemies: 1
+  critChance: 0
+  rocketChance: 0
   ammoRefills: 0
   reloadAmount: 0

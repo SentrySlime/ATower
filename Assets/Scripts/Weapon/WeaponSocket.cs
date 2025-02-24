@@ -249,8 +249,6 @@ public class WeaponSocket : MonoBehaviour
 
     public void SetUpWeapon(GameObject incomingObj)
     {
-        print("Set up weapon");
-     
         if (!wSwitch_SFX.isPlaying)
             wSwitch_SFX.Play();
         if(!equippedWeapon)

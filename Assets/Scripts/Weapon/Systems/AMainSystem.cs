@@ -64,6 +64,8 @@ public class AMainSystem : MonoBehaviour
 
     private float CalculateDamage(float incomingDamage)
     {
+        incomingDamage += playerStats.damage;
+
         int critChance = Random.Range(0, 100);
 
         if (playerStats.criticalChance > critChance)
@@ -71,6 +73,7 @@ public class AMainSystem : MonoBehaviour
             PlaySFX(true);
             return incomingDamage *= playerStats.criticalMultiplier;
         }
+        
         PlaySFX(false);
         return incomingDamage;
     }
