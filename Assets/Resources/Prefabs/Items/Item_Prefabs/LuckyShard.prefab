@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2239080014955014833}
   - component: {fileID: 5591423426680212735}
   m_Layer: 0
-  m_Name: LuckyRing
+  m_Name: LuckyShard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,11 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c27a65a8f09c64eb7ec27436106a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: LuckyRing
+  itemName: LuckyShard
   itemDescription: +5% crit chance
   itemIcon: {fileID: 21300000, guid: 3e98cee877aacce49bff1523daf144ad, type: 3}
-  itemMesh: {fileID: -8803937527578110353, guid: ff1399e8955405b4d83e2a3ec5b2a391, type: 3}
-  itemMaterial: {fileID: 2100000, guid: 69709798d150b5c47982c4a7cbcf7e46, type: 2}
+  itemMesh: {fileID: 7308240330714792986, guid: 5767c654a137b7a47a66114704e54bbc, type: 3}
+  itemMaterial: {fileID: 2100000, guid: 329d9fa61570e324a86e1b7d547c560d, type: 2}
   maxHp: 0
   hpRegen: 0
   damageReductionPercent: 0
@@ -56,7 +56,10 @@ MonoBehaviour:
   extraJumps: 0
   includeExplosion: 0
   canExplodeEnemies: 0
+  damage: 0
   critChance: 5
   rocketChance: 0
   ammoRefills: 0
   reloadAmount: 0
+  maxMagazineSize: 0
+  playerStats: {fileID: 0}
