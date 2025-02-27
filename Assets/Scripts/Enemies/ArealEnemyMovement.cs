@@ -91,8 +91,8 @@ public class ArealEnemyMovement : MonoBehaviour
     [Header("Notice player")]
     public float noticePlayerRange = 75;
     public LayerMask layerMask;
-    bool foundPlayer = false;
-    bool canSeePlayer = false;
+    public bool foundPlayer = false;
+    public bool canSeePlayer = false;
 
     [Header("Avoidance")]
     Vector3 frontPosition;
@@ -119,8 +119,6 @@ public class ArealEnemyMovement : MonoBehaviour
 
     void Update()
     {
-        if (!foundPlayer)
-            IdleBehaviour();
 
         if (beamCooldownTimer < beamCooldown && !beamAttacking)
             beamCooldownTimer += Time.deltaTime;
@@ -130,6 +128,12 @@ public class ArealEnemyMovement : MonoBehaviour
 
         if (meleeCooldownTimer < meleeCooldown && !meleeAttacking)
             meleeCooldownTimer += Time.deltaTime;
+
+        if (!foundPlayer)
+        {
+            IdleBehaviour();
+            return;
+        }
 
         float distanceToPlayer = Vector3.Distance(player.transform.position, shootPoint.transform.position);
         Vector3 directionToPlayer = player.transform.position - shootPoint.transform.position;
@@ -224,13 +228,15 @@ public class ArealEnemyMovement : MonoBehaviour
 
     private void IdleBehaviour()
     {
+        print("Idle");
+
         float playerDist = Vector3.Distance(transform.position, player.transform.position);
         if (playerDist < noticePlayerRange)
         {
             Vector3 directionToPlayer = player.transform.position - shootPoint.transform.position;
 
             RaycastHit hit;
-            if (Physics.Raycast(shootPoint.transform.position, directionToPlayer, out hit))
+            if (Physics.Raycast(shootPoint.transform.position, directionToPlayer, out hit, noticePlayerRange, layerMask))
             {
                 if (hit.transform.CompareTag("Player"))
                 {
@@ -243,7 +249,10 @@ public class ArealEnemyMovement : MonoBehaviour
 
     private void NavMeshMove()
     {
+        print("Moving to: " + player.transform.position);
+
         agent.isStopped = false;
+
         agent.SetDestination(player.transform.position);
         agent.speed = 11;
         agent.angularSpeed = angularSpeed;
