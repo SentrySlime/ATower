@@ -9,14 +9,14 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: M_heartregen
   m_Shader: {fileID: 4800000, guid: 94cb0d6305cd4a743b1d2ec684e277de, type: 3}
-  m_ShaderKeywords: BFC DIFF_VERTEX SPEC_GOURAUD TRANSPARENT UNLIT _ALPHABLEND_ON
-    _DIFFMODEL_VERTEX _DRAWDIST_ON _EMISSION _SPECMODEL_GOURAUD
+  m_ShaderKeywords: CUTOUT DIFF_VERTEX SPEC_GOURAUD UNLIT _DIFFMODEL_VERTEX _DRAWDIST_ON
+    _EMISSION _SPECMODEL_GOURAUD
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 2000
   stringTagMap:
-    RenderType: Transparent
+    RenderType: Opaque
   disabledShaderPasses:
   - FORWARDADD
   m_SavedProperties:
@@ -81,13 +81,13 @@ Material:
     m_Floats:
     - _BlendOp: 0
     - _BumpScale: 1
-    - _Cul: 2
+    - _Cul: 0
     - _Cutoff: 0.5
-    - _CutoutThreshold: 0.434
+    - _CutoutThreshold: 0.915
     - _DetailNormalMapScale: 1
     - _DiffModel: 0
     - _DrawDist: 1
-    - _DstBlend: 10
+    - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -97,13 +97,13 @@ Material:
     - _NormalMapDepth: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RenderMode: 1
+    - _RenderMode: 2
     - _Smoothness: 0.64
     - _SmoothnessTextureChannel: 0
     - _SpecModel: 0
     - _Specular: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 5
+    - _SrcBlend: 1
     - _UVSec: 0
     - _Unlit: 1
     - _VertexInaccuracy: 0.01
