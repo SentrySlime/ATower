@@ -46,8 +46,8 @@ MonoBehaviour:
   itemName: ViolentDeath
   itemDescription: Enemies you kill explode
   itemIcon: {fileID: 21300000, guid: 3600bc37874a8ba44aa416a2ce0e9a92, type: 3}
-  itemMesh: {fileID: -2432090755550338912, guid: b557593f5f2a27640b9b5cb8879bbc73, type: 3}
-  itemMaterial: {fileID: 2100000, guid: 08d5c6dcf8540184b98e47e52d4cdd8f, type: 2}
+  itemMesh: {fileID: -5250525002983872318, guid: 713e8a675a041e84b85e5b2e60f0e662, type: 3}
+  itemMaterial: {fileID: 2100000, guid: 52416ac8b138d884bb43b3ce02422f80, type: 2}
   maxHp: 0
   hpRegen: 0
   damageReductionPercent: 0
@@ -56,7 +56,10 @@ MonoBehaviour:
   extraJumps: 0
   includeExplosion: 1
   canExplodeEnemies: 1
+  damage: 0
   critChance: 0
   rocketChance: 0
   ammoRefills: 0
   reloadAmount: 0
+  maxMagazineSize: 0
+  playerStats: {fileID: 0}
