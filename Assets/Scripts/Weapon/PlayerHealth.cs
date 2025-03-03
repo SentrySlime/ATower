@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using static System.Net.Mime.MediaTypeNames;
 
 public class PlayerHealth : MonoBehaviour, IDamageInterface
 {
@@ -52,6 +53,7 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
         pauseMenu = GameObject.Find("Canvas").GetComponent<PauseMenu>();
         pauseMenu.GetVignettes(this);
         barHP = GameObject.FindGameObjectWithTag("HPBar").GetComponent<Slider>();
+        textHP = GameObject.FindGameObjectWithTag("textHP").GetComponent<TextMeshProUGUI>();
         currentHP = maxHP;
         barHP.maxValue = maxHP;
         UpdateHP();

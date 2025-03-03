@@ -41,10 +41,17 @@ public class CameraMovement : MonoBehaviour
     Transform playerPos;
     public WeaponSocket weaponSocket;
 
-    private void Start()
+    private void Awake()
     {
         playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        sensslider = GameObject.FindGameObjectWithTag("Sensitivity").GetComponent<Slider>();
+        sensValue = GameObject.FindGameObjectWithTag("SensitivityText").GetComponent<TextMeshProUGUI>();
         weaponSocket = GameObject.FindObjectOfType<WeaponSocket>();
+    }
+
+    private void Start()
+    {
+       
 
         if (sensslider == null) { return; }
         sensslider.maxValue = 10;

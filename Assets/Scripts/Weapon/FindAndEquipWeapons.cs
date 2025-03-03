@@ -32,7 +32,7 @@ public class FindAndEquipWeapons : MonoBehaviour
     public CanvasGroup popUpItemGroup;
     public TextMeshProUGUI popUpItemName;
     public TextMeshProUGUI popUpItemDescription;
-    public Image image2;
+    public Image popUpItemImage;
 
     [Header("Item panel")]
     public GameObject itemPanel;
@@ -52,6 +52,14 @@ public class FindAndEquipWeapons : MonoBehaviour
         Mcamera = Camera.main;
         inventory = GetComponent<Inventory>();
         shootPoint = GameObject.FindGameObjectWithTag("ShootPoint").transform;
+        iconParent = GameObject.FindGameObjectWithTag("iconParent");
+
+        //---
+        popUpPanel = GameObject.FindGameObjectWithTag("PopUpItemPanel");
+        popUpItemDescription = popUpPanel.transform.Find("PopUpDescription").GetComponent<TextMeshProUGUI>();
+        popUpItemName = popUpPanel.transform.Find("PopUpName").GetComponent<TextMeshProUGUI>();
+        popUpItemImage = popUpPanel.transform.Find("PopUpItemSprite").GetComponent<Image>();
+        
         playerStats = GetComponent<PlayerStats>();
     }
 
@@ -152,7 +160,7 @@ public class FindAndEquipWeapons : MonoBehaviour
         {
             dissapearTimer += Time.deltaTime;
         }
-        else if(popUpPanel)
+        else if (popUpPanel)
         {
             popUpPanel.SetActive(false);
         }
@@ -171,7 +179,7 @@ public class FindAndEquipWeapons : MonoBehaviour
 
                     popUpItemName.text = tempItem.itemName;
                     popUpItemDescription.text = tempItem.itemDescription;
-                    image2.sprite = tempItem.itemIcon;
+                    popUpItemImage.sprite = tempItem.itemIcon;
 
                 }
             }

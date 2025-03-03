@@ -42,6 +42,7 @@ public class PauseMenu : MonoBehaviour
         cmMovement = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMovement>();
         SetPlayerObj();
         StartCoroutine(HideMenu());
+        pauseMenu.SetActive(false);
     }
 
     void Update()

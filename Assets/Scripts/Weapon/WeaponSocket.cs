@@ -78,13 +78,14 @@ public class WeaponSocket : MonoBehaviour
         crosshair = GameObject.FindGameObjectWithTag("Crosshair").GetComponent<CanvasGroup>();
         reloadIcon.enabled = false;
         pauseMenu = GameObject.FindGameObjectWithTag("Canvas").GetComponent<PauseMenu>();
+        reloadGroup = GameObject.FindGameObjectWithTag("ReloadGroup").GetComponent<CanvasGroup>();
+        reloadFinish = reloadGroup.transform.Find("ReloadFinish").GetComponent<Image>();
         reloadGroup.alpha = 0;
     }
 
     void Start()
     {
         reloadFinish.enabled = false;
-
 
         SetFOVnSens();
 
