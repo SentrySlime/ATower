@@ -34,6 +34,7 @@ public class Kobold : MonoBehaviour, INoticePlayer
     public bool FoundPlayer = false;
     public float moveSpeed = 7;
     public float playerDist = 0;
+    public GameObject visionTransform;
 
     [Header("FiringRate")]
     public float firingRate = 2;
@@ -280,11 +281,11 @@ public class Kobold : MonoBehaviour, INoticePlayer
 
     private bool HasLineOfSight()
     {
-        Vector3 directionToPlayer = player.transform.position - transform.position;
-        float distance = Vector3.Distance(player.transform.position, transform.position);
+        Vector3 directionToPlayer = player.transform.position - visionTransform.transform.position;
+        float distance = Vector3.Distance(player.transform.position, visionTransform.transform.position);
 
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, directionToPlayer, out hit, distance, layerMask))
+        if (Physics.Raycast(visionTransform.transform.position, directionToPlayer, out hit, distance, layerMask))
         {
             if (hit.transform.CompareTag("Player"))
             {
@@ -326,9 +327,15 @@ public class Kobold : MonoBehaviour, INoticePlayer
         //Setting random range
         float randomRange = UnityEngine.Random.Range(1, 100);
         if(randomRange >= 50)
-            finalRangedDistance = UnityEngine.Random.Range(35, 40);
+        {
+            finalRangedDistance = UnityEngine.Random.Range(25, 30);
+
+        }
         else
-            finalRangedDistance = UnityEngine.Random.Range(20, 25);
+        {
+            finalRangedDistance = UnityEngine.Random.Range(15, 20);
+
+        }
 
         //Setting random firerate
         firingRate = UnityEngine.Random.Range(0.1f, 0.7f);

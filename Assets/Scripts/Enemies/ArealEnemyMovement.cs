@@ -11,7 +11,7 @@ public class ArealEnemyMovement : MonoBehaviour
     [Header("Movement")]
     public NavMeshAgent agent;
     
-    public float movementSpeed = 0.1f;
+    public float movementSpeed = 1f;
     public float angularSpeed = 2000;
 
     float minDistance = 1;
@@ -135,6 +135,7 @@ public class ArealEnemyMovement : MonoBehaviour
             return;
         }
 
+
         float distanceToPlayer = Vector3.Distance(player.transform.position, shootPoint.transform.position);
         Vector3 directionToPlayer = player.transform.position - shootPoint.transform.position;
 
@@ -150,11 +151,19 @@ public class ArealEnemyMovement : MonoBehaviour
                 canSeePlayer = false;
         }
 
-        if (distanceToPlayer > rangedAttackDist && !beamAttacking && !meleeAttacking || !canSeePlayer)
+        if (foundPlayer)
         {
+            SetMoveMentSpeed();
             NavMeshMove();
         }
-        else if (attackTimer < attackRate && !beamAttacking && !meleeAttacking)
+
+
+        if (distanceToPlayer > rangedAttackDist && !beamAttacking && !meleeAttacking || !canSeePlayer)
+        {
+            //NavMeshMove();
+        }
+
+        if (attackTimer < attackRate && !beamAttacking && !meleeAttacking)
         {
             attackTimer += Time.deltaTime;
         }
@@ -228,7 +237,6 @@ public class ArealEnemyMovement : MonoBehaviour
 
     private void IdleBehaviour()
     {
-        print("Idle");
 
         float playerDist = Vector3.Distance(transform.position, player.transform.position);
         if (playerDist < noticePlayerRange)
@@ -249,12 +257,11 @@ public class ArealEnemyMovement : MonoBehaviour
 
     private void NavMeshMove()
     {
-        print("Moving to: " + player.transform.position);
 
         agent.isStopped = false;
 
         agent.SetDestination(player.transform.position);
-        agent.speed = 11;
+        agent.speed = movementSpeed;
         agent.angularSpeed = angularSpeed;
     }
 
@@ -313,8 +320,6 @@ public class ArealEnemyMovement : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(shootPoint.transform.position, playerDirection, out hit, distanceToPlayer + 1, meleeLayerMask))
         {
-
-            print(hit.transform.name);
 
             if (hit.transform.CompareTag("Player"))
             {
@@ -419,5 +424,16 @@ public class ArealEnemyMovement : MonoBehaviour
 
         Vector3 newDirection1 = Vector3.RotateTowards(transform.forward, player.transform.position, 1 * Time.deltaTime, 0);
         transform.rotation = Quaternion.LookRotation(newDirection1);
+    }
+
+    private void SetMoveMentSpeed()
+    {
+        if (player == null) return;
+
+        // Calculate distance to the player
+        float distance = Vector3.Distance(transform.position, player.transform.position);
+
+        // Map the distance to speed while clamping
+        movementSpeed = Mathf.Clamp((distance / 30) * 11, 1, 11);
     }
 }
