@@ -9,14 +9,13 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Water
   m_Shader: {fileID: 4800000, guid: 94cb0d6305cd4a743b1d2ec684e277de, type: 3}
-  m_ShaderKeywords: DIFF_VERTEX OPAQUE SPEC_GOURAUD _DIFFMODEL_VERTEX _DRAWDIST_ON
-    _EMISSION _SPECMODEL_GOURAUD
+  m_ShaderKeywords: DIFF_VERTEX SPEC_GOURAUD TRANSPARENT _ALPHABLEND_ON _DIFFMODEL_VERTEX
+    _DRAWDIST_ON _EMISSION _SPECMODEL_GOURAUD
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Opaque
+  m_DoubleSidedGI: 1
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -54,7 +53,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ad6a17ac288791a4584bea29a4e87d8e, type: 3}
+        m_Texture: {fileID: 2800000, guid: d8c8cf3a43652d740bb480d821e1451d, type: 3}
         m_Scale: {x: 0.02, y: 0.02}
         m_Offset: {x: 0, y: 0}
     - _MetalMap:
@@ -86,11 +85,11 @@ Material:
     - _BumpScale: 1
     - _Cul: 0
     - _Cutoff: 0.5
-    - _CutoutThreshold: 0.5
+    - _CutoutThreshold: 0.341
     - _DetailNormalMapScale: 1
     - _DiffModel: 0
     - _DrawDist: 1
-    - _DstBlend: 0
+    - _DstBlend: 10
     - _EmissionAmt: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -101,13 +100,13 @@ Material:
     - _NormalMapDepth: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RenderMode: 0
+    - _RenderMode: 1
     - _Smoothness: 0.168
     - _SmoothnessTextureChannel: 0
     - _SpecModel: 0
     - _Specular: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 1
+    - _SrcBlend: 5
     - _UVSec: 0
     - _Unlit: 0
     - _VertexInaccuracy: -1
