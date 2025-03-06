@@ -337,7 +337,7 @@ ParticleSystem:
     startSizeY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 30
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -390,7 +390,7 @@ ParticleSystem:
     startSizeZ:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 30
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4823,7 +4823,7 @@ ParticleSystemRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5753959484571427866}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -4834,7 +4834,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c07befab8ca1540368e662cfe2fddf6b, type: 2}
+  - {fileID: 2100000, guid: 254ab6dd980584343baf2cfdff133c4c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4875,8 +4875,8 @@ ParticleSystemRenderer:
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 2534964839176971238, guid: db07bec39230335458eaaeab29e95734, type: 3}
-  m_Mesh1: {fileID: 0}
-  m_Mesh2: {fileID: 0}
+  m_Mesh: {fileID: -2663431818202395925, guid: b99178f708250e447894ebbf7135e41a, type: 3}
+  m_Mesh1: {fileID: 452047269599719127, guid: 1ceb9a3ecf0117f40afdbcee671355c1, type: 3}
+  m_Mesh2: {fileID: 5106758481214275618, guid: 23923b7c2dab57b4eb6b4022cea59e93, type: 3}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
