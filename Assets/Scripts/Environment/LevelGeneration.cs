@@ -76,7 +76,7 @@ public class LevelGeneration : MonoBehaviour
 
     private int GetRandomRoom()
     {
-        return Random.Range(0, 3);
+        return Random.Range(0, rooms.Count);
     }
 
     private void GenerateLevel()
