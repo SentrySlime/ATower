@@ -15,7 +15,10 @@ public class LevelGeneration : MonoBehaviour
     GameObject spawnTransform;
     int allRoomCount;
 
+    [Header("RoomLogic")]
+    public bool removeRooms = true;
     public int roomCount = 0;
+
 
     [Header("Timer")]
     public bool hasTimer = false;
@@ -34,6 +37,7 @@ public class LevelGeneration : MonoBehaviour
         navMeshManager = GetComponent<NavMeshManager>();
         allRoomCount = rooms.Count;
 
+
         
     }
 
@@ -41,7 +45,7 @@ public class LevelGeneration : MonoBehaviour
     void Update()
     {
         
-        if (roomCount < 12)
+        if (roomCount < allRoomCount)
         {
             if(!hasTimer)
             {
@@ -65,12 +69,6 @@ public class LevelGeneration : MonoBehaviour
             hasBuilt = true;    
 
         }
-        //else if(!hasBuilt)
-        //{
-
-        //    //GenerateNavmesh here
-        //    GenerateNavMesh();
-        //}
 
     }
 
@@ -81,22 +79,24 @@ public class LevelGeneration : MonoBehaviour
 
     private void GenerateLevel()
     {
-        int newNumber = Random.Range(0, roomCount);
+        int roomIndex = GetRandomRoom();
+        
         //GetChildren(newNumber);
         if (roomCount == 0)
         {
-
-            RoomScript newRoom = Instantiate(rooms[GetRandomRoom()], transform.position, Quaternion.identity).GetComponent<RoomScript>();
+            RoomScript newRoom = Instantiate(rooms[roomIndex], transform.position, Quaternion.identity).GetComponent<RoomScript>();
             spawnTransform = newRoom.point2.gameObject;
         }
         else
         {
 
-            RoomScript newRoom = Instantiate(rooms[GetRandomRoom()], spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
+            RoomScript newRoom = Instantiate(rooms[roomIndex], spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
             spawnTransform = newRoom.point2.gameObject;
         }
 
-        //rooms.RemoveAt(newNumber);
+        if(removeRooms)
+            rooms.RemoveAt(roomIndex);
+        
         roomCount++;
     }
 
