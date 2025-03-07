@@ -41,6 +41,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     LootSystem lootSystem;
     AMainSystem aMainSystem;
     GameObject player;
+    Inventory inventory;
     //Felix was here
     [Header("Loot")]
     public bool dropLoot;
@@ -70,6 +71,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
         aMainSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AMainSystem>();
         enemyManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<EnemyManager>();
         lootSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LootSystem>();
+        inventory = player.GetComponent<Inventory>();
 
         layerMask = LayerMask.GetMask("Enemy");
 
@@ -137,7 +139,10 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
         if (moneySpawnPoint != null)
         {
             if(moneyPrefab)
-                Instantiate(moneyPrefab, moneySpawnPoint.position, Quaternion.identity);
+            {
+                ParticleSystem ps = Instantiate(moneyPrefab, moneySpawnPoint.position, Quaternion.identity).GetComponent<ParticleSystem>();
+                ps.trigger.AddCollider(player.GetComponent<Collider>());
+            }
 
             if (CanExplode())
             {

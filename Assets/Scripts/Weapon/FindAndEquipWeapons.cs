@@ -77,10 +77,12 @@ public class FindAndEquipWeapons : MonoBehaviour
         {
 
             RaycastHit hit;
-            if (Physics.Raycast(Mcamera.transform.position, Mcamera.transform.forward * interactDistance, out hit, interactDistance) && hit.transform.gameObject.CompareTag("Item"))
+            if (Physics.Raycast(Mcamera.transform.position, Mcamera.transform.forward * interactDistance, out hit, interactDistance))
             {
-                InitializeWeapon(hit.collider.gameObject);
-                
+                if (hit.transform.gameObject.CompareTag("Item"))
+                    InitializeWeapon(hit.collider.gameObject);
+                else if (hit.transform.gameObject.CompareTag("Interact"))
+                    hit.transform.GetComponent<IInteractInterface>().Interact();
             }
         }
     }
