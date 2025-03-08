@@ -6,7 +6,10 @@ public class ChestScript : MonoBehaviour, IInteractInterface
 {
     public Transform spawnPos;
     public GameObject coins;
-    
+    public Collider collider;
+
+    bool open = false;
+
     GameObject gameManager;
     LootSystem lootSystem;
     Inventory inventory;
@@ -19,12 +22,8 @@ public class ChestScript : MonoBehaviour, IInteractInterface
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
         player = GameObject.FindGameObjectWithTag("Player");
-
         lootSystem = gameManager.GetComponent<LootSystem>();
-        
         inventory = player.GetComponent<Inventory>();
-        
-        //StartCoroutine(SpawnWeapon());
     }
 
     void Update()
@@ -36,17 +35,16 @@ public class ChestScript : MonoBehaviour, IInteractInterface
     {
         animation.Play();
         yield return new WaitForSeconds(1);
+        collider.enabled = false;
         Instantiate(coins, spawnPos.position, Quaternion.identity).GetComponent<ParticleSystem>().trigger.AddCollider(player.GetComponent<Collider>());
         yield return new WaitForSeconds(0.3f);
-        //lootSystem.DropWeapon(spawnPos.position);
-        //yield return new WaitForSeconds(1);
+        lootSystem.DropWeapon(spawnPos.position);
     }
-
-
-
 
     public void Interact()
     {
+        if(open) { return; }
+        open = true;
         StartCoroutine(SpawnWeapon());
     }
 }
