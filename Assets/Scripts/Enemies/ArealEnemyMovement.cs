@@ -58,7 +58,9 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
     [Header("Beam Attack")] //Beams
     public float beamCooldown = 10;
     float beamCooldownTimer = 0;
-    
+
+    public float rotationSpeed = 1;
+
     public GameObject partToRotate;
     public GameObject telegraphVFX;
     public GameObject telegraphPosition;
@@ -67,6 +69,8 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
     float beamDamage = 10;
     float beamFollowSpeed = 0.15f;
     float maxBeamFollowSpeed = 0.15f;
+    public float yawSpeed = 0.15f;
+    public float pitchSpeed = 0.15f;
     LineRenderer lineRenderer;
 
     bool beamAttacking = false;
@@ -104,8 +108,9 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
     public float avoidanceDistance = 15;
 
     [Header("Misc")]
-    int burstCount = 0;
+    float distanceToPlayer;
     public float burstTimer;
+    int burstCount = 0;
     bool chasingPlayer = false;
     bool burst = false;
     AMainSystem aMainSystem;
@@ -141,7 +146,7 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
         }
 
 
-        float distanceToPlayer = Vector3.Distance(player.transform.position, shootPoint.transform.position);
+        distanceToPlayer = Vector3.Distance(player.transform.position, shootPoint.transform.position);
         Vector3 directionToPlayer = player.transform.position - shootPoint.transform.position;
 
         RaycastHit hit;
@@ -159,8 +164,7 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
         if (foundPlayer)
         {
             SetMoveMentSpeed();
-            if(distanceToPlayer > avoidanceDistance)
-                NavMeshMove();
+            NavMeshMove();
         }
 
 
@@ -225,6 +229,15 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
         {
             //BeamMovementSpeed();
             //Stop();
+
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            Vector3 toOther = Vector3.Normalize(player.transform.position - transform.position);
+
+            if(Vector3.Dot(forward, toOther) < 0)
+            {
+                beamTimer = beamDuration;
+            }
+
             if (beamTimer < beamDuration)
             {
                 attackTimer = 0;
@@ -245,8 +258,7 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
     private void IdleBehaviour()
     {
 
-        float playerDist = Vector3.Distance(transform.position, player.transform.position);
-        if (playerDist < noticePlayerRange)
+        if (distanceToPlayer < noticePlayerRange)
         {
             Vector3 directionToPlayer = player.transform.position - shootPoint.transform.position;
 
@@ -266,10 +278,10 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
     {
 
         agent.isStopped = false;
-
         agent.SetDestination(player.transform.position);
-        agent.speed = movementSpeed;
         agent.angularSpeed = angularSpeed;
+
+        agent.speed = movementSpeed;
     }
 
     public void Stop()
@@ -311,7 +323,6 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
 
     private void MeleeDealDamage()
     {
-        float distanceToPlayer = Vector3.Distance(player.transform.position, shootPoint.transform.position);
 
         if(distanceToPlayer >= 25) { return; }
 
@@ -352,12 +363,20 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
 
     private void BeamAttack()
     {
-        //RotateTowardsPlayer();
+        RotateTowardsPlayer();
 
+
+        //Old rotate code
         Vector3 playerDirection = player.transform.position - shootPoint.transform.position;
-        Vector3 newDirection = Vector3.RotateTowards(shootPoint.transform.forward, playerDirection, beamFollowSpeed * Time.deltaTime, maxBeamFollowSpeed);
+        Vector3 horizontalDirection = new Vector3(playerDirection.x, 0, playerDirection.z);
+        Vector3 verticalDirection = new Vector3(playerDirection.x, 0, playerDirection.z);
 
-        shootPoint.transform.rotation = Quaternion.LookRotation(newDirection);
+        Vector3 newDirection = Vector3.RotateTowards(shootPoint.transform.forward, playerDirection, yawSpeed * Time.deltaTime, maxBeamFollowSpeed);
+        Vector3 finalDir = Vector3.RotateTowards(shootPoint.transform.forward, playerDirection, pitchSpeed * Time.deltaTime, maxBeamFollowSpeed);
+
+        Vector3 finalFinalDir = new Vector3(newDirection.x, finalDir.y, newDirection.z);
+
+        shootPoint.transform.rotation = Quaternion.LookRotation(finalFinalDir);
 
         Vector3 hitPosition = shootPoint.transform.position + shootPoint.transform.forward * 200;
 
@@ -401,11 +420,6 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
         beamCooldownTimer = 0;
     }
 
-    private void BeamMovementSpeed()
-    {
-        agent.angularSpeed = 400;
-    }
-
     #endregion
 
     #region Projectiles
@@ -447,8 +461,9 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
 
     private void RotateTowardsPlayer()
     {
-        Vector3 newDirection1 = Vector3.RotateTowards(transform.forward, player.transform.position, 1 * Time.deltaTime, 0);
-        transform.rotation = Quaternion.LookRotation(newDirection1);
+        Quaternion targetRotation = Quaternion.LookRotation(player.transform.position - transform.position);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
     }
 
     private void SetMoveMentSpeed()
@@ -457,25 +472,29 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
 
         if(meleeAttacking)
         {
-            movementSpeed = 1;
+            movementSpeed = 0;
             return;
         }
         else if (beamAttacking)
         {
-            movementSpeed = 1;
+            movementSpeed = 0;
             return;
         }
         else if(projectileAttacking)
         {
-            movementSpeed = 1;
+            movementSpeed = 0;
             return;
         }
 
-        // Calculate distance to the player
-        float distance = Vector3.Distance(transform.position, player.transform.position);
+        if (distanceToPlayer <= avoidanceDistance)
+        {
+            movementSpeed = 0;
+            return;
+        }
+
 
         // Map the distance to speed while clamping
-        movementSpeed = Mathf.Clamp((distance / 30) * 11, 1, 11);
+        movementSpeed = Mathf.Clamp((distanceToPlayer / 30) * 11, 1, 11);
     }
 
     public void NoticePlayer()

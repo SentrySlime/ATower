@@ -2693,11 +2693,13 @@ MonoBehaviour:
   projectileSpacing: 40
   shootPoint: {fileID: 2127446042881441319}
   projectile: {fileID: 7929977615501413461, guid: 7a9fc87c60e37254bbe591868594b884, type: 3}
-  beamCooldown: 6
+  beamCooldown: 1
+  rotationSpeed: 40
   partToRotate: {fileID: 1710239320598269243}
   telegraphVFX: {fileID: 5156593245698994014, guid: d1a550d7b83299b4aa1fb79884145d72, type: 3}
   telegraphPosition: {fileID: 5609812244648666840}
-  beamIsTelegraphing: 0
+  yawSpeed: 0.1
+  pitchSpeed: 1
   meleeAttacking: 0
   meleeCooldown: 3
   telegraphScaleSpeed: 10
