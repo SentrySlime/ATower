@@ -36,6 +36,8 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
     float shieldVignetteTimer = 0;
     public float shieldVignetteRate = 0;
 
+    [Header("Object References")]
+    public GameObject playerTargetPoint;
 
     [HideInInspector] public float damageReductionPercent = 1;
     [HideInInspector] public int damageIgnoreChance = 0;
@@ -43,7 +45,7 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
     float iFrameTimer = 0;
     bool canBeDamaged = true;
 
-    public float hpRegenCooldown = 0;
+    float hpRegenCooldown = 0;
     float hpRegenTimer = 0;
 
     private void Awake()
@@ -210,5 +212,9 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
         textHP.text = currentHP.ToString() + " / " + maxHP;
     }
 
+    public GameObject GetTargetPoint()
+    {
+        return playerTargetPoint;
+    }
 }
 

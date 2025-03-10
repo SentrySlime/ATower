@@ -47,7 +47,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     public bool dropLoot;
     public GameObject itemPrefab;
     public float dropChance = 0.05f;
-    bool dead = false;
+    [HideInInspector] public bool dead = false;
 
     public bool gauranteeItemDrop;
 
@@ -126,6 +126,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
 
     private void Die()
     {
+        dead = true;
 
         DetachProjectileChildren();
 
@@ -134,7 +135,6 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
         else
             lootSystem.DropLoot(moneySpawnPoint.position, dropChance);
 
-        dead = true;
         enemyManager.ReportDeath(moneyAmount);
         if (moneySpawnPoint != null)
         {

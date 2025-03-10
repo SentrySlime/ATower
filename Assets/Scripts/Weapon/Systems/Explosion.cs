@@ -61,7 +61,17 @@ public class Explosion : MonoBehaviour, IExplosionInterface
             Collider[] player = Physics.OverlapSphere(transform.position, eRadius * 1.5f, layermask);
 
             if(player.Length != 0)
+            {
+                GameObject thePlayer = player[0].gameObject;
                 DealDamageToPlayer(player[0]);
+                Vector3 playerDirection = thePlayer.transform.position - transform.position;
+                //Push the player
+                thePlayer.transform.GetComponent<Locomotion2>().Push();
+                playerDirection = playerDirection.normalized;
+                Vector3 force = playerDirection * 300;
+                force.y = 30;
+                thePlayer.transform.gameObject.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+            }
         }
         else
         {

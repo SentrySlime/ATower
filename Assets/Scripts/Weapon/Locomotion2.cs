@@ -48,6 +48,7 @@ public class Locomotion2 : MonoBehaviour
     public float playerHeight;
     public LayerMask notGround;
     bool grounded;
+    public bool pushed;
     public AudioSource landSFX;
 
     [Header("Slope Handling")]
@@ -98,28 +99,12 @@ public class Locomotion2 : MonoBehaviour
         {
             rb.drag = 0;
 
-
-
-            //Vector3 tempVel = orientation.forward * rb.velocity.x + orientation.right * rb.velocity.z;
-
-            //if(horizontalInput == 0)
-            //    rb.AddForce(new Vector3(0, 0, tempVel.z * -2));
-
-            //if (verticalInput == 0)
-            //    rb.AddForce(new Vector3(tempVel.x * -2, 0, 0));
-
-            //moveDirection = new Vector3(moveDirection.x, 0, moveDirection.z);
-
-            //if (horizontalInput == 0 || verticalInput == 0)
-
-            //    rb.AddForce(new Vector3(rb.velocity.x * -2, 0, rb.velocity.z * -2));
-            //rb.AddForce(new Vector3(0, 0, rb.velocity.z * -2));
-            //if(verticalInput == 0)
-            //    rb.AddForce(new Vector3(rb.velocity.x * -2, 0, 0));
-
         }
 
         rb.useGravity = !OnSlope();
+
+
+        if(pushed) { return; }
 
         if (grounded)
         {
@@ -345,4 +330,17 @@ public class Locomotion2 : MonoBehaviour
         }
 
     }
+
+    public void Push()
+    {
+        pushed = true;
+        StartCoroutine(RemovePush());
+    }
+
+    IEnumerator RemovePush()
+    {
+        yield return new WaitForSeconds(0.15f);
+        pushed = false; 
+    }
+
 }

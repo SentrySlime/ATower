@@ -47,6 +47,7 @@ public class AMainSystem : MonoBehaviour
         if(friendly)
         {
             DamageEnemy(incomingObj, incomingDamage);
+            UILogic();
         }
         else
         {

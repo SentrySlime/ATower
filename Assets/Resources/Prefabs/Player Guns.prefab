@@ -631,7 +631,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4322366131005725864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalPosition: {x: 0, y: 1.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5004350295439402693}
@@ -900,6 +900,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5004350294145823628}
+  - component: {fileID: 1351508222}
   m_Layer: 0
   m_Name: GunKick
   m_TagString: Untagged
@@ -921,6 +922,50 @@ Transform:
   m_Father: {fileID: 5004350295593563223}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1351508222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004350294145823629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 783da0e881cfc98478604e6ced6c0348, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponTransform: {fileID: 5004350294145823628}
+  swaySmooth: 9
+  swayCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  posToRotAmount: 1
+  swaySmoothCounteraction: 1
+  rotationSwayMultiplier: -1
+  maxRotSwayAmount: 5
+  movementSwayMultiplier: -0.1
+  maxPosSwayAmount: 0.01
 --- !u!1 &5004350294291638558
 GameObject:
   m_ObjectHideFlags: 0
@@ -6638,9 +6683,9 @@ MonoBehaviour:
   shieldVignette: {fileID: 0}
   shieldvignetteAlpha: 0
   shieldVignetteRate: 1
+  playerTargetPoint: {fileID: 4322366131005725864}
   damageReductionPercent: 1
   damageIgnoreChance: 0
-  hpRegenCooldown: 0
 --- !u!114 &5004350295439402689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6694,6 +6739,7 @@ MonoBehaviour:
   notGround:
     serializedVersion: 2
     m_Bits: 691
+  pushed: 0
   landSFX: {fileID: 5004350293951226319}
   maxSlopeAngle: 45
   orientation: {fileID: 5004350295593563223}

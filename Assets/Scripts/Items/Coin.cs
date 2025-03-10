@@ -25,6 +25,7 @@ public class Coin : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
+        GiveMoney();
         if(!canTrigger) { return; }
 
         if (other.CompareTag("iconParent"))

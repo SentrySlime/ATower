@@ -26,6 +26,7 @@ public class Kobold : MonoBehaviour, INoticePlayer
     public Animator animator;
     public NavMeshAgent agent;
     GameObject player;
+    Transform playerTargetPoint;
 
     private float idleBehaviourRate = 0.5f;
     private float idleBehaviourTimer = 0;
@@ -52,12 +53,12 @@ public class Kobold : MonoBehaviour, INoticePlayer
     [Header("RangedTelegraph")]
     public GameObject telegraphSphere;
 
-
-
+    public EnemyBase enemyBase;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerTargetPoint = player.GetComponent<PlayerHealth>().GetTargetPoint().transform;
         SetRandomStats();
         layerMask = ~layerMask;
     }
@@ -263,7 +264,9 @@ public class Kobold : MonoBehaviour, INoticePlayer
     {
         yield return new WaitForSeconds(waitTime);
 
-        Vector3 direction = player.transform.position - shootPoint.position;
+        if(enemyBase.dead) { yield return null; }
+
+        Vector3 direction = playerTargetPoint.transform.position - shootPoint.position;
 
         // Create a rotation that points towards the player
         Quaternion lookRotation = Quaternion.LookRotation(direction);

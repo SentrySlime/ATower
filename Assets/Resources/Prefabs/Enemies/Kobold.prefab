@@ -193,6 +193,7 @@ MonoBehaviour:
   dropLoot: 1
   itemPrefab: {fileID: 0}
   dropChance: 0.05
+  dead: 0
   gauranteeItemDrop: 0
   damagedPS: {fileID: 0}
 --- !u!195 &915999531
@@ -271,6 +272,7 @@ MonoBehaviour:
   seePlayerRangedDistance: 115
   shootPoint: {fileID: 1953697717}
   telegraphSphere: {fileID: 958035822}
+  enemyBase: {fileID: 6596524139053908575}
 --- !u!82 &6261519859023998162
 AudioSource:
   m_ObjectHideFlags: 0
@@ -20727,6 +20729,7 @@ MonoBehaviour:
   dropLoot: 0
   itemPrefab: {fileID: 0}
   dropChance: 0.05
+  dead: 0
   gauranteeItemDrop: 0
   damagedPS: {fileID: 0}
 --- !u!65 &1903837400
@@ -21392,7 +21395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ec1b712ac410073429b81134b1b6f451, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec1b712ac410073429b81134b1b6f451, type: 3}
