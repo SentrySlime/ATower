@@ -12,8 +12,10 @@ public class LevelGeneration : MonoBehaviour
     public NavMeshSurface surfaCE;
 
     public List<GameObject> rooms = new List<GameObject>();
+    public List<GameObject> corridors = new List<GameObject>();
     GameObject spawnTransform;
     int allRoomCount;
+    bool currentRoom = false;
 
     [Header("RoomLogic")]
     public bool removeRooms = true;
@@ -35,10 +37,7 @@ public class LevelGeneration : MonoBehaviour
     void Start()
     {
         navMeshManager = GetComponent<NavMeshManager>();
-        allRoomCount = rooms.Count;
-
-
-        
+        allRoomCount = rooms.Count + corridors.Count;
     }
 
 
@@ -77,10 +76,31 @@ public class LevelGeneration : MonoBehaviour
         return Random.Range(0, rooms.Count);
     }
 
+    private int GetRandomCorridor()
+    {
+        return Random.Range(0, corridors.Count);
+    }
+
     private void GenerateLevel()
     {
-        int roomIndex = GetRandomRoom();
+        if(currentRoom)
+        {
+            GenerateRoom();
+            currentRoom = false;
+        }
+        else
+        {
+            GenerateCorridor();
+            currentRoom = true;
+        }
+
         
+    }
+
+    private void GenerateRoom()
+    {
+        int roomIndex = GetRandomRoom();
+
         //GetChildren(newNumber);
         if (roomCount == 0)
         {
@@ -94,9 +114,32 @@ public class LevelGeneration : MonoBehaviour
             spawnTransform = newRoom.point2.gameObject;
         }
 
-        if(removeRooms)
+        if (removeRooms)
             rooms.RemoveAt(roomIndex);
-        
+
+        roomCount++;
+    }
+
+    private void GenerateCorridor()
+    {
+        int roomIndex = GetRandomRoom();
+
+        //GetChildren(newNumber);
+        if (roomCount == 0)
+        {
+            RoomScript newRoom = Instantiate(corridors[roomIndex], transform.position, Quaternion.identity).GetComponent<RoomScript>();
+            spawnTransform = newRoom.point2.gameObject;
+        }
+        else
+        {
+
+            RoomScript newRoom = Instantiate(corridors[roomIndex], spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
+            spawnTransform = newRoom.point2.gameObject;
+        }
+
+        if (removeRooms)
+            corridors.RemoveAt(roomIndex);
+
         roomCount++;
     }
 
