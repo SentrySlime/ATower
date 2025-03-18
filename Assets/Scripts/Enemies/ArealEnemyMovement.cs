@@ -56,8 +56,12 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
     float Accuracy = 5;
 
     [Header("Beam Attack")] //Beams
+    public float beamDamage = 10;
     public float beamCooldown = 10;
     float beamCooldownTimer = 0;
+
+    public float beamDamageRate = 0.5f;
+    float beamDamageRateTimer = 0f;
 
     public float rotationSpeed = 1;
 
@@ -66,9 +70,8 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
     public GameObject telegraphPosition;
     
 
-    float beamDamage = 10;
-    float beamFollowSpeed = 0.15f;
-    float maxBeamFollowSpeed = 0.15f;
+    float beamFollowSpeed = 0.125f;
+    float maxBeamFollowSpeed = 0.125f;
     public float yawSpeed = 0.15f;
     public float pitchSpeed = 0.15f;
     LineRenderer lineRenderer;
@@ -81,14 +84,14 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
     public float meleeCooldown = 4;
     float meleeCooldownTimer = 0;
     
-    public float telegraphScaleSpeed = 5;
-    public float meleeRange = 10;
+    float telegraphScaleSpeed = 8;
+    float meleeRange = 20;
 
     float meleeForce = 300;
     float meleeForceY = 30;
 
+    public int meleeDamage = 30;
     float meleeRadius = 1;
-    public int meleeDamage = 10;
     public GameObject attackVFX;
     public GameObject telegraphVFX2;
     public GameObject expandingAttackPosition;
@@ -108,7 +111,7 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
     public float avoidanceDistance = 15;
 
     [Header("Misc")]
-    float distanceToPlayer;
+    public float distanceToPlayer;
     public float burstTimer;
     int burstCount = 0;
     bool chasingPlayer = false;
@@ -167,10 +170,9 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
             NavMeshMove();
         }
 
-
-        if (distanceToPlayer > rangedAttackDist && !beamAttacking && !meleeAttacking || !canSeePlayer)
+        if (!canSeePlayer && !beamAttacking && !projectileAttacking && !meleeAttacking)
         {
-            //NavMeshMove();
+            return;
         }
 
         if (attackTimer < attackRate && !beamAttacking && !meleeAttacking)
@@ -242,6 +244,8 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
             {
                 attackTimer = 0;
                 beamTimer += Time.deltaTime;
+             
+
                 BeamAttack();
             }
             else
@@ -365,6 +369,10 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
     {
         RotateTowardsPlayer();
 
+        if (beamDamageRateTimer < beamDamageRate)
+        {
+            beamDamageRateTimer += Time.deltaTime;
+        }
 
         //Old rotate code
         Vector3 playerDirection = player.transform.position - shootPoint.transform.position;
@@ -380,15 +388,20 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
 
         Vector3 hitPosition = shootPoint.transform.position + shootPoint.transform.forward * 200;
 
+
         RaycastHit hit;
-        if (Physics.SphereCast(shootPoint.transform.position, 1.7f, shootPoint.transform.forward, out hit, 999, layerMask))
 
         if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.forward, out hit))
         {
             hitPosition = hit.point;
+
             if (hit.transform.CompareTag("Player"))
             {
-                    aMainSystem.DealDamage(hit.transform.gameObject, meleeDamage, false);
+                if(beamDamageRateTimer >= beamDamageRate)
+                {
+                    aMainSystem.DealDamage(hit.transform.gameObject, beamDamage, false);
+                    beamDamageRateTimer = 0;
+                }
                     //hit.collider.gameObject.GetComponent<IDamageInterface>().Damage(beamDamage);
             }
 
@@ -486,12 +499,11 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
             return;
         }
 
-        if (distanceToPlayer <= avoidanceDistance)
-        {
-            movementSpeed = 0;
-            return;
-        }
-
+        //if (distanceToPlayer <= avoidanceDistance && !canSeePlayer)
+        //{    
+        //    movementSpeed = 0;
+        //    return;
+        //}
 
         // Map the distance to speed while clamping
         movementSpeed = Mathf.Clamp((distanceToPlayer / 30) * 11, 1, 11);
