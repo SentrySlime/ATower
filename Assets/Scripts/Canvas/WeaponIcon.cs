@@ -10,6 +10,7 @@ public class WeaponIcon : MonoBehaviour
     public Image borderImage;
     public Image iconImage;
     public TextMeshProUGUI hotkeyIndex;
+    public Color color;
 
     private void SetHeirarchy()
     {
@@ -23,7 +24,7 @@ public class WeaponIcon : MonoBehaviour
 
     public void Activate()
     {
-        borderImage.color = Color.red;
+        borderImage.color = color;
         //SetHeirarchy();
     }
 
