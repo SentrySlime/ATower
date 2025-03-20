@@ -66,10 +66,9 @@ public class PlayerStats : MonoBehaviour
     public void StartPlayerHP()
     {
         playerHealth.maxHP = maxHealth;
-        playerHealth.UpdateHPRegen();
         playerHealth.damageReductionPercent = damageReductionPercent;
         playerHealth.damageIgnoreChance = damageIgnoreChance;
-        playerHealth.UpdateHP();
+        playerHealth.StartHealth();
     }
 
     public void StartWeaponSocket()

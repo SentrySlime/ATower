@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using static System.Net.Mime.MediaTypeNames;
+using static UnityEngine.ProBuilder.AutoUnwrapSettings;
 
 public class PlayerHealth : MonoBehaviour, IDamageInterface
 {
@@ -20,6 +21,8 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
     private Vector3 startPos;
     
     public Slider barHP;
+    public RectTransform hpFill;
+    public RectTransform hpBackground;
     public TextMeshProUGUI textHP;
 
     [Header("DamageVignetteStuff")]
@@ -55,9 +58,12 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
         pauseMenu = GameObject.Find("Canvas").GetComponent<PauseMenu>();
         pauseMenu.GetVignettes(this);
         barHP = GameObject.FindGameObjectWithTag("HPBar").GetComponent<Slider>();
+
+        hpFill = GameObject.FindGameObjectWithTag("HPFill").GetComponent<RectTransform>();
+        hpBackground = GameObject.FindGameObjectWithTag("HPBackground").GetComponent<RectTransform>();
         textHP = GameObject.FindGameObjectWithTag("textHP").GetComponent<TextMeshProUGUI>();
-        currentHP = maxHP;
-        barHP.maxValue = maxHP;
+
+        UpdateMaxHP();
         UpdateHP();
         HealthRegen();
         UpdateHPRegen();
@@ -65,12 +71,13 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
     void Start()
     {
+        
     }
 
 
     void Update()
-       {
-            
+    {
+
         HealthRegen();
      
         if (iFrameTimer < iFrameDuration)
@@ -207,14 +214,29 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
     public void UpdateHP()
     {
-        barHP.maxValue = maxHP;
         barHP.value = currentHP;
+        hpFill.sizeDelta = new Vector2(currentHP, hpFill.sizeDelta.y);
         textHP.text = currentHP.ToString() + " / " + maxHP;
+    }
+
+    public void UpdateMaxHP()
+    {
+        barHP.maxValue = maxHP;
+        hpBackground.sizeDelta = new Vector2(maxHP, hpBackground.sizeDelta.y);
     }
 
     public GameObject GetTargetPoint()
     {
         return playerTargetPoint;
+    }
+
+    public void StartHealth()
+    {
+        currentHP = maxHP;
+        barHP.maxValue = maxHP;
+        UpdateHPRegen();
+        UpdateHP();
+        UpdateMaxHP();
     }
 }
 

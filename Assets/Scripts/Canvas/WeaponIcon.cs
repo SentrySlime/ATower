@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class WeaponIcon : MonoBehaviour
 {
+    public Sprite selectedImageBorder;
+    public Sprite imageBorder;
 
     public Image borderImage;
     public Image iconImage;
@@ -24,13 +26,15 @@ public class WeaponIcon : MonoBehaviour
 
     public void Activate()
     {
-        borderImage.color = color;
+        borderImage.sprite = selectedImageBorder;
+        //borderImage.color = color;
         //SetHeirarchy();
     }
 
     public void SetInactive()
     {
-        borderImage.color = Color.white;
+        borderImage.sprite = imageBorder;
+        //borderImage.color = Color.white;
     }
 
     public void SetHotKeyIndex(int index)
