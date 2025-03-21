@@ -7,17 +7,27 @@ public class EnemyManager : MonoBehaviour
 
     int enemyDeaths = 0;
     float countDown = 0;
-
     float slowCounter = 0;
-
     bool slowDown = false;
-    public float slowDuration = 1;
+    float slowDuration = 0.03f;
 
+    public GameObject helpingHandPrefab;
+
+
+    GameObject player;
     Inventory inventory;
+    PlayerStats playerStats;
+    PlayerHealth playerHealth;
+    WeaponSocket weaponSocket;
 
     void Start()
     {
-        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        inventory = player.GetComponent<Inventory>();
+        playerStats = player.GetComponent<PlayerStats>();
+        playerHealth = player.GetComponent<PlayerHealth>();
+        weaponSocket = player.GetComponent<WeaponSocket>();
     }
 
     
@@ -39,8 +49,9 @@ public class EnemyManager : MonoBehaviour
         
     }
 
-    public void ReportDeath(int moneyToDrop)
+    public void ReportDeath(int moneyToDrop, Vector3 deathPosition)
     {
+        PlayerStatsEffects(deathPosition);
         inventory.IncreaseMoney(moneyToDrop);
 
         if (!slowDown)
@@ -88,6 +99,29 @@ public class EnemyManager : MonoBehaviour
             enemyDeaths--;
             countDown = 0;
         }
+    }
+
+    private void PlayerStatsEffects(Vector3 deathPosition)
+    {
+        if(playerStats.hpOnKill > 0)
+            playerHealth.Heal(playerStats.hpOnKill);
+
+        if (playerStats.helpingHand)
+        {
+            int randomNumb = Random.Range(1, 10);
+            print(randomNumb);
+            if(randomNumb <= 3)
+                Instantiate(helpingHandPrefab, deathPosition, Quaternion.identity).GetComponent<HelpingHandPickUp>().playerHealth = playerHealth;
+        }
+
+        StartCoroutine(WaitBefore());
+    }
+
+    IEnumerator WaitBefore()
+    {
+        yield return new WaitForEndOfFrame();
+        if (playerStats.returnAmmoOnkill)
+            weaponSocket.equippedWeapon.GiveAmmoToMagazine(1);
     }
 
 }

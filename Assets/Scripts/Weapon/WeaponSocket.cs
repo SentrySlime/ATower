@@ -17,6 +17,8 @@ public class WeaponSocket : MonoBehaviour
     public CameraMovement cameraMovement;
     public GameObject obj;
     public AudioSource noAmmo;
+    ShootSystem shootSystem;
+    PlayerStats playerStats;
 
     [Header("Visible Cursor")]
     public bool hideCursor;
@@ -35,7 +37,6 @@ public class WeaponSocket : MonoBehaviour
     [Header("SFX")]
     public AudioSource wSwitch_SFX;
     public AudioSource reload_SFX;
-
 
     //public Quaternion hipRot;
     //public Quaternion adsRot;
@@ -63,8 +64,6 @@ public class WeaponSocket : MonoBehaviour
     float burstDelay = 0.1f;
     //float burstTimer = 0;
 
-    public int rocketChance = 0;
-
     public enum FireMode { fullAuto, semi, burst };
     public FireMode fireMode;
 
@@ -80,6 +79,8 @@ public class WeaponSocket : MonoBehaviour
         pauseMenu = GameObject.FindGameObjectWithTag("Canvas").GetComponent<PauseMenu>();
         reloadGroup = GameObject.FindGameObjectWithTag("ReloadGroup").GetComponent<CanvasGroup>();
         reloadFinish = reloadGroup.transform.Find("ReloadFinish").GetComponent<Image>();
+        shootSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShootSystem>();
+        playerStats = GetComponent<PlayerStats>();
         reloadGroup.alpha = 0;
     }
 
@@ -196,7 +197,7 @@ public class WeaponSocket : MonoBehaviour
             recoilScript.CallFire();
             equippedWeapon.TriggerItem();
             equippedWeapon.TakeAmmo();
-            GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShootSystem>().FireHomingRocket(false, equippedWeapon.barrel, 30, rocketChance);
+            shootSystem.FireHomingRocket(false, equippedWeapon.barrel, 30, playerStats.fireBallChance);
         }
         else if (equippedWeapon.currentMagazine <= 0 && equippedWeapon.currentAmmo != 0)
         {
@@ -287,11 +288,20 @@ public class WeaponSocket : MonoBehaviour
         while (reloadIcon.fillAmount < 1 && reloadIcon.isActiveAndEnabled)
         {
             yield return new WaitForEndOfFrame();
-            reloadIcon.fillAmount += 1.0f / equippedWeapon.reloadTime * Time.deltaTime;
+
+            float totalReloadSpeed = 1 + playerStats.reloadSpeed;
+
+            if (playerStats.hasAlternateFastReload && playerStats.alternateFastReload)
+                totalReloadSpeed += 0.5f;
+
+            reloadIcon.fillAmount += totalReloadSpeed * (1.0f / equippedWeapon.reloadTime * Time.deltaTime);
         }
 
         if (reloadIcon.fillAmount >= 1)
         {
+            if (playerStats.hasAlternateFastReload && playerStats.alternateFastReload)
+                playerStats.alternateFastReload = !playerStats.alternateFastReload;
+
             equippedWeapon.ReloadWeapon();
             if(equippedWeapon.HasFullMagazine() || equippedWeapon.OutOfAmmo())
                 StartCoroutine(ReloadFinish());

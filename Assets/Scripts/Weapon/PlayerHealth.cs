@@ -106,7 +106,7 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
     public void HealOnKill()
     {
-        Heal(playerStats.healPerKill);
+        Heal(playerStats.hpOnKill);
     }
 
     private void HealthRegen()
@@ -129,6 +129,14 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
     public void UpdateHPRegen()
     {
         hpRegenCooldown = 1 / playerStats.hpRegen;
+    }
+
+    public bool HasFullHP()
+    {
+        if(currentHP >= maxHP)
+            return true;
+        else
+            return false;
     }
 
     #endregion

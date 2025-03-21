@@ -60,13 +60,13 @@ public class ShootRaycast : BaseWeapon
     private void Awake()
     {
         //This layermask sends a single raycast and should basically only hit terrain
-        layermask = LayerMask.GetMask("Player", "Enemy", "Projectile", "Items", "Breakable");
+        layermask = LayerMask.GetMask("Player", "Enemy", "Projectile", "Items", "Breakable", "Ignore Raycast");
         
         //This actually only tries to get the enemies in the way
         layermask2 = LayerMask.GetMask("Enemy", "WeaponLayer", "Breakable");
         
         //This layermask is only for shotguns
-        layermask3 = LayerMask.GetMask("Player", "Projectile", "Items");
+        layermask3 = LayerMask.GetMask("Player", "Projectile", "Items", "Ignore Raycast");
 
         //shootPoint = GameObject.Find("FX").GetComponent<GameObject>();
         shootPoint = GameObject.FindGameObjectWithTag("ShootPoint");

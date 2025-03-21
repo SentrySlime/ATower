@@ -264,6 +264,27 @@ public class BaseWeapon : MonoBehaviour
 
     }
 
+    public void GiveAmmoToMagazine(int incomingAmmo)
+    {
+        print("1");
+
+        if(HasFullMagazine())
+        {
+            return;
+        }
+
+        print("2");
+
+        currentMagazine += incomingAmmo;
+
+        if (currentMagazine > maxMagazine)
+            currentMagazine = maxMagazine;
+
+        print("3");
+
+        SetAmmoInfo();
+    }
+
     public void RefillMag()
     {
         currentMagazine = maxMagazine;

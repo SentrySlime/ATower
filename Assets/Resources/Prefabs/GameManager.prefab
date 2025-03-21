@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e3f583b03bdefd4d8b7b76bbd86b214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowDuration: 0.03
+  helpingHandPrefab: {fileID: 3289367216350407278, guid: 375e8f0155830b6488570adf9541f3e1, type: 3}
 --- !u!114 &8046788520921340378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,8 +97,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5814a2a64c81648438772c745286d549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionSystem: {fileID: 446967191}
-  shootSystem: {fileID: 7614514148234217133}
+  hitSFX: {fileID: 0}
+  critHitSFX: {fileID: 0}
+  hitVFX: {fileID: 0}
+  hitEnemyVFX: {fileID: 0}
+  pickUpVFX: {fileID: 0}
+  player: {fileID: 0}
 --- !u!114 &7614514148234217133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35a27bc4c00ee9f4fa39f03d5f5c54ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 0}
+  projectile: {fileID: 8458187518107989519, guid: e7ff468585e3b3344a858ac4403c81f6, type: 3}
   accuracy: 30
 --- !u!114 &446967191
 MonoBehaviour:

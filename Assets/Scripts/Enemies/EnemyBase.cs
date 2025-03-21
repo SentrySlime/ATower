@@ -52,6 +52,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     public bool gauranteeItemDrop;
 
     [Header("Extra")]
+    public bool shouldReportDeath = true;
     public ParticleSystem damagedPS;
     List<GameObject> projectileChildren = new List<GameObject>();
 
@@ -74,7 +75,6 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
         inventory = player.GetComponent<Inventory>();
 
         layerMask = LayerMask.GetMask("Enemy");
-
 
         //------Particle system when damaged
         if(damagedPS != null)
@@ -130,12 +130,17 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
 
         DetachProjectileChildren();
 
-        if (gauranteeItemDrop)
-            lootSystem.DropItem(moneySpawnPoint.position);
-        else
-            lootSystem.DropLoot(moneySpawnPoint.position, dropChance);
+        if (dropLoot)
+        {
+            if (gauranteeItemDrop)
+                lootSystem.DropItem(moneySpawnPoint.position);
+            else
+                lootSystem.DropLoot(moneySpawnPoint.position, dropChance);
+        }
 
-        enemyManager.ReportDeath(moneyAmount);
+        if(shouldReportDeath)
+            enemyManager.ReportDeath(moneyAmount, moneySpawnPoint.position);
+
         if (moneySpawnPoint != null)
         {
             if(moneyPrefab)

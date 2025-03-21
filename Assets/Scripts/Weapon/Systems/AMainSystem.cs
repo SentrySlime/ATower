@@ -11,17 +11,25 @@ public class AMainSystem : MonoBehaviour
     [Header("VFX")]
     public GameObject hitVFX;
     public GameObject hitEnemyVFX;
-    
-    HitmarkerLogic hitMarkerLogic;
+    public GameObject pickUpVFX;
+
+    public GameObject player;
+
     PlayerStats playerStats;
+    PlayerHealth playerHealth;
+    Inventory inventory;
     ShootSystem shootSystem;
+    HitmarkerLogic hitMarkerLogic;
     ExplosionSystem explosionSystem;
 
     private void Awake()
     {
         shootSystem = GetComponent<ShootSystem>();
         explosionSystem = GetComponent<ExplosionSystem>();
-        playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerStats = player.GetComponent<PlayerStats>();
+        playerHealth = player.GetComponent<PlayerHealth>();
+        inventory = player.GetComponent<Inventory>();
         hitMarkerLogic = GameObject.FindGameObjectWithTag("HitMarker").GetComponent<HitmarkerLogic>();
     }
 
@@ -40,6 +48,10 @@ public class AMainSystem : MonoBehaviour
         explosionSystem.SpawnExplosion(position, radius, damage, parent, enemyOwned);
     }
 
+    public void SpawnPickUpEffects(Vector3 position)
+    {
+        Instantiate(pickUpVFX, position, Quaternion.identity);
+    }
 
     //Damage calculations
     public void DealDamage(GameObject incomingObj, float incomingDamage, bool friendly)
@@ -60,6 +72,8 @@ public class AMainSystem : MonoBehaviour
     {
         float finalDamage = CalculateDamage(incomingDamage);
 
+        playerHealth.Heal(playerStats.hpOnHit);
+
         incomingObj.GetComponent<IDamageInterface>().Damage(incomingDamage);
     }
 
@@ -67,6 +81,9 @@ public class AMainSystem : MonoBehaviour
     {
         incomingDamage += playerStats.damage;
 
+        if (playerStats.moneyIsPower)
+            incomingDamage = 1 + ((float) inventory.Money / 10000);
+            
         int critChance = Random.Range(0, 100);
 
         if (playerStats.criticalChance > critChance)

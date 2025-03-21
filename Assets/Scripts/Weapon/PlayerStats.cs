@@ -11,8 +11,10 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Healing")]
     public float hpRegen = 1;
-    public int healPerKill = 5;
+    public int hpOnKill = 5;
+    public int hpOnHit = 1;
 
+    public bool helpingHand = false;
 
     [Header("Damage")]
     public float damage = 0;
@@ -23,17 +25,27 @@ public class PlayerStats : MonoBehaviour
     public float moveSpeed = 0;
     public int extraJumps = 0;
 
-    [Header("WeaponSocket")]
+    [Header("Weapon Stats")]
     public int reloadAmount = 0;
-    public int rocketChance = 0;
+    public int maxMagazineSize = 0;
+    [Tooltip("0.1 is equal to 10% increase in reload speed")]
+    public float reloadSpeed = 0;
 
+    [Header("Return Ammo On Kill")]
+    public bool hasReturnAmmoOnkill = false;
+    public bool returnAmmoOnkill = false;
+
+    [Header("Alternate reload is 50% faster")]
+    public bool hasAlternateFastReload = false;
+    public bool alternateFastReload = false;
 
     [Header("Others")]
     public bool canExplode = false;
     public int ammoRefills = 0;
+    public bool moneyIsPower = false;
 
-    [Header("Weapon Stats")]
-    public int maxMagazineSize = 0;
+    [Header("WeaponSocket")]
+    public int fireBallChance = 0;
 
     PlayerHealth playerHealth;
     Locomotion2 locomotion;
@@ -51,7 +63,6 @@ public class PlayerStats : MonoBehaviour
     {
         StartLocomotion();
         StartPlayerHP();
-        StartWeaponSocket();
     }
 
     //
@@ -70,12 +81,6 @@ public class PlayerStats : MonoBehaviour
         playerHealth.damageIgnoreChance = damageIgnoreChance;
         playerHealth.StartHealth();
     }
-
-    public void StartWeaponSocket()
-    {
-        weaponSocket.rocketChance = rocketChance;
-    }
-
 
     public void AddStatsToPickedUpWeapon(GameObject weaponObj)
     {

@@ -109,9 +109,12 @@ MonoBehaviour:
   moneySpawnPoint: {fileID: 6198504517991691383}
   killMarker: {fileID: 0}
   homingTarget: {fileID: 6198504517991691388}
-  dropLoot: 0
+  dropLoot: 1
   itemPrefab: {fileID: 0}
   dropChance: 0.05
+  dead: 0
+  gauranteeItemDrop: 0
+  shouldReportDeath: 0
   damagedPS: {fileID: 0}
 --- !u!136 &6198504517991691387
 CapsuleCollider:
