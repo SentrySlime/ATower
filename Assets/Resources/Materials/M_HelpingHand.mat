@@ -7,17 +7,18 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Coins
+  m_Name: M_HelpingHand
   m_Shader: {fileID: 4800000, guid: 94cb0d6305cd4a743b1d2ec684e277de, type: 3}
-  m_ShaderKeywords: DIFF_VERTEX OPAQUE SPEC_GOURAUD _DIFFMODEL_VERTEX _DRAWDIST_ON
-    _EMISSION _SPECMODEL_GOURAUD
+  m_ShaderKeywords: BFC DIFF_VERTEX SPEC_GOURAUD TRANSPARENT UNLIT _ALPHABLEND_ON
+    _DIFFMODEL_VERTEX _DRAWDIST_ON _EMISSION _SPECMODEL_GOURAUD
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 3000
   stringTagMap:
-    RenderType: Opaque
-  disabledShaderPasses: []
+    RenderType: Transparent
+  disabledShaderPasses:
+  - FORWARDADD
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -50,7 +51,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ad45b41a2144f514d8dfc04312aee9b9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 856d8cb6408364f4ab801e81531ad094, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetalMap:
@@ -80,13 +81,13 @@ Material:
     m_Floats:
     - _BlendOp: 0
     - _BumpScale: 1
-    - _Cul: 0
+    - _Cul: 2
     - _Cutoff: 0.5
-    - _CutoutThreshold: 0.5
+    - _CutoutThreshold: 0.128
     - _DetailNormalMapScale: 1
     - _DiffModel: 0
     - _DrawDist: 1
-    - _DstBlend: 0
+    - _DstBlend: 10
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -96,15 +97,15 @@ Material:
     - _NormalMapDepth: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RenderMode: 0
-    - _Smoothness: 0
+    - _RenderMode: 1
+    - _Smoothness: 0.64
     - _SmoothnessTextureChannel: 0
     - _SpecModel: 0
     - _Specular: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 1
+    - _SrcBlend: 5
     - _UVSec: 0
-    - _Unlit: 0
+    - _Unlit: 1
     - _VertexInaccuracy: 0.01
     - _ZWrite: 1
     m_Colors:
