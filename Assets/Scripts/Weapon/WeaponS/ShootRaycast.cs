@@ -59,6 +59,7 @@ public class ShootRaycast : BaseWeapon
 
     private void Awake()
     {
+        SetBaseStatsOnSpawn();
 
         //This layermask sends a single raycast and should basically only hit terrain
         layermask = LayerMask.GetMask("Player", "Enemy", "Projectile", "Items", "Breakable", "Ignore Raycast");

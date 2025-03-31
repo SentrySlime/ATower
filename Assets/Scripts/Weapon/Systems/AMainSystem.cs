@@ -72,10 +72,8 @@ public class AMainSystem : MonoBehaviour
     private void DamageEnemy(GameObject incomingObj, float incomingDamage)
     {
         float finalDamage = CalculateDamage(incomingDamage);
-
         playerHealth.Heal(playerStats.hpOnHit);
-
-        incomingObj.GetComponent<IDamageInterface>().Damage(incomingDamage);
+        incomingObj.GetComponent<IDamageInterface>().Damage(finalDamage);
     }
 
     private float CalculateDamage(float incomingDamage)
@@ -83,8 +81,10 @@ public class AMainSystem : MonoBehaviour
         incomingDamage += playerStats.damage;
 
         if (playerStats.moneyIsPower > 0)
-            incomingDamage = 1 + ((float) inventory.Money / 10000);
-            
+        {
+            float percentage = 1 + ((float) inventory.Money / 10000);
+            incomingDamage *= percentage;   
+        }
         int critChance = Random.Range(0, 100);
 
         if (playerStats.criticalChance > critChance)

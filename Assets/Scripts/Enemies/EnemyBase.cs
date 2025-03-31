@@ -98,6 +98,8 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
                 gameObject.GetComponent<INoticePlayer>().NoticePlayer();
         }
 
+        
+
         currentHealth -= CalculateDamage(damage);
 
         //hitMarkerLogic.EnableHitMarker();

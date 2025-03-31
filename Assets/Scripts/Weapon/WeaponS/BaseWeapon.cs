@@ -103,7 +103,7 @@ public class BaseWeapon : MonoBehaviour
 
     public GameObject[] renderObjects;
 
-    protected virtual void Awake()
+    private void Awake()
     {
         
     }
@@ -113,7 +113,7 @@ public class BaseWeapon : MonoBehaviour
     public virtual void Start()
     {
         //This is a virtual "override start function" so the children inherit and use this (So don't remove)
-        SetBaseStatsOnSpawn();
+        
     }
 
     void Update()
@@ -276,21 +276,15 @@ public class BaseWeapon : MonoBehaviour
 
     public void GiveAmmoToMagazine(int incomingAmmo)
     {
-        print("1");
-
         if(HasFullMagazine())
         {
             return;
         }
 
-        print("2");
-
         currentMagazine += incomingAmmo;
 
         if (currentMagazine > maxMagazine)
             currentMagazine = maxMagazine;
-
-        print("3");
 
         SetAmmoInfo();
     }
@@ -380,7 +374,7 @@ public class BaseWeapon : MonoBehaviour
 
     #endregion
 
-    private void SetBaseStatsOnSpawn()
+    public void SetBaseStatsOnSpawn()
     {
         baseMaxAmmo = maxAmmo;
         baseAmmoPerShot = ammoPerShot;

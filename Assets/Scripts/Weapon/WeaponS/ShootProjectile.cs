@@ -39,6 +39,7 @@ public class ShootProjectile : BaseWeapon
 
     private void Awake()
     {
+        SetBaseStatsOnSpawn();
 
         layerMask = LayerMask.GetMask("Player", "Projectile");
 

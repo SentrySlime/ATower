@@ -111,7 +111,6 @@ public class EnemyManager : MonoBehaviour
         if (playerStats.helpingHand > 0)
         {
             int randomNumb = Random.Range(1, 10);
-            print(randomNumb);
             if (randomNumb <= 3)
             {
                 HelpingHandPickUp tempHelpingHand = Instantiate(helpingHandPrefab, deathPosition, Quaternion.identity).GetComponent<HelpingHandPickUp>();

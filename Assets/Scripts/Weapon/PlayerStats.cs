@@ -78,6 +78,7 @@ public class PlayerStats : MonoBehaviour
     {
         playerHealth.damageReductionPercent = damageReductionPercent;
         playerHealth.damageIgnoreChance = damageIgnoreChance;
+        playerHealth.maxHP = maxHealth;
         playerHealth.ItemUpdateHealth();
     }
 

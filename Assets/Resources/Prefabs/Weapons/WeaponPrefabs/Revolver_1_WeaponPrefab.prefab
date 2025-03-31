@@ -4973,16 +4973,24 @@ MonoBehaviour:
   objectToRecoil: {fileID: 6593228928422068522}
   weaponIcon: {fileID: 21300000, guid: 299e4d1674e545448aafe864e3a3eb5e, type: 3}
   iconPrefab: {fileID: 0}
+  baseMaxAmmo: 0
   maxAmmo: 114
   currentAmmo: 114
+  baseAmmoPerShot: 0
   ammoPerShot: 1
+  baseInfinteAmmo: 0
   infinteAmmo: 0
   reloadType: 1
+  baseMaxMagazine: 0
   maxMagazine: 6
   currentMagazine: 6
+  baseReloadTime: 0
   reloadTime: 1.5
+  baseReloadAmount: 0
   reloadAmount: 1
-  damage: 300
+  baseDamage: 0
+  damage: 250
+  baseFireRate: 0
   fireRate: 0.02
   burstDelay: 1
   burstAmount: 1
