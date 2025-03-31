@@ -49,7 +49,7 @@ public class ShootProjectile : BaseWeapon
 
         maxAmmoText = GameObject.Find("MaxAmmoText").GetComponent<TextMeshProUGUI>();
         currentMagazineText = GameObject.Find("CurrentMagazineText").GetComponent<TextMeshProUGUI>();
-        ammoFill = GameObject.FindGameObjectWithTag("Fill").GetComponent<Image>();
+        //ammoFill = GameObject.FindGameObjectWithTag("Fill").GetComponent<Image>();
 
         currentAmmo = maxAmmo;
         currentMagazine = maxMagazine;

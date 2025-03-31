@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class WeaponSocket : MonoBehaviour
 {
+    public AmmoScript ammoScript;
 
     public float baseCameraFOV;
     public float zoomedCameraFOV;
@@ -197,6 +198,7 @@ public class WeaponSocket : MonoBehaviour
             recoilScript.CallFire();
             equippedWeapon.TriggerItem();
             equippedWeapon.TakeAmmo();
+            ammoScript.UseAmmo();
             shootSystem.FireHomingRocket(false, equippedWeapon.barrel, 30, playerStats.fireBallChance);
         }
         else if (equippedWeapon.currentMagazine <= 0 && equippedWeapon.currentAmmo != 0)
@@ -258,6 +260,8 @@ public class WeaponSocket : MonoBehaviour
         
         InitalizeItem(incomingObj);
 
+        
+
         if (equippedWeapon != null)
             hipPos = equippedWeapon.hipPos;
     }
@@ -269,6 +273,18 @@ public class WeaponSocket : MonoBehaviour
         equippedWeapon.screenShake = screenShake;
         recoilScript = incomingObj.GetComponent<Recoil>();
         equippedWeapon.Initialize(cameraObj);
+
+        UpdateAmmo();
+
+    }
+
+    public void UpdateAmmo()
+    {
+        ammoScript.maxMagazine = equippedWeapon.maxMagazine;
+        ammoScript.currentMagazine = equippedWeapon.currentMagazine - 1;
+
+        ammoScript.SetMagazineSize();
+        ammoScript.UpdateAmmoInfo();
     }
 
     public void StopReload()
@@ -302,7 +318,10 @@ public class WeaponSocket : MonoBehaviour
             if (playerStats.hasAlternateFastReload > 0)
                 playerStats.alternateFastReload = !playerStats.alternateFastReload;
 
+            
             equippedWeapon.ReloadWeapon();
+
+
             if(equippedWeapon.HasFullMagazine() || equippedWeapon.OutOfAmmo())
                 StartCoroutine(ReloadFinish());
             else
@@ -312,6 +331,26 @@ public class WeaponSocket : MonoBehaviour
 
 
         yield return null;
+    }
+
+    public void AmmoVisualRefillMagazine()
+    {
+        ammoScript.RefillMagazine();
+    }
+
+    public void AmmoVisualRefillMagazineAmount(int amount)
+    {
+        ammoScript.RefillMagazineAmount(amount);
+    }
+
+    public void AmmoVisualOneByOne()
+    {
+        ammoScript.FillAmmo();
+    }
+
+    public void AmmoVisualOneByOne(int ammoAmount)
+    {
+        ammoScript.FillAmmo(ammoAmount);
     }
 
     public void SetFOVnSens()

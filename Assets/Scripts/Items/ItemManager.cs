@@ -20,7 +20,7 @@ public class ItemManager : MonoBehaviour
     
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.O))
+        if(Input.GetKeyDown(KeyCode.I))
         {
             print("ItemManager");
             DropItem(player.transform.position);

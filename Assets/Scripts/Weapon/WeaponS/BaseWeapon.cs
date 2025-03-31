@@ -148,10 +148,13 @@ public class BaseWeapon : MonoBehaviour
             if (infinteAmmo)
             {
                 currentMagazine = maxMagazine;
+                if (!recoil.holstered)
+                    weaponSocket.AmmoVisualRefillMagazine();
             }
             else
             {
                 //Check how much ammo we have left
+                int tempCurrentAmmo = currentAmmo;
                 currentAmmo -= maxMagazine - currentMagazine;
 
                 int remainingAmmo = 0;
@@ -162,17 +165,30 @@ public class BaseWeapon : MonoBehaviour
                     remainingAmmo = 0 - currentAmmo;
                     currentMagazine = maxMagazine - remainingAmmo;
                     currentAmmo = 0;
+                    if (!recoil.holstered)
+                    {
+
+                        weaponSocket.AmmoVisualRefillMagazineAmount(tempCurrentAmmo);
+                    }
                 }
                 else
+                {
                     currentMagazine = maxMagazine; //If we had more or as much ammo as the magazine can fit, we don't need to do the math
-            }
+                    if (!recoil.holstered)
+                        weaponSocket.AmmoVisualRefillMagazine();
+                }
 
+            }
 
             currentAmmo = Mathf.Clamp(currentAmmo, 0, 99999);
             //Then we update the hud with our ammo info
-            if(!recoil.holstered)
+            if (!recoil.holstered)
+            {
+                //weaponSocket.AmmoVisualRefillMagazine();
                 SetAmmoInfo();
-        }
+
+            }
+        }   
         else if (reloadType == ReloadType.ShotByShot)
         {
             if (currentMagazine >= maxMagazine) { return; }
@@ -184,6 +200,10 @@ public class BaseWeapon : MonoBehaviour
                     if (currentMagazine != maxMagazine)
                     {
                         currentMagazine++;
+                        if (!recoil.holstered)
+                            weaponSocket.AmmoVisualOneByOne();
+
+
                     }
                 }
             }
@@ -191,13 +211,15 @@ public class BaseWeapon : MonoBehaviour
             {
 
                 int reloadNumber = Mathf.Clamp(reloadAmount + playerStats.reloadAmount, 1, maxMagazine - currentMagazine);
-             
+
                 for (int i = 0; i < reloadNumber; i++)
                 {
                     if (currentAmmo != 0 || currentMagazine != maxMagazine)
                     {
                         currentAmmo--;
                         currentMagazine++;
+                        if (!recoil.holstered)
+                            weaponSocket.AmmoVisualOneByOne(reloadAmount + playerStats.reloadAmount);
                     }
                 }
 
@@ -216,10 +238,7 @@ public class BaseWeapon : MonoBehaviour
             else if (reloadType == ReloadType.ShotByShot)
                 MantleWeapon();
 
-
-
         }
-
     }
 
     //This should be called when switching weapons
@@ -311,9 +330,6 @@ public class BaseWeapon : MonoBehaviour
             maxAmmoText.text = currentAmmo.ToString();
 
         }
-
-        //This is for the bar which fills depending on how much ammo you have
-        ammoFill.fillAmount = (float)currentMagazine / (float)maxMagazine;
 
         if (currentMagazine >= maxMagazine)
         {
