@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1330662222}
   - component: {fileID: 1330662225}
   - component: {fileID: 1330662224}
-  - component: {fileID: 1330662223}
+  - component: {fileID: 333762671}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -82,19 +82,35 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1330662223
-BoxCollider:
+--- !u!114 &333762671
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1330662221}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: -902729914
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4095
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.6666667
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 0}
 --- !u!1 &1745589072951350242
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,12 +160,23 @@ MonoBehaviour:
   navMeshSurfaces: []
   surfaCE: {fileID: 2109320633}
   rooms:
-  - {fileID: 6946836349154946844, guid: c9d315fe0dd642b41898c4b879f4b820, type: 3}
-  - {fileID: 9081712268719766887, guid: deef74ec272444b409611c436c8e66cc, type: 3}
-  - {fileID: 1106451772483270369, guid: c5ad2780a202b834f9b52bf147e8cd88, type: 3}
+  - {fileID: 9049246289987635994, guid: a3375045d766f3c4e84fc0507ddc2ed8, type: 3}
+  - {fileID: 8157766797853555144, guid: 99074aec934783947bebc5e1e1af2396, type: 3}
+  - {fileID: 5188076373493364511, guid: 9bbe837a8dd401747b3c328c884276a0, type: 3}
+  - {fileID: 6082911674671352749, guid: 4cbfa98118e5a8b4e8c5662ea5ca4131, type: 3}
+  - {fileID: 7875776370316182781, guid: 50540fb6384a78441b46cb0cdd7d2412, type: 3}
+  - {fileID: 7875776370316182781, guid: cd3719c975a47934d9a2dc8cf699ea17, type: 3}
+  corridors:
+  - {fileID: 211026210306712453, guid: 79daf878caa9fb84690e0b98e5a9230e, type: 3}
+  - {fileID: 8916126137658203837, guid: 122f7e543c0b7584ba56bfa06c8b606a, type: 3}
+  - {fileID: 3509907624801447122, guid: b8fa2b86ddeee2a4c98a070a69e934b9, type: 3}
+  - {fileID: 3509907624801447122, guid: 9187247e8865fb4428c31b2a7e8129f4, type: 3}
+  - {fileID: 7027426252763649109, guid: f978b01442cd2034caa1172773c96ce2, type: 3}
+  - {fileID: 211026210306712453, guid: bc50eefc7dde09045a624998519fecf8, type: 3}
+  removeRooms: 1
   roomCount: 0
   hasTimer: 0
-  rate1: 0.001
+  rate1: 1
   allSurfaces: []
 --- !u!114 &1745589071282283977
 MonoBehaviour:
@@ -181,7 +208,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4095
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1

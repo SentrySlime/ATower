@@ -194,7 +194,8 @@ MonoBehaviour:
   itemPrefab: {fileID: 0}
   dropChance: 0.05
   dead: 0
-  gauranteeItemDrop: 0
+  gauranteeItemDrop: 1
+  shouldReportDeath: 1
   damagedPS: {fileID: 0}
 --- !u!195 &915999531
 NavMeshAgent:
@@ -20731,6 +20732,7 @@ MonoBehaviour:
   dropChance: 0.05
   dead: 0
   gauranteeItemDrop: 0
+  shouldReportDeath: 1
   damagedPS: {fileID: 0}
 --- !u!65 &1903837400
 BoxCollider:

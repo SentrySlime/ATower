@@ -222,7 +222,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.5003222, g: 0, b: 0.6226415, a: 0.6745098}
+      maxColor: {r: 0.10764039, g: 0.8301887, b: 0, a: 0.6745098}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4899,7 +4899,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5421101633274152638, guid: 8ab1c0cf9f494b443846170d9be5aabb, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5421101633274152638, guid: 8ab1c0cf9f494b443846170d9be5aabb, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
@@ -4911,15 +4911,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5421101633274152638, guid: 8ab1c0cf9f494b443846170d9be5aabb, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.185
+      value: 0.050195772
       objectReference: {fileID: 0}
     - target: {fileID: 5421101633274152638, guid: 8ab1c0cf9f494b443846170d9be5aabb, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0
+      value: 0.5660378
       objectReference: {fileID: 0}
     - target: {fileID: 5421101633274152638, guid: 8ab1c0cf9f494b443846170d9be5aabb, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.09773582
+      value: 0.15228942
       objectReference: {fileID: 0}
     - target: {fileID: 5421101633274152638, guid: 8ab1c0cf9f494b443846170d9be5aabb, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.atime1
@@ -5061,7 +5061,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4868708293687273639, guid: 3021f42d0edb76244a33d07c4f21b55f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8367589795575863265, guid: 3021f42d0edb76244a33d07c4f21b55f, type: 3}
       propertyPath: ShapeModule.angle

@@ -50,7 +50,8 @@ public class AMainSystem : MonoBehaviour
 
     public void SpawnPickUpEffects(Vector3 position)
     {
-        Instantiate(pickUpVFX, position, Quaternion.identity);
+        if(pickUpVFX)
+            Instantiate(pickUpVFX, position, Quaternion.identity);
     }
 
     //Damage calculations
@@ -81,7 +82,7 @@ public class AMainSystem : MonoBehaviour
     {
         incomingDamage += playerStats.damage;
 
-        if (playerStats.moneyIsPower)
+        if (playerStats.moneyIsPower > 0)
             incomingDamage = 1 + ((float) inventory.Money / 10000);
             
         int critChance = Random.Range(0, 100);

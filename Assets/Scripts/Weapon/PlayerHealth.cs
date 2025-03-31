@@ -63,7 +63,10 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
         hpBackground = GameObject.FindGameObjectWithTag("HPBackground").GetComponent<RectTransform>();
         textHP = GameObject.FindGameObjectWithTag("textHP").GetComponent<TextMeshProUGUI>();
 
+        maxHP = playerStats.maxHealth;
+
         UpdateMaxHP();
+        StartHealth();
         UpdateHP();
         HealthRegen();
         UpdateHPRegen();
@@ -99,6 +102,11 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
         if (vignetteAlpha > vignetteThreshold)
             DamageVignette();
+
+        if(Input.GetKeyDown(KeyCode.U))
+        {
+            Damage(10);
+        }
 
     }
 
@@ -233,15 +241,28 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
         hpBackground.sizeDelta = new Vector2(maxHP, hpBackground.sizeDelta.y);
     }
 
+    public void PlayerMaxHP()
+    {
+        currentHP = maxHP;
+    }
+
     public GameObject GetTargetPoint()
     {
         return playerTargetPoint;
     }
 
+
     public void StartHealth()
     {
-        currentHP = maxHP;
-        barHP.maxValue = maxHP;
+        PlayerMaxHP();
+        UpdateHPRegen();
+        UpdateHP();
+        UpdateMaxHP();
+
+    }
+
+    public void ItemUpdateHealth()
+    {
         UpdateHPRegen();
         UpdateHP();
         UpdateMaxHP();

@@ -13,8 +13,8 @@ public class PlayerStats : MonoBehaviour
     public float hpRegen = 1;
     public int hpOnKill = 5;
     public int hpOnHit = 1;
+    public int helpingHand = 0;
 
-    public bool helpingHand = false;
 
     [Header("Damage")]
     public float damage = 0;
@@ -32,17 +32,18 @@ public class PlayerStats : MonoBehaviour
     public float reloadSpeed = 0;
 
     [Header("Return Ammo On Kill")]
-    public bool hasReturnAmmoOnkill = false;
-    public bool returnAmmoOnkill = false;
+    public int returnAmmoOnkill = 0;
 
     [Header("Alternate reload is 50% faster")]
-    public bool hasAlternateFastReload = false;
+    public int hasAlternateFastReload = 0;
     public bool alternateFastReload = false;
 
     [Header("Others")]
     public bool canExplode = false;
     public int ammoRefills = 0;
-    public bool moneyIsPower = false;
+    public int moneyIsPower = 0;
+
+    public bool increasedMoneyDrop = false;
 
     [Header("WeaponSocket")]
     public int fireBallChance = 0;
@@ -62,7 +63,6 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         StartLocomotion();
-        StartPlayerHP();
     }
 
     //
@@ -76,17 +76,17 @@ public class PlayerStats : MonoBehaviour
 
     public void StartPlayerHP()
     {
-        playerHealth.maxHP = maxHealth;
         playerHealth.damageReductionPercent = damageReductionPercent;
         playerHealth.damageIgnoreChance = damageIgnoreChance;
-        playerHealth.StartHealth();
+        playerHealth.ItemUpdateHealth();
     }
 
     public void AddStatsToPickedUpWeapon(GameObject weaponObj)
     {
-        BaseWeapon weapon = weaponObj.transform.GetChild(0).GetComponent<BaseWeapon>();
-        weapon.maxMagazine += maxMagazineSize;
-        weapon.currentMagazine = weapon.maxMagazine;
+        StartCoroutine(WaitforEndFrame(weaponObj));
+        //BaseWeapon weapon = weaponObj.transform.GetChild(0).GetComponent<BaseWeapon>();
+        //weapon.maxMagazine = weapon.baseMaxMagazine + maxMagazineSize;
+        //weapon.currentMagazine = weapon.maxMagazine;
     }
 
     public void AddAllWeaponStats()
@@ -96,7 +96,7 @@ public class PlayerStats : MonoBehaviour
         for (int i = 0; i < inventory.heldWeapons.Count; i++)
         {
             BaseWeapon weapon = inventory.heldWeapons[i].transform.GetChild(0).GetComponent<BaseWeapon>();
-            weapon.maxMagazine += maxMagazineSize;
+            weapon.maxMagazine = weapon.baseMaxMagazine + maxMagazineSize;
             findAndEquipWeapons.SetWeapon(weaponSocket.equippedWeapon.transform.parent.gameObject);
         }
     }
@@ -111,7 +111,14 @@ public class PlayerStats : MonoBehaviour
         findAndEquipWeapons = GetComponent<FindAndEquipWeapons>();
     }
 
+    IEnumerator WaitforEndFrame(GameObject weaponObj)
+    {
+        yield return new WaitForEndOfFrame();
+        BaseWeapon weapon = weaponObj.transform.GetChild(0).GetComponent<BaseWeapon>();
+        weapon.maxMagazine = weapon.baseMaxMagazine + maxMagazineSize;
+        weapon.currentMagazine = weapon.maxMagazine;
 
+    }
 
 }
 

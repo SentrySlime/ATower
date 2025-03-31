@@ -19,6 +19,7 @@ public class EnemyManager : MonoBehaviour
     PlayerStats playerStats;
     PlayerHealth playerHealth;
     WeaponSocket weaponSocket;
+    AMainSystem mainSystem;
 
     void Start()
     {
@@ -28,6 +29,7 @@ public class EnemyManager : MonoBehaviour
         playerStats = player.GetComponent<PlayerStats>();
         playerHealth = player.GetComponent<PlayerHealth>();
         weaponSocket = player.GetComponent<WeaponSocket>();
+        mainSystem = GetComponent<AMainSystem>();
     }
 
     
@@ -106,12 +108,17 @@ public class EnemyManager : MonoBehaviour
         if(playerStats.hpOnKill > 0)
             playerHealth.Heal(playerStats.hpOnKill);
 
-        if (playerStats.helpingHand)
+        if (playerStats.helpingHand > 0)
         {
             int randomNumb = Random.Range(1, 10);
             print(randomNumb);
-            if(randomNumb <= 3)
-                Instantiate(helpingHandPrefab, deathPosition, Quaternion.identity).GetComponent<HelpingHandPickUp>().playerHealth = playerHealth;
+            if (randomNumb <= 3)
+            {
+                HelpingHandPickUp tempHelpingHand = Instantiate(helpingHandPrefab, deathPosition, Quaternion.identity).GetComponent<HelpingHandPickUp>();
+                tempHelpingHand.playerHealth = playerHealth;
+                tempHelpingHand.mainSystem = mainSystem;
+            }
+            
         }
 
         StartCoroutine(WaitBefore());
@@ -120,8 +127,8 @@ public class EnemyManager : MonoBehaviour
     IEnumerator WaitBefore()
     {
         yield return new WaitForEndOfFrame();
-        if (playerStats.returnAmmoOnkill)
-            weaponSocket.equippedWeapon.GiveAmmoToMagazine(1);
+
+        weaponSocket.equippedWeapon.GiveAmmoToMagazine(playerStats.returnAmmoOnkill);
     }
 
 }

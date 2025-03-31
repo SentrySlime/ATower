@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ItemManager : MonoBehaviour
 {
@@ -8,14 +9,14 @@ public class ItemManager : MonoBehaviour
     public GameObject itemTemplate;
     //public List<ItemBase> items = new List<ItemBase>();
 
-    public ItemBase[] items;
+    public List<ItemBase> items;
 
     GameObject player;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        items = Resources.LoadAll<ItemBase>("Prefabs/Items/Item_Prefabs");
+        items = Resources.LoadAll<ItemBase>("Prefabs/Items/Item_Prefabs").ToList();
     }
 
     
@@ -31,14 +32,16 @@ public class ItemManager : MonoBehaviour
     public void DropItem(Vector3 spawnPos)
     {
         ItemPickUp tempItem = Instantiate(itemTemplate, spawnPos, Quaternion.identity).GetComponent<ItemPickUp>();
-        tempItem.itemPrefab = GetRandomItem();
-
+        ItemBase item = GetRandomItem();
+        items.Remove(item);
+        tempItem.itemPrefab = item;
+        
     }
 
 
     private ItemBase GetRandomItem()
     {
-        int itemIndex = Random.Range(0, items.Length);
+        int itemIndex = Random.Range(0, items.Count);
         return items[itemIndex];
     }
 }

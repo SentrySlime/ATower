@@ -291,7 +291,7 @@ public class WeaponSocket : MonoBehaviour
 
             float totalReloadSpeed = 1 + playerStats.reloadSpeed;
 
-            if (playerStats.hasAlternateFastReload && playerStats.alternateFastReload)
+            if (playerStats.hasAlternateFastReload > 0 && playerStats.alternateFastReload)
                 totalReloadSpeed += 0.5f;
 
             reloadIcon.fillAmount += totalReloadSpeed * (1.0f / equippedWeapon.reloadTime * Time.deltaTime);
@@ -299,7 +299,7 @@ public class WeaponSocket : MonoBehaviour
 
         if (reloadIcon.fillAmount >= 1)
         {
-            if (playerStats.hasAlternateFastReload && playerStats.alternateFastReload)
+            if (playerStats.hasAlternateFastReload > 0)
                 playerStats.alternateFastReload = !playerStats.alternateFastReload;
 
             equippedWeapon.ReloadWeapon();

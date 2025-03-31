@@ -29,9 +29,8 @@ public class ItemBase : MonoBehaviour
     [Tooltip("1 point is equal to 1 extra health gained when hitting killing an enemy")]
     [Range(-90f, 90f)] public int hpOnKill;
 
-    [Tooltip("Helping hand spawns hands which heal you")]
-    public bool hasHelpingHand = false;
-    public bool helpingHand = false;
+    [Tooltip("If it's at 1 it gives the player helping hand")]
+    [Range(0f, 1f)] public int helpingHand = 0;
 
     #endregion
 
@@ -63,19 +62,16 @@ public class ItemBase : MonoBehaviour
     [Range(-100, 100f)] public int damage = 0;
     
     //Critical Hit ---- 
-    [Header("Crit")]
+    [Tooltip("1 point is equal to 1% percent")]
     [Range(-25, 25f)] public int critChance = 0;
     
     //Explosion ---- 
-    [Header("Explosisions")]
     [Tooltip("If this is true, all your triggered kills explode enemies")]
     public bool includeExplosion = false;
     public bool canExplodeEnemies;
 
-    [Header("MoneyIsPower")]
     [Tooltip("If this is true, you get 1% damage for every 100 money")]
-    public bool includeMoneyIsPower = false;
-    public bool moneyIsPower;
+    [Range(0, 1f)] public int moneyIsPower = 0;
 
     #endregion
 
@@ -95,12 +91,29 @@ public class ItemBase : MonoBehaviour
     [Tooltip("0.1 is equal to 10% increase in reload speed")]
     [Range(-50, 50f)] public float reloadSpeed = 0;
 
+    [Tooltip("1 is equal to returning one ammo on kill")]
+    [Range(-5, 5f)] public int returnAmmoOnkill = 0;
+
+    [Tooltip("Every other reload is 50% faster")]
+    [Range(0, 1f)] public int hasAlternateFastReload = 0;
+
     #endregion
 
     #region WeaponSocket
     [Header("WeaponSocket ---------------------------------------------------")]
     [Tooltip("1 point is equal to 1% chance to fire a rocket")]
     [Range(-100, 100f)] public int fireBallChance = 0;
+
+    #endregion
+    
+    [Header("Misc ---------------------------------------------------")]
+    [Tooltip("Makes enemies drop increased amount of moeny")]
+    public bool hasIncreasedMoneyDrops = false;
+    public bool increasedMoneyDrops = false;
+
+    #region Misc
+
+
 
     #endregion
 
@@ -120,13 +133,10 @@ public class ItemBase : MonoBehaviour
         playerStats.hpRegen += hpRegen;
         playerStats.hpOnHit += hpOnHit;
         playerStats.hpOnKill += hpOnKill;
+        playerStats.helpingHand += helpingHand;
         playerStats.damageIgnoreChance += damageIgnoreChance;
         playerStats.damageReductionPercent += damageReductionPercent;
 
-        if (hasHelpingHand)
-        {
-            playerStats.helpingHand = helpingHand;
-        }
 
         //Movement ---
         playerStats.moveSpeed += moveSpeed;
@@ -134,14 +144,9 @@ public class ItemBase : MonoBehaviour
         
         //Damage ----
         if (includeExplosion)
-        {
             playerStats.canExplode = canExplodeEnemies;
-        }
 
-        if(includeMoneyIsPower)
-        {
-            playerStats.moneyIsPower = moneyIsPower;
-        }
+        playerStats.moneyIsPower += moneyIsPower;
 
         playerStats.damage += damage;
         playerStats.criticalChance += critChance;
@@ -151,10 +156,16 @@ public class ItemBase : MonoBehaviour
         playerStats.ammoRefills += ammoRefills;
         playerStats.reloadSpeed += reloadSpeed;
         playerStats.reloadAmount += reloadAmount;
-        playerStats.maxMagazineSize = maxMagazineSize;
-        
+        playerStats.maxMagazineSize += maxMagazineSize;
+        playerStats.returnAmmoOnkill += returnAmmoOnkill;
+        playerStats.hasAlternateFastReload += hasAlternateFastReload;
+
+
+
         //WeaponSocket
         playerStats.fireBallChance += fireBallChance;
+
+        //Misc
 
         //Restart each one
         playerStats.StartPlayerHP();
@@ -169,13 +180,9 @@ public class ItemBase : MonoBehaviour
         playerStats.hpRegen -= hpRegen;
         playerStats.hpOnHit -= hpOnHit;
         playerStats.hpOnKill -= hpOnKill;
+        playerStats.helpingHand -= helpingHand;
         playerStats.damageIgnoreChance -= damageIgnoreChance;
         playerStats.damageReductionPercent -= damageReductionPercent;
-
-        if (hasHelpingHand)
-        {
-            playerStats.helpingHand = helpingHand;
-        }
 
         //movement ---
         playerStats.moveSpeed -= moveSpeed;
@@ -183,14 +190,9 @@ public class ItemBase : MonoBehaviour
 
         //Damage ----
         if (includeExplosion)
-        {
             playerStats.canExplode = canExplodeEnemies;
-        }
 
-        if (includeMoneyIsPower)
-        {
-            playerStats.moneyIsPower = moneyIsPower;
-        }
+        playerStats.moneyIsPower -= moneyIsPower;
 
         playerStats.damage -= damage;
         playerStats.criticalChance -= critChance;
@@ -201,6 +203,9 @@ public class ItemBase : MonoBehaviour
         playerStats.reloadSpeed -= reloadSpeed;
         playerStats.reloadAmount -= reloadAmount;
         playerStats.maxMagazineSize -= maxMagazineSize;
+        playerStats.returnAmmoOnkill -= returnAmmoOnkill;
+        playerStats.hasAlternateFastReload -= hasAlternateFastReload;
+
 
         //WeaponSocket ---
         playerStats.fireBallChance -= fireBallChance;

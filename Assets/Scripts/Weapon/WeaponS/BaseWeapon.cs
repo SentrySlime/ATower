@@ -36,20 +36,28 @@ public class BaseWeapon : MonoBehaviour
     }
 
     [Header("Ammunition")]
+    [HideInInspector] public int baseMaxAmmo = 0;
     public int maxAmmo = 0;
     public int currentAmmo = 0;
+    [HideInInspector] public int baseAmmoPerShot = 0;
     public int ammoPerShot = 1;
+    [HideInInspector] public bool baseInfinteAmmo = false;
     public bool infinteAmmo = false;
 
     [Header("Magazine")]
     public ReloadType reloadType;
+    public int baseMaxMagazine = 0;
     public int maxMagazine = 0;
     public int currentMagazine = 0;
+    [HideInInspector] public float baseReloadTime = 0;
     public float reloadTime = 1;
+    [HideInInspector] public int baseReloadAmount = 0;
     public int reloadAmount = 1;
 
     [Header("DPS")]
+    [HideInInspector] public float baseDamage = 0;
     public float damage = 1;
+    [HideInInspector] public float baseFireRate = 0;
     public float fireRate = 1;
 
     [Header("Burst")]
@@ -95,14 +103,17 @@ public class BaseWeapon : MonoBehaviour
 
     public GameObject[] renderObjects;
 
-    private void Awake()
+    protected virtual void Awake()
     {
-
+        
     }
+
+    #region All
 
     public virtual void Start()
     {
         //This is a virtual "override start function" so the children inherit and use this (So don't remove)
+        SetBaseStatsOnSpawn();
     }
 
     void Update()
@@ -122,7 +133,6 @@ public class BaseWeapon : MonoBehaviour
             }
         }
     }
-
 
     public virtual void ReloadWeapon()
     {
@@ -294,6 +304,7 @@ public class BaseWeapon : MonoBehaviour
     //Set the HUD info for the weapons
     public void SetAmmoInfo()
     {
+
         currentMagazineText.text = currentMagazine.ToString();
 
         if (infinteAmmo)
@@ -364,6 +375,18 @@ public class BaseWeapon : MonoBehaviour
 
         if (GetComponentInChildren<Animation>() != null)
             GetComponentInChildren<Animation>().Play();
+
+    }
+
+    #endregion
+
+    private void SetBaseStatsOnSpawn()
+    {
+        baseMaxAmmo = maxAmmo;
+        baseAmmoPerShot = ammoPerShot;
+        baseInfinteAmmo = infinteAmmo;
+        baseMaxMagazine = maxMagazine;
+
 
     }
 }

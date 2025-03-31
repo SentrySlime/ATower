@@ -39,6 +39,7 @@ public class ShootProjectile : BaseWeapon
 
     private void Awake()
     {
+
         layerMask = LayerMask.GetMask("Player", "Projectile");
 
         recoil = GetComponentInParent<Recoil>();

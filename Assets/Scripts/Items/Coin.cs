@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
+    PlayerStats playerStats;
+
     public AudioSource audioSource;
     public AudioClip clip;
     public Inventory inventory;
@@ -11,6 +13,11 @@ public class Coin : MonoBehaviour
     bool canTrigger = true;
     float timer = 0.05f;
     float counter = 0.05f;
+
+    private void Awake()
+    {
+        playerStats = GetComponent<PlayerStats>();
+    }
 
     private void Update()
     {
@@ -37,6 +44,9 @@ public class Coin : MonoBehaviour
 
     private void GiveMoney()
     {
-        inventory.IncreaseMoney(5);
+        if(playerStats.increasedMoneyDrop)
+            inventory.IncreaseMoney(8);
+        else
+            inventory.IncreaseMoney(5);
     }
 }
