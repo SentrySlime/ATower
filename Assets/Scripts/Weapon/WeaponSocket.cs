@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class WeaponSocket : MonoBehaviour
 {
-    public AmmoScript ammoScript;
 
     public float baseCameraFOV;
     public float zoomedCameraFOV;
@@ -20,6 +19,7 @@ public class WeaponSocket : MonoBehaviour
     public AudioSource noAmmo;
     ShootSystem shootSystem;
     PlayerStats playerStats;
+    AmmoScript ammoScript;
 
     [Header("Visible Cursor")]
     public bool hideCursor;
@@ -70,8 +70,8 @@ public class WeaponSocket : MonoBehaviour
 
     private void Awake()
     {
-        screenShake = GetComponentInChildren<ScreenShake>();
         GameObject tempObj = GameObject.FindGameObjectWithTag("ShootPoint");
+        screenShake = GetComponentInChildren<ScreenShake>();
         cameraMovement = GetComponentInChildren<CameraMovement>();
         reloadIcon = GameObject.FindGameObjectWithTag("ReloadImage").GetComponent<Image>();
         //weaponIcon = GameObject.FindGameObjectWithTag("WeaponIcon").GetComponent<Image>();
@@ -81,6 +81,7 @@ public class WeaponSocket : MonoBehaviour
         reloadGroup = GameObject.FindGameObjectWithTag("ReloadGroup").GetComponent<CanvasGroup>();
         reloadFinish = reloadGroup.transform.Find("ReloadFinish").GetComponent<Image>();
         shootSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShootSystem>();
+        ammoScript = GameObject.Find("AmmoBar").GetComponent<AmmoScript>();
         playerStats = GetComponent<PlayerStats>();
         reloadGroup.alpha = 0;
     }
@@ -282,8 +283,9 @@ public class WeaponSocket : MonoBehaviour
     {
         ammoScript.maxMagazine = equippedWeapon.maxMagazine;
         ammoScript.currentMagazine = equippedWeapon.currentMagazine - 1;
+        //ammoScript.ammoSprite = equippedWeapon.sprite;
+        ammoScript.SetAmmoType(equippedWeapon.type);
 
-        ammoScript.SetMagazineSize();
         ammoScript.UpdateAmmoInfo();
     }
 

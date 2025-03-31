@@ -4967,15 +4967,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aName: Revolver
   aDescription: Hits like a truck
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: df6580d52ef8a2a4d8da44b2533dac71, type: 3}
+  cellSize_x: 37.5
+  cellSize_y: 18.75
+  spacing: -7
   shootPoint: {fileID: 0}
   barrel: {fileID: 1856004530348900990}
   objectToRecoil: {fileID: 6593228928422068522}
   weaponIcon: {fileID: 21300000, guid: 0ae2f5ff6aef84a43b2b21009b3bc32b, type: 3}
   iconPrefab: {fileID: 0}
+  type: 2
   baseMaxAmmo: 0
-  maxAmmo: 10
-  currentAmmo: 10
+  maxAmmo: 600
+  currentAmmo: 600
   baseAmmoPerShot: 0
   ammoPerShot: 1
   baseInfinteAmmo: 0

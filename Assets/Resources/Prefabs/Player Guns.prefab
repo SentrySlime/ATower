@@ -1769,6 +1769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10777ec976e78034e8236aa130832803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ammoScript: {fileID: 0}
   baseCameraFOV: 90
   zoomedCameraFOV: 0
   baseSensitivity: 0
@@ -1837,6 +1838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Money: 0
+  moneyText: {fileID: 0}
   weaponIndex: 0
   previousIndex: 0
   heldWeapons: []
@@ -2086,7 +2088,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2ad01dbf21409af4f82ec1a5f2c0a7db, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 0.07
   m_Pitch: 1
   Loop: 0
   Mute: 0

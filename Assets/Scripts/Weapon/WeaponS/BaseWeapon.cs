@@ -17,7 +17,6 @@ public class BaseWeapon : MonoBehaviour
     [Header("Item Info")]
     public string aName;
     public string aDescription;
-    public Sprite sprite;
     public GameObject shootPoint;
     public GameObject barrel;
     public GameObject objectToRecoil;
@@ -32,8 +31,10 @@ public class BaseWeapon : MonoBehaviour
         LMG,
         Shotgun,
         Sniper,
-        Throwing,
+        Arrow,
     }
+
+    public WeaponType type;
 
     [Header("Ammunition")]
     [HideInInspector] public int baseMaxAmmo = 0;
@@ -167,7 +168,6 @@ public class BaseWeapon : MonoBehaviour
                     currentAmmo = 0;
                     if (!recoil.holstered)
                     {
-
                         weaponSocket.AmmoVisualRefillMagazineAmount(tempCurrentAmmo);
                     }
                 }
@@ -218,8 +218,12 @@ public class BaseWeapon : MonoBehaviour
                     {
                         currentAmmo--;
                         currentMagazine++;
+
+                        //if (!recoil.holstered)
+                        //    weaponSocket.AmmoVisualRefillMagazineAmount(reloadNumber);
+
                         if (!recoil.holstered)
-                            weaponSocket.AmmoVisualOneByOne(reloadAmount + playerStats.reloadAmount);
+                            weaponSocket.AmmoVisualOneByOne();
                     }
                 }
 

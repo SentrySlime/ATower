@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,39 @@ using UnityEngine.UI;
 
 public class AmmoScript : MonoBehaviour
 {
+    [Header("Pistol")]
+    public Sprite pistolSprite;
+    Vector2 pistolCellSize = new Vector2(50, 25);
+    Vector2 pistolSpacing = new Vector2(0, -10);
+
+    [Header("Rifle")]
+    public Sprite rifleSprite;
+    Vector2 rifleCellSize = new Vector2(37.5f, 18.75f);
+    Vector2 rifleSpacing = new Vector2(0, -7);
+
+    [Header("Shotgun")]
+    public Sprite shotgunSprite;
+    Vector2 shotgunCellSize = new Vector2(70f, 35f);
+    Vector2 shotgunSpacing = new Vector2(0, -13.5f);
+
+    [Header("Arrow")]
+    public Sprite arrowSprite;
+    Vector2 arrowCellSize = new Vector2(70f, 35f);
+    Vector2 arrowSpacing = new Vector2(0, -10);
+
+    [Header("Reference")]
     public Sprite ammoSprite;
-    public int maxMagazine;
-    public int currentMagazine;
+    Vector2 cellSize;
+    float cellSize_x = 100;
+    float cellSize_y = 100;
+    float spacing = 0;
+    
+    public GridLayoutGroup gridLayoutGroup;
+    [HideInInspector] public int maxMagazine;
+    [HideInInspector] public int currentMagazine;
     public List<GameObject> ammoList;
+
+
 
     public int currentAmmo;
 
@@ -31,7 +61,9 @@ public class AmmoScript : MonoBehaviour
         }
     }
 
-    public void UpdateAmmoInfo()
+
+    //Triggers to set based on current ammo in magazine
+    public void SetcurrentMagAmount()
     {
         
         for (int i = 0; i < ammoList.Count; i++)
@@ -55,13 +87,15 @@ public class AmmoScript : MonoBehaviour
         
         
     }
-
+    
+    //Triggers to fill with just a single round
     public void FillAmmo()
     {
         currentMagazine++; 
         ammoList[currentMagazine].GetComponent<Image>().enabled = true;
     }
 
+    //Triggers to fill with a certain amount, like shot by shot reload
     public void FillAmmo(int ammoAmount)
     {
         for(int i = 0;i < ammoAmount;i++)
@@ -71,12 +105,14 @@ public class AmmoScript : MonoBehaviour
         }
     }
 
+    //Fires when you shoot ammo
     public void UseAmmo()
     {
         ammoList[currentMagazine].GetComponent<Image>().enabled = false;
         currentMagazine--;
     }
 
+    //Trigggers to refill the entier magazine
     public void RefillMagazine()
     {
         for (int i = 0; i < ammoList.Count; i++)
@@ -90,6 +126,7 @@ public class AmmoScript : MonoBehaviour
         }
     }
 
+    //Trigggers to the magazine based on amount
     public void RefillMagazineAmount(int amount)
     {
         for (int i = 0; i < currentMagazine + amount; i++)
@@ -105,6 +142,7 @@ public class AmmoScript : MonoBehaviour
         currentMagazine += amount;
     }
 
+    //Set the max size of the magazine
     public void SetMagazineSize()
     {
         for (int i = 0; i < ammoList.Count; i++)
@@ -123,5 +161,58 @@ public class AmmoScript : MonoBehaviour
                 ammoList[i].SetActive(true);
             }
         }
+    }
+
+    //Set the max size of the magazine
+    public void UpdateAmmoInfo()
+    {
+        
+
+        for (int i = 0; i < ammoList.Count; i++)
+        {
+            if (i == ammoList.Count - 1)
+            {
+                return;
+            }
+
+            
+            if (i >= maxMagazine)
+            {
+                ammoList[i].SetActive(false);
+            }
+            else
+            {
+                if (i <= currentMagazine)
+                {
+                    ammoList[i].GetComponent<Image>().enabled = true;
+                }
+                else
+                {
+                    ammoList[i].GetComponent<Image>().enabled = false;
+                }
+
+                ammoList[i].SetActive(true);
+                ammoList[i].GetComponent<Image>().sprite = ammoSprite;
+            }
+        }
+    }
+
+    public void SetAmmoType(BaseWeapon.WeaponType weaponType)
+    {
+        if (weaponType == BaseWeapon.WeaponType.handgun)
+            SetCellsAndSpacing(pistolSprite, pistolCellSize, pistolSpacing);
+        if (weaponType == BaseWeapon.WeaponType.AssaultRifle)
+            SetCellsAndSpacing(rifleSprite, rifleCellSize, rifleSpacing);
+        if (weaponType == BaseWeapon.WeaponType.Shotgun)
+            SetCellsAndSpacing(shotgunSprite, shotgunCellSize, shotgunSpacing);
+        if (weaponType == BaseWeapon.WeaponType.Arrow)
+            SetCellsAndSpacing(arrowSprite, arrowCellSize, arrowSpacing);
+    }
+
+    private void SetCellsAndSpacing(Sprite sprite, Vector2 cellsize, Vector2 spacing)
+    {
+        ammoSprite = sprite;
+        gridLayoutGroup.cellSize = cellsize;
+        gridLayoutGroup.spacing = spacing;
     }
 }
