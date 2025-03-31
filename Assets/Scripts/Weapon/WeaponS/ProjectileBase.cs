@@ -32,7 +32,7 @@ public class ProjectileBase : MonoBehaviour
 
     //---------- Explosive ----------\\
     [Header("Explosive Stats")]
-    [Tooltip("Is this a projectile which uses explosive logic")]
+    [Tooltip("If this is explosive, it only deals explosive damage")]
     public bool isExplosive = false;
 
     [Tooltip("How large the explosive radius is")]

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,9 @@ public class Inventory : MonoBehaviour
 {
     [Header("Money")]
     public int Money;
+    public TextMeshProUGUI moneyText;
 
+    [Header("Weapon")]
     public int weaponIndex = 0;
     public int previousIndex = 0;
 
@@ -32,7 +35,9 @@ public class Inventory : MonoBehaviour
         pauseMenu = GameObject.FindGameObjectWithTag("Canvas").GetComponent<PauseMenu>();
         weaponSocket = GetComponent<WeaponSocket>();
         reloadIcon = GameObject.FindGameObjectWithTag("ReloadImage").GetComponent<Image>();
-        
+        moneyText = GameObject.FindGameObjectWithTag("MoneyText").GetComponent<TextMeshProUGUI>();
+        UpdateMoneyText();
+
     }
 
     void Update()
@@ -112,7 +117,12 @@ public class Inventory : MonoBehaviour
     public void IncreaseMoney(int incomingAmount)
     {
         Money += incomingAmount;
-        //Money++;
+        UpdateMoneyText();
+    }
+
+    private void UpdateMoneyText()
+    {
+        moneyText.text = Money.ToString();
     }
 
     public void SwitchWeapon()
@@ -131,6 +141,8 @@ public class Inventory : MonoBehaviour
         findAndEquipWeapons.SetWeapon(heldWeapons[weaponIndex]);
         previousIndex = weaponIndex;
     }
+
+
 
     //Do something about longer reloads here
 

@@ -49,17 +49,26 @@ MonoBehaviour:
   itemMesh: {fileID: 9157310088157048165, guid: b6e7947926b761e4b8785b563df760d4, type: 3}
   itemMaterial: {fileID: 2100000, guid: 17dca9c73a786374d9239f56721b286b, type: 2}
   maxHp: 0
-  hpRegen: 4
+  hpRegen: 2
+  hpOnHit: 0
+  hpOnKill: 0
+  helpingHand: 0
   damageReductionPercent: 0
   damageIgnoreChance: 0
   moveSpeed: 0
   extraJumps: 0
-  includeExplosion: 0
-  canExplodeEnemies: 0
   damage: 0
   critChance: 0
-  rocketChance: 0
+  includeExplosion: 0
+  canExplodeEnemies: 0
+  moneyIsPower: 0
   ammoRefills: 0
   reloadAmount: 0
   maxMagazineSize: 0
+  reloadSpeed: 0
+  returnAmmoOnkill: 0
+  hasAlternateFastReload: 0
+  fireBallChance: 0
+  hasIncreasedMoneyDrops: 0
+  increasedMoneyDrops: 0
   playerStats: {fileID: 0}

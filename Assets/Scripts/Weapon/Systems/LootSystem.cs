@@ -16,15 +16,7 @@ public class LootSystem : MonoBehaviour
 
     void Update()
     {
-        //numberOfRoles++;
-        //float number = Random.Range(0f, 1f);
 
-        //print(number + " " + numberOfRoles);
-
-        //if (number <= 0.001)
-        //{
-        //    Debug.LogError("Found the number " + number);
-        //}
     }
 
 

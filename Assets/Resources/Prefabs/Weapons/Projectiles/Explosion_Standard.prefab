@@ -7195,7 +7195,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8ba6f4c41f31cba41b2523a55a423df3, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.05
   m_Pitch: 1
   Loop: 0
@@ -7295,17 +7295,17 @@ MonoBehaviour:
   layermask:
     serializedVersion: 2
     m_Bits: 4294967295
-  sfxToSpawn: {fileID: 0}
+  audioSource: {fileID: 4754212808808740488}
   eDamage: 1
   eRadius: 1
   eEnemyOwned: 0
   sphere: {fileID: 1623059494373576220}
   SphereScaleSpeed: 6
+  mainSystem: {fileID: 0}
   pointLight: {fileID: 956362275655556706}
   mesh: {fileID: 1623059494373576220}
   myMaterial: {fileID: 0}
   alpha: 1
-  alphaFadeRate: 2
 --- !u!54 &9222552570574736658
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7338,8 +7338,8 @@ MonoBehaviour:
   soundEffects:
   - {fileID: 8300000, guid: 8ba6f4c41f31cba41b2523a55a423df3, type: 3}
   shouldDestroy: 0
-  MinPitch: 0.9
-  MaxPitch: 1.1
+  MinPitch: 0.8
+  MaxPitch: 1.2
 --- !u!1 &8238250918583508225
 GameObject:
   m_ObjectHideFlags: 0

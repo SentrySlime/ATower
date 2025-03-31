@@ -131,18 +131,10 @@ public class ShootProjectile : BaseWeapon
             #endregion
 
             shootPoint.transform.Rotate(((minXoffset + maxXoffset)), ((minYOffset + maxYOffset)), 0);
-            //shootPoint.transform.Rotate(((minXoffset + maxXoffset), ((minYOffset + maxYOffset)), 0);
-
-
-
             Quaternion rotation = Quaternion.LookRotation(shootPoint.transform.forward, Vector3.up);
-
-
 
             Instantiate(projectile, shootPoint.transform.position, rotation);
             shootPoint.transform.localRotation = Quaternion.Euler(0, 0, 0);
-
-            //shotProjectile.AddForce(transform.forward * shotSpeed, ForceMode.Impulse);
         }
         else
         {

@@ -21,11 +21,9 @@ public class HelpingHandPickUp : MonoBehaviour
             if (playerHealth.HasFullHP())
                 return;
 
-            
             mainSystem.SpawnPickUpEffects(transform.position);
             
             triggered = true;
-            print("Triggered");
             playerHealth.Heal(25);
             Destroy(gameObject);
         }

@@ -98,11 +98,8 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
                 gameObject.GetComponent<INoticePlayer>().NoticePlayer();
         }
 
-        
-
         currentHealth -= CalculateDamage(damage);
 
-        //hitMarkerLogic.EnableHitMarker();
         if (damagedPS != null)
         {
             damagedPS.emissionRate += damage;
@@ -116,13 +113,6 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     private float CalculateDamage(float damage)
     {
         float finalDamage = damage;
-
-        //int critChance = Random.Range(0, 100);
-        //if(playerStats.criticalChance > critChance)
-        //{
-        //    finalDamage *= playerStats.criticalMultiplier;
-        //}
-
         return finalDamage;
     }
 

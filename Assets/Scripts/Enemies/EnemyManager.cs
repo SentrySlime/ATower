@@ -24,7 +24,6 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-
         inventory = player.GetComponent<Inventory>();
         playerStats = player.GetComponent<PlayerStats>();
         playerHealth = player.GetComponent<PlayerHealth>();
@@ -35,13 +34,8 @@ public class EnemyManager : MonoBehaviour
     
     void Update()
     {
-        //if (Input.GetKey(KeyCode.U))
-        //    slowDown = true;
-
         if(enemyDeaths > 0)
             DeathsCountdown();
-
-
     }
 
     private void LateUpdate()
@@ -73,8 +67,6 @@ public class EnemyManager : MonoBehaviour
 
     private void SlowDown()
     {
-
-         
         Time.timeScale = 0.1f;
         if (slowCounter < slowDuration)
         {

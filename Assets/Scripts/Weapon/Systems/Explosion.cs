@@ -7,7 +7,8 @@ public class Explosion : MonoBehaviour, IExplosionInterface
 
     SphereCollider attachedCollider;
     public LayerMask layermask;
-    public GameObject sfxToSpawn;
+    //public GameObject sfxToSpawn;
+    public AudioSource audioSource;
     public int eDamage = 150;
     public float eRadius;
     public bool eEnemyOwned = false;
@@ -50,9 +51,23 @@ public class Explosion : MonoBehaviour, IExplosionInterface
 
         transform.localScale = new Vector3(eRadius, eRadius, eRadius);
 
+        if(eRadius <= 1)
+        {
+            audioSource.volume = 0.01f;
+        }
+        else if(eRadius <= 2)
+        {
+            audioSource.volume = 0.03f;
+        }
+        else if(eRadius >= 3)
+        {
+            audioSource.volume = 0.05f;
+        }
+
         //hitMarkerLogic = GameObject.FindGameObjectWithTag("HitMarker").GetComponent<HitmarkerLogicd>();
-        if (sfxToSpawn)
-            Instantiate(sfxToSpawn, transform.position, Quaternion.identity);
+        //if (sfxToSpawn)
+        //    Instantiate(sfxToSpawn, transform.position, Quaternion.identity);
+
         screenShake.Screenshake(-1, 1, 1);
         
         if(enemyOwned)

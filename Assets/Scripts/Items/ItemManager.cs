@@ -5,9 +5,7 @@ using System.Linq;
 
 public class ItemManager : MonoBehaviour
 {
-
     public GameObject itemTemplate;
-    //public List<ItemBase> items = new List<ItemBase>();
 
     public List<ItemBase> items;
 
