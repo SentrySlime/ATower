@@ -101,7 +101,7 @@ public class BaseWeapon : MonoBehaviour
 
 
     public bool interuptReload = false;
-
+    [HideInInspector] public bool finishedReload = false;
     public GameObject[] renderObjects;
 
     private void Awake()
@@ -202,8 +202,6 @@ public class BaseWeapon : MonoBehaviour
                         currentMagazine++;
                         if (!recoil.holstered)
                             weaponSocket.AmmoVisualOneByOne();
-
-
                     }
                 }
             }
@@ -219,9 +217,6 @@ public class BaseWeapon : MonoBehaviour
                         currentAmmo--;
                         currentMagazine++;
 
-                        //if (!recoil.holstered)
-                        //    weaponSocket.AmmoVisualRefillMagazineAmount(reloadNumber);
-
                         if (!recoil.holstered)
                             weaponSocket.AmmoVisualOneByOne();
                     }
@@ -229,18 +224,12 @@ public class BaseWeapon : MonoBehaviour
 
             }
 
+
             currentAmmo = Mathf.Clamp(currentAmmo, 0, 99999);
+            finishedReload = true;
             //Then we update the hud with our ammo info
             if (!recoil.holstered)
                 SetAmmoInfo();
-
-            if (recoil.holstered)
-                return;
-
-            if (currentMagazine < maxMagazine && !interuptReload)
-                StartCoroutine(weaponSocket.Reloading());
-            else if (reloadType == ReloadType.ShotByShot)
-                MantleWeapon();
 
         }
     }

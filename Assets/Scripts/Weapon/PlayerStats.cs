@@ -84,10 +84,9 @@ public class PlayerStats : MonoBehaviour
 
     public void AddStatsToPickedUpWeapon(GameObject weaponObj)
     {
-        StartCoroutine(WaitforEndFrame(weaponObj));
-        //BaseWeapon weapon = weaponObj.transform.GetChild(0).GetComponent<BaseWeapon>();
-        //weapon.maxMagazine = weapon.baseMaxMagazine + maxMagazineSize;
-        //weapon.currentMagazine = weapon.maxMagazine;
+        BaseWeapon weapon = weaponObj.transform.GetChild(0).GetComponent<BaseWeapon>();
+        weapon.maxMagazine = weapon.baseMaxMagazine + maxMagazineSize;
+        weapon.currentMagazine = weapon.maxMagazine;
     }
 
     public void AddAllWeaponStats()
@@ -110,15 +109,6 @@ public class PlayerStats : MonoBehaviour
         weaponSocket = GetComponent<WeaponSocket>();
         inventory = GetComponent<Inventory>();
         findAndEquipWeapons = GetComponent<FindAndEquipWeapons>();
-    }
-
-    IEnumerator WaitforEndFrame(GameObject weaponObj)
-    {
-        yield return new WaitForEndOfFrame();
-        BaseWeapon weapon = weaponObj.transform.GetChild(0).GetComponent<BaseWeapon>();
-        weapon.maxMagazine = weapon.baseMaxMagazine + maxMagazineSize;
-        weapon.currentMagazine = weapon.maxMagazine;
-
     }
 
 }

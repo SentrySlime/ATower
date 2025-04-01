@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static BaseWeapon;
 
 public class WeaponSocket : MonoBehaviour
 {
@@ -306,31 +307,32 @@ public class WeaponSocket : MonoBehaviour
         while (reloadIcon.fillAmount < 1 && reloadIcon.isActiveAndEnabled)
         {
             yield return new WaitForEndOfFrame();
-
             float totalReloadSpeed = 1 + playerStats.reloadSpeed;
-
             if (playerStats.hasAlternateFastReload > 0 && playerStats.alternateFastReload)
                 totalReloadSpeed += 0.5f;
 
             reloadIcon.fillAmount += totalReloadSpeed * (1.0f / equippedWeapon.reloadTime * Time.deltaTime);
+            float fillAmountFor035 = (totalReloadSpeed / equippedWeapon.reloadTime) * 0.15f;
+            float finalReloadBuffer = 1 - fillAmountFor035; 
+            if (reloadIcon.fillAmount >= finalReloadBuffer)
+            {
+                if(!equippedWeapon.finishedReload)
+                    equippedWeapon.ReloadWeapon();
+            }
         }
 
-        if (reloadIcon.fillAmount >= 1)
+        if(reloadIcon.fillAmount >= 1)
         {
             if (playerStats.hasAlternateFastReload > 0)
                 playerStats.alternateFastReload = !playerStats.alternateFastReload;
 
-            
-            equippedWeapon.ReloadWeapon();
+            equippedWeapon.finishedReload = false;
 
-
-            if(equippedWeapon.HasFullMagazine() || equippedWeapon.OutOfAmmo())
+            if (equippedWeapon.HasFullMagazine() || equippedWeapon.OutOfAmmo())
                 StartCoroutine(ReloadFinish());
             else
                 StartCoroutine(PartialReloadFinish());
-
         }
-
 
         yield return null;
     }
@@ -371,6 +373,7 @@ public class WeaponSocket : MonoBehaviour
         reloadGroup.alpha = 0;
         reloadFinish.enabled = false;
         reloadIcon.enabled = false;
+        RepeatReload();
     }
 
     public IEnumerator PartialReloadFinish()
@@ -378,6 +381,18 @@ public class WeaponSocket : MonoBehaviour
         reloadFinish.enabled = true;
         yield return new WaitForSeconds(0.1f);
         reloadFinish.enabled = false;
+        RepeatReload();
+    }
+
+    private void RepeatReload()
+    {
+        if (equippedWeapon.recoil.holstered)
+            return;
+
+        if (equippedWeapon.currentMagazine < equippedWeapon.maxMagazine && !equippedWeapon.interuptReload)
+            StartCoroutine(Reloading());
+        else if (equippedWeapon.reloadType == ReloadType.ShotByShot)
+            equippedWeapon.MantleWeapon();
     }
 
 }
