@@ -26,6 +26,7 @@ public class ItemPickUp : MonoBehaviour
     //private GameObject rotatingMesh;
     [SerializeField] Vector3 size;
     //ItemBase itemBase;
+    [SerializeField] Rigidbody rb;
 
     void Start()
     {
@@ -38,8 +39,6 @@ public class ItemPickUp : MonoBehaviour
             GetComponentInChildren<MeshFilter>().mesh = itemPrefab.itemMesh;
             GetComponentInChildren<MeshRenderer>().material = itemPrefab.itemMaterial;
         }
-           
-
     }
 
 
@@ -56,8 +55,20 @@ public class ItemPickUp : MonoBehaviour
             itemPrefab.EquipItem();
             //itemPrefab.GetComponent<ItemBase>().EquipItem();
         }
-
-
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        print("Something" + other.gameObject.layer);
+
+        if (other.gameObject.layer == 0)
+        {
+
+            print("Entered");
+            rb.useGravity = false;
+            rb.isKinematic = true;
+        }
+    }
+
 }
 

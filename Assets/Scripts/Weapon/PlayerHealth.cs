@@ -231,14 +231,14 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
     public void UpdateHP()
     {
         barHP.value = currentHP;
-        hpFill.sizeDelta = new Vector2(currentHP, hpFill.sizeDelta.y);
+        hpFill.sizeDelta = new Vector2(currentHP / 2, hpFill.sizeDelta.y);
         textHP.text = currentHP.ToString() + " / " + maxHP;
     }
 
     public void UpdateMaxHP()
     {
         barHP.maxValue = maxHP;
-        hpBackground.sizeDelta = new Vector2(maxHP, hpBackground.sizeDelta.y);
+        hpBackground.sizeDelta = new Vector2(maxHP /  2, hpBackground.sizeDelta.y);
     }
 
     public void PlayerMaxHP()

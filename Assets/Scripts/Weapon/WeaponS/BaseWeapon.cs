@@ -294,6 +294,8 @@ public class BaseWeapon : MonoBehaviour
         }
 
         currentMagazine += incomingAmmo;
+        weaponSocket.AmmoVisualOneByOne(incomingAmmo);
+        //weaponSocket.AmmoVisualRefillMagazineAmount(incomingAmmo);
 
         if (currentMagazine > maxMagazine)
             currentMagazine = maxMagazine;
