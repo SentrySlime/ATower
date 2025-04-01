@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: FireScroll
-  itemDescription: 10% chance to spawn fireball
+  itemDescription: Chance to spawn fireball when firing any weapon
   itemIcon: {fileID: 21300000, guid: a5233730664406f4989b16cb805b39d4, type: 3}
   itemMesh: {fileID: 5829669766972427010, guid: f13627e04fb73354e863e06b1cf3cd19, type: 3}
   itemMaterial: {fileID: 2100000, guid: 25b2ee572e49c894b83bd270a4295427, type: 2}
@@ -52,7 +52,6 @@ MonoBehaviour:
   hpRegen: 0
   hpOnHit: 0
   hpOnKill: 0
-  hasHelpingHand: 0
   helpingHand: 0
   damageReductionPercent: 0
   damageIgnoreChance: 0
@@ -62,13 +61,13 @@ MonoBehaviour:
   critChance: 0
   includeExplosion: 0
   canExplodeEnemies: 0
-  includeMoneyIsPower: 0
   moneyIsPower: 0
   ammoRefills: 0
   reloadAmount: 0
   maxMagazineSize: 0
   reloadSpeed: 0
   returnAmmoOnkill: 0
+  hasAlternateFastReload: 0
   fireBallChance: 10
   hasIncreasedMoneyDrops: 0
   increasedMoneyDrops: 0
