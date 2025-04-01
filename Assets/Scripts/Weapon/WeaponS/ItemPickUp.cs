@@ -53,7 +53,6 @@ public class ItemPickUp : MonoBehaviour
         {
             currentItem = Instantiate(itemPrefab.gameObject);
             itemPrefab.EquipItem();
-            //itemPrefab.GetComponent<ItemBase>().EquipItem();
         }
     }
 

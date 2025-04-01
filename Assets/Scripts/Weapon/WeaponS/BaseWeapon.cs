@@ -288,17 +288,44 @@ public class BaseWeapon : MonoBehaviour
 
     public void GiveAmmoToMagazine(int incomingAmmo)
     {
-        if(HasFullMagazine())
+        if(HasFullMagazine() || OutOfAmmo())
         {
             return;
         }
 
-        currentMagazine += incomingAmmo;
-        weaponSocket.AmmoVisualOneByOne(incomingAmmo);
+        //Check how much ammo we have left
+        int tempCurrentAmmo = currentAmmo;
+        currentAmmo -= maxMagazine - currentMagazine;
+
+        int remainingAmmo = 0;
+
+        if (currentAmmo < 0)
+        {
+            //Use only the ammo we have to reload
+            remainingAmmo = 0 - currentAmmo;
+            currentMagazine = maxMagazine - remainingAmmo;
+            currentAmmo = 0;
+            if (!recoil.holstered)
+            {
+                weaponSocket.AmmoVisualRefillMagazineAmount(tempCurrentAmmo);
+            }
+        }
+        else
+        {
+            currentMagazine = maxMagazine; //If we had more or as much ammo as the magazine can fit, we don't need to do the math
+            if (!recoil.holstered)
+                weaponSocket.AmmoVisualRefillMagazine();
+        }
+
+
+
+        //currentAmmo -= incomingAmmo;
+        //currentMagazine += incomingAmmo;
+        //weaponSocket.AmmoVisualOneByOne(incomingAmmo);
         //weaponSocket.AmmoVisualRefillMagazineAmount(incomingAmmo);
 
-        if (currentMagazine > maxMagazine)
-            currentMagazine = maxMagazine;
+        //if (currentMagazine > maxMagazine)
+        //    currentMagazine = maxMagazine;
 
         SetAmmoInfo();
     }

@@ -10,6 +10,7 @@ public class PauseMenu : MonoBehaviour
     GameObject player;
     GameObject shootPoint;
     public GameObject pauseMenu;
+    public GameObject inventoryMenu;
     public bool paused = false;
     public CameraMovement cmMovement;
     //bool panelOn;
@@ -50,9 +51,12 @@ public class PauseMenu : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if (inventoryMenu.activeInHierarchy)
+                return;
+
             if (pauseMenu.activeInHierarchy)
             {
-                ResumeGame();
+                ResumeGame(false);
             }
             else
             {
@@ -63,6 +67,27 @@ public class PauseMenu : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
 
                 pauseMenu.SetActive(true);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (pauseMenu.activeInHierarchy)
+                return;
+
+            if (inventoryMenu.activeInHierarchy)
+            {
+                ResumeGame(true);
+            }
+            else
+            {
+                paused = true;
+                cmMovement.paused = true;
+                Time.timeScale = 0;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+
+                inventoryMenu.SetActive(true);
             }
         }
 
@@ -78,6 +103,20 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    public void ResumeGame(bool inventory)
+    {
+        paused = false;
+        cmMovement.paused = false;
+        Time.timeScale = 1;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        if(inventory)
+            inventoryMenu.SetActive(false);
+        else
+            pauseMenu.SetActive(false);
+    }
+
     public void ResumeGame()
     {
         paused = false;
@@ -85,6 +124,8 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        inventoryMenu.SetActive(false);
         pauseMenu.SetActive(false);
     }
 
@@ -106,6 +147,7 @@ public class PauseMenu : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         pauseMenu.SetActive(false);
+        inventoryMenu.SetActive(false);
     }
 
     private void SetPlayerObj()
