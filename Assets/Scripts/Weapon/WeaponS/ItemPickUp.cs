@@ -59,12 +59,8 @@ public class ItemPickUp : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("Something" + other.gameObject.layer);
-
         if (other.gameObject.layer == 0)
         {
-
-            print("Entered");
             rb.useGravity = false;
             rb.isKinematic = true;
         }

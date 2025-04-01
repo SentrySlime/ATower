@@ -20,9 +20,12 @@ public class ItemManager : MonoBehaviour
     
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.I))
+        if(Input.GetKey(KeyCode.I))
         {
-            print("ItemManager");
+            if (items == null || items.Count == 0)
+            {
+                return;
+            }
             DropItem(player.transform.position);
         }
     }
@@ -31,7 +34,7 @@ public class ItemManager : MonoBehaviour
     {
         ItemPickUp tempItem = Instantiate(itemTemplate, spawnPos, Quaternion.identity).GetComponent<ItemPickUp>();
         ItemBase item = GetRandomItem();
-        items.Remove(item);
+        //items.Remove(item);
         tempItem.itemPrefab = item;
         
     }
