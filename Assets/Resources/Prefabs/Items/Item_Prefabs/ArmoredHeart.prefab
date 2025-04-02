@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2239080014955014833}
-  - component: {fileID: 6928261848857916641}
+  - component: {fileID: 2223843894015457076}
   m_Layer: 0
-  m_Name: RocketBoots
+  m_Name: ArmoredHeart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6928261848857916641
+--- !u!114 &2223843894015457076
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,20 +43,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c27a65a8f09c64eb7ec27436106a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: RocketBoots
-  itemDescription: Gain an extra jump
-  itemIcon: {fileID: 21300000, guid: 5850d2d21e6fa9145972d88414078a07, type: 3}
-  itemMesh: {fileID: -6293527657104920375, guid: 5bb7333895bdbfc49b834e1f1c1f9a26, type: 3}
-  itemMaterial: {fileID: 2100000, guid: 2bec5dd5b4305e340ba6a50e7ebf1c10, type: 2}
-  maxHp: 0
+  itemName: ArmoredHeart
+  itemDescription: Increased health and damage reduction
+  itemIcon: {fileID: 21300000, guid: 86723179a23b2f24a88066f8b790e439, type: 3}
+  itemMesh: {fileID: -1615256894602388440, guid: 1390ab6d7ea848e4ab06dce548902196, type: 3}
+  itemMaterial: {fileID: 2100000, guid: e42d2865f5d25da47be6b7f41040c97f, type: 2}
+  maxHp: 30
   hpRegen: 0
   hpOnHit: 0
   hpOnKill: 0
   helpingHand: 0
-  damageReductionPercent: 0
+  damageReductionPercent: 0.05
   damageIgnoreChance: 0
   moveSpeed: 0
-  extraJumps: 1
+  extraJumps: 0
   damage: 0
   critChance: 0
   includeExplosion: 0
