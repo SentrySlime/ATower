@@ -4998,22 +4998,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aName: Retribution
   aDescription: Pocket rocket
-  sprite: {fileID: 0}
   shootPoint: {fileID: 5778652067730987094}
   barrel: {fileID: 1856004530348900990}
   objectToRecoil: {fileID: 6593228928422068522}
   weaponIcon: {fileID: 21300000, guid: dcec780f91f3d08439abf36d7b516d78, type: 3}
   iconPrefab: {fileID: 0}
+  type: 0
+  baseMaxAmmo: 0
   maxAmmo: 150
   currentAmmo: 150
+  baseAmmoPerShot: 0
   ammoPerShot: 1
+  baseInfinteAmmo: 0
   infinteAmmo: 0
   reloadType: 1
+  baseMaxMagazine: 0
   maxMagazine: 8
   currentMagazine: 8
+  baseReloadTime: 0
   reloadTime: 1
+  baseReloadAmount: 0
   reloadAmount: 1
+  baseDamage: 0
   damage: 1
+  baseFireRate: 0
   fireRate: 0.5
   burstDelay: 1
   burstAmount: 1
@@ -5037,6 +5045,7 @@ MonoBehaviour:
   weaponSocket: {fileID: 0}
   playerStats: {fileID: 0}
   interuptReload: 0
+  finishedReload: 0
   renderObjects:
   - {fileID: 7600481199244424061}
   - {fileID: 6010637072426048203}
@@ -5244,3 +5253,60 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 198000011976894484, guid: 8b56da22c6bc71744b3a938c65d79323, type: 3}
   m_PrefabInstance: {fileID: 3572035018457187289}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6223550736227419523
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2769480800673040966}
+    m_Modifications:
+    - target: {fileID: 4214793554014566294, guid: 30c49d159be5ddc49b2fd214693df1c7, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214793554014566294, guid: 30c49d159be5ddc49b2fd214693df1c7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214793554014566294, guid: 30c49d159be5ddc49b2fd214693df1c7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.07658508
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214793554014566294, guid: 30c49d159be5ddc49b2fd214693df1c7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.5195497
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214793554014566294, guid: 30c49d159be5ddc49b2fd214693df1c7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214793554014566294, guid: 30c49d159be5ddc49b2fd214693df1c7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214793554014566294, guid: 30c49d159be5ddc49b2fd214693df1c7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214793554014566294, guid: 30c49d159be5ddc49b2fd214693df1c7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214793554014566294, guid: 30c49d159be5ddc49b2fd214693df1c7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214793554014566294, guid: 30c49d159be5ddc49b2fd214693df1c7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214793554014566294, guid: 30c49d159be5ddc49b2fd214693df1c7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4532526540558458670, guid: 30c49d159be5ddc49b2fd214693df1c7, type: 3}
+      propertyPath: m_Name
+      value: Circle (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 30c49d159be5ddc49b2fd214693df1c7, type: 3}
