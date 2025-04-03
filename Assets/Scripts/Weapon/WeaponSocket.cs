@@ -215,7 +215,6 @@ public class WeaponSocket : MonoBehaviour
 
     }
 
-
     public void Reload()
     {
         if (equippedWeapon.currentAmmo == 0 && !equippedWeapon.infinteAmmo) { return; }
@@ -293,9 +292,12 @@ public class WeaponSocket : MonoBehaviour
     public void StopReload()
     {
         StopCoroutine(Reloading());
-        reloadGroup.alpha = 0;
+
         reloadIcon.fillAmount = 0f;
+        reloadGroup.alpha = 0;
         reloadIcon.enabled = false;
+        
+        StartCoroutine(CancelReload());
     }
 
     public IEnumerator Reloading()
@@ -303,6 +305,7 @@ public class WeaponSocket : MonoBehaviour
         reloadIcon.fillAmount = 0f;
         reloadIcon.enabled = true;
         reloadGroup.alpha = 1;
+        equippedWeapon.finishedReload = false;
 
         while (reloadIcon.fillAmount < 1 && reloadIcon.isActiveAndEnabled)
         {
@@ -383,6 +386,13 @@ public class WeaponSocket : MonoBehaviour
         RepeatReload();
     }
 
+    public IEnumerator CancelReload()
+    {
+        reloadFinish.enabled = true;
+        yield return new WaitForSeconds(0.1f);
+        reloadFinish.enabled = false;
+    }
+
     private void RepeatReload()
     {
         if (equippedWeapon.recoil.holstered && equippedWeapon.OutOfAmmo())
@@ -393,5 +403,4 @@ public class WeaponSocket : MonoBehaviour
         else if (equippedWeapon.reloadType == ReloadType.ShotByShot)
             equippedWeapon.MantleWeapon();
     }
-
 }
