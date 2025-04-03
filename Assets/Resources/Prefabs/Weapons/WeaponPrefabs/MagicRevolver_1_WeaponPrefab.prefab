@@ -5061,6 +5061,36 @@ MonoBehaviour:
   muzzleFlash: {fileID: 3687609282251090893}
   casingVFX: {fileID: 0}
   mantleAnimation: {fileID: 0}
+--- !u!114 &8790461748992136300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7545986459718687405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9537760147db3a9418c7b50b16d58221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateX: -1
+  rotateY: 0
+  rotateZ: 0
+--- !u!114 &7418970766321959300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7600481199244424061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9537760147db3a9418c7b50b16d58221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateX: 0.5
+  rotateY: 0
+  rotateZ: 0
 --- !u!1001 &2442522612851338669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5111,6 +5141,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e9795556bfdd257438d4e2b56ae8b0c7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2271502847731017999, guid: e9795556bfdd257438d4e2b56ae8b0c7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.275
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e9795556bfdd257438d4e2b56ae8b0c7, type: 3}
       propertyPath: m_Name
@@ -5308,5 +5342,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Circle (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4532526540558458670, guid: 30c49d159be5ddc49b2fd214693df1c7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30c49d159be5ddc49b2fd214693df1c7, type: 3}
+--- !u!1 &7545986459718687405 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4532526540558458670, guid: 30c49d159be5ddc49b2fd214693df1c7, type: 3}
+  m_PrefabInstance: {fileID: 6223550736227419523}
+  m_PrefabAsset: {fileID: 0}

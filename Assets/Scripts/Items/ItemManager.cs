@@ -34,7 +34,7 @@ public class ItemManager : MonoBehaviour
     {
         ItemPickUp tempItem = Instantiate(itemTemplate, spawnPos, Quaternion.identity).GetComponent<ItemPickUp>();
         ItemBase item = GetRandomItem();
-        //items.Remove(item);
+        items.Remove(item);
         tempItem.itemPrefab = item;
         
     }

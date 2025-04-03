@@ -52,7 +52,11 @@ public class PauseMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (inventoryMenu.activeInHierarchy)
+            {
+                ResumeGame(true);
+
                 return;
+            }
 
             if (pauseMenu.activeInHierarchy)
             {
@@ -129,6 +133,12 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
     }
 
+    public void OpenInventoryFromPause()
+    {
+        inventoryMenu.SetActive(true);
+        pauseMenu.SetActive(false);
+    }
+
     public void ResetGame()
     {
         ResumeGame();
@@ -174,6 +184,8 @@ public class PauseMenu : MonoBehaviour
         playerHP.damageVignette = damageVignette;
         playerHP.shieldVignette = shieldVignette;
     }
+
+
 
     public void Settings()
     {
