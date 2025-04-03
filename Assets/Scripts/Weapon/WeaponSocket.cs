@@ -373,7 +373,6 @@ public class WeaponSocket : MonoBehaviour
         reloadGroup.alpha = 0;
         reloadFinish.enabled = false;
         reloadIcon.enabled = false;
-        RepeatReload();
     }
 
     public IEnumerator PartialReloadFinish()
@@ -386,7 +385,7 @@ public class WeaponSocket : MonoBehaviour
 
     private void RepeatReload()
     {
-        if (equippedWeapon.recoil.holstered)
+        if (equippedWeapon.recoil.holstered && equippedWeapon.OutOfAmmo())
             return;
 
         if (equippedWeapon.currentMagazine < equippedWeapon.maxMagazine && !equippedWeapon.interuptReload)
