@@ -474,9 +474,10 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
 
     private void RotateTowardsPlayer()
     {
+        if (!canSeePlayer) { return; }
+
         Quaternion targetRotation = Quaternion.LookRotation(player.transform.position - transform.position);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
     }
 
     private void SetMoveMentSpeed()
@@ -498,15 +499,11 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
             movementSpeed = 0;
             return;
         }
-
-        //if (distanceToPlayer <= avoidanceDistance && !canSeePlayer)
-        //{    
-        //    movementSpeed = 0;
-        //    return;
-        //}
-
-        // Map the distance to speed while clamping
-        movementSpeed = Mathf.Clamp((distanceToPlayer / 30) * 11, 1, 11);
+        else
+        {
+            // Map the distance to speed while clamping
+            movementSpeed = Mathf.Clamp((distanceToPlayer / 30) * 11, 1, 11);
+        }
     }
 
     public void NoticePlayer()
