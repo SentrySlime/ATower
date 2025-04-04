@@ -25,6 +25,10 @@ public class ItemPanel : MonoBehaviour
     GameObject itemPanel;
     SelectedItem selectedItem;
 
+    [HideInInspector] public Mesh itemMesh;
+    [HideInInspector] public Material itemMaterial;
+
+
     void Start()
     {
         selectedItem = GetComponentInParent<SelectedItem>();
@@ -57,6 +61,9 @@ public class ItemPanel : MonoBehaviour
 
     public void SetPanel(ItemPickUp tempItem)
     {
+        itemMesh = tempItem.itemMesh;
+        itemMaterial = tempItem.itemMaterial;
+
         aName = tempItem.itemName;
         aDescription = tempItem.itemDescription;
         anIcon = tempItem.itemIcon;

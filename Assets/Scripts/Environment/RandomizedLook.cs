@@ -5,7 +5,7 @@ using UnityEngine;
 public class RandomizedLook : MonoBehaviour
 {
     public List<Texture> textures = new List<Texture>();
-    private Material material;
+    Material material;
 
     void Start()
     {

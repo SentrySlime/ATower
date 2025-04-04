@@ -6,6 +6,7 @@ public class SelectedItem : MonoBehaviour
 {
 
     public ItemPanel selectedPanel;
+    public GameObject selectedGameObject;
 
     void Start()
     {
@@ -20,6 +21,10 @@ public class SelectedItem : MonoBehaviour
     public void SetSelectedPanel(ItemPanel incomingPanel)
     {
         UnSelectedItem();
+
+        selectedGameObject.GetComponent<MeshFilter>().mesh = incomingPanel.itemMesh;
+        selectedGameObject.GetComponent<MeshRenderer>().material = incomingPanel.itemMaterial;
+
         selectedPanel = incomingPanel;
     }
 

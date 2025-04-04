@@ -28,6 +28,11 @@ public class ItemPickUp : MonoBehaviour
     //ItemBase itemBase;
     [SerializeField] Rigidbody rb;
 
+    [HideInInspector] public ItemPickUp itemPickUp;
+
+    [HideInInspector] public Mesh itemMesh;
+    [HideInInspector] public Material itemMaterial;
+
     void Start()
     {
         if(itemPrefab)
@@ -37,7 +42,9 @@ public class ItemPickUp : MonoBehaviour
             itemDescription = itemPrefab.itemDescription;
             itemIcon = itemPrefab.itemIcon;
             GetComponentInChildren<MeshFilter>().mesh = itemPrefab.itemMesh;
+            itemMesh = itemPrefab.itemMesh;
             GetComponentInChildren<MeshRenderer>().material = itemPrefab.itemMaterial;
+            itemMaterial = itemPrefab.itemMaterial;
         }
     }
 
