@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateX: 0
-  rotateY: 0.5
+  rotateY: 0
   rotateZ: 0
 --- !u!1 &6883399813431151616
 GameObject:
@@ -9856,6 +9856,10 @@ PrefabInstance:
     - target: {fileID: 4532526540558458670, guid: 30c49d159be5ddc49b2fd214693df1c7, type: 3}
       propertyPath: m_Name
       value: Circle (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4532526540558458670, guid: 30c49d159be5ddc49b2fd214693df1c7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30c49d159be5ddc49b2fd214693df1c7, type: 3}
