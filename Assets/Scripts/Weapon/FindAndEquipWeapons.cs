@@ -40,6 +40,7 @@ public class FindAndEquipWeapons : MonoBehaviour
     [HideInInspector] public TextMeshProUGUI itemName;
     [HideInInspector] public TextMeshProUGUI itemDescription;
     [HideInInspector] public Image image;
+    [HideInInspector] public SelectedItem selectedItem;
 
     [Header("SFX")]
     public AudioSource equipSFX;
@@ -65,6 +66,7 @@ public class FindAndEquipWeapons : MonoBehaviour
 
     void Start()
     {
+        selectedItem = itemGroup.GetComponent<SelectedItem>();
         if (startWeapon)
             InitializeWeapon(startWeapon);
     }
@@ -101,12 +103,8 @@ public class FindAndEquipWeapons : MonoBehaviour
             inventory.weaponIndex = inventory.heldWeapons.Count;
 
             Destroy(IncomingWeaponObj);
-
             inventory.heldWeapons.Add(weaponObj);
-
             playerStats.AddStatsToPickedUpWeapon(weaponObj);
-
-            
 
             if (baseWeapon != null)
             {
@@ -126,9 +124,12 @@ public class FindAndEquipWeapons : MonoBehaviour
 
             Vector3 SpawnPos = new Vector3(-9999, -9999, -9999);
             ItemBase tempObj = Instantiate(IncomingWeaponObj.GetComponent<ItemPickUp>().itemPrefab, SpawnPos, Quaternion.identity);
-            tempObj.EquipItem();
-            Destroy(IncomingWeaponObj);
+            inventory.heldItems.Add(tempObj.gameObject);
 
+            tempObj.EquipItem();
+            
+            Destroy(IncomingWeaponObj);
+            
             GameObject itemObj = Instantiate(itemPanel, itemGroup.transform);
             ItemPanel tempPanel = itemObj.GetComponent<ItemPanel>();
             tempPanel.SetPanel(test2);

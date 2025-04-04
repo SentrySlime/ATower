@@ -4998,12 +4998,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aName: Rocket Launcher
   aDescription: Shoots a rocket
-  sprite: {fileID: 0}
   shootPoint: {fileID: 5778652067730987094}
   barrel: {fileID: 1856004530348900990}
   objectToRecoil: {fileID: 6593228928422068522}
   weaponIcon: {fileID: 21300000, guid: 8635cce8df1441c49915342ed4890c2f, type: 3}
   iconPrefab: {fileID: 0}
+  type: 4
   baseMaxAmmo: 0
   maxAmmo: 30
   currentAmmo: 30
@@ -5045,6 +5045,7 @@ MonoBehaviour:
   weaponSocket: {fileID: 0}
   playerStats: {fileID: 0}
   interuptReload: 0
+  finishedReload: 0
   renderObjects:
   - {fileID: 3615794952587007957}
   projectile: {fileID: 3201373492876456356, guid: 8c3f9833651e4124c8e73d1a43b996dd, type: 3}

@@ -26,12 +26,11 @@ public class BaseWeapon : MonoBehaviour
     public enum WeaponType
     {
         handgun,
-        SMG,
         AssaultRifle,
-        LMG,
         Shotgun,
-        Sniper,
         Arrow,
+        Explosive,
+        Energy
     }
 
     public WeaponType type;

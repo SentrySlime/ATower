@@ -6,7 +6,13 @@ using TMPro;
 
 public class ItemPanel : MonoBehaviour
 {
+    [Header("Border")]
+    public Image border_Image;
+    public Sprite unselected;
+    public Sprite selected;
+
     public Image buttonImage;
+
 
     public string aName;
     public string aDescription;
@@ -17,10 +23,11 @@ public class ItemPanel : MonoBehaviour
     public Image image;
 
     GameObject itemPanel;
+    SelectedItem selectedItem;
 
     void Start()
     {
-
+        selectedItem = GetComponentInParent<SelectedItem>();
     }
 
 
@@ -29,9 +36,20 @@ public class ItemPanel : MonoBehaviour
 
     }
 
+    public void Selected()
+    {
+        selectedItem.SetSelectedPanel(this);
+        border_Image.sprite = selected;
+    }
+
+    public void UnSelected()
+    {
+        border_Image.sprite = unselected;
+    }
 
     public void SetItemDisplay()
     {
+        Selected();
         itemName.text = aName;
         itemDescription.text = aDescription;
         image.sprite = anIcon;
@@ -45,11 +63,5 @@ public class ItemPanel : MonoBehaviour
 
         buttonImage.sprite = anIcon;
 
-        //itemName.text = tempItem.itemName;
-        //itemDescription.text = tempItem.itemDescription;
-        //image.sprite = tempItem.itemIcon;
-
     }
-
-
 }

@@ -1169,6 +1169,7 @@ GameObject:
   - component: {fileID: 6633900192646647784}
   - component: {fileID: 6472789611875006947}
   - component: {fileID: 5203250834585662450}
+  - component: {fileID: 3343235058018381731}
   m_Layer: 5
   m_Name: ItemHolder
   m_TagString: Untagged
@@ -1304,6 +1305,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &3343235058018381731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734359993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3384689aa0bd1424ba4a4f42538f1670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedPanel: {fileID: 0}
 --- !u!1 &7571514127610986
 GameObject:
   m_ObjectHideFlags: 0
@@ -14736,6 +14750,8 @@ MonoBehaviour:
   rifleSprite: {fileID: 21300000, guid: df6580d52ef8a2a4d8da44b2533dac71, type: 3}
   shotgunSprite: {fileID: 21300000, guid: f93e70805910db04abc61115b6ea7e9a, type: 3}
   arrowSprite: {fileID: 21300000, guid: 1500ff2dbafb5f749864887ed5f27310, type: 3}
+  explosiveSprite: {fileID: 21300000, guid: b5d675d108030624f84301408f3249b8, type: 3}
+  energySprite: {fileID: 21300000, guid: 11da10abc29ade34a86cfac5d09dc9be, type: 3}
   ammoSprite: {fileID: 21300000, guid: f93e70805910db04abc61115b6ea7e9a, type: 3}
   gridLayoutGroup: {fileID: 2742121257245300120}
   maxMagazine: 10

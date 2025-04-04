@@ -6,6 +6,14 @@ using UnityEngine.UI;
 
 public class AmmoScript : MonoBehaviour
 {
+    //    Handgun,
+    //    SMG,
+    //    AssaultRifle,
+    //    LMG,
+    //    Shotgun,
+    //    Sniper,
+    //    Arrow,
+
     [Header("Pistol")]
     public Sprite pistolSprite;
     Vector2 pistolCellSize = new Vector2(50, 25);
@@ -25,6 +33,16 @@ public class AmmoScript : MonoBehaviour
     public Sprite arrowSprite;
     Vector2 arrowCellSize = new Vector2(70f, 35f);
     Vector2 arrowSpacing = new Vector2(0, -10);
+
+    [Header("Explosive")]
+    public Sprite explosiveSprite;
+    Vector2 explosiveCellSize = new Vector2(70f, 35f);
+    Vector2 explosiveSpacing = new Vector2(0, -10);
+
+    [Header("Energy")]
+    public Sprite energySprite;
+    Vector2 energyCellSize = new Vector2(90f, 45f);
+    Vector2 energySpacing = new Vector2(0, -19);
 
     [Header("Reference")]
     public Sprite ammoSprite;
@@ -207,6 +225,10 @@ public class AmmoScript : MonoBehaviour
             SetCellsAndSpacing(shotgunSprite, shotgunCellSize, shotgunSpacing);
         if (weaponType == BaseWeapon.WeaponType.Arrow)
             SetCellsAndSpacing(arrowSprite, arrowCellSize, arrowSpacing);
+        if (weaponType == BaseWeapon.WeaponType.Explosive)
+            SetCellsAndSpacing(explosiveSprite, explosiveCellSize, explosiveSpacing);
+        if (weaponType == BaseWeapon.WeaponType.Energy)
+            SetCellsAndSpacing(energySprite, energyCellSize, energySpacing);
     }
 
     private void SetCellsAndSpacing(Sprite sprite, Vector2 cellsize, Vector2 spacing)
