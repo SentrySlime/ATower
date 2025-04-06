@@ -59,7 +59,20 @@ public class AMainSystem : MonoBehaviour
     {
         if(friendly)
         {
-            DamageEnemy(incomingObj, incomingDamage);
+            DamageEnemy(incomingObj, incomingDamage, false);
+            UILogic();
+        }
+        else
+        {
+            DamagePlayer(incomingObj, incomingDamage);
+        }
+    }
+
+    public void DealDamage(GameObject incomingObj, float incomingDamage, bool friendly, bool weakSpotShot)
+    {
+        if (friendly)
+        {
+            DamageEnemy(incomingObj, incomingDamage, weakSpotShot);
             UILogic();
         }
         else
@@ -69,16 +82,21 @@ public class AMainSystem : MonoBehaviour
     }
 
     #region DealingDamageToenemies
-    private void DamageEnemy(GameObject incomingObj, float incomingDamage)
+    private void DamageEnemy(GameObject incomingObj, float incomingDamage, bool incomingWeakSpotShot)
     {
-        float finalDamage = CalculateDamage(incomingDamage);
+        float finalDamage = CalculateDamage(incomingDamage, incomingWeakSpotShot);
         playerHealth.Heal(playerStats.hpOnHit);
         incomingObj.GetComponent<IDamageInterface>().Damage(finalDamage);
     }
 
-    private float CalculateDamage(float incomingDamage)
+    private float CalculateDamage(float incomingDamage, bool incomingWeakSpotShot)
     {
         incomingDamage += playerStats.damage;
+
+        if(incomingWeakSpotShot)
+        {
+            incomingDamage *= 1.5f;
+        }
 
         if (playerStats.moneyIsPower > 0)
         {

@@ -36,12 +36,17 @@ public class PauseMenu : MonoBehaviour
     [Header("Settings")]
     public Slider sensitivitySlider;
 
-    void Start()
+    private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         shootPoint = GameObject.FindGameObjectWithTag("ShootPoint");
         cmMovement = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMovement>();
         SetPlayerObj();
+        
+    }
+
+    void Start()
+    {
         StartCoroutine(HideMenu());
         pauseMenu.SetActive(false);
     }

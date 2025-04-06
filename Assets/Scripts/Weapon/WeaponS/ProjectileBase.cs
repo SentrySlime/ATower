@@ -124,7 +124,18 @@ public class ProjectileBase : MonoBehaviour
             }
             else
             {
-                ImpactBehaviour(other.transform.root.gameObject);
+                ImpactBehaviour(other.transform.root.gameObject, false);
+            }
+        }
+        if (other.CompareTag("WeakSpot"))
+        {
+            if (isExplosive)
+            {
+                ExplosiveShot(other.transform.root.gameObject);
+            }
+            else
+            {
+                ImpactBehaviour(other.transform.root.gameObject, true);
             }
         }
         else if(other.CompareTag("Breakable"))
@@ -135,7 +146,9 @@ public class ProjectileBase : MonoBehaviour
             }
             else
             {
-                ImpactBehaviour(other.gameObject);
+                ImpactBehaviour(other.gameObject, false);
+                pierceAmount = 0;
+                CheckPierce();
             }
         }
         else if (isExplosive)
@@ -154,7 +167,7 @@ public class ProjectileBase : MonoBehaviour
     }
 
 
-    public virtual void ImpactBehaviour(GameObject hitEnemy)
+    public virtual void ImpactBehaviour(GameObject hitEnemy, bool incomingWeakSpotShot)
     {
         //if (!hitEnemy.CompareTag("Enemy")) { return; }
         //GameObject enemyRoot = hitEnemy.gameObject;
@@ -164,15 +177,15 @@ public class ProjectileBase : MonoBehaviour
         {
             if (hitEnemy.GetComponent<IDamageInterface>() != null)
             {
-                DealDamage(hitEnemy);
+                DealDamage(hitEnemy, incomingWeakSpotShot);
             }
         }
     }
 
-    public virtual void DealDamage(GameObject enemyRoot)
+    public virtual void DealDamage(GameObject enemyRoot, bool incomingWeakSpotShot)
     {
         //hitMarkerLogic.EnableHitMarker();
-        aMainSysteM.DealDamage(enemyRoot, damage, true);
+        aMainSysteM.DealDamage(enemyRoot, damage, true, incomingWeakSpotShot);
         //enemyRoot.GetComponentInParent<IDamageInterface>().Damage(damage);
         hitEnemies.Add(enemyRoot);
         CheckPierce();

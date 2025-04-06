@@ -130,6 +130,16 @@ public class AmmoScript : MonoBehaviour
         currentMagazine--;
     }
 
+    public void UseAmountOfAmmo(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            ammoList[currentMagazine].GetComponent<Image>().enabled = false;
+            currentMagazine--;
+        }
+        
+    }
+
     //Trigggers to refill the entier magazine
     public void RefillMagazine()
     {

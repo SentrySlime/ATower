@@ -200,7 +200,8 @@ public class WeaponSocket : MonoBehaviour
             recoilScript.CallFire();
             equippedWeapon.TriggerItem();
             equippedWeapon.TakeAmmo();
-            ammoScript.UseAmmo();
+            ammoScript.UseAmountOfAmmo(equippedWeapon.ammoPerShot);
+            
             shootSystem.FireHomingRocket(false, equippedWeapon.barrel, 30, playerStats.fireBallChance);
         }
         else if (equippedWeapon.currentMagazine <= 0 && equippedWeapon.currentAmmo != 0)
@@ -315,7 +316,7 @@ public class WeaponSocket : MonoBehaviour
                 totalReloadSpeed += 0.5f;
 
             reloadIcon.fillAmount += totalReloadSpeed * (1.0f / equippedWeapon.reloadTime * Time.deltaTime);
-            float fillAmountFor035 = (totalReloadSpeed / equippedWeapon.reloadTime) * 0.15f;
+            float fillAmountFor035 = (totalReloadSpeed / equippedWeapon.reloadTime) * 0.25f;
             float finalReloadBuffer = 1 - fillAmountFor035; 
             if (reloadIcon.fillAmount >= finalReloadBuffer)
             {

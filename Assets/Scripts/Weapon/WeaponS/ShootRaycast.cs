@@ -181,6 +181,7 @@ public class ShootRaycast : BaseWeapon
 
 
             List<GameObject> alreadyDamaged = new List<GameObject>();
+            List<GameObject> enemiesToDamage = new List<GameObject>();
 
             for (int i = 0; i < hits.Length; i++)
             {
@@ -191,9 +192,13 @@ public class ShootRaycast : BaseWeapon
                     if (hits[i].transform.CompareTag("Breakable"))
                     {
                         alreadyDamaged.Add(hits[i].transform.gameObject);
+                        enemiesToDamage.Add(hits[i].transform.gameObject);
                     }
                     else
+                    {
                         alreadyDamaged.Add(hits[i].transform.root.gameObject);
+                        enemiesToDamage.Add(hits[i].transform.gameObject);
+                    }
 
                     
                 }
@@ -211,7 +216,6 @@ public class ShootRaycast : BaseWeapon
             {
                 tempPierce = alreadyDamaged.Count;
 
-
                 if (ShouldExplode)
                 {
                     aMainSystem.SpawnExplosion(raycastHit.point, explosiveRadius, explosiveDamage);
@@ -221,13 +225,11 @@ public class ShootRaycast : BaseWeapon
                     Vector3 hitDirection = transform.position - raycastHit.point;
                     Instantiate(hitVFX, raycastHit.point, Quaternion.LookRotation(hitDirection));
                 }
-
             }
-
 
             for (int i = 0; i < tempPierce; i++)
             {
-                if (alreadyDamaged[i].transform.CompareTag("Enemy"))
+                if (enemiesToDamage[i].transform.CompareTag("Enemy"))
                 {
                     if(ShouldExplode)
                     {
@@ -235,13 +237,28 @@ public class ShootRaycast : BaseWeapon
                     }
                     else
                     {
-                        DealDamage(alreadyDamaged[i]);
+                        DealDamage(alreadyDamaged[i], false);
                         var fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal);
                         var tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
                         Vector3 hitDirection = transform.position - raycastHit.point;
                         Instantiate(hitEnemyVFX, hits[i].point, Quaternion.LookRotation(hitDirection), alreadyDamaged[i].transform);
                     }
 
+                }
+                else if (enemiesToDamage[i].transform.CompareTag("WeakSpot"))
+                {
+                    if (ShouldExplode)
+                    {
+                        aMainSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i]);
+                    }
+                    else
+                    {
+                        DealDamage(alreadyDamaged[i], true);
+                        var fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal);
+                        var tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
+                        Vector3 hitDirection = transform.position - raycastHit.point;
+                        Instantiate(hitEnemyVFX, hits[i].point, Quaternion.LookRotation(hitDirection), alreadyDamaged[i].transform);
+                    }
                 }
                 else if(alreadyDamaged[i].transform.CompareTag("Breakable"))
                 {
@@ -251,12 +268,12 @@ public class ShootRaycast : BaseWeapon
                     }
                     else
                     {
-                        DealDamage(alreadyDamaged[i]);
+                        DealDamage(alreadyDamaged[i], false);
                         var fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal);
                         var tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
                         Vector3 hitDirection = transform.position - raycastHit.point;
                         Instantiate(hitVFX, hits[i].point, Quaternion.LookRotation(hitDirection), alreadyDamaged[i].transform);
-
+                        tempPierce = 0;
                         
                     }
                 }
@@ -306,13 +323,20 @@ public class ShootRaycast : BaseWeapon
                 {
                     if(hit.transform.CompareTag("Enemy"))
                     {
-                        DealDamage(hit.transform.root.gameObject);
+                        DealDamage(hit.transform.root.gameObject, false);
                         hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
                         Instantiate(hitEnemyVFX, hit.point, Quaternion.Inverse(transform.rotation), hit.transform);
                     }
+                    if (hit.transform.CompareTag("WeakSpot"))
+                    {
+                        DealDamage(hit.transform.root.gameObject, true);
+                        hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
+                        Instantiate(hitEnemyVFX, hit.point, Quaternion.Inverse(transform.rotation), hit.transform);
+                    }
+
                     else if(hit.transform.CompareTag("Breakable"))
                     {
-                        DealDamage(hit.transform.gameObject);
+                        DealDamage(hit.transform.gameObject, false);
                         hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
                         Instantiate(hitVFX, hit.point, Quaternion.Inverse(transform.rotation));
                     }
@@ -337,7 +361,7 @@ public class ShootRaycast : BaseWeapon
     }
 
 
-    public void DealDamage(GameObject incomingObj)
+    public void DealDamage(GameObject incomingObj, bool incomingWeakSpotShot)
     {
         if (incomingObj.GetComponent<IDamageInterface>() != null)
         {
@@ -345,7 +369,7 @@ public class ShootRaycast : BaseWeapon
             //if (hitSFX != null)
             //    Instantiate(hitSFX.GetComponent<AudioSource>());
 
-            aMainSystem.DealDamage(incomingObj, damage, true);
+            aMainSystem.DealDamage(incomingObj, damage, true, incomingWeakSpotShot);
 
 
             //incomingObj.GetComponent<IDamageInterface>().Damage(damage);

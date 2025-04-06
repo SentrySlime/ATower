@@ -4967,10 +4967,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aName: Revolver
   aDescription: Hits like a truck
-  sprite: {fileID: 21300000, guid: 8c6c3493e5567f64c852097c548ef165, type: 3}
-  cellSize_x: 50
-  cellSize_y: 25
-  spacing: -10
   shootPoint: {fileID: 0}
   barrel: {fileID: 1856004530348900990}
   objectToRecoil: {fileID: 6593228928422068522}
@@ -5018,6 +5014,7 @@ MonoBehaviour:
   weaponSocket: {fileID: 0}
   playerStats: {fileID: 0}
   interuptReload: 0
+  finishedReload: 0
   renderObjects:
   - {fileID: 5352461095775856614}
   hitDistance: 0
