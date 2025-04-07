@@ -13,14 +13,16 @@ public class LevelGeneration : MonoBehaviour
     public List<GameObject> rooms = new List<GameObject>();
     public List<GameObject> corridors = new List<GameObject>();
     [Header("Special Rooms")]
-    public GameObject treasureRoom;
     public GameObject startingRoom;
+    public GameObject endRoom;
+    public GameObject treasureRoom;
 
     GameObject spawnTransform;
     int allRoomCount;
     bool currentRoom = true;
 
     [Header("RoomLogic")]
+    public int amountOfRoomsToSpawn = 28;
     public bool removeRooms = true;
     public bool removeCorridor = true;
     public int roomCount = 0;
@@ -42,13 +44,15 @@ public class LevelGeneration : MonoBehaviour
     {
         navMeshManager = GetComponent<NavMeshManager>();
         allRoomCount = rooms.Count + corridors.Count + 1;
+        if (!removeRooms)
+            allRoomCount = amountOfRoomsToSpawn;
     }
 
 
     void Update()
     {
         
-        if (roomCount < allRoomCount || !removeRooms && roomCount < 28)
+        if (roomCount < allRoomCount)
         {
             if(rooms.Count == 0) { return; }
 
@@ -70,6 +74,7 @@ public class LevelGeneration : MonoBehaviour
         }
         else if(!hasBuilt)
         {
+            GenerateEndRoom();
             surfaCE.BuildNavMesh();
             hasBuilt = true;    
 
@@ -106,6 +111,12 @@ public class LevelGeneration : MonoBehaviour
     private void GenerateTreasureRoom()
     {
         RoomScript newRoom = Instantiate(treasureRoom, spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
+        spawnTransform = newRoom.point2.gameObject;
+    }
+
+    private void GenerateEndRoom()
+    {
+        RoomScript newRoom = Instantiate(endRoom, spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
         spawnTransform = newRoom.point2.gameObject;
     }
 
