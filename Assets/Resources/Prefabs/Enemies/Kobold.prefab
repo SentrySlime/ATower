@@ -137,9 +137,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3691346946901463816}
   - component: {fileID: 6596524139053908575}
+  - component: {fileID: 1732250573}
   - component: {fileID: 915999531}
   - component: {fileID: 1732250578}
-  - component: {fileID: 1732250573}
   - component: {fileID: 6261519859023998162}
   - component: {fileID: 747920691}
   m_Layer: 9
@@ -192,11 +192,47 @@ MonoBehaviour:
   homingTarget: {fileID: 1503445920806744871}
   dropLoot: 1
   itemPrefab: {fileID: 0}
-  dropChance: 0.15
+  dropChance: 0.1
   dead: 0
   gauranteeItemDrop: 0
   shouldReportDeath: 1
   damagedPS: {fileID: 0}
+--- !u!114 &1732250573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159938395663860492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da8829efbb10d8e459fc5914ecbcf996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 6261519859023998162}
+  shootAudioSource: {fileID: 747920691}
+  currentState: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1792
+  animator: {fileID: 1732250578}
+  agent: {fileID: 915999531}
+  FoundPlayer: 0
+  moveSpeed: 11
+  playerDist: 0
+  visionTransform: {fileID: 8992700577153244976}
+  firingRate: 0.5
+  timer: 0
+  rangedAttack: 0
+  rangedProjectile: {fileID: 7929977615501413461, guid: aaa211e7b9418704d8e7f3733954f506, type: 3}
+  rangedDistance1: 15
+  rangedDistance2: 30
+  finalRangedDistance: 30
+  incompletRangedDistance: 75
+  seePlayerRangedDistance: 115
+  shootPoint: {fileID: 1953697717}
+  telegraphSphere: {fileID: 958035822}
+  enemyBase: {fileID: 6596524139053908575}
 --- !u!195 &915999531
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -238,42 +274,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1732250573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 159938395663860492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da8829efbb10d8e459fc5914ecbcf996, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 6261519859023998162}
-  shootAudioSource: {fileID: 747920691}
-  currentState: 0
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 1792
-  animator: {fileID: 1732250578}
-  agent: {fileID: 915999531}
-  FoundPlayer: 0
-  moveSpeed: 11
-  playerDist: 0
-  visionTransform: {fileID: 8992700577153244976}
-  firingRate: 0.5
-  timer: 0
-  rangedAttack: 0
-  rangedProjectile: {fileID: 7929977615501413461, guid: aaa211e7b9418704d8e7f3733954f506, type: 3}
-  rangedDistance1: 15
-  rangedDistance2: 30
-  finalRangedDistance: 30
-  incompletRangedDistance: 75
-  seePlayerRangedDistance: 115
-  shootPoint: {fileID: 1953697717}
-  telegraphSphere: {fileID: 958035822}
-  enemyBase: {fileID: 6596524139053908575}
 --- !u!82 &6261519859023998162
 AudioSource:
   m_ObjectHideFlags: 0

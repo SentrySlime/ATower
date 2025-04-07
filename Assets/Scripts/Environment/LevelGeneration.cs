@@ -137,10 +137,10 @@ public class LevelGeneration : MonoBehaviour
             //RoomScript newRoom = Instantiate(rooms[roomIndex], transform.position, Quaternion.identity).GetComponent<RoomScript>();
             //spawnTransform = newRoom.point2.gameObject;
         }
-        else if(roomCount == 6)
-        {
-            GenerateTreasureRoom();
-        }
+        //else if(roomCount == 6)
+        //{
+        //    GenerateTreasureRoom();
+        //}
         else if (roomCount == 12)
         {
             

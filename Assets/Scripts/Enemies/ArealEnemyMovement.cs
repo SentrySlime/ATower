@@ -58,7 +58,8 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
     [Header("Beam Attack")] //Beams
     public float beamDamage = 10;
     public float beamCooldown = 10;
-    float beamCooldownTimer = 0;
+    public float beamCooldownTimer = 0;
+
 
     public float beamDamageRate = 0.5f;
     float beamDamageRateTimer = 0f;
@@ -84,8 +85,8 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
     public float meleeCooldown = 4;
     float meleeCooldownTimer = 0;
     
-    float telegraphScaleSpeed = 8;
-    float meleeRange = 20;
+    float telegraphScaleSpeed = 6;
+    float meleeRange = 24;
 
     float meleeForce = 300;
     float meleeForceY = 30;

@@ -2645,10 +2645,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f62242947bcb804c98fa0c285b6e8dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2000
-  currentHealth: 2000
+  maxHealth: 2500
+  currentHealth: 2500
   moneyAmount: 100
-  canExplode: 0
+  canExplode: 1
   explodeOnDeath: 0
   explosionDamage: 100
   moneyPrefab: {fileID: 5753959484571427866, guid: f4c33ad25fa66f548a4d336f2524f348, type: 3}
@@ -2682,27 +2682,28 @@ MonoBehaviour:
   angularSpeed: 2000
   turnRadius: 3
   maxDelta: 3
-  attackRate: 2
+  attackRate: 1
   beamDuration: 4
   projectileDuration: 0.1
   rangedAttackDist: 50
   projectileAttacking: 0
-  projectileCooldown: 3.5
+  projectileCooldown: 3
   projectileFireRate: 0.09
   yOffset: -35
   projectileAmount: 3
   projectileSpacing: 40
   shootPoint: {fileID: 2127446042881441319}
   projectile: {fileID: 7929977615501413461, guid: 7a9fc87c60e37254bbe591868594b884, type: 3}
-  beamDamage: 3
-  beamCooldown: 1
-  beamDamageRate: 0.2
+  beamDamage: 7
+  beamCooldown: 6
+  beamCooldownTimer: 0
+  beamDamageRate: 0.1
   rotationSpeed: 40
   partToRotate: {fileID: 1710239320598269243}
   telegraphVFX: {fileID: 5156593245698994014, guid: d1a550d7b83299b4aa1fb79884145d72, type: 3}
   telegraphPosition: {fileID: 5609812244648666840}
-  yawSpeed: 0.1
-  pitchSpeed: 1
+  yawSpeed: 0.2
+  pitchSpeed: 2
   meleeAttacking: 0
   meleeCooldown: 3
   meleeDamage: 30

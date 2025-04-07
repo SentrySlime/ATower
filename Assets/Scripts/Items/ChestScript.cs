@@ -33,11 +33,12 @@ public class ChestScript : MonoBehaviour, IInteractInterface
 
     IEnumerator SpawnWeapon()
     {
+        animation["Armature|open"].speed = 5f;
         animation.Play();
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.25f);
         collider.enabled = false;
         Instantiate(coins, spawnPos.position, Quaternion.identity).GetComponent<ParticleSystem>().trigger.AddCollider(player.GetComponent<Collider>());
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
         lootSystem.DropWeapon(spawnPos.position);
     }
 

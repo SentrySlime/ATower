@@ -6,8 +6,8 @@ public class LootSystem : MonoBehaviour
 {
     public WeaponManager weaponManager;
     public ItemManager itemManager;
-    
 
+    public int itemKillRequirement = 0;
 
     void Start()
     {
@@ -22,20 +22,18 @@ public class LootSystem : MonoBehaviour
 
     public void DropLoot(Vector3 spawnPos, float dropChance)
     {
-        if (!DropCheck(dropChance))
-            return;
+        if(itemKillRequirement >= 3)
+        {
+            if (!DropCheck(dropChance))
+                return;
 
-        int weaponOrItem = Random.Range(0, 2);
-     
             itemManager.DropItem(spawnPos);
-        //if (weaponOrItem == 1)
-        //{
-        //    weaponManager.DropWeapon(spawnPos);
-        //}
-        //else
-        //{
-        //}
-
+            itemKillRequirement = 0;
+        }
+        else
+        {
+            itemKillRequirement++;
+        }
     }
 
     public bool DropCheck(float dropChance)

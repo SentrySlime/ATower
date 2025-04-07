@@ -11,8 +11,10 @@ public class EnemyManager : MonoBehaviour
     bool slowDown = false;
     float slowDuration = 0.03f;
 
+    [Header("HelpingHandStats")]
     public GameObject helpingHandPrefab;
-
+    public int helpingHandKillRequirement = 0;
+    public int helpingHandSpawnChance = 3;
 
     GameObject player;
     Inventory inventory;
@@ -56,6 +58,7 @@ public class EnemyManager : MonoBehaviour
             if (enemyDeaths >= 5)
                 ActiveSlowDown();
         }
+
     }
 
     public void ActiveSlowDown()
@@ -100,19 +103,34 @@ public class EnemyManager : MonoBehaviour
         if(playerStats.hpOnKill > 0)
             playerHealth.Heal(playerStats.hpOnKill);
 
-        if (playerStats.helpingHand > 0)
+
+        HelpingHandLogic(deathPosition);
+        StartCoroutine(WaitBefore());
+    }
+
+    private void HelpingHandLogic(Vector3 deathPosition)
+    {
+        helpingHandKillRequirement++;
+
+        if (playerStats.helpingHand > 0 || helpingHandKillRequirement > 2)
         {
             int randomNumb = Random.Range(1, 10);
-            if (randomNumb <= 3)
+
+            if (randomNumb <= helpingHandSpawnChance)
             {
                 HelpingHandPickUp tempHelpingHand = Instantiate(helpingHandPrefab, deathPosition, Quaternion.identity).GetComponent<HelpingHandPickUp>();
                 tempHelpingHand.playerHealth = playerHealth;
                 tempHelpingHand.mainSystem = mainSystem;
+                helpingHandKillRequirement = 0;
+                helpingHandSpawnChance = 2;
             }
-            
+            else
+            {
+                helpingHandSpawnChance++;
+            }
+
         }
 
-        StartCoroutine(WaitBefore());
     }
 
     IEnumerator WaitBefore()

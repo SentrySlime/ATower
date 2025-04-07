@@ -47,4 +47,9 @@ public class ItemManager : MonoBehaviour
         int itemIndex = Random.Range(0, items.Count);
         return items[itemIndex];
     }
+
+    private void CalculateNextItemType()
+    {
+
+    }
 }

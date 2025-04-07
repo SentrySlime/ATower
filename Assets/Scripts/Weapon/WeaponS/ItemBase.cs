@@ -13,6 +13,18 @@ public class ItemBase : MonoBehaviour
     public Mesh itemMesh;
     public Material itemMaterial;
 
+    public enum ItemType
+    {
+        Health,
+        Defense,
+        Movement,
+        Damage,
+        Ammo,
+        WeaponSocket
+    }
+
+    public ItemType type;
+
     #region Health
     [Header("Player health Stats ---------------------------------------------------")]
 

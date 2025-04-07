@@ -115,7 +115,9 @@ public class EnemyProjectile : MonoBehaviour
         }
         else if (explode)
         {
-            Instantiate(explosion, transform.position, Quaternion.identity);
+            Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+            Instantiate(explosion, spawnPosition, Quaternion.identity);
+
             hasExploded = true;
             DestroyProjectile();
         }
