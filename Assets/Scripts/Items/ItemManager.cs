@@ -32,6 +32,8 @@ public class ItemManager : MonoBehaviour
 
     public void DropItem(Vector3 spawnPos)
     {
+        if(items == null || items.Count == 0) { return; }
+
         ItemPickUp tempItem = Instantiate(itemTemplate, spawnPos, Quaternion.identity).GetComponent<ItemPickUp>();
         ItemBase item = GetRandomItem();
         items.Remove(item);

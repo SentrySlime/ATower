@@ -5,20 +5,24 @@ using UnityEngine.AI;
 
 public class LevelGeneration : MonoBehaviour
 {
-    
-    [SerializeField]
-    NavMeshSurface[] navMeshSurfaces;
+    [SerializeField] NavMeshSurface[] navMeshSurfaces;
 
     public NavMeshSurface surfaCE;
-
+    
+    [Header("Rooms")]
     public List<GameObject> rooms = new List<GameObject>();
     public List<GameObject> corridors = new List<GameObject>();
+    [Header("Special Rooms")]
+    public GameObject treasureRoom;
+    public GameObject startingRoom;
+
     GameObject spawnTransform;
     int allRoomCount;
-    bool currentRoom = false;
+    bool currentRoom = true;
 
     [Header("RoomLogic")]
     public bool removeRooms = true;
+    public bool removeCorridor = true;
     public int roomCount = 0;
 
 
@@ -37,15 +41,17 @@ public class LevelGeneration : MonoBehaviour
     void Start()
     {
         navMeshManager = GetComponent<NavMeshManager>();
-        allRoomCount = rooms.Count + corridors.Count;
+        allRoomCount = rooms.Count + corridors.Count + 1;
     }
 
 
     void Update()
     {
         
-        if (roomCount < allRoomCount)
+        if (roomCount < allRoomCount || !removeRooms && roomCount < 28)
         {
+            if(rooms.Count == 0) { return; }
+
             if(!hasTimer)
             {
                 GenerateLevel();
@@ -97,6 +103,18 @@ public class LevelGeneration : MonoBehaviour
         
     }
 
+    private void GenerateTreasureRoom()
+    {
+        RoomScript newRoom = Instantiate(treasureRoom, spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
+        spawnTransform = newRoom.point2.gameObject;
+    }
+
+    private void GenerateStartingRoom()
+    {
+        RoomScript newRoom = Instantiate(startingRoom, transform.position, Quaternion.identity).GetComponent<RoomScript>();
+        spawnTransform = newRoom.point2.gameObject;
+    }
+
     private void GenerateRoom()
     {
         int roomIndex = GetRandomRoom();
@@ -104,12 +122,21 @@ public class LevelGeneration : MonoBehaviour
         //GetChildren(newNumber);
         if (roomCount == 0)
         {
-            RoomScript newRoom = Instantiate(rooms[roomIndex], transform.position, Quaternion.identity).GetComponent<RoomScript>();
-            spawnTransform = newRoom.point2.gameObject;
+            GenerateStartingRoom();
+            //RoomScript newRoom = Instantiate(rooms[roomIndex], transform.position, Quaternion.identity).GetComponent<RoomScript>();
+            //spawnTransform = newRoom.point2.gameObject;
+        }
+        else if(roomCount == 6)
+        {
+            GenerateTreasureRoom();
+        }
+        else if (roomCount == 12)
+        {
+            
+            GenerateTreasureRoom();
         }
         else
         {
-
             RoomScript newRoom = Instantiate(rooms[roomIndex], spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
             spawnTransform = newRoom.point2.gameObject;
         }
@@ -137,7 +164,7 @@ public class LevelGeneration : MonoBehaviour
             spawnTransform = newRoom.point2.gameObject;
         }
 
-        if (removeRooms)
+        if (removeCorridor)
             corridors.RemoveAt(roomIndex);
 
         roomCount++;

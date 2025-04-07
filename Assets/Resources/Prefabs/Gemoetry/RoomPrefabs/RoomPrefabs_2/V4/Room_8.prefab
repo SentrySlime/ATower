@@ -6037,7 +6037,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1895995377475474312}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &738604240202614530
 MeshFilter:
@@ -6431,7 +6431,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1895995377475474312}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &738604240247300409
 MeshFilter:
@@ -21726,6 +21726,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1862076180078306019}
   - component: {fileID: 7134052394666458012}
+  - component: {fileID: 8591971466128829152}
   m_Layer: 0
   m_Name: NavMesh
   m_TagString: Untagged
@@ -21745,7 +21746,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1895995377475474312}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7134052394666458012
 MonoBehaviour:
@@ -21765,7 +21766,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4095
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -21775,7 +21776,36 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.6666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: f5cc6171b60b9564195a1efbe459163f, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 20a9afaa5dd7eb04ca71e87ceace3a4c, type: 2}
+--- !u!114 &8591971466128829152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4578688974850231546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4095
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.33333334
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 23800000, guid: 8be8fbde63c781b47a6e363c0681daef, type: 2}
 --- !u!1 &4820148392277711674
 GameObject:
   m_ObjectHideFlags: 0
@@ -22117,9 +22147,9 @@ Transform:
   m_LocalPosition: {x: -38.961082, y: 78.42319, z: 120.543755}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1862076180078306019}
   - {fileID: 738604240202614543}
   - {fileID: 738604240247300422}
-  - {fileID: 1862076180078306019}
   - {fileID: 3875434631943435}
   - {fileID: 3875433147100589}
   - {fileID: 3467022842208171041}
