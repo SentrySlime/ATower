@@ -23,7 +23,6 @@ public class OpenDoors : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         openDoors = true;
-        print("Hello");
     }
 
     void Update()
