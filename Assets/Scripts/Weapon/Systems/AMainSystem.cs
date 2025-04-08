@@ -84,12 +84,12 @@ public class AMainSystem : MonoBehaviour
     #region DealingDamageToenemies
     private void DamageEnemy(GameObject incomingObj, float incomingDamage, bool incomingWeakSpotShot)
     {
-        float finalDamage = CalculateDamage(incomingDamage, incomingWeakSpotShot);
+        CalculateDamage(incomingObj, incomingDamage, incomingWeakSpotShot);
         playerHealth.Heal(playerStats.hpOnHit);
-        incomingObj.GetComponent<IDamageInterface>().Damage(finalDamage);
+        
     }
 
-    private float CalculateDamage(float incomingDamage, bool incomingWeakSpotShot)
+    private void CalculateDamage(GameObject incomingObj, float incomingDamage, bool incomingWeakSpotShot)
     {
         incomingDamage += playerStats.damage;
 
@@ -108,11 +108,14 @@ public class AMainSystem : MonoBehaviour
         if (playerStats.criticalChance > critChance)
         {
             PlaySFX(true);
-            return incomingDamage *= playerStats.criticalMultiplier;
+            incomingDamage *= playerStats.criticalMultiplier;
+            incomingObj.GetComponent<IDamageInterface>().Damage(incomingDamage, true);
+            return;
         }
         
         PlaySFX(false);
-        return incomingDamage;
+
+        incomingObj.GetComponent<IDamageInterface>().Damage(incomingDamage);
     }
 
     private void PlaySFX(bool isCrit)

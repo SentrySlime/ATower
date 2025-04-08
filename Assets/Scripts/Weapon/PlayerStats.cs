@@ -14,7 +14,7 @@ public class PlayerStats : MonoBehaviour
     public int hpOnKill = 5;
     public int hpOnHit = 1;
     public int helpingHand = 0;
-
+    public int hpRegenOnEnemyHit = 0;
 
     [Header("Damage")]
     public float damage = 0;

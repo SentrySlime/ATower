@@ -52,6 +52,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons:
   - {fileID: 738855649075375035, guid: a5eeb651e57c25e4b8489e6f26cfef28, type: 3}
+  - {fileID: 6952844890914244580, guid: da0782fcf73d9c44392ccc187a60dff7, type: 3}
+  - {fileID: 6931329448293354149, guid: be883186d4de3cc47917f9cfac817c04, type: 3}
   - {fileID: 2356860116122222479, guid: 5c42d8417fcb1014b9ac79de79bf8fbd, type: 3}
   - {fileID: 7527335582870803992, guid: 76e18f5081c5c50449be5e3a058b1627, type: 3}
   - {fileID: 2749742489556895009, guid: 6c3bf8a88effc3746b070689c03d395a, type: 3}
@@ -61,11 +63,9 @@ MonoBehaviour:
   - {fileID: 7527335582870803992, guid: fdf9c5910b0807b4a9018e07d29b82c4, type: 3}
   - {fileID: 6952844890914244580, guid: 297d7e38b46066445806f8bf6abea0da, type: 3}
   - {fileID: 4962411745360347528, guid: 9f259f18d802dc54fb9b2324518abd61, type: 3}
+  - {fileID: 6952844890914244580, guid: 32be05b989b007044829d2923610cd45, type: 3}
   - {fileID: 6952844890914244580, guid: 53ee614294fe7bd40984f6032008952e, type: 3}
   - {fileID: 6952844890914244580, guid: 520e8d8d69205634bbfbdf44cac4d933, type: 3}
-  - {fileID: 6952844890914244580, guid: f33da1b3a62dfa249b09a139e73d12d1, type: 3}
-  - {fileID: 6952844890914244580, guid: da0782fcf73d9c44392ccc187a60dff7, type: 3}
-  - {fileID: 6952844890914244580, guid: 32be05b989b007044829d2923610cd45, type: 3}
   pickUps: []
   s_Tier: []
   a_Tier: []
@@ -85,6 +85,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   helpingHandPrefab: {fileID: 3289367216350407278, guid: 375e8f0155830b6488570adf9541f3e1, type: 3}
+  helpingHandKillRequirement: 0
+  helpingHandSpawnChance: 3
 --- !u!114 &8046788520921340378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponManager: {fileID: 7614514148234217132}
   itemManager: {fileID: 1170188830}
+  itemKillRequirement: 0
 --- !u!82 &611839642
 AudioSource:
   m_ObjectHideFlags: 0
@@ -168,9 +171,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4b4138605e5299849a9d1a5bfe36a82e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: af13af6bdb1798d448fdf5c42414c087, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.612
+  m_Volume: 0.07
   m_Pitch: 1
   Loop: 1
   Mute: 0

@@ -13,7 +13,6 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     [Header("Explosion")]
     public bool canExplode = false;
     public bool explodeOnDeath = false;
-    public int explosionDamage = 100;
 
     [Header("VFX  SFX")]
     [Tooltip("This spawns the money prefab")]
@@ -92,9 +91,9 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
 
     public void Damage(float damage)
     {
-        if(currentHealth == maxHealth)
+        if (currentHealth == maxHealth)
         {
-            if(gameObject.GetComponent<INoticePlayer>() != null)
+            if (gameObject.GetComponent<INoticePlayer>() != null)
                 gameObject.GetComponent<INoticePlayer>().NoticePlayer();
         }
 
@@ -107,7 +106,29 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
         }
 
         if (currentHealth <= 0 && !dead)
-            Die();
+            Die(false);
+    }
+
+    public void Damage(float damage, bool criticalHit)
+    {
+        if (currentHealth == maxHealth)
+        {
+            if (gameObject.GetComponent<INoticePlayer>() != null)
+                gameObject.GetComponent<INoticePlayer>().NoticePlayer();
+        }
+
+
+
+        currentHealth -= CalculateDamage(damage);
+
+        if (damagedPS != null)
+        {
+            damagedPS.emissionRate += damage;
+            damagedPS.emissionRate = Mathf.Clamp(damagedPS.emissionRate, 0, 150);
+        }
+
+        if (currentHealth <= 0 && !dead)
+            Die(criticalHit);
     }
 
     private float CalculateDamage(float damage)
@@ -116,7 +137,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
         return finalDamage;
     }
 
-    private void Die()
+    private void Die(bool criticalDeath)
     {
         dead = true;
 
@@ -141,9 +162,9 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
                 ps.trigger.AddCollider(player.GetComponent<Collider>());
             }
 
-            if (CanExplode())
+            if (CanExplode(criticalDeath))
             {
-                aMainSystem.SpawnExplosion(moneySpawnPoint.position, 7, explosionDamage);
+                aMainSystem.SpawnExplosion(moneySpawnPoint.position, 7, (int)maxHealth);
             }
             else if (deathParticles)
             {
@@ -169,7 +190,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
 
     }
 
-    private bool CanExplode()
+    private bool CanExplode(bool criticalDeath)
     {
 
         if(!canExplode)
@@ -179,7 +200,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
         
         if (explodeOnDeath)
             shouldExplode = true;
-        else if (playerStats.canExplode)
+        else if (playerStats.canExplode && criticalDeath)
             shouldExplode = true;
 
         return shouldExplode;
@@ -234,4 +255,6 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
                 projectileChildren[i].transform.SetParent(null, true);
         }
     }
+
+    
 }
