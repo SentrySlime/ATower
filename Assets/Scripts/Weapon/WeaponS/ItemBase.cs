@@ -32,8 +32,6 @@ public class ItemBase : MonoBehaviour
     [Tooltip("One point is equal to one max HP")]
     [Range(-200, 200f)] public int maxHp;
 
-    [Tooltip("1 point is equal to 1 extra health gained over 1 sec")]
-    [Range(-90f, 90f)] public int hpRegen;
 
     [Tooltip("1 point is equal to 1 extra health gained when hitting an enemy")]
     [Range(-90f, 90f)] public int hpOnHit;
@@ -43,6 +41,12 @@ public class ItemBase : MonoBehaviour
 
     [Tooltip("If it's at 1 it gives the player helping hand")]
     [Range(0f, 1f)] public int helpingHand = 0;
+
+    [Tooltip("1 point is equal to 1 extra health gained over 1 sec")]
+    [Range(-90f, 90f)] public float hpRegen;
+
+    [Tooltip("1 point is equal to activate this")]
+    [HideInInspector] [Range(-1f, 1f)] public int hpRegenOnEnemyHit;
 
     #endregion
 
@@ -146,6 +150,7 @@ public class ItemBase : MonoBehaviour
         playerStats.hpOnHit += hpOnHit;
         playerStats.hpOnKill += hpOnKill;
         playerStats.helpingHand += helpingHand;
+        playerStats.hpRegenOnEnemyHit += hpRegenOnEnemyHit;
         playerStats.damageIgnoreChance += damageIgnoreChance;
         playerStats.damageReductionPercent += damageReductionPercent;
 
@@ -193,6 +198,7 @@ public class ItemBase : MonoBehaviour
         playerStats.hpOnHit -= hpOnHit;
         playerStats.hpOnKill -= hpOnKill;
         playerStats.helpingHand -= helpingHand;
+        playerStats.hpRegenOnEnemyHit -= hpRegenOnEnemyHit;
         playerStats.damageIgnoreChance -= damageIgnoreChance;
         playerStats.damageReductionPercent -= damageReductionPercent;
 

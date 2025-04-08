@@ -4967,22 +4967,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aName: Revolver
   aDescription: Hits like a truck
-  sprite: {fileID: 0}
   shootPoint: {fileID: 0}
   barrel: {fileID: 1856004530348900990}
   objectToRecoil: {fileID: 6593228928422068522}
   weaponIcon: {fileID: 21300000, guid: c307b89b9783c86468f7ee102a74897f, type: 3}
   iconPrefab: {fileID: 0}
+  type: 0
+  baseMaxAmmo: 0
   maxAmmo: 114
   currentAmmo: 114
+  baseAmmoPerShot: 0
   ammoPerShot: 1
+  baseInfinteAmmo: 0
   infinteAmmo: 0
   reloadType: 1
+  baseMaxMagazine: 0
   maxMagazine: 8
   currentMagazine: 8
+  baseReloadTime: 0
   reloadTime: 1.2
+  baseReloadAmount: 0
   reloadAmount: 1
+  baseDamage: 0
   damage: 0
+  baseFireRate: 0
   fireRate: 0.02
   burstDelay: 1
   burstAmount: 1
@@ -5006,6 +5014,7 @@ MonoBehaviour:
   weaponSocket: {fileID: 0}
   playerStats: {fileID: 0}
   interuptReload: 0
+  finishedReload: 0
   renderObjects:
   - {fileID: 7923602564950879454}
   hitDistance: 0
@@ -5015,7 +5024,7 @@ MonoBehaviour:
   shotSize: 0.3
   pierceAmount: 1
   ShouldExplode: 1
-  explosiveDamage: 200
+  explosiveDamage: 150
   explosiveRadius: 3
   SFXList: []
   shootSFX: {fileID: 4964101775347663484, guid: 0f2c1ad0607fd94458f7da48dad9c000, type: 3}

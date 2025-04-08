@@ -112,7 +112,7 @@ public class EnemyManager : MonoBehaviour
     {
         helpingHandKillRequirement++;
 
-        if (playerStats.helpingHand > 0 || helpingHandKillRequirement > 2)
+        if (playerStats.helpingHand > 0 && helpingHandKillRequirement > 2)
         {
             int randomNumb = Random.Range(1, 10);
 

@@ -86,7 +86,7 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
     float meleeCooldownTimer = 0;
     
     float telegraphScaleSpeed = 6;
-    float meleeRange = 24;
+    float meleeRange = 28;
 
     float meleeForce = 300;
     float meleeForceY = 30;

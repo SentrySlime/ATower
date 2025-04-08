@@ -267,5 +267,18 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
         UpdateHP();
         UpdateMaxHP();
     }
+
+    public void Damage(float damage, bool criticalHit)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void TempHealthRegen()
+    {
+
+        
+    }
+
+
 }
 

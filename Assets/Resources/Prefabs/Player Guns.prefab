@@ -1756,6 +1756,7 @@ MonoBehaviour:
   itemName: {fileID: 0}
   itemDescription: {fileID: 0}
   image: {fileID: 0}
+  selectedItem: {fileID: 0}
   equipSFX: {fileID: 5004350294498629577}
 --- !u!114 &5004350295439402695
 MonoBehaviour:
@@ -1769,7 +1770,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10777ec976e78034e8236aa130832803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoScript: {fileID: 0}
   baseCameraFOV: 90
   zoomedCameraFOV: 0
   baseSensitivity: 0
@@ -1920,6 +1920,7 @@ MonoBehaviour:
   hpOnKill: 0
   hpOnHit: 0
   helpingHand: 0
+  hpRegenOnEnemyHit: 0
   damage: 0
   criticalChance: 5
   criticalMultiplier: 2

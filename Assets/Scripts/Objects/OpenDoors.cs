@@ -8,6 +8,8 @@ public class OpenDoors : MonoBehaviour
     public GameObject leftDoor;
     public GameObject rightDoor;
 
+    public AudioSource audioSource;
+
     private bool openDoors = false;
 
     private bool canInvoke = true;
@@ -22,7 +24,11 @@ public class OpenDoors : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        openDoors = true;
+        if(!openDoors)
+            openDoors = true;
+            audioSource.Play();
+
+
     }
 
     void Update()

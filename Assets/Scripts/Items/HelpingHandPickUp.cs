@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class HelpingHandPickUp : MonoBehaviour
 {
-
-    public PlayerHealth playerHealth;
-    public AMainSystem mainSystem;
+    public float healAmount = 10;
+    [HideInInspector] public PlayerHealth playerHealth;
+    [HideInInspector] public AMainSystem mainSystem;
     bool triggered = false;
 
     private void Update()
@@ -24,7 +24,7 @@ public class HelpingHandPickUp : MonoBehaviour
             mainSystem.SpawnPickUpEffects(transform.position);
             
             triggered = true;
-            playerHealth.Heal(25);
+            playerHealth.Heal(healAmount);
             Destroy(gameObject);
         }
     }
