@@ -179,15 +179,10 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
 
         playerHealth.HealOnKill();
 
-        Destroy(gameObject);
 
         //Felix was here
-        if (itemPrefab)
-        {
-            if(Random.Range(0.1f, 100.0f) <= dropChance)
-                Instantiate(itemPrefab, moneySpawnPoint.transform.position, Quaternion.identity);   
-        }
 
+        Destroy(gameObject);
     }
 
     private bool CanExplode(bool criticalDeath)

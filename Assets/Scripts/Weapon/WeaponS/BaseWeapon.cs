@@ -46,7 +46,7 @@ public class BaseWeapon : MonoBehaviour
 
     [Header("Magazine")]
     public ReloadType reloadType;
-    public int baseMaxMagazine = 0;
+    [HideInInspector] public int baseMaxMagazine = 0;
     public int maxMagazine = 0;
     public int currentMagazine = 0;
     [HideInInspector] public float baseReloadTime = 0;

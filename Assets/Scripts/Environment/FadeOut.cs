@@ -12,12 +12,21 @@ public class FadeOut : MonoBehaviour
     bool fadeOut = false;
     bool fadeIn = false;
 
-    CanvasGroup canvasToFade;
+    CanvasGroup canvasToFadeIn;
+    CanvasGroup canvasToFadeOut;
+    //CanvasGroup canvasToFade;
     public GameObject endText;
+    public GameObject endScreenButtons;
 
     void Start()
     {
-        canvasToFade = GameObject.Find("FadeImage").GetComponent<CanvasGroup>();
+        canvasToFadeIn = GameObject.Find("FadeImageIn").GetComponent<CanvasGroup>();
+        canvasToFadeOut = GameObject.Find("FadeImageOut").GetComponent<CanvasGroup>();
+        //canvasToFade = GameObject.Find("FadeImage").GetComponent<CanvasGroup>();
+        
+        endScreenButtons = GameObject.Find("EndScreenButtons");
+        endScreenButtons.SetActive(false);
+
         endText = GameObject.Find("EndText");
         Invoke("StartFadeIn", 0.35f);
     }
@@ -25,21 +34,21 @@ public class FadeOut : MonoBehaviour
     
     void Update()
     {
-        if (fadeOut)
-            canvasToFade.alpha += Time.deltaTime * fadeSpeed;
-
         if (fadeIn)
-            canvasToFade.alpha -= Time.deltaTime * fadeSpeed;
+            canvasToFadeIn.alpha -= Time.deltaTime * fadeSpeed;
+        
+        if (fadeOut)
+            canvasToFadeOut.alpha += Time.deltaTime * fadeSpeed;
 
-        if (canvasToFade.alpha == 0)
+        if (canvasToFadeIn.alpha == 0)
         {
             fadeIn = false;
         }
 
-        if (canvasToFade.alpha == 1 && fadeOut)
+        if (canvasToFadeOut.alpha == 1 && fadeOut)
         {
             Invoke("EnableEndText", 0.5f);
-            //SceneManager.LoadScene(1);
+            Invoke("PauseGame", 0.5f);
         }
 
     }
@@ -57,9 +66,17 @@ public class FadeOut : MonoBehaviour
         }
     }
 
+    private void PauseGame()
+    {
+        Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     private void EnableEndText()
     {
         endText.GetComponent<TextMeshProUGUI>().enabled = true;
+        endScreenButtons.SetActive(true);
     }
 
 }

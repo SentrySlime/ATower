@@ -11,10 +11,17 @@ public class EnemyManager : MonoBehaviour
     bool slowDown = false;
     float slowDuration = 0.03f;
 
+    [Header("Ammo Drop")]
+    public GameObject ammoPrefab;
+    int ammoKillRequirement = 0;
+    int minAmmoSpawnChance = 0;
+    int maxAmmoSpawnChance = 5;
+    int ammoSpawnChance = 0;
+
     [Header("HelpingHandStats")]
     public GameObject helpingHandPrefab;
-    public int helpingHandKillRequirement = 0;
-    public int helpingHandSpawnChance = 3;
+    int helpingHandKillRequirement = 0;
+    int helpingHandSpawnChance = 3;
 
     GameObject player;
     Inventory inventory;
@@ -50,7 +57,8 @@ public class EnemyManager : MonoBehaviour
     public void ReportDeath(int moneyToDrop, Vector3 deathPosition)
     {
         PlayerStatsEffects(deathPosition);
-        inventory.IncreaseMoney(moneyToDrop);
+        CheckForAmmoDrop(deathPosition);
+        //inventory.IncreaseMoney(moneyToDrop);
 
         if (!slowDown)
         {
@@ -59,6 +67,32 @@ public class EnemyManager : MonoBehaviour
                 ActiveSlowDown();
         }
 
+    }
+
+    private void CheckForAmmoDrop(Vector3 deathPosition)
+    {
+
+        ammoKillRequirement++;
+
+        if (ammoKillRequirement > 3)
+        {
+            int randomNumb = Random.Range(1, 100);
+
+            if (randomNumb <= ammoSpawnChance)
+            {
+                Instantiate(ammoPrefab, deathPosition, Quaternion.identity);
+                ammoKillRequirement = 0;
+                ammoSpawnChance = minAmmoSpawnChance;
+            }
+            else
+            {
+                if(ammoSpawnChance < maxAmmoSpawnChance)
+                {
+                    ammoSpawnChance++;
+                    ammoKillRequirement = 0;
+                }
+            }
+        }
     }
 
     public void ActiveSlowDown()

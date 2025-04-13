@@ -7,6 +7,11 @@ using System.Linq;
 
 public class ShootRaycast : BaseWeapon
 {
+    [Header("Line Renderer")]
+    public LineRenderer lineRenderer;
+    Coroutine lineRenderCoroutine;
+    public float lineDuration = 0.9f;
+    public float lineTimer;
 
     public float hitDistance = 0;
 
@@ -59,6 +64,9 @@ public class ShootRaycast : BaseWeapon
 
     private void Awake()
     {
+        if(lineRenderer)
+            lineRenderer.enabled = false;
+
         SetBaseStatsOnSpawn();
 
         //This layermask sends a single raycast and should basically only hit terrain
@@ -130,7 +138,7 @@ public class ShootRaycast : BaseWeapon
             muzzleFlash.Play();
 
         #endregion
-        if(effectPosition)
+        if(effectPosition && shootEffect)
         {
             Instantiate(shootEffect, effectPosition.position, transform.rotation);
         }
@@ -223,6 +231,7 @@ public class ShootRaycast : BaseWeapon
                 else
                 {
                     Vector3 hitDirection = transform.position - raycastHit.point;
+                    SetLineRenderer(raycastHit.point);
                     Instantiate(hitVFX, raycastHit.point, Quaternion.LookRotation(hitDirection));
                 }
             }
@@ -241,6 +250,7 @@ public class ShootRaycast : BaseWeapon
                         var fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal);
                         var tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
                         Vector3 hitDirection = transform.position - raycastHit.point;
+                        SetLineRenderer(hits[i].point);
                         Instantiate(hitEnemyVFX, hits[i].point, Quaternion.LookRotation(hitDirection), alreadyDamaged[i].transform);
                     }
 
@@ -257,6 +267,7 @@ public class ShootRaycast : BaseWeapon
                         var fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal);
                         var tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
                         Vector3 hitDirection = transform.position - raycastHit.point;
+                        SetLineRenderer(hits[i].point);
                         Instantiate(hitEnemyVFX, hits[i].point, Quaternion.LookRotation(hitDirection), alreadyDamaged[i].transform);
                     }
                 }
@@ -272,6 +283,7 @@ public class ShootRaycast : BaseWeapon
                         var fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal);
                         var tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
                         Vector3 hitDirection = transform.position - raycastHit.point;
+                        SetLineRenderer(hits[i].point);
                         Instantiate(hitVFX, hits[i].point, Quaternion.LookRotation(hitDirection), alreadyDamaged[i].transform);
                         tempPierce = 0;
                         
@@ -282,6 +294,7 @@ public class ShootRaycast : BaseWeapon
                     var fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal);
                     var tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
                     Vector3 hitDirection = transform.position - raycastHit.point;
+                    SetLineRenderer(hits[i].point);
                     Instantiate(hitVFX, hits[i].point, Quaternion.LookRotation(hitDirection), alreadyDamaged[i].transform);
 
                     break;
@@ -375,4 +388,47 @@ public class ShootRaycast : BaseWeapon
             //incomingObj.GetComponent<IDamageInterface>().Damage(damage);
         }
     }
+
+    private void SetLineRenderer(Vector3 endPos)
+    {
+        if(!lineRenderer) { return; }
+
+        if(lineRenderCoroutine != null)
+            StopCoroutine(lineRenderCoroutine);
+
+        lineRenderer.enabled = true;
+
+        Vector3 startPos = transform.position;
+
+        int pointCount = 20;
+        lineRenderer.positionCount = pointCount;
+
+        Vector3 controlPoint = (startPos + endPos) * 0.5f + (Random.onUnitSphere + Vector3.up).normalized * 15f;
+
+        for (int i = 0; i < pointCount; i++)
+        {
+            float t = i / (float)(pointCount - 1);
+            Vector3 pointOnCurve = GetQuadraticBezierPoint(startPos, controlPoint, endPos, t);
+            lineRenderer.SetPosition(i, pointOnCurve);
+        }
+
+        lineRenderCoroutine = StartCoroutine(DisableLineRenderer());
+    }
+
+
+    IEnumerator DisableLineRenderer ()
+    {
+        yield return new WaitForSeconds(0.2f);
+        lineRenderer.enabled = false;
+    }
+
+
+    private Vector3 GetQuadraticBezierPoint(Vector3 p0, Vector3 p1, Vector3 p2, float t)
+    {
+        return Mathf.Pow(1 - t, 2) * p0 +
+               2 * (1 - t) * t * p1 +
+               Mathf.Pow(t, 2) * p2;
+    }
+
+
 }

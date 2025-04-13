@@ -66,6 +66,7 @@ MonoBehaviour:
   - {fileID: 6952844890914244580, guid: 32be05b989b007044829d2923610cd45, type: 3}
   - {fileID: 6952844890914244580, guid: 53ee614294fe7bd40984f6032008952e, type: 3}
   - {fileID: 6952844890914244580, guid: 520e8d8d69205634bbfbdf44cac4d933, type: 3}
+  - {fileID: 2749742489556895009, guid: 6c3bf8a88effc3746b070689c03d395a, type: 3}
   pickUps: []
   s_Tier: []
   a_Tier: []
@@ -84,6 +85,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e3f583b03bdefd4d8b7b76bbd86b214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ammoPrefab: {fileID: 9089351037408256591, guid: dc29b4c24852552499a993df5441b567, type: 3}
+  ammoKillRequirement: 0
+  minAmmoSpawnChance: 1
+  maxAmmoSpawnChance: 5
+  ammoSpawnChance: 0
   helpingHandPrefab: {fileID: 3289367216350407278, guid: 375e8f0155830b6488570adf9541f3e1, type: 3}
   helpingHandKillRequirement: 0
   helpingHandSpawnChance: 3
@@ -173,7 +179,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: af13af6bdb1798d448fdf5c42414c087, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.07
+  m_Volume: 0.02
   m_Pitch: 1
   Loop: 1
   Mute: 0

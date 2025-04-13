@@ -45,8 +45,11 @@ public class Coin : MonoBehaviour
     private void GiveMoney()
     {
         if(playerStats.increasedMoneyDrop)
-            inventory.IncreaseMoney(8);
-        else
             inventory.IncreaseMoney(5);
+        else
+        {
+            int coinAmount = Random.Range(1, 3);
+            inventory.IncreaseMoney(coinAmount);
+        }
     }
 }

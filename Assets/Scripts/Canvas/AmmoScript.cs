@@ -134,11 +134,19 @@ public class AmmoScript : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            ammoList[currentMagazine].GetComponent<Image>().enabled = false;
-            currentMagazine--;
+            if (currentMagazine >= 0 && currentMagazine < ammoList.Count)
+            {
+                ammoList[currentMagazine].GetComponent<Image>().enabled = false;
+                currentMagazine--;
+            }
+            else
+            {
+                print("Ammo outside of bounds");
+                break;
+            }
         }
-        
     }
+
 
     //Trigggers to refill the entier magazine
     public void RefillMagazine()

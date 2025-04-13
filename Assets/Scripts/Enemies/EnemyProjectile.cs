@@ -86,8 +86,6 @@ public class EnemyProjectile : MonoBehaviour
             MoveSine();
         else if (homing && !cantHome)
             HomingLogic();
-        else if (affectedByGravity)
-            print("ArcMovement");
         else
             MoveForward();
 
