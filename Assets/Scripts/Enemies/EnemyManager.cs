@@ -54,10 +54,11 @@ public class EnemyManager : MonoBehaviour
         
     }
 
-    public void ReportDeath(int moneyToDrop, Vector3 deathPosition)
+    public void ReportDeath(Vector3 deathPosition, bool canDropAmmo)
     {
         PlayerStatsEffects(deathPosition);
-        CheckForAmmoDrop(deathPosition);
+        if(canDropAmmo)
+            CheckForAmmoDrop(deathPosition);
         //inventory.IncreaseMoney(moneyToDrop);
 
         if (!slowDown)

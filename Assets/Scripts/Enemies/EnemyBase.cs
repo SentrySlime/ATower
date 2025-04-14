@@ -8,7 +8,6 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     [Tooltip("This decides how much this enemy should have")]
     public float maxHealth = 100;
     public float currentHealth = 100;
-    public int moneyAmount = 100;
 
     [Header("Explosion")]
     public bool canExplode = false;
@@ -52,6 +51,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
 
     [Header("Extra")]
     public bool shouldReportDeath = true;
+    public bool canDropAmmo = true;
     public ParticleSystem damagedPS;
     List<GameObject> projectileChildren = new List<GameObject>();
 
@@ -152,7 +152,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
         }
 
         if(shouldReportDeath)
-            enemyManager.ReportDeath(moneyAmount, moneySpawnPoint.position);
+            enemyManager.ReportDeath(moneySpawnPoint.position.normalized, canDropAmmo);
 
         if (moneySpawnPoint != null)
         {

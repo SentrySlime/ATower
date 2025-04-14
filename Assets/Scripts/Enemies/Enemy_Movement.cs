@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Enemy_Movement : MonoBehaviour
 {
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
     GameObject player;
     Vector3 lastValidLocation;
 
@@ -32,11 +32,19 @@ public class Enemy_Movement : MonoBehaviour
     private float newDestinationRate = 0.5f;
     private float newDestinationTimer = 0;
 
+    [Header("Movement perlin")]
+    public float noiseScale = 1.0f;
+    public float pathOffsetAmount = 5.0f;
+    public float updateRate = 1f;
+
+    private float movementTimer = 0f;
+    public float noiseOffset;
+
     void Start()
     {
 
         //firingRate = Random.Range(2, 4);
-
+        noiseOffset = Random.Range(0f, 100f);
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         MeleeAttack();
@@ -50,91 +58,136 @@ public class Enemy_Movement : MonoBehaviour
             return;
         }
 
+        movementTimer += Time.deltaTime;
+        if (movementTimer >= updateRate)
+        {
+            if (agent && agent.isOnNavMesh)
+            {
+                EnemyMove();
+                movementTimer = 0f;
+            }
+        }
+
         NoticePlayer();
 
         if (!foundPlayer) { return; }
 
         float playerDistance = Vector3.Distance(transform.position, player.transform.position);
 
-        if(agent && agent.isOnNavMesh)
-        EnemyMove();
+        //if(agent && agent.isOnNavMesh)
+        //EnemyMove();
 
-        if (timer < firingRate)
-        {
-            timer += Time.deltaTime;
-        }
-        else if (playerDistance <= meleeDistance_ && meleeAttack)
-        {
-            Vector3 playerDirection = player.transform.position - transform.position;
+        #region attacks
 
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, playerDirection, out hit))
-            {
-                if (hit.transform.CompareTag("Player"))
-                {
-                    timer = 0;
-                    MeleeAttack();
-                }
-            }
+        //if (timer < firingRate)
+        //{
+        //    timer += Time.deltaTime;
+        //}
+        //else if (playerDistance <= meleeDistance_ && meleeAttack)
+        //{
+        //    Vector3 playerDirection = player.transform.position - transform.position;
 
-        }
-        else if (playerDistance <= rangedDistance_ && rangedAttack)
-        {
+        //    RaycastHit hit;
+        //    if (Physics.Raycast(transform.position, playerDirection, out hit))
+        //    {
+        //        if (hit.transform.CompareTag("Player"))
+        //        {
+        //            timer = 0;
+        //            MeleeAttack();
+        //        }
+        //    }
 
-                    RangedAttack();
-                    timer = 0;
-            Vector3 playerDirection = player.transform.position - transform.position;
+        //}
+        //else if (playerDistance <= rangedDistance_ && rangedAttack)
+        //{
 
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, playerDirection, out hit))
-            {
-                
+        //            RangedAttack();
+        //            timer = 0;
+        //    Vector3 playerDirection = player.transform.position - transform.position;
 
-                if (hit.transform.CompareTag("Player"))
-                {
+        //    RaycastHit hit;
+        //    if (Physics.Raycast(transform.position, playerDirection, out hit))
+        //    {
 
-                }
-            }
-        }
+
+        //        if (hit.transform.CompareTag("Player"))
+        //        {
+
+        //        }
+        //    }
+        //}
 
         //agent.Move(player.transform.position);
+
+        #endregion
     }
+
+    //public void EnemyMove()
+    //{
+    //    NavMeshPath navMeshPath = new NavMeshPath();
+
+    //    if (agent.CalculatePath(player.transform.position, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete)
+    //    {
+    //        lastValidLocation = player.transform.position;
+    //        agent.isStopped = false;
+    //        agent.SetDestination(lastValidLocation);
+
+    //    }
+
+    //    if (agent.CalculatePath(lastValidLocation, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete)
+    //    {
+
+    //        if (agent.remainingDistance <= 6 && agent.remainingDistance != 0)
+    //        {
+    //            //agent.ResetPath();
+    //            //agent.isStopped = true;
+
+    //        }
+    //        else
+    //        {
+    //            agent.isStopped = false;
+    //            agent.SetDestination(lastValidLocation);
+    //        }
+
+
+    //    }
+    //    else
+    //    {
+
+    //        agent.ResetPath();
+    //        agent.isStopped = true;
+
+    //    }
+    //}
 
     public void EnemyMove()
     {
         NavMeshPath navMeshPath = new NavMeshPath();
 
-        if (agent.CalculatePath(player.transform.position, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete)
+        // Direction from enemy to player
+        Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
+
+        // Get Perlin-based offset
+        float time = Time.time + noiseOffset;
+        float noiseX = Mathf.PerlinNoise(time * noiseScale, 0f);
+        float noiseZ = Mathf.PerlinNoise(0f, time * noiseScale);
+
+        Vector3 noiseOffsetVec = new Vector3((noiseX - 0.5f) * 2f, 0, (noiseZ - 0.5f) * 2f) * pathOffsetAmount;
+
+        // Combine direct path with noise offset
+        Vector3 targetPosition = player.transform.position + noiseOffsetVec;
+
+        // Validate path
+        if (agent.CalculatePath(targetPosition, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete)
         {
-            lastValidLocation = player.transform.position;
+            lastValidLocation = targetPosition;
             agent.isStopped = false;
             agent.SetDestination(lastValidLocation);
-
-        }
-
-        if (agent.CalculatePath(lastValidLocation, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete)
-        {
-
-            if (agent.remainingDistance <= 6 && agent.remainingDistance != 0)
-            {
-                //agent.ResetPath();
-                //agent.isStopped = true;
-
-            }
-            else
-            {
-                agent.isStopped = false;
-                agent.SetDestination(lastValidLocation);
-            }
-
-
         }
         else
         {
-
             agent.ResetPath();
             agent.isStopped = true;
-
         }
     }
 
