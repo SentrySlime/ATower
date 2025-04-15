@@ -143,14 +143,13 @@ public class LevelGeneration : MonoBehaviour
         }
         else
         {
-
             roomCount++;
             RoomScript newRoom = Instantiate(rooms[roomIndex], spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
             spawnTransform = newRoom.point2.gameObject;
+            if (removeRooms)
+                rooms.RemoveAt(roomIndex);
         }
 
-        if (removeRooms)
-            rooms.RemoveAt(roomIndex);
 
         
     }
