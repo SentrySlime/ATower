@@ -43,7 +43,9 @@ public class LevelGeneration : MonoBehaviour
     void Start()
     {
         navMeshManager = GetComponent<NavMeshManager>();
-        allRoomCount = rooms.Count;
+        
+        allRoomCount = rooms.Count + 2;
+        
         if (!removeRooms)
             allRoomCount = amountOfRoomsToSpawn;
     }
@@ -146,6 +148,7 @@ public class LevelGeneration : MonoBehaviour
             roomCount++;
             RoomScript newRoom = Instantiate(rooms[roomIndex], spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
             spawnTransform = newRoom.point2.gameObject;
+
             if (removeRooms)
                 rooms.RemoveAt(roomIndex);
         }

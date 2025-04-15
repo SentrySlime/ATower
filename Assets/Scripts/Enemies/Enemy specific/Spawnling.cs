@@ -5,8 +5,9 @@ using UnityEngine.AI;
 
 public class Spawnling : MonoBehaviour
 {
-    Vector3 lastValidLocation;
     public NavMeshAgent agent;
+    Vector3 lastValidLocation;
+    
     GameObject player;
     ExplosionSystem explosionSystem;
     Animator animator;
@@ -69,7 +70,7 @@ public class Spawnling : MonoBehaviour
 
         if (agent.velocity.magnitude > 0)
         {
-        animator.SetBool("Moving", true);
+            animator.SetBool("Moving", true);
             //audioSource.UnPause();
         }
         else
@@ -119,16 +120,28 @@ public class Spawnling : MonoBehaviour
 
         Vector3 targetPosition = player.transform.position + noiseOffsetVec;
 
-        if (agent.CalculatePath(targetPosition, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete)
+        NavMeshPath path = new NavMeshPath();
+
+        if (agent.CalculatePath(targetPosition, path))
         {
-            lastValidLocation = targetPosition;
-            agent.isStopped = false;
-            agent.SetDestination(lastValidLocation);
-        }
-        else
-        {
-            agent.ResetPath();
-            agent.isStopped = true;
+            if (path.status == NavMeshPathStatus.PathComplete)
+            {
+                agent.isStopped = false;
+                agent.SetDestination(targetPosition);
+            }
+            else if (path.status == NavMeshPathStatus.PathPartial)
+            {
+                if (path.corners.Length > 1)
+                {
+                    Vector3 lastReachablePoint = path.corners[path.corners.Length - 1];
+                    agent.isStopped = false;
+                    agent.SetDestination(lastReachablePoint);
+                }
+            }
+            else
+            {
+                Roam();
+            }
         }
     }
 

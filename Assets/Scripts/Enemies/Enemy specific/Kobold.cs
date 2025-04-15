@@ -31,6 +31,11 @@ public class Kobold : MonoBehaviour, INoticePlayer
     private float idleBehaviourRate = 0.5f;
     private float idleBehaviourTimer = 0;
 
+    [Header("Movement")]
+    public bool roam = false;
+    private float newDestinationRate = 0.5f;
+    private float newDestinationTimer = 0;
+
     [Header("Misc")]
     public bool FoundPlayer = false;
     public float moveSpeed = 7;
@@ -66,6 +71,11 @@ public class Kobold : MonoBehaviour, INoticePlayer
     
     void Update()
     {
+        if(roam)
+        {
+            
+        }
+
         playerDist = Vector3.Distance(transform.position, player.transform.position);
         
         if(agent.isOnOffMeshLink)
@@ -103,6 +113,8 @@ public class Kobold : MonoBehaviour, INoticePlayer
 
     public void IdleBehaviour()
     {
+        Roam();
+
         if (idleBehaviourTimer < idleBehaviourRate)
         {
             idleBehaviourTimer += Time.deltaTime;
@@ -112,6 +124,7 @@ public class Kobold : MonoBehaviour, INoticePlayer
         idleBehaviourTimer = 0;
 
         animator.SetBool("CloseToAttack", false);
+
 
         if (playerDist < seePlayerRangedDistance && HasLineOfSight())
         {
@@ -240,11 +253,58 @@ public class Kobold : MonoBehaviour, INoticePlayer
         StartCoroutine(ShootAfterTime(0.25f));
     }
 
+    public void Roam()
+    {
+        if (newDestinationTimer < newDestinationRate)
+        {
+            newDestinationTimer += Time.deltaTime;
+        }
+        else
+        {
+            Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * 30;
+            randomDirection += transform.position;
+            NavMeshHit hit;
+            NavMesh.SamplePosition(randomDirection, out hit, 10, 1);
+            Vector3 finalPosition = hit.position;
+            newDestinationTimer = 0;
+            agent.SetDestination(finalPosition);
+        }
+    }
+
     public void MoveToPlayer()
     {
-        agent.destination = player.transform.position;
-        agent.isStopped = false;
+        NavMeshPath path = new NavMeshPath();
+        Vector3 targetPosition = player.transform.position;
+
+        if (agent.CalculatePath(targetPosition, path))
+        {
+            if (path.status == NavMeshPathStatus.PathComplete)
+            {
+                // Full path is valid — go directly to the player
+                agent.isStopped = false;
+                agent.SetDestination(targetPosition);
+            }
+            else if (path.status == NavMeshPathStatus.PathPartial)
+            {
+                // Partial path — move as far as we can toward the player
+                if (path.corners.Length > 1)
+                {
+                    Vector3 lastReachablePoint = path.corners[path.corners.Length - 1];
+                    agent.isStopped = false;
+                    agent.SetDestination(lastReachablePoint);
+                }
+            }
+            else
+            {
+                currentState = CurrentState.idle;
+            }
+        }
+        else
+        {
+            currentState = CurrentState.idle;
+        }
     }
+
 
     public void Stop()
     {
