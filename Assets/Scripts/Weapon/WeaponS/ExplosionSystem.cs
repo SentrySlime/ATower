@@ -40,4 +40,11 @@ public class ExplosionSystem : MonoBehaviour
         tempExplosions.GetComponent<IExplosionInterface>().InitiateExplosion(mainSystem, explosionRadius, damage, true);
     }
 
+    public void SpawnExplosion(Vector3 explosionPos, float explosionRadius, int damage, bool enemyOwned)
+    {
+        tempExplosions = Instantiate(standardExplosion, explosionPos, Quaternion.identity);
+
+        tempExplosions.GetComponent<IExplosionInterface>().InitiateExplosion(mainSystem, explosionRadius, damage, true);
+    }
+
 }

@@ -33,18 +33,22 @@ public class Enemy_Movement : MonoBehaviour
     private float newDestinationTimer = 0;
 
     [Header("Movement perlin")]
-    public float noiseScale = 1.0f;
-    public float pathOffsetAmount = 5.0f;
-    public float updateRate = 1f;
+    float noiseScale = 1.0f;
+    float pathOffsetAmount = 5.0f;
+    float updateRate = 1f;
 
-    private float movementTimer = 0f;
+    float movementTimer = 0f;
     public float noiseOffset;
 
     void Start()
     {
 
-        //firingRate = Random.Range(2, 4);
+        
+        //noiseScale = Random.Range(8, 12);
+        //pathOffsetAmount = Random.Range(40, 50);
+        updateRate = Random.Range(0.5f, 1f);
         noiseOffset = Random.Range(0f, 100f);
+
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         MeleeAttack();

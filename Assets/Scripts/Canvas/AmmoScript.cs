@@ -44,6 +44,21 @@ public class AmmoScript : MonoBehaviour
     Vector2 energyCellSize = new Vector2(90f, 45f);
     Vector2 energySpacing = new Vector2(0, -19);
 
+    [Header("EnergyDark")]
+    public Sprite energyDarkSprite;
+    Vector2 energyDarkCellSize = new Vector2(90f, 45f);
+    Vector2 energyDarkSpacing = new Vector2(0, -19);
+
+    [Header("EnergyRifle")]
+    public Sprite energyRifleSprite;
+    Vector2 energyRifleCellSize = new Vector2(37.5f, 18.75f);
+    Vector2 energyRifleSpacing = new Vector2(0, -7);
+
+    [Header("MagicPistol")]
+    public Sprite magicPistolSprite;
+    Vector2 magicPistolCellSize = new Vector2(50, 25);
+    Vector2 magicPistolSpacing = new Vector2(0, -10);
+
     [Header("Reference")]
     public Sprite ammoSprite;
     Vector2 cellSize;
@@ -235,7 +250,7 @@ public class AmmoScript : MonoBehaviour
 
     public void SetAmmoType(BaseWeapon.WeaponType weaponType)
     {
-        if (weaponType == BaseWeapon.WeaponType.handgun)
+        if (weaponType == BaseWeapon.WeaponType.Handgun)
             SetCellsAndSpacing(pistolSprite, pistolCellSize, pistolSpacing);
         if (weaponType == BaseWeapon.WeaponType.AssaultRifle)
             SetCellsAndSpacing(rifleSprite, rifleCellSize, rifleSpacing);
@@ -247,6 +262,12 @@ public class AmmoScript : MonoBehaviour
             SetCellsAndSpacing(explosiveSprite, explosiveCellSize, explosiveSpacing);
         if (weaponType == BaseWeapon.WeaponType.Energy)
             SetCellsAndSpacing(energySprite, energyCellSize, energySpacing);
+        if (weaponType == BaseWeapon.WeaponType.EnergyDark)
+            SetCellsAndSpacing(energyDarkSprite, energyDarkCellSize, energyDarkSpacing);
+        if (weaponType == BaseWeapon.WeaponType.EnergyRifle)
+            SetCellsAndSpacing(energyRifleSprite, energyRifleCellSize, energyRifleSpacing);
+        if (weaponType == BaseWeapon.WeaponType.MagicHandgun)
+            SetCellsAndSpacing(magicPistolSprite, magicPistolCellSize, magicPistolSpacing);
     }
 
     private void SetCellsAndSpacing(Sprite sprite, Vector2 cellsize, Vector2 spacing)

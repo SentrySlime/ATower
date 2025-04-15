@@ -26,11 +26,12 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     public Transform moneySpawnPoint;
     public GameObject killMarker;
     public GameObject homingTarget;
-    
+
 
 
 
     //HealingGun healingGun;
+    [HideInInspector] public Spawner spawner;
     HitmarkerLogic hitMarkerLogic;
     LayerMask layerMask;
     PlayerHealth playerHealth;
@@ -137,7 +138,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
         return finalDamage;
     }
 
-    private void Die(bool criticalDeath)
+    public void Die(bool criticalDeath)
     {
         dead = true;
 
@@ -173,7 +174,9 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
             }
         }
 
-        
+        if (spawner)
+            spawner.DecreaseMinionCount();
+            
         if(dieSFX)
             Instantiate(dieSFX);
 

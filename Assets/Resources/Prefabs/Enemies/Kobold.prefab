@@ -179,7 +179,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 100
-  moneyAmount: 0
   canExplode: 1
   explodeOnDeath: 0
   moneyPrefab: {fileID: 5753959484571427866, guid: 5a06e082355407f48a81c50a87cc3045, type: 3}
@@ -191,10 +190,11 @@ MonoBehaviour:
   homingTarget: {fileID: 1503445920806744871}
   dropLoot: 1
   itemPrefab: {fileID: 9089351037408256591, guid: dc29b4c24852552499a993df5441b567, type: 3}
-  dropChance: 0.1
+  dropChance: 0.05
   dead: 0
   gauranteeItemDrop: 0
   shouldReportDeath: 1
+  canDropAmmo: 1
   damagedPS: {fileID: 0}
 --- !u!114 &1732250573
 MonoBehaviour:
@@ -20715,7 +20715,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 150
   currentHealth: 150
-  moneyAmount: 100
   canExplode: 0
   explodeOnDeath: 0
   moneyPrefab: {fileID: 0}
@@ -20731,6 +20730,7 @@ MonoBehaviour:
   dead: 0
   gauranteeItemDrop: 0
   shouldReportDeath: 1
+  canDropAmmo: 1
   damagedPS: {fileID: 0}
 --- !u!65 &1903837400
 BoxCollider:

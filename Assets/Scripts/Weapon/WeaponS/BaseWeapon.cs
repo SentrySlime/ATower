@@ -25,12 +25,16 @@ public class BaseWeapon : MonoBehaviour
 
     public enum WeaponType
     {
-        handgun,
+        Handgun,
         AssaultRifle,
         Shotgun,
         Arrow,
         Explosive,
-        Energy
+        Energy,
+        EnergyDark,
+        EnergyRifle,
+        MagicHandgun
+         
     }
 
     public WeaponType type;
