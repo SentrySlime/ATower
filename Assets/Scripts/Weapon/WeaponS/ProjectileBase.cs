@@ -69,7 +69,8 @@ public class ProjectileBase : MonoBehaviour
     Vector3 secondPos;
     PlayerStats playerStats;
     //ExplosionSystem explosionSystem;
-    AMainSystem aMainSysteM;
+    [HideInInspector] public AMainSystem aMainSysteM;
+    [HideInInspector] public ShootSystem shootSystem;
     HitmarkerLogic hitMarkerLogic;
     List<GameObject> hitEnemies = new List<GameObject>();
 
@@ -82,38 +83,42 @@ public class ProjectileBase : MonoBehaviour
         //hitMarkerLogic = GameObject.FindGameObjectWithTag("HitMarker").GetComponent<HitmarkerLogicd>();
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
         aMainSysteM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AMainSystem>();
+        shootSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShootSystem>();
         //explosionSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ExplosionSystem>();
         enemyMask = LayerMask.GetMask("Enemy");
 
 
     }
 
-    void Update()
+    public virtual void Update()
     {
         CheckLifeTimer();
 
         if (homing)
         {
+            print("Homing");
             HomingLogic();
         }
         else
         {
+            print("Moving Forward");
             MoveForward();
         }
 
+        CallOnUpdate();
+
         if (UseAdvancedCalculations)
             AdvancedCollision();
+
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
-
         OnHitTrigger(other);
-
-
     }
 
-    public virtual void OnHitTrigger(Collider other)
+    protected void OnHitTrigger(Collider other)
     {
 
         if (other.CompareTag("Enemy"))
@@ -167,7 +172,7 @@ public class ProjectileBase : MonoBehaviour
     }
 
 
-    public virtual void ImpactBehaviour(GameObject hitEnemy, bool incomingWeakSpotShot)
+    protected void ImpactBehaviour(GameObject hitEnemy, bool incomingWeakSpotShot)
     {
         //if (!hitEnemy.CompareTag("Enemy")) { return; }
         //GameObject enemyRoot = hitEnemy.gameObject;
@@ -182,7 +187,7 @@ public class ProjectileBase : MonoBehaviour
         }
     }
 
-    public virtual void DealDamage(GameObject enemyRoot, bool incomingWeakSpotShot)
+    protected void DealDamage(GameObject enemyRoot, bool incomingWeakSpotShot)
     {
         //hitMarkerLogic.EnableHitMarker();
         aMainSysteM.DealDamage(enemyRoot, damage, true, incomingWeakSpotShot);
@@ -191,7 +196,7 @@ public class ProjectileBase : MonoBehaviour
         CheckPierce();
     }
 
-    public virtual void AdvancedCollision()
+    protected void AdvancedCollision()
     {
         secondPos = transform.position;
 
@@ -208,7 +213,7 @@ public class ProjectileBase : MonoBehaviour
 
 
 
-    public void ExplosiveShot(GameObject parent)
+    protected void ExplosiveShot(GameObject parent)
     {
         aMainSysteM.SpawnExplosion(transform.position, explosiveRadius, explosiveDamage, parent);
  
@@ -217,7 +222,7 @@ public class ProjectileBase : MonoBehaviour
 
 
 
-    public virtual void CheckPierce()
+    protected void CheckPierce()
     {
         pierceAmount--;
 
@@ -227,7 +232,7 @@ public class ProjectileBase : MonoBehaviour
         }
     }
 
-    public virtual void CheckLifeTimer()
+    protected void CheckLifeTimer()
     {
         if (lifeTimer < lifeDuration)
         {
@@ -237,31 +242,29 @@ public class ProjectileBase : MonoBehaviour
             EndObjectLife();
     }
 
-    public virtual void EndObjectLife()
+    protected void EndObjectLife()
     {
         //-----Eventually pool this object
         Destroy(gameObject);
     }
 
     #region Movement Logic -----------------------------------
-    public virtual void MoveForward()
+    protected void MoveForward()
     {
-
-        if(useGravity)
+        if (useGravity)
         {
-
             velocity += Physics.gravity * gravityMagnitude * Time.deltaTime;
-
             transform.position += velocity * Time.deltaTime;
-
             transform.position += transform.forward * projectileSpeed * Time.deltaTime;
         }
         else
-        transform.position += transform.forward * projectileSpeed * Time.deltaTime;
-
+        {
+            print("transform forwad");
+            transform.position += transform.forward * projectileSpeed * Time.deltaTime;
+        }
     }
 
-    public virtual void HomingLogic()
+    protected void HomingLogic()
     {
         if (homingTimer < nonHomingDuration)
         {
@@ -279,7 +282,7 @@ public class ProjectileBase : MonoBehaviour
         }
     }
 
-    public virtual void MoveTowardsTarget()
+    protected void MoveTowardsTarget()
     {
         if (!target)
         {
@@ -294,7 +297,7 @@ public class ProjectileBase : MonoBehaviour
         }
     }
 
-    public void HomingCheckTimer()
+    protected void HomingCheckTimer()
     {
         if (homingCheckTimer < nonHomingDuration)
         {
@@ -307,7 +310,7 @@ public class ProjectileBase : MonoBehaviour
         }
     }
 
-    public virtual void GetTarget()
+    protected void GetTarget()
     {
         Collider[] targets = Physics.OverlapSphere(transform.position, 75, enemyMask);
 
@@ -325,6 +328,10 @@ public class ProjectileBase : MonoBehaviour
 
     }
 
+    public virtual void CallOnUpdate()
+    {
+
+    }
 
     #endregion
 }

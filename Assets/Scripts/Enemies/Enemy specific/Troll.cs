@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using static Kobold;
+using static UnityEngine.UI.Image;
 
 public class Troll : MonoBehaviour, INoticePlayer
 {
@@ -25,17 +26,19 @@ public class Troll : MonoBehaviour, INoticePlayer
     [SerializeField] private GameObject leftfoot;
     
     [Header("Behaviour")]
-    public float interactDistance_ = 125f;
-    public float distanceToPlayer = 0;
+    float interactDistance_ = 125f;
+    float distanceToPlayer = 0;
     bool foundPlayer;
 
     [Header("DonutExplosion")]
-    public bool attacking = false;
+    bool attacking = false;
 
     public GameObject donutExplosionVFX;
     public GameObject donutExplosion;
     public Transform donutExplosionSpawnTransform;
     public float donutExplosionTimer = 0.4f;
+
+    public LayerMask donutLayerMask;
 
     float animationTimer = 0.6f;
     float speedTimer = 1.75f;
@@ -47,7 +50,6 @@ public class Troll : MonoBehaviour, INoticePlayer
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        //Invoke("ShootAnimation", 1);
     }
 
 
@@ -79,7 +81,7 @@ public class Troll : MonoBehaviour, INoticePlayer
         }
 
 
-        if(distanceToPlayer < 20)
+        if(distanceToPlayer < 30)
         {
             if(attacking == false)
             {
@@ -216,7 +218,13 @@ public class Troll : MonoBehaviour, INoticePlayer
             Instantiate(donutExplosionVFX, donutExplosionSpawnTransform.position + new Vector3(0, -6.5f, 0), Quaternion.identity);
         
         if (donutExplosion)
-            Instantiate(donutExplosion, donutExplosionSpawnTransform.position + new Vector3(0, -8.5f, 0), Quaternion.identity);
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(donutExplosionSpawnTransform.position, -transform.up, out hit, 20, donutLayerMask))
+            {
+                Instantiate(donutExplosion, hit.point + new Vector3(0, 3, 0), Quaternion.identity);
+            }
+        }
     }
 
     #endregion
