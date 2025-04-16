@@ -420,7 +420,7 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
         beamIsTelegraphing = true;
 
         Instantiate(telegraphVFX, telegraphPosition.transform.position, telegraphPosition.transform.rotation, telegraphPosition.transform);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
         beamAttacking = true;
         StartCoroutine(fade());
         beamIsTelegraphing = false;

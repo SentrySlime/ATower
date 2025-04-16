@@ -19,7 +19,7 @@ public class DestroyAfterTime : MonoBehaviour
         if (destroyTime < destroyTimer)
             destroyTime += Time.deltaTime;
         else
-            Destroy(this);
+            Destroy(gameObject);
         
     }
 
