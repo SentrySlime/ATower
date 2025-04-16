@@ -16,6 +16,8 @@ public class OpenDoors : MonoBehaviour
 
     ScreenShake screenShake;
 
+    bool triggered = false;
+
     void Start()
     {
         screenShake = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ScreenShake>();
@@ -24,6 +26,10 @@ public class OpenDoors : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        if(triggered) { return; }
+
+        triggered = true;
+
         if(!openDoors)
             openDoors = true;
             audioSource.Play();

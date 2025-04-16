@@ -167,7 +167,6 @@ public class EnemyProjectile : MonoBehaviour
         if (Physics.SphereCast(firstPos, projectileSize, direction, out hit, length, layerMask))
         {
             OnTriggerEnter(hit.collider);
-
         }
 
         firstPos = secondPos;
@@ -206,7 +205,6 @@ public class EnemyProjectile : MonoBehaviour
 
     float MapValue(float mainValue, float inValueMin, float inValueMax, float outValueMin, float outValueMax)
     {
-
         return (mainValue - inValueMin) * (outValueMax - outValueMin) / (inValueMax - inValueMin) + outValueMin;
     }
 

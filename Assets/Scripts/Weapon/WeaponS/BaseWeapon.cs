@@ -123,8 +123,12 @@ public class BaseWeapon : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetMouseButtonDown(0) /*|| Input.GetKeyDown(KeyCode.R)*/)
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (HasEmptyMagazine()) { return; }
+
             StartCoroutine(ReloadInteruption());
+        }
 
         if (currentMagazine == 0 && currentAmmo == 0)
         {
@@ -255,6 +259,18 @@ public class BaseWeapon : MonoBehaviour
     public bool HasFullMagazine()
     {
         if(currentMagazine == maxMagazine)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool HasEmptyMagazine()
+    {
+        if (currentMagazine == 0)
         {
             return true;
         }

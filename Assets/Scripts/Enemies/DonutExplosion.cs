@@ -13,7 +13,7 @@ public class DonutExplosion : MonoBehaviour
     float explosionScale = 1;
 
     float damageRate = 0.75f;
-    float damageTimer = 0;
+    float damageTimer = 0.75f;
 
     public float maxRadius = 50;
 
@@ -41,7 +41,7 @@ public class DonutExplosion : MonoBehaviour
         if (!other.CompareTag("Player")) { return; }
 
         float distance = Vector3.Distance(transform.position, other.transform.position);
-        float tempRadius = (currentRadius - 1) * 0.5f;
+        float tempRadius = (currentRadius - 2) * 0.5f;
 
         if (distance >= tempRadius)
         {

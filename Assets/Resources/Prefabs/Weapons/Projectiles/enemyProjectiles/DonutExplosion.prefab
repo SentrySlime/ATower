@@ -2171,7 +2171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 30
-  scaleSpeed: 3
+  scaleSpeed: 9
   psScaleSpeed: 1
   currentRadius: 1
   maxRadius: 75
@@ -2210,11 +2210,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5421101633274152638, guid: 192659e4ec62d0c4d8d832885e963eb6, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 9.8
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5421101633274152638, guid: 192659e4ec62d0c4d8d832885e963eb6, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 2.5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5421101633274152638, guid: 192659e4ec62d0c4d8d832885e963eb6, type: 3}
       propertyPath: InitialModule.startColor.maxColor.a

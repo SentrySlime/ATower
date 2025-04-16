@@ -11,12 +11,15 @@ public class FadeOut : MonoBehaviour
 
     bool fadeOut = false;
     bool fadeIn = false;
+    bool triggered = false;
 
     CanvasGroup canvasToFadeIn;
     CanvasGroup canvasToFadeOut;
     //CanvasGroup canvasToFade;
     public GameObject endText;
     public GameObject endScreenButtons;
+
+    public Collider triggerCollider;
 
     void Start()
     {
@@ -60,8 +63,13 @@ public class FadeOut : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (triggered) { return; }
+
+        triggerCollider.isTrigger = false;
+
+        if (other.CompareTag("Player"))
         {
+            triggered = true;
             fadeOut = true;
         }
     }

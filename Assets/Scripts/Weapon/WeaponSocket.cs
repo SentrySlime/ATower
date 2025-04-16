@@ -123,7 +123,8 @@ public class WeaponSocket : MonoBehaviour
             {
                 if(reloadIcon.enabled) 
                 { 
-                    StopReload(); 
+                    if(!equippedWeapon.HasEmptyMagazine())
+                        StopReload(); 
                     
                     if(equippedWeapon.currentMagazine < equippedWeapon.ammoPerShot)
                         return; 

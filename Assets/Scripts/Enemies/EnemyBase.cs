@@ -153,7 +153,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
         }
 
         if(shouldReportDeath)
-            enemyManager.ReportDeath(moneySpawnPoint.position.normalized, canDropAmmo);
+            enemyManager.ReportDeath(moneySpawnPoint.position, canDropAmmo);
 
         if (moneySpawnPoint != null)
         {

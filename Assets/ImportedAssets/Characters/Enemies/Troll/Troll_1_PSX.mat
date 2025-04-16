@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Troll_1_PSX
   m_Shader: {fileID: 4800000, guid: 94cb0d6305cd4a743b1d2ec684e277de, type: 3}
-  m_ShaderKeywords: DIFF_VERTEX OPAQUE SPEC_GOURAUD _DIFFMODEL_VERTEX _DRAWDIST_ON
+  m_ShaderKeywords: CUTOUT DIFF_VERTEX SPEC_GOURAUD _DIFFMODEL_VERTEX _DRAWDIST_ON
     _EMISSION _SPECMODEL_GOURAUD
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
@@ -96,7 +96,7 @@ Material:
     - _NormalMapDepth: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RenderMode: 0
+    - _RenderMode: 2
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecModel: 0

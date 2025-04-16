@@ -172,9 +172,9 @@ public class EnemyManager : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-        if(weaponSocket.equippedWeapon == null) { yield return null; }
-
-        weaponSocket.equippedWeapon.GiveAmmoToMagazine(playerStats.returnAmmoOnkill);
+        if(weaponSocket.equippedWeapon != null)
+        {
+            weaponSocket.equippedWeapon.GiveAmmoToMagazine(playerStats.returnAmmoOnkill);
+        }
     }
-
 }
