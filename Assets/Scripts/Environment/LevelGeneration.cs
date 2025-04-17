@@ -91,7 +91,7 @@ public class LevelGeneration : MonoBehaviour
 
     private int GetRandomCorridor()
     {
-        return Random.Range(0, corridors.Count);
+        return Random.Range(0, corridors.Count+1);
     }
 
     private void GenerateLevel()

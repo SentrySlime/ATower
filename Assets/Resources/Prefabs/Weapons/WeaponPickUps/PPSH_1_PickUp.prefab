@@ -9619,6 +9619,7 @@ GameObject:
   - component: {fileID: 6931329448293354154}
   - component: {fileID: 6931329448293354155}
   - component: {fileID: 6931329448293354148}
+  - component: {fileID: 2724401682568691992}
   m_Layer: 0
   m_Name: PPSH_1_PickUp
   m_TagString: Item
@@ -9666,10 +9667,23 @@ BoxCollider:
   m_GameObject: {fileID: 6931329448293354149}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.4250958, y: 0.7227416, z: 1.5754023}
   m_Center: {x: 0.0020388365, y: -0.044850588, z: -0.10271287}
+--- !u!135 &2724401682568691992
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6931329448293354149}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2127992049310788994
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -60,7 +60,7 @@ public class AMainSystem : MonoBehaviour
         if(friendly)
         {
             DamageEnemy(incomingObj, incomingDamage, false);
-            UILogic();
+            UILogic(false);
         }
         else
         {
@@ -73,7 +73,7 @@ public class AMainSystem : MonoBehaviour
         if (friendly)
         {
             DamageEnemy(incomingObj, incomingDamage, weakSpotShot);
-            UILogic();
+            UILogic(weakSpotShot);
         }
         else
         {
@@ -133,9 +133,12 @@ public class AMainSystem : MonoBehaviour
 
     }
 
-    private void UILogic()
+    private void UILogic(bool weakSpotShot)
     {
-        hitMarkerLogic.EnableHitMarker();
+        if (weakSpotShot)
+            hitMarkerLogic.EnableCritHitMarker();
+        else
+            hitMarkerLogic.EnableHitMarker();
     }
 
     #endregion

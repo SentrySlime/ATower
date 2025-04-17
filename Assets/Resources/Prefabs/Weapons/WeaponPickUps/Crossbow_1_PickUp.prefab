@@ -9619,6 +9619,7 @@ GameObject:
   - component: {fileID: 6931329448293354154}
   - component: {fileID: 6931329448293354155}
   - component: {fileID: 6931329448293354148}
+  - component: {fileID: 7709938463506493877}
   m_Layer: 0
   m_Name: Crossbow_1_PickUp
   m_TagString: Item
@@ -9666,10 +9667,23 @@ BoxCollider:
   m_GameObject: {fileID: 6931329448293354149}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.66201735, y: 0.7998786, z: 2.9528542}
   m_Center: {x: -0.0062258244, y: -0.13300729, z: -0.13026237}
+--- !u!135 &7709938463506493877
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6931329448293354149}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &9094811663793891562
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class FindAndEquipWeapons : MonoBehaviour
     [SerializeField] public BaseWeapon baseWeapon;
     [SerializeField] WeaponSocket weaponSocket;
     [SerializeField] GameObject weaponParent;
-    [SerializeField] float interactDistance;
+    float interactDistance = 10;
 
     GameObject lastHitObj;
     public GameObject startWeapon;

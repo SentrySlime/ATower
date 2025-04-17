@@ -188,9 +188,10 @@ MonoBehaviour:
   moneySpawnPoint: {fileID: 3639223469683857148}
   killMarker: {fileID: 0}
   homingTarget: {fileID: 1503445920806744871}
+  spawner: {fileID: 0}
   dropLoot: 1
   itemPrefab: {fileID: 9089351037408256591, guid: dc29b4c24852552499a993df5441b567, type: 3}
-  dropChance: 0.05
+  dropChance: 0.1
   dead: 0
   gauranteeItemDrop: 0
   shouldReportDeath: 1
@@ -216,6 +217,7 @@ MonoBehaviour:
     m_Bits: 1792
   animator: {fileID: 1732250578}
   agent: {fileID: 915999531}
+  roam: 0
   FoundPlayer: 0
   moveSpeed: 11
   playerDist: 0
@@ -20724,6 +20726,7 @@ MonoBehaviour:
   moneySpawnPoint: {fileID: 9124457959747447762}
   killMarker: {fileID: 0}
   homingTarget: {fileID: 1503445920806744871}
+  spawner: {fileID: 0}
   dropLoot: 0
   itemPrefab: {fileID: 0}
   dropChance: 0.05

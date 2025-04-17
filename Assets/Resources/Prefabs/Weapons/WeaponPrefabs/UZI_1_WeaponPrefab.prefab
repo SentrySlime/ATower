@@ -4979,7 +4979,7 @@ MonoBehaviour:
   baseAmmoPerShot: 0
   ammoPerShot: 1
   baseInfinteAmmo: 0
-  infinteAmmo: 0
+  infinteAmmo: 1
   reloadType: 0
   baseMaxMagazine: 0
   maxMagazine: 45
@@ -5017,6 +5017,9 @@ MonoBehaviour:
   finishedReload: 0
   renderObjects:
   - {fileID: 5740748131621819047}
+  lineRenderer: {fileID: 0}
+  lineDuration: 0.9
+  lineTimer: 0
   hitDistance: 0
   hitmarker: {fileID: 0}
   isShotgun: 0

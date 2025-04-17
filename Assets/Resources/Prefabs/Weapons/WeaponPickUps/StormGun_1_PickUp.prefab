@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7527405179895652823}
   - component: {fileID: 7527405179895652822}
   - component: {fileID: 7527405179895652825}
+  - component: {fileID: 993889670873730306}
   m_Layer: 0
   m_Name: StormGun_1_PickUp
   m_TagString: Item
@@ -58,10 +59,23 @@ BoxCollider:
   m_GameObject: {fileID: 7527405179895652824}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.4250958, y: 0.7227416, z: 2.4070973}
   m_Center: {x: 0.0020388365, y: -0.044850588, z: -0.039572954}
+--- !u!135 &993889670873730306
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7527405179895652824}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7527405180740405345
 GameObject:
   m_ObjectHideFlags: 0

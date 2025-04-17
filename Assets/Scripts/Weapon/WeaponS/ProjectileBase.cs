@@ -57,6 +57,10 @@ public class ProjectileBase : MonoBehaviour
     public float gravityMagnitude = 1;
     Vector3 velocity;
 
+    [Header("VFX")]
+    [SerializeField] private GameObject hitVFX;
+    [SerializeField] private GameObject hitEnemyVFX;
+
     //[Tooltip("If true, this OBJ can interact with other projectiles")]
     //bool projectileInteraction = false;
     //bool onlyHitEnemies = false;
@@ -96,12 +100,10 @@ public class ProjectileBase : MonoBehaviour
 
         if (homing)
         {
-            print("Homing");
             HomingLogic();
         }
         else
         {
-            print("Moving Forward");
             MoveForward();
         }
 
@@ -120,6 +122,11 @@ public class ProjectileBase : MonoBehaviour
 
     protected void OnHitTrigger(Collider other)
     {
+        if(other.gameObject.layer == 0 && !isExplosive)
+        {
+            Instantiate(hitVFX, transform.position, Quaternion.LookRotation(transform.forward));
+            EndObjectLife();
+        }
 
         if (other.CompareTag("Enemy"))
         {
@@ -129,6 +136,7 @@ public class ProjectileBase : MonoBehaviour
             }
             else
             {
+                Instantiate(hitEnemyVFX, transform.position, Quaternion.LookRotation(transform.forward));
                 ImpactBehaviour(other.transform.root.gameObject, false);
             }
         }
@@ -140,6 +148,7 @@ public class ProjectileBase : MonoBehaviour
             }
             else
             {
+                Instantiate(hitEnemyVFX, transform.position, Quaternion.LookRotation(transform.forward));
                 ImpactBehaviour(other.transform.root.gameObject, true);
             }
         }
@@ -151,6 +160,7 @@ public class ProjectileBase : MonoBehaviour
             }
             else
             {
+                Instantiate(hitVFX, transform.position, Quaternion.LookRotation(transform.forward));
                 ImpactBehaviour(other.gameObject, false);
                 pierceAmount = 0;
                 CheckPierce();
@@ -259,7 +269,6 @@ public class ProjectileBase : MonoBehaviour
         }
         else
         {
-            print("transform forwad");
             transform.position += transform.forward * projectileSpeed * Time.deltaTime;
         }
     }

@@ -22,18 +22,11 @@ public class LootSystem : MonoBehaviour
 
     public void DropLoot(Vector3 spawnPos, float dropChance)
     {
-        if(itemKillRequirement >= 3)
-        {
-            if (!DropCheck(dropChance))
-                return;
 
-            itemManager.DropItem(spawnPos);
-            itemKillRequirement = 0;
-        }
-        else
-        {
-            itemKillRequirement++;
-        }
+        if (!DropCheck(dropChance))
+            return;
+
+        itemManager.DropItem(spawnPos);
     }
 
     public bool DropCheck(float dropChance)

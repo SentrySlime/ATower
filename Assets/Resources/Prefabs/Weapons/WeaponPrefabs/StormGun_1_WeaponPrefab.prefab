@@ -9749,7 +9749,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2166172145339785141}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.556, y: -0.23, z: 1.747}
+  m_LocalPosition: {x: 0.902, y: -0.23, z: 2.629}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1856004529439608098}
@@ -9810,8 +9810,8 @@ MonoBehaviour:
   iconPrefab: {fileID: 0}
   type: 6
   baseMaxAmmo: 0
-  maxAmmo: 220
-  currentAmmo: 220
+  maxAmmo: 200
+  currentAmmo: 200
   baseAmmoPerShot: 0
   ammoPerShot: 1
   baseInfinteAmmo: 0
@@ -9825,7 +9825,7 @@ MonoBehaviour:
   baseReloadAmount: 0
   reloadAmount: 1
   baseDamage: 0
-  damage: 30
+  damage: 49
   baseFireRate: 0
   fireRate: 0.1
   burstDelay: 1
@@ -9872,8 +9872,8 @@ MonoBehaviour:
   effectPosition: {fileID: 5502287252857412224}
   shootEffect: {fileID: 0}
   muzzleFlash: {fileID: 5159709355697822310}
-  hitVFX: {fileID: 1879272669879180, guid: 15b9dd0ff0b73454aad08fc61f1d3084, type: 3}
-  hitEnemyVFX: {fileID: 6989748845792572187, guid: 0b6c39561220bc041bef80a79669f463, type: 3}
+  hitVFX: {fileID: 3463168027487975298, guid: 48f64310a75aaa74ea673854834beeab, type: 3}
+  hitEnemyVFX: {fileID: 7468110898010713756, guid: be650337c1758f04c8801b5e168bb317, type: 3}
   casingVFX: {fileID: 1856004529903584604}
   mantleAnimation: {fileID: 0}
 --- !u!1 &8389912404386435729
@@ -9949,10 +9949,10 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 11.88, z: 0}
+  - {x: 0, y: 22.7, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 12
+    widthMultiplier: 10
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -9965,6 +9965,15 @@ LineRenderer:
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.2445761
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4

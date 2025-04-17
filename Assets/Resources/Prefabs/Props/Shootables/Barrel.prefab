@@ -96,12 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f62242947bcb804c98fa0c285b6e8dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 75
-  currentHealth: 75
-  moneyAmount: 10
+  maxHealth: 20
+  currentHealth: 20
   canExplode: 0
   explodeOnDeath: 0
-  explosionDamage: 100
   moneyPrefab: {fileID: 0}
   dieSFX: {fileID: 4964101775347663484, guid: dba1259558b4b5b48894a28b9b668cd2, type: 3}
   deathParticles: {fileID: 6730801598990464917, guid: 227f794be2b758242af83d65eb7f14af, type: 3}
@@ -109,12 +107,14 @@ MonoBehaviour:
   moneySpawnPoint: {fileID: 6198504517991691383}
   killMarker: {fileID: 0}
   homingTarget: {fileID: 6198504517991691388}
+  spawner: {fileID: 0}
   dropLoot: 1
   itemPrefab: {fileID: 0}
   dropChance: 0.001
   dead: 0
   gauranteeItemDrop: 0
   shouldReportDeath: 0
+  canDropAmmo: 1
   damagedPS: {fileID: 0}
 --- !u!136 &6198504517991691387
 CapsuleCollider:

@@ -13,9 +13,19 @@ public class RoomScript : MonoBehaviour
     public Transform point1;
     public Transform point2;
 
+    [Tooltip("Room difficulty decides if this room is gonna spawn early or late, smaller number means earlier")]
+    [Range(1, 3)] public int roomDifficultyLevel = 1;
+
+    [Header("Connected Room")]
+    public GameObject blockade;
+    public Transform secretPoint;
+
+    public GameObject roomToSpawn;
+
     void Start()
     {
-
+        if(roomToSpawn)
+            SpawnRoom();
     }
 
 
@@ -23,4 +33,11 @@ public class RoomScript : MonoBehaviour
     {
 
     }
+
+    private void SpawnRoom()
+    {
+        blockade.SetActive(false);
+        Instantiate(roomToSpawn, secretPoint.transform.position, secretPoint.transform.rotation);
+    }
+
 }

@@ -61,7 +61,6 @@ public class ShootRaycast : BaseWeapon
 
     public Animation mantleAnimation;
 
-
     private void Awake()
     {
         if(lineRenderer)
@@ -246,12 +245,13 @@ public class ShootRaycast : BaseWeapon
                     }
                     else
                     {
-                        DealDamage(alreadyDamaged[i], false);
                         var fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal);
                         var tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
                         Vector3 hitDirection = transform.position - raycastHit.point;
                         SetLineRenderer(hits[i].point);
-                        Instantiate(hitEnemyVFX, hits[i].point, Quaternion.LookRotation(hitDirection), alreadyDamaged[i].transform);
+                        GameObject tempVFX = Instantiate(hitEnemyVFX, enemiesToDamage[i].transform.position, Quaternion.LookRotation(hitDirection));
+                        StartCoroutine(AttachEffectNextFrame(tempVFX, alreadyDamaged[i].transform));
+                        DealDamage(alreadyDamaged[i], false);
                     }
 
                 }
@@ -263,12 +263,13 @@ public class ShootRaycast : BaseWeapon
                     }
                     else
                     {
-                        DealDamage(alreadyDamaged[i], true);
                         var fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal);
                         var tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
                         Vector3 hitDirection = transform.position - raycastHit.point;
                         SetLineRenderer(hits[i].point);
-                        Instantiate(hitEnemyVFX, hits[i].point, Quaternion.LookRotation(hitDirection), alreadyDamaged[i].transform);
+                        GameObject tempVFX = Instantiate(hitEnemyVFX, enemiesToDamage[i].transform.position, Quaternion.LookRotation(hitDirection));
+                        DealDamage(alreadyDamaged[i], true);
+                        StartCoroutine(AttachEffectNextFrame(tempVFX, alreadyDamaged[i].transform));
                     }
                 }
                 else if(alreadyDamaged[i].transform.CompareTag("Breakable"))
@@ -279,12 +280,13 @@ public class ShootRaycast : BaseWeapon
                     }
                     else
                     {
-                        DealDamage(alreadyDamaged[i], false);
                         var fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal);
                         var tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
                         Vector3 hitDirection = transform.position - raycastHit.point;
                         SetLineRenderer(hits[i].point);
-                        Instantiate(hitVFX, hits[i].point, Quaternion.LookRotation(hitDirection), alreadyDamaged[i].transform);
+                        GameObject tempVFX = Instantiate(hitVFX, hits[i].point, Quaternion.LookRotation(hitDirection));
+                        StartCoroutine(AttachEffectNextFrame(tempVFX, alreadyDamaged[i].transform));
+                        DealDamage(alreadyDamaged[i], false);
                         tempPierce = 0;
                         
                     }
@@ -339,6 +341,7 @@ public class ShootRaycast : BaseWeapon
                         DealDamage(hit.transform.root.gameObject, false);
                         hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
                         Instantiate(hitEnemyVFX, hit.point, Quaternion.Inverse(transform.rotation), hit.transform);
+
                     }
                     if (hit.transform.CompareTag("WeakSpot"))
                     {
@@ -398,7 +401,7 @@ public class ShootRaycast : BaseWeapon
 
         lineRenderer.enabled = true;
 
-        Vector3 startPos = transform.position;
+        Vector3 startPos = effectPosition.position;
 
         int pointCount = 20;
         lineRenderer.positionCount = pointCount;
@@ -422,6 +425,11 @@ public class ShootRaycast : BaseWeapon
         lineRenderer.enabled = false;
     }
 
+    IEnumerator AttachEffectNextFrame(GameObject effect, Transform parent)
+    {
+        yield return null; // wait one frame
+        if (effect && parent) effect.transform.SetParent(parent);
+    }
 
     private Vector3 GetQuadraticBezierPoint(Vector3 p0, Vector3 p1, Vector3 p2, float t)
     {

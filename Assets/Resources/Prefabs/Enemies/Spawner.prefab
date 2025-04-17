@@ -125,7 +125,7 @@ MonoBehaviour:
   spawner: {fileID: 0}
   dropLoot: 1
   itemPrefab: {fileID: 0}
-  dropChance: 0.1
+  dropChance: 0.3
   dead: 0
   gauranteeItemDrop: 0
   shouldReportDeath: 1
@@ -95372,6 +95372,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 284103732153410428}
     m_Modifications:
+    - target: {fileID: 512296962237348463, guid: 1a0db613e426fd549a341b5179eb5de8, type: 3}
+      propertyPath: destroyTimer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5362722116538506452, guid: 1a0db613e426fd549a341b5179eb5de8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

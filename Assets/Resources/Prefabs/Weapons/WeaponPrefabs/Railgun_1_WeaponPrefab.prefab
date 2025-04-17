@@ -29,7 +29,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5779255679518579600}
-  - {fileID: 5502287252857412224}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4944,11 +4943,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2166172145339785141}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.556, y: -0.23, z: 1.747}
+  m_LocalPosition: {x: -0, y: 0, z: 0.318}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1856004529439608098}
-  m_RootOrder: 1
+  m_Father: {fileID: 4666999484866591277}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6593228928422068522
 GameObject:
@@ -5059,6 +5058,9 @@ MonoBehaviour:
   - {fileID: 2653731725439422702}
   - {fileID: 7309281274837570850}
   - {fileID: 8500282243306034118}
+  lineRenderer: {fileID: 0}
+  lineDuration: 0.9
+  lineTimer: 0
   hitDistance: 0
   hitmarker: {fileID: 0}
   isShotgun: 0
@@ -5074,8 +5076,8 @@ MonoBehaviour:
   effectPosition: {fileID: 5502287252857412224}
   shootEffect: {fileID: 5041501958831826202, guid: 97509b8efd7feb74fa5b4ba36aa4145b, type: 3}
   muzzleFlash: {fileID: 3281113293317059530}
-  hitVFX: {fileID: 1879272669879180, guid: 15b9dd0ff0b73454aad08fc61f1d3084, type: 3}
-  hitEnemyVFX: {fileID: 6989748845792572187, guid: 0b6c39561220bc041bef80a79669f463, type: 3}
+  hitVFX: {fileID: 1879272669879180, guid: e000aa721affc9f4388070a6965b8738, type: 3}
+  hitEnemyVFX: {fileID: 425359807012254669, guid: bec38f1dba5948e4e9e0937fa9f41ba0, type: 3}
   casingVFX: {fileID: 1856004529903584604}
   mantleAnimation: {fileID: 0}
 --- !u!1001 &3402321034730323790

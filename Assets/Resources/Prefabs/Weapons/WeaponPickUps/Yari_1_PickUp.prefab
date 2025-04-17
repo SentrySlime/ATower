@@ -9781,6 +9781,7 @@ GameObject:
   - component: {fileID: 2356860116122222464}
   - component: {fileID: 2356860116122222465}
   - component: {fileID: 2356860116122222478}
+  - component: {fileID: 4018527784782629946}
   m_Layer: 0
   m_Name: Yari_1_PickUp
   m_TagString: Item
@@ -9828,10 +9829,23 @@ BoxCollider:
   m_GameObject: {fileID: 2356860116122222479}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.8184943, y: 1.0845652, z: 3.2322314}
   m_Center: {x: -0.014159918, y: 0.07044411, z: 0.003914714}
+--- !u!135 &4018527784782629946
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2356860116122222479}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2661519998635756000
 GameObject:
   m_ObjectHideFlags: 0

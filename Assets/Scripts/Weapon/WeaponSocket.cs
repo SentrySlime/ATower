@@ -69,6 +69,7 @@ public class WeaponSocket : MonoBehaviour
     public enum FireMode { fullAuto, semi, burst };
     public FireMode fireMode;
 
+    Coroutine burstFireCoroutine;
     private void Awake()
     {
         GameObject tempObj = GameObject.FindGameObjectWithTag("ShootPoint");
@@ -137,7 +138,7 @@ public class WeaponSocket : MonoBehaviour
                 }
                 else if (fireMode == FireMode.burst)
                 {
-                    StartCoroutine(BurstFire());
+                    burstFireCoroutine = StartCoroutine(BurstFire());
                 }
             }
             else if (Input.GetMouseButton(0))
@@ -224,6 +225,7 @@ public class WeaponSocket : MonoBehaviour
 
         if (!reload_SFX.isPlaying)
             reload_SFX.Play();
+
         StartCoroutine(Reloading());
     }
 
@@ -304,6 +306,9 @@ public class WeaponSocket : MonoBehaviour
 
     public IEnumerator Reloading()
     {
+        if(burstFireCoroutine != null)
+            StopCoroutine(burstFireCoroutine);
+
         reloadIcon.fillAmount = 0f;
         reloadIcon.enabled = true;
         reloadGroup.alpha = 1;

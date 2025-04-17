@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2749742489556895022}
   - component: {fileID: 2749742489556895023}
   - component: {fileID: 2749742489556895008}
+  - component: {fileID: 2619440849077950242}
   m_Layer: 0
   m_Name: Mauler_1_PickUp
   m_TagString: Item
@@ -59,10 +60,23 @@ BoxCollider:
   m_GameObject: {fileID: 2749742489556895009}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.5888927, y: 0.6268616, z: 2.7110624}
   m_Center: {x: 0.007498622, y: 0.111215115, z: 0.006485462}
+--- !u!135 &2619440849077950242
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2749742489556895009}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2749742489844609820
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,8 @@ public class DestroyAfterTime : MonoBehaviour
     
     void Update()
     {
+        if(destroyTimer == 0) { return; }
+
         if (destroyTime < destroyTimer)
             destroyTime += Time.deltaTime;
         else

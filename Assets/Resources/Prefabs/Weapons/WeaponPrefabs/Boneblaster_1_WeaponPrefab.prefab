@@ -4974,30 +4974,30 @@ MonoBehaviour:
   iconPrefab: {fileID: 0}
   type: 2
   baseMaxAmmo: 0
-  maxAmmo: 200
-  currentAmmo: 200
+  maxAmmo: 160
+  currentAmmo: 160
   baseAmmoPerShot: 0
-  ammoPerShot: 2
+  ammoPerShot: 1
   baseInfinteAmmo: 0
   infinteAmmo: 0
   reloadType: 0
   baseMaxMagazine: 0
-  maxMagazine: 10
-  currentMagazine: 10
+  maxMagazine: 14
+  currentMagazine: 14
   baseReloadTime: 0
-  reloadTime: 2
+  reloadTime: 3.5
   baseReloadAmount: 0
   reloadAmount: 1
   baseDamage: 0
-  damage: 25
+  damage: 15
   baseFireRate: 0
   fireRate: 0.02
   burstDelay: 1
   burstAmount: 1
   recoilAmount: -25
   moveAmount: -0.4
-  ADSAccuracy: 3
-  HIPAccuracy: 6
+  ADSAccuracy: 4
+  HIPAccuracy: 11
   recoilX: -25
   recoilY: 8
   recoilZ: 0.8
@@ -5017,6 +5017,9 @@ MonoBehaviour:
   finishedReload: 0
   renderObjects:
   - {fileID: 3424277986567293756}
+  lineRenderer: {fileID: 0}
+  lineDuration: 0.9
+  lineTimer: 0
   hitDistance: 0
   hitmarker: {fileID: 0}
   isShotgun: 1
@@ -5024,10 +5027,10 @@ MonoBehaviour:
   shotSize: 0.6
   pierceAmount: 1
   ShouldExplode: 0
-  explosiveDamage: 1
-  explosiveRadius: 1
+  explosiveDamage: 45
+  explosiveRadius: 2
   SFXList: []
-  shootSFX: {fileID: 4964101775347663484, guid: 0f2c1ad0607fd94458f7da48dad9c000, type: 3}
+  shootSFX: {fileID: 4964101775347663484, guid: ce9ad2ad97237a744b33180447e1907f, type: 3}
   hitSFX: {fileID: 4964101775347663484, guid: b244e633c20fdda4895818242ba7786b, type: 3}
   effectPosition: {fileID: 0}
   shootEffect: {fileID: 0}

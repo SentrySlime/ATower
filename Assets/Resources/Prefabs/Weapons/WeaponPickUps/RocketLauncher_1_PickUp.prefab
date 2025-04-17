@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4962411745360347527}
   - component: {fileID: 4962411745360347526}
   - component: {fileID: 4962411745360347529}
+  - component: {fileID: 3523133402551702830}
   m_Layer: 0
   m_Name: RocketLauncher_1_PickUp
   m_TagString: Item
@@ -58,10 +59,23 @@ BoxCollider:
   m_GameObject: {fileID: 4962411745360347528}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.0833023, y: 0.84851146, z: 2.8880224}
   m_Center: {x: -0.04599631, y: 0.07731235, z: 0.025972843}
+--- !u!135 &3523133402551702830
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4962411745360347528}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4962411745575712693
 GameObject:
   m_ObjectHideFlags: 0

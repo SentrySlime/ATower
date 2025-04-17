@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2392086210444663580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.002, y: -0.472, z: 0.142}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.002, y: -1.435, z: 0.142}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 2088756571712569513}
   m_RootOrder: 0
@@ -131,20 +131,24 @@ MonoBehaviour:
   explosivePrefab: {fileID: 0}
   UseAdvancedCalculations: 1
   damage: 250
-  projectileSpeed: 70
+  projectileSpeed: 180
   pierceObjects: 1
   pierceAmount: 4
   isExplosive: 0
   explosiveRadius: 1
   explosiveDamage: 10
   explosiveImpactSFX: {fileID: 0}
-  homing: 0
-  turnSpeed: 3
+  homing: 1
+  turnSpeed: 1
   target: {fileID: 0}
   useGravity: 0
   gravityMagnitude: 1
+  hitVFX: {fileID: 1879272669879180, guid: 1845e09e109a8fd48bd5f1f5b15d1217, type: 3}
+  hitEnemyVFX: {fileID: 1879272669879180, guid: 36113f08340819b4cb8a7f3f43199807, type: 3}
   lifeDuration: 8
   lifeTimer: 0
+  aMainSysteM: {fileID: 0}
+  shootSystem: {fileID: 0}
 --- !u!54 &4140537416350080728
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -172,7 +176,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3436718510349363369
 PrefabInstance:
