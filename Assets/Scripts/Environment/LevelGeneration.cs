@@ -91,7 +91,7 @@ public class LevelGeneration : MonoBehaviour
 
     private int GetRandomCorridor()
     {
-        return Random.Range(0, corridors.Count+1);
+        return Random.Range(0, corridors.Count);
     }
 
     private void GenerateLevel()
@@ -159,7 +159,7 @@ public class LevelGeneration : MonoBehaviour
 
     private void GenerateCorridor()
     {
-        int roomIndex = GetRandomRoom();
+        int roomIndex = GetRandomCorridor();
 
         //GetChildren(newNumber);
         if (roomCount == 0)
