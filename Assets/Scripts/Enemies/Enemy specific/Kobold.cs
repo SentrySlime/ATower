@@ -369,7 +369,7 @@ public class Kobold : MonoBehaviour, INoticePlayer
 
         float dot = Vector3.Dot(enemyforward, toPlayer);
 
-        if(dot > 0)
+        if(dot > 0.5)
         {
             return true;
         }

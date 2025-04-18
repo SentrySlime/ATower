@@ -14,6 +14,18 @@ public class WeaponIcon : MonoBehaviour
     public TextMeshProUGUI hotkeyIndex;
     public Color color;
 
+    public CanvasGroup canvasGroup;
+    public Image fillImage;
+
+    public float reloadTime = 0;
+    public float reloadTimeTimer = 0;
+
+    private void Update()
+    {
+        if (canvasGroup != null)
+            DecreaseAlpha();
+    }
+
     private void SetHeirarchy()
     {
         transform.SetAsFirstSibling();
@@ -40,5 +52,31 @@ public class WeaponIcon : MonoBehaviour
     public void SetHotKeyIndex(int index)
     {
         hotkeyIndex.text = index.ToString();
+    }
+
+    public void DisplayFinishedReload()
+    {
+        canvasGroup.alpha = 0.75f;
+        fillImage.fillAmount = 1;
+    }
+
+    private void DecreaseAlpha()
+    {
+
+        if (fillImage.fillAmount > 0)
+        {
+            fillImage.fillAmount -= (1 / reloadTime) * Time.deltaTime;
+        }
+        else
+        {
+            canvasGroup.alpha = 0;
+        }
+
+    }
+
+    public void DisableReloadIcon()
+    {
+        fillImage.fillAmount = 0;
+        canvasGroup.alpha = 0;
     }
 }

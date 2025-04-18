@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Kobold_Bottom 1
+  m_Name: M_Troll_Fixed_1_PSX
   m_Shader: {fileID: 4800000, guid: 94cb0d6305cd4a743b1d2ec684e277de, type: 3}
-  m_ShaderKeywords: DIFF_VERTEX OPAQUE SPEC_GOURAUD _DIFFMODEL_VERTEX _DRAWDIST_ON
+  m_ShaderKeywords: CUTOUT DIFF_VERTEX SPEC_GOURAUD _DIFFMODEL_VERTEX _DRAWDIST_ON
     _EMISSION _EMISSION_MAP _SPECMODEL_GOURAUD
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
@@ -42,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: 0a3de50fd5f40f343b7460402cf5c44e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4d18e081fc7007e419284dfdcc29769f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _LODTex:
@@ -50,7 +50,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 81f38e0f84370b6408316bb4e184dc43, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8d11a6fa8f3c4cf4082594f2aba13ad8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetalMap:
@@ -88,15 +88,15 @@ Material:
     - _DrawDist: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 0
     - _GlossyReflections: 1
     - _LODAmt: 0
     - _Metallic: 0
-    - _Mode: 0
+    - _Mode: 1
     - _NormalMapDepth: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RenderMode: 0
+    - _RenderMode: 2
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecModel: 0
@@ -105,10 +105,10 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _Unlit: 0
-    - _VertexInaccuracy: 0.001
+    - _VertexInaccuracy: -1
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Emission: {r: 1, g: 0, b: 0, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Emission: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

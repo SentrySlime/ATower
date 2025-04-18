@@ -8,6 +8,7 @@ using static UnityEngine.UI.Image;
 public class Troll : MonoBehaviour, INoticePlayer
 {
     GameObject player;
+    Transform playerTargetPoint;
 
     [Header("Controllers")]
     public Animator trollAnimator;
@@ -30,16 +31,25 @@ public class Troll : MonoBehaviour, INoticePlayer
     float distanceToPlayer = 0;
     bool foundPlayer;
 
-    [Header("DonutExplosion")]
-    bool attacking = false;
+    [Header("AttackStats")]
+    float attackRate = 1.5f;
+    public float attackRateTimer;
 
+    [Header("ShootAttack")]
+    public GameObject shootTelegraphVFX;
+    public GameObject shootTelegraphVFXPosition;
+    public GameObject shootProjectile;
+    public GameObject cannonObject;
+
+    [Header("MeleeAttack")]
     public GameObject donutExplosionVFX;
     public GameObject donutExplosion;
     public Transform donutExplosionSpawnTransform;
-    public float donutExplosionTimer = 0.4f;
+    float donutExplosionTimer = 0.4f;
 
     public LayerMask donutLayerMask;
 
+    bool attacking = false;
     float animationTimer = 0.6f;
     float speedTimer = 1.75f;
 
@@ -50,6 +60,7 @@ public class Troll : MonoBehaviour, INoticePlayer
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerTargetPoint = player.GetComponent<PlayerHealth>().GetTargetPoint().transform;
     }
 
 
@@ -80,13 +91,26 @@ public class Troll : MonoBehaviour, INoticePlayer
             return;
         }
 
-
-        if(distanceToPlayer < 30)
+        if(attackRateTimer < attackRate)
+        {
+            attackRateTimer += Time.deltaTime;
+        }
+        else if (distanceToPlayer < 30)
         {
             if(attacking == false)
             {
                 attacking = true;
-                Invoke("ShootAnimation", 1);
+                MeleeAnimation();
+                //Invoke("MeleeAnimation", 1);
+            }
+        }
+        else
+        {
+            if (attacking == false)
+            {
+                if (!IsPlayerInfront()) { return; }
+                attacking = true;
+                InitiateShootAttack();
             }
         }
 
@@ -178,9 +202,33 @@ public class Troll : MonoBehaviour, INoticePlayer
         Instantiate(footStepVFX, rightfoot.transform.position + new Vector3(0, -1, 0), Quaternion.identity);
     }
 
+    #region ShootAttack
+
+    private void InitiateShootAttack()
+    {
+        cannonObject.transform.localRotation = new Quaternion(-0.185198382f, -0.0976984948f, 0.263889641f, 0.941551268f);
+        Instantiate(shootTelegraphVFX, shootTelegraphVFXPosition.transform.position, shootTelegraphVFXPosition.transform.rotation, shootTelegraphVFXPosition.transform);
+        Invoke("ShootProjectile", 1.5f);
+    }
+
+    private void ShootProjectile()
+    {
+        Vector3 direction = playerTargetPoint.transform.position - shootPoint.transform.position;
+
+        // Create a rotation that points towards the player
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+        // Instantiate the projectile with the correct rotation
+        Instantiate(shootProjectile, shootPoint.transform.position, lookRotation);
+
+        Invoke("Idle", 1);
+    }
+
+    #endregion
+
     #region MeleeAttack
 
-    private void ShootAnimation()
+    private void MeleeAnimation()
     {
         if (trollAnimator)
         {
@@ -222,7 +270,7 @@ public class Troll : MonoBehaviour, INoticePlayer
             RaycastHit hit;
             if (Physics.Raycast(donutExplosionSpawnTransform.position, -transform.up, out hit, 20, donutLayerMask))
             {
-                Instantiate(donutExplosion, hit.point + new Vector3(0, 3, 0), Quaternion.identity);
+                Instantiate(donutExplosion, hit.point + new Vector3(0, 2.5f, 0), Quaternion.identity);
             }
         }
     }
@@ -231,9 +279,9 @@ public class Troll : MonoBehaviour, INoticePlayer
 
     private void Idle()
     {
-        
+        cannonObject.transform.localRotation = new Quaternion(0, 0, 0, 0);
         attacking = false;
-
+        ResetAttackTimer();
         if (trollAnimator)
         {
             trollAnimator.SetBool("Melee", false);
@@ -246,6 +294,30 @@ public class Troll : MonoBehaviour, INoticePlayer
             cannonAnimator.SetBool("Melee", false);
             cannonAnimator.speed = 1f;
         }
+    }
+
+    private bool IsPlayerInfront()
+    {
+        Vector3 enemyforward = transform.forward;
+
+        Vector3 toPlayer = (player.transform.position - transform.position).normalized;
+
+        float dot = Vector3.Dot(enemyforward, toPlayer);
+
+        if (dot > 0.5)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    private void ResetAttackTimer()
+    {
+        attackRateTimer = 0;
     }
 
     void INoticePlayer.NoticePlayer()

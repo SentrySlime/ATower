@@ -144,8 +144,6 @@ public class BaseWeapon : MonoBehaviour
 
     public virtual void ReloadWeapon()
     {
-
-
         //We don't want to reload if we don't have enough ammo
         if (currentAmmo == 0 && !infinteAmmo) { return; }
         //if (infinteAmmo) { return; }
@@ -183,6 +181,7 @@ public class BaseWeapon : MonoBehaviour
                     currentMagazine = maxMagazine; //If we had more or as much ammo as the magazine can fit, we don't need to do the math
                     if (!recoil.holstered)
                         weaponSocket.AmmoVisualRefillMagazine();
+                    
                 }
 
             }
@@ -209,6 +208,7 @@ public class BaseWeapon : MonoBehaviour
                         currentMagazine++;
                         if (!recoil.holstered)
                             weaponSocket.AmmoVisualOneByOne();
+
                     }
                 }
             }
@@ -419,8 +419,6 @@ public class BaseWeapon : MonoBehaviour
         baseAmmoPerShot = ammoPerShot;
         baseInfinteAmmo = infinteAmmo;
         baseMaxMagazine = maxMagazine;
-
-
     }
 }
 

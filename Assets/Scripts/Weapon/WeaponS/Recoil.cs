@@ -43,6 +43,8 @@ public class Recoil : MonoBehaviour
 
     WeaponSocket weaponSocket;
 
+    bool reloading = false;
+
     private void Awake()
     {
         //obj = GetComponentInChildren<GameObject>();
@@ -196,10 +198,19 @@ public class Recoil : MonoBehaviour
 
         if (baseWeapon.reloadType == BaseWeapon.ReloadType.Magazine)
         {
+
+            if(!reloading)
+                baseWeapon.iconPrefab.GetComponent<WeaponIcon>().DisplayFinishedReload();
+
+            reloading = true;
             MagazineBasedReload();
         }
         else if (baseWeapon.reloadType == BaseWeapon.ReloadType.ShotByShot)
         {
+            if (!reloading)
+                baseWeapon.iconPrefab.GetComponent<WeaponIcon>().DisplayFinishedReload();
+
+            reloading = true;
             SingleBasedReload();
         }
     }
@@ -213,6 +224,7 @@ public class Recoil : MonoBehaviour
         {
             reloadTimer = 0;
             baseWeapon.ReloadWeapon();
+            reloading = false;
             //baseWeapon.currentMagazine = baseWeapon.maxMagazine;
         }
 
@@ -228,6 +240,7 @@ public class Recoil : MonoBehaviour
         {
             reloadTimer = 0;
             baseWeapon.ReloadWeapon();
+            reloading = false;
             //baseWeapon.currentMagazine += baseWeapon.reloadAmount;
         }
 
@@ -242,7 +255,9 @@ public class Recoil : MonoBehaviour
 
     public void EnableWeapon()
     {
+        reloading = false;
         holstered = false;
+        baseWeapon.iconPrefab.GetComponent<WeaponIcon>().DisableReloadIcon();
         obj.SetActive(true);
     }
 }

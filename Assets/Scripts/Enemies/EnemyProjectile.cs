@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
+    [Header("Explosions")]
+    [Tooltip("If no prefab is slotted in explosion, then we call the explosion system")]
     public bool explode = false;
     public GameObject explosion;
+    public int explosionDamage = 20;
+    public float explosionRadius = 5;
+
     bool hasExploded = false;
+
     public bool affectedByGravity;
     public float gravityScale = 1;
     float projectileSize;
@@ -57,11 +63,13 @@ public class EnemyProjectile : MonoBehaviour
     PlayerHealth playerHealth;
     PlayerStats playerStats;
     AMainSystem mainSystem;
+    ExplosionSystem explosionSystem;
     float lifeTimer = 0;
 
     private void Awake()
     {
         mainSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AMainSystem>();
+        explosionSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ExplosionSystem>();
     }
 
     void Start()
@@ -113,8 +121,7 @@ public class EnemyProjectile : MonoBehaviour
         }
         else if (explode)
         {
-            Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
-            Instantiate(explosion, spawnPosition, Quaternion.identity);
+            Explode();
 
             hasExploded = true;
             DestroyProjectile();
@@ -226,11 +233,21 @@ public class EnemyProjectile : MonoBehaviour
         if (explode)
         {
             if (!hasExploded)
-                Instantiate(explosion, transform.position, Quaternion.identity); ;
+                Explode();
         }
 
         Destroy(gameObject);
 
+    }
+
+    private void Explode()
+    {
+        Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+
+        if (explosion)
+            Instantiate(explosion, spawnPosition, Quaternion.identity);
+        else
+            explosionSystem.SpawnExplosion(transform.position, explosionRadius, explosionDamage, true);
     }
 
     public void LifeTimer()

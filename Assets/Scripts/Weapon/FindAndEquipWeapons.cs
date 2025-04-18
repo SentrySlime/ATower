@@ -195,6 +195,9 @@ public class FindAndEquipWeapons : MonoBehaviour
         //Spawn the new weaponIcon
         GameObject obj = Instantiate(weaponIcon, iconParent.transform);
         WeaponIcon weaponIconObj = obj.GetComponent<WeaponIcon>();
+
+        weaponIconObj.reloadTime = weaponObj.GetComponentInChildren<BaseWeapon>().reloadTime * 1.5f;
+
         //Set the icon to resemble the weapon we picked up
         weaponIconObj.SetIcon(weaponObj.GetComponentInChildren<BaseWeapon>().weaponIcon);
         //Setting the hotkey number for what to press
