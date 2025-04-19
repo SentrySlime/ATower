@@ -8,6 +8,9 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private List<GameObject> weapons = new List<GameObject>();
     [SerializeField] private List<WeaponPickUp> pickUps = new List<WeaponPickUp>();
 
+    private List<GameObject> shuffledWeapons = new List<GameObject>();
+    private int currentIndex = 0;
+
     public List<GameObject> s_Tier = new List<GameObject>();
     public List<GameObject> a_Tier = new List<GameObject>();
     public List<GameObject> b_Tier = new List<GameObject>();
@@ -19,7 +22,6 @@ public class WeaponManager : MonoBehaviour
         SortRarity();
     }
 
-
     void Update()
     {
 
@@ -28,7 +30,8 @@ public class WeaponManager : MonoBehaviour
     public void DropWeapon(Vector3 spawnPos)
     {
 
-        GameObject weaponToDrop = GetRandomWeapon();
+        //GameObject weaponToDrop = GetRandomWeapon();
+        GameObject weaponToDrop = GetShuffledWeapon();
         Instantiate(weaponToDrop, spawnPos, Quaternion.identity);
     }
 
@@ -171,5 +174,34 @@ public class WeaponManager : MonoBehaviour
         c_Tier.Clear();
         d_Tier.Clear();
 
+    }
+
+    private void ShuffleWeapons()
+    {
+        shuffledWeapons = new List<GameObject>(weapons);
+        for (int i = 0; i < shuffledWeapons.Count; i++)
+        {
+            int rnd = Random.Range(i, shuffledWeapons.Count);
+            var temp = shuffledWeapons[i];
+            shuffledWeapons[i] = shuffledWeapons[rnd];
+            shuffledWeapons[rnd] = temp;
+        }
+    }
+
+    private GameObject GetShuffledWeapon()
+    {
+        if (currentIndex >= shuffledWeapons.Count)
+        {
+            ShuffleWeapons();
+            currentIndex = 0;
+        }
+
+        GameObject weapon = shuffledWeapons[currentIndex];
+        currentIndex++;
+        weapons.Remove(weapon);
+        RemoveLists();
+        SortRarity();
+
+        return weapon;
     }
 }
