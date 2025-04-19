@@ -75,7 +75,24 @@ public class Explosion : MonoBehaviour, IExplosionInterface
             layermask = LayerMask.GetMask("Player");
             Collider[] player = Physics.OverlapSphere(transform.position, eRadius * 1.5f, layermask);
 
-            if(player.Length != 0)
+            if (player.Length <= 0) { return; }
+
+            //Add raycast here
+            LayerMask obstacleMask = LayerMask.GetMask("Default", "Environment"); // Adjust based on your layers
+
+
+
+            Vector3 directionToPlayer = (player[0].transform.position - transform.position).normalized;
+            float distanceToPlayer = Vector3.Distance(transform.position, player[0].transform.position);
+
+            if (Physics.Raycast(transform.position, directionToPlayer, distanceToPlayer, obstacleMask))
+            {
+                // Something is in the way
+                return;
+            }
+
+
+            if (player.Length != 0)
             {
                 GameObject thePlayer = player[0].gameObject;
                 DealDamageToPlayer(player[0]);

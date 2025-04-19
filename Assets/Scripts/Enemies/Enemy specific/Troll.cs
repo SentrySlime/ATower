@@ -95,7 +95,7 @@ public class Troll : MonoBehaviour, INoticePlayer
         {
             attackRateTimer += Time.deltaTime;
         }
-        else if (distanceToPlayer < 30)
+        else if (distanceToPlayer < 18)
         {
             if(attacking == false)
             {
@@ -109,6 +109,7 @@ public class Troll : MonoBehaviour, INoticePlayer
             if (attacking == false)
             {
                 if (!IsPlayerInfront()) { return; }
+
                 attacking = true;
                 InitiateShootAttack();
             }
@@ -219,7 +220,17 @@ public class Troll : MonoBehaviour, INoticePlayer
         Quaternion lookRotation = Quaternion.LookRotation(direction);
 
         // Instantiate the projectile with the correct rotation
+        // Original projectile
         Instantiate(shootProjectile, shootPoint.transform.position, lookRotation);
+
+        // Left projectile (35 degrees counter-clockwise)
+        Quaternion leftRotation = Quaternion.Euler(0, -15, 0) * lookRotation;
+        Instantiate(shootProjectile, shootPoint.transform.position, leftRotation);
+
+        // Right projectile (35 degrees clockwise)
+        Quaternion rightRotation = Quaternion.Euler(0, 15, 0) * lookRotation;
+        Instantiate(shootProjectile, shootPoint.transform.position, rightRotation);
+
 
         Invoke("Idle", 1);
     }
@@ -304,7 +315,7 @@ public class Troll : MonoBehaviour, INoticePlayer
 
         float dot = Vector3.Dot(enemyforward, toPlayer);
 
-        if (dot > 0.5)
+        if (dot > 0.75)
         {
             return true;
         }
@@ -322,6 +333,7 @@ public class Troll : MonoBehaviour, INoticePlayer
 
     void INoticePlayer.NoticePlayer()
     {
+        print("Found player");
         foundPlayer = true;
     }
 }
