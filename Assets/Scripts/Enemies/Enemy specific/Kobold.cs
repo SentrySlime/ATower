@@ -332,6 +332,7 @@ public class Kobold : MonoBehaviour, INoticePlayer
         Quaternion lookRotation = Quaternion.LookRotation(direction);
 
         // Instantiate the projectile with the correct rotation
+        if(rangedProjectile)
         Instantiate(rangedProjectile, shootPoint.position, lookRotation);
         //rb.AddForce(direction.normalized * projectileSpeed, ForceMode.Impulse);
         animator.SetBool("CloseToAttack", false);

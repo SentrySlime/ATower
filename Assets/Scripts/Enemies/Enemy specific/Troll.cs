@@ -29,7 +29,7 @@ public class Troll : MonoBehaviour, INoticePlayer
     [Header("Behaviour")]
     float interactDistance_ = 125f;
     float distanceToPlayer = 0;
-    bool foundPlayer;
+    public bool foundPlayer;
 
     [Header("AttackStats")]
     float attackRate = 1.5f;
@@ -49,7 +49,7 @@ public class Troll : MonoBehaviour, INoticePlayer
 
     public LayerMask donutLayerMask;
 
-    bool attacking = false;
+    public bool attacking = false;
     float animationTimer = 0.6f;
     float speedTimer = 1.75f;
 
@@ -108,10 +108,12 @@ public class Troll : MonoBehaviour, INoticePlayer
         {
             if (attacking == false)
             {
-                if (!IsPlayerInfront()) { return; }
+                if (IsPlayerInfront())
+                {
+                    attacking = true;
+                    InitiateShootAttack();
+                }
 
-                attacking = true;
-                InitiateShootAttack();
             }
         }
 
@@ -123,6 +125,8 @@ public class Troll : MonoBehaviour, INoticePlayer
 
     public void MoveToPlayer()
     {
+        print("Moving");
+
         NavMeshPath path = new NavMeshPath();
         Vector3 targetPosition = player.transform.position;
 
@@ -130,15 +134,20 @@ public class Troll : MonoBehaviour, INoticePlayer
         {
             if (path.status == NavMeshPathStatus.PathComplete)
             {
+                print("Path complete");
+
                 // Full path is valid — go directly to the player
                 agent.isStopped = false;
                 agent.SetDestination(targetPosition);
             }
             else if (path.status == NavMeshPathStatus.PathPartial)
             {
+                print("On my way");
+
                 // Partial path — move as far as we can toward the player
                 if (path.corners.Length > 1)
                 {
+                    print("Moving along path");
                     Vector3 lastReachablePoint = path.corners[path.corners.Length - 1];
                     agent.isStopped = false;
                     agent.SetDestination(lastReachablePoint);
@@ -195,12 +204,14 @@ public class Troll : MonoBehaviour, INoticePlayer
 
     public void LeftFootVFX()
     {
-        Instantiate(footStepVFX, leftfoot.transform.position + new Vector3(0, -1, 0), Quaternion.identity);
+        if(footStepVFX)
+            Instantiate(footStepVFX, leftfoot.transform.position + new Vector3(0, -1, 0), Quaternion.identity);
     }
 
     public void RightFootVFX()
     {
-        Instantiate(footStepVFX, rightfoot.transform.position + new Vector3(0, -1, 0), Quaternion.identity);
+        if (footStepVFX)
+            Instantiate(footStepVFX, rightfoot.transform.position + new Vector3(0, -1, 0), Quaternion.identity);
     }
 
     #region ShootAttack
@@ -208,7 +219,8 @@ public class Troll : MonoBehaviour, INoticePlayer
     private void InitiateShootAttack()
     {
         cannonObject.transform.localRotation = new Quaternion(-0.185198382f, -0.0976984948f, 0.263889641f, 0.941551268f);
-        Instantiate(shootTelegraphVFX, shootTelegraphVFXPosition.transform.position, shootTelegraphVFXPosition.transform.rotation, shootTelegraphVFXPosition.transform);
+        if(shootTelegraphVFX)
+            Instantiate(shootTelegraphVFX, shootTelegraphVFXPosition.transform.position, shootTelegraphVFXPosition.transform.rotation, shootTelegraphVFXPosition.transform);
         Invoke("ShootProjectile", 1.5f);
     }
 
@@ -221,15 +233,18 @@ public class Troll : MonoBehaviour, INoticePlayer
 
         // Instantiate the projectile with the correct rotation
         // Original projectile
-        Instantiate(shootProjectile, shootPoint.transform.position, lookRotation);
+        if(shootProjectile)
+            Instantiate(shootProjectile, shootPoint.transform.position, lookRotation);
 
         // Left projectile (35 degrees counter-clockwise)
         Quaternion leftRotation = Quaternion.Euler(0, -15, 0) * lookRotation;
-        Instantiate(shootProjectile, shootPoint.transform.position, leftRotation);
+        if (shootProjectile)
+            Instantiate(shootProjectile, shootPoint.transform.position, leftRotation);
 
         // Right projectile (35 degrees clockwise)
         Quaternion rightRotation = Quaternion.Euler(0, 15, 0) * lookRotation;
-        Instantiate(shootProjectile, shootPoint.transform.position, rightRotation);
+        if (shootProjectile)
+            Instantiate(shootProjectile, shootPoint.transform.position, rightRotation);
 
 
         Invoke("Idle", 1);
@@ -281,7 +296,8 @@ public class Troll : MonoBehaviour, INoticePlayer
             RaycastHit hit;
             if (Physics.Raycast(donutExplosionSpawnTransform.position, -transform.up, out hit, 20, donutLayerMask))
             {
-                Instantiate(donutExplosion, hit.point + new Vector3(0, 2.5f, 0), Quaternion.identity);
+                if (donutExplosion)
+                    Instantiate(donutExplosion, hit.point + new Vector3(0, 2.5f, 0), Quaternion.identity);
             }
         }
     }
@@ -333,7 +349,6 @@ public class Troll : MonoBehaviour, INoticePlayer
 
     void INoticePlayer.NoticePlayer()
     {
-        print("Found player");
         foundPlayer = true;
     }
 }

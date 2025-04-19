@@ -43,10 +43,17 @@ public class AMainSystem : MonoBehaviour
         explosionSystem.SpawnExplosion(position, radius, damage, parent);
     }
 
+    public void SpawnExplosion(Vector3 position, float radius, int damage, bool enemyOwned)
+    {
+        explosionSystem.SpawnExplosion(position, radius, damage, enemyOwned);
+    }
+
     public void SpawnExplosion(Vector3 position, float radius, int damage, GameObject parent, bool enemyOwned)
     {
         explosionSystem.SpawnExplosion(position, radius, damage, parent, enemyOwned);
     }
+
+
 
     public void SpawnPickUpEffects(Vector3 position)
     {

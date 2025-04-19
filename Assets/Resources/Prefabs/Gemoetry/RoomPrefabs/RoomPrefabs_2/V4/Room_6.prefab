@@ -17506,6 +17506,10 @@ MonoBehaviour:
   direction: 2
   point1: {fileID: 6764651318295752102}
   point2: {fileID: 1117862778}
+  roomDifficultyLevel: 1
+  blockade: {fileID: 0}
+  secretPoint: {fileID: 0}
+  roomToSpawn: {fileID: 0}
 --- !u!1 &9185156210566671666
 GameObject:
   m_ObjectHideFlags: 0
@@ -19032,7 +19036,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -64.756
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9016285968333512282, guid: 987d498a22a4b7d43957e1db4de67a19, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 987d498a22a4b7d43957e1db4de67a19, type: 3}
 --- !u!4 &7305221597601545043 stripped
 Transform:

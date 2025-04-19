@@ -37,7 +37,8 @@ public class ChestScript : MonoBehaviour, IInteractInterface
         animation.Play();
         yield return new WaitForSeconds(0.25f);
         collider.enabled = false;
-        Instantiate(coins, spawnPos.position, Quaternion.identity).GetComponent<ParticleSystem>().trigger.AddCollider(player.GetComponent<Collider>());
+        if(coins)
+            Instantiate(coins, spawnPos.position, Quaternion.identity).GetComponent<ParticleSystem>().trigger.AddCollider(player.GetComponent<Collider>());
         yield return new WaitForSeconds(0.1f);
         lootSystem.DropWeapon(spawnPos.position);
     }

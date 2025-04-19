@@ -7570,6 +7570,10 @@ MonoBehaviour:
   direction: 0
   point1: {fileID: 683977223709932830}
   point2: {fileID: 2674626617730662910}
+  roomDifficultyLevel: 1
+  blockade: {fileID: 0}
+  secretPoint: {fileID: 0}
+  roomToSpawn: {fileID: 0}
 --- !u!1 &7262418144041061903
 GameObject:
   m_ObjectHideFlags: 0
@@ -11034,7 +11038,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -1.684
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9016285968333512282, guid: 987d498a22a4b7d43957e1db4de67a19, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 987d498a22a4b7d43957e1db4de67a19, type: 3}
 --- !u!4 &6134441856987725398 stripped
 Transform:
@@ -11170,7 +11175,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -4.429
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9016285968333512282, guid: 987d498a22a4b7d43957e1db4de67a19, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 987d498a22a4b7d43957e1db4de67a19, type: 3}
 --- !u!4 &6422557314433965452 stripped
 Transform:
@@ -11780,7 +11786,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9016285968333512282, guid: 987d498a22a4b7d43957e1db4de67a19, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 987d498a22a4b7d43957e1db4de67a19, type: 3}
 --- !u!4 &3181567548974310198 stripped
 Transform:
@@ -12200,7 +12207,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -45.958
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9016285968333512282, guid: 987d498a22a4b7d43957e1db4de67a19, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 987d498a22a4b7d43957e1db4de67a19, type: 3}
 --- !u!4 &1284036991764538503 stripped
 Transform:
@@ -12546,7 +12554,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -45.958
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9016285968333512282, guid: 987d498a22a4b7d43957e1db4de67a19, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 987d498a22a4b7d43957e1db4de67a19, type: 3}
 --- !u!4 &1768474064363312869 stripped
 Transform:

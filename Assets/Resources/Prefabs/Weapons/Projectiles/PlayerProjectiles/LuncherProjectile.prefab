@@ -47,21 +47,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosivePrefab: {fileID: 6181682070259854663, guid: 22c33e41a1ca8c74a9de4a0767131945, type: 3}
   UseAdvancedCalculations: 1
-  damage: 100
+  damage: 0
   projectileSpeed: 80
   pierceObjects: 0
   pierceAmount: 0
   isExplosive: 1
-  explosiveRadius: 10
-  explosiveDamage: 500
+  explosiveRadius: 12
+  explosiveDamage: 200
   explosiveImpactSFX: {fileID: 0}
   homing: 0
   turnSpeed: 12
   target: {fileID: 0}
   useGravity: 1
   gravityMagnitude: 4
+  hitVFX: {fileID: 0}
+  hitEnemyVFX: {fileID: 0}
   lifeDuration: 8
   lifeTimer: 0
+  aMainSysteM: {fileID: 0}
+  shootSystem: {fileID: 0}
 --- !u!135 &3201373492876456345
 SphereCollider:
   m_ObjectHideFlags: 0

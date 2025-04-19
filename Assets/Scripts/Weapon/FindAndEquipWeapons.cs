@@ -18,7 +18,7 @@ public class FindAndEquipWeapons : MonoBehaviour
     [SerializeField] public BaseWeapon baseWeapon;
     [SerializeField] WeaponSocket weaponSocket;
     [SerializeField] GameObject weaponParent;
-    float interactDistance = 10;
+    float interactDistance = 12;
 
     GameObject lastHitObj;
     public GameObject startWeapon;
@@ -42,6 +42,8 @@ public class FindAndEquipWeapons : MonoBehaviour
     [HideInInspector] public Image image;
     [HideInInspector] public SelectedItem selectedItem;
 
+    [HideInInspector] public GameObject interactPrompt;
+
     [Header("SFX")]
     public AudioSource equipSFX;
 
@@ -60,7 +62,11 @@ public class FindAndEquipWeapons : MonoBehaviour
         popUpItemDescription = popUpPanel.transform.Find("PopUpDescription").GetComponent<TextMeshProUGUI>();
         popUpItemName = popUpPanel.transform.Find("PopUpName").GetComponent<TextMeshProUGUI>();
         popUpItemImage = popUpPanel.transform.Find("PopUpItemSprite").GetComponent<Image>();
-        
+
+        interactPrompt = GameObject.Find("Interact_Prompt").gameObject;
+
+        interactPrompt.SetActive(false);
+
         playerStats = GetComponent<PlayerStats>();
     }
 
@@ -159,18 +165,28 @@ public class FindAndEquipWeapons : MonoBehaviour
 
     private void CheckForItems()
     {
-        if (dissapearTimer < .25f)
+        if (dissapearTimer < .15f)
         {
             dissapearTimer += Time.deltaTime;
         }
         else if (popUpPanel)
         {
-            popUpPanel.SetActive(false);
+            if (popUpPanel.activeInHierarchy)
+                popUpPanel.SetActive(false);
+            if (interactPrompt.activeInHierarchy)
+                interactPrompt.SetActive(false);
         }
 
         RaycastHit hit;
         if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.forward, out hit, interactDistance))
         {
+            if (hit.transform.CompareTag("Item") || hit.transform.CompareTag("Interact"))
+            {
+                if (!interactPrompt.activeInHierarchy)
+                    interactPrompt.SetActive(true);
+            }
+
+
             if (hit.transform.CompareTag("Item"))
             {
                 dissapearTimer = 0;
@@ -193,6 +209,7 @@ public class FindAndEquipWeapons : MonoBehaviour
     {
         
         //Spawn the new weaponIcon
+
         GameObject obj = Instantiate(weaponIcon, iconParent.transform);
         WeaponIcon weaponIconObj = obj.GetComponent<WeaponIcon>();
 

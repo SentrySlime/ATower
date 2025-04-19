@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class EnemyBase : MonoBehaviour, IDamageInterface
 {
@@ -165,7 +166,10 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
 
             if (CanExplode(criticalDeath))
             {
-                aMainSystem.SpawnExplosion(moneySpawnPoint.position, 7, (int)maxHealth);
+                if(explodeOnDeath)
+                    aMainSystem.SpawnExplosion(moneySpawnPoint.position, 7, (int)maxHealth, true);
+                else
+                    aMainSystem.SpawnExplosion(moneySpawnPoint.position, 7, (int)maxHealth);
             }
             else if (deathParticles)
             {

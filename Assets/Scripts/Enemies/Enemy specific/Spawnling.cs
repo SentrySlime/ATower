@@ -147,17 +147,18 @@ public class Spawnling : MonoBehaviour
 
     private void InitiateAttack()
     {
-        Instantiate(attackTelegraph, shootPoint.transform.position, Quaternion.identity, transform);
+        if (attackTelegraph)
+            Instantiate(attackTelegraph, shootPoint.transform.position, Quaternion.identity, transform);
         agent.speed = 0;
         agent.angularSpeed = 0;
         agent.velocity = Vector3.zero;
         animator.SetBool("Attacking", true);
-        Invoke("DoAttack", 1.25f);
+        Invoke("DoAttack", 0.75f);
     }
 
     private void DoAttack()
     {
-        explosionSystem.SpawnExplosion(transform.position, 10, 25, true);
+        explosionSystem.SpawnExplosion(transform.position, 10, 15, true);
         enemy.Die(false);
     }
 

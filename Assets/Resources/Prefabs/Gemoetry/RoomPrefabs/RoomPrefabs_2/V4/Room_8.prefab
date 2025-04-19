@@ -20743,6 +20743,50 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!1 &2248884476963577210
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8460054952492093603}
+  - component: {fileID: 8039429226483275075}
+  m_Layer: 0
+  m_Name: Cube (22)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8460054952492093603
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2248884476963577210}
+  m_LocalRotation: {x: -0.32129893, y: 0.021299012, z: -0.07012049, w: 0.944138}
+  m_LocalPosition: {x: -12.53, y: -13.81, z: 23.65}
+  m_LocalScale: {x: 4.404725, y: 8.4984, z: 2.4478}
+  m_Children: []
+  m_Father: {fileID: 1895995377475474312}
+  m_RootOrder: 142
+  m_LocalEulerAnglesHint: {x: -37.136, y: 6.141, z: -10.56}
+--- !u!65 &8039429226483275075
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2248884476963577210}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2922914608828933713
 GameObject:
   m_ObjectHideFlags: 0
@@ -22288,6 +22332,8 @@ Transform:
   - {fileID: 2438056972369885967}
   - {fileID: 1426106549727926443}
   - {fileID: 4747437894788377367}
+  - {fileID: 5505386227957302328}
+  - {fileID: 8460054952492093603}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -22310,6 +22356,50 @@ MonoBehaviour:
   blockade: {fileID: 0}
   secretPoint: {fileID: 0}
   roomToSpawn: {fileID: 0}
+--- !u!1 &7983534882536276770
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5505386227957302328}
+  - component: {fileID: 8249182147436771610}
+  m_Layer: 0
+  m_Name: Cube (21)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5505386227957302328
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7983534882536276770}
+  m_LocalRotation: {x: -0, y: 0.018277075, z: -0, w: 0.999833}
+  m_LocalPosition: {x: -3.18, y: -14.846008, z: 22.2}
+  m_LocalScale: {x: 25.533157, y: 8.4984, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1895995377475474312}
+  m_RootOrder: 141
+  m_LocalEulerAnglesHint: {x: 0, y: 2.095, z: 0}
+--- !u!65 &8249182147436771610
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7983534882536276770}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &16762795258960920
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32901,7 +32991,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9016285968333512282, guid: 987d498a22a4b7d43957e1db4de67a19, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 987d498a22a4b7d43957e1db4de67a19, type: 3}
 --- !u!4 &4275181241080594344 stripped
 Transform:
@@ -34043,7 +34134,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9016285968333512282, guid: 987d498a22a4b7d43957e1db4de67a19, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 987d498a22a4b7d43957e1db4de67a19, type: 3}
 --- !u!4 &1310093591057453799 stripped
 Transform:

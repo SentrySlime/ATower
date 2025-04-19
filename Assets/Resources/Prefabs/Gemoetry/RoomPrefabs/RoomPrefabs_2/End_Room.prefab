@@ -2774,7 +2774,7 @@ GameObject:
   - component: {fileID: 1225547665218192446}
   - component: {fileID: 7684629026363040238}
   - component: {fileID: 2916123773133147600}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Doors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4877,7 +4877,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1225547665587887704}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6932,7 +6932,7 @@ GameObject:
   - component: {fileID: 1225547665907129575}
   - component: {fileID: 1225547665907129574}
   - component: {fileID: 1225547665907129573}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8441,7 +8441,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1225547665980184026}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9123,7 +9123,7 @@ GameObject:
   - component: {fileID: 1225547666099652348}
   - component: {fileID: 1225547666099652099}
   - component: {fileID: 1225547666099652098}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12361,7 +12361,7 @@ GameObject:
   - component: {fileID: 8837998467396005447}
   - component: {fileID: 7688043972660856684}
   - component: {fileID: 6189613240422221663}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17226,6 +17226,10 @@ MonoBehaviour:
   direction: 0
   point1: {fileID: 1267435142416006065}
   point2: {fileID: 8092638124060650530}
+  roomDifficultyLevel: 1
+  blockade: {fileID: 0}
+  secretPoint: {fileID: 0}
+  roomToSpawn: {fileID: 0}
 --- !u!1 &3063648873861166990
 GameObject:
   m_ObjectHideFlags: 0
@@ -17692,7 +17696,7 @@ GameObject:
   - component: {fileID: 4319403944145505755}
   - component: {fileID: 2400259754438713354}
   - component: {fileID: 4099053490398599612}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Particle System (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

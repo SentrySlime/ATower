@@ -462,6 +462,7 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
         {
             float angle = startAngle + (i * projectileSpacing);
             Quaternion rotation = Quaternion.Euler(0, angle, 0) * baseRotation; // Apply horizontal spread
+            if(projectile)
             Instantiate(projectile, shootPoint.transform.position, rotation);
         }
     }

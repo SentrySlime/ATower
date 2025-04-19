@@ -4989,7 +4989,7 @@ MonoBehaviour:
   baseReloadAmount: 0
   reloadAmount: 1
   baseDamage: 0
-  damage: 55
+  damage: 50
   baseFireRate: 0
   fireRate: 0.1
   burstDelay: 1
@@ -5017,6 +5017,9 @@ MonoBehaviour:
   finishedReload: 0
   renderObjects:
   - {fileID: 412970014213503205}
+  lineRenderer: {fileID: 0}
+  lineDuration: 0.9
+  lineTimer: 0
   hitDistance: 0
   hitmarker: {fileID: 0}
   isShotgun: 1
