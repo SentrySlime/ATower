@@ -70,14 +70,18 @@ public class PlayerStats : MonoBehaviour
     {
         locomotion.moveSpeed = moveSpeed;
         locomotion.UpdateJumps(extraJumps);
-
-        //locomotion.maxJumps = extraJumps;
     }
 
     public void StartPlayerHP()
     {
         playerHealth.damageReductionPercent = damageReductionPercent;
         playerHealth.damageIgnoreChance = damageIgnoreChance;
+        
+        if(maxHealth > playerHealth.maxHP)
+        {
+            int tempHP = maxHealth - playerHealth.maxHP;
+            playerHealth.currentHP += tempHP;
+        }
         playerHealth.maxHP = maxHealth;
         playerHealth.ItemUpdateHealth();
     }
