@@ -10,6 +10,8 @@ public class Kobold : MonoBehaviour, INoticePlayer
 {
     public AudioSource audioSource;
 
+    public AudioSource chargeUpAudioSource;
+
     public AudioSource shootAudioSource;
 
     public enum CurrentState
@@ -245,10 +247,10 @@ public class Kobold : MonoBehaviour, INoticePlayer
     public void RangedAttack()
     {
         telegraphSphere.SetActive(true);
-        shootAudioSource.Play();
+        
         agent.speed = 0;
         agent.isStopped = true;
-
+        chargeUpAudioSource.Play();
         float length = Vector3.Distance(player.transform.position, transform.position);
         StartCoroutine(ShootAfterTime(0.25f));
     }
@@ -327,7 +329,7 @@ public class Kobold : MonoBehaviour, INoticePlayer
         if(enemyBase.dead) { yield return null; }
 
         Vector3 direction = playerTargetPoint.transform.position - shootPoint.position;
-
+        shootAudioSource.Play();
         // Create a rotation that points towards the player
         Quaternion lookRotation = Quaternion.LookRotation(direction);
 

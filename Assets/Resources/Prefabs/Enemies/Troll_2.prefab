@@ -206,7 +206,7 @@ MonoBehaviour:
   spawner: {fileID: 0}
   dropLoot: 1
   itemPrefab: {fileID: 0}
-  dropChance: 0.5
+  dropChance: 1
   dead: 0
   gauranteeItemDrop: 0
   shouldReportDeath: 1
@@ -231,6 +231,7 @@ MonoBehaviour:
   footStepVFX: {fileID: 2724889193774223026, guid: 9eddf0536a26e8840ac3239f2379bfbc, type: 3}
   rightfoot: {fileID: 1955486551559354505}
   leftfoot: {fileID: 5639720341469680060}
+  foundPlayer: 0
   attackRateTimer: 0
   shootTelegraphVFX: {fileID: 5156593245698994014, guid: 97a0903238715ff41994f483513f6541, type: 3}
   shootTelegraphVFXPosition: {fileID: 4759182224863658418}
@@ -242,6 +243,7 @@ MonoBehaviour:
   donutLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  attacking: 0
   shootPoint: {fileID: 955962327963157220}
 --- !u!195 &955962329172938194
 NavMeshAgent:

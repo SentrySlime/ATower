@@ -207,10 +207,12 @@ public class FindAndEquipWeapons : MonoBehaviour
 
     private void SetNewWeaponIcon(GameObject weaponObj)
     {
-        
+
         //Spawn the new weaponIcon
 
         GameObject obj = Instantiate(weaponIcon, iconParent.transform);
+        obj.transform.SetSiblingIndex(0);
+
         WeaponIcon weaponIconObj = obj.GetComponent<WeaponIcon>();
 
         weaponIconObj.reloadTime = weaponObj.GetComponentInChildren<BaseWeapon>().reloadTime * 1.5f;

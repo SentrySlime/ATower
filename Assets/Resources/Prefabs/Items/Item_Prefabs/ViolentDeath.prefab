@@ -44,14 +44,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: ViolentDeath
-  itemDescription: Enemies you kill explode
+  itemDescription: Enemies you kill with a critical hit explode
   itemIcon: {fileID: 21300000, guid: 46d7e2b2558621b4ba9e9c92a0639ae3, type: 3}
   itemMesh: {fileID: -5250525002983872318, guid: 713e8a675a041e84b85e5b2e60f0e662, type: 3}
   itemMaterial: {fileID: 2100000, guid: 52416ac8b138d884bb43b3ce02422f80, type: 2}
+  type: 0
   maxHp: 0
-  hpRegen: 0
   hpOnHit: 0
   hpOnKill: 0
+  helpingHand: 0
+  hpRegen: 0
+  hpRegenOnEnemyHit: 0
   damageReductionPercent: 0
   damageIgnoreChance: 0
   moveSpeed: 0
@@ -60,11 +63,14 @@ MonoBehaviour:
   critChance: 0
   includeExplosion: 1
   canExplodeEnemies: 1
-  includeMoneyIsPower: 0
   moneyIsPower: 0
   ammoRefills: 0
   reloadAmount: 0
   maxMagazineSize: 0
   reloadSpeed: 0
+  returnAmmoOnkill: 0
+  hasAlternateFastReload: 0
   fireBallChance: 0
+  hasIncreasedMoneyDrops: 0
+  increasedMoneyDrops: 0
   playerStats: {fileID: 0}
