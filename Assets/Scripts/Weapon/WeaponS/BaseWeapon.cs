@@ -346,6 +346,7 @@ public class BaseWeapon : MonoBehaviour
         if (infinteAmmo)
         {
 
+            //maxAmmoText.text = "Infinte";
             maxAmmoText.text = "\u221E";
         }
         else

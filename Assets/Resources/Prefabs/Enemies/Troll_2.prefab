@@ -192,8 +192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f62242947bcb804c98fa0c285b6e8dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 8000
-  currentHealth: 8000
+  maxHealth: 5000
+  currentHealth: 5000
   canExplode: 1
   explodeOnDeath: 0
   moneyPrefab: {fileID: 5753959484571427866, guid: f4c33ad25fa66f548a4d336f2524f348, type: 3}
@@ -234,10 +234,12 @@ MonoBehaviour:
   foundPlayer: 0
   attackRateTimer: 0
   shootTelegraphVFX: {fileID: 5156593245698994014, guid: 97a0903238715ff41994f483513f6541, type: 3}
+  shootExplosionSFX: {fileID: 4964101775347663484, guid: a7217256273320844b639626e0c2d9da, type: 3}
   shootTelegraphVFXPosition: {fileID: 4759182224863658418}
   shootProjectile: {fileID: 7929977615501413461, guid: 9670c21603a7675439328fc30f176b81, type: 3}
   cannonObject: {fileID: 4003286232463046327}
   donutExplosionVFX: {fileID: 3211388572963393823, guid: d88cc6638f15b9243a439d650d87d4c0, type: 3}
+  donutExplosionSFX: {fileID: 4964101775347663484, guid: 894358803c491834883403a9d125620c, type: 3}
   donutExplosion: {fileID: 5167799958932818234, guid: 3b5d098d079649d409f1b7869557b122, type: 3}
   donutExplosionSpawnTransform: {fileID: 4634813730964728768}
   donutLayerMask:
@@ -245,6 +247,10 @@ MonoBehaviour:
     m_Bits: 4294967295
   attacking: 0
   shootPoint: {fileID: 955962327963157220}
+  visionTransform: {fileID: 4696042830214006872}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 6399
 --- !u!195 &955962329172938194
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -258,8 +264,8 @@ NavMeshAgent:
   m_Speed: 9
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 1000
-  m_StoppingDistance: 6
+  m_AngularSpeed: 1200
+  m_StoppingDistance: 9
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

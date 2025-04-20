@@ -37,12 +37,14 @@ public class Troll : MonoBehaviour, INoticePlayer
 
     [Header("ShootAttack")]
     public GameObject shootTelegraphVFX;
+    public GameObject shootExplosionSFX;
     public GameObject shootTelegraphVFXPosition;
     public GameObject shootProjectile;
     public GameObject cannonObject;
 
     [Header("MeleeAttack")]
     public GameObject donutExplosionVFX;
+    public GameObject donutExplosionSFX;
     public GameObject donutExplosion;
     public Transform donutExplosionSpawnTransform;
     float donutExplosionTimer = 0.4f;
@@ -55,6 +57,8 @@ public class Troll : MonoBehaviour, INoticePlayer
 
     [Header("Misc")]
     [SerializeField] private GameObject shootPoint;
+    [SerializeField] private GameObject visionTransform;
+    public LayerMask layerMask;
 
 
     void Start()
@@ -108,7 +112,7 @@ public class Troll : MonoBehaviour, INoticePlayer
         {
             if (attacking == false)
             {
-                if (IsPlayerInfront())
+                if (IsPlayerInfront() && HasLineOfSight())
                 {
                     attacking = true;
                     InitiateShootAttack();
@@ -226,6 +230,9 @@ public class Troll : MonoBehaviour, INoticePlayer
 
     private void ShootProjectile()
     {
+        if(shootExplosionSFX)
+            Instantiate(shootExplosionSFX, shootTelegraphVFXPosition.transform.position, Quaternion.identity);
+
         Vector3 direction = playerTargetPoint.transform.position - shootPoint.transform.position;
 
         // Create a rotation that points towards the player
@@ -290,6 +297,8 @@ public class Troll : MonoBehaviour, INoticePlayer
     {
         if(donutExplosionVFX)
             Instantiate(donutExplosionVFX, donutExplosionSpawnTransform.position + new Vector3(0, -6.5f, 0), Quaternion.identity);
+        if(donutExplosionSFX)
+            Instantiate(donutExplosionSFX, donutExplosionSpawnTransform.position + new Vector3(0, -6.5f, 0), Quaternion.identity);
         
         if (donutExplosion)
         {
@@ -340,6 +349,25 @@ public class Troll : MonoBehaviour, INoticePlayer
             return false;
         }
 
+    }
+
+    private bool HasLineOfSight()
+    {
+        Vector3 directionToPlayer = player.transform.position - visionTransform.transform.position;
+        float distance = Vector3.Distance(player.transform.position, visionTransform.transform.position);
+
+        RaycastHit hit;
+        if (Physics.Raycast(visionTransform.transform.position, directionToPlayer, out hit, distance, layerMask))
+        {
+            if (hit.transform.CompareTag("Player"))
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
+        return false;
     }
 
     private void ResetAttackTimer()

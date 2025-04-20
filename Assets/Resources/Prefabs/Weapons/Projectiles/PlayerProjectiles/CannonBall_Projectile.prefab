@@ -26124,21 +26124,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosivePrefab: {fileID: 6181682070259854663, guid: 22c33e41a1ca8c74a9de4a0767131945, type: 3}
   UseAdvancedCalculations: 1
-  damage: 1500
+  damage: 0
   projectileSpeed: 50
-  pierceObjects: 1
+  pierceObjects: 0
   pierceAmount: 12
-  isExplosive: 0
-  explosiveRadius: 10
-  explosiveDamage: 1000
+  isExplosive: 1
+  explosiveRadius: 6
+  explosiveDamage: 500
   explosiveImpactSFX: {fileID: 0}
   homing: 0
   turnSpeed: 12
   target: {fileID: 0}
+  nonHomingDuration: 0.35
   useGravity: 0
   gravityMagnitude: 1
-  hitVFX: {fileID: 0}
-  hitEnemyVFX: {fileID: 0}
+  hitVFX: {fileID: 1879272669879180, guid: 52baafc6c69151e418a228e14e1bd356, type: 3}
+  hitEnemyVFX: {fileID: 2512749170250154484, guid: acce0b4b09260c84eb6e5ddb1239880d, type: 3}
   lifeDuration: 16
   lifeTimer: 0
   aMainSysteM: {fileID: 0}
@@ -26181,6 +26182,7 @@ MonoBehaviour:
   homing: 0
   turnSpeed: 12
   target: {fileID: 0}
+  nonHomingDuration: 0.35
   useGravity: 0
   gravityMagnitude: 1
   hitVFX: {fileID: 0}

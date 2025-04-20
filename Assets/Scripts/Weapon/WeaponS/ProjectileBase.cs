@@ -47,7 +47,7 @@ public class ProjectileBase : MonoBehaviour
     public float turnSpeed = 12;
     public GameObject target;
     float homingTimer = 0;
-    float nonHomingDuration = 0.35f;
+    public float nonHomingDuration = 0.35f;
     float homingCheckTimer = 0;
     bool cantHome = false;
 

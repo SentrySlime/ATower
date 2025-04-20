@@ -28,6 +28,7 @@ public class Spawnling : MonoBehaviour
     [Header("Melee")]
     public bool meleeAttack;
     public GameObject meleeObj;
+    public AudioSource telegraphSFX;
     public float meleeDistance_ = 10;
 
     [Header("Particle System")]
@@ -149,6 +150,8 @@ public class Spawnling : MonoBehaviour
     {
         if (attackTelegraph)
             Instantiate(attackTelegraph, shootPoint.transform.position, Quaternion.identity, transform);
+        if (telegraphSFX)
+            telegraphSFX.Play();
         agent.speed = 0;
         agent.angularSpeed = 0;
         agent.velocity = Vector3.zero;

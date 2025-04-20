@@ -5094,32 +5094,32 @@ MonoBehaviour:
   infinteAmmo: 0
   reloadType: 1
   baseMaxMagazine: 0
-  maxMagazine: 1
-  currentMagazine: 1
+  maxMagazine: 3
+  currentMagazine: 3
   baseReloadTime: 0
-  reloadTime: 4
+  reloadTime: 3.5
   baseReloadAmount: 0
-  reloadAmount: 1
+  reloadAmount: 3
   baseDamage: 0
   damage: 1
   baseFireRate: 0
   fireRate: 0.3
-  burstDelay: 1
-  burstAmount: 1
-  recoilAmount: -25
+  burstDelay: 0.15
+  burstAmount: 3
+  recoilAmount: -10
   moveAmount: -0.8
-  ADSAccuracy: 1
-  HIPAccuracy: 1
+  ADSAccuracy: 3
+  HIPAccuracy: 6
   recoilX: -50
   recoilY: 2
   recoilZ: 0.9
   hipPos: {x: 0.61, y: -0.53, z: 1.98}
   adsPos: {x: -0.37, y: -0.53, z: 1.98}
-  adsSpeed: 6
+  adsSpeed: 3
   maxAmmoText: {fileID: 0}
   currentMagazineText: {fileID: 0}
   ammoFill: {fileID: 0}
-  firingMode: 0
+  firingMode: 2
   aimCamera: {fileID: 0}
   recoil: {fileID: 0}
   screenShake: {fileID: 0}
@@ -5131,13 +5131,13 @@ MonoBehaviour:
   - {fileID: 3686643664562012467}
   projectile: {fileID: 3201373492876456356, guid: 9973599e5c4fb9647810154603d0d2f5, type: 3}
   shotSpeed: 1
-  shootAmount: 1
+  shootAmount: 3
   shotSize: 1
   pierceAmount: 1
   isShotgun: 0
-  UseHorizontal: 1
-  UseVertical: 1
-  shootSFX: {fileID: 4964101775347663484, guid: 33ac0cdea42e54e4e8ff9cf26ac00b95, type: 3}
+  UseHorizontal: 0
+  UseVertical: 0
+  shootSFX: {fileID: 4964101775347663484, guid: 3923c3623885b124e919498fdeaa7e77, type: 3}
   muzzleFlash: {fileID: 3023387803275709626}
   casingVFX: {fileID: 0}
   mantleAnimation: {fileID: 0}
