@@ -7,6 +7,7 @@ public class ChestScript : MonoBehaviour, IInteractInterface
     public Transform spawnPos;
     public GameObject coins;
     public Collider collider;
+    public AudioSource chestOpenSFX;
 
     bool open = false;
 
@@ -47,6 +48,9 @@ public class ChestScript : MonoBehaviour, IInteractInterface
     {
         if(open) { return; }
         open = true;
+        if(chestOpenSFX != null)
+            chestOpenSFX.Play();
+
         StartCoroutine(SpawnWeapon());
     }
 }

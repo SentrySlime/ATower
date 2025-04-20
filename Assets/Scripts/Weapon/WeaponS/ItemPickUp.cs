@@ -37,14 +37,11 @@ public class ItemPickUp : MonoBehaviour
     {
         if(itemPrefab)
         {
-            //itemBase = itemPrefab.GetComponent<ItemBase>();
-            itemName = itemPrefab.itemName;
-            itemDescription = itemPrefab.itemDescription;
-            itemIcon = itemPrefab.itemIcon;
-            GetComponentInChildren<MeshFilter>().mesh = itemPrefab.itemMesh;
-            itemMesh = itemPrefab.itemMesh;
-            GetComponentInChildren<MeshRenderer>().material = itemPrefab.itemMaterial;
-            itemMaterial = itemPrefab.itemMaterial;
+            if(itemPrefab.notItem)
+                SetPartialItemInfo();
+            else
+                SetItemInfo();
+
         }
     }
 
@@ -61,6 +58,30 @@ public class ItemPickUp : MonoBehaviour
             currentItem = Instantiate(itemPrefab.gameObject);
             itemPrefab.EquipItem();
         }
+    }
+
+    private void SetItemInfo()
+    {
+        //itemBase = itemPrefab.GetComponent<ItemBase>();
+        itemName = itemPrefab.itemName;
+        itemDescription = itemPrefab.itemDescription;
+        itemIcon = itemPrefab.itemIcon;
+        GetComponentInChildren<MeshFilter>().mesh = itemPrefab.itemMesh;
+        itemMesh = itemPrefab.itemMesh;
+        GetComponentInChildren<MeshRenderer>().material = itemPrefab.itemMaterial;
+        itemMaterial = itemPrefab.itemMaterial;
+    }
+
+    private void SetPartialItemInfo()
+    {
+        //itemBase = itemPrefab.GetComponent<ItemBase>();
+        itemName = itemPrefab.itemName;
+        itemDescription = itemPrefab.itemDescription;
+        itemIcon = itemPrefab.itemIcon;
+        //GetComponentInChildren<MeshFilter>().mesh = itemPrefab.itemMesh;
+        //itemMesh = itemPrefab.itemMesh;
+        //GetComponentInChildren<MeshRenderer>().material = itemPrefab.itemMaterial;
+        //itemMaterial = itemPrefab.itemMaterial;
     }
 
     private void OnTriggerEnter(Collider other)
