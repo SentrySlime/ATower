@@ -17,10 +17,12 @@ public class BaseWeapon : MonoBehaviour
     [Header("Item Info")]
     public string aName;
     public string aDescription;
+    public Sprite weaponIcon;
+
+    [Header("General references")]
     public GameObject shootPoint;
     public GameObject barrel;
     public GameObject objectToRecoil;
-    public Sprite weaponIcon;
     public GameObject iconPrefab;
 
     public enum WeaponType
@@ -280,12 +282,36 @@ public class BaseWeapon : MonoBehaviour
         }
     }
 
+    public bool HasFullAmmo()
+    {
+        if (currentAmmo == maxAmmo)
+            return true;
+        else
+            return false;
+    }
+
     public bool OutOfAmmo()
     {
         if(currentAmmo == 0)
             return true;
         else
             return false;
+    }
+
+    public bool HasInfiniteAmmo()
+    {
+        if (infinteAmmo)
+            return true;
+        else
+            return false;
+    }
+
+    public bool CanRefillAmmo()
+    {
+        if (HasInfiniteAmmo() || HasFullAmmo())
+            return false;
+        else
+            return true;
     }
 
     //This is called everytime you shot, as it takes ammo 

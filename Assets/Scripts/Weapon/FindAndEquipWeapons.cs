@@ -87,23 +87,61 @@ public class FindAndEquipWeapons : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(Mcamera.transform.position, Mcamera.transform.forward * interactDistance, out hit, interactDistance))
             {
-                if (hit.transform.gameObject.CompareTag("Item"))
-                    InitializeWeapon(hit.collider.gameObject);
-                else if (hit.transform.gameObject.CompareTag("Interact"))
+                if (hit.transform.gameObject.CompareTag("Interact"))
+                {
                     hit.transform.GetComponent<IInteractInterface>().Interact();
+                }
+                else if (hit.transform.gameObject.CompareTag("PickUp"))
+                {
+                    if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Items"))
+                    {    
+                        InitializeItem(hit.collider.gameObject);
+                        if (!equipSFX.isPlaying)
+                            equipSFX.Play();
+                    }
+                    else
+                    {
+                        InitializeWeapon(hit.collider.gameObject);
+                        if (!equipSFX.isPlaying)
+                            equipSFX.Play();
+                    }
+                }
+
             }
         }
     }
 
+    private void InitializeItem(GameObject incomingItem)
+    {
+        ItemPickUp test2 = incomingItem.GetComponent<ItemPickUp>();
+
+        if (!test2) return;
+
+        Vector3 SpawnPos = new Vector3(-9999, -9999, -9999);
+
+        ItemBase tempObj = Instantiate(incomingItem.GetComponent<ItemPickUp>().itemPrefab, SpawnPos, Quaternion.identity);
+        
+        inventory.heldItems.Add(tempObj.gameObject);
+
+        tempObj.EquipItem();
+
+        Destroy(incomingItem);
+
+        GameObject itemObj = Instantiate(itemPanel, itemGroup.transform);
+        ItemPanel tempPanel = itemObj.GetComponent<ItemPanel>();
+        tempPanel.SetPanel(test2);
+        tempPanel.itemName = itemName;
+        tempPanel.itemDescription = itemDescription;
+        tempPanel.image = image;
+    }
+
     private void InitializeWeapon(GameObject IncomingWeaponObj)
     {
-        if (!equipSFX.isPlaying)
-            equipSFX.Play();
-
+       
         WeaponPickUp weaponPickUp = IncomingWeaponObj.GetComponent<WeaponPickUp>();
         if (weaponPickUp != null)
         {
-            GameObject weaponObj = IncomingWeaponObj.GetComponent<WeaponPickUp>().returnWeapon();
+            GameObject weaponObj = IncomingWeaponObj.GetComponent<WeaponPickUp>().ReturnWeapon();
             SetNewWeaponIcon(weaponObj);
 
             inventory.weaponIndex = inventory.heldWeapons.Count;
@@ -121,27 +159,6 @@ public class FindAndEquipWeapons : MonoBehaviour
                 SetWeapon(weaponObj);
             }
 
-        }
-        else
-        {
-            ItemPickUp test2 = IncomingWeaponObj.GetComponent<ItemPickUp>();
-
-            if (!test2) return;
-
-            Vector3 SpawnPos = new Vector3(-9999, -9999, -9999);
-            ItemBase tempObj = Instantiate(IncomingWeaponObj.GetComponent<ItemPickUp>().itemPrefab, SpawnPos, Quaternion.identity);
-            inventory.heldItems.Add(tempObj.gameObject);
-
-            tempObj.EquipItem();
-            
-            Destroy(IncomingWeaponObj);
-            
-            GameObject itemObj = Instantiate(itemPanel, itemGroup.transform);
-            ItemPanel tempPanel = itemObj.GetComponent<ItemPanel>();
-            tempPanel.SetPanel(test2);
-            tempPanel.itemName = itemName;
-            tempPanel.itemDescription = itemDescription;
-            tempPanel.image = image;
         }
     }
 
@@ -180,17 +197,17 @@ public class FindAndEquipWeapons : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.forward, out hit, interactDistance))
         {
-            if (hit.transform.CompareTag("Item") || hit.transform.CompareTag("Interact"))
+            if (hit.transform.CompareTag("PickUp") || hit.transform.CompareTag("Interact"))
             {
                 if (!interactPrompt.activeInHierarchy)
                     interactPrompt.SetActive(true);
             }
 
 
-            if (hit.transform.CompareTag("Item"))
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Items"))
             {
                 dissapearTimer = 0;
-                var tempItem = hit.transform.GetComponent<ItemPickUp>();
+                var tempItem = hit.transform.GetComponent<Item>();
                 if (tempItem)
                 {
                     if (!popUpPanel.activeInHierarchy)

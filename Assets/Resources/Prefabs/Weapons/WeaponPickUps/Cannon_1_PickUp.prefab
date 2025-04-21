@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 7259968907755212438}
   m_Layer: 0
   m_Name: Cannon_1_PickUp
-  m_TagString: Item
+  m_TagString: PickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,6 +129,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a534775eed81f4fa047e368bc2b8ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemName: TrollCannon
+  itemDescription: 
+  itemIcon: {fileID: 21300000, guid: 8635cce8df1441c49915342ed4890c2f, type: 3}
   weaponRarity: 0
   weaponPrefab: {fileID: 1856004529439608096, guid: a59d5126af1874549a160c5de0cc7ff3, type: 3}
 --- !u!65 &4962411745360347529

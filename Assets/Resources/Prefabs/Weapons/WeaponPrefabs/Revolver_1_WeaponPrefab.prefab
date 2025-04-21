@@ -4965,12 +4965,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f64b5086b30334087b89dea5fa7b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aName: Revolver
-  aDescription: Hits like a truck
+  aName: Big Iron
+  aDescription: Big iron on his hip
+  weaponIcon: {fileID: 21300000, guid: 299e4d1674e545448aafe864e3a3eb5e, type: 3}
   shootPoint: {fileID: 0}
   barrel: {fileID: 1856004530348900990}
   objectToRecoil: {fileID: 6593228928422068522}
-  weaponIcon: {fileID: 21300000, guid: 299e4d1674e545448aafe864e3a3eb5e, type: 3}
   iconPrefab: {fileID: 0}
   type: 0
   baseMaxAmmo: 0
@@ -5017,6 +5017,9 @@ MonoBehaviour:
   finishedReload: 0
   renderObjects:
   - {fileID: 5352461095775856614}
+  lineRenderer: {fileID: 0}
+  lineDuration: 0.9
+  lineTimer: 0
   hitDistance: 0
   hitmarker: {fileID: 0}
   isShotgun: 0

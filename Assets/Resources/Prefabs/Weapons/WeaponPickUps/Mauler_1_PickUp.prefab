@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2619440849077950242}
   m_Layer: 0
   m_Name: Mauler_1_PickUp
-  m_TagString: Item
+  m_TagString: PickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,6 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a534775eed81f4fa047e368bc2b8ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemName: 
+  itemDescription: 
+  itemIcon: {fileID: 0}
   weaponRarity: 0
   weaponPrefab: {fileID: 1856004529439608096, guid: c0fef4b126baacf4c82d101bc0bd7c2b, type: 3}
 --- !u!65 &2749742489556895008

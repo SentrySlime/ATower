@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemPickUp : MonoBehaviour
+public class ItemPickUp : Item, IInteractInterface
 {
     public enum ItemRarity
     {
@@ -12,12 +12,7 @@ public class ItemPickUp : MonoBehaviour
         C,
         D
     }
-
-    public string itemName;
-    public string itemDescription;
-    public Sprite itemIcon;
     
-
     public ItemRarity weaponRarity;
 
     public ItemBase itemPrefab;
@@ -37,18 +32,20 @@ public class ItemPickUp : MonoBehaviour
     {
         if(itemPrefab)
         {
-            if(itemPrefab.notItem)
-                SetPartialItemInfo();
-            else
-                SetItemInfo();
-
+            SetItemInfo();
         }
     }
 
+    
 
     void Update()
     {
         transform.Rotate(Vector3.up, 100 * Time.deltaTime);
+    }
+
+    public void Interact()
+    {
+        EquipItem();
     }
 
     public void EquipItem()
@@ -62,7 +59,6 @@ public class ItemPickUp : MonoBehaviour
 
     private void SetItemInfo()
     {
-        //itemBase = itemPrefab.GetComponent<ItemBase>();
         itemName = itemPrefab.itemName;
         itemDescription = itemPrefab.itemDescription;
         itemIcon = itemPrefab.itemIcon;
@@ -70,18 +66,6 @@ public class ItemPickUp : MonoBehaviour
         itemMesh = itemPrefab.itemMesh;
         GetComponentInChildren<MeshRenderer>().material = itemPrefab.itemMaterial;
         itemMaterial = itemPrefab.itemMaterial;
-    }
-
-    private void SetPartialItemInfo()
-    {
-        //itemBase = itemPrefab.GetComponent<ItemBase>();
-        itemName = itemPrefab.itemName;
-        itemDescription = itemPrefab.itemDescription;
-        itemIcon = itemPrefab.itemIcon;
-        //GetComponentInChildren<MeshFilter>().mesh = itemPrefab.itemMesh;
-        //itemMesh = itemPrefab.itemMesh;
-        //GetComponentInChildren<MeshRenderer>().material = itemPrefab.itemMaterial;
-        //itemMaterial = itemPrefab.itemMaterial;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -93,5 +77,6 @@ public class ItemPickUp : MonoBehaviour
         }
     }
 
+  
 }
 

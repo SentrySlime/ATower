@@ -6,8 +6,7 @@ using UnityEngine.UI;
 
 public class ItemBase : MonoBehaviour
 {
-    public bool notItem = true;
-
+    
     [Header("Base")]
     public string itemName;
     public string itemDescription;

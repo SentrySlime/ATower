@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ammo_Refill : MonoBehaviour, IInteractInterface
+public class Ammo_Refill : Item, IInteractInterface
 {
 
     public GameObject FX;
@@ -17,19 +17,19 @@ public class Ammo_Refill : MonoBehaviour, IInteractInterface
     {
         transform.Rotate(Vector3.up, 100 * Time.deltaTime);
     }
-
     public void Interact()
     {
-        RefillAmmo();   
+        RefillAmmo();
     }
 
     private void RefillAmmo()
     {
-        Instantiate(FX, transform.position, Quaternion.identity);
+        if(!player.GetComponent<WeaponSocket>().equippedWeapon.GetComponentInChildren<BaseWeapon>().CanRefillAmmo()) { return; }
 
+        Instantiate(FX, transform.position, Quaternion.identity);
         BaseWeapon tempWeapon = player.GetComponent<WeaponSocket>().equippedWeapon.GetComponentInChildren<BaseWeapon>();
         tempWeapon.AmmoRefill();
-
         Destroy(gameObject);
     }
+
 }

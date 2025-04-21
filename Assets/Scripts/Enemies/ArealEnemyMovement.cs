@@ -95,6 +95,7 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
     float meleeRadius = 1;
     public GameObject attackVFX;
     public GameObject telegraphVFX2;
+    public AudioSource meleeTelegraphSFX;
     public GameObject expandingAttackPosition;
 
     public LayerMask meleeLayerMask;
@@ -188,6 +189,7 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
                 attackTimer = 0;
                 meleeCooldownTimer = 0;
                 telegraphVFX2.transform.localScale = Vector3.one;
+                meleeTelegraphSFX.Play();
                 telegraphVFX2.SetActive(true);
             }
             else if (distanceToPlayer <= rangedAttackDist)

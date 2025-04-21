@@ -9619,10 +9619,9 @@ GameObject:
   - component: {fileID: 9089351037408256576}
   - component: {fileID: 9089351037408256584}
   - component: {fileID: 9089351037408256585}
-  - component: {fileID: 3476675793237170250}
   m_Layer: 6
   m_Name: ammo_Refill
-  m_TagString: Item
+  m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9656,6 +9655,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 128336b68bce9ff42b0269b344e2e485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemName: AmmoCrate
+  itemDescription: Refills ammo of you currently held weapon
+  itemIcon: {fileID: 21300000, guid: b0a9cccf60d61bc43816c6baf1f7a7bc, type: 3}
   FX: {fileID: 6866219754749391768, guid: 1bf1bf37765595745ba72fa67f8dab05, type: 3}
 --- !u!135 &9089351037408256585
 SphereCollider:
@@ -9670,29 +9672,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.68
   m_Center: {x: 0, y: -0.2, z: 0}
---- !u!114 &3476675793237170250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9089351037408256591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd1dc76f57f7cea43a74a70aae65aa47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: 
-  itemDescription: 
-  itemIcon: {fileID: 0}
-  weaponRarity: 0
-  itemPrefab: {fileID: 9046290321474250322, guid: 8eb3ae63ee636da479f3ddefcba286f7, type: 3}
-  currentItem: {fileID: 0}
-  size: {x: 0, y: 0, z: 0}
-  rb: {fileID: 0}
-  itemPickUp: {fileID: 0}
-  itemMesh: {fileID: 0}
-  itemMaterial: {fileID: 0}
 --- !u!1001 &5708430338275863115
 PrefabInstance:
   m_ObjectHideFlags: 0

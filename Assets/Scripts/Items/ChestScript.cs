@@ -31,6 +31,15 @@ public class ChestScript : MonoBehaviour, IInteractInterface
     {
         
     }
+    public void Interact()
+    {
+        if (open) { return; }
+        open = true;
+        if (chestOpenSFX != null)
+            chestOpenSFX.Play();
+
+        StartCoroutine(SpawnWeapon());
+    }
 
     IEnumerator SpawnWeapon()
     {
@@ -44,13 +53,4 @@ public class ChestScript : MonoBehaviour, IInteractInterface
         lootSystem.DropWeapon(spawnPos.position);
     }
 
-    public void Interact()
-    {
-        if(open) { return; }
-        open = true;
-        if(chestOpenSFX != null)
-            chestOpenSFX.Play();
-
-        StartCoroutine(SpawnWeapon());
-    }
 }
