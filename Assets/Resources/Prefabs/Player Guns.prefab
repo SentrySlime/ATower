@@ -1696,6 +1696,7 @@ GameObject:
   - component: {fileID: 5004350295439402680}
   - component: {fileID: 1655174550}
   - component: {fileID: 1655174549}
+  - component: {fileID: 7169635864036311181}
   m_Layer: 3
   m_Name: Player Guns
   m_TagString: Player
@@ -1756,6 +1757,7 @@ MonoBehaviour:
   itemDescription: {fileID: 0}
   image: {fileID: 0}
   selectedItem: {fileID: 0}
+  interactPrompt: {fileID: 0}
   equipSFX: {fileID: 5004350294498629577}
 --- !u!114 &5004350295439402695
 MonoBehaviour:
@@ -1817,7 +1819,6 @@ MonoBehaviour:
   vignetteAlpha: 0
   vignetteRate: 1
   vignetteThreshold: 0
-  playerStats: {fileID: 0}
   shieldVignette: {fileID: 0}
   shieldvignetteAlpha: 0
   shieldVignetteRate: 1
@@ -2187,6 +2188,18 @@ MonoBehaviour:
   audioSource: {fileID: 1655174550}
   clip: {fileID: 8300000, guid: 2ad01dbf21409af4f82ec1a5f2c0a7db, type: 3}
   inventory: {fileID: 5004350295439402689}
+--- !u!114 &7169635864036311181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004350295439402681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca5411cb1ab34a940b575c7a2944660f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5004350295593563216
 GameObject:
   m_ObjectHideFlags: 0

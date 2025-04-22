@@ -28,7 +28,7 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
     public float beamDuration = 4;
     float beamTimer = 0;
 
-    public float projectileDuration = 2;
+    float projectileDuration = 0.1f;
     float projectileTimer = 0;
 
     public float rangedAttackDist = 10;
@@ -38,7 +38,7 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
     public float projectileCooldown = 3;
     float projectileCooldownTimer = 0;
 
-    public float projectileFireRate = 0.25f;
+    public float projectileFireRate = 0.45f;
     float projectileFireRateTimer = 0;
 
     [Tooltip("Increase to shoot lower, Decrease to shoot higher")]

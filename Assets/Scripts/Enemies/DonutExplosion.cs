@@ -7,7 +7,7 @@ public class DonutExplosion : MonoBehaviour
     public float damage = 20;
 
     public float scaleSpeed = 1;
-    public float psScaleSpeed = 1;
+    //public float psScaleSpeed = 1;
 
     public float currentRadius = 1;
     float explosionScale = 1;
@@ -32,7 +32,7 @@ public class DonutExplosion : MonoBehaviour
         donut = ps.shape;
         transform.root.transform.localScale = new Vector3(explosionScale, 1, explosionScale);
         playerhp = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
-        psMain.startLifetime = maxRadius * 0.05f;
+        psMain.startLifetime = maxRadius * 0.018f;
     }
 
     private void OnTriggerStay(Collider other)
@@ -41,7 +41,7 @@ public class DonutExplosion : MonoBehaviour
         if (!other.CompareTag("Player")) { return; }
 
         float distance = Vector3.Distance(transform.position, other.transform.position);
-        float tempRadius = (currentRadius - 2) * 0.5f;
+        float tempRadius = (currentRadius - 1) * 0.5f;
 
         if (distance >= tempRadius)
         {
@@ -63,7 +63,7 @@ public class DonutExplosion : MonoBehaviour
         {
             collidingObj.transform.localScale += currentScale * Time.deltaTime * scaleSpeed;
             currentRadius = collidingObj.transform.localScale.z;
-            donut.radius += Time.deltaTime * psScaleSpeed;
+            //donut.radius += Time.deltaTime * psScaleSpeed;
         }
         else if(currentRadius > maxRadius - 2)
         {

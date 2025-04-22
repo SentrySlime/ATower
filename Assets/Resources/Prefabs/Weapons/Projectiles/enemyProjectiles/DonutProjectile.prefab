@@ -152,13 +152,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explode: 1
   explosion: {fileID: 5167799958932818234, guid: 3b5d098d079649d409f1b7869557b122, type: 3}
+  explosionDamage: 20
+  explosionRadius: 5
   affectedByGravity: 1
   gravityScale: 11
   layerMask:
     serializedVersion: 2
     m_Bits: 159
   damage: 5
-  projectileSpeed: 50
+  projectileSpeed: 30
   lifeDuration: 2
   sineMove: 0
   frequency: 15

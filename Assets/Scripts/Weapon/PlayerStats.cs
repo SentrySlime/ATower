@@ -39,7 +39,7 @@ public class PlayerStats : MonoBehaviour
     public bool alternateFastReload = false;
 
     [Header("Others")]
-    public bool canExplode = false;
+    public int canExplode = 0;
     public int ammoRefills = 0;
     public int moneyIsPower = 0;
 
@@ -114,6 +114,5 @@ public class PlayerStats : MonoBehaviour
         inventory = GetComponent<Inventory>();
         findAndEquipWeapons = GetComponent<FindAndEquipWeapons>();
     }
-
 }
 

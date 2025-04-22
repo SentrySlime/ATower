@@ -17,10 +17,13 @@ public class AMainSystem : MonoBehaviour
 
     PlayerStats playerStats;
     PlayerHealth playerHealth;
+    HealthRegen healthRegen;
     Inventory inventory;
     ShootSystem shootSystem;
     HitmarkerLogic hitMarkerLogic;
     ExplosionSystem explosionSystem;
+
+    
 
     private void Awake()
     {
@@ -29,6 +32,7 @@ public class AMainSystem : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerStats = player.GetComponent<PlayerStats>();
         playerHealth = player.GetComponent<PlayerHealth>();
+        healthRegen = player.GetComponent<HealthRegen>();
         inventory = player.GetComponent<Inventory>();
         hitMarkerLogic = GameObject.FindGameObjectWithTag("HitMarker").GetComponent<HitmarkerLogic>();
     }
@@ -92,8 +96,6 @@ public class AMainSystem : MonoBehaviour
     private void DamageEnemy(GameObject incomingObj, float incomingDamage, bool incomingWeakSpotShot)
     {
         CalculateDamage(incomingObj, incomingDamage, incomingWeakSpotShot);
-        playerHealth.Heal(playerStats.hpOnHit);
-        
     }
 
     private void CalculateDamage(GameObject incomingObj, float incomingDamage, bool incomingWeakSpotShot)
@@ -158,4 +160,11 @@ public class AMainSystem : MonoBehaviour
     }
 
     #endregion
+
+    public void HitEffect()
+    {
+        playerHealth.Heal(playerStats.hpOnHit);
+        //healthRegen.StartHPRegen();
+    }
+
 }

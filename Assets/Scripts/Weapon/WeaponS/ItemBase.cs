@@ -41,7 +41,7 @@ public class ItemBase : MonoBehaviour
     [Range(-90f, 90f)] public int hpOnKill;
 
     [Tooltip("If it's at 1 it gives the player helping hand")]
-    [Range(0f, 1f)] public int helpingHand = 0;
+    [Range(-1f, 1f)] public int helpingHand = 0;
 
     [Tooltip("1 point is equal to 1 extra health gained over 1 sec")]
     [Range(-90f, 90f)] public float hpRegen;
@@ -84,11 +84,10 @@ public class ItemBase : MonoBehaviour
     
     //Explosion ---- 
     [Tooltip("If this is true, all your triggered kills explode enemies")]
-    public bool includeExplosion = false;
-    public bool canExplodeEnemies;
+    [Range(-1f, 1f)] public int canExplodeEnemies = 0;
 
     [Tooltip("If this is true, you get 1% damage for every 100 money")]
-    [Range(0, 1f)] public int moneyIsPower = 0;
+    [Range(-1f, 1f)] public int moneyIsPower = 0;
 
     #endregion
 
@@ -112,7 +111,7 @@ public class ItemBase : MonoBehaviour
     [Range(-5, 5f)] public int returnAmmoOnkill = 0;
 
     [Tooltip("Every other reload is 50% faster")]
-    [Range(0, 1f)] public int hasAlternateFastReload = 0;
+    [Range(-1f, 1f)] public int hasAlternateFastReload = 0;
 
     #endregion
 
@@ -124,9 +123,8 @@ public class ItemBase : MonoBehaviour
     #endregion
     
     [Header("Misc ---------------------------------------------------")]
-    [Tooltip("Makes enemies drop increased amount of moeny")]
-    public bool hasIncreasedMoneyDrops = false;
-    public bool increasedMoneyDrops = false;
+    [Tooltip("Makes enemies drop increased amount of money")]
+    [Range(-1f, 1f)] public int increasedMoneyDrops = 0;
 
     #region Misc
 
@@ -161,8 +159,7 @@ public class ItemBase : MonoBehaviour
         playerStats.extraJumps += extraJumps;
         
         //Damage ----
-        if (includeExplosion)
-            playerStats.canExplode = canExplodeEnemies;
+        playerStats.canExplode += canExplodeEnemies;
 
         playerStats.moneyIsPower += moneyIsPower;
 
@@ -208,8 +205,7 @@ public class ItemBase : MonoBehaviour
         playerStats.extraJumps -= extraJumps;
 
         //Damage ----
-        if (includeExplosion)
-            playerStats.canExplode = canExplodeEnemies;
+        playerStats.canExplode -= canExplodeEnemies;
 
         playerStats.moneyIsPower -= moneyIsPower;
 

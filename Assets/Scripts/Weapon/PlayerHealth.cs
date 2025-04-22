@@ -11,7 +11,10 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 {
     public bool isInvincible;
 
+    PlayerStats playerStats;
+    HealthRegen healthRegen;
     PauseMenu pauseMenu;
+
 
     [Header("Health stuff")]
     public int maxHP;
@@ -33,7 +36,6 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
     public float vignetteThreshold = 0;
 
     [Header("ShieldVignetteStuff")]
-    public PlayerStats playerStats;
     public CanvasGroup shieldVignette;
     public float shieldvignetteAlpha = 0;
     float shieldVignetteTimer = 0;
@@ -48,13 +50,11 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
     float iFrameTimer = 0;
     bool canBeDamaged = true;
 
-    float hpRegenCooldown = 0;
-    float hpRegenTimer = 0;
-
     private void Awake()
     {
         startPos = transform.position;
         playerStats = GetComponent<PlayerStats>();
+        healthRegen = GetComponent<HealthRegen>();
         pauseMenu = GameObject.Find("Canvas").GetComponent<PauseMenu>();
         pauseMenu.GetVignettes(this);
         barHP = GameObject.FindGameObjectWithTag("HPBar").GetComponent<Slider>();
@@ -68,8 +68,6 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
         UpdateMaxHP();
         StartHealth();
         UpdateHP();
-        HealthRegen();
-        UpdateHPRegen();
     }
 
     void Start()
@@ -80,8 +78,6 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
     void Update()
     {
-
-        HealthRegen();
      
         if (iFrameTimer < iFrameDuration)
         {
@@ -105,7 +101,8 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
         if(Input.GetKeyDown(KeyCode.U))
         {
-            Damage(10);
+            
+            Damage(40);
         }
 
     }
@@ -117,26 +114,11 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
         Heal(playerStats.hpOnKill);
     }
 
-    private void HealthRegen()
-    {
-        if(hpRegenTimer < hpRegenCooldown)
-            hpRegenTimer += Time.deltaTime;
-        else
-        {
-           Heal(1);
-           hpRegenTimer = 0;
-        }
-    }
-
     public void Heal(float incomingHealth)
     {
         currentHP += ((int)incomingHealth);
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
         UpdateHP();
-    }
-    public void UpdateHPRegen()
-    {
-        hpRegenCooldown = 1 / playerStats.hpRegen;
     }
 
     public bool HasFullHP()
@@ -255,7 +237,8 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
     public void StartHealth()
     {
         PlayerMaxHP();
-        UpdateHPRegen();
+        if (healthRegen != null)
+            healthRegen.UpdateHPRegen();
         UpdateHP();
         UpdateMaxHP();
 
@@ -263,7 +246,8 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
     public void ItemUpdateHealth()
     {
-        UpdateHPRegen();
+        if(healthRegen != null)
+            healthRegen.UpdateHPRegen();
         UpdateHP();
         UpdateMaxHP();
     }
@@ -272,13 +256,6 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
     {
         throw new System.NotImplementedException();
     }
-
-    public void TempHealthRegen()
-    {
-
-        
-    }
-
 
 }
 

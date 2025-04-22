@@ -91,6 +91,7 @@ public class Troll : MonoBehaviour, INoticePlayer
 
         if (roam)
         {
+            print("Raoming");
             Roam();
             return;
         }

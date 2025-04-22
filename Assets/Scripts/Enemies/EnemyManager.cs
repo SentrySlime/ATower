@@ -27,6 +27,7 @@ public class EnemyManager : MonoBehaviour
     Inventory inventory;
     PlayerStats playerStats;
     PlayerHealth playerHealth;
+    HealthRegen healthRegen;
     WeaponSocket weaponSocket;
     AMainSystem mainSystem;
 
@@ -36,6 +37,7 @@ public class EnemyManager : MonoBehaviour
         inventory = player.GetComponent<Inventory>();
         playerStats = player.GetComponent<PlayerStats>();
         playerHealth = player.GetComponent<PlayerHealth>();
+        healthRegen = player.GetComponent<HealthRegen>();
         weaponSocket = player.GetComponent<WeaponSocket>();
         mainSystem = GetComponent<AMainSystem>();
     }
@@ -138,7 +140,7 @@ public class EnemyManager : MonoBehaviour
         if(playerStats.hpOnKill > 0)
             playerHealth.Heal(playerStats.hpOnKill);
 
-
+        healthRegen.StartHPRegen();
         HelpingHandLogic(deathPosition);
         StartCoroutine(WaitBefore());
     }

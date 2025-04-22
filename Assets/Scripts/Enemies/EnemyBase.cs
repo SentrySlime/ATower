@@ -52,6 +52,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     public bool gauranteeItemDrop;
 
     [Header("Extra")]
+    public bool enableOnHitEffects = true;
     public bool shouldReportDeath = true;
     public bool canDropAmmo = true;
     public ParticleSystem damagedPS;
@@ -135,6 +136,10 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
 
     private float CalculateDamage(float damage)
     {
+
+        if(enableOnHitEffects)
+            aMainSystem.HitEffect();
+        
         float finalDamage = damage;
         return finalDamage;
     }
@@ -202,7 +207,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
         
         if (explodeOnDeath)
             shouldExplode = true;
-        else if (playerStats.canExplode && criticalDeath)
+        else if (playerStats.canExplode > 0 && criticalDeath)
             shouldExplode = true;
 
         return shouldExplode;
