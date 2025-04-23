@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ItemPickUp : Item, IInteractInterface
 {
+
     public enum ItemRarity
     {
         S,
@@ -13,6 +14,9 @@ public class ItemPickUp : Item, IInteractInterface
         D
     }
     
+    public Devil devilItem;
+
+    [Header("Extra Stuff")]
     public ItemRarity weaponRarity;
 
     public ItemBase itemPrefab;
@@ -30,6 +34,10 @@ public class ItemPickUp : Item, IInteractInterface
 
     void Start()
     {
+        
+        devilItem = GameObject.Find("Devil").GetComponent<Devil>();
+        
+
         if(itemPrefab)
         {
             SetItemInfo();
@@ -45,11 +53,14 @@ public class ItemPickUp : Item, IInteractInterface
 
     public void Interact()
     {
-        EquipItem();
+        //EquipItem();
+        devilItem.DestroyOtherItem(this);
+        print("Destroy");
     }
 
     public void EquipItem()
     {
+
         if (itemPrefab)
         {
             currentItem = Instantiate(itemPrefab.gameObject);

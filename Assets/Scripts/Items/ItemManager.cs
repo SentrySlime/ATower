@@ -6,8 +6,11 @@ using System.Linq;
 public class ItemManager : MonoBehaviour
 {
     public GameObject itemTemplate;
+    public GameObject itemSFX;
+    public GameObject devilItemSFX;
 
     public List<ItemBase> items;
+    public List<ItemBase> devilItems;
 
     GameObject player;
 
@@ -15,6 +18,7 @@ public class ItemManager : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         items = Resources.LoadAll<ItemBase>("Prefabs/Items/Item_Prefabs").ToList();
+        devilItems = Resources.LoadAll<ItemBase>("Prefabs/Items/Devil_Item_Prefabs").ToList();
     }
 
     
@@ -35,12 +39,26 @@ public class ItemManager : MonoBehaviour
         if(items == null || items.Count == 0) { return; }
 
         ItemPickUp tempItem = Instantiate(itemTemplate, spawnPos, Quaternion.identity).GetComponent<ItemPickUp>();
+        
+        if(itemSFX)
+            Instantiate(itemSFX, spawnPos, Quaternion.identity);
         ItemBase item = GetRandomItem();
         items.Remove(item);
         tempItem.itemPrefab = item;
-        
     }
 
+    public ItemPickUp DropDevilItem(Vector3 spawnPos)
+    {
+        if (devilItems == null || devilItems.Count == 0) { return null; }
+
+        if (devilItemSFX)
+            Instantiate(devilItemSFX, spawnPos, Quaternion.identity);
+        ItemPickUp tempItem = Instantiate(itemTemplate, spawnPos, Quaternion.identity).GetComponent<ItemPickUp>();
+        ItemBase item = GetRandomItem();
+        items.Remove(item);
+        tempItem.itemPrefab = item;
+        return tempItem;
+    }
 
     private ItemBase GetRandomItem()
     {

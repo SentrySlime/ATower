@@ -49,4 +49,9 @@ public class LootSystem : MonoBehaviour
         itemManager.DropItem(pos);
     }
 
+    public ItemPickUp DropDevilItem(Vector3 pos)
+    {
+        return itemManager.DropDevilItem(pos);
+    }
+
 }

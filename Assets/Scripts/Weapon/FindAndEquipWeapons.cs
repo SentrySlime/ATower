@@ -90,6 +90,7 @@ public class FindAndEquipWeapons : MonoBehaviour
                 if (hit.transform.gameObject.CompareTag("Interact"))
                 {
                     hit.transform.GetComponent<IInteractInterface>().Interact();
+                    print("Interacting");
                 }
                 else if (hit.transform.gameObject.CompareTag("PickUp"))
                 {
@@ -113,9 +114,11 @@ public class FindAndEquipWeapons : MonoBehaviour
 
     private void InitializeItem(GameObject incomingItem)
     {
-        ItemPickUp test2 = incomingItem.GetComponent<ItemPickUp>();
+        ItemPickUp itemPrefab = incomingItem.GetComponent<ItemPickUp>();
 
-        if (!test2) return;
+        itemPrefab.Interact();
+
+        if (!itemPrefab) return;
 
         Vector3 SpawnPos = new Vector3(-9999, -9999, -9999);
 
@@ -129,7 +132,7 @@ public class FindAndEquipWeapons : MonoBehaviour
 
         GameObject itemObj = Instantiate(itemPanel, itemGroup.transform);
         ItemPanel tempPanel = itemObj.GetComponent<ItemPanel>();
-        tempPanel.SetPanel(test2);
+        tempPanel.SetPanel(itemPrefab);
         tempPanel.itemName = itemName;
         tempPanel.itemDescription = itemDescription;
         tempPanel.image = image;
