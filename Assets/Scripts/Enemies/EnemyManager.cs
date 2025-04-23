@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    public int totalEnemyDeaths = 0;
 
     int enemyDeaths = 0;
     float countDown = 0;
@@ -58,6 +59,8 @@ public class EnemyManager : MonoBehaviour
 
     public void ReportDeath(Vector3 deathPosition, bool canDropAmmo)
     {
+        totalEnemyDeaths++;
+
         PlayerStatsEffects(deathPosition);
         if(canDropAmmo)
             CheckForAmmoDrop(deathPosition);

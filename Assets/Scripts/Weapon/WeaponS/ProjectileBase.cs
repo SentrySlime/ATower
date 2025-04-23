@@ -122,7 +122,12 @@ public class ProjectileBase : MonoBehaviour
 
     protected void OnHitTrigger(Collider other)
     {
-        if(other.gameObject.layer == 0 && !isExplosive)
+        if (other.gameObject.layer == 2)
+        {
+            return;
+        }
+
+        if (other.gameObject.layer == 0 && !isExplosive)
         {
             if(hitVFX)
                 Instantiate(hitVFX, transform.position, Quaternion.LookRotation(transform.forward));
