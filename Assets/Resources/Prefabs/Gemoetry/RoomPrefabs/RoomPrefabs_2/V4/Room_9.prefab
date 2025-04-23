@@ -599,7 +599,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6452889675498707237
 Transform:
   m_ObjectHideFlags: 0
@@ -5664,7 +5664,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5381660556214707369
 Transform:
   m_ObjectHideFlags: 0
@@ -6905,7 +6905,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7505688308818697145
 Transform:
   m_ObjectHideFlags: 0
@@ -6949,7 +6949,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7641221161435171366
 Transform:
   m_ObjectHideFlags: 0
@@ -12687,7 +12687,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1701552130807771667
 Transform:
   m_ObjectHideFlags: 0
@@ -12731,7 +12731,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4079646582570035927
 Transform:
   m_ObjectHideFlags: 0
@@ -12806,7 +12806,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6930695919906048902}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -12940,7 +12940,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6291276163473752469}
   - component: {fileID: 8003369311276952407}
-  m_Layer: 0
+  - component: {fileID: 6517994262059892169}
+  m_Layer: 2
   m_Name: Room_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13088,7 +13089,24 @@ MonoBehaviour:
   roomDifficultyLevel: 3
   blockade: {fileID: 5932479263562813986}
   secretPoint: {fileID: 2823347693942696182}
-  roomToSpawn: {fileID: 0}
+  roomToSpawn: {fileID: 2351597762166467222, guid: 401a4915fde7b7a4d9e6f62172a65951, type: 3}
+  enemyList: []
+  roomIndex: 0
+  roomManager: {fileID: 0}
+  invertedRoomDirection: 0
+--- !u!65 &6517994262059892169
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7753766002208220355}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 15.4, y: 18.66, z: 13.53}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8028020407096099660
 GameObject:
   m_ObjectHideFlags: 0
@@ -13499,7 +13517,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8218834042404294611
 Transform:
   m_ObjectHideFlags: 0

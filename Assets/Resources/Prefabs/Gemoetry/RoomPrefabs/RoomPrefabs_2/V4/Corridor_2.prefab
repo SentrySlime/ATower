@@ -7550,7 +7550,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6614709990862239675}
   - component: {fileID: 6826289813083274544}
-  m_Layer: 0
+  - component: {fileID: 9053133034426036486}
+  m_Layer: 2
   m_Name: Corridor_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7606,6 +7607,23 @@ MonoBehaviour:
   blockade: {fileID: 0}
   secretPoint: {fileID: 0}
   roomToSpawn: {fileID: 0}
+  enemyList: []
+  roomIndex: 0
+  roomManager: {fileID: 0}
+  invertedRoomDirection: 0
+--- !u!65 &9053133034426036486
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916126137658203837}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 15.4, y: 18.66, z: 13.53}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &225872683358993850
 PrefabInstance:
   m_ObjectHideFlags: 0

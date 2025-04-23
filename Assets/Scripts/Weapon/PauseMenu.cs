@@ -100,16 +100,16 @@ public class PauseMenu : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.L))
-        {
+        //if (Input.GetKeyDown(KeyCode.L))
+        //{
 
-            Scene scene = SceneManager.GetActiveScene();
-            if (SceneManager.GetSceneByBuildIndex(0) == scene)
-                FelixStage();
-            if (SceneManager.GetSceneByBuildIndex(1) == scene)
-                SebbeStage();
+        //    Scene scene = SceneManager.GetActiveScene();
+        //    if (SceneManager.GetSceneByBuildIndex(0) == scene)
+        //        FelixStage();
+        //    if (SceneManager.GetSceneByBuildIndex(1) == scene)
+        //        SebbeStage();
 
-        }
+        //}
     }
 
     public void ResumeGame(bool inventory)

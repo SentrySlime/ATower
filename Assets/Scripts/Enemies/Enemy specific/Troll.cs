@@ -91,7 +91,7 @@ public class Troll : MonoBehaviour, INoticePlayer
 
         if (roam)
         {
-            print("Raoming");
+            //print("Roaming");
             Roam();
             return;
         }
@@ -130,7 +130,7 @@ public class Troll : MonoBehaviour, INoticePlayer
 
     public void MoveToPlayer()
     {
-        print("Moving");
+        //print("Moving");
 
         NavMeshPath path = new NavMeshPath();
         Vector3 targetPosition = player.transform.position;
@@ -139,7 +139,7 @@ public class Troll : MonoBehaviour, INoticePlayer
         {
             if (path.status == NavMeshPathStatus.PathComplete)
             {
-                print("Path complete");
+                //print("Path complete");
 
                 // Full path is valid — go directly to the player
                 agent.isStopped = false;
@@ -147,12 +147,12 @@ public class Troll : MonoBehaviour, INoticePlayer
             }
             else if (path.status == NavMeshPathStatus.PathPartial)
             {
-                print("On my way");
+                //print("On my way");
 
                 // Partial path — move as far as we can toward the player
                 if (path.corners.Length > 1)
                 {
-                    print("Moving along path");
+                    //print("Moving along path");
                     Vector3 lastReachablePoint = path.corners[path.corners.Length - 1];
                     agent.isStopped = false;
                     agent.SetDestination(lastReachablePoint);
@@ -160,12 +160,12 @@ public class Troll : MonoBehaviour, INoticePlayer
             }
             else
             {
-                print("Can't reach player");
+                //print("Can't reach player");
             }
         }
         else
         {
-            print("Can't reach player 2");
+            //print("Can't reach player 2");
         }
     }
 

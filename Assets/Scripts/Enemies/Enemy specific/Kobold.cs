@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.AI;
@@ -130,13 +131,22 @@ public class Kobold : MonoBehaviour, INoticePlayer
 
         if (playerDist < seePlayerRangedDistance && HasLineOfSight())
         {
-            if (agent.CalculatePath(player.transform.position, agent.path))
+            if (agent.isOnNavMesh)
             {
-                currentState = CurrentState.canReachPlayer;
+                NavMeshPath path = new NavMeshPath();
+                if (agent.CalculatePath(player.transform.position, path) && path.status == NavMeshPathStatus.PathComplete)
+                {
+                    currentState = CurrentState.canReachPlayer;
+                }
+                else
+                {
+                    currentState = CurrentState.canSeePlayer;
+                }
             }
             else
             {
-                currentState = CurrentState.canSeePlayer;
+                Debug.LogWarning("Agent is not on the NavMesh!");
+                currentState = CurrentState.canSeePlayer; // fallback
             }
         }
         else
@@ -149,22 +159,32 @@ public class Kobold : MonoBehaviour, INoticePlayer
     {
         if (playerDist < seePlayerRangedDistance)
         {
-            if (!agent.CalculatePath(player.transform.position, agent.path))
+            if (agent.isOnNavMesh)
             {
-                if (timer < firingRate && !animator.GetBool("CloseToAttack"))
+                if (!agent.CalculatePath(player.transform.position, agent.path))
                 {
-                    timer += Time.deltaTime;
+                    if (timer < firingRate && !animator.GetBool("CloseToAttack"))
+                    {
+                        timer += Time.deltaTime;
+                    }
+                    else
+                    {
+                        animator.SetBool("CloseToAttack", true);
+                        timer = 0;
+                    }
                 }
                 else
                 {
-                    animator.SetBool("CloseToAttack", true);
-                    timer = 0;
+                    currentState = CurrentState.canReachPlayer;
                 }
             }
             else
             {
-                currentState = CurrentState.canReachPlayer;
+                Debug.LogWarning("Agent is not on the NavMesh!");
+                currentState = CurrentState.canSeePlayer; // fallback
             }
+
+            
         }
         else
         {
@@ -269,7 +289,21 @@ public class Kobold : MonoBehaviour, INoticePlayer
             NavMesh.SamplePosition(randomDirection, out hit, 10, 1);
             Vector3 finalPosition = hit.position;
             newDestinationTimer = 0;
-            agent.SetDestination(finalPosition);
+            if (NavMesh.SamplePosition(finalPosition, out hit, 3, NavMesh.AllAreas))
+            {
+                if (agent.isOnNavMesh)
+                {
+                    agent.SetDestination(hit.position);
+                }
+                else
+                {
+                    Debug.LogWarning("Agent is not on the NavMesh!");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Final position is not on the NavMesh!");
+            }
         }
     }
 

@@ -29298,7 +29298,8 @@ GameObject:
   m_Component:
   - component: {fileID: 69087278223645259}
   - component: {fileID: 6859247682967395559}
-  m_Layer: 0
+  - component: {fileID: 4233017895874027864}
+  m_Layer: 2
   m_Name: Room_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29481,6 +29482,23 @@ MonoBehaviour:
   blockade: {fileID: 0}
   secretPoint: {fileID: 0}
   roomToSpawn: {fileID: 0}
+  enemyList: []
+  roomIndex: 0
+  roomManager: {fileID: 0}
+  invertedRoomDirection: 0
+--- !u!65 &4233017895874027864
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6082911674671352749}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 15.4, y: 18.66, z: 13.53}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6295841250582857649
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class FadeOut : MonoBehaviour
 {
+    public bool isFadeIn = true;
 
-    public float fadeSpeed = 1;
+    float fadeSpeed = 1;
 
     bool fadeOut = false;
     bool fadeIn = false;
@@ -16,22 +17,29 @@ public class FadeOut : MonoBehaviour
     CanvasGroup canvasToFadeIn;
     CanvasGroup canvasToFadeOut;
     //CanvasGroup canvasToFade;
-    public GameObject endText;
-    public GameObject endScreenButtons;
+    GameObject endText;
+    GameObject endScreenButtons;
 
-    public Collider triggerCollider;
+    Collider triggerCollider;
 
     void Start()
     {
-        canvasToFadeIn = GameObject.Find("FadeImageIn").GetComponent<CanvasGroup>();
-        canvasToFadeOut = GameObject.Find("FadeImageOut").GetComponent<CanvasGroup>();
+
+            canvasToFadeIn = GameObject.Find("FadeImageIn").GetComponent<CanvasGroup>();
+            canvasToFadeOut = GameObject.Find("FadeImageOut").GetComponent<CanvasGroup>();
+        
+        triggerCollider = GetComponent<Collider>();
         //canvasToFade = GameObject.Find("FadeImage").GetComponent<CanvasGroup>();
         
         endScreenButtons = GameObject.Find("EndScreenButtons");
-        endScreenButtons.SetActive(false);
+        
+        if(endScreenButtons != null && isFadeIn)
+            endScreenButtons.SetActive(false);
 
         endText = GameObject.Find("EndText");
-        Invoke("StartFadeIn", 0.35f);
+
+        if(isFadeIn)
+            Invoke("StartFadeIn", 0.35f);
     }
 
     
@@ -63,7 +71,7 @@ public class FadeOut : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (triggered) { return; }
+        if (triggered || isFadeIn) { return; }
 
         triggerCollider.isTrigger = false;
 

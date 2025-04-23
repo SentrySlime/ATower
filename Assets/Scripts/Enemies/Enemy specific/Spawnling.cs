@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static Kobold;
 
 public class Spawnling : MonoBehaviour
 {
@@ -199,7 +200,16 @@ public class Spawnling : MonoBehaviour
             NavMesh.SamplePosition(randomDirection, out hit, 10, 1);
             Vector3 finalPosition = hit.position;
             newDestinationTimer = 0;
-            agent.SetDestination(finalPosition);
+
+            if (agent.isOnNavMesh)
+            {
+                agent.SetDestination(finalPosition);
+            }
+            else
+            {
+                Debug.LogWarning("Agent is not on the NavMesh!");
+            }
+
         }
     }
 }

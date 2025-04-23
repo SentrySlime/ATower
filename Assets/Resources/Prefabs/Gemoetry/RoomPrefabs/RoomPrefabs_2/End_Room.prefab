@@ -17230,6 +17230,10 @@ MonoBehaviour:
   blockade: {fileID: 0}
   secretPoint: {fileID: 0}
   roomToSpawn: {fileID: 0}
+  enemyList: []
+  roomIndex: 0
+  roomManager: {fileID: 0}
+  invertedRoomDirection: 0
 --- !u!1 &3063648873861166990
 GameObject:
   m_ObjectHideFlags: 0
@@ -17635,7 +17639,7 @@ GameObject:
   - component: {fileID: 6870740674065964402}
   - component: {fileID: 6878908318621017499}
   - component: {fileID: 3771888433471784999}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FadeOut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17668,10 +17672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63ac8c586f0991f44a9326169a8cfb56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeSpeed: 1
-  endText: {fileID: 0}
-  endScreenButtons: {fileID: 0}
-  triggerCollider: {fileID: 3771888433471784999}
+  isFadeIn: 0
 --- !u!65 &3771888433471784999
 BoxCollider:
   m_ObjectHideFlags: 0

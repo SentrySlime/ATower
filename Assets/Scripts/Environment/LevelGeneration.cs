@@ -21,6 +21,8 @@ public class LevelGeneration : MonoBehaviour
     public int allRoomCount;
     bool currentRoom = true;
 
+    [HideInInspector] public bool spawnedDevilRoom = false;
+
     [Header("RoomLogic")]
     public int amountOfRoomsToSpawn = 28;
     public bool removeRooms = true;
@@ -37,12 +39,14 @@ public class LevelGeneration : MonoBehaviour
     //public List<> allSurfaces = new List<GameObject>();
 
     NavMeshManager navMeshManager;
+    RoomManager roomManager;
 
     bool hasBuilt = false;
 
     void Start()
     {
         navMeshManager = GetComponent<NavMeshManager>();
+        roomManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<RoomManager>();
         
         allRoomCount = rooms.Count + 2;
         
@@ -113,6 +117,8 @@ public class LevelGeneration : MonoBehaviour
     private void GenerateTreasureRoom()
     {
         RoomScript newRoom = Instantiate(treasureRoom, spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
+        if (roomManager)
+            roomManager.AddRoom(newRoom);
         spawnTransform = newRoom.point2.gameObject;
     }
 
@@ -120,12 +126,16 @@ public class LevelGeneration : MonoBehaviour
     {
         RoomScript newRoom = Instantiate(endRoom, spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
         spawnTransform = newRoom.point2.gameObject;
+        if (roomManager)
+            roomManager.AddRoom(newRoom);
     }
 
     private void GenerateStartingRoom()
     {
         RoomScript newRoom = Instantiate(startingRoom, transform.position, Quaternion.identity).GetComponent<RoomScript>();
         spawnTransform = newRoom.point2.gameObject;
+        if (roomManager)
+            roomManager.AddRoom(newRoom);
     }
 
     private void GenerateRoom()
@@ -147,7 +157,10 @@ public class LevelGeneration : MonoBehaviour
         {
             roomCount++;
             RoomScript newRoom = Instantiate(rooms[roomIndex], spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
+            if(roomManager)
+                roomManager.AddRoom(newRoom);
             spawnTransform = newRoom.point2.gameObject;
+            newRoom.levelGeneration = this;
 
             if (removeRooms)
                 rooms.RemoveAt(roomIndex);
@@ -166,13 +179,18 @@ public class LevelGeneration : MonoBehaviour
         {
             RoomScript newRoom = Instantiate(corridors[roomIndex], transform.position, Quaternion.identity).GetComponent<RoomScript>();
             spawnTransform = newRoom.point2.gameObject;
+            if (roomManager)
+                roomManager.AddRoom(newRoom);
         }
         else
         {
-
             RoomScript newRoom = Instantiate(corridors[roomIndex], spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
             spawnTransform = newRoom.point2.gameObject;
+            if (roomManager)
+                roomManager.AddRoom(newRoom);
         }
+
+        
 
         if (removeCorridor)
             corridors.RemoveAt(roomIndex);

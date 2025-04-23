@@ -14387,7 +14387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3245166816968726870}
   - component: {fileID: 3337227077506201881}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Room_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14434,6 +14434,14 @@ MonoBehaviour:
   direction: 0
   point1: {fileID: 4217217502911960824}
   point2: {fileID: 4719099003172765509}
+  roomDifficultyLevel: 1
+  blockade: {fileID: 0}
+  secretPoint: {fileID: 0}
+  roomToSpawn: {fileID: 0}
+  enemyList: []
+  roomIndex: 0
+  roomManager: {fileID: 0}
+  invertedRoomDirection: 0
 --- !u!1 &7776650374776446548
 GameObject:
   m_ObjectHideFlags: 0
