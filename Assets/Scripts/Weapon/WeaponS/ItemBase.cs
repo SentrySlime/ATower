@@ -25,6 +25,8 @@ public class ItemBase : MonoBehaviour
     }
 
     public ItemType type;
+    public bool isDevilItem;
+
 
     #region Health
     [Header("Player health Stats ---------------------------------------------------")]

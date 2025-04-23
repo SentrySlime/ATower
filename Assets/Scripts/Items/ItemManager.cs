@@ -54,8 +54,8 @@ public class ItemManager : MonoBehaviour
         if (devilItemSFX)
             Instantiate(devilItemSFX, spawnPos, Quaternion.identity);
         ItemPickUp tempItem = Instantiate(itemTemplate, spawnPos, Quaternion.identity).GetComponent<ItemPickUp>();
-        ItemBase item = GetRandomItem();
-        items.Remove(item);
+        ItemBase item = GetRandomDevilItem();
+        devilItems.Remove(item);
         tempItem.itemPrefab = item;
         return tempItem;
     }
@@ -64,6 +64,12 @@ public class ItemManager : MonoBehaviour
     {
         int itemIndex = Random.Range(0, items.Count);
         return items[itemIndex];
+    }
+
+    private ItemBase GetRandomDevilItem()
+    {
+        int itemIndex = Random.Range(0, devilItems.Count);
+        return devilItems[itemIndex];
     }
 
     private void CalculateNextItemType()

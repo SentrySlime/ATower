@@ -49,6 +49,7 @@ MonoBehaviour:
   itemMesh: {fileID: 5829669766972427010, guid: f13627e04fb73354e863e06b1cf3cd19, type: 3}
   itemMaterial: {fileID: 2100000, guid: 25b2ee572e49c894b83bd270a4295427, type: 2}
   type: 0
+  isDevilItem: 1
   maxHp: 0
   hpOnHit: 0
   hpOnKill: 0
@@ -61,7 +62,6 @@ MonoBehaviour:
   extraJumps: 0
   damage: 0
   critChance: 0
-  includeExplosion: 0
   canExplodeEnemies: 0
   moneyIsPower: 0
   ammoRefills: 0
@@ -71,6 +71,5 @@ MonoBehaviour:
   returnAmmoOnkill: 0
   hasAlternateFastReload: 0
   fireBallChance: 5
-  hasIncreasedMoneyDrops: 0
   increasedMoneyDrops: 0
   playerStats: {fileID: 0}

@@ -13,7 +13,8 @@ public class ItemPickUp : Item, IInteractInterface
         C,
         D
     }
-    
+
+    public bool isDevilItem;
     public Devil devilItem;
 
     [Header("Extra Stuff")]
@@ -34,10 +35,6 @@ public class ItemPickUp : Item, IInteractInterface
 
     void Start()
     {
-        
-        devilItem = GameObject.Find("Devil").GetComponent<Devil>();
-        
-
         if(itemPrefab)
         {
             SetItemInfo();
@@ -54,8 +51,8 @@ public class ItemPickUp : Item, IInteractInterface
     public void Interact()
     {
         //EquipItem();
-        devilItem.DestroyOtherItem(this);
-        print("Destroy");
+        if(isDevilItem)
+            devilItem.DestroyOtherItem(this);
     }
 
     public void EquipItem()
@@ -73,10 +70,14 @@ public class ItemPickUp : Item, IInteractInterface
         itemName = itemPrefab.itemName;
         itemDescription = itemPrefab.itemDescription;
         itemIcon = itemPrefab.itemIcon;
+        isDevilItem = itemPrefab.isDevilItem;
         GetComponentInChildren<MeshFilter>().mesh = itemPrefab.itemMesh;
         itemMesh = itemPrefab.itemMesh;
         GetComponentInChildren<MeshRenderer>().material = itemPrefab.itemMaterial;
         itemMaterial = itemPrefab.itemMaterial;
+
+        if (isDevilItem)
+            devilItem = GameObject.Find("Devil").GetComponent<Devil>();
     }
 
     private void OnTriggerEnter(Collider other)

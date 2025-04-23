@@ -22,6 +22,7 @@ public class ItemBaseEditor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("itemMesh"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("itemMaterial"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("type"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("isDevilItem"));
 
         DrawFoldout("Health", ref showHealth, new string[]
         {

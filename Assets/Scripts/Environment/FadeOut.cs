@@ -18,28 +18,31 @@ public class FadeOut : MonoBehaviour
     CanvasGroup canvasToFadeOut;
     //CanvasGroup canvasToFade;
     GameObject endText;
-    GameObject endScreenButtons;
+    public GameObject endScreenButtons;
 
     Collider triggerCollider;
+
+    private void Awake()
+    {
+        endScreenButtons = GameObject.Find("EndScreenButtons");
+    }
 
     void Start()
     {
 
-            canvasToFadeIn = GameObject.Find("FadeImageIn").GetComponent<CanvasGroup>();
-            canvasToFadeOut = GameObject.Find("FadeImageOut").GetComponent<CanvasGroup>();
+        canvasToFadeIn = GameObject.Find("FadeImageIn").GetComponent<CanvasGroup>();
+        canvasToFadeOut = GameObject.Find("FadeImageOut").GetComponent<CanvasGroup>();
         
         triggerCollider = GetComponent<Collider>();
         //canvasToFade = GameObject.Find("FadeImage").GetComponent<CanvasGroup>();
-        
-        endScreenButtons = GameObject.Find("EndScreenButtons");
-        
-        if(endScreenButtons != null && isFadeIn)
-            endScreenButtons.SetActive(false);
+
+
+        StartCoroutine(WaitBeforeDisable());
 
         endText = GameObject.Find("EndText");
 
         if(isFadeIn)
-            Invoke("StartFadeIn", 0.35f);
+            Invoke("StartFadeIn", 1f);
     }
 
     
@@ -73,7 +76,7 @@ public class FadeOut : MonoBehaviour
     {
         if (triggered || isFadeIn) { return; }
 
-        triggerCollider.isTrigger = false;
+        triggerCollider.enabled = false;
 
         if (other.CompareTag("Player"))
         {
@@ -84,7 +87,7 @@ public class FadeOut : MonoBehaviour
 
     private void PauseGame()
     {
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
@@ -92,7 +95,19 @@ public class FadeOut : MonoBehaviour
     private void EnableEndText()
     {
         endText.GetComponent<TextMeshProUGUI>().enabled = true;
-        endScreenButtons.SetActive(true);
+        if(endScreenButtons)
+            endScreenButtons.SetActive(true);
+        else
+        {
+            GetComponentInParent<FadeOut>().endScreenButtons.SetActive(true);
+        }
+    }
+
+    IEnumerator WaitBeforeDisable()
+    {
+        yield return new WaitForSeconds(0.7f);
+        if (endScreenButtons != null && isFadeIn)
+            endScreenButtons.SetActive(false);
     }
 
 }

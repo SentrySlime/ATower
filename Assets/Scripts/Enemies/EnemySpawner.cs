@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] GameObject enemyToSpawn;
+    [SerializeField] GameObject spawnedEnemy;
     RoomScript roomScript;
     
     void Start()
@@ -22,8 +23,8 @@ public class EnemySpawner : MonoBehaviour
     IEnumerator SpawnEnemy()
     {
         yield return new WaitForSeconds(0.8f);
-        GameObject tempEnemy = Instantiate(enemyToSpawn, transform.position, transform.rotation);
-        roomScript.AddEnemy(tempEnemy);
+        spawnedEnemy = Instantiate(enemyToSpawn, transform.position, transform.rotation);
+        roomScript.AddEnemy(spawnedEnemy);
     }
 
 }

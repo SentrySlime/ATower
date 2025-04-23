@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -88,7 +89,8 @@ public class RoomManager : MonoBehaviour
         room.roomIndex = rooms.Count - 1;
 
         if (rooms.Count > 4)
-            room.gameObject.SetActive(false);
+            StartCoroutine(WaitBeforeDisablingRoom(room));
+            
     }
 
     public void SetEnabledRooms(int index)
@@ -105,6 +107,20 @@ public class RoomManager : MonoBehaviour
                 rooms[i].gameObject.SetActive(false);
                 rooms[i].DisableEnemies();
             }
+        }
+    }
+
+    IEnumerator WaitBeforeDisablingRoom(RoomScript room)
+    {
+        if(room.gameObject.name == "End_Room(Clone)")
+        {
+            yield return new WaitForSeconds(1);
+            room.gameObject.SetActive(false);
+
+        }
+        else
+        {
+            room.gameObject.SetActive(false);
         }
     }
 

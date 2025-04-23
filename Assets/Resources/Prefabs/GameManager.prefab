@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1170188830}
   - component: {fileID: 1170188831}
   - component: {fileID: 611839642}
+  - component: {fileID: 2026563273}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -87,6 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e3f583b03bdefd4d8b7b76bbd86b214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalEnemyDeaths: 0
   ammoPrefab: {fileID: 9089351037408256591, guid: dc29b4c24852552499a993df5441b567, type: 3}
   helpingHandPrefab: {fileID: 3289367216350407278, guid: 375e8f0155830b6488570adf9541f3e1, type: 3}
 --- !u!114 &8046788520921340378
@@ -147,7 +149,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemTemplate: {fileID: 6883399814758267453, guid: 80ccf9e572c334e48841cb85ad2fa64e, type: 3}
+  itemSFX: {fileID: 8552275175276907877, guid: f29a4d5b238bfde459ba00a57118301c, type: 3}
+  devilItemSFX: {fileID: 8552275175276907877, guid: 18a505546fd14614bb5c9d081337fdce, type: 3}
   items: []
+  devilItems: []
 --- !u!114 &1170188831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,3 +264,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2026563273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7614514148234217134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07490b74d727d49408cf5ade5c2e3398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rooms: []
+  roomIndex: 3
+  rate: 0.5
+  timer: 0
+  roomOffset: 2

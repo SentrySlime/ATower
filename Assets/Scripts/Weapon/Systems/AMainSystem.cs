@@ -109,8 +109,8 @@ public class AMainSystem : MonoBehaviour
 
         if (playerStats.moneyIsPower > 0)
         {
-            float percentage = 1 + ((float) inventory.Money / 10000);
-            incomingDamage *= percentage;   
+            float percentage = 1 + ((float)inventory.Money * 0.03f / 100);
+            incomingDamage *= percentage;
         }
         int critChance = Random.Range(0, 100);
 
