@@ -107,11 +107,20 @@ public class AMainSystem : MonoBehaviour
             incomingDamage *= 1.5f;
         }
 
+        float totalMultiplier = 1f;
+
         if (playerStats.moneyIsPower > 0)
         {
-            float percentage = 1 + ((float)inventory.money * 0.03f / 100);
-            incomingDamage *= percentage;
+            totalMultiplier += ((float)inventory.money * 0.03f / 100);
         }
+
+        if (playerStats.hpIsPower > 0)
+        {
+            totalMultiplier += (playerHealth.maxHP / 5f) * 0.01f;
+        }
+
+        incomingDamage *= totalMultiplier;
+
         int critChance = Random.Range(0, 100);
 
 
@@ -136,7 +145,7 @@ public class AMainSystem : MonoBehaviour
                 Instantiate(critHitSFX.GetComponent<AudioSource>());
 
             if(playerStats.hpOnCritHit > 0)
-                playerHealth.Heal(playerStats.hpOnCritHit);
+                playerHealth.Heal(playerStats.hpOnCritHit, false);
         }
         else
         {
@@ -168,7 +177,7 @@ public class AMainSystem : MonoBehaviour
     public void HitEffect()
     {
         print(playerStats.hpOnHit);
-        playerHealth.Heal(playerStats.hpOnHit);
+        playerHealth.Heal(playerStats.hpOnHit, false);
         //healthRegen.StartHPRegen();
     }
 

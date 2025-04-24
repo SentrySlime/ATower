@@ -113,13 +113,32 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
     public void HealOnKill()
     {
-        Heal(playerStats.hpOnKill);
+        Heal(playerStats.hpOnKill, false);
     }
 
-    public void Heal(float incomingHealth)
+    public void Heal(float incomingHealth, bool elite)
     {
+        if(playerStats.onlyEliteKillHeal > 0 && elite == false) { return; }
+
         currentHP += ((int)incomingHealth);
-        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+
+        if(playerStats.canOverheal > 0)
+        {
+            
+        }
+        else
+        {
+            if (playerStats.healCap > 0)
+            {
+                if(CalculatePercentage(playerStats.healCap) > currentHP)
+                {
+                    currentHP = Mathf.Clamp(currentHP, 0, CalculatePercentage(playerStats.healCap));
+                }
+            }
+            else
+                currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+        }
+        
         UpdateHP();
     }
 
@@ -161,7 +180,7 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
         if(playerStats.moneyIsHealth > 0)
         {
-            inventory.DecreaseMoney((int)damage);
+            inventory.DecreaseMoney((int)damage * 5);
         }
         else
         {

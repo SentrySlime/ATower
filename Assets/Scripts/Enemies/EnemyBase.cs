@@ -9,6 +9,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     [Tooltip("This decides how much this enemy should have")]
     public float maxHealth = 100;
     public float currentHealth = 100;
+    public bool elite = false;
 
     [Header("Explosion")]
     public bool canExplode = false;
@@ -159,7 +160,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
         }
 
         if(shouldReportDeath && moneySpawnPoint)
-            enemyManager.ReportDeath(moneySpawnPoint.position, canDropAmmo);
+            enemyManager.ReportDeath(moneySpawnPoint.position, canDropAmmo, elite);
 
         if (moneySpawnPoint != null)
         {
@@ -172,7 +173,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
             if (CanExplode(criticalDeath))
             {
                 if(explodeOnDeath)
-                    aMainSystem.SpawnExplosion(moneySpawnPoint.position, 7, (int)maxHealth, true);
+                    aMainSystem.SpawnExplosion(moneySpawnPoint.position, 7, 15, true);
                 else
                     aMainSystem.SpawnExplosion(moneySpawnPoint.position, 7, (int)maxHealth);
             }
@@ -230,18 +231,6 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
             return Vector3.Distance(transform.position, player.transform.position);
         else
             return 0;
-    }
-
-    public void HealPlayer()
-    {
-        float newDistance = DistanceToPlayer();
-        if (newDistance < 17)
-        {
-            float newHeal = MapValue(newDistance, 1, 21, 1f, 0f);
-            newHeal *= newHeal * (maxHealth / 10);
-            newHeal = Mathf.Clamp(newHeal, 5, 20);
-            playerHealth.Heal(newHeal);
-        }
     }
 
     float MapValue(float mainValue, float inValueMin, float inValueMax, float outValueMin, float outValueMax)

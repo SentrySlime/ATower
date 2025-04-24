@@ -10,9 +10,13 @@ public class PlayerStats : MonoBehaviour
     public int hpOnHit = 0;
     public int hpOnCritHit = 0;
     public int hpOnKill = 0;
+    public int hpOnEliteKill = 0;
     public int helpingHand = 0;
     public float hpRegen = 0;
     public int hpRegenOnEnemyHit = 0;
+    public int healCap = 0;
+    public int canOverheal = 0;
+    public int onlyEliteKillHeal = 0;
 
     [Header("Defense")]
     public float damageReductionPercent = 1.1f;
@@ -28,6 +32,8 @@ public class PlayerStats : MonoBehaviour
     public float criticalMultiplier = 2;
     public int canExplode = 0;
     public int moneyIsPower = 0;
+    public int hpIsPower = 0;
+    
 
     [Header("Ammo")]
     public int ammoRefills = 0;
@@ -74,10 +80,15 @@ public class PlayerStats : MonoBehaviour
     {
         playerHealth.damageReductionPercent = damageReductionPercent;
         playerHealth.damageIgnoreChance = damageIgnoreChance;
+
         
-        if(oneMaxHP > 0)
-        {
+        if (oneMaxHP <= 0)
+            playerHealth.maxHP = maxHealth;
+        else
             playerHealth.maxHP = 1;
+
+        if (oneMaxHP > 0)
+        {
             playerHealth.currentHP = 1;
         }
         else if(maxHealth > playerHealth.maxHP)
@@ -85,15 +96,15 @@ public class PlayerStats : MonoBehaviour
             int tempHP = maxHealth - playerHealth.maxHP;
             playerHealth.currentHP += tempHP;
         }
-        else if(maxHealth < playerHealth.maxHP)
+        else if(playerHealth.currentHP > playerHealth.maxHP)
         {
-            int tempHP = playerHealth.maxHP - maxHealth;
-            playerHealth.currentHP -= tempHP;
+            if (canOverheal <= 0)
+            {
+                playerHealth.currentHP = maxHealth;
+            }
         }
 
-        if(oneMaxHP <= 0)
-            playerHealth.maxHP = maxHealth;
-        
+
         playerHealth.ItemUpdateHealth();
     }
 

@@ -24,7 +24,7 @@ public class HelpingHandPickUp : MonoBehaviour
             mainSystem.SpawnPickUpEffects(transform.position);
             
             triggered = true;
-            playerHealth.Heal(healAmount);
+            playerHealth.Heal(healAmount, false);
             Destroy(gameObject);
         }
     }

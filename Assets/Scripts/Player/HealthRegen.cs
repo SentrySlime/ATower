@@ -55,7 +55,7 @@ public class HealthRegen : MonoBehaviour
 
             while (regenElapsed - lastHealTime >= hpRegenCooldown)
             {
-                playerHealth.Heal(1);
+                playerHealth.Heal(1, false);
                 lastHealTime += hpRegenCooldown;
             }
 

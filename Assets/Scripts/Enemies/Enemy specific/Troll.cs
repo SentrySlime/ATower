@@ -100,7 +100,7 @@ public class Troll : MonoBehaviour, INoticePlayer
         {
             attackRateTimer += Time.deltaTime;
         }
-        else if (distanceToPlayer < 18)
+        else if (distanceToPlayer < 25)
         {
             if(attacking == false)
             {

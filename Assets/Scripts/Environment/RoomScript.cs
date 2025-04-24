@@ -29,7 +29,7 @@ public class RoomScript : MonoBehaviour
 
     [HideInInspector] public int roomIndex;
     [HideInInspector] public RoomManager roomManager;
-    [HideInInspector] public LevelGeneration levelGeneration;
+    [HideInInspector] public LevelGeneration_2 levelGeneration;
 
     public bool invertedRoomDirection = false;
 

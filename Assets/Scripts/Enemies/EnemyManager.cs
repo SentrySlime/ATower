@@ -57,13 +57,17 @@ public class EnemyManager : MonoBehaviour
         
     }
 
-    public void ReportDeath(Vector3 deathPosition, bool canDropAmmo)
+    public void ReportDeath(Vector3 deathPosition, bool canDropAmmo, bool elite)
     {
         totalEnemyDeaths++;
-
         PlayerStatsEffects(deathPosition);
         if(canDropAmmo)
             CheckForAmmoDrop(deathPosition);
+        if(elite)
+        {
+            if(playerStats.hpOnEliteKill > 0)
+                playerHealth.Heal(playerStats.hpOnEliteKill, true);
+        }
         //inventory.IncreaseMoney(moneyToDrop);
 
         if (!slowDown)
@@ -141,7 +145,7 @@ public class EnemyManager : MonoBehaviour
     private void PlayerStatsEffects(Vector3 deathPosition)
     {
         if(playerStats.hpOnKill > 0)
-            playerHealth.Heal(playerStats.hpOnKill);
+            playerHealth.Heal(playerStats.hpOnKill, false);
 
         healthRegen.StartHPRegen();
         HelpingHandLogic(deathPosition);

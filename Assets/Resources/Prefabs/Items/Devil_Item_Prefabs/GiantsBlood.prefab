@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2239080014955014833}
   - component: {fileID: 6928261848857916641}
   m_Layer: 0
-  m_Name: FleshfangRing
+  m_Name: GiantsBlood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,32 +43,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c27a65a8f09c64eb7ec27436106a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: FleshfangRing
-  itemDescription: Increased critical chance, critical hits heals you, but reduced
-    health
-  itemIcon: {fileID: 21300000, guid: 26947f46691358246885b898ac3960db, type: 3}
-  itemMesh: {fileID: 3213417791820917881, guid: f6e229d2e23e92145a213574ae3b37fa, type: 3}
-  itemMaterial: {fileID: 2100000, guid: 149622933cd4648408fc349a3971a577, type: 2}
+  itemName: GiantsBlood
+  itemDescription: Heal on elite kill, you can overheal, but can't heal from other
+    sources
+  itemIcon: {fileID: 21300000, guid: 29c2be8abef378e4aa5bd5c11a846ca0, type: 3}
+  itemMesh: {fileID: 5149007572182649733, guid: a514d8e85b5f79f4ea1ea54707384159, type: 3}
+  itemMaterial: {fileID: 2100000, guid: b8497d9ca9718ae44b6f446e333b918c, type: 2}
   type: 0
   isDevilItem: 1
-  maxHp: -75
+  maxHp: 0
   oneMaxHP: 0
   hpOnHit: 0
-  hpOnCritHit: 5
+  hpOnCritHit: 0
   hpOnKill: 0
-  hpOnEliteKill: 0
+  hpOnEliteKill: 75
   helpingHand: 0
   hpRegen: 0
   hpRegenOnEnemyHit: 0
   healCap: 0
-  canOverheal: 0
-  onlyEliteKillHeal: 0
+  canOverheal: 1
+  onlyEliteKillHeal: 1
   damageReductionPercent: 0
   damageIgnoreChance: 0
   moveSpeed: 0
   extraJumps: 0
   damage: 0
-  critChance: 5
+  critChance: 0
   canExplodeEnemies: 0
   moneyIsPower: 0
   hpIsPower: 0

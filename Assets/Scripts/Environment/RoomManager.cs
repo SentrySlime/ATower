@@ -88,8 +88,8 @@ public class RoomManager : MonoBehaviour
         room.roomManager = this;
         room.roomIndex = rooms.Count - 1;
 
-        if (rooms.Count > 4)
-            StartCoroutine(WaitBeforeDisablingRoom(room));
+        //if (rooms.Count > 4)
+        //    StartCoroutine(WaitBeforeDisablingRoom(room));
             
     }
 

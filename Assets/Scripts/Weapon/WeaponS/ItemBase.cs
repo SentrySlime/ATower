@@ -47,6 +47,9 @@ public class ItemBase : MonoBehaviour
     [Tooltip("1 point is equal to 1 extra health gained when hitting killing an enemy")]
     [Range(-90f, 90f)] public int hpOnKill;
 
+    [Tooltip("1 point is equal to 1 extra health gained when hitting killing an elite enemy")]
+    [Range(-90f, 90f)] public int hpOnEliteKill;
+
     [Tooltip("If it's at 1 it gives the player helping hand")]
     [Range(-1f, 1f)] public int helpingHand = 0;
 
@@ -56,6 +59,15 @@ public class ItemBase : MonoBehaviour
     [Tooltip("1 point is equal to activate this")]
     [HideInInspector] [Range(-1f, 1f)] public int hpRegenOnEnemyHit;
 
+    [Tooltip("1 point says we are healCapped")]
+    [HideInInspector][Range(-100f, 100f)] public int healCap;
+
+    [Tooltip("1 point says we can overheal")]
+    [HideInInspector][Range(-1f, 1f)] public int canOverheal;
+
+    [Tooltip("1 point says we can only heal from killing elites")]
+    [HideInInspector][Range(-1f, 1f)] public int onlyEliteKillHeal;
+    
 
     #endregion
 
@@ -96,6 +108,10 @@ public class ItemBase : MonoBehaviour
 
     [Tooltip("If this is true, you get 1% damage for every 100 money")]
     [Range(-1f, 1f)] public int moneyIsPower = 0;
+
+    [Tooltip("If this is true, you get 1% damage for every 100 money")]
+    [Range(-1f, 1f)] public int hpIsPower = 0;
+    
 
     #endregion
 
@@ -164,23 +180,29 @@ public class ItemBase : MonoBehaviour
         playerStats.hpOnHit += hpOnHit;
         playerStats.hpOnCritHit += hpOnCritHit;
         playerStats.hpOnKill += hpOnKill;
+        playerStats.hpOnEliteKill += hpOnEliteKill;
         playerStats.helpingHand += helpingHand;
         playerStats.hpRegenOnEnemyHit += hpRegenOnEnemyHit;
+        playerStats.healCap += healCap;
+        playerStats.canOverheal += canOverheal;
+        playerStats.onlyEliteKillHeal += onlyEliteKillHeal;
+
+
+
+        //Defense
         playerStats.damageIgnoreChance += damageIgnoreChance;
         playerStats.damageReductionPercent += damageReductionPercent;
-
 
         //Movement ---
         playerStats.moveSpeed += moveSpeed;
         playerStats.extraJumps += extraJumps;
         
         //Damage ----
-        playerStats.canExplode += canExplodeEnemies;
-
-        playerStats.moneyIsPower += moneyIsPower;
-
         playerStats.damage += damage;
+        playerStats.moneyIsPower += moneyIsPower;
         playerStats.criticalChance += critChance;
+        playerStats.hpIsPower -= hpIsPower;
+        playerStats.canExplode += canExplodeEnemies;
 
 
         //Ammo ---
@@ -214,8 +236,14 @@ public class ItemBase : MonoBehaviour
         playerStats.hpOnHit -= hpOnHit;
         playerStats.hpOnCritHit -= hpOnCritHit;
         playerStats.hpOnKill -= hpOnKill;
+        playerStats.hpOnEliteKill -= hpOnEliteKill;
         playerStats.helpingHand -= helpingHand;
         playerStats.hpRegenOnEnemyHit -= hpRegenOnEnemyHit;
+        playerStats.healCap -= healCap;
+        playerStats.canOverheal -= canOverheal;
+        playerStats.onlyEliteKillHeal -= onlyEliteKillHeal;
+
+        //Defense
         playerStats.damageIgnoreChance -= damageIgnoreChance;
         playerStats.damageReductionPercent -= damageReductionPercent;
 
@@ -227,6 +255,7 @@ public class ItemBase : MonoBehaviour
         playerStats.damage -= damage;
         playerStats.criticalChance -= critChance;
         playerStats.moneyIsPower -= moneyIsPower;
+        playerStats.hpIsPower -= hpIsPower;
         playerStats.canExplode -= canExplodeEnemies;
 
 

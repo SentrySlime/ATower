@@ -42,6 +42,7 @@ public class Recoil : MonoBehaviour
     public bool isBurstFiring = false;
 
     WeaponSocket weaponSocket;
+    PlayerStats playerStats;
 
     bool reloading = false;
 
@@ -52,7 +53,9 @@ public class Recoil : MonoBehaviour
 
     private void Start()
     {
-        weaponSocket = GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponSocket>();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        weaponSocket = player.GetComponent<WeaponSocket>();
+        playerStats = player.GetComponent<PlayerStats>();
         baseWeapon = obj.GetComponent<BaseWeapon>();
     }
 
@@ -86,14 +89,15 @@ public class Recoil : MonoBehaviour
 
     public void Fire()
     {
-        if (weaponSocket.equippedWeapon.currentMagazine > 0 && !weaponSocket.reloadIcon.isActiveAndEnabled)
-        {
-            timeElapsed = 0;
-            timeElapsed2 = 0;
-            rotating = true;
-        }
-
-
+        timeElapsed = 0;
+        timeElapsed2 = 0;
+        rotating = true;
+        //if (weaponSocket.equippedWeapon.currentMagazine > 0 || playerStats.heartboundRounds > 0)
+        //{
+        //    if(!weaponSocket.reloadIcon.isActiveAndEnabled)
+        //    {
+        //    }
+        //}
     }
 
     public void RecoilFunc()

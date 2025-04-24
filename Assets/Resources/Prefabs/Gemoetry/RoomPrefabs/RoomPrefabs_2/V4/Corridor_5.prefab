@@ -9842,7 +9842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e23e28f92a56b540a4a28731c664c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 0
+  direction: 1
   point1: {fileID: 211026210540028830}
   point2: {fileID: 211026210464469379}
   roomDifficultyLevel: 1
@@ -9852,6 +9852,7 @@ MonoBehaviour:
   enemyList: []
   roomIndex: 0
   roomManager: {fileID: 0}
+  levelGeneration: {fileID: 0}
   invertedRoomDirection: 0
 --- !u!65 &1232222096637279487
 BoxCollider:

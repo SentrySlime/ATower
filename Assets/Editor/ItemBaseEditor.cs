@@ -26,7 +26,7 @@ public class ItemBaseEditor : Editor
 
         DrawFoldout("Health", ref showHealth, new string[]
         {
-            "maxHp", "oneMaxHP", "hpOnHit", "hpOnCritHit", "hpOnKill", "helpingHand", "hpRegen", "hpRegenOnEnemyHit", 
+            "maxHp", "oneMaxHP", "hpOnHit", "hpOnCritHit", "hpOnKill", "hpOnEliteKill" ,"helpingHand", "hpRegen", "hpRegenOnEnemyHit", "healCap", "canOverheal", "onlyEliteKillHeal"
         });
 
         DrawFoldout("Defense", ref showDefense, new string[]
@@ -41,7 +41,7 @@ public class ItemBaseEditor : Editor
 
         DrawFoldout("Damage", ref showDamage, new string[]
         {
-            "damage", "critChance", "canExplodeEnemies", "moneyIsPower"
+            "damage", "critChance", "canExplodeEnemies", "moneyIsPower", "hpIsPower"
         });
 
         DrawFoldout("Ammo", ref showAmmo, new string[]
