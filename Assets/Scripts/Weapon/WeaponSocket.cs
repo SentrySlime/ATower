@@ -20,6 +20,7 @@ public class WeaponSocket : MonoBehaviour
     public AudioSource noAmmo;
     ShootSystem shootSystem;
     PlayerStats playerStats;
+    PlayerHealth playerHealth;
     AmmoScript ammoScript;
 
     [Header("Visible Cursor")]
@@ -85,6 +86,7 @@ public class WeaponSocket : MonoBehaviour
         shootSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShootSystem>();
         ammoScript = GameObject.Find("AmmoBar").GetComponent<AmmoScript>();
         playerStats = GetComponent<PlayerStats>();
+        playerHealth = GetComponent<PlayerHealth>();
         reloadGroup.alpha = 0;
     }
 
@@ -133,7 +135,7 @@ public class WeaponSocket : MonoBehaviour
 
                 if (fireMode == FireMode.semi)
                 {
-                    Fire();
+                    CheckForFire();
                     currentTimer = 0;
                 }
                 else if (fireMode == FireMode.burst)
@@ -145,11 +147,10 @@ public class WeaponSocket : MonoBehaviour
             {
                 if (fireMode == FireMode.fullAuto)
                 {
-                    if (Input.GetMouseButton(0))
-                    {
-                        Fire();
-                        currentTimer = 0;
-                    }
+
+                    CheckForFire();
+                    currentTimer = 0;
+                    
                 }
             }
         }
@@ -192,19 +193,23 @@ public class WeaponSocket : MonoBehaviour
         }
     }
 
-    public void Fire()
+    public void CheckForFire()
     {
         
         if (equippedWeapon == null || reloadIcon.isActiveAndEnabled) { return; }
 
+        int percentageOfPlayerHp = playerHealth.CalculatePercentage(5);
+
         if (equippedWeapon.currentMagazine >= equippedWeapon.ammoPerShot)
         {
-            recoilScript.CallFire();
-            equippedWeapon.TriggerItem();
             equippedWeapon.TakeAmmo();
             ammoScript.UseAmountOfAmmo(equippedWeapon.ammoPerShot);
-            
-            shootSystem.FireHomingRocket(false, equippedWeapon.barrel, 30, playerStats.fireBallChance);
+            Fire();
+        }
+        else if (playerStats.heartboundRounds > 0 && playerHealth.currentHP - percentageOfPlayerHp > 0)
+        {
+            playerHealth.RemoveHealth(percentageOfPlayerHp);
+            Fire();
         }
         else if (equippedWeapon.currentMagazine <= 0 && equippedWeapon.currentAmmo != 0)
         {
@@ -216,6 +221,13 @@ public class WeaponSocket : MonoBehaviour
                 noAmmo.Play();
         }
 
+    }
+
+    public void Fire()
+    {
+        recoilScript.CallFire();
+        equippedWeapon.TriggerItem();
+        shootSystem.FireHomingRocket(false, equippedWeapon.barrel, 30, playerStats.fireBallChance);
     }
 
     public void Reload()
@@ -248,7 +260,7 @@ public class WeaponSocket : MonoBehaviour
         currentTimer = 0;
         for (int i = 0; i < equippedWeapon.burstAmount; i++)
         {
-            Fire();
+            CheckForFire();
             yield return new WaitForSeconds(equippedWeapon.burstDelay);
         }
 
@@ -319,7 +331,7 @@ public class WeaponSocket : MonoBehaviour
             yield return new WaitForEndOfFrame();
             float totalReloadSpeed = 1 + playerStats.reloadSpeed;
             if (playerStats.hasAlternateFastReload > 0 && playerStats.alternateFastReload)
-                totalReloadSpeed += 0.5f;
+                totalReloadSpeed += 0.75f;
 
             reloadIcon.fillAmount += totalReloadSpeed * (1.0f / equippedWeapon.reloadTime * Time.deltaTime);
             float fillAmountFor035 = (totalReloadSpeed / equippedWeapon.reloadTime) * 0.25f;

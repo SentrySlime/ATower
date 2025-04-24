@@ -51,7 +51,7 @@ public class ItemPickUp : Item, IInteractInterface
     public void Interact()
     {
         //EquipItem();
-        if(isDevilItem)
+        if(isDevilItem && devilItem)
             devilItem.DestroyOtherItem(this);
     }
 
@@ -77,7 +77,21 @@ public class ItemPickUp : Item, IInteractInterface
         itemMaterial = itemPrefab.itemMaterial;
 
         if (isDevilItem)
-            devilItem = GameObject.Find("Devil").GetComponent<Devil>();
+        {
+            GameObject devilObject = GameObject.Find("Devil");
+
+            if (devilObject != null)
+            {
+                devilItem = devilObject.GetComponent<Devil>();
+            }
+            else
+            {
+                // Handle the case where "Devil" is not found
+                Debug.LogWarning("Devil object not found in the scene.");
+                devilItem = null; // Or any default behavior you'd like
+            }
+
+        }
     }
 
     private void OnTriggerEnter(Collider other)

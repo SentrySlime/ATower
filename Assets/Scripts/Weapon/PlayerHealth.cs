@@ -13,6 +13,7 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
     PlayerStats playerStats;
     HealthRegen healthRegen;
+    Inventory inventory;
     PauseMenu pauseMenu;
 
 
@@ -55,6 +56,7 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
         startPos = transform.position;
         playerStats = GetComponent<PlayerStats>();
         healthRegen = GetComponent<HealthRegen>();
+        inventory = GetComponent<Inventory>();
         pauseMenu = GameObject.Find("Canvas").GetComponent<PauseMenu>();
         pauseMenu.GetVignettes(this);
         barHP = GameObject.FindGameObjectWithTag("HPBar").GetComponent<Slider>();
@@ -135,6 +137,8 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
     public void Damage(float damage)
     {
+        print("Took damage");
+
         if (isInvincible) { return; }
 
         if (!canBeDamaged)
@@ -146,23 +150,54 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
         if (DamageChance())
         {
-            //Do something here
+            return;
         }
         else
         {
             vignetteAlpha = 1;
             vignetteTimer = 0;
             damage = damage / damageReductionPercent;
-            currentHP -= ((int)damage);
         }
 
-        UpdateHP();
+        if(playerStats.moneyIsHealth > 0)
+        {
+            inventory.DecreaseMoney((int)damage);
+        }
+        else
+        {
+            currentHP -= ((int)damage);
+            UpdateHP();
+        }
 
         canBeDamaged = false;
         iFrameTimer = 0;
 
         if (currentHP <= 0)
             PlayerDeath();
+    }
+
+    public void RemoveHealth(float hpToRemove)
+    {
+        vignetteAlpha = 1;
+        vignetteTimer = 0;
+        currentHP -= ((int)hpToRemove);
+        UpdateHP();
+    }
+
+    public int CalculatePercentage(int value)
+    {
+        if (value < 1 || value > 100)
+        {
+            Debug.LogError("Value must be between 1 and 100.");
+            return 0;
+        }
+
+        float percentage = (value / 100f) * maxHP;
+
+        int roundedPercentage = Mathf.CeilToInt(percentage);
+
+        Debug.Log("Calculated Percentage: " + roundedPercentage);
+        return roundedPercentage;
     }
 
     public void PlayerDeath()

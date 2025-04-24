@@ -35,10 +35,15 @@ public class ItemBase : MonoBehaviour
     [Tooltip("One point is equal to one max HP")]
     [Range(-200, 200f)] public int maxHp;
 
+    [Tooltip("Sets HP to 1")]
+    [Range(-1, 1f)] public int oneMaxHP;
 
     [Tooltip("1 point is equal to 1 extra health gained when hitting an enemy")]
     [Range(-90f, 90f)] public int hpOnHit;
 
+    [Tooltip("1 point is equal to 1 extra health gained when hitting a crit on an enemy")]
+    [Range(-90f, 90f)] public int hpOnCritHit;
+    
     [Tooltip("1 point is equal to 1 extra health gained when hitting killing an enemy")]
     [Range(-90f, 90f)] public int hpOnKill;
 
@@ -50,6 +55,7 @@ public class ItemBase : MonoBehaviour
 
     [Tooltip("1 point is equal to activate this")]
     [HideInInspector] [Range(-1f, 1f)] public int hpRegenOnEnemyHit;
+
 
     #endregion
 
@@ -115,6 +121,9 @@ public class ItemBase : MonoBehaviour
     [Tooltip("Every other reload is 50% faster")]
     [Range(-1f, 1f)] public int hasAlternateFastReload = 0;
 
+    [Tooltip("Shooting while on an empty magazine deals damage equal to 5% of your health")]
+    [Range(-1f, 1f)] public int heartboundRounds = 0;
+
     #endregion
 
     #region WeaponSocket
@@ -127,6 +136,9 @@ public class ItemBase : MonoBehaviour
     [Header("Misc ---------------------------------------------------")]
     [Tooltip("Makes enemies drop increased amount of money")]
     [Range(-1f, 1f)] public int increasedMoneyDrops = 0;
+
+    [Tooltip("You take first from money before you take damage from hp")]
+    [Range(-1f, 1f)] public int moneyIsHealth = 0;
 
     #region Misc
 
@@ -147,8 +159,10 @@ public class ItemBase : MonoBehaviour
 
         //Health ---
         playerStats.maxHealth += maxHp;
+        playerStats.oneMaxHP += oneMaxHP;
         playerStats.hpRegen += hpRegen;
         playerStats.hpOnHit += hpOnHit;
+        playerStats.hpOnCritHit += hpOnCritHit;
         playerStats.hpOnKill += hpOnKill;
         playerStats.helpingHand += helpingHand;
         playerStats.hpRegenOnEnemyHit += hpRegenOnEnemyHit;
@@ -176,13 +190,14 @@ public class ItemBase : MonoBehaviour
         playerStats.maxMagazineSize += maxMagazineSize;
         playerStats.returnAmmoOnkill += returnAmmoOnkill;
         playerStats.hasAlternateFastReload += hasAlternateFastReload;
-
+        playerStats.heartboundRounds += heartboundRounds;
 
 
         //WeaponSocket
         playerStats.fireBallChance += fireBallChance;
 
         //Misc
+        playerStats.moneyIsHealth += moneyIsHealth;
 
         //Restart each one
         playerStats.StartPlayerHP();
@@ -194,8 +209,10 @@ public class ItemBase : MonoBehaviour
     {
         //Health ---
         playerStats.maxHealth -= maxHp;
+        playerStats.oneMaxHP -= oneMaxHP;
         playerStats.hpRegen -= hpRegen;
         playerStats.hpOnHit -= hpOnHit;
+        playerStats.hpOnCritHit -= hpOnCritHit;
         playerStats.hpOnKill -= hpOnKill;
         playerStats.helpingHand -= helpingHand;
         playerStats.hpRegenOnEnemyHit -= hpRegenOnEnemyHit;
@@ -207,12 +224,10 @@ public class ItemBase : MonoBehaviour
         playerStats.extraJumps -= extraJumps;
 
         //Damage ----
-        playerStats.canExplode -= canExplodeEnemies;
-
-        playerStats.moneyIsPower -= moneyIsPower;
-
         playerStats.damage -= damage;
         playerStats.criticalChance -= critChance;
+        playerStats.moneyIsPower -= moneyIsPower;
+        playerStats.canExplode -= canExplodeEnemies;
 
 
         //Ammo
@@ -222,11 +237,14 @@ public class ItemBase : MonoBehaviour
         playerStats.maxMagazineSize -= maxMagazineSize;
         playerStats.returnAmmoOnkill -= returnAmmoOnkill;
         playerStats.hasAlternateFastReload -= hasAlternateFastReload;
-
+        playerStats.heartboundRounds -= heartboundRounds;
 
         //WeaponSocket ---
         playerStats.fireBallChance -= fireBallChance;
         
+        //Misc
+        playerStats.moneyIsHealth -= moneyIsHealth;
+
         //Restart each one
         playerStats.StartPlayerHP();
         playerStats.StartLocomotion();

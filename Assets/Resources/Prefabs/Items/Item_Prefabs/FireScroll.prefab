@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2239080014955014833}
   - component: {fileID: 3524115026056419694}
   m_Layer: 0
-  m_Name: HelpingHand
+  m_Name: FireScroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,17 +43,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c27a65a8f09c64eb7ec27436106a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: HelpingHand
-  itemDescription: Chance to spawn a healing hand on kill
-  itemIcon: {fileID: 21300000, guid: ffd88ec3c9fa3364ca4c32f20056ba09, type: 3}
-  itemMesh: {fileID: -1727643662729791872, guid: 3d5ea7f56b5abc649ad5ba66be56c710, type: 3}
-  itemMaterial: {fileID: 2100000, guid: 0012a496b7834d54daefd25962b12ed4, type: 2}
+  itemName: FireScroll
+  itemDescription: Chance to spawn fireball when firing any weapon
+  itemIcon: {fileID: 21300000, guid: a5233730664406f4989b16cb805b39d4, type: 3}
+  itemMesh: {fileID: 5829669766972427010, guid: f13627e04fb73354e863e06b1cf3cd19, type: 3}
+  itemMaterial: {fileID: 2100000, guid: 25b2ee572e49c894b83bd270a4295427, type: 2}
   type: 0
-  isDevilItem: 1
-  maxHp: 25
+  isDevilItem: 0
+  maxHp: 0
+  oneMaxHP: 0
   hpOnHit: 0
+  hpOnCritHit: 0
   hpOnKill: 0
-  helpingHand: 1
+  helpingHand: 0
   hpRegen: 0
   hpRegenOnEnemyHit: 0
   damageReductionPercent: 0
@@ -70,6 +72,8 @@ MonoBehaviour:
   reloadSpeed: 0
   returnAmmoOnkill: 0
   hasAlternateFastReload: 0
-  fireBallChance: 0
+  heartboundRounds: 0
+  fireBallChance: 5
   increasedMoneyDrops: 0
+  moneyIsHealth: 0
   playerStats: {fileID: 0}

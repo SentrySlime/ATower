@@ -81,24 +81,6 @@ public class Recoil : MonoBehaviour
         {
             Fire();
             currentTimer = 0;
-            //if (fireMode == FireMode.fullAuto)
-            //{
-            //        Fire();
-
-
-            //}
-            //else if (fireMode == FireMode.semi)
-            //{
-            //        currentTimer = 0;
-
-
-
-            //}
-            //else if (fireMode == FireMode.burst)
-            //{
-            //        StartCoroutine(BurstFire());
-
-            //}
         }
     }
 

@@ -109,10 +109,11 @@ public class AMainSystem : MonoBehaviour
 
         if (playerStats.moneyIsPower > 0)
         {
-            float percentage = 1 + ((float)inventory.Money * 0.03f / 100);
+            float percentage = 1 + ((float)inventory.money * 0.03f / 100);
             incomingDamage *= percentage;
         }
         int critChance = Random.Range(0, 100);
+
 
         if (playerStats.criticalChance > critChance)
         {
@@ -133,6 +134,9 @@ public class AMainSystem : MonoBehaviour
         {
             if (critHitSFX != null)
                 Instantiate(critHitSFX.GetComponent<AudioSource>());
+
+            if(playerStats.hpOnCritHit > 0)
+                playerHealth.Heal(playerStats.hpOnCritHit);
         }
         else
         {
@@ -163,6 +167,7 @@ public class AMainSystem : MonoBehaviour
 
     public void HitEffect()
     {
+        print(playerStats.hpOnHit);
         playerHealth.Heal(playerStats.hpOnHit);
         //healthRegen.StartHPRegen();
     }

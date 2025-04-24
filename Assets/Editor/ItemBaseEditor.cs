@@ -26,7 +26,7 @@ public class ItemBaseEditor : Editor
 
         DrawFoldout("Health", ref showHealth, new string[]
         {
-            "maxHp", "hpOnHit", "hpOnKill", "helpingHand", "hpRegen", "hpRegenOnEnemyHit"
+            "maxHp", "oneMaxHP", "hpOnHit", "hpOnCritHit", "hpOnKill", "helpingHand", "hpRegen", "hpRegenOnEnemyHit", 
         });
 
         DrawFoldout("Defense", ref showDefense, new string[]
@@ -46,7 +46,7 @@ public class ItemBaseEditor : Editor
 
         DrawFoldout("Ammo", ref showAmmo, new string[]
         {
-            "ammoRefills", "reloadAmount", "maxMagazineSize", "reloadSpeed", "returnAmmoOnkill", "hasAlternateFastReload"
+            "ammoRefills", "reloadAmount", "maxMagazineSize", "reloadSpeed", "returnAmmoOnkill", "hasAlternateFastReload", "heartboundRounds"
         });
 
         DrawFoldout("Weapon Socket", ref showWeaponSocket, new string[]
@@ -56,7 +56,7 @@ public class ItemBaseEditor : Editor
 
         DrawFoldout("Misc", ref showMisc, new string[]
         {
-            "hasIncreasedMoneyDrops", "increasedMoneyDrops"
+            "hasIncreasedMoneyDrops", "increasedMoneyDrops", "moneyIsHealth"
         });
 
         serializedObject.ApplyModifiedProperties();

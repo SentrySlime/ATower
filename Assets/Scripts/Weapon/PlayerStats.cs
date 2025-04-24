@@ -6,47 +6,45 @@ public class PlayerStats : MonoBehaviour
 {
     [Header("Player HP")]
     public int maxHealth;
-    public float damageReductionPercent = 1.1f;
-    public int damageIgnoreChance = 0;
-
-    [Header("Healing")]
-    public float hpRegen = 1;
-    public int hpOnKill = 5;
-    public int hpOnHit = 1;
+    public int oneMaxHP = 0;
+    public int hpOnHit = 0;
+    public int hpOnCritHit = 0;
+    public int hpOnKill = 0;
     public int helpingHand = 0;
+    public float hpRegen = 0;
     public int hpRegenOnEnemyHit = 0;
 
-    [Header("Damage")]
-    public float damage = 0;
-    public float criticalChance = 5;
-    public float criticalMultiplier = 2;
+    [Header("Defense")]
+    public float damageReductionPercent = 1.1f;
+    public int damageIgnoreChance = 0;
 
     [Header("Locomotion")]
     public float moveSpeed = 0;
     public int extraJumps = 0;
 
-    [Header("Weapon Stats")]
-    public int reloadAmount = 0;
-    public int maxMagazineSize = 0;
-    [Tooltip("0.1 is equal to 10% increase in reload speed")]
-    public float reloadSpeed = 0;
-
-    [Header("Return Ammo On Kill")]
-    public int returnAmmoOnkill = 0;
-
-    [Header("Alternate reload is 50% faster")]
-    public int hasAlternateFastReload = 0;
-    public bool alternateFastReload = false;
-
-    [Header("Others")]
+    [Header("Damage")]
+    public float damage = 0;
+    public float criticalChance = 5;
+    public float criticalMultiplier = 2;
     public int canExplode = 0;
-    public int ammoRefills = 0;
     public int moneyIsPower = 0;
 
-    public bool increasedMoneyDrop = false;
+    [Header("Ammo")]
+    public int ammoRefills = 0;
+    public int reloadAmount = 0;
+    public int maxMagazineSize = 0;
+    public float reloadSpeed = 0;
+    public int returnAmmoOnkill = 0;
+    public int hasAlternateFastReload = 0;
+    public bool alternateFastReload;
+    public int heartboundRounds = 0;
 
     [Header("WeaponSocket")]
     public int fireBallChance = 0;
+
+    [Header("Misc")]
+    public bool increasedMoneyDrop = false;
+    public int moneyIsHealth = 0;
 
     PlayerHealth playerHealth;
     Locomotion2 locomotion;
@@ -77,12 +75,25 @@ public class PlayerStats : MonoBehaviour
         playerHealth.damageReductionPercent = damageReductionPercent;
         playerHealth.damageIgnoreChance = damageIgnoreChance;
         
-        if(maxHealth > playerHealth.maxHP)
+        if(oneMaxHP > 0)
+        {
+            playerHealth.maxHP = 1;
+            playerHealth.currentHP = 1;
+        }
+        else if(maxHealth > playerHealth.maxHP)
         {
             int tempHP = maxHealth - playerHealth.maxHP;
             playerHealth.currentHP += tempHP;
         }
-        playerHealth.maxHP = maxHealth;
+        else if(maxHealth < playerHealth.maxHP)
+        {
+            int tempHP = playerHealth.maxHP - maxHealth;
+            playerHealth.currentHP -= tempHP;
+        }
+
+        if(oneMaxHP <= 0)
+            playerHealth.maxHP = maxHealth;
+        
         playerHealth.ItemUpdateHealth();
     }
 

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     [Header("Money")]
-    public int Money;
+    public int money;
     public TextMeshProUGUI moneyText;
 
     [Header("Weapon")]
@@ -116,13 +116,19 @@ public class Inventory : MonoBehaviour
 
     public void IncreaseMoney(int incomingAmount)
     {
-        Money += incomingAmount;
+        money += incomingAmount;
+        UpdateMoneyText();
+    }
+
+    public void DecreaseMoney(int incomingAmount)
+    {
+        money -= incomingAmount;
         UpdateMoneyText();
     }
 
     private void UpdateMoneyText()
     {
-        moneyText.text = Money.ToString();
+        moneyText.text = money.ToString();
     }
 
     public void SwitchWeapon()
