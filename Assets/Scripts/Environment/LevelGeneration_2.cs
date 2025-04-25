@@ -209,6 +209,10 @@ public class LevelGeneration_2 : MonoBehaviour
 
     private void AssignRoomsToList()
     {
+        easyRooms.Clear();
+        mediumRooms.Clear();
+        hardRooms.Clear();
+
         for (int i = 0; i < rooms.Count; i++)
         {
             if (rooms[i] == null) { return; }
@@ -217,10 +221,26 @@ public class LevelGeneration_2 : MonoBehaviour
 
             if (roomScript.roomDifficultyLevel == 1)
                 easyRooms.Add(rooms[i]);
-            if (roomScript.roomDifficultyLevel == 2)
+            else if (roomScript.roomDifficultyLevel == 2)
                 mediumRooms.Add(rooms[i]);
-            if (roomScript.roomDifficultyLevel == 3)
+            else if (roomScript.roomDifficultyLevel == 3)
                 hardRooms.Add(rooms[i]);
         }
+
+        ShuffleList(easyRooms);
+        ShuffleList(mediumRooms);
+        ShuffleList(hardRooms);
     }
+
+    private void ShuffleList<T>(List<T> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            int randomIndex = UnityEngine.Random.Range(i, list.Count);
+            T temp = list[i];
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
+        }
+    }
+
 }
