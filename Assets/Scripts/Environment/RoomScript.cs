@@ -76,13 +76,15 @@ public class RoomScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        roomManager.SetEnabledRooms(roomIndex);
+        if(roomManager)
+            roomManager.SetEnabledRooms(roomIndex);
     }
 
 
     private void SpawnRoom()
     {
-        if(levelGeneration.spawnedDevilRoom) { return; }
+        
+        if(levelGeneration && levelGeneration.spawnedDevilRoom) { return; }
 
         blockade.SetActive(false);
         Instantiate(roomToSpawn, secretPoint.transform.position, secretPoint.transform.rotation);
