@@ -10,7 +10,6 @@ public class HealthRegen : MonoBehaviour
     float hpRegen;
 
     float hpRegenCooldown = 0;
-    float hpRegenTimer = 0;
 
     //--
     bool isRegen = false;

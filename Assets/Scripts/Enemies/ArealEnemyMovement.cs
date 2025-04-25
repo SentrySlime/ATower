@@ -115,7 +115,6 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
     [Header("Misc")]
     public float distanceToPlayer;
     public float burstTimer;
-    int burstCount = 0;
     bool chasingPlayer = false;
     bool burst = false;
     AMainSystem aMainSystem;

@@ -38,7 +38,6 @@ public class Recoil : MonoBehaviour
     public float reloadTimer = 0;
     private float maxTimer = 0.08f;
     private float currentTimer = 0;
-    private float burstDelay = .1f;
     public bool isBurstFiring = false;
 
     WeaponSocket weaponSocket;

@@ -123,6 +123,7 @@ public class Inventory : MonoBehaviour
     public void DecreaseMoney(int incomingAmount)
     {
         money -= incomingAmount;
+        money = Mathf.Clamp(money, 0, 99999999);
         UpdateMoneyText();
     }
 

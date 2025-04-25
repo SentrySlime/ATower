@@ -30,11 +30,15 @@ public class LevelGeneration_2 : MonoBehaviour
 
     //roomCounters
     public int roomCount = 0;
-    int easyRoomCount = 5;
-    int mediumRoomCount = 10;
+    int easyRoomCount = 7;
+    int mediumRoomCount = 14;
     int hardRoomCount = 9;
 
+    bool spawnRoom = false;
+    bool spawnEndRoom = true;
+
     GameObject previousRoom;
+    GameObject previousCorridor;
 
     NavMeshManager navMeshManager;
     RoomManager roomManager;
@@ -48,13 +52,31 @@ public class LevelGeneration_2 : MonoBehaviour
 
     void Start()
     {
-        StartLevelGeneration();
+        //StartLevelGeneration();
+        GenerateStartingRoom();
     }
 
     
     void Update()
     {
-        
+        if(roomCount < roomAmount)
+        {
+
+            if (spawnRoom)
+            {
+                GenerateRoom();
+                roomCount++;
+            }
+            else
+                GenerateCorridor();
+
+            spawnRoom = !spawnRoom;
+        }
+        else if(spawnEndRoom)
+        {
+            spawnEndRoom = false;
+            GenerateEndRoom();
+        }
     }
 
 
@@ -78,9 +100,37 @@ public class LevelGeneration_2 : MonoBehaviour
         }
     }
 
+    private void GenerateRoom()
+    {
+        if (roomCount <= easyRoomCount)
+        {
+            GenerateEasyRoom();
+        }
+        else if (roomCount > easyRoomCount && roomCount < mediumRoomCount)
+        {
+            GenerateMediumRoom();
+        }
+        else if (spawnEndRoom)
+        {
+            spawnEndRoom = false;
+            GenerateEndRoom();
+        }
+
+    }
+
     private void GenerateStartingRoom()
     {
         RoomScript newRoom = Instantiate(startingRoom, transform.position, Quaternion.identity).GetComponent<RoomScript>();
+        spawnTransform = newRoom.point2.gameObject;
+        if (roomManager)
+            roomManager.AddRoom(newRoom);
+    }
+
+    private void GenerateEndRoom()
+    {
+        print("End room");
+
+        RoomScript newRoom = Instantiate(endRoom, spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
         spawnTransform = newRoom.point2.gameObject;
         if (roomManager)
             roomManager.AddRoom(newRoom);
@@ -98,7 +148,7 @@ public class LevelGeneration_2 : MonoBehaviour
                     randomIndex++;
                 else
                     randomIndex = 0;
-            }
+            }   
         }
 
         previousRoom = easyRooms[randomIndex];
@@ -130,6 +180,31 @@ public class LevelGeneration_2 : MonoBehaviour
         spawnTransform = newRoom.point2.gameObject;
         if (roomManager)
             roomManager.AddRoom(newRoom);
+    }
+
+    private void GenerateCorridor()
+    {
+        int randomIndex = Random.Range(0, corridors.Count);
+
+        if (previousCorridor)
+        {
+            if (corridors[randomIndex] == previousCorridor)
+            {
+                if (randomIndex + 1 < corridors.Count)
+                    randomIndex++;
+                else
+                    randomIndex = 0;
+            }
+        }
+
+        previousCorridor = corridors[randomIndex];
+
+        RoomScript newRoom = Instantiate(corridors[randomIndex], spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
+        newRoom.levelGeneration = this;
+        spawnTransform = newRoom.point2.gameObject;
+        if (roomManager)
+            roomManager.AddRoom(newRoom);
+
     }
 
     private void AssignRoomsToList()

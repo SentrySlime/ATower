@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using static System.Net.Mime.MediaTypeNames;
 using static UnityEngine.ProBuilder.AutoUnwrapSettings;
+using System;
 
 public class PlayerHealth : MonoBehaviour, IDamageInterface
 {
@@ -180,13 +181,27 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
         if(playerStats.moneyIsHealth > 0)
         {
-            inventory.DecreaseMoney((int)damage * 5);
+            int damageCost = (int)damage * 3;
+            int moneyAvailable = inventory.money;
+
+            int moneyToDeduct = Math.Min(moneyAvailable, damageCost);
+            int remainingDamage = damageCost - moneyToDeduct;
+
+            inventory.DecreaseMoney(moneyToDeduct);
+
+            if (remainingDamage > 0)
+            {
+                currentHP -= remainingDamage;
+                UpdateHP();
+            }
         }
         else
         {
             currentHP -= ((int)damage);
             UpdateHP();
         }
+
+        currentHP = Mathf.Clamp(currentHP, 0, 9999);
 
         canBeDamaged = false;
         iFrameTimer = 0;
@@ -228,7 +243,7 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
     private bool DamageChance()
     {
-        int ignoreChance = Random.Range(0, 100);
+        int ignoreChance = UnityEngine.Random.Range(0, 100);
 
         if (damageIgnoreChance > ignoreChance)
         {

@@ -13,7 +13,6 @@ public class CameraMovement : MonoBehaviour
     [Header("Sensitivity")]
     public Slider sensslider;
     public TextMeshProUGUI sensValue;
-    private float currentSens = 0;
     private float previousSens = 0;
     public float Sensitivity
     {
