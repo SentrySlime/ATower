@@ -10,13 +10,14 @@ public class ShootRaycast : BaseWeapon
     [Header("Line Renderer")]
     public LineRenderer lineRenderer;
     Coroutine lineRenderCoroutine;
+    public bool curve = false;
     public float lineDuration = 0.9f;
     public float lineTimer;
 
     public float hitDistance = 0;
 
     HitmarkerLogic hitMarkLogic;
-    AMainSystem aMainSystem;
+    [HideInInspector] public AMainSystem aMainSystem;
     public GameObject hitmarker;
 
     [Header("Shotgun")]
@@ -89,8 +90,6 @@ public class ShootRaycast : BaseWeapon
         
         maxAmmoText = GameObject.Find("MaxAmmoText").GetComponent<TextMeshProUGUI>();
         currentMagazineText = GameObject.Find("CurrentMagazineText").GetComponent<TextMeshProUGUI>();
-        //ammoFill = GameObject.FindGameObjectWithTag("Fill").GetComponent<Image>();
-        //ammoFill = GameObject.Find("Fill").GetComponent<Image>();
 
         currentAmmo = maxAmmo;
         currentMagazine = maxMagazine;
@@ -101,8 +100,6 @@ public class ShootRaycast : BaseWeapon
     {
         base.Start();
         layermask = ~layermask;
-
-
     }
 
 
@@ -225,12 +222,12 @@ public class ShootRaycast : BaseWeapon
 
                 if (ShouldExplode)
                 {
-                    aMainSystem.SpawnExplosion(raycastHit.point, explosiveRadius, explosiveDamage);
+                    aMainSystem.SpawnExplosion(raycastHit.point, explosiveRadius, explosiveDamage, this);
                 }
                 else
                 {
                     Vector3 hitDirection = transform.position - raycastHit.point;
-                    SetLineRenderer(raycastHit.point);
+                    SpawnLinerenderer(effectPosition.position, raycastHit.point);
                     Instantiate(hitVFX, raycastHit.point, Quaternion.LookRotation(hitDirection));
                 }
             }
@@ -241,14 +238,14 @@ public class ShootRaycast : BaseWeapon
                 {
                     if(ShouldExplode)
                     {
-                        aMainSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i]);
+                        aMainSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i], this);
                     }
                     else
                     {
                         var fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal);
                         var tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
                         Vector3 hitDirection = transform.position - raycastHit.point;
-                        SetLineRenderer(hits[i].point);
+                        SpawnLinerenderer(effectPosition.position, hits[i].point);
                         GameObject tempVFX = Instantiate(hitEnemyVFX, enemiesToDamage[i].transform.position, Quaternion.LookRotation(hitDirection));
                         StartCoroutine(AttachEffectNextFrame(tempVFX, alreadyDamaged[i].transform));
                         DealDamage(alreadyDamaged[i], false);
@@ -259,14 +256,14 @@ public class ShootRaycast : BaseWeapon
                 {
                     if (ShouldExplode)
                     {
-                        aMainSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i]);
+                        aMainSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i], this);
                     }
                     else
                     {
                         var fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal);
                         var tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
                         Vector3 hitDirection = transform.position - raycastHit.point;
-                        SetLineRenderer(hits[i].point);
+                        SpawnLinerenderer(effectPosition.position, hits[i].point);
                         GameObject tempVFX = Instantiate(hitEnemyVFX, enemiesToDamage[i].transform.position, Quaternion.LookRotation(hitDirection));
                         DealDamage(alreadyDamaged[i], true);
                         StartCoroutine(AttachEffectNextFrame(tempVFX, alreadyDamaged[i].transform));
@@ -276,14 +273,14 @@ public class ShootRaycast : BaseWeapon
                 {
                     if (ShouldExplode)
                     {
-                        aMainSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i]);
+                        aMainSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i], this);
                     }
                     else
                     {
                         var fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal);
                         var tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
                         Vector3 hitDirection = transform.position - raycastHit.point;
-                        SetLineRenderer(hits[i].point);
+                        SpawnLinerenderer(effectPosition.position, hits[i].point);
                         GameObject tempVFX = Instantiate(hitVFX, hits[i].point, Quaternion.LookRotation(hitDirection));
                         StartCoroutine(AttachEffectNextFrame(tempVFX, alreadyDamaged[i].transform));
                         DealDamage(alreadyDamaged[i], false);
@@ -296,7 +293,7 @@ public class ShootRaycast : BaseWeapon
                     var fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal);
                     var tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
                     Vector3 hitDirection = transform.position - raycastHit.point;
-                    SetLineRenderer(hits[i].point);
+                    SpawnLinerenderer(effectPosition.position, hits[i].point);
                     Instantiate(hitVFX, hits[i].point, Quaternion.LookRotation(hitDirection), alreadyDamaged[i].transform);
 
                     break;
@@ -359,11 +356,6 @@ public class ShootRaycast : BaseWeapon
                     else
                         Instantiate(hitVFX, hit.point, Quaternion.Inverse(transform.rotation));
 
-
-                    //if (hit.transform.root.CompareTag("Enemy"))
-                    //    Instantiate(hitEnemyVFX, hit.point, Quaternion.Inverse(transform.rotation), hit.transform);
-                    //else
-                    //    Instantiate(hitVFX, hit.point, Quaternion.Inverse(transform.rotation));
                 }
 
                 shootPoint.transform.localRotation = Quaternion.Euler(0, 0, 0);
@@ -381,49 +373,63 @@ public class ShootRaycast : BaseWeapon
     {
         if (incomingObj.GetComponent<IDamageInterface>() != null)
         {
-            //hitMarkLogic.EnableHitMarker();
-            //if (hitSFX != null)
-            //    Instantiate(hitSFX.GetComponent<AudioSource>());
-
             aMainSystem.DealDamage(incomingObj, damage, true, incomingWeakSpotShot);
-
-
-            //incomingObj.GetComponent<IDamageInterface>().Damage(damage);
+            
+            if(incomingWeakSpotShot)
+            {
+                OnHit(incomingObj, incomingWeakSpotShot);
+                OnWeakSpotHit(incomingObj, incomingWeakSpotShot);
+            }
+            else
+            {
+                OnHit(incomingObj, incomingWeakSpotShot);
+            }
         }
     }
 
-    private void SetLineRenderer(Vector3 endPos)
+    public virtual void OnHit(GameObject incomingEnemy, bool enemyWeakSpot)
     {
-        if(!lineRenderer) { return; }
+        print("Override this");
+    }
 
-        if(lineRenderCoroutine != null)
-            StopCoroutine(lineRenderCoroutine);
+    public virtual void OnWeakSpotHit(GameObject incomingEnemy, bool enemyWeakSpot)
+    {
+        print("Override this");
+    }
 
-        lineRenderer.enabled = true;
 
-        Vector3 startPos = effectPosition.position;
+    public void SpawnLinerenderer(Vector3 start, Vector3 end)
+    {
+        if (!lineRenderer) { return; }
+        LineRenderer tempLineRender = Instantiate(lineRenderer, Vector3.zero, Quaternion.identity).GetComponent<LineRenderer>();
+        tempLineRender.enabled = true;
 
-        int pointCount = 20;
-        lineRenderer.positionCount = pointCount;
-
-        Vector3 controlPoint = (startPos + endPos) * 0.5f + (Random.onUnitSphere + Vector3.up).normalized * 15f;
-
-        for (int i = 0; i < pointCount; i++)
+        if(curve)
         {
-            float t = i / (float)(pointCount - 1);
-            Vector3 pointOnCurve = GetQuadraticBezierPoint(startPos, controlPoint, endPos, t);
-            lineRenderer.SetPosition(i, pointOnCurve);
+            int pointCount = 20;
+            tempLineRender.positionCount = pointCount;
+            float distance = Vector3.Distance(start, end);
+
+            float curveIntensity = Mathf.Clamp(distance * 0.3f, 5f, 50f);
+
+            Vector3 controlPoint = (start + end) * 0.5f + (Random.onUnitSphere + Vector3.up).normalized * curveIntensity;
+
+            for (int i = 0; i < pointCount; i++)
+            {
+                float t = i / (float)(pointCount - 1);
+                Vector3 pointOnCurve = GetQuadraticBezierPoint(start, controlPoint, end, t);
+                tempLineRender.SetPosition(i, pointOnCurve);
+            }
+        }
+        else
+        {
+            tempLineRender.SetPosition(0, start);
+            tempLineRender.SetPosition(1, end);
         }
 
-        lineRenderCoroutine = StartCoroutine(DisableLineRenderer());
     }
 
-
-    IEnumerator DisableLineRenderer ()
-    {
-        yield return new WaitForSeconds(0.2f);
-        lineRenderer.enabled = false;
-    }
+    
 
     IEnumerator AttachEffectNextFrame(GameObject effect, Transform parent)
     {

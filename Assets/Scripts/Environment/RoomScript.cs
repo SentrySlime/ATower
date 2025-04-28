@@ -35,8 +35,8 @@ public class RoomScript : MonoBehaviour
 
     void Start()
     {
-        if(roomToSpawn)
-            SpawnRoom();
+        
+        SpawnRoom();
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
@@ -49,7 +49,7 @@ public class RoomScript : MonoBehaviour
 
     public void DisableEnemies()
     {
-        if (enemyList.Count == 0)
+        if (enemyList.Count != 0)
         {
             for (int i = 0; i < enemyList.Count; i++)
             {
@@ -83,13 +83,18 @@ public class RoomScript : MonoBehaviour
 
     private void SpawnRoom()
     {
+
+        if(!levelGeneration) { return; }
+        if (!blockade) { return; }
         
-        if(levelGeneration && levelGeneration.spawnedDevilRoom) { return; }
+        GameObject roomToSpawn = levelGeneration.GetRandomRoom();
+
+        if(roomToSpawn == null) { return; }
 
         blockade.SetActive(false);
         Instantiate(roomToSpawn, secretPoint.transform.position, secretPoint.transform.rotation);
-        levelGeneration.spawnedDevilRoom = true;
     }
+
     public void AddEnemy(GameObject enemy)
     {
         enemyList.Add(enemy);

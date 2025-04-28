@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: OverflowingChalice
-  itemDescription: Deal 1% increased damage for each 5 hp can't heal above 50% life
+  itemDescription: Gain 1% increased damage for every 5 max health, but you can't
+    heal above 50% life
   itemIcon: {fileID: 21300000, guid: edfc7b9c5029716459cdfb24a350ef14, type: 3}
   itemMesh: {fileID: -8455378998706859297, guid: 9449f5e30e3aed84c9d47b6952a88f4f, type: 3}
   itemMaterial: {fileID: 2100000, guid: f93126247b1d7934cae298497c8e0889, type: 2}
@@ -52,7 +53,7 @@ MonoBehaviour:
   isDevilItem: 1
   maxHp: 0
   oneMaxHP: 0
-  hpOnHit: 1
+  hpOnHit: 0
   hpOnCritHit: 0
   hpOnKill: 0
   hpOnEliteKill: 0

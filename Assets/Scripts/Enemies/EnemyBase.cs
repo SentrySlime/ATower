@@ -29,9 +29,6 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     public GameObject killMarker;
     public GameObject homingTarget;
 
-
-
-
     //HealingGun healingGun;
     [HideInInspector] public Spawner spawner;
     HitmarkerLogic hitMarkerLogic;
@@ -95,11 +92,10 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
 
     public void Damage(float damage)
     {
-        if (currentHealth == maxHealth)
-        {
-            if (gameObject.GetComponent<INoticePlayer>() != null)
-                gameObject.GetComponent<INoticePlayer>().NoticePlayer();
-        }
+
+        if (gameObject.GetComponent<INoticePlayer>() != null)
+            gameObject.GetComponent<INoticePlayer>().NoticePlayer();
+        
 
         currentHealth -= CalculateDamage(damage);
 
@@ -115,11 +111,9 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
 
     public void Damage(float damage, bool criticalHit)
     {
-        if (currentHealth == maxHealth)
-        {
-            if (gameObject.GetComponent<INoticePlayer>() != null)
-                gameObject.GetComponent<INoticePlayer>().NoticePlayer();
-        }
+    
+        if (gameObject.GetComponent<INoticePlayer>() != null)
+            gameObject.GetComponent<INoticePlayer>().NoticePlayer();
 
 
 
@@ -173,9 +167,9 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
             if (CanExplode(criticalDeath))
             {
                 if(explodeOnDeath)
-                    aMainSystem.SpawnExplosion(moneySpawnPoint.position, 7, 15, true);
+                    aMainSystem.SpawnExplosion(moneySpawnPoint.position, 7, 15, true, null);
                 else
-                    aMainSystem.SpawnExplosion(moneySpawnPoint.position, 7, (int)maxHealth);
+                    aMainSystem.SpawnExplosion(moneySpawnPoint.position, 7, (int)maxHealth, null);
             }
             else if (deathParticles)
             {

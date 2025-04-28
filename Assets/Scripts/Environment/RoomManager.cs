@@ -90,7 +90,7 @@ public class RoomManager : MonoBehaviour
 
         if (rooms.Count > 4)
             StartCoroutine(WaitBeforeDisablingRoom(room));
-            
+
     }
 
     public void SetEnabledRooms(int index)
@@ -104,24 +104,26 @@ public class RoomManager : MonoBehaviour
             }
             else
             {
-                rooms[i].gameObject.SetActive(false);
                 rooms[i].DisableEnemies();
+                //rooms[i].gameObject.SetActive(false);
             }
         }
     }
 
     IEnumerator WaitBeforeDisablingRoom(RoomScript room)
     {
-        if(room.gameObject.name == "End_Room(Clone)")
-        {
             yield return new WaitForSeconds(1);
-            room.gameObject.SetActive(false);
+        room.DisableEnemies();
+        
+        //if(room.gameObject.name == "End_Room(Clone)")
+        //{
 
-        }
-        else
-        {
-            room.gameObject.SetActive(false);
-        }
+        //    room.gameObject.SetActive(false);
+        //}
+        //else
+        //{
+        //    room.gameObject.SetActive(false);
+        //}
     }
 
 }

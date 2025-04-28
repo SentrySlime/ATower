@@ -44,18 +44,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: HelpingHand
-  itemDescription: Chance to spawn a healing hand on kill
+  itemDescription: Increased max health and chance to spawn a healing hand on kill
   itemIcon: {fileID: 21300000, guid: ffd88ec3c9fa3364ca4c32f20056ba09, type: 3}
   itemMesh: {fileID: -1727643662729791872, guid: 3d5ea7f56b5abc649ad5ba66be56c710, type: 3}
   itemMaterial: {fileID: 2100000, guid: 0012a496b7834d54daefd25962b12ed4, type: 2}
   type: 0
   isDevilItem: 0
   maxHp: 25
+  oneMaxHP: 0
   hpOnHit: 0
+  hpOnCritHit: 0
   hpOnKill: 0
+  hpOnEliteKill: 0
   helpingHand: 1
   hpRegen: 0
   hpRegenOnEnemyHit: 0
+  healCap: 0
+  canOverheal: 0
+  onlyEliteKillHeal: 0
   damageReductionPercent: 0
   damageIgnoreChance: 0
   moveSpeed: 0
@@ -64,6 +70,7 @@ MonoBehaviour:
   critChance: 0
   canExplodeEnemies: 0
   moneyIsPower: 0
+  hpIsPower: 0
   ammoRefills: 0
   reloadAmount: 0
   maxMagazineSize: 0
@@ -73,4 +80,5 @@ MonoBehaviour:
   heartboundRounds: 0
   fireBallChance: 0
   increasedMoneyDrops: 0
+  moneyIsHealth: 0
   playerStats: {fileID: 0}

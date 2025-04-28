@@ -13,7 +13,6 @@ public class ItemPanel : MonoBehaviour
 
     public Image buttonImage;
 
-
     public string aName;
     public string aDescription;
     public Sprite anIcon;
@@ -21,6 +20,7 @@ public class ItemPanel : MonoBehaviour
     public TextMeshProUGUI itemName;
     public TextMeshProUGUI itemDescription;
     public Image image;
+    public bool isDevilItem = false;
 
     GameObject itemPanel;
     SelectedItem selectedItem;
@@ -67,6 +67,11 @@ public class ItemPanel : MonoBehaviour
         aName = tempItem.itemName;
         aDescription = tempItem.itemDescription;
         anIcon = tempItem.itemIcon;
+        isDevilItem = tempItem.isDevilItem;
+
+        if(isDevilItem)
+            border_Image.color = Color.red;
+
 
         buttonImage.sprite = anIcon;
 

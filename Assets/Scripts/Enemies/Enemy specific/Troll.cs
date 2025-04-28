@@ -182,8 +182,8 @@ public class Troll : MonoBehaviour, INoticePlayer
                 Debug.DrawLine(shootPoint.transform.position, playerDir * 200);
                 if (hit.transform.CompareTag("Player"))
                 {
-                    foundPlayer = true;
                     roam = false;
+                    foundPlayer = true;
                 }
             }
         }
@@ -378,6 +378,7 @@ public class Troll : MonoBehaviour, INoticePlayer
 
     void INoticePlayer.NoticePlayer()
     {
+        roam = false;
         foundPlayer = true;
     }
 }

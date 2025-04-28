@@ -42,7 +42,7 @@ public class FadeOut : MonoBehaviour
         endText = GameObject.Find("EndText");
 
         if(isFadeIn)
-            Invoke("StartFadeIn", 1f);
+            Invoke("StartFadeIn", 1.3f);
     }
 
     

@@ -23,16 +23,19 @@ public class LevelGeneration_2 : MonoBehaviour
     [Header("Room generation stats")]
     public int roomAmount = 12;
 
+    [HideInInspector] public bool spawnedTreasureRoom = false;
     [HideInInspector] public bool spawnedDevilRoom = false;
     [HideInInspector] public bool spawnedShopRoom = false;
     [HideInInspector] public List<GameObject> allSurfaces = new List<GameObject>();
     [HideInInspector] public GameObject spawnTransform;
 
     //roomCounters
-    public int roomCount = 0;
-    int easyRoomCount = 7;
-    int mediumRoomCount = 14;
-    int hardRoomCount = 9;
+    public int roomCount1 = 0;
+    public int roomCount2 = 0;
+    public int roomCount3 = 0;
+    int easyRoomCount = 3;
+    int mediumRoomCount = 2;
+    int hardRoomCount = 2;
 
     bool spawnRoom = false;
     bool spawnEndRoom = true;
@@ -52,6 +55,8 @@ public class LevelGeneration_2 : MonoBehaviour
 
     void Start()
     {
+        roomAmount = easyRoomCount + mediumRoomCount + hardRoomCount;
+
         //StartLevelGeneration();
         GenerateStartingRoom();
     }
@@ -59,18 +64,17 @@ public class LevelGeneration_2 : MonoBehaviour
     
     void Update()
     {
-        if(roomCount < roomAmount)
+        if(roomCount3 < 3)
         {
-
             if (spawnRoom)
             {
                 GenerateRoom();
-                roomCount++;
             }
             else
                 GenerateCorridor();
 
             spawnRoom = !spawnRoom;
+
         }
         else if(spawnEndRoom)
         {
@@ -79,36 +83,24 @@ public class LevelGeneration_2 : MonoBehaviour
         }
     }
 
-
-
-    private void StartLevelGeneration()
-    {
-        GenerateStartingRoom();
-
-        for (int i = 0; i < roomAmount; i++)
-        {
-            if (roomCount <= easyRoomCount)
-            {
-                GenerateEasyRoom();
-                roomCount++;
-            }
-            if(roomCount > easyRoomCount &&  roomCount < mediumRoomCount)
-            {
-                GenerateMediumRoom();
-                roomCount++;
-            }
-        }
-    }
-
     private void GenerateRoom()
     {
-        if (roomCount <= easyRoomCount)
+
+
+        if (roomCount1 <= easyRoomCount)
         {
             GenerateEasyRoom();
+            roomCount1++;
         }
-        else if (roomCount > easyRoomCount && roomCount < mediumRoomCount)
+        else if (roomCount2 <= mediumRoomCount)
         {
             GenerateMediumRoom();
+            roomCount2++;
+        }
+        else if (roomCount3 <= hardRoomCount)
+        {
+            GenerateHardRoom();
+            roomCount3++;
         }
         else if (spawnEndRoom)
         {
@@ -128,8 +120,6 @@ public class LevelGeneration_2 : MonoBehaviour
 
     private void GenerateEndRoom()
     {
-        print("End room");
-
         RoomScript newRoom = Instantiate(endRoom, spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
         spawnTransform = newRoom.point2.gameObject;
         if (roomManager)
@@ -176,6 +166,29 @@ public class LevelGeneration_2 : MonoBehaviour
 
         previousRoom = mediumRooms[randomIndex];
         RoomScript newRoom = Instantiate(mediumRooms[randomIndex], spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
+        newRoom.levelGeneration = this;
+        spawnTransform = newRoom.point2.gameObject;
+        if (roomManager)
+            roomManager.AddRoom(newRoom);
+    }
+
+    private void GenerateHardRoom()
+    {
+        int randomIndex = Random.Range(0, hardRooms.Count);
+
+        if (previousRoom)
+        {
+            if (hardRooms[randomIndex] == previousRoom)
+            {
+                if (randomIndex + 1 < hardRooms.Count)
+                    randomIndex++;
+                else
+                    randomIndex = 0;
+            }
+        }
+
+        previousRoom = hardRooms[randomIndex];
+        RoomScript newRoom = Instantiate(hardRooms[randomIndex], spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
         newRoom.levelGeneration = this;
         spawnTransform = newRoom.point2.gameObject;
         if (roomManager)
@@ -243,4 +256,36 @@ public class LevelGeneration_2 : MonoBehaviour
         }
     }
 
+    public GameObject GetRandomRoom()
+    {
+        if (spawnedDevilRoom && spawnedTreasureRoom)
+        {
+            print("Both rooms already spawned");
+            return null;
+        }
+
+        List<GameObject> availableRooms = new List<GameObject>();
+
+        if (!spawnedTreasureRoom && treasureRoom != null)
+            availableRooms.Add(treasureRoom);
+
+        if (!spawnedDevilRoom && devilRoom != null)
+            availableRooms.Add(devilRoom);
+
+        if (availableRooms.Count == 0)
+            return null;
+
+        GameObject chosenRoom = availableRooms[Random.Range(0, availableRooms.Count)];
+
+        if (chosenRoom == treasureRoom)
+        {
+            spawnedTreasureRoom = true;
+        }
+        else if (chosenRoom == devilRoom)
+        {
+            spawnedDevilRoom = true;
+        }
+
+        return chosenRoom;
+    }
 }

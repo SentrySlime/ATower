@@ -282,13 +282,18 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
 
     private void NavMeshMove()
     {
+        if (!agent.isOnNavMesh)
+        {
+            Debug.LogWarning("Agent is not on the NavMesh!");
+            return;
+        }
 
         agent.isStopped = false;
-        agent.SetDestination(player.transform.position);
         agent.angularSpeed = angularSpeed;
-
         agent.speed = movementSpeed;
+        agent.SetDestination(player.transform.position);
     }
+
 
     public void Stop()
     {

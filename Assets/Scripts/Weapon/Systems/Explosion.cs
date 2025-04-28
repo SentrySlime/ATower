@@ -20,6 +20,8 @@ public class Explosion : MonoBehaviour, IExplosionInterface
     List<GameObject> hitEnemies = new List<GameObject>();
     HitmarkerLogic hitMarkerLogic;
     ScreenShake screenShake;
+    PlayerStats playerStats;
+    public BaseWeapon weaponParent;
     public AMainSystem mainSystem;
 
     [Header("Light")]
@@ -40,10 +42,15 @@ public class Explosion : MonoBehaviour, IExplosionInterface
     }
 
     //Interface function
-    public void InitiateExplosion(AMainSystem incomingMainSystem, float explosionRadius, int damage, bool enemyOwned)
+    public void InitiateExplosion(AMainSystem incomingMainSystem, float explosionRadius, int damage, bool enemyOwned, BaseWeapon weaponParent)
     {
         mainSystem = incomingMainSystem;
-        screenShake = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ScreenShake>();
+
+        GameObject tempPlayer = GameObject.FindGameObjectWithTag("Player");
+        screenShake = tempPlayer.GetComponentInChildren<ScreenShake>();
+        playerStats = tempPlayer.GetComponent<PlayerStats>();
+
+        this.weaponParent = weaponParent;
 
         eDamage = damage;
         eRadius = explosionRadius;
@@ -107,6 +114,8 @@ public class Explosion : MonoBehaviour, IExplosionInterface
         }
         else
         {
+            
+
             Collider[] enemies = Physics.OverlapSphere(transform.position, eRadius * 1.5f, layermask);
             DealDamage(enemies);
         }

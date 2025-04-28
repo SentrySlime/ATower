@@ -82,19 +82,18 @@ public class PlayerStats : MonoBehaviour
         playerHealth.damageIgnoreChance = damageIgnoreChance;
 
         
-        if (oneMaxHP <= 0)
-            playerHealth.maxHP = maxHealth;
-        else
-            playerHealth.maxHP = 1;
-
         if (oneMaxHP > 0)
         {
+            playerHealth.maxHP = 1;
             playerHealth.currentHP = 1;
+
         }
         else if(maxHealth > playerHealth.maxHP)
         {
             int tempHP = maxHealth - playerHealth.maxHP;
+            playerHealth.maxHP = maxHealth;
             playerHealth.currentHP += tempHP;
+
         }
         else if(playerHealth.currentHP > playerHealth.maxHP)
         {

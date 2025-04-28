@@ -37,17 +37,17 @@ public class AMainSystem : MonoBehaviour
         hitMarkerLogic = GameObject.FindGameObjectWithTag("HitMarker").GetComponent<HitmarkerLogic>();
     }
 
-    public void SpawnExplosion(Vector3 position, float radius, int damage)
+    public void SpawnExplosion(Vector3 position, float radius, int damage, BaseWeapon weaponParent)
     {
-        explosionSystem.SpawnExplosion(position, radius, damage);
+        explosionSystem.SpawnExplosion(position, radius, damage, weaponParent);
     }
 
-    public void SpawnExplosion(Vector3 position, float radius, int damage, GameObject parent)
+    public void SpawnExplosion(Vector3 position, float radius, int damage, GameObject parent, BaseWeapon weaponParent)
     {
-        explosionSystem.SpawnExplosion(position, radius, damage, parent);
+        explosionSystem.SpawnExplosion(position, radius, damage, parent, weaponParent);
     }
 
-    public void SpawnExplosion(Vector3 position, float radius, int damage, bool enemyOwned)
+    public void SpawnExplosion(Vector3 position, float radius, int damage, bool enemyOwned, BaseWeapon weaponParent)
     {
         explosionSystem.SpawnExplosion(position, radius, damage, enemyOwned);
     }
@@ -176,7 +176,6 @@ public class AMainSystem : MonoBehaviour
 
     public void HitEffect()
     {
-        print(playerStats.hpOnHit);
         playerHealth.Heal(playerStats.hpOnHit, false);
         //healthRegen.StartHPRegen();
     }

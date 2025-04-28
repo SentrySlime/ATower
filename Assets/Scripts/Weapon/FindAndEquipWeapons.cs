@@ -90,7 +90,6 @@ public class FindAndEquipWeapons : MonoBehaviour
                 if (hit.transform.gameObject.CompareTag("Interact"))
                 {
                     hit.transform.GetComponent<IInteractInterface>().Interact();
-                    print("Interacting");
                 }
                 else if (hit.transform.gameObject.CompareTag("PickUp"))
                 {

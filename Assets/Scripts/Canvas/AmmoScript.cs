@@ -156,7 +156,6 @@ public class AmmoScript : MonoBehaviour
             }
             else
             {
-                print("Ammo outside of bounds");
                 break;
             }
         }

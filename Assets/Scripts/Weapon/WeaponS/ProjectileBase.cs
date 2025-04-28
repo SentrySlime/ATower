@@ -72,6 +72,7 @@ public class ProjectileBase : MonoBehaviour
     Vector3 firstPos;
     Vector3 secondPos;
     PlayerStats playerStats;
+    [HideInInspector] public BaseWeapon weaponParent;
     //ExplosionSystem explosionSystem;
     [HideInInspector] public AMainSystem aMainSysteM;
     [HideInInspector] public ShootSystem shootSystem;
@@ -234,7 +235,7 @@ public class ProjectileBase : MonoBehaviour
 
     protected void ExplosiveShot(GameObject parent)
     {
-        aMainSysteM.SpawnExplosion(transform.position, explosiveRadius, explosiveDamage, parent);
+        aMainSysteM.SpawnExplosion(transform.position, explosiveRadius, explosiveDamage, parent, weaponParent);
  
         CheckPierce();
     }

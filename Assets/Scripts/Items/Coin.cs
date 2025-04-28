@@ -11,8 +11,8 @@ public class Coin : MonoBehaviour
     public Inventory inventory;
 
     bool canTrigger = true;
-    float timer = 0.05f;
-    float counter = 0.05f;
+    float timer = 0.025f;
+    float counter = 0.025f;
 
     private void Awake()
     {

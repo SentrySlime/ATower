@@ -133,7 +133,7 @@ public class ShootProjectile : BaseWeapon
             shootPoint.transform.Rotate(((minXoffset + maxXoffset)), ((minYOffset + maxYOffset)), 0);
             Quaternion rotation = Quaternion.LookRotation(shootPoint.transform.forward, Vector3.up);
 
-            Instantiate(projectile, shootPoint.transform.position, rotation);
+            Instantiate(projectile, shootPoint.transform.position, rotation).GetComponent<ProjectileBase>().weaponParent = this;
             shootPoint.transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
         else
@@ -192,7 +192,7 @@ public class ShootProjectile : BaseWeapon
                 shootPoint.transform.Rotate(((minXoffset + maxXoffset)), ((minYOffset + maxYOffset)), 0);
 
                 //----
-                Instantiate(projectile, shootPoint.transform.position, shootPoint.transform.rotation);
+                Instantiate(projectile, shootPoint.transform.position, shootPoint.transform.rotation).GetComponent<ProjectileBase>().weaponParent = this;
 
 
                 //shotProjectile.AddForce(shotProjectile.transform.forward * shotSpeed, ForceMode.Impulse);

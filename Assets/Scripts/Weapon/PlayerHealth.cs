@@ -157,8 +157,6 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
     public void Damage(float damage)
     {
-        print("Took damage");
-
         if (isInvincible) { return; }
 
         if (!canBeDamaged)
@@ -181,7 +179,7 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
         if(playerStats.moneyIsHealth > 0)
         {
-            int damageCost = (int)damage * 3;
+            int damageCost = (int)damage * 4;
             int moneyAvailable = inventory.money;
 
             int moneyToDeduct = Math.Min(moneyAvailable, damageCost);
@@ -222,15 +220,11 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
     {
         if (value < 1 || value > 100)
         {
-            Debug.LogError("Value must be between 1 and 100.");
             return 0;
         }
 
         float percentage = (value / 100f) * maxHP;
-
         int roundedPercentage = Mathf.CeilToInt(percentage);
-
-        Debug.Log("Calculated Percentage: " + roundedPercentage);
         return roundedPercentage;
     }
 

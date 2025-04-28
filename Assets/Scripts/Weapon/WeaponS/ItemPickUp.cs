@@ -33,6 +33,13 @@ public class ItemPickUp : Item, IInteractInterface
     [HideInInspector] public Mesh itemMesh;
     [HideInInspector] public Material itemMaterial;
 
+    ParticleSystem ps;
+
+    private void Awake()
+    {
+        ps = GetComponentInChildren<ParticleSystem>();
+    }
+
     void Start()
     {
         if(itemPrefab)
@@ -86,12 +93,21 @@ public class ItemPickUp : Item, IInteractInterface
             }
             else
             {
-                // Handle the case where "Devil" is not found
                 Debug.LogWarning("Devil object not found in the scene.");
-                devilItem = null; // Or any default behavior you'd like
+                devilItem = null;
             }
 
         }
+
+        HandleParticleSystem();
+    }
+
+    private void HandleParticleSystem()
+    {
+        if(isDevilItem)
+            ps.startColor = Color.red;
+
+        ps.Play();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -102,7 +118,5 @@ public class ItemPickUp : Item, IInteractInterface
             rb.isKinematic = true;
         }
     }
-
-  
 }
 

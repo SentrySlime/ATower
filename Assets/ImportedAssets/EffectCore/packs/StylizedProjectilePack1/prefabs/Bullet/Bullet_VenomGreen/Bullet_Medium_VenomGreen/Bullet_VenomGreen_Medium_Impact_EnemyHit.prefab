@@ -38120,9 +38120,9 @@ GameObject:
   m_Component:
   - component: {fileID: 428300994749263969}
   - component: {fileID: 321853241225757861}
-  - component: {fileID: 321944287588327537}
   - component: {fileID: 515589665989871681}
   - component: {fileID: 513467562983735965}
+  - component: {fileID: 4758188837082460818}
   m_Layer: 0
   m_Name: Bullet_VenomGreen_Medium_Impact_EnemyHit
   m_TagString: Untagged
@@ -38360,21 +38360,6 @@ MonoBehaviour:
       m_NumAlphaKeys: 4
   applyChanges: 0
   Keep_applyChanges: 0
---- !u!114 &321944287588327537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 425359807012254669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a895231490da6545890b1e1794f8704, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
-  deathtimer: 5
-  minimumRadius: 0
 --- !u!199 &515589665989871681
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -43159,6 +43144,19 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &4758188837082460818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425359807012254669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbb79221f71c14e459fbd440f4d63c9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTimer: 0.5
 --- !u!1 &425423297504516191
 GameObject:
   m_ObjectHideFlags: 0
