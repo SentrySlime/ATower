@@ -11,10 +11,9 @@ public class BouncingRaycast : ShootRaycast
     public int chanceToRefract = 50;
     public int refractRange = 50;
 
-
     public LineRenderer bouncingLineRender;
 
-    public override void OnWeakSpotHit(GameObject incomingEnemy, bool enemyWeakSpot)
+    public override void OnWeakSpotHit(GameObject incomingEnemy, bool enemyWeakSpot, Vector3 hitPos)
     {
         if(onWeakSpot)
         {
@@ -22,28 +21,28 @@ public class BouncingRaycast : ShootRaycast
             if(chanceToRefract >= randomNumb)
             {
                 
-                FindEnemies(incomingEnemy);
+                FindEnemies(incomingEnemy, hitPos);
             }
         }
     }
 
-    public override void OnHit(GameObject incomingEnemy, bool enemyWeakSpot)
+    public override void OnHit(GameObject incomingEnemy, bool enemyWeakSpot, Vector3 hitPos)
     {
         if (onWeakSpot) { return; }
 
         int randomNumb = Random.Range(0, 100);
         if (chanceToRefract >= randomNumb)
         {
-            FindEnemies(incomingEnemy);
+            FindEnemies(incomingEnemy, hitPos);
         }
     }
 
-    public void FindEnemies(GameObject incomingEnemy)
+    public void FindEnemies(GameObject incomingEnemy, Vector3 hitPos)
     {
 
         GameObject[] enemies = RemoveEnemy(Physics.OverlapSphere(incomingEnemy.transform.position, refractRange, 1 << 9), incomingEnemy);
         
-        CheckLineOfSight(enemies, incomingEnemy);
+        CheckLineOfSight(enemies, incomingEnemy, hitPos);
     }
 
     public GameObject[] RemoveEnemy(Collider[] enemies, GameObject enemy)
@@ -64,7 +63,7 @@ public class BouncingRaycast : ShootRaycast
         return enemyList.ToArray();
     }
 
-    public void CheckLineOfSight(GameObject[] enemies, GameObject enemy)
+    public void CheckLineOfSight(GameObject[] enemies, GameObject enemy, Vector3 hitPos)
     {
         
 
@@ -84,11 +83,11 @@ public class BouncingRaycast : ShootRaycast
             }
 
             alreadyAddedEnemies.Add(enemyParent);
-            Vector3 startVector = enemy.GetComponentInParent<EnemyBase>().homingTarget.transform.position;
+            //Vector3 startVector = enemy.GetComponentInParent<EnemyBase>().homingTarget.transform.position;
+            Vector3 startVector = hitPos;
             Vector3 direction = CalculateDirection(startVector, enemies[i]);
 
-           
-            SpawnLinerenderer(startVector, enemies[i].GetComponentInParent<EnemyBase>().homingTarget.transform.position);
+            SpawnLinerenderer(startVector, enemies[i].GetComponentInParent<EnemyBase>().homingTarget.transform.position, true);
             DealBouncyDamage(enemies[i].transform.gameObject);
 
         }
