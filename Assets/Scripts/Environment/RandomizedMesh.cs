@@ -14,29 +14,36 @@ public class RandomizedMesh : MonoBehaviour
 
     void Start()
     {
-        int randomIndex = Random.Range(0, meshes.Count);
+        
 
-        SetRandomMesh(randomIndex);
-        SetRandomTexture(randomIndex);
+        SetRandomMesh();
+        SetRandomTexture();
     }
 
-    private void SetRandomMesh(int index)
+    private void SetRandomMesh()
     {
+
         if (meshes.Count == 0)
             return;
+
 
         meshFilter = GetComponent<MeshFilter>();
 
         if (meshFilter == null)
             return;
+        
+        int randomIndex = Random.Range(0, meshes.Count);
 
-        meshFilter.mesh = meshes[index];
+        meshFilter.mesh = meshes[randomIndex];
     }
 
-    public void SetRandomTexture(int index)
+    public void SetRandomTexture()
     {
+
         if (textures.Count == 0)
             return;
+
+        int randomIndex = Random.Range(0, textures.Count);
 
         Renderer renderer = GetComponent<Renderer>();
 
@@ -44,7 +51,7 @@ public class RandomizedMesh : MonoBehaviour
             return;
 
         material = renderer.material;
-        material.SetTexture("_MainTex", textures[index]);
+        material.SetTexture("_MainTex", textures[randomIndex]);
     }
 
 }
