@@ -93,7 +93,16 @@ public class PlayerStats : MonoBehaviour
             int tempHP = maxHealth - playerHealth.maxHP;
             playerHealth.maxHP = maxHealth;
             playerHealth.currentHP += tempHP;
+        }
+        else if(maxHealth < playerHealth.maxHP)
+        {
+            playerHealth.maxHP = maxHealth;
 
+            if(playerHealth.currentHP > maxHealth && canOverheal <= 0)
+            {
+                playerHealth.currentHP = maxHealth;
+            }
+            
         }
         else if(playerHealth.currentHP > playerHealth.maxHP)
         {

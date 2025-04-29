@@ -50,7 +50,8 @@ public class Explosion : MonoBehaviour, IExplosionInterface
         screenShake = tempPlayer.GetComponentInChildren<ScreenShake>();
         playerStats = tempPlayer.GetComponent<PlayerStats>();
 
-        this.weaponParent = weaponParent;
+        if(weaponParent != null)
+            this.weaponParent = weaponParent;
 
         eDamage = damage;
         eRadius = explosionRadius;
@@ -76,9 +77,11 @@ public class Explosion : MonoBehaviour, IExplosionInterface
         //    Instantiate(sfxToSpawn, transform.position, Quaternion.identity);
 
         screenShake.Screenshake(-1, 1, 1);
-        
-        if(enemyOwned)
+
+        if (enemyOwned)
         {
+            print("Enemy owned");
+
             layermask = LayerMask.GetMask("Player");
             Collider[] player = Physics.OverlapSphere(transform.position, eRadius * 1.5f, layermask);
 
@@ -114,11 +117,15 @@ public class Explosion : MonoBehaviour, IExplosionInterface
         }
         else
         {
-            
-
             Collider[] enemies = Physics.OverlapSphere(transform.position, eRadius * 1.5f, layermask);
             DealDamage(enemies);
         }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, eRadius * 1.5f);
     }
 
 
