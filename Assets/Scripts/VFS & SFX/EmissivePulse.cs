@@ -8,7 +8,10 @@ public class EmissivePulse : MonoBehaviour
 
     public float pulseSpeed = 0.4f;
     public float emissionIntensity = 1.2f; 
-    Color emissionColor = Color.white;
+    public Color emissionColor = Color.white;
+
+    [Range(0f, 1f)] public float minPulse = 0.2f;
+    [Range(0f, 1f)] public float maxPulse = 1f;
 
     void Start()
     {
@@ -18,8 +21,10 @@ public class EmissivePulse : MonoBehaviour
 
     void Update()
     {
-        float pulse = Mathf.PingPong(Time.time * pulseSpeed, 1f);
-        Color currentColor = emissionColor * pulse * emissionIntensity;
-        pulseMaterial.SetColor("_EmissionColor", currentColor);
+        float rawPulse = Mathf.PingPong(Time.time * pulseSpeed, 1f);
+        float scaledPulse = Mathf.Lerp(minPulse, maxPulse, rawPulse);
+
+        Color currentColor = emissionColor * scaledPulse * emissionIntensity;
+        pulseMaterial.SetColor("_Emission", currentColor);
     }
 }

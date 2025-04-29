@@ -24,6 +24,7 @@ public class Devil : MonoBehaviour
     ItemPickUp rightItem;
     ItemPickUp leftItem;
 
+    public Renderer pentagramRender;
     public Material material;
 
     LootSystem lootSystem;
@@ -35,7 +36,8 @@ public class Devil : MonoBehaviour
         leftHandAnimator = leftHand.GetComponent<Animator>();
         rightHandAnimator = rightHand.GetComponent<Animator>();
         lootSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LootSystem>();
-        material.SetColor("_EmissionColor", Color.black);
+
+        material = pentagramRender.GetComponent<Renderer>().material;
     }
 
     
@@ -115,14 +117,13 @@ public class Devil : MonoBehaviour
         {
             float t = elapsedTime / fadeDuration;
             Color currentColor = Color.red * Mathf.Lerp(0f, 1f, t);
-            material.SetColor("_EmissionColor", currentColor);
+            material.SetColor("_Emission", currentColor);
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        // Ensure it's fully set at the end
-        material.SetColor("_EmissionColor", Color.red);
+        material.SetColor("_Emission", Color.red);
+        
     }
-
 }

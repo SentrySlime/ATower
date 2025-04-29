@@ -80,7 +80,6 @@ public class Explosion : MonoBehaviour, IExplosionInterface
 
         if (enemyOwned)
         {
-            print("Enemy owned");
 
             layermask = LayerMask.GetMask("Player");
             Collider[] player = Physics.OverlapSphere(transform.position, eRadius * 1.5f, layermask);
