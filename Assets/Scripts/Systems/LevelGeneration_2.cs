@@ -260,7 +260,7 @@ public class LevelGeneration_2 : MonoBehaviour
     {
         if (spawnedDevilRoom && spawnedTreasureRoom)
         {
-            print("Both rooms already spawned");
+
             return null;
         }
 

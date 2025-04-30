@@ -9,15 +9,16 @@ public class RandomizedMesh : MonoBehaviour
     MeshFilter meshFilter;
 
     [Header("Textures")]
-    public List<Texture> textures = new List<Texture>();
-    Material material;
+    //public List<Texture> textures = new List<Texture>();
+    //Material material;
+    public List<Material> material = new List<Material>();
+    MeshRenderer meshRenderer;
 
     void Start()
     {
-        
-
         SetRandomMesh();
-        SetRandomTexture();
+        SetRandomMaterial();
+        //SetRandomTexture();
     }
 
     private void SetRandomMesh()
@@ -37,21 +38,37 @@ public class RandomizedMesh : MonoBehaviour
         meshFilter.mesh = meshes[randomIndex];
     }
 
-    public void SetRandomTexture()
+    //public void SetRandomTexture()
+    //{
+
+    //    if (textures.Count == 0)
+    //        return;
+
+    //    int randomIndex = Random.Range(0, textures.Count);
+
+    //    Renderer renderer = GetComponent<Renderer>();
+
+    //    if (renderer == null)
+    //        return;
+
+    //    material = renderer.material;
+    //    material.SetTexture("_MainTex", textures[randomIndex]);
+    //}
+
+    public void SetRandomMaterial()
     {
 
-        if (textures.Count == 0)
+        if (material.Count == 0)
             return;
 
-        int randomIndex = Random.Range(0, textures.Count);
+        meshRenderer = GetComponent<MeshRenderer>();
 
-        Renderer renderer = GetComponent<Renderer>();
+        if(meshRenderer == null) return;
 
-        if (renderer == null)
-            return;
+        int randomIndex = Random.Range(0, material.Count);
 
-        material = renderer.material;
-        material.SetTexture("_MainTex", textures[randomIndex]);
+        meshRenderer.material = material[randomIndex];
+
     }
 
 }

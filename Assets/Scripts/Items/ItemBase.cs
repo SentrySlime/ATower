@@ -201,7 +201,7 @@ public class ItemBase : MonoBehaviour
         playerStats.damage += damage;
         playerStats.moneyIsPower += moneyIsPower;
         playerStats.criticalChance += critChance;
-        playerStats.hpIsPower -= hpIsPower;
+        playerStats.hpIsPower += hpIsPower;
         playerStats.canExplode += canExplodeEnemies;
 
 

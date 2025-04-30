@@ -394,12 +394,12 @@ public class ShootRaycast : BaseWeapon
 
     public virtual void OnHit(GameObject incomingEnemy, bool enemyWeakSpot, Vector3 hitPos)
     {
-        print("Override this");
+
     }
 
     public virtual void OnWeakSpotHit(GameObject incomingEnemy, bool enemyWeakSpot, Vector3 hitPos)
     {
-        print("Override this");
+        
     }
 
 

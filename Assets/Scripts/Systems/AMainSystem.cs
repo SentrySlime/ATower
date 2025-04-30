@@ -116,7 +116,8 @@ public class AMainSystem : MonoBehaviour
 
         if (playerStats.hpIsPower > 0)
         {
-            totalMultiplier += (playerHealth.maxHP / 5f) * 0.01f;
+            totalMultiplier += (playerHealth.maxHP / 4f) * 0.01f;
+
         }
 
         incomingDamage *= totalMultiplier;
