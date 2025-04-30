@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class WeaponManager : MonoBehaviour
 {
+    GameObject player;
 
     [SerializeField] private List<GameObject> weapons = new List<GameObject>();
     [SerializeField] private List<WeaponPickUp> pickUps = new List<WeaponPickUp>();
@@ -19,12 +21,20 @@ public class WeaponManager : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         SortRarity();
     }
 
     void Update()
     {
-
+        if (Input.GetKey(KeyCode.U))
+        {
+            if (weapons == null || weapons.Count == 0)
+            {
+                return;
+            }
+            DropWeapon(player.transform.position);
+        }
     }
 
     public void DropWeapon(Vector3 spawnPos)

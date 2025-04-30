@@ -197,11 +197,11 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
                 {
                     StartBeamAttack();
                 }
-                else
-                {
+                //else
+                //{
 
-                    projectileAttacking = true;
-                }
+                //    projectileAttacking = true;
+                //}
             }
         }
 

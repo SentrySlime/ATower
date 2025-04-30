@@ -84,14 +84,8 @@ public class AmmoScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            UseAmmo();
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            FillAmmo();
-        }
+
+
     }
 
 

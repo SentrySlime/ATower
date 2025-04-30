@@ -102,7 +102,7 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
         if (vignetteAlpha > vignetteThreshold)
             DamageVignette();
 
-        if(Input.GetKeyDown(KeyCode.U))
+        if(Input.GetKeyDown(KeyCode.M))
         {
             
             Damage(40);

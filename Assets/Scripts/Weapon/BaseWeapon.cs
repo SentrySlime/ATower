@@ -308,7 +308,7 @@ public class BaseWeapon : MonoBehaviour
 
     public bool CanRefillAmmo()
     {
-        if (HasInfiniteAmmo() || !HasFullMagazine())
+        if (HasInfiniteAmmo())
             return false;
         else
             return true;

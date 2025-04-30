@@ -32,11 +32,6 @@ public class HealthRegen : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            StartHPRegen();
-        }
-
         Regen();
     }
 

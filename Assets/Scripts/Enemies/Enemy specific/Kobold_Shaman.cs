@@ -10,7 +10,7 @@ public class Kobold_Shaman : MonoBehaviour
     Animator animator;
     bool foundPlayer;
     bool attacking = false;
-    float playerDistance = 0;
+    float distanceToPlayer = 0;
 
     public float interactDistance_ = 125f;
     public Transform shootPoint;
@@ -26,7 +26,14 @@ public class Kobold_Shaman : MonoBehaviour
     float pathOffsetAmount = 5.0f;
     float updateRate = 1f;
     float movementTimer = 0f;
-    
+
+    [Header("AttackStats")]
+    float attackRate = 1.5f;
+    public float attackRateTimer;
+
+    [Header("FireSpire")]
+    public GameObject fireSpireTelegraphVFX;
+    public GameObject fireSpireVFX;
 
     void Start()
     {
@@ -58,11 +65,37 @@ public class Kobold_Shaman : MonoBehaviour
 
         if (!foundPlayer) { return; }
 
-        playerDistance = Vector3.Distance(transform.position, player.transform.position);
+        distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
         if (!agent || !agent.isOnNavMesh) { return; }
 
         if (attacking) { return; }
+
+        //if (attackRateTimer < attackRate)
+        //{
+        //    attackRateTimer += Time.deltaTime;
+        //}
+        //else if (distanceToPlayer < 25)
+        //{
+        //    if (attacking == false)
+        //    {
+        //        attacking = true;
+                
+        //        //Invoke("MeleeAnimation", 1);
+        //    }
+        //}
+        //else
+        //{
+        //    if (attacking == false)
+        //    {
+        //        if (IsPlayerInfront() && HasLineOfSight())
+        //        {
+        //            attacking = true;
+        //            InitiateShootAttack();
+        //        }
+
+        //    }
+        //}
 
         movementTimer += Time.deltaTime;
         if (movementTimer >= updateRate)
@@ -74,11 +107,15 @@ public class Kobold_Shaman : MonoBehaviour
             }
         }
 
+
+
         if(Input.GetKeyDown(KeyCode.K))
         {
-            agent.speed = 0;
-            animator.SetBool("Evocation", true);
-            Invoke("Revoke", 1);
+            StartAttack();
+            FireSpireTelegraph();
+            //agent.speed = 0;
+            //animator.SetBool("Evocation", true);
+            //Invoke("Revoke", 1);
         }
 
     }
@@ -89,6 +126,7 @@ public class Kobold_Shaman : MonoBehaviour
         animator.SetBool("Evocation", false);
     }
 
+    #region Movement
     public void Roam()
     {
         if (newDestinationTimer < newDestinationRate)
@@ -153,6 +191,19 @@ public class Kobold_Shaman : MonoBehaviour
                 Roam();
             }
         }
+    }
+
+    #endregion
+
+    private void StartAttack()
+    {
+        agent.speed = 0;
+    }
+
+    private void FireSpireTelegraph()
+    {
+        animator.SetBool("Evocation", true);
+        Instantiate(fireSpireTelegraphVFX, player.transform.position, Quaternion.identity);
     }
 
     private void NoticePlayer()

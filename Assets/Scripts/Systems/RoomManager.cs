@@ -28,22 +28,6 @@ public class RoomManager : MonoBehaviour
             timer += Time.deltaTime;
             return;
         }
-
-
-
-        if (Input.GetKeyUp(KeyCode.Mouse4))
-        {
-            timer = 0;
-            roomIndex--;
-            GoBack(roomIndex);
-        }
-
-        if (Input.GetKeyUp(KeyCode.Mouse3))
-        {
-            timer = 0;
-            GoForward(roomIndex);
-            roomIndex++;
-        }
     }
 
     public void GoBack(int index)
