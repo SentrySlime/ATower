@@ -21,31 +21,27 @@ public class RoomScript : MonoBehaviour
     public GameObject blockade;
     public Transform secretPoint;
 
-    public GameObject roomToSpawn;
-
     public List<GameObject> enemyList = new List<GameObject>();
 
     Transform player;
+    SpecialRoom specialRoom;
 
     [HideInInspector] public int roomIndex;
     [HideInInspector] public RoomManager roomManager;
     [HideInInspector] public LevelGeneration_2 levelGeneration;
 
+
+
     public bool invertedRoomDirection = false;
 
     void Start()
     {
-        
         SpawnRoom();
-
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        
     }
 
-
-    void Update()
-    {
-
-    }
+    
 
     public void DisableEnemies()
     {
@@ -92,12 +88,30 @@ public class RoomScript : MonoBehaviour
         if(roomToSpawn == null) { return; }
 
         blockade.SetActive(false);
-        Instantiate(roomToSpawn, secretPoint.transform.position, secretPoint.transform.rotation);
+        GameObject spawnedRoom = Instantiate(roomToSpawn, secretPoint.transform.position, secretPoint.transform.rotation);
+
+        specialRoom = spawnedRoom.GetComponent<SpecialRoom>();
     }
 
     public void AddEnemy(GameObject enemy)
     {
         enemyList.Add(enemy);
+
+        EnemyBase enemyBase = enemy.GetComponent<EnemyBase>();
+        if (enemyBase)
+            enemyBase.OnEnemyDied += HandleEnemyDeath;
+
+    }
+
+    private void HandleEnemyDeath(EnemyBase deadEnemy)
+    {
+        enemyList.Remove(deadEnemy.gameObject);
+
+        if(enemyList.Count == 0)
+        {
+            specialRoom.IniateLockRelease();
+        }
+    
     }
 
 }

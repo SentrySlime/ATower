@@ -56,6 +56,8 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     public ParticleSystem damagedPS;
     List<GameObject> projectileChildren = new List<GameObject>();
 
+    [HideInInspector] public event System.Action<EnemyBase> OnEnemyDied;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -177,6 +179,8 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
                tempPS.transform.localScale = new Vector3(deathParticleSize, deathParticleSize, deathParticleSize);
             }
         }
+
+        OnEnemyDied?.Invoke(this);
 
         if (spawner)
             spawner.DecreaseMinionCount();

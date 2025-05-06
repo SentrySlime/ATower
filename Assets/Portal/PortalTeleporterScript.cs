@@ -6,16 +6,21 @@ public class PortalTeleporterScript : MonoBehaviour
 {
 
     Transform player;
-    public Transform reciever;
+    AudioManager audioManager;
 
+
+    public Transform reciever;
     private bool playerIsOverlapping = false;
+
+    public bool isDevilRoom = false;
 
     private void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioManager>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         if (playerIsOverlapping)
@@ -23,10 +28,17 @@ public class PortalTeleporterScript : MonoBehaviour
             Vector3 portalToPlayer = player.position - transform.position;
             float dotProduct = Vector3.Dot(transform.up, portalToPlayer);
 
-            // If this is true: The player has moved across the portal
+
+            
             if (dotProduct < 0f)
             {
-                // Teleport him!
+
+                if (isDevilRoom)
+                    DevilRoomLogic();
+                else
+                    MainLogic();
+
+                
                 float rotationDiff = -Quaternion.Angle(transform.rotation, reciever.rotation);
                 rotationDiff += 180;
                 player.Rotate(Vector3.up, rotationDiff);
@@ -53,6 +65,16 @@ public class PortalTeleporterScript : MonoBehaviour
         {
             playerIsOverlapping = false;
         }
+    }
+
+    private void MainLogic()
+    {
+        audioManager.TriggerMainMusic();
+    }
+
+    private void DevilRoomLogic()
+    {
+        audioManager.TriggerDevilMusic();
     }
 
 

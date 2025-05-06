@@ -113,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1000
   currentHealth: 1000
+  elite: 0
   canExplode: 1
   explodeOnDeath: 0
   moneyPrefab: {fileID: 5753959484571427866, guid: f4c33ad25fa66f548a4d336f2524f348, type: 3}
@@ -128,6 +129,7 @@ MonoBehaviour:
   dropChance: 0.3
   dead: 0
   gauranteeItemDrop: 0
+  enableOnHitEffects: 1
   shouldReportDeath: 1
   canDropAmmo: 1
   damagedPS: {fileID: 0}
@@ -47682,8 +47684,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.34
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 2
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!1 &4885643971129045301
 GameObject:
   m_ObjectHideFlags: 0

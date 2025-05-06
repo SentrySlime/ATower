@@ -120,11 +120,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1745589072951350241}
-  - component: {fileID: 1745589072951350240}
   - component: {fileID: 1745589071282283977}
+  - component: {fileID: 803409200}
   - component: {fileID: 2109320633}
   - component: {fileID: 269352844}
-  - component: {fileID: 803409200}
   m_Layer: 0
   m_Name: LevelGenerator
   m_TagString: Untagged
@@ -147,74 +146,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1745589072951350240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1745589072951350242}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fbe407f440ddc74f92a2808db7a8d74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navMeshSurfaces: []
-  surfaCE: {fileID: 2109320633}
-  direction: 0
-  rooms:
-  - {fileID: 5188076373493364511, guid: 9bbe837a8dd401747b3c328c884276a0, type: 3}
-  - {fileID: 6082911674671352749, guid: 4cbfa98118e5a8b4e8c5662ea5ca4131, type: 3}
-  - {fileID: 7875776370316182781, guid: 50540fb6384a78441b46cb0cdd7d2412, type: 3}
-  - {fileID: 7875776370316182781, guid: cd3719c975a47934d9a2dc8cf699ea17, type: 3}
-  - {fileID: 4839127966138762509, guid: bf7a23d9aecde0b488fc973282684218, type: 3}
-  - {fileID: 7753766002208220355, guid: adb17efdd05735a4093f18cb09bf8db2, type: 3}
-  - {fileID: 5188076373493364511, guid: 9bbe837a8dd401747b3c328c884276a0, type: 3}
-  - {fileID: 6082911674671352749, guid: 4cbfa98118e5a8b4e8c5662ea5ca4131, type: 3}
-  - {fileID: 7875776370316182781, guid: 50540fb6384a78441b46cb0cdd7d2412, type: 3}
-  - {fileID: 7875776370316182781, guid: cd3719c975a47934d9a2dc8cf699ea17, type: 3}
-  - {fileID: 4839127966138762509, guid: bf7a23d9aecde0b488fc973282684218, type: 3}
-  - {fileID: 7753766002208220355, guid: adb17efdd05735a4093f18cb09bf8db2, type: 3}
-  fordwardRooms:
-  - {fileID: 7875776370316182781, guid: cd3719c975a47934d9a2dc8cf699ea17, type: 3}
-  - {fileID: 7753766002208220355, guid: adb17efdd05735a4093f18cb09bf8db2, type: 3}
-  leftRooms:
-  - {fileID: 5188076373493364511, guid: 9bbe837a8dd401747b3c328c884276a0, type: 3}
-  - {fileID: 6082911674671352749, guid: 4cbfa98118e5a8b4e8c5662ea5ca4131, type: 3}
-  rightRooms:
-  - {fileID: 7875776370316182781, guid: 50540fb6384a78441b46cb0cdd7d2412, type: 3}
-  - {fileID: 4839127966138762509, guid: bf7a23d9aecde0b488fc973282684218, type: 3}
-  corridors:
-  - {fileID: 211026210306712453, guid: 79daf878caa9fb84690e0b98e5a9230e, type: 3}
-  - {fileID: 8916126137658203837, guid: 122f7e543c0b7584ba56bfa06c8b606a, type: 3}
-  - {fileID: 3509907624801447122, guid: 9187247e8865fb4428c31b2a7e8129f4, type: 3}
-  - {fileID: 7027426252763649109, guid: f978b01442cd2034caa1172773c96ce2, type: 3}
-  - {fileID: 211026210306712453, guid: bc50eefc7dde09045a624998519fecf8, type: 3}
-  - {fileID: 211026210306712453, guid: 04e559aee424c0f46b581037da5eac21, type: 3}
-  - {fileID: 3509907624801447122, guid: b8fa2b86ddeee2a4c98a070a69e934b9, type: 3}
-  fordwardCorridors:
-  - {fileID: 211026210306712453, guid: 79daf878caa9fb84690e0b98e5a9230e, type: 3}
-  - {fileID: 8916126137658203837, guid: 122f7e543c0b7584ba56bfa06c8b606a, type: 3}
-  - {fileID: 3509907624801447122, guid: 9187247e8865fb4428c31b2a7e8129f4, type: 3}
-  - {fileID: 211026210306712453, guid: 04e559aee424c0f46b581037da5eac21, type: 3}
-  leftCorridors:
-  - {fileID: 211026210306712453, guid: bc50eefc7dde09045a624998519fecf8, type: 3}
-  - {fileID: 3509907624801447122, guid: ba6286ed4d6e0dc4fac5a77bbc4afa34, type: 3}
-  rightCorridors:
-  - {fileID: 7027426252763649109, guid: f978b01442cd2034caa1172773c96ce2, type: 3}
-  - {fileID: 3509907624801447122, guid: b8fa2b86ddeee2a4c98a070a69e934b9, type: 3}
-  startingRoom: {fileID: 4628512745484002855, guid: 26bbb0822cc95e14f8c4c44281e0c11e, type: 3}
-  endRoom: {fileID: 2394344774148854506, guid: 2d74fc6f039c01e498e17a09276dd082, type: 3}
-  treasureRoom: {fileID: 9049246289987635994, guid: a3375045d766f3c4e84fc0507ddc2ed8, type: 3}
-  allRoomCount: 0
-  spawnedDevilRoom: 0
-  amountOfRoomsToSpawn: 12
-  removeRooms: 1
-  removeCorridor: 0
-  roomCount: 0
-  hasTimer: 1
-  rate1: 1
-  allSurfaces: []
 --- !u!114 &1745589071282283977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,6 +158,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74f7afb11c59eb44b8142b5c0f8c8fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &803409200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745589072951350242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd213149f480a8340925c325f5e8dabe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  easyRooms: []
+  mediumRooms: []
+  hardRooms: []
+  rooms:
+  - {fileID: 8157766797853555144, guid: 99074aec934783947bebc5e1e1af2396, type: 3}
+  - {fileID: 5188076373493364511, guid: 9bbe837a8dd401747b3c328c884276a0, type: 3}
+  - {fileID: 6082911674671352749, guid: 4cbfa98118e5a8b4e8c5662ea5ca4131, type: 3}
+  - {fileID: 7734508486400793860, guid: f0d9f9c0ebcf0bf47bdd02fee3fc44e0, type: 3}
+  - {fileID: 7875776370316182781, guid: 50540fb6384a78441b46cb0cdd7d2412, type: 3}
+  - {fileID: 7875776370316182781, guid: cd3719c975a47934d9a2dc8cf699ea17, type: 3}
+  - {fileID: 4839127966138762509, guid: bf7a23d9aecde0b488fc973282684218, type: 3}
+  - {fileID: 7753766002208220355, guid: adb17efdd05735a4093f18cb09bf8db2, type: 3}
+  - {fileID: 7753766002208220355, guid: ae220df7fdd3f3f4086e0769e00ffafc, type: 3}
+  corridors:
+  - {fileID: 211026210306712453, guid: 79daf878caa9fb84690e0b98e5a9230e, type: 3}
+  - {fileID: 8916126137658203837, guid: 122f7e543c0b7584ba56bfa06c8b606a, type: 3}
+  - {fileID: 3509907624801447122, guid: 9187247e8865fb4428c31b2a7e8129f4, type: 3}
+  - {fileID: 7027426252763649109, guid: f978b01442cd2034caa1172773c96ce2, type: 3}
+  - {fileID: 211026210306712453, guid: bc50eefc7dde09045a624998519fecf8, type: 3}
+  - {fileID: 211026210306712453, guid: 04e559aee424c0f46b581037da5eac21, type: 3}
+  - {fileID: 3509907624801447122, guid: b8fa2b86ddeee2a4c98a070a69e934b9, type: 3}
+  - {fileID: 3509907624801447122, guid: ba6286ed4d6e0dc4fac5a77bbc4afa34, type: 3}
+  startingRoom: {fileID: 4628512745484002855, guid: 26bbb0822cc95e14f8c4c44281e0c11e, type: 3}
+  endRoom: {fileID: 2394344774148854506, guid: 2d74fc6f039c01e498e17a09276dd082, type: 3}
+  treasureRoom: {fileID: 2351597762166467222, guid: eba914ce3b2eeb9409cc3bedcfe0c8ff, type: 3}
+  devilRoom: {fileID: 2351597762166467222, guid: 401a4915fde7b7a4d9e6f62172a65951, type: 3}
+  roomAmount: 12
+  spawnedTreasureRoom: 0
+  spawnedDevilRoom: 0
+  spawnedShopRoom: 0
+  allSurfaces: []
+  spawnTransform: {fileID: 0}
+  roomCount1: 0
+  roomCount2: 0
+  roomCount3: 0
 --- !u!114 &2109320633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,50 +263,3 @@ MonoBehaviour:
   m_VoxelSize: 0.6666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &803409200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1745589072951350242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd213149f480a8340925c325f5e8dabe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  easyRooms: []
-  mediumRooms: []
-  hardRooms: []
-  rooms:
-  - {fileID: 8157766797853555144, guid: 99074aec934783947bebc5e1e1af2396, type: 3}
-  - {fileID: 5188076373493364511, guid: 9bbe837a8dd401747b3c328c884276a0, type: 3}
-  - {fileID: 6082911674671352749, guid: 4cbfa98118e5a8b4e8c5662ea5ca4131, type: 3}
-  - {fileID: 7734508486400793860, guid: f0d9f9c0ebcf0bf47bdd02fee3fc44e0, type: 3}
-  - {fileID: 7875776370316182781, guid: 50540fb6384a78441b46cb0cdd7d2412, type: 3}
-  - {fileID: 7875776370316182781, guid: cd3719c975a47934d9a2dc8cf699ea17, type: 3}
-  - {fileID: 4839127966138762509, guid: bf7a23d9aecde0b488fc973282684218, type: 3}
-  - {fileID: 7753766002208220355, guid: adb17efdd05735a4093f18cb09bf8db2, type: 3}
-  - {fileID: 7753766002208220355, guid: ae220df7fdd3f3f4086e0769e00ffafc, type: 3}
-  corridors:
-  - {fileID: 211026210306712453, guid: 79daf878caa9fb84690e0b98e5a9230e, type: 3}
-  - {fileID: 8916126137658203837, guid: 122f7e543c0b7584ba56bfa06c8b606a, type: 3}
-  - {fileID: 3509907624801447122, guid: 9187247e8865fb4428c31b2a7e8129f4, type: 3}
-  - {fileID: 7027426252763649109, guid: f978b01442cd2034caa1172773c96ce2, type: 3}
-  - {fileID: 211026210306712453, guid: bc50eefc7dde09045a624998519fecf8, type: 3}
-  - {fileID: 211026210306712453, guid: 04e559aee424c0f46b581037da5eac21, type: 3}
-  - {fileID: 3509907624801447122, guid: b8fa2b86ddeee2a4c98a070a69e934b9, type: 3}
-  - {fileID: 3509907624801447122, guid: ba6286ed4d6e0dc4fac5a77bbc4afa34, type: 3}
-  startingRoom: {fileID: 4628512745484002855, guid: 26bbb0822cc95e14f8c4c44281e0c11e, type: 3}
-  endRoom: {fileID: 2394344774148854506, guid: 2d74fc6f039c01e498e17a09276dd082, type: 3}
-  treasureRoom: {fileID: 2351597762166467222, guid: eba914ce3b2eeb9409cc3bedcfe0c8ff, type: 3}
-  devilRoom: {fileID: 2351597762166467222, guid: 401a4915fde7b7a4d9e6f62172a65951, type: 3}
-  roomAmount: 12
-  spawnedTreasureRoom: 0
-  spawnedDevilRoom: 0
-  spawnedShopRoom: 0
-  allSurfaces: []
-  spawnTransform: {fileID: 0}
-  roomCount1: 0
-  roomCount2: 0
-  roomCount3: 0

@@ -398,7 +398,7 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
 
         RaycastHit hit;
 
-        if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.forward, out hit))
+        if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.forward, out hit, 100))
         {
             hitPosition = hit.point;
 
@@ -414,7 +414,7 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
 
         }
         else
-            hitPosition = shootPoint.transform.position + shootPoint.transform.forward * 200;
+            hitPosition = shootPoint.transform.position + shootPoint.transform.forward * 100;
         lineRenderer.enabled = true;
         lineRenderer.SetPosition(0, shootPoint.transform.position);
         lineRenderer.SetPosition(1, hitPosition);
