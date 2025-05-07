@@ -6,9 +6,15 @@ using UnityEngine.AI;
 
 public class LevelGeneration_2 : MonoBehaviour
 {
-    public List<GameObject> easyRooms = new List<GameObject>();
-    public List<GameObject> mediumRooms = new List<GameObject>();
-    public List<GameObject> hardRooms = new List<GameObject>();
+    [Header("Navmesh")]
+    public NavMeshSurface surface_1;
+    public NavMeshSurface surface_2;
+    [SerializeField] NavMeshSurface[] navMeshSurfaces;
+
+
+    List<GameObject> easyRooms = new List<GameObject>();
+    List<GameObject> mediumRooms = new List<GameObject>();
+    List<GameObject> hardRooms = new List<GameObject>();
 
     [Header("Rooms & corridors")]
     public List<GameObject> rooms = new List<GameObject>();
@@ -80,6 +86,7 @@ public class LevelGeneration_2 : MonoBehaviour
         {
             spawnEndRoom = false;
             GenerateEndRoom();
+            GenerateNavMesh();
         }
     }
 
@@ -288,4 +295,30 @@ public class LevelGeneration_2 : MonoBehaviour
 
         return chosenRoom;
     }
+
+    private void GenerateNavMesh()
+    {
+
+        StartCoroutine(some());
+        
+
+        //navMeshManager.NavMeshBuilder(allSurfaces[0].GetComponent<NavMeshSurface>());
+    }
+
+    IEnumerator some()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        print("Build");
+
+        surface_1.BuildNavMesh();
+        surface_2.BuildNavMesh();
+
+        //for (int i = 0; i < allSurfaces.Count; i++)
+        //{
+        //    // build navmesh here
+        //    navMeshSurfaces[i].BuildNavMesh();
+        //}
+    }
+
 }

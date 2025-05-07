@@ -69,12 +69,50 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
         {
             playerHealth = player.GetComponent<PlayerHealth>();
             playerStats = player.GetComponent<PlayerStats>();
+            inventory = player.GetComponent<Inventory>();
         }
-        hitMarkerLogic = GameObject.FindGameObjectWithTag("HitMarker").GetComponent<HitmarkerLogic>();
-        aMainSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AMainSystem>();
-        enemyManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<EnemyManager>();
-        lootSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<LootSystem>();
-        inventory = player.GetComponent<Inventory>();
+
+
+        GameObject hitMarkerGO = GameObject.FindGameObjectWithTag("HitMarker");
+
+        if (hitMarkerGO != null)
+        {
+            hitMarkerLogic = hitMarkerGO.GetComponent<HitmarkerLogic>();
+
+            if (hitMarkerLogic == null)
+            {
+                Debug.LogWarning("HitMarker GameObject found, but it is missing the HitmarkerLogic component.");
+            }
+        }
+
+        GameObject gameManagerGO = GameObject.FindGameObjectWithTag("GameManager");
+
+        if (gameManagerGO != null)
+        {
+            aMainSystem = gameManagerGO.GetComponent<AMainSystem>();
+            if (aMainSystem == null)
+            {
+                Debug.LogWarning("GameManager found, but missing AMainSystem component.");
+            }
+
+            enemyManager = gameManagerGO.GetComponent<EnemyManager>();
+            if (enemyManager == null)
+            {
+                Debug.LogWarning("GameManager found, but missing EnemyManager component.");
+            }
+
+            lootSystem = gameManagerGO.GetComponent<LootSystem>();
+            if (lootSystem == null)
+            {
+                Debug.LogWarning("GameManager found, but missing LootSystem component.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No GameObject with the 'GameManager' tag was found.");
+        }
+
+        
 
         layerMask = LayerMask.GetMask("Enemy");
 

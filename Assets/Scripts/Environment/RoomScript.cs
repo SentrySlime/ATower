@@ -107,6 +107,8 @@ public class RoomScript : MonoBehaviour
     {
         enemyList.Remove(deadEnemy.gameObject);
 
+        if (specialRoom == null) return;
+
         if(enemyList.Count == 0)
         {
             specialRoom.IniateLockRelease();

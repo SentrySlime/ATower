@@ -65,8 +65,12 @@ public class Kobold : MonoBehaviour, INoticePlayer
 
     void Start()
     {
+
         player = GameObject.FindGameObjectWithTag("Player");
-        playerTargetPoint = player.GetComponent<PlayerHealth>().GetTargetPoint().transform;
+
+        if(player)
+            playerTargetPoint = player.GetComponent<PlayerHealth>().GetTargetPoint().transform;
+        
         SetRandomStats();
         layerMask = ~layerMask;
     }
@@ -79,7 +83,8 @@ public class Kobold : MonoBehaviour, INoticePlayer
             
         }
 
-        playerDist = Vector3.Distance(transform.position, player.transform.position);
+        if(player)
+            playerDist = Vector3.Distance(transform.position, player.transform.position);
         
         if(agent.isOnOffMeshLink)
         {
@@ -381,7 +386,10 @@ public class Kobold : MonoBehaviour, INoticePlayer
 
     private bool HasLineOfSight()
     {
+        if (!player) return false;
+        
         Vector3 directionToPlayer = player.transform.position - visionTransform.transform.position;
+
         float distance = Vector3.Distance(player.transform.position, visionTransform.transform.position);
 
         RaycastHit hit;

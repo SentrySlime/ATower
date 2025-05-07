@@ -11,15 +11,16 @@ public class Kobold_Shaman : MonoBehaviour
     bool foundPlayer;
     bool attacking = false;
     float distanceToPlayer = 0;
+    float interactDistance_ = 125f;
 
-    public float interactDistance_ = 125f;
-    public Transform shootPoint;
+
+    
 
     [Header("Movement")]
     public bool roam = false;
-    private float newDestinationRate = 0.5f;
-    private float newDestinationTimer = 0;
-    public float noiseOffset;
+    float newDestinationRate = 0.5f;
+    float newDestinationTimer = 0;
+    float noiseOffset = 1;
 
     [Header("Movement perlin")]
     float noiseScale = 1.0f;
@@ -34,6 +35,15 @@ public class Kobold_Shaman : MonoBehaviour
     [Header("FireSpire")]
     public GameObject fireSpireTelegraphVFX;
     public GameObject fireSpireVFX;
+
+    [Header("Shield")]
+    public GameObject shield;
+
+    [Header("Misc")]
+    public Transform shootPoint;
+    public Transform visionTransform;
+    public LayerMask layerMask;
+
 
     void Start()
     {
@@ -71,31 +81,32 @@ public class Kobold_Shaman : MonoBehaviour
 
         if (attacking) { return; }
 
-        //if (attackRateTimer < attackRate)
-        //{
-        //    attackRateTimer += Time.deltaTime;
-        //}
-        //else if (distanceToPlayer < 25)
-        //{
-        //    if (attacking == false)
-        //    {
-        //        attacking = true;
-                
-        //        //Invoke("MeleeAnimation", 1);
-        //    }
-        //}
-        //else
-        //{
-        //    if (attacking == false)
-        //    {
-        //        if (IsPlayerInfront() && HasLineOfSight())
-        //        {
-        //            attacking = true;
-        //            InitiateShootAttack();
-        //        }
+        if (attackRateTimer < attackRate)
+        {
+            attackRateTimer += Time.deltaTime;
+        }
+        else if (distanceToPlayer < 25)
+        {
+            if (attacking == false)
+            {
+                attacking = true;
 
-        //    }
-        //}
+                //Invoke("MeleeAnimation", 1);
+            }
+        }
+        else
+        {
+            if (attacking == false)
+            {
+                if (IsPlayerInfront() && HasLineOfSight())
+                {
+                    attacking = true;
+                    animator.SetBool("Evocation", true);
+                    StartCoroutine(FireSpireTelegraph());
+                }
+
+            }
+        }
 
         movementTimer += Time.deltaTime;
         if (movementTimer >= updateRate)
@@ -112,10 +123,11 @@ public class Kobold_Shaman : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.K))
         {
             StartAttack();
-            FireSpireTelegraph();
-            //agent.speed = 0;
-            //animator.SetBool("Evocation", true);
-            //Invoke("Revoke", 1);
+
+            Shield();
+
+            //StartCoroutine(FireSpireTelegraph());
+            
         }
 
     }
@@ -200,10 +212,24 @@ public class Kobold_Shaman : MonoBehaviour
         agent.speed = 0;
     }
 
-    private void FireSpireTelegraph()
+    private void Shield()
+    {
+        Instantiate(shield, transform.position, Quaternion.identity, transform);
+    }
+
+    IEnumerator FireSpireTelegraph()
+    {
+        StartAttack();
+        Vector3 fireSpirePos = player.transform.position;
+        Instantiate(fireSpireTelegraphVFX, fireSpirePos, Quaternion.identity);
+        yield return new WaitForSeconds(1);
+        FireSpire(fireSpirePos);
+    }
+
+    private void FireSpire(Vector3 spawnPos)
     {
         animator.SetBool("Evocation", true);
-        Instantiate(fireSpireTelegraphVFX, player.transform.position, Quaternion.identity);
+        Instantiate(fireSpireVFX, spawnPos, Quaternion.identity);
     }
 
     private void NoticePlayer()
@@ -224,5 +250,44 @@ public class Kobold_Shaman : MonoBehaviour
                 }
             }
         }
+    }
+
+
+    private bool IsPlayerInfront()
+    {
+        Vector3 enemyforward = transform.forward;
+
+        Vector3 toPlayer = (player.transform.position - transform.position).normalized;
+
+        float dot = Vector3.Dot(enemyforward, toPlayer);
+
+        if (dot > 0.75)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    private bool HasLineOfSight()
+    {
+        Vector3 directionToPlayer = player.transform.position - visionTransform.position;
+        float distance = Vector3.Distance(player.transform.position, visionTransform.position);
+
+        RaycastHit hit;
+        if (Physics.Raycast(visionTransform.position, directionToPlayer, out hit, distance, layerMask))
+        {
+            if (hit.transform.CompareTag("Player"))
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
+        return false;
     }
 }

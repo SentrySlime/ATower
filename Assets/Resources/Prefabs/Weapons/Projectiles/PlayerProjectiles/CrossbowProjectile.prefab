@@ -138,15 +138,17 @@ MonoBehaviour:
   explosiveRadius: 1
   explosiveDamage: 10
   explosiveImpactSFX: {fileID: 0}
-  homing: 1
+  homing: 0
   turnSpeed: 1
   target: {fileID: 0}
+  nonHomingDuration: 0.35
   useGravity: 0
   gravityMagnitude: 1
   hitVFX: {fileID: 1879272669879180, guid: 1845e09e109a8fd48bd5f1f5b15d1217, type: 3}
   hitEnemyVFX: {fileID: 1879272669879180, guid: 36113f08340819b4cb8a7f3f43199807, type: 3}
   lifeDuration: 8
   lifeTimer: 0
+  weaponParent: {fileID: 0}
   aMainSysteM: {fileID: 0}
   shootSystem: {fileID: 0}
 --- !u!54 &4140537416350080728
@@ -176,7 +178,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 0.25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3436718510349363369
 PrefabInstance:
@@ -249,9 +251,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 198474663198814734, guid: 2fa2d7455fc1db84e9c6ec4494aed9f3, type: 3}
+      propertyPath: TrailModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 199454646651633794, guid: 2fa2d7455fc1db84e9c6ec4494aed9f3, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 199454646651633794, guid: 2fa2d7455fc1db84e9c6ec4494aed9f3, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 199460809115817730, guid: 2fa2d7455fc1db84e9c6ec4494aed9f3, type: 3}
       propertyPath: m_Materials.Array.size
