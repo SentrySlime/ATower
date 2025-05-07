@@ -8,6 +8,7 @@ public class Devil : MonoBehaviour
     public GameObject destroySFX;
 
     public AudioSource pentagramSFX;
+    public ParticleSystem pentagramVFX;
 
     public GameObject devilItemVFX;
 
@@ -23,6 +24,8 @@ public class Devil : MonoBehaviour
 
     ItemPickUp rightItem;
     ItemPickUp leftItem;
+
+
 
     public Renderer pentagramRender;
     public Material material;
@@ -53,6 +56,7 @@ public class Devil : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             pentagramSFX.Play();
+            pentagramVFX.Play();
             StartCoroutine(FadeEmission());
             triggered = true;
             OpenHands();

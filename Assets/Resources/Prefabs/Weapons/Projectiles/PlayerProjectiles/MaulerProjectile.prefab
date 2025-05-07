@@ -141,12 +141,14 @@ MonoBehaviour:
   homing: 1
   turnSpeed: 18
   target: {fileID: 0}
+  nonHomingDuration: 0.1
   useGravity: 0
   gravityMagnitude: 1
   hitVFX: {fileID: 1879272669879180, guid: 1845e09e109a8fd48bd5f1f5b15d1217, type: 3}
   hitEnemyVFX: {fileID: 1879272669879180, guid: 36113f08340819b4cb8a7f3f43199807, type: 3}
   lifeDuration: 8
   lifeTimer: 0
+  weaponParent: {fileID: 0}
   aMainSysteM: {fileID: 0}
   shootSystem: {fileID: 0}
 --- !u!54 &4140537416350080728
