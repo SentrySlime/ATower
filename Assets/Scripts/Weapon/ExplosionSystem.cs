@@ -43,14 +43,14 @@ public class ExplosionSystem : MonoBehaviour
         if (parent.GetComponent<EnemyBase>())
             parent.GetComponent<EnemyBase>().SetProjetile(tempExplosions);
 
-        tempExplosions.GetComponent<IExplosionInterface>().InitiateExplosion(mainSystem, explosionRadius, damage, true, null);
+        tempExplosions.GetComponent<IExplosionInterface>().InitiateExplosion(mainSystem, explosionRadius, damage, enemyOwned, null);
     }
 
     public void SpawnExplosion(Vector3 explosionPos, float explosionRadius, int damage, bool enemyOwned)
     {
         tempExplosions = Instantiate(standardExplosion, explosionPos, Quaternion.identity);
 
-        tempExplosions.GetComponent<IExplosionInterface>().InitiateExplosion(mainSystem, explosionRadius, damage, true, null);
+        tempExplosions.GetComponent<IExplosionInterface>().InitiateExplosion(mainSystem, explosionRadius, damage, enemyOwned, null);
     }
 
 }

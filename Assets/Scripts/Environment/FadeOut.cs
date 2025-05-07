@@ -6,108 +6,49 @@ using UnityEngine.SceneManagement;
 
 public class FadeOut : MonoBehaviour
 {
-    public bool isFadeIn = true;
 
-    float fadeSpeed = 1;
+    float fadeSpeed = 0.25f;
+    float fadeAlpha = 1f;
 
-    bool fadeOut = false;
-    bool fadeIn = false;
-    bool triggered = false;
-
+    [HideInInspector] public GameObject endScreenButtons;
     CanvasGroup canvasToFadeIn;
-    CanvasGroup canvasToFadeOut;
-    //CanvasGroup canvasToFade;
     GameObject endText;
-    public GameObject endScreenButtons;
-
     Collider triggerCollider;
 
     private void Awake()
     {
         endScreenButtons = GameObject.Find("EndScreenButtons");
+        canvasToFadeIn = GameObject.Find("FadeImageIn").GetComponent<CanvasGroup>();
+        triggerCollider = GetComponent<Collider>();
+        endText = GameObject.Find("EndText");
     }
 
     void Start()
     {
-
-        canvasToFadeIn = GameObject.Find("FadeImageIn").GetComponent<CanvasGroup>();
-        canvasToFadeOut = GameObject.Find("FadeImageOut").GetComponent<CanvasGroup>();
-        
-        triggerCollider = GetComponent<Collider>();
-        //canvasToFade = GameObject.Find("FadeImage").GetComponent<CanvasGroup>();
-
-
-        StartCoroutine(WaitBeforeDisable());
-
-        endText = GameObject.Find("EndText");
-
-        if(isFadeIn)
-            Invoke("StartFadeIn", 1.3f);
+        DisableObjects();
+        StartCoroutine(FadeIn());
     }
 
-    
-    void Update()
+    private void DisableObjects()
     {
-        if (fadeIn)
-            canvasToFadeIn.alpha -= Time.deltaTime * fadeSpeed;
-        
-        if (fadeOut)
-            canvasToFadeOut.alpha += Time.deltaTime * fadeSpeed;
+        endScreenButtons.SetActive(false);
+        endText.GetComponent<TextMeshProUGUI>().enabled = false;
+    }
 
-        if (canvasToFadeIn.alpha == 0)
+    IEnumerator FadeIn()
+    {
+        fadeAlpha = 1;
+
+        while (fadeAlpha > 0)
         {
-            fadeIn = false;
+            fadeAlpha -= Time.deltaTime * fadeSpeed;
+            fadeAlpha = Mathf.Clamp01(fadeAlpha); 
+            canvasToFadeIn.alpha = fadeAlpha;
+
+            yield return null; 
         }
 
-        if (canvasToFadeOut.alpha == 1 && fadeOut)
-        {
-            Invoke("EnableEndText", 0.5f);
-            Invoke("PauseGame", 0.5f);
-        }
-
-    }
-
-    private void StartFadeIn()
-    {
-        fadeIn = true;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (triggered || isFadeIn) { return; }
-
-        triggerCollider.enabled = false;
-
-        if (other.CompareTag("Player"))
-        {
-            triggered = true;
-            fadeOut = true;
-        }
-    }
-
-    private void PauseGame()
-    {
-        //Time.timeScale = 0;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-    }
-
-    private void EnableEndText()
-    {
-        endText.GetComponent<TextMeshProUGUI>().enabled = true;
-        if(endScreenButtons)
-            endScreenButtons.SetActive(true);
-        else
-        {
-            GetComponentInParent<FadeOut>().endScreenButtons.SetActive(true);
-        }
-    }
-
-    IEnumerator WaitBeforeDisable()
-    {
-        yield return new WaitForSeconds(0.7f);
-        if (endScreenButtons != null && isFadeIn)
-            endScreenButtons.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
     }
 
 }

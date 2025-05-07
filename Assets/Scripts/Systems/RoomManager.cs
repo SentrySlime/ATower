@@ -15,21 +15,6 @@ public class RoomManager : MonoBehaviour
 
     public int roomOffset = 2;
 
-    void Start()
-    {
-
-    }
-
-
-    void Update()
-    {
-        if (timer < rate)
-        {
-            timer += Time.deltaTime;
-            return;
-        }
-    }
-
     public void GoBack(int index)
     {
         if (index <= 1 || index >= rooms.Count - 1) { return; }
@@ -54,7 +39,7 @@ public class RoomManager : MonoBehaviour
     {
         if (index >= rooms.Count) { return; }
         if (index < 0) { return; }
-        rooms[index].DisableEnemies();
+        rooms[index].DisableRoom();
     }
 
     private void EnableRoom(int index)
@@ -71,10 +56,6 @@ public class RoomManager : MonoBehaviour
         rooms.Add(room);
         room.roomManager = this;
         room.roomIndex = rooms.Count - 1;
-
-        if (rooms.Count > 4)
-            StartCoroutine(WaitBeforeDisablingRoom(room));
-
     }
 
     public void SetEnabledRooms(int index)
@@ -88,26 +69,24 @@ public class RoomManager : MonoBehaviour
             }
             else
             {
-                rooms[i].DisableEnemies();
-                //rooms[i].gameObject.SetActive(false);
+                rooms[i].DisableRoom();
             }
         }
     }
 
-    IEnumerator WaitBeforeDisablingRoom(RoomScript room)
+    public void DisableRooms()
     {
-            yield return new WaitForSeconds(1);
-        room.DisableEnemies();
-        
-        //if(room.gameObject.name == "End_Room(Clone)")
-        //{
-
-        //    room.gameObject.SetActive(false);
-        //}
-        //else
-        //{
-        //    room.gameObject.SetActive(false);
-        //}
+        StartCoroutine(DisableRoomsRoutine());
     }
 
+    IEnumerator DisableRoomsRoutine()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        for (int i = 4; i < rooms.Count;i++)
+        {
+            rooms[i].DisableRoom();
+        }
+        
+    }
 }

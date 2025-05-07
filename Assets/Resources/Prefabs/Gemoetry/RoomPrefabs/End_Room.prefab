@@ -17229,10 +17229,10 @@ MonoBehaviour:
   roomDifficultyLevel: 1
   blockade: {fileID: 0}
   secretPoint: {fileID: 0}
-  roomToSpawn: {fileID: 0}
   enemyList: []
   roomIndex: 0
   roomManager: {fileID: 0}
+  levelGeneration: {fileID: 0}
   invertedRoomDirection: 0
 --- !u!1 &3063648873861166990
 GameObject:
@@ -17637,8 +17637,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6870740674065964402}
-  - component: {fileID: 6878908318621017499}
   - component: {fileID: 3771888433471784999}
+  - component: {fileID: 2763733742934594141}
   m_Layer: 2
   m_Name: FadeOut
   m_TagString: Untagged
@@ -17660,19 +17660,6 @@ Transform:
   m_Father: {fileID: 2021547191705729211}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6878908318621017499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6801637294082964052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63ac8c586f0991f44a9326169a8cfb56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isFadeIn: 0
 --- !u!65 &3771888433471784999
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17686,6 +17673,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 100, y: 150, z: 50}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2763733742934594141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6801637294082964052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c4dbfcde7c719141bb4b8be5e6ad54b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7757959109540349618
 GameObject:
   m_ObjectHideFlags: 0

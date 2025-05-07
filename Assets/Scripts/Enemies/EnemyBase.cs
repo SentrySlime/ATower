@@ -14,6 +14,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     [Header("Explosion")]
     public bool canExplode = false;
     public bool explodeOnDeath = false;
+    public bool explosiveBarrel = false;
 
     [Header("VFX  SFX")]
     [Tooltip("This spawns the money prefab")]
@@ -204,7 +205,9 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
                 ps.trigger.AddCollider(player.GetComponent<Collider>());
             }
 
-            if (CanExplode(criticalDeath))
+            if (explosiveBarrel)
+                aMainSystem.SpawnExplosion(moneySpawnPoint.position, 7, 100, false, null);
+            else if (CanExplode(criticalDeath))
             {
                 if(explodeOnDeath)
                     aMainSystem.SpawnExplosion(moneySpawnPoint.position, 7, 15, true, null);

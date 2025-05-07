@@ -10,21 +10,13 @@ public class EnemySpawner : MonoBehaviour
     
     void Start()
     {
-        StartCoroutine(SpawnEnemy());
         roomScript = GetComponentInParent<RoomScript>();
+        SpawnEnemy();
     }
 
-    
-    void Update()
+    private void SpawnEnemy()
     {
-        
-    }
-
-    IEnumerator SpawnEnemy()
-    {
-        yield return new WaitForSeconds(0.8f);
         spawnedEnemy = Instantiate(enemyToSpawn, transform.position, transform.rotation);
         roomScript.AddEnemy(spawnedEnemy);
     }
-
 }

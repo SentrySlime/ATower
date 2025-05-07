@@ -267,7 +267,6 @@ public class LevelGeneration_2 : MonoBehaviour
     {
         if (spawnedDevilRoom && spawnedTreasureRoom)
         {
-
             return null;
         }
 
@@ -298,27 +297,8 @@ public class LevelGeneration_2 : MonoBehaviour
 
     private void GenerateNavMesh()
     {
-
-        StartCoroutine(some());
-        
-
-        //navMeshManager.NavMeshBuilder(allSurfaces[0].GetComponent<NavMeshSurface>());
-    }
-
-    IEnumerator some()
-    {
-        yield return new WaitForSeconds(0.1f);
-
-        print("Build");
-
         surface_1.BuildNavMesh();
         surface_2.BuildNavMesh();
-
-        //for (int i = 0; i < allSurfaces.Count; i++)
-        //{
-        //    // build navmesh here
-        //    navMeshSurfaces[i].BuildNavMesh();
-        //}
+        roomManager.DisableRooms();
     }
-
 }

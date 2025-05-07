@@ -105,7 +105,7 @@ public class WeaponSocket : MonoBehaviour
 
     void Update()
     {
-        if (pauseMenu.paused || equippedWeapon == null) { return; }
+        if (pauseMenu.paused || equippedWeapon == null || interupptedBool) { return; }
 
         if (equippedWeapon)
         {

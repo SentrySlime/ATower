@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class RoomScript : MonoBehaviour
 {
-    //[Header("Room attributes")]
     public enum Direction { forward, left, right, down }
 
     public Direction direction;
@@ -30,8 +29,6 @@ public class RoomScript : MonoBehaviour
     [HideInInspector] public RoomManager roomManager;
     [HideInInspector] public LevelGeneration_2 levelGeneration;
 
-
-
     public bool invertedRoomDirection = false;
 
     void Start()
@@ -41,9 +38,7 @@ public class RoomScript : MonoBehaviour
         
     }
 
-    
-
-    public void DisableEnemies()
+    public void DisableRoom()
     {
         if (enemyList.Count != 0)
         {
@@ -53,7 +48,6 @@ public class RoomScript : MonoBehaviour
                     enemyList[i].SetActive(false);
             }
         }
-
 
         gameObject.SetActive(false);
     }
@@ -67,7 +61,6 @@ public class RoomScript : MonoBehaviour
             if(enemyList[i])
                 enemyList[i].SetActive(true);
         }
-        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -75,8 +68,6 @@ public class RoomScript : MonoBehaviour
         if(roomManager)
             roomManager.SetEnabledRooms(roomIndex);
     }
-
-
     private void SpawnRoom()
     {
 
