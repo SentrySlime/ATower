@@ -90,8 +90,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 6000
   currentHealth: 6000
+  elite: 0
   canExplode: 1
   explodeOnDeath: 0
+  explosiveBarrel: 0
   moneyPrefab: {fileID: 5753959484571427866, guid: f4c33ad25fa66f548a4d336f2524f348, type: 3}
   dieSFX: {fileID: 4964101775347663484, guid: 57d9e00357cc8f44c9703fedb68cbd04, type: 3}
   deathParticles: {fileID: 8240258288333259156, guid: 1a0db613e426fd549a341b5179eb5de8, type: 3}
@@ -105,6 +107,7 @@ MonoBehaviour:
   dropChance: 0.9
   dead: 0
   gauranteeItemDrop: 0
+  enableOnHitEffects: 1
   shouldReportDeath: 1
   canDropAmmo: 1
   damagedPS: {fileID: 0}
@@ -127,17 +130,26 @@ MonoBehaviour:
   footStepVFX: {fileID: 2724889193774223026, guid: 9eddf0536a26e8840ac3239f2379bfbc, type: 3}
   rightfoot: {fileID: 3219457139645982257}
   leftfoot: {fileID: 8776047118651903748}
+  foundPlayer: 0
   attackRateTimer: 0
   shootTelegraphVFX: {fileID: 5156593245698994014, guid: 97a0903238715ff41994f483513f6541, type: 3}
+  shootExplosionSFX: {fileID: 0}
   shootTelegraphVFXPosition: {fileID: 8467476049873346314}
   shootProjectile: {fileID: 0}
+  cannonObject: {fileID: 0}
   donutExplosionVFX: {fileID: 3211388572963393823, guid: d88cc6638f15b9243a439d650d87d4c0, type: 3}
+  donutExplosionSFX: {fileID: 0}
   donutExplosion: {fileID: 5167799958932818234, guid: 3b5d098d079649d409f1b7869557b122, type: 3}
   donutExplosionSpawnTransform: {fileID: 8636968496679318904}
   donutLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  attacking: 0
   shootPoint: {fileID: 4236415219618307164}
+  visionTransform: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!195 &4236415218429465450
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -147,7 +159,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 4236415218429465454}
   m_Enabled: 1
   m_AgentTypeID: -902729914
-  m_Radius: 5
+  m_Radius: 4
   m_Speed: 9
   m_Acceleration: 8
   avoidancePriority: 50

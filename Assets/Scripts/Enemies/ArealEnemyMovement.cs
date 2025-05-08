@@ -34,21 +34,25 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
     public float rangedAttackDist = 10;
 
     [Header("Projectile Attack")] // Projectiles
-    public bool projectileAttacking = false;
+    
     public float projectileCooldown = 3;
     float projectileCooldownTimer = 0;
 
-    public float projectileFireRate = 0.45f;
+    public float projectileFireRate = 0.09f;
     float projectileFireRateTimer = 0;
 
     [Tooltip("Increase to shoot lower, Decrease to shoot higher")]
-    public float yOffset = 0;
+    public float yOffset = -35;
 
     [Tooltip("Decides how many projectiles to shoot")]
-    public float projectileAmount = 1;
+    public float projectileAmount = 6;
 
     [Tooltip("When shooting a shotgun, decides the distance between the projectiles")]
-    public float projectileSpacing = 10;
+    public float projectileSpacing = 30;
+
+    public bool canFireProjectile = false;
+
+    public int numberOfProjectiles = 0;
 
     public GameObject shootPoint;
     public GameObject projectile;
@@ -137,8 +141,10 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
         if (beamCooldownTimer < beamCooldown && !beamAttacking)
             beamCooldownTimer += Time.deltaTime;
 
-        if(projectileCooldownTimer < projectileCooldown && !projectileAttacking)
+        if(projectileCooldownTimer < projectileCooldown &&  !canFireProjectile)
             projectileCooldownTimer += Time.deltaTime;
+        else
+            canFireProjectile = true;
 
         if (meleeCooldownTimer < meleeCooldown && !meleeAttacking)
             meleeCooldownTimer += Time.deltaTime;
@@ -171,7 +177,7 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
             NavMeshMove();
         }
 
-        if (!canSeePlayer && !beamAttacking && !projectileAttacking && !meleeAttacking)
+        if (!canSeePlayer && !beamAttacking && !canFireProjectile && !meleeAttacking)
         {
             return;
         }
@@ -197,11 +203,12 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
                 {
                     StartBeamAttack();
                 }
-                //else
-                //{
-
-                //    projectileAttacking = true;
-                //}
+                else
+                {
+                    projectileCooldownTimer = 0;
+                    if (canFireProjectile)
+                        DoProjectile1();
+                }
             }
         }
 
@@ -210,29 +217,9 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
             StartMeeleAttack();
         }
 
-        if (projectileAttacking)
-        {
-            //ProjectileMovementSpeed();
-            //Stop();
-            if (projectileTimer < projectileDuration)
-            {
-                attackTimer = 0;
-                projectileTimer += Time.deltaTime;
-                ShootProjectile();
-            } 
-            else
-            {
-                projectileAttacking = false;
-                projectileTimer = 0;
-                shootPoint.transform.rotation = gameObject.transform.root.rotation;
-            }
-
-        }
-
+       
         if(beamAttacking)
         {
-            //BeamMovementSpeed();
-            //Stop();
 
             Vector3 forward = transform.TransformDirection(Vector3.forward);
             Vector3 toOther = Vector3.Normalize(player.transform.position - transform.position);
@@ -442,35 +429,32 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
 
     #endregion
 
-    #region Projectiles
 
-    private void ShootProjectile()
+    #region Projecctiles2
+
+    private void DoProjectile1()
     {
-        RotateTowardsPlayer();
+        canFireProjectile = false;
 
-        if (projectileFireRateTimer >= projectileFireRate)
-        {
-            ShootFan();
-            projectileFireRateTimer = 0;
-        }
-        else
-            projectileFireRateTimer += Time.deltaTime;
+        StartCoroutine(DoProjectile2());
     }
 
-    public void ShootFan()
+    IEnumerator DoProjectile2()
     {
         Vector3 directionToPlayer = (player.transform.position - shootPoint.transform.position).normalized;
-        Quaternion baseRotation = Quaternion.LookRotation(directionToPlayer) * Quaternion.Euler(yOffset, 0, 0); // Apply Y offset
+        Quaternion baseRotation = Quaternion.LookRotation(directionToPlayer) * Quaternion.Euler(yOffset, 0, 0);
 
         float startAngle = -(projectileAmount - 1) / 2f * projectileSpacing;
 
         for (int i = 0; i < projectileAmount; i++)
         {
             float angle = startAngle + (i * projectileSpacing);
-            Quaternion rotation = Quaternion.Euler(0, angle, 0) * baseRotation; // Apply horizontal spread
-            if(projectile)
-            Instantiate(projectile, shootPoint.transform.position, rotation);
+            Quaternion rotation = Quaternion.Euler(0, angle, 0) * baseRotation;
+            if (projectile)
+                Instantiate(projectile, shootPoint.transform.position, rotation);
         }
+
+        yield return null;
     }
 
     #endregion
@@ -502,7 +486,7 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
             movementSpeed = 0;
             return;
         }
-        else if(projectileAttacking)
+        else if(canFireProjectile)
         {
             movementSpeed = 0;
             return;

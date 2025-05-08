@@ -37,6 +37,8 @@ public class FadeOut : MonoBehaviour
 
     IEnumerator FadeIn()
     {
+        yield return new WaitForSeconds(0.3f);
+        
         fadeAlpha = 1;
 
         while (fadeAlpha > 0)
@@ -48,7 +50,6 @@ public class FadeOut : MonoBehaviour
             yield return null; 
         }
 
-        yield return new WaitForSeconds(0.5f);
     }
 
 }
