@@ -44,6 +44,7 @@ public class PlayerStats : MonoBehaviour
     public int hasAlternateFastReload = 0;
     public bool alternateFastReload;
     public int heartboundRounds = 0;
+    public float maxAmmo = 0;
 
     [Header("WeaponSocket")]
     public int fireBallChance = 0;
@@ -121,6 +122,10 @@ public class PlayerStats : MonoBehaviour
         BaseWeapon weapon = weaponObj.transform.GetChild(0).GetComponent<BaseWeapon>();
         weapon.maxMagazine = weapon.baseMaxMagazine + maxMagazineSize;
         weapon.currentMagazine = weapon.maxMagazine;
+
+        weapon.maxAmmo = Mathf.FloorToInt(weapon.baseMaxAmmo + (weapon.baseMaxAmmo * maxAmmo));
+
+        weapon.currentAmmo = weapon.maxAmmo;
     }
 
     public void AddAllWeaponStats()
@@ -130,7 +135,11 @@ public class PlayerStats : MonoBehaviour
         for (int i = 0; i < inventory.heldWeapons.Count; i++)
         {
             BaseWeapon weapon = inventory.heldWeapons[i].transform.GetChild(0).GetComponent<BaseWeapon>();
+            
             weapon.maxMagazine = weapon.baseMaxMagazine + maxMagazineSize;
+
+            weapon.maxAmmo = Mathf.FloorToInt(weapon.baseMaxAmmo + (weapon.baseMaxAmmo * maxAmmo));
+
             findAndEquipWeapons.SetWeapon(weaponSocket.equippedWeapon.transform.parent.gameObject);
         }
     }

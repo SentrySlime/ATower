@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy_Movement : MonoBehaviour
+public class Enemy_Movement : MonoBehaviour, INoticePlayer
 {
-    NavMeshAgent agent;
+    [HideInInspector] public NavMeshAgent agent;
     Vector3 lastValidLocation;
-    Animator animator;
-    EnemyBase enemyBase;
-    GameObject player;
-
-
+    [HideInInspector] public Animator animator;
+    [HideInInspector] public EnemyBase enemyBase;
+    [HideInInspector] public GameObject player;
+    [HideInInspector] public GameObject playerTargetPoint;
 
     [Header("Movement")]
     public bool roam = false;
     public AudioSource walkingSFX;
+    [HideInInspector] public float movementSpeed = 0;
     private float newDestinationRate = 0.5f;
     private float newDestinationTimer = 0;
-
 
     [Header("Movement perlin")]
     float noiseScale = 1.0f;
@@ -28,26 +27,39 @@ public class Enemy_Movement : MonoBehaviour
     float noiseOffset = 2;
 
     [Header("Player Detection")]
+    [Tooltip("This changes how much in front of the enemy the player has to be. \nWhere 1 is right in front and -1 is right behind.")]
+    [Range(-1f, 1f)] public float dotProductForInfront = 0.5f;
     public Transform visionPoint;
     public LayerMask layerMask;
-    public float interactDistance_ = 125f;
+    [HideInInspector] public float interactDistance_ = 125f;
     bool foundPlayer = false; 
 
     [Header("MISC")]
-    public bool attacking = false;
-    float playerDistance = 0;
-    Vector3 directionToPlayer;
+    public bool isAttacking = false;
+    public float playerDistance = 0;
+    [HideInInspector] public Vector3 directionToPlayer;
 
-    void Start()
+    [Header("Base Attack Stuff")]
+    public float attackRate = 2;
+    [HideInInspector] public float attackRateTimer = 0;
+
+    public void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+        movementSpeed = agent.speed;
+
+        enemyBase = GetComponent<EnemyBase>();
+        animator = GetComponent<Animator>();
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerTargetPoint = player.GetComponent<PlayerHealth>().playerTargetPoint;
+
         updateRate = Random.Range(0.5f, 1f);
         noiseOffset = Random.Range(0f, 100f);
 
-        agent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    void Update()
+    public void Update()
     {
         if (roam)
         {
@@ -71,31 +83,68 @@ public class Enemy_Movement : MonoBehaviour
                 walkingSFX.Pause();
         }
 
-        NoticePlayer();
+        playerDistance = Vector3.Distance(visionPoint.position, playerTargetPoint.transform.position);
+        directionToPlayer = (playerTargetPoint.transform.position - visionPoint.position).normalized;
+        
+        LookForPlayer();
 
         if (!foundPlayer) { return; }
 
-        playerDistance = Vector3.Distance(transform.position, player.transform.position);
-        directionToPlayer = (player.transform.position - transform.position).normalized;
-
         if (!agent || !agent.isOnNavMesh) { return; }
 
-
-        if (attacking) { return; }
+        if (isAttacking) { return; }
 
         movementTimer += Time.deltaTime;
         if (movementTimer >= updateRate)
         {
             if (agent && agent.isOnNavMesh)
             {
-                EnemyMove();
+                CanMoveToPlayer();
                 movementTimer = 0f;
             }
         }
+
+        AttackLogic();
+
     }
 
-    public void EnemyMove()
+    #region Attacks
+
+    public virtual void StartAttack()
     {
+        isAttacking = true;
+        agent.speed = 0;
+    }
+    public virtual void AttackLogic ()
+    {
+
+    }
+    public virtual void EndAttack()
+    {
+        isAttacking = false;
+        attackRateTimer = 0f;
+    }
+
+    #endregion
+
+    public virtual bool ReasonToStop()
+    {
+        return false;
+    }
+
+    private void CanMoveToPlayer()
+    {
+
+        if (ReasonToStop())
+            agent.speed = 0f;
+        else
+            MoveToPlayer();
+    }
+
+    public void MoveToPlayer()
+    {
+        agent.speed = movementSpeed;
+
         NavMeshPath navMeshPath = new NavMeshPath();
 
         float time = Time.time + noiseOffset;
@@ -131,31 +180,16 @@ public class Enemy_Movement : MonoBehaviour
         }
     }
 
-    private void MeleeAttack()
-    {
-        
-
-    }
-
-    private void RangedAttack()
-    {
-        
-    }
-
-    public virtual void OnButtonPress()
-    {
-
-    }
-
-    private void NoticePlayer()
+    private void LookForPlayer()
     {
         if (playerDistance < interactDistance_)
         {
+            Debug.DrawRay(visionPoint.position, directionToPlayer * 200, Color.red, 1f);
 
             RaycastHit hit;
-            if (Physics.Raycast(visionPoint.transform.position, directionToPlayer, out hit, 400/*, ~layerMask*/))
+            if (Physics.Raycast(visionPoint.position, directionToPlayer, out hit, 200/*, ~layerMask*/))
             {
-                Debug.DrawLine(visionPoint.transform.position, directionToPlayer * 200);
+                
                 if (hit.transform.CompareTag("Player"))
                 {
                     foundPlayer = true;
@@ -181,5 +215,45 @@ public class Enemy_Movement : MonoBehaviour
             newDestinationTimer = 0;
             agent.SetDestination(finalPosition);
         }
+    }
+
+    public bool IsPlayerInfront()
+    {
+        Vector3 enemyforward = transform.forward;
+
+        float dot = Vector3.Dot(enemyforward, directionToPlayer);
+
+        if (dot > dotProductForInfront)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    public bool HasLineOfSight()
+    {
+        RaycastHit hit;
+     
+        if (Physics.Raycast(visionPoint.transform.position, directionToPlayer, out hit, playerDistance, layerMask))
+        {
+            if (hit.transform.CompareTag("Player"))
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
+        return false;
+    }
+
+    void INoticePlayer.NoticePlayer()
+    {
+        roam = false;
+        foundPlayer = true;
     }
 }

@@ -55,12 +55,12 @@ public class AudioManager : MonoBehaviour
         {
             time += Time.deltaTime;
             float t = time / fadeDuration;
-            fadeIn.volume = Mathf.Lerp(fadeInStart, 0.2f, t);
+            fadeIn.volume = Mathf.Lerp(fadeInStart, 0.125f, t);
             fadeOut.volume = Mathf.Lerp(fadeOutStart, 0f, t);
             yield return null;
         }
 
-        fadeIn.volume = 0.2f;
+        fadeIn.volume = 0.125f;
         fadeOut.volume = 0f;
     }
 

@@ -25,6 +25,7 @@ public class Recoil : MonoBehaviour
 
     [SerializeField] public bool rotating;
     bool moving;
+    bool hasSetRecoil = false;
 
     Quaternion startRotation;
     Vector3 startPos;
@@ -146,6 +147,10 @@ public class Recoil : MonoBehaviour
 
     public void InitializeRecoil(float move, int angle, float fireRate, int firingMode)
     {
+        if (hasSetRecoil) return;
+
+        hasSetRecoil = true;
+
         recoilAmount = angle;
         moveAmount = move;
         maxTimer = fireRate;

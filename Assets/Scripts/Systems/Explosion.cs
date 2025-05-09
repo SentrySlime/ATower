@@ -72,10 +72,6 @@ public class Explosion : MonoBehaviour, IExplosionInterface
             audioSource.volume = 0.05f;
         }
 
-        //hitMarkerLogic = GameObject.FindGameObjectWithTag("HitMarker").GetComponent<HitmarkerLogicd>();
-        //if (sfxToSpawn)
-        //    Instantiate(sfxToSpawn, transform.position, Quaternion.identity);
-
         screenShake.Screenshake(-1, 1, 1);
 
         if (enemyOwned)
@@ -116,6 +112,7 @@ public class Explosion : MonoBehaviour, IExplosionInterface
         }
         else
         {
+            print(1);
             Collider[] enemies = Physics.OverlapSphere(transform.position, eRadius * 1.5f, layermask);
             DealDamage(enemies);
         }

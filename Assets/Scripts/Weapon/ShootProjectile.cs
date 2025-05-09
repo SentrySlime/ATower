@@ -39,31 +39,12 @@ public class ShootProjectile : BaseWeapon
 
     private void Awake()
     {
-        SetBaseStatsOnSpawn();
-
         layerMask = LayerMask.GetMask("Player", "Projectile");
-
-        recoil = GetComponentInParent<Recoil>();
-        screenShake = GetComponentInParent<ScreenShake>();
-        weaponSocket = GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponSocket>();
-
-        maxAmmoText = GameObject.Find("MaxAmmoText").GetComponent<TextMeshProUGUI>();
-        currentMagazineText = GameObject.Find("CurrentMagazineText").GetComponent<TextMeshProUGUI>();
-        //ammoFill = GameObject.FindGameObjectWithTag("Fill").GetComponent<Image>();
-
-        currentAmmo = maxAmmo;
-        currentMagazine = maxMagazine;
-        playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
-
         raycastShootPoint = GameObject.FindGameObjectWithTag("ShootPoint");
-
-        currentAmmo = maxAmmo;
-        currentMagazine = maxMagazine;
-
-
+        base.Awake();
     }
 
-    public override void Start()
+    public void Start()
     {
         base.Start();
 

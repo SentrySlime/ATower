@@ -140,6 +140,9 @@ public class ItemBase : MonoBehaviour
     [Tooltip("Shooting while on an empty magazine deals damage equal to 5% of your health")]
     [Range(-1f, 1f)] public int heartboundRounds = 0;
 
+    [Tooltip("Increased percentage of max ammo for all weapons, 0.1 point is 10% increased ammo")]
+    [Range(-4f, 4f)] public float maxAmmo = 0;
+
     #endregion
 
     #region WeaponSocket
@@ -207,12 +210,13 @@ public class ItemBase : MonoBehaviour
 
         //Ammo ---
         playerStats.ammoRefills += ammoRefills;
-        playerStats.reloadSpeed += reloadSpeed;
         playerStats.reloadAmount += reloadAmount;
         playerStats.maxMagazineSize += maxMagazineSize;
+        playerStats.reloadSpeed += reloadSpeed;
         playerStats.returnAmmoOnkill += returnAmmoOnkill;
         playerStats.hasAlternateFastReload += hasAlternateFastReload;
         playerStats.heartboundRounds += heartboundRounds;
+        playerStats.maxAmmo += maxAmmo;
 
 
         //WeaponSocket
@@ -267,6 +271,7 @@ public class ItemBase : MonoBehaviour
         playerStats.returnAmmoOnkill -= returnAmmoOnkill;
         playerStats.hasAlternateFastReload -= hasAlternateFastReload;
         playerStats.heartboundRounds -= heartboundRounds;
+        playerStats.maxAmmo -= maxAmmo;
 
         //WeaponSocket ---
         playerStats.fireBallChance -= fireBallChance;

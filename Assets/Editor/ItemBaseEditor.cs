@@ -46,7 +46,7 @@ public class ItemBaseEditor : Editor
 
         DrawFoldout("Ammo", ref showAmmo, new string[]
         {
-            "ammoRefills", "reloadAmount", "maxMagazineSize", "reloadSpeed", "returnAmmoOnkill", "hasAlternateFastReload", "heartboundRounds"
+            "ammoRefills", "reloadAmount", "maxMagazineSize", "reloadSpeed", "returnAmmoOnkill", "hasAlternateFastReload", "heartboundRounds", "maxAmmo"
         });
 
         DrawFoldout("Weapon Socket", ref showWeaponSocket, new string[]

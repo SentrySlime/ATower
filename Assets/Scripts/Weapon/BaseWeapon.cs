@@ -90,7 +90,9 @@ public class BaseWeapon : MonoBehaviour
 
 
     [HideInInspector] public TextMeshProUGUI maxAmmoText;
+    [HideInInspector] public TextMeshProUGUI currentAmmoText;
     [HideInInspector] public TextMeshProUGUI currentMagazineText;
+    [HideInInspector] public TextMeshProUGUI ammoDivider;
     [HideInInspector] public Image ammoFill;
 
     //[Header("FiringMode")]
@@ -102,6 +104,7 @@ public class BaseWeapon : MonoBehaviour
     [HideInInspector] public Recoil recoil;
     public ScreenShake screenShake;
     [HideInInspector] public WeaponSocket weaponSocket;
+    [HideInInspector] public AMainSystem aMainSystem;
     public PlayerStats playerStats;
 
 
@@ -109,17 +112,43 @@ public class BaseWeapon : MonoBehaviour
     [HideInInspector] public bool finishedReload = false;
     public GameObject[] renderObjects;
 
-    private void Awake()
+    public void Awake()
     {
-        
+        playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+        aMainSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AMainSystem>();
+
+        recoil = GetComponentInParent<Recoil>();
+        screenShake = GetComponentInParent<ScreenShake>();
+        weaponSocket = GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponSocket>();
+
+
+        GameObject currentTextObj;
+
+        currentTextObj = GameObject.Find("MaxAmmoText");
+        if (currentTextObj)
+            maxAmmoText = currentTextObj.GetComponent<TextMeshProUGUI>();
+
+        currentTextObj = GameObject.Find("CurrentAmmoText");
+        if(currentTextObj)
+            currentAmmoText = currentTextObj.GetComponent<TextMeshProUGUI>();
+
+        currentTextObj = GameObject.Find("CurrentMagazineText");
+        if (currentTextObj)
+            currentMagazineText = currentTextObj.GetComponent<TextMeshProUGUI>();
+
+        currentTextObj = GameObject.Find("AmmoDivider");
+        if (currentTextObj)
+            ammoDivider = currentTextObj.GetComponent<TextMeshProUGUI>();
+
+        SetBaseStatsOnSpawn();
     }
 
     #region All
 
-    public virtual void Start()
+    public void Start()
     {
-        //This is a virtual "override start function" so the children inherit and use this (So don't remove)
-        
+        currentAmmo = maxAmmo;
+        currentMagazine = maxMagazine;
     }
 
     void Update()
@@ -369,15 +398,19 @@ public class BaseWeapon : MonoBehaviour
 
         currentMagazineText.text = currentMagazine.ToString();
 
+        
+
         if (infinteAmmo)
         {
-
-            //maxAmmoText.text = "Infinte";
-            maxAmmoText.text = "\u221E";
+            maxAmmoText.text = " ";
+            currentAmmoText.text = " ";
+            ammoDivider.text = "\u221E";
         }
         else
         {
-            maxAmmoText.text = currentAmmo.ToString();
+            maxAmmoText.text = maxAmmo.ToString();
+            ammoDivider.text = "/";
+            currentAmmoText.text = currentAmmo.ToString();
 
         }
 

@@ -17,7 +17,8 @@ public class ShootRaycast : BaseWeapon
     public float hitDistance = 0;
 
     HitmarkerLogic hitMarkLogic;
-    [HideInInspector] public AMainSystem aMainSystem;
+
+    
     public GameObject hitmarker;
 
     [Header("Shotgun")]
@@ -67,7 +68,6 @@ public class ShootRaycast : BaseWeapon
         if(lineRenderer)
             lineRenderer.enabled = false;
 
-        SetBaseStatsOnSpawn();
 
         //This layermask sends a single raycast and should basically only hit terrain
         layermask = LayerMask.GetMask("Player", "Enemy", "Projectile", "Items", "Breakable", "Ignore Raycast");
@@ -80,23 +80,11 @@ public class ShootRaycast : BaseWeapon
 
         //shootPoint = GameObject.Find("FX").GetComponent<GameObject>();
         shootPoint = GameObject.FindGameObjectWithTag("ShootPoint");
-        aMainSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AMainSystem>();
-        //hitMarkLogic = GameObject.FindGameObjectWithTag("HitMarker").GetComponent<HitmarkerLogicd>();
-
-        recoil = GetComponentInParent<Recoil>();
-        screenShake = GetComponentInParent<ScreenShake>();
-        weaponSocket = GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponSocket>();
-        playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
         
-        maxAmmoText = GameObject.Find("MaxAmmoText").GetComponent<TextMeshProUGUI>();
-        currentMagazineText = GameObject.Find("CurrentMagazineText").GetComponent<TextMeshProUGUI>();
-
-        currentAmmo = maxAmmo;
-        currentMagazine = maxMagazine;
-
+        base.Awake();
     }
 
-    public override void Start()
+    public void Start()
     {
         base.Start();
         layermask = ~layermask;
@@ -246,8 +234,12 @@ public class ShootRaycast : BaseWeapon
                         var fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal);
                         var tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
                         Vector3 hitDirection = transform.position - raycastHit.point;
-                        GameObject tempVFX = Instantiate(hitEnemyVFX, enemiesToDamage[i].transform.position, Quaternion.LookRotation(hitDirection));
+
+                        GameObject tempVFX = Instantiate(hitEnemyVFX, hits[i].point, Quaternion.LookRotation(hitDirection));
+
                         StartCoroutine(AttachEffectNextFrame(tempVFX, alreadyDamaged[i].transform));
+                        
+                        
                         if (lineRenderer)
                             SpawnLinerenderer(effectPosition.position, hits[i].point, true);
                         DealDamage(alreadyDamaged[i], false, hits[i].point);
@@ -265,11 +257,14 @@ public class ShootRaycast : BaseWeapon
                         var fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal);
                         var tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
                         Vector3 hitDirection = transform.position - raycastHit.point;
-                        GameObject tempVFX = Instantiate(hitEnemyVFX, enemiesToDamage[i].transform.position, Quaternion.LookRotation(hitDirection));
+                        
+                        GameObject tempVFX = Instantiate(hitEnemyVFX, hits[i].point, Quaternion.LookRotation(hitDirection));
+
+                        StartCoroutine(AttachEffectNextFrame(tempVFX, alreadyDamaged[i].transform));
+                        
                         if (lineRenderer)
                             SpawnLinerenderer(effectPosition.position, hits[i].point, true);
                         DealDamage(alreadyDamaged[i], true, hits[i].point);
-                        StartCoroutine(AttachEffectNextFrame(tempVFX, alreadyDamaged[i].transform));
                     }
                 }
                 else if(alreadyDamaged[i].transform.CompareTag("Breakable"))
@@ -342,6 +337,7 @@ public class ShootRaycast : BaseWeapon
                     {
                         DealDamage(hit.transform.root.gameObject, false, hit.point);
                         hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
+
                         Instantiate(hitEnemyVFX, hit.point, Quaternion.Inverse(transform.rotation), hit.transform);
 
                     }
@@ -349,6 +345,7 @@ public class ShootRaycast : BaseWeapon
                     {
                         DealDamage(hit.transform.root.gameObject, true, hit.point);
                         hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
+
                         Instantiate(hitEnemyVFX, hit.point, Quaternion.Inverse(transform.rotation), hit.transform);
                     }
 
@@ -448,7 +445,7 @@ public class ShootRaycast : BaseWeapon
     IEnumerator AttachEffectNextFrame(GameObject effect, Transform parent)
     {
         yield return null; // wait one frame
-        if (effect && parent) effect.transform.SetParent(parent);
+        if (effect && parent) effect.transform.SetParent(parent, true);
     }
 
     private Vector3 GetQuadraticBezierPoint(Vector3 p0, Vector3 p1, Vector3 p2, float t)

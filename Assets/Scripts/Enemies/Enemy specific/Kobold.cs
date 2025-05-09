@@ -151,7 +151,7 @@ public class Kobold : MonoBehaviour, INoticePlayer
             else
             {
                 Debug.LogWarning("Agent is not on the NavMesh!");
-                currentState = CurrentState.canSeePlayer; // fallback
+                currentState = CurrentState.canSeePlayer; 
             }
         }
         else

@@ -5019,9 +5019,11 @@ MonoBehaviour:
   renderObjects:
   - {fileID: 6745158401392658359}
   lineRenderer: {fileID: 0}
+  curve: 0
   lineDuration: 0.9
   lineTimer: 0
   hitDistance: 0
+  aMainSystem: {fileID: 0}
   hitmarker: {fileID: 0}
   isShotgun: 1
   shootAmount: 12
@@ -5262,6 +5264,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 85b00c74b32774b428135e5034b62fd5, type: 3}
       propertyPath: m_Name
       value: SK_SPAS12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723762526256027154, guid: 85b00c74b32774b428135e5034b62fd5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85b00c74b32774b428135e5034b62fd5, type: 3}

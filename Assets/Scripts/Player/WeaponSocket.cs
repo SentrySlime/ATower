@@ -351,9 +351,13 @@ public class WeaponSocket : MonoBehaviour
             equippedWeapon.finishedReload = false;
 
             if (equippedWeapon.HasFullMagazine() || equippedWeapon.OutOfAmmo())
+            {
                 StartCoroutine(ReloadFinish());
+            }
             else
+            {
                 StartCoroutine(PartialReloadFinish());
+            }
         }
 
         yield return null;
@@ -390,8 +394,10 @@ public class WeaponSocket : MonoBehaviour
 
     public IEnumerator ReloadFinish()
     {
+
         reloadFinish.enabled = true;
         yield return new WaitForSeconds(0.1f);
+
         reloadGroup.alpha = 0;
         reloadFinish.enabled = false;
         reloadIcon.enabled = false;
@@ -401,6 +407,7 @@ public class WeaponSocket : MonoBehaviour
     {
         reloadFinish.enabled = true;
         yield return new WaitForSeconds(0.1f);
+
         reloadFinish.enabled = false;
         RepeatReload();
     }
@@ -418,8 +425,12 @@ public class WeaponSocket : MonoBehaviour
             return;
 
         if (equippedWeapon.currentMagazine < equippedWeapon.maxMagazine && !equippedWeapon.interuptReload)
+        {
             StartCoroutine(Reloading());
+        }
         else if (equippedWeapon.reloadType == ReloadType.ShotByShot)
-            equippedWeapon.MantleWeapon();
+        {
+            StartCoroutine(Reloading());
+        }
     }
 }

@@ -14,15 +14,9 @@ public class HitmarkerLogic : MonoBehaviour
         critHitMarker = transform.GetChild(1).gameObject;
     }
 
-    void Update()
-    {
-
-    }
-
     public void EnableCritHitMarker()
     {
         StopCoroutine(DisableCritHitmarker());
-        //StopAllCoroutines();
 
         critHitMarker.SetActive(true);
 
@@ -31,7 +25,7 @@ public class HitmarkerLogic : MonoBehaviour
 
     IEnumerator DisableCritHitmarker()
     {
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.2f);
 
         critHitMarker.SetActive(false);
     }
@@ -39,7 +33,6 @@ public class HitmarkerLogic : MonoBehaviour
     public void EnableHitMarker()
     {
         StopCoroutine(DisableHitmarker());
-        //StopAllCoroutines();
 
         hitMarker.SetActive(true);
 
@@ -48,7 +41,7 @@ public class HitmarkerLogic : MonoBehaviour
 
     IEnumerator DisableHitmarker()
     {
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.2f);
 
         hitMarker.SetActive(false);
     }
