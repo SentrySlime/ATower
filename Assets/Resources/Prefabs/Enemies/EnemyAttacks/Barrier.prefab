@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5206377327788692536}
   - component: {fileID: 5206377327788692532}
   - component: {fileID: 2392629683112380128}
+  - component: {fileID: 340075950}
   m_Layer: 11
   m_Name: Barrier
   m_TagString: Breakable
@@ -29,14 +30,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5206377327788692538}
-  m_LocalRotation: {x: -0, y: 0.86602443, z: -0, w: 0.5000017}
+  m_LocalRotation: {x: 0, y: 0.86602545, z: 0, w: 0.49999994}
   m_LocalPosition: {x: 0.03980343, y: -0.34999847, z: -0.23498446}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5206377328400476330}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 120, z: 0}
 --- !u!114 &5206377327788692535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2251,7 +2252,7 @@ MeshCollider:
   m_GameObject: {fileID: 5206377327788692538}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
@@ -2273,6 +2274,7 @@ MonoBehaviour:
   elite: 0
   canExplode: 0
   explodeOnDeath: 0
+  explosiveBarrel: 0
   moneyPrefab: {fileID: 0}
   dieSFX: {fileID: 4964101775347663484, guid: 0c5f55bde2f442e4e897386c8d299ba6, type: 3}
   deathParticles: {fileID: 4186107489171515808, guid: 9c5bea2b0425dfd4cbd28392619900cd, type: 3}
@@ -2395,6 +2397,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &340075950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5206377327788692538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cae4ff4e8981774dbedefbe1e2f1336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5206377328400476333
 GameObject:
   m_ObjectHideFlags: 0

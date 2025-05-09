@@ -124,21 +124,33 @@ public class BaseWeapon : MonoBehaviour
 
         GameObject currentTextObj;
 
-        currentTextObj = GameObject.Find("MaxAmmoText");
-        if (currentTextObj)
-            maxAmmoText = currentTextObj.GetComponent<TextMeshProUGUI>();
-
-        currentTextObj = GameObject.Find("CurrentAmmoText");
-        if(currentTextObj)
-            currentAmmoText = currentTextObj.GetComponent<TextMeshProUGUI>();
 
         currentTextObj = GameObject.Find("CurrentMagazineText");
         if (currentTextObj)
             currentMagazineText = currentTextObj.GetComponent<TextMeshProUGUI>();
 
-        currentTextObj = GameObject.Find("AmmoDivider");
-        if (currentTextObj)
-            ammoDivider = currentTextObj.GetComponent<TextMeshProUGUI>();
+        //currentTextObj = GameObject.Find("MaxAmmoText");
+        //if (currentTextObj)
+        //    maxAmmoText = currentTextObj.GetComponent<TextMeshProUGUI>();
+
+
+        //currentTextObj = GameObject.Find("CurrentAmmoText");
+        //if(currentTextObj)
+        //    currentAmmoText = currentTextObj.GetComponent<TextMeshProUGUI>();
+
+
+        //currentTextObj = GameObject.Find("CurrentMagazineText");
+        //if (currentTextObj)
+        //    currentMagazineText = currentTextObj.GetComponent<TextMeshProUGUI>();
+
+
+        //currentTextObj = GameObject.Find("AmmoDivider");
+        //if (currentTextObj)
+        //    ammoDivider = currentTextObj.GetComponent<TextMeshProUGUI>();
+
+
+        
+
 
         SetBaseStatsOnSpawn();
     }
@@ -147,8 +159,15 @@ public class BaseWeapon : MonoBehaviour
 
     public void Start()
     {
+        maxAmmoText = iconPrefab.GetComponent<WeaponIcon>().maxAmmoText;
+
+        currentAmmoText = iconPrefab.GetComponent<WeaponIcon>().currentAmmoText;
+
+        ammoDivider = iconPrefab.GetComponent<WeaponIcon>().ammoDivider;
+
         currentAmmo = maxAmmo;
         currentMagazine = maxMagazine;
+
     }
 
     void Update()
@@ -219,12 +238,9 @@ public class BaseWeapon : MonoBehaviour
 
             currentAmmo = Mathf.Clamp(currentAmmo, 0, 99999);
             //Then we update the hud with our ammo info
-            if (!recoil.holstered)
-            {
-                //weaponSocket.AmmoVisualRefillMagazine();
-                SetAmmoInfo();
-
-            }
+            
+            SetAmmoInfo();
+            
         }   
         else if (reloadType == ReloadType.ShotByShot)
         {
@@ -266,8 +282,8 @@ public class BaseWeapon : MonoBehaviour
             currentAmmo = Mathf.Clamp(currentAmmo, 0, 99999);
             finishedReload = true;
             //Then we update the hud with our ammo info
-            if (!recoil.holstered)
-                SetAmmoInfo();
+            
+            SetAmmoInfo();
 
         }
     }
@@ -281,9 +297,15 @@ public class BaseWeapon : MonoBehaviour
         aimCamera = camera;
         recoil.InitializeRecoil(moveAmount, recoilAmount, fireRate, (int)firingMode);
         screenShake.InitializeShake(recoilX, recoilY, recoilZ);
-        weaponSocket.SetAds(adsPos, hipPos, fireRate, adsSpeed);
 
-        //Text based elements for ammo
+        StartCoroutine(InitalizeCoroutine());
+    }
+
+    IEnumerator InitalizeCoroutine()
+    {
+        yield return null;
+
+        weaponSocket.SetAds(adsPos, hipPos, fireRate, adsSpeed);
         SetAmmoInfo();
     }
 
@@ -395,29 +417,90 @@ public class BaseWeapon : MonoBehaviour
     //Set the HUD info for the weapons
     public void SetAmmoInfo()
     {
-
-        currentMagazineText.text = currentMagazine.ToString();
-
+        
+        if(!recoil.holstered)
+        {
+            currentMagazineText.text = currentMagazine.ToString();
+            SetCurrentMagazineTextColor();
+        }
+        
         
 
         if (infinteAmmo)
         {
-            maxAmmoText.text = " ";
             currentAmmoText.text = " ";
             ammoDivider.text = "\u221E";
+            maxAmmoText.text = " ";
         }
         else
         {
-            maxAmmoText.text = maxAmmo.ToString();
-            ammoDivider.text = "/";
             currentAmmoText.text = currentAmmo.ToString();
+            SetCurrentAmmoTextColor();
+            ammoDivider.text = "/";
+            maxAmmoText.text = maxAmmo.ToString();
 
         }
 
-        if (currentMagazine >= maxMagazine)
+        //if (currentMagazine >= maxMagazine)
+        //{
+        //    MantleWeapon();
+        //}
+
+    }
+
+    private void SetCurrentMagazineTextColor()
+    {
+        float ammoPercent = (float)currentMagazine / maxMagazine;
+
+        Color color;
+        if (ammoPercent > 0.66f)
         {
-            MantleWeapon();
+            // From white to yellow
+            float t = (ammoPercent - 0.66f) / (1f - 0.66f);
+            color = Color.Lerp(Color.yellow, Color.white, t);
         }
+        else if (ammoPercent > 0.33f)
+        {
+            // From yellow to orange
+            float t = (ammoPercent - 0.33f) / (0.66f - 0.33f);
+            color = Color.Lerp(new Color(1f, 0.5f, 0f), Color.yellow, t); // Orange to Yellow
+        }
+        else
+        {
+            // From orange to red
+            float t = ammoPercent / 0.33f;
+            color = Color.Lerp(Color.red, new Color(1f, 0.5f, 0f), t); // Red to Orange
+        }
+
+        currentMagazineText.color = color;
+
+    }
+
+    private void SetCurrentAmmoTextColor()
+    {
+        float ammoPercent = (float)currentAmmo / maxAmmo;
+
+        Color color;
+        if (ammoPercent > 0.66f)
+        {
+            // From white to yellow
+            float t = (ammoPercent - 0.66f) / (1f - 0.66f);
+            color = Color.Lerp(Color.yellow, Color.white, t);
+        }
+        else if (ammoPercent > 0.33f)
+        {
+            // From yellow to orange
+            float t = (ammoPercent - 0.33f) / (0.66f - 0.33f);
+            color = Color.Lerp(new Color(1f, 0.5f, 0f), Color.yellow, t); // Orange to Yellow
+        }
+        else
+        {
+            // From orange to red
+            float t = ammoPercent / 0.33f;
+            color = Color.Lerp(Color.red, new Color(1f, 0.5f, 0f), t); // Red to Orange
+        }
+
+        currentAmmoText.color = color;
 
     }
 

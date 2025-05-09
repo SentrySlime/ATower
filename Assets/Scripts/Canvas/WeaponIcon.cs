@@ -20,6 +20,11 @@ public class WeaponIcon : MonoBehaviour
     public float reloadTime = 0;
     public float reloadTimeTimer = 0;
 
+    [Header("AmmoText")]
+    public TextMeshProUGUI currentAmmoText;
+    public TextMeshProUGUI ammoDivider;
+    public TextMeshProUGUI maxAmmoText;
+
     private void Update()
     {
         if (canvasGroup != null)
@@ -65,7 +70,7 @@ public class WeaponIcon : MonoBehaviour
 
         if (fillImage.fillAmount > 0)
         {
-            fillImage.fillAmount -= (1 / reloadTime) * Time.deltaTime;
+            fillImage.fillAmount -= (1f / reloadTime) * Time.deltaTime;
         }
         else
         {

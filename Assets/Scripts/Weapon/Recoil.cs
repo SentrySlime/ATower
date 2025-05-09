@@ -222,7 +222,7 @@ public class Recoil : MonoBehaviour
 
     private void SingleBasedReload()
     {
-        if (reloadTimer < baseWeapon.reloadTime)
+        if (reloadTimer < baseWeapon.reloadTime * 1.5)
         {
             reloadTimer += Time.deltaTime;
         }

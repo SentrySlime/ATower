@@ -42,7 +42,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.12
-  m_Center: {x: 0, y: 2.02, z: -0.24}
+  m_Center: {x: 0, y: 2, z: -0.24}
 --- !u!1 &1710239320598269243
 GameObject:
   m_ObjectHideFlags: 0
@@ -2686,13 +2686,13 @@ MonoBehaviour:
   angularSpeed: 2000
   turnRadius: 3
   maxDelta: 3
-  attackRate: 1
+  attackRate: 3
   beamDuration: 4
   rangedAttackDist: 50
-  projectileCooldown: 3
+  projectileCooldown: 3.5
   projectileFireRate: 0.09
   yOffset: -35
-  projectileAmount: 6
+  projectileAmount: 3
   projectileSpacing: 30
   canFireProjectile: 0
   numberOfProjectiles: 0
@@ -2709,7 +2709,7 @@ MonoBehaviour:
   yawSpeed: 0.6
   pitchSpeed: 6
   meleeAttacking: 0
-  meleeCooldown: 3
+  meleeCooldown: 4
   meleeDamage: 30
   attackVFX: {fileID: 8739366338853244675, guid: 18fe8a61f96f1204fa8f4d67f4aff290, type: 3}
   telegraphVFX2: {fileID: 7277943351480721913}

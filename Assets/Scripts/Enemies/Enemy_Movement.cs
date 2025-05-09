@@ -213,7 +213,10 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
             NavMesh.SamplePosition(randomDirection, out hit, 10, 1);
             Vector3 finalPosition = hit.position;
             newDestinationTimer = 0;
-            agent.SetDestination(finalPosition);
+            if (agent.isOnNavMesh)
+            {
+                agent.SetDestination(finalPosition);
+            }
         }
     }
 
