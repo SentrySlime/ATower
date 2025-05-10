@@ -85,8 +85,11 @@ public class ShootProjectile : BaseWeapon
 
 
 
+
         #region Shooting
 
+        float tempADSAccuracy = ADSAccuracy + playerStats.accuracy;
+        float tempHIPAccuracy = HIPAccuracy + playerStats.accuracy;
 
         if (!isShotgun)
         {
@@ -94,19 +97,19 @@ public class ShootProjectile : BaseWeapon
             #region RandomNumbers Accuracy
             if (weaponSocket.adsProgress < 0.9)
             {
-                minYOffset = Random.Range(-ADSAccuracy, 0);
-                maxYOffset = Random.Range(ADSAccuracy, 0);
+                minYOffset = Random.Range(-tempADSAccuracy, 0);
+                maxYOffset = Random.Range(tempADSAccuracy, 0);
 
-                minXoffset = Random.Range(-ADSAccuracy, 0);
-                maxXoffset = Random.Range(ADSAccuracy, 0);
+                minXoffset = Random.Range(-tempADSAccuracy, 0);
+                maxXoffset = Random.Range(tempADSAccuracy, 0);
             }
             else
             {
-                minYOffset = Random.Range(-HIPAccuracy, 0);
-                maxYOffset = Random.Range(HIPAccuracy, 0);
+                minYOffset = Random.Range(-tempHIPAccuracy, 0);
+                maxYOffset = Random.Range(tempHIPAccuracy, 0);
 
-                minXoffset = Random.Range(-HIPAccuracy, 0);
-                maxXoffset = Random.Range(HIPAccuracy, 0);
+                minXoffset = Random.Range(-tempHIPAccuracy, 0);
+                maxXoffset = Random.Range(tempHIPAccuracy, 0);
             }
 
             #endregion
@@ -132,20 +135,21 @@ public class ShootProjectile : BaseWeapon
             }
             for (int i = 0; i < shootAmount; i++)
             {
+                
 
                 #region RandomNumbers Accuracy
                 if (weaponSocket.adsProgress < 0.9)
                 {
                     if (UseHorizontal)
                     {
-                        minYOffset = Random.Range(-ADSAccuracy, 0);
-                        maxYOffset = Random.Range(ADSAccuracy, 0);
+                        minYOffset = Random.Range(-tempADSAccuracy, 0);
+                        maxYOffset = Random.Range(tempADSAccuracy, 0);
                     }
 
                     if (UseVertical)
                     {
-                        minXoffset = Random.Range(-ADSAccuracy, 0);
-                        maxXoffset = Random.Range(ADSAccuracy, 0);
+                        minXoffset = Random.Range(-tempADSAccuracy, 0);
+                        maxXoffset = Random.Range(tempADSAccuracy, 0);
                     }
 
                 }
@@ -153,14 +157,14 @@ public class ShootProjectile : BaseWeapon
                 {
                     if (UseHorizontal)
                     {
-                        minYOffset = Random.Range(-HIPAccuracy, 0);
-                        maxYOffset = Random.Range(HIPAccuracy, 0);
+                        minYOffset = Random.Range(-tempHIPAccuracy, 0);
+                        maxYOffset = Random.Range(tempHIPAccuracy, 0);
                     }
 
                     if (UseVertical)
                     {
-                        minXoffset = Random.Range(-HIPAccuracy, 0);
-                        maxXoffset = Random.Range(HIPAccuracy, 0);
+                        minXoffset = Random.Range(-tempHIPAccuracy, 0);
+                        maxXoffset = Random.Range(tempHIPAccuracy, 0);
                     }
 
                 }

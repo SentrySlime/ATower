@@ -100,7 +100,7 @@ public class AMainSystem : MonoBehaviour
 
     private void CalculateDamage(GameObject incomingObj, float incomingDamage, bool incomingWeakSpotShot)
     {
-        incomingDamage += playerStats.damage;
+        incomingDamage += playerStats.addedDamage;
 
         if(incomingWeakSpotShot)
         {
@@ -118,6 +118,11 @@ public class AMainSystem : MonoBehaviour
         {
             totalMultiplier += (playerHealth.maxHP / 4f) * 0.01f;
 
+        }
+
+        if(playerStats.increasedDamage > 0)
+        {
+            totalMultiplier += playerStats.increasedDamage;
         }
 
         incomingDamage *= totalMultiplier;

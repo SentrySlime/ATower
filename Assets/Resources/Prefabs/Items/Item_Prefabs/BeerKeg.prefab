@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: BeerKeg
-  itemDescription: Lower Accuracy but Higher Damage
+  itemDescription: Lower Accuracy but increased Damage
   itemIcon: {fileID: 21300000, guid: 71a8e5b9b1f16de4296d02a544ce3300, type: 3}
   itemMesh: {fileID: -8421077457981113594, guid: e028a7ce52f633a4d902f7c5069036a1, type: 3}
   itemMaterial: {fileID: 2100000, guid: dbf8b92450a66e940b9b1c5e9d909b58, type: 2}
@@ -66,7 +66,8 @@ MonoBehaviour:
   damageIgnoreChance: 0
   moveSpeed: 0
   extraJumps: 0
-  damage: 10
+  damage: 0
+  increasedDamage: 0.3
   critChance: 0
   canExplodeEnemies: 0
   moneyIsPower: 0
@@ -76,10 +77,11 @@ MonoBehaviour:
   maxMagazineSize: 0
   reloadSpeed: 0
   returnAmmoOnkill: 0
-  hasAlternateFastReload: 1
+  hasAlternateFastReload: 0
   heartboundRounds: 0
   maxAmmo: 0
   fireBallChance: 0
+  accuracy: 4
   increasedMoneyDrops: 0
   moneyIsHealth: 0
   playerStats: {fileID: 0}

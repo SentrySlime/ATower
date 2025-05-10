@@ -127,26 +127,30 @@ public class ShootRaycast : BaseWeapon
             Instantiate(shootEffect, effectPosition.position, transform.rotation);
         }
 
+        float tempADSAccuracy = ADSAccuracy + playerStats.accuracy;
+        float tempHIPAccuracy = HIPAccuracy + playerStats.accuracy;
+
         #region Shooting
         if (!isShotgun)
         {
+
             //This is where we se the random numbers for the accuracy
             #region RandomNumbers Accuracy
             if (weaponSocket.adsProgress < 0.9)
             {
-                minYOffset = Random.Range(-ADSAccuracy, 0);
-                maxYOffset = Random.Range(ADSAccuracy, 0);
+                minYOffset = Random.Range(-tempADSAccuracy, 0);
+                maxYOffset = Random.Range(tempADSAccuracy, 0);
 
-                minXoffset = Random.Range(-ADSAccuracy, 0);
-                maxXoffset = Random.Range(ADSAccuracy, 0);
+                minXoffset = Random.Range(-tempADSAccuracy, 0);
+                maxXoffset = Random.Range(tempADSAccuracy, 0);
             }
             else
             {
-                minYOffset = Random.Range(-HIPAccuracy, 0);
-                maxYOffset = Random.Range(HIPAccuracy, 0);
+                minYOffset = Random.Range(-tempHIPAccuracy, 0);
+                maxYOffset = Random.Range(tempHIPAccuracy, 0);
 
-                minXoffset = Random.Range(-HIPAccuracy, 0);
-                maxXoffset = Random.Range(HIPAccuracy, 0);
+                minXoffset = Random.Range(-tempHIPAccuracy, 0);
+                maxXoffset = Random.Range(tempHIPAccuracy, 0);
             }
 
             #endregion
@@ -311,19 +315,19 @@ public class ShootRaycast : BaseWeapon
                 #region RandomNumbers Accuracy
                 if (weaponSocket.adsProgress < 0.9)
                 {
-                    minYOffset = Random.Range(-ADSAccuracy, 0);
-                    maxYOffset = Random.Range(ADSAccuracy, 0);
+                    minYOffset = Random.Range(-tempADSAccuracy, 0);
+                    maxYOffset = Random.Range(tempADSAccuracy, 0);
 
-                    minXoffset = Random.Range(-ADSAccuracy, 0);
-                    maxXoffset = Random.Range(ADSAccuracy, 0);
+                    minXoffset = Random.Range(-tempADSAccuracy, 0);
+                    maxXoffset = Random.Range(tempADSAccuracy, 0);
                 }
                 else
                 {
-                    minYOffset = Random.Range(-HIPAccuracy, 0);
-                    maxYOffset = Random.Range(HIPAccuracy, 0);
+                    minYOffset = Random.Range(-tempHIPAccuracy, 0);
+                    maxYOffset = Random.Range(tempHIPAccuracy, 0);
 
-                    minXoffset = Random.Range(-HIPAccuracy, 0);
-                    maxXoffset = Random.Range(HIPAccuracy, 0);
+                    minXoffset = Random.Range(-tempHIPAccuracy, 0);
+                    maxXoffset = Random.Range(tempHIPAccuracy, 0);
                 }
 
                 #endregion

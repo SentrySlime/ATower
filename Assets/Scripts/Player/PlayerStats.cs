@@ -27,7 +27,8 @@ public class PlayerStats : MonoBehaviour
     public int extraJumps = 0;
 
     [Header("Damage")]
-    public float damage = 0;
+    public float addedDamage = 0;
+    public float increasedDamage = 0;
     public float criticalChance = 5;
     public float criticalMultiplier = 2;
     public int canExplode = 0;
@@ -48,6 +49,7 @@ public class PlayerStats : MonoBehaviour
 
     [Header("WeaponSocket")]
     public int fireBallChance = 0;
+    public int accuracy = 0;
 
     [Header("Misc")]
     public bool increasedMoneyDrop = false;

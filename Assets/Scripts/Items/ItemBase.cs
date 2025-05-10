@@ -97,6 +97,9 @@ public class ItemBase : MonoBehaviour
 
     //Damage ---- 
     [Range(-100, 100f)] public int damage = 0;
+
+    [Tooltip("0.1 point is equal to 10% percent")]
+    [Range(-100, 100f)] public float increasedDamage = 0;
     
     //Critical Hit ---- 
     [Tooltip("1 point is equal to 1% percent")]
@@ -150,17 +153,19 @@ public class ItemBase : MonoBehaviour
     [Tooltip("1 point is equal to 1% chance to fire a rocket")]
     [Range(-100, 100f)] public int fireBallChance = 0;
 
+    [Tooltip("1 point is equal to 1 point lower accuracy")]
+    [Range(-30, 30f)] public int accuracy = 0;
+
     #endregion
-    
+
+    #region Misc
+
     [Header("Misc ---------------------------------------------------")]
     [Tooltip("Makes enemies drop increased amount of money")]
     [Range(-1f, 1f)] public int increasedMoneyDrops = 0;
 
     [Tooltip("You take first from money before you take damage from hp")]
     [Range(-1f, 1f)] public int moneyIsHealth = 0;
-
-    #region Misc
-
 
 
     #endregion
@@ -190,8 +195,6 @@ public class ItemBase : MonoBehaviour
         playerStats.canOverheal += canOverheal;
         playerStats.onlyEliteKillHeal += onlyEliteKillHeal;
 
-
-
         //Defense
         playerStats.damageIgnoreChance += damageIgnoreChance;
         playerStats.damageReductionPercent += damageReductionPercent;
@@ -201,7 +204,8 @@ public class ItemBase : MonoBehaviour
         playerStats.extraJumps += extraJumps;
         
         //Damage ----
-        playerStats.damage += damage;
+        playerStats.addedDamage += damage;
+        playerStats.increasedDamage += increasedDamage;
         playerStats.moneyIsPower += moneyIsPower;
         playerStats.criticalChance += critChance;
         playerStats.hpIsPower += hpIsPower;
@@ -221,6 +225,7 @@ public class ItemBase : MonoBehaviour
 
         //WeaponSocket
         playerStats.fireBallChance += fireBallChance;
+        playerStats.accuracy += accuracy;
 
         //Misc
         playerStats.moneyIsHealth += moneyIsHealth;
@@ -256,7 +261,8 @@ public class ItemBase : MonoBehaviour
         playerStats.extraJumps -= extraJumps;
 
         //Damage ----
-        playerStats.damage -= damage;
+        playerStats.addedDamage -= damage;
+        playerStats.increasedDamage -= increasedDamage;
         playerStats.criticalChance -= critChance;
         playerStats.moneyIsPower -= moneyIsPower;
         playerStats.hpIsPower -= hpIsPower;
@@ -275,7 +281,8 @@ public class ItemBase : MonoBehaviour
 
         //WeaponSocket ---
         playerStats.fireBallChance -= fireBallChance;
-        
+        playerStats.accuracy -= accuracy;
+
         //Misc
         playerStats.moneyIsHealth -= moneyIsHealth;
 

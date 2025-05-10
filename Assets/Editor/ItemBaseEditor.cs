@@ -41,7 +41,7 @@ public class ItemBaseEditor : Editor
 
         DrawFoldout("Damage", ref showDamage, new string[]
         {
-            "damage", "critChance", "canExplodeEnemies", "moneyIsPower", "hpIsPower"
+            "damage", "increasedDamage", "critChance", "canExplodeEnemies", "moneyIsPower", "hpIsPower"
         });
 
         DrawFoldout("Ammo", ref showAmmo, new string[]
@@ -51,7 +51,7 @@ public class ItemBaseEditor : Editor
 
         DrawFoldout("Weapon Socket", ref showWeaponSocket, new string[]
         {
-            "fireBallChance"
+            "fireBallChance", "accuracy" ,
         });
 
         DrawFoldout("Misc", ref showMisc, new string[]
