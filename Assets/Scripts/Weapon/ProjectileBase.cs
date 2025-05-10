@@ -45,9 +45,11 @@ public class ProjectileBase : MonoBehaviour
     [Header("Homing stuff")]
     public bool homing = false;
     public float turnSpeed = 12;
+    public float nonHomingDuration = 0.35f;
+    public float homingRange = 25;
+
     public GameObject target;
     float homingTimer = 0;
-    public float nonHomingDuration = 0.35f;
     float homingCheckTimer = 0;
     bool cantHome = false;
 
@@ -331,7 +333,7 @@ public class ProjectileBase : MonoBehaviour
 
     protected void GetTarget()
     {
-        Collider[] targets = Physics.OverlapSphere(transform.position, 75, enemyMask);
+        Collider[] targets = Physics.OverlapSphere(transform.position, homingRange, enemyMask);
 
         if (targets.Length == 0)
         {

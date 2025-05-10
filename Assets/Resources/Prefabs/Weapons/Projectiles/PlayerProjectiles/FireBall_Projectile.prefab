@@ -140,11 +140,18 @@ MonoBehaviour:
   explosiveImpactSFX: {fileID: 0}
   homing: 1
   turnSpeed: 18
+  nonHomingDuration: 0.35
+  homingRange: 55
   target: {fileID: 0}
   useGravity: 0
   gravityMagnitude: 1
+  hitVFX: {fileID: 0}
+  hitEnemyVFX: {fileID: 0}
   lifeDuration: 8
   lifeTimer: 0
+  weaponParent: {fileID: 0}
+  aMainSysteM: {fileID: 0}
+  shootSystem: {fileID: 0}
 --- !u!54 &4140537416350080728
 Rigidbody:
   m_ObjectHideFlags: 0
