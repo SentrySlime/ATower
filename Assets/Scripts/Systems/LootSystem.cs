@@ -54,4 +54,9 @@ public class LootSystem : MonoBehaviour
         return itemManager.DropDevilItem(pos);
     }
 
+    public ItemBase GetItemForShop()
+    {
+        return itemManager.GetItemForShop();
+    }
+
 }

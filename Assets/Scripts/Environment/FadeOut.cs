@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class FadeOut : MonoBehaviour
 {
 
-    float fadeSpeed = 0.25f;
+    float fadeSpeed = 0.75f;
     float fadeAlpha = 1f;
 
     [HideInInspector] public GameObject endScreenButtons;
@@ -37,7 +37,7 @@ public class FadeOut : MonoBehaviour
 
     IEnumerator FadeIn()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
         
         fadeAlpha = 1;
 

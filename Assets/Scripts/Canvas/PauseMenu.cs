@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
 {
     GameObject player;
     GameObject shootPoint;
+    public GameObject shopPanel;
     public GameObject pauseMenu;
     public GameObject inventoryMenu;
     public bool paused = false;
@@ -28,10 +29,10 @@ public class PauseMenu : MonoBehaviour
     public TextMeshProUGUI PitemDescription;
     public Image Pimage;
 
-
     [Header("ChildReferences")]
     public CanvasGroup damageVignette;
     public CanvasGroup shieldVignette;
+    public ItemShowCase itemShowCase;
 
     [Header("Settings")]
     public Slider sensitivitySlider;
@@ -41,6 +42,7 @@ public class PauseMenu : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         shootPoint = GameObject.FindGameObjectWithTag("ShootPoint");
         cmMovement = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMovement>();
+        
         SetPlayerObj();
         
     }
@@ -58,45 +60,46 @@ public class PauseMenu : MonoBehaviour
         {
             if (inventoryMenu.activeInHierarchy)
             {
-                ResumeGame(true);
+                ResumeGame(inventoryMenu);
 
                 return;
             }
 
             if (pauseMenu.activeInHierarchy)
             {
-                ResumeGame(false);
+                ResumeGame(pauseMenu);
+                return;
+            }
+
+
+            if(shopPanel.activeInHierarchy)
+            {
+                ResumeGame(shopPanel);
+                return;
+
             }
             else
             {
-                paused = true;
-                cmMovement.paused = true;
-                Time.timeScale = 0;
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-
+                PauseGame();
                 pauseMenu.SetActive(true);
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (pauseMenu.activeInHierarchy)
+            if (pauseMenu.activeInHierarchy || shopPanel.activeInHierarchy)
                 return;
+
 
             if (inventoryMenu.activeInHierarchy)
             {
-                ResumeGame(true);
+                ResumeGame(inventoryMenu);
             }
             else
             {
-                paused = true;
-                cmMovement.paused = true;
-                Time.timeScale = 0;
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-
+                PauseGame();
                 inventoryMenu.SetActive(true);
+                itemShowCase.SetFirstItemDisplay();
             }
         }
 
@@ -112,7 +115,16 @@ public class PauseMenu : MonoBehaviour
         //}
     }
 
-    public void ResumeGame(bool inventory)
+    public void PauseGame()
+    {
+        paused = true;
+        cmMovement.paused = true;
+        Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void ResumeGame(GameObject obj)
     {
         paused = false;
         cmMovement.paused = false;
@@ -120,10 +132,7 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        if(inventory)
-            inventoryMenu.SetActive(false);
-        else
-            pauseMenu.SetActive(false);
+        obj.SetActive(false);
     }
 
     public void ResumeGame()
@@ -136,6 +145,7 @@ public class PauseMenu : MonoBehaviour
 
         inventoryMenu.SetActive(false);
         pauseMenu.SetActive(false);
+        shopPanel.SetActive(false);
     }
 
     public void OpenInventoryFromPause()
@@ -160,9 +170,11 @@ public class PauseMenu : MonoBehaviour
 
     private IEnumerator HideMenu()
     {
+        shopPanel.GetComponent<ShopPanel>().PopulateShop();
         yield return new WaitForSeconds(0.1f);
         pauseMenu.SetActive(false);
         inventoryMenu.SetActive(false);
+        shopPanel.SetActive(false);
     }
 
     private void SetPlayerObj()

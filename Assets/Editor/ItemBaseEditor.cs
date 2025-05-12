@@ -21,6 +21,7 @@ public class ItemBaseEditor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("itemIcon"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("itemMesh"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("itemMaterial"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("goldCost"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("type"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("isDevilItem"));
 

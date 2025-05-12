@@ -108,7 +108,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.6666667
+  m_VoxelSize: 1.3333334
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1 &1745589072951350242
@@ -170,9 +170,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd213149f480a8340925c325f5e8dabe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  easyRooms: []
-  mediumRooms: []
-  hardRooms: []
+  surface_1: {fileID: 2109320633}
+  surface_2: {fileID: 269352844}
+  navMeshSurfaces:
+  - {fileID: 2109320633}
+  - {fileID: 269352844}
   rooms:
   - {fileID: 8157766797853555144, guid: 99074aec934783947bebc5e1e1af2396, type: 3}
   - {fileID: 5188076373493364511, guid: 9bbe837a8dd401747b3c328c884276a0, type: 3}
@@ -219,7 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AgentTypeID: 0
   m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
+  m_Size: {x: 1000, y: 1000, z: 1000}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
@@ -233,7 +235,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.33333334
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: da4455a22475cc4468b8d34d5ce1c51c, type: 2}
 --- !u!114 &269352844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,6 +262,6 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.6666667
+  m_VoxelSize: 1.3333334
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: e39f0c6b085d32d4489db835d6d2503f, type: 2}

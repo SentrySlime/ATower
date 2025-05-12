@@ -7,15 +7,19 @@ using TMPro;
 public class ItemPanel : MonoBehaviour
 {
     [Header("Border")]
+    public ItemBase itemBase;
+
     public Image border_Image;
     public Sprite unselected;
     public Sprite selected;
+    public TextMeshProUGUI goldCost;
 
     public Image buttonImage;
 
     public string aName;
     public string aDescription;
     public Sprite anIcon;
+
 
     public TextMeshProUGUI itemName;
     public TextMeshProUGUI itemDescription;
@@ -24,6 +28,7 @@ public class ItemPanel : MonoBehaviour
 
     GameObject itemPanel;
     SelectedItem selectedItem;
+    [HideInInspector] public ShopPanel shopPanel;
 
     [HideInInspector] public Mesh itemMesh;
     [HideInInspector] public Material itemMaterial;
@@ -57,10 +62,39 @@ public class ItemPanel : MonoBehaviour
         itemName.text = aName;
         itemDescription.text = aDescription;
         image.sprite = anIcon;
+
+        if (shopPanel)
+        {
+            shopPanel.selectedItem = itemBase;
+            shopPanel.selectedIcon = this.gameObject;
+        }
     }
 
-    public void SetPanel(ItemPickUp tempItem)
+
+    public void SetPanelFromItemBase(ItemBase incomingItem)
     {
+        itemBase = incomingItem;
+
+        itemMesh = incomingItem.itemMesh;
+        itemMaterial = incomingItem.itemMaterial;
+
+        aName = incomingItem.itemName;
+        aDescription = incomingItem.itemDescription;
+        anIcon = incomingItem.itemIcon;
+            
+        buttonImage.sprite = anIcon;
+
+        if (shopPanel)
+        {
+            goldCost.text = incomingItem.goldCost.ToString();
+
+        }
+    }
+
+    public void SetPanelFromPickUp(ItemBase tempItem)
+    {
+        itemBase = tempItem;
+
         itemMesh = tempItem.itemMesh;
         itemMaterial = tempItem.itemMaterial;
 

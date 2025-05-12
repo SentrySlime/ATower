@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using static UnityEditor.Progress;
 
 public class ItemManager : MonoBehaviour
 {
@@ -57,6 +58,14 @@ public class ItemManager : MonoBehaviour
         ItemBase item = GetRandomDevilItem();
         devilItems.Remove(item);
         tempItem.itemPrefab = item;
+        return tempItem;
+    }
+
+    public ItemBase GetItemForShop()
+    {
+        int itemIndex = Random.Range(0, items.Count);
+        ItemBase tempItem = items[itemIndex];
+        items.Remove(tempItem);
         return tempItem;
     }
 

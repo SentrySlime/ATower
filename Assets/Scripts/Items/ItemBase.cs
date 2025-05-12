@@ -13,6 +13,8 @@ public class ItemBase : MonoBehaviour
     public Sprite itemIcon;
     public Mesh itemMesh;
     public Material itemMaterial;
+    public int goldCost = 500;
+
 
     public enum ItemType
     {
@@ -27,6 +29,7 @@ public class ItemBase : MonoBehaviour
     public ItemType type;
     public bool isDevilItem;
 
+    [Header("//-----Items-----\\")]
 
     #region Health
     [Header("Player health Stats ---------------------------------------------------")]

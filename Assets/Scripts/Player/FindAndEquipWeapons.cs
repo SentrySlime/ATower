@@ -48,6 +48,8 @@ public class FindAndEquipWeapons : MonoBehaviour
     public AudioSource equipSFX;
 
     PlayerStats playerStats;
+    GameObject canvas;
+    PauseMenu pauseMenu;
 
     private void Awake()
     {
@@ -63,6 +65,11 @@ public class FindAndEquipWeapons : MonoBehaviour
         popUpItemName = popUpPanel.transform.Find("PopUpName").GetComponent<TextMeshProUGUI>();
         popUpItemImage = popUpPanel.transform.Find("PopUpItemSprite").GetComponent<Image>();
 
+        //---
+        canvas = GameObject.FindGameObjectWithTag("Canvas");
+        pauseMenu = canvas.GetComponent<PauseMenu>();
+
+        //---
         interactPrompt = GameObject.Find("Interact_Prompt").gameObject;
 
         interactPrompt.SetActive(false);
@@ -79,6 +86,8 @@ public class FindAndEquipWeapons : MonoBehaviour
 
     void Update()
     {
+        if (pauseMenu.paused) return;
+
         CheckForItems();
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -114,24 +123,28 @@ public class FindAndEquipWeapons : MonoBehaviour
     private void InitializeItem(GameObject incomingItem)
     {
         ItemPickUp itemPrefab = incomingItem.GetComponent<ItemPickUp>();
-
         itemPrefab.Interact();
 
         if (!itemPrefab) return;
 
         Vector3 SpawnPos = new Vector3(-9999, -9999, -9999);
-
         ItemBase tempObj = Instantiate(incomingItem.GetComponent<ItemPickUp>().itemPrefab, SpawnPos, Quaternion.identity);
-        
-        inventory.heldItems.Add(tempObj.gameObject);
 
-        tempObj.EquipItem();
 
+        EquipItemBase(tempObj);
         Destroy(incomingItem);
+    }
+
+    public void EquipItemBase(ItemBase incomingItem)
+    {
+        inventory.heldItems.Add(incomingItem.gameObject);
+        incomingItem.EquipItem();
 
         GameObject itemObj = Instantiate(itemPanel, itemGroup.transform);
         ItemPanel tempPanel = itemObj.GetComponent<ItemPanel>();
-        tempPanel.SetPanel(itemPrefab);
+
+
+        tempPanel.SetPanelFromPickUp(incomingItem);
         tempPanel.itemName = itemName;
         tempPanel.itemDescription = itemDescription;
         tempPanel.image = image;
