@@ -33,6 +33,7 @@ public class FindAndEquipWeapons : MonoBehaviour
     public TextMeshProUGUI popUpItemName;
     public TextMeshProUGUI popUpItemDescription;
     public Image popUpItemImage;
+    public Image popUpWeaponImage;
 
     [Header("Item panel")]
     public GameObject itemPanel;
@@ -41,8 +42,12 @@ public class FindAndEquipWeapons : MonoBehaviour
     [HideInInspector] public TextMeshProUGUI itemDescription;
     [HideInInspector] public Image image;
     [HideInInspector] public SelectedItem selectedItem;
-
     [HideInInspector] public GameObject interactPrompt;
+
+    [Header("Weapon panel")]
+    public GameObject weaponPanel;
+    [HideInInspector] public CanvasGroup weaponGroup;
+
 
     [Header("SFX")]
     public AudioSource equipSFX;
@@ -64,6 +69,7 @@ public class FindAndEquipWeapons : MonoBehaviour
         popUpItemDescription = popUpPanel.transform.Find("PopUpDescription").GetComponent<TextMeshProUGUI>();
         popUpItemName = popUpPanel.transform.Find("PopUpName").GetComponent<TextMeshProUGUI>();
         popUpItemImage = popUpPanel.transform.Find("PopUpItemSprite").GetComponent<Image>();
+        popUpWeaponImage = popUpPanel.transform.Find("PopUpWeaponSprite").GetComponent<Image>();
 
         //---
         canvas = GameObject.FindGameObjectWithTag("Canvas");
@@ -108,7 +114,7 @@ public class FindAndEquipWeapons : MonoBehaviour
                         if (!equipSFX.isPlaying)
                             equipSFX.Play();
                     }
-                    else
+                    else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Weapons"))
                     {
                         InitializeWeapon(hit.collider.gameObject);
                         if (!equipSFX.isPlaying)
@@ -177,6 +183,8 @@ public class FindAndEquipWeapons : MonoBehaviour
         }
     }
 
+    
+
     public void SetWeapon(GameObject hitObj)
     {
         baseWeapon = hitObj.GetComponentInChildren<BaseWeapon>();
@@ -193,6 +201,19 @@ public class FindAndEquipWeapons : MonoBehaviour
             weaponSocket.SetUpWeapon(lastHitObj);
             SetActiveWeaponIcon();
         }
+
+        //SetWeaponUI();
+    }
+
+    public void SetWeaponUI(BaseWeapon incomingWeapon)
+    {
+        GameObject weaponPanelObj = Instantiate(weaponPanel, weaponGroup.transform);
+        ItemPanel tempPanel = weaponPanelObj.GetComponent<ItemPanel>();
+
+        tempPanel.SetPanelFromWeapon(incomingWeapon);
+        tempPanel.itemName = itemName;
+        tempPanel.itemDescription = itemDescription;
+        tempPanel.image = image;
     }
 
     private void CheckForItems()
@@ -230,7 +251,26 @@ public class FindAndEquipWeapons : MonoBehaviour
 
                     popUpItemName.text = tempItem.itemName;
                     popUpItemDescription.text = tempItem.itemDescription;
+                    popUpWeaponImage.enabled = false;
+                    popUpItemImage.enabled = true;
                     popUpItemImage.sprite = tempItem.itemIcon;
+
+                }
+            }
+            else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Weapons"))
+            {
+                dissapearTimer = 0;
+                var tempWeapon = hit.transform.GetComponentInChildren<WeaponPickUp>();
+                if (tempWeapon)
+                {
+                    if (!popUpPanel.activeInHierarchy)
+                        popUpPanel.SetActive(true);
+
+                    popUpItemName.text = tempWeapon.itemName;
+                    popUpItemDescription.text = tempWeapon.itemDescription;
+                    popUpItemImage.enabled = false;
+                    popUpWeaponImage.enabled = true;
+                    popUpWeaponImage.sprite = tempWeapon.itemIcon;
 
                 }
             }
@@ -247,15 +287,19 @@ public class FindAndEquipWeapons : MonoBehaviour
 
         WeaponIcon weaponIconObj = obj.GetComponent<WeaponIcon>();
 
-        weaponIconObj.reloadTime = weaponObj.GetComponentInChildren<BaseWeapon>().reloadTime * 1.5f;
+        BaseWeapon tempWeapon = weaponObj.GetComponentInChildren<BaseWeapon>();
+
+        weaponIconObj.reloadTime = tempWeapon.reloadTime * 1.5f;
+
+        SetWeaponUI(tempWeapon);
 
         //Set the icon to resemble the weapon we picked up
-        weaponIconObj.SetIcon(weaponObj.GetComponentInChildren<BaseWeapon>().weaponIcon);
+        weaponIconObj.SetIcon(tempWeapon.weaponIcon);
         //Setting the hotkey number for what to press
         weaponIconObj.SetHotKeyIndex(inventory.weaponIndex = inventory.heldWeapons.Count + 1);
         //Add it to the list of weaponIcons
         weaponIcons.Add(weaponIconObj);
-        weaponObj.GetComponentInChildren<BaseWeapon>().iconPrefab = obj;
+        tempWeapon.iconPrefab = obj;
         SetActiveWeaponIcon(weaponObj);
     }
 

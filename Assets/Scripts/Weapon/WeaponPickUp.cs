@@ -16,10 +16,12 @@ public class WeaponPickUp : Item, IInteractWeaponInterface
     }
 
 
-
+    public BaseWeapon baseWeapon;
     public WeaponRarity weaponRarity;
     [SerializeField] GameObject weaponPrefab;
     private GameObject currentWeapon;
+    [HideInInspector] public Mesh weaponMesh;
+    [HideInInspector] public Material weaponMaterial;
 
 
 
@@ -47,15 +49,16 @@ public class WeaponPickUp : Item, IInteractWeaponInterface
     {
         currentWeapon = Instantiate(weaponPrefab);
         return currentWeapon;
-
     }
 
     private void SetItemInfo()
     {
-        BaseWeapon weapon = weaponPrefab.GetComponentInChildren<BaseWeapon>();
-        itemName = weapon.aName;
-        itemDescription = weapon.aDescription;
-        itemIcon = weapon.weaponIcon;
+        baseWeapon = weaponPrefab.GetComponentInChildren<BaseWeapon>();
+        itemName = baseWeapon.aName;
+        itemDescription = baseWeapon.aDescription;
+        itemIcon = baseWeapon.weaponIcon;
+        weaponMaterial = baseWeapon.weaponMaterial;
+        weaponMesh = baseWeapon.weaponMesh;
     }
 
 }

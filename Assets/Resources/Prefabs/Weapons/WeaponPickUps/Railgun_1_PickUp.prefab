@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7527405179895652822}
   - component: {fileID: 7527405179895652825}
   - component: {fileID: 8132331096311311786}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Railgun_1_PickUp
   m_TagString: PickUp
   m_Icon: {fileID: 0}
@@ -51,8 +51,11 @@ MonoBehaviour:
   itemName: 
   itemDescription: 
   itemIcon: {fileID: 0}
+  baseWeapon: {fileID: 0}
   weaponRarity: 0
   weaponPrefab: {fileID: 1856004529439608096, guid: fd13f768b068fb547919d521761949c5, type: 3}
+  weaponMesh: {fileID: 0}
+  weaponMaterial: {fileID: 0}
 --- !u!65 &7527405179895652825
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -90,7 +93,7 @@ GameObject:
   - component: {fileID: 7527405180740405374}
   - component: {fileID: 7527405180740405372}
   - component: {fileID: 7527405180740405375}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4894,7 +4897,7 @@ GameObject:
   - component: {fileID: 7527405181289863138}
   - component: {fileID: 7527405181289863136}
   - component: {fileID: 7527405181289863139}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9699,16 +9702,28 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00999999
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.11000013
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9738,9 +9753,61 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -7640558969779515294, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -7146521406498821007, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -6763858364670572316, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -2045257923548263128, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -1599826595754709761, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -516098083770646512, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -466329591000292508, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -208595431880416365, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 281855664364225751, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
       propertyPath: m_Name
       value: Railgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416272007918961125, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f808e222a05da90449370f6bc0c6483c, type: 3}

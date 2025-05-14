@@ -4973,7 +4973,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6593228928422068522}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.013962104, y: 0, z: 0, w: 0.9999026}
   m_LocalPosition: {x: 0.248, y: -0.475, z: 1.477}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4983,7 +4983,7 @@ Transform:
   - {fileID: 6561183891236000801}
   m_Father: {fileID: 1856004529439608098}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -1.6, y: 0, z: 0}
 --- !u!114 &6593228928422068517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4998,11 +4998,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aName: UZI
   aDescription: Imbued with runes and shaman magic for extra oomph
-  weaponIcon: {fileID: 21300000, guid: 04db0b9b270dcfd438e30ad5f5eb0bea, type: 3}
+  weaponIcon: {fileID: 21300000, guid: 9810c2f252bb2f846bda2c59558e4657, type: 3}
   shootPoint: {fileID: 6036176367885834149}
   barrel: {fileID: 1856004530348900990}
   objectToRecoil: {fileID: 6593228928422068522}
   iconPrefab: {fileID: 0}
+  goldCost: 500
+  weaponMesh: {fileID: -2473009901867278844, guid: b5376874770da6f49b3548ccd4ac149e, type: 3}
+  weaponMaterial: {fileID: 2100000, guid: 499a1dcc29168cf4aadd4171460dd867, type: 2}
   type: 0
   baseMaxAmmo: 0
   maxAmmo: 350
@@ -5033,16 +5036,19 @@ MonoBehaviour:
   recoilY: 1
   recoilZ: 0.2
   hipPos: {x: 0.248, y: -0.475, z: 1.477}
-  adsPos: {x: -0.314, y: -0.311, z: 1.167}
+  adsPos: {x: -0.314, y: -0.428, z: 1.375}
   adsSpeed: 6
   maxAmmoText: {fileID: 0}
+  currentAmmoText: {fileID: 0}
   currentMagazineText: {fileID: 0}
+  ammoDivider: {fileID: 0}
   ammoFill: {fileID: 0}
   firingMode: 0
   aimCamera: {fileID: 0}
   recoil: {fileID: 0}
   screenShake: {fileID: 0}
   weaponSocket: {fileID: 0}
+  aMainSystem: {fileID: 0}
   playerStats: {fileID: 0}
   interuptReload: 0
   finishedReload: 0
@@ -5050,6 +5056,7 @@ MonoBehaviour:
   - {fileID: 5844348217375076756}
   - {fileID: 9202271606749545175}
   lineRenderer: {fileID: 0}
+  curve: 0
   lineDuration: 0.9
   lineTimer: 0
   hitDistance: 0

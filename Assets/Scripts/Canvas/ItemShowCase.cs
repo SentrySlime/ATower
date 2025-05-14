@@ -46,4 +46,15 @@ public class ItemShowCase : MonoBehaviour
         renderTextureMeshRenderer.material = tempItem.itemMaterial;
     }
 
+    private void SetTheShowCase(BaseWeapon baseWeapon)
+    {
+        itemName.text = baseWeapon.aName;
+        itemDescription.text = baseWeapon.aDescription;
+        image.sprite = baseWeapon.weaponIcon;
+
+
+        renderTextureMeshFilter.mesh = baseWeapon.weaponMesh;
+        renderTextureMeshRenderer.material = baseWeapon.weaponMaterial;
+    }
+
 }

@@ -7,7 +7,8 @@ using TMPro;
 public class ItemPanel : MonoBehaviour
 {
     [Header("Border")]
-    public ItemBase itemBase;
+    [HideInInspector] public ItemBase itemBase;
+    public BaseWeapon baseWeapon;
 
     public Image border_Image;
     public Sprite unselected;
@@ -47,7 +48,10 @@ public class ItemPanel : MonoBehaviour
 
     public void Selected()
     {
-        selectedItem.SetSelectedPanel(this);
+        if (selectedItem)
+        {
+            selectedItem.SetSelectedPanel(this);
+        }
         border_Image.sprite = selected;
     }
 
@@ -70,6 +74,25 @@ public class ItemPanel : MonoBehaviour
         }
     }
 
+    public void SetPanelFromWeapon(BaseWeapon incomingWeapon)
+    {
+        baseWeapon = incomingWeapon;
+
+        itemMesh = incomingWeapon.weaponMesh;
+        itemMaterial = incomingWeapon.weaponMaterial;
+
+        aName = incomingWeapon.aName;
+        aDescription = incomingWeapon.aDescription;
+        anIcon = incomingWeapon.weaponIcon;
+
+        buttonImage.sprite = anIcon;
+
+        //if (shopPanel)
+        //{
+        //    goldCost.text = incomingWeapon.goldCost.ToString();
+
+        //}
+    }
 
     public void SetPanelFromItemBase(ItemBase incomingItem)
     {

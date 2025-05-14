@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7527335582033657790}
   - component: {fileID: 7527335582033657788}
   - component: {fileID: 7527335582033657791}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4815,7 +4815,7 @@ GameObject:
   - component: {fileID: 7527335582583103522}
   - component: {fileID: 7527335582583103520}
   - component: {fileID: 7527335582583103523}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9620,7 +9620,7 @@ GameObject:
   - component: {fileID: 7527335582870803990}
   - component: {fileID: 7527335582870803993}
   - component: {fileID: 4625923547730710718}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: MagicRevolver_1_PickUp
   m_TagString: PickUp
   m_Icon: {fileID: 0}
@@ -9659,8 +9659,11 @@ MonoBehaviour:
   itemName: 
   itemDescription: 
   itemIcon: {fileID: 0}
+  baseWeapon: {fileID: 0}
   weaponRarity: 0
   weaponPrefab: {fileID: 1856004529439608096, guid: 48709eef854615e408f36b87967f148f, type: 3}
+  weaponMesh: {fileID: 0}
+  weaponMaterial: {fileID: 0}
 --- !u!65 &7527335582870803993
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9697,6 +9700,18 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e9795556bfdd257438d4e2b56ae8b0c7, type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e9795556bfdd257438d4e2b56ae8b0c7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e9795556bfdd257438d4e2b56ae8b0c7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e9795556bfdd257438d4e2b56ae8b0c7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e9795556bfdd257438d4e2b56ae8b0c7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9738,9 +9753,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -968405920312494234, guid: e9795556bfdd257438d4e2b56ae8b0c7, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e9795556bfdd257438d4e2b56ae8b0c7, type: 3}
       propertyPath: m_Name
       value: magic revolver1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e9795556bfdd257438d4e2b56ae8b0c7, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5233112405309087440, guid: e9795556bfdd257438d4e2b56ae8b0c7, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9795556bfdd257438d4e2b56ae8b0c7, type: 3}

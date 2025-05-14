@@ -24,6 +24,11 @@ public class BaseWeapon : MonoBehaviour
     public GameObject barrel;
     public GameObject objectToRecoil;
     public GameObject iconPrefab;
+    public int goldCost = 500;
+
+    [Header("Mesh & Material")]
+    public Mesh weaponMesh;
+    public Material weaponMaterial;
 
     public enum WeaponType
     {

@@ -50,7 +50,7 @@ public class Inventory : MonoBehaviour
         if (recoil.isBurstFiring) { return; }
 
 
-        weaponIndex += Mathf.RoundToInt(Input.mouseScrollDelta.y);
+        weaponIndex -= Mathf.RoundToInt(Input.mouseScrollDelta.y);
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6952844890914244586}
   - component: {fileID: 6952844890914244581}
   - component: {fileID: 4932173556171087153}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Metrek_1_PickUp
   m_TagString: PickUp
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 6952844891739091422}
   - component: {fileID: 6952844891739091420}
   - component: {fileID: 6952844891739091423}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4894,7 +4894,7 @@ GameObject:
   - component: {fileID: 6952844892288544322}
   - component: {fileID: 6952844892288544320}
   - component: {fileID: 6952844892288544323}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9741,6 +9741,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b991488e2f130c845a7e3ba0ecd7fd61, type: 3}
       propertyPath: m_Name
       value: metralhadoraMetreca
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b991488e2f130c845a7e3ba0ecd7fd61, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b991488e2f130c845a7e3ba0ecd7fd61, type: 3}

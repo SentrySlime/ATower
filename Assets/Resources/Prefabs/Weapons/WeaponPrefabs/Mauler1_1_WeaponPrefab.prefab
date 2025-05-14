@@ -4998,11 +4998,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aName: Mauler
   aDescription: Carbine rifle fused with the carcase of a hexademon
-  weaponIcon: {fileID: 21300000, guid: 1ea639241225bb740989aa1ae2201ade, type: 3}
+  weaponIcon: {fileID: 21300000, guid: eee8f268d9d6ef943b25e59a79abdbc0, type: 3}
   shootPoint: {fileID: 5778652067730987094}
   barrel: {fileID: 1856004530348900990}
   objectToRecoil: {fileID: 6593228928422068522}
   iconPrefab: {fileID: 0}
+  goldCost: 500
+  weaponMesh: {fileID: 996101317834215552, guid: a395fea86d708ab479804ef187161c3d, type: 3}
+  weaponMaterial: {fileID: 2100000, guid: e70f85e8de991de42900378499d60869, type: 2}
   type: 7
   baseMaxAmmo: 0
   maxAmmo: 570
@@ -5036,13 +5039,16 @@ MonoBehaviour:
   adsPos: {x: -0.017, y: -0.671, z: 1.42}
   adsSpeed: 6
   maxAmmoText: {fileID: 0}
+  currentAmmoText: {fileID: 0}
   currentMagazineText: {fileID: 0}
+  ammoDivider: {fileID: 0}
   ammoFill: {fileID: 0}
   firingMode: 0
   aimCamera: {fileID: 0}
   recoil: {fileID: 0}
   screenShake: {fileID: 0}
   weaponSocket: {fileID: 0}
+  aMainSystem: {fileID: 0}
   playerStats: {fileID: 0}
   interuptReload: 0
   finishedReload: 0

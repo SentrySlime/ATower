@@ -1751,6 +1751,7 @@ MonoBehaviour:
   popUpItemName: {fileID: 0}
   popUpItemDescription: {fileID: 0}
   popUpItemImage: {fileID: 0}
+  popUpWeaponImage: {fileID: 0}
   itemPanel: {fileID: 2080928488862453808, guid: 481c4b478a64a6d4398ecb442b644773, type: 3}
   itemGroup: {fileID: 0}
   itemName: {fileID: 0}
@@ -1758,6 +1759,8 @@ MonoBehaviour:
   image: {fileID: 0}
   selectedItem: {fileID: 0}
   interactPrompt: {fileID: 0}
+  weaponPanel: {fileID: 2080928488862453808, guid: f0ca8ef7afdf23d479da613ccc136c6a, type: 3}
+  weaponGroup: {fileID: 0}
   equipSFX: {fileID: 5004350294498629577}
 --- !u!114 &5004350295439402695
 MonoBehaviour:
@@ -1929,7 +1932,8 @@ MonoBehaviour:
   damageIgnoreChance: 0
   moveSpeed: 20
   extraJumps: 0
-  damage: 0
+  addedDamage: 0
+  increasedDamage: 0
   criticalChance: 5
   criticalMultiplier: 2
   canExplode: 0
@@ -1943,7 +1947,9 @@ MonoBehaviour:
   hasAlternateFastReload: 0
   alternateFastReload: 0
   heartboundRounds: 0
+  maxAmmo: 0
   fireBallChance: 0
+  accuracy: 0
   increasedMoneyDrop: 0
   moneyIsHealth: 0
 --- !u!114 &1655174549
@@ -2283,7 +2289,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 7935
+    m_Bits: 16127
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

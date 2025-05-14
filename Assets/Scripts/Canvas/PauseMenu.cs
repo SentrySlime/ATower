@@ -25,6 +25,7 @@ public class PauseMenu : MonoBehaviour
 
     [Header("Player objects")]
     public CanvasGroup PitemGroup;
+    public CanvasGroup PWeaponGroup;
     public TextMeshProUGUI PitemName;
     public TextMeshProUGUI PitemDescription;
     public Image Pimage;
@@ -181,6 +182,7 @@ public class PauseMenu : MonoBehaviour
     {
         FindAndEquipWeapons tempFind = player.GetComponent<FindAndEquipWeapons>();
         tempFind.itemGroup = PitemGroup;
+        tempFind.weaponGroup = PWeaponGroup;
         tempFind.itemName = PitemName;
         tempFind.itemDescription = PitemDescription;
         tempFind.image = Pimage;

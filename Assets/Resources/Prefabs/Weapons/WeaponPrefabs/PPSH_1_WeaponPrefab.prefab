@@ -83,7 +83,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1856004529903584578}
   m_LocalRotation: {x: -0.6029121, y: 0.36945516, z: -0.3694552, w: 0.6029119}
-  m_LocalPosition: {x: 0.392, y: 0.148, z: -0.584}
+  m_LocalPosition: {x: 0.392, y: 0.148, z: -0.954}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5779255679518579600}
@@ -4968,11 +4968,14 @@ MonoBehaviour:
   aName: PPSH
   aDescription: The impetus for the development of the PPSh came from the Winter
     War
-  weaponIcon: {fileID: 21300000, guid: 0ae2f5ff6aef84a43b2b21009b3bc32b, type: 3}
+  weaponIcon: {fileID: 21300000, guid: 54307e239553aae4dad5bd1605574ded, type: 3}
   shootPoint: {fileID: 0}
   barrel: {fileID: 1856004530348900990}
   objectToRecoil: {fileID: 6593228928422068522}
   iconPrefab: {fileID: 0}
+  goldCost: 500
+  weaponMesh: {fileID: -3311819593020789841, guid: 7b3cca0983e925848903804b11595801, type: 3}
+  weaponMaterial: {fileID: 2100000, guid: bfb6d920574790f4c806434e11237830, type: 2}
   type: 1
   baseMaxAmmo: 0
   maxAmmo: 600
@@ -5003,22 +5006,26 @@ MonoBehaviour:
   recoilY: 0.4
   recoilZ: 0.1
   hipPos: {x: 0.248, y: -0.475, z: 1.477}
-  adsPos: {x: -0.325, y: -0.26, z: 1.05}
+  adsPos: {x: -0.31, y: -0.31, z: 1.441}
   adsSpeed: 6
   maxAmmoText: {fileID: 0}
+  currentAmmoText: {fileID: 0}
   currentMagazineText: {fileID: 0}
+  ammoDivider: {fileID: 0}
   ammoFill: {fileID: 0}
   firingMode: 0
   aimCamera: {fileID: 0}
   recoil: {fileID: 0}
   screenShake: {fileID: 0}
   weaponSocket: {fileID: 0}
+  aMainSystem: {fileID: 0}
   playerStats: {fileID: 0}
   interuptReload: 0
   finishedReload: 0
   renderObjects:
   - {fileID: 5478958427004091082}
   lineRenderer: {fileID: 0}
+  curve: 0
   lineDuration: 0.9
   lineTimer: 0
   hitDistance: 0
@@ -5212,24 +5219,36 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7b3cca0983e925848903804b11595801, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7b3cca0983e925848903804b11595801, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7b3cca0983e925848903804b11595801, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7b3cca0983e925848903804b11595801, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.32
+      value: 0.215
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7b3cca0983e925848903804b11595801, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.038
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7b3cca0983e925848903804b11595801, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.587
+      value: -0.884
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7b3cca0983e925848903804b11595801, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7b3cca0983e925848903804b11595801, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7b3cca0983e925848903804b11595801, type: 3}
       propertyPath: m_LocalRotation.y
@@ -5237,7 +5256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7b3cca0983e925848903804b11595801, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7b3cca0983e925848903804b11595801, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

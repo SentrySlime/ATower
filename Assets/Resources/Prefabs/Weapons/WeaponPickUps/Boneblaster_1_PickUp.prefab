@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 738855647692947997}
   - component: {fileID: 738855647692947999}
   - component: {fileID: 738855647692947996}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4815,7 +4815,7 @@ GameObject:
   - component: {fileID: 738855648217243009}
   - component: {fileID: 738855648217243011}
   - component: {fileID: 738855648217243008}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9620,7 +9620,7 @@ GameObject:
   - component: {fileID: 738855649075375029}
   - component: {fileID: 738855649075375034}
   - component: {fileID: 3948943329293287536}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Boneblaster_1_PickUp
   m_TagString: PickUp
   m_Icon: {fileID: 0}
@@ -9753,6 +9753,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8a418c519747e014fba4768a50e5ad15, type: 3}
       propertyPath: m_Name
       value: SM_Boneblaster
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8a418c519747e014fba4768a50e5ad15, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a418c519747e014fba4768a50e5ad15, type: 3}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6952844890914244586}
   - component: {fileID: 6952844890914244581}
   - component: {fileID: 1988447411637612340}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: StarterGun_1_PickUp
   m_TagString: PickUp
   m_Icon: {fileID: 0}
@@ -51,8 +51,11 @@ MonoBehaviour:
   itemName: 
   itemDescription: 
   itemIcon: {fileID: 0}
+  baseWeapon: {fileID: 0}
   weaponRarity: 0
   weaponPrefab: {fileID: 1856004529439608096, guid: 61254b3e373f8db4b9365671c30849d4, type: 3}
+  weaponMesh: {fileID: 0}
+  weaponMaterial: {fileID: 0}
 --- !u!65 &6952844890914244581
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -90,7 +93,7 @@ GameObject:
   - component: {fileID: 6952844891739091422}
   - component: {fileID: 6952844891739091420}
   - component: {fileID: 6952844891739091423}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4894,7 +4897,7 @@ GameObject:
   - component: {fileID: 6952844892288544322}
   - component: {fileID: 6952844892288544320}
   - component: {fileID: 6952844892288544323}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9699,6 +9702,18 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7b91300ad772773469199b1c250d8d5c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7b91300ad772773469199b1c250d8d5c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7b91300ad772773469199b1c250d8d5c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7b91300ad772773469199b1c250d8d5c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -9738,9 +9753,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: 7b91300ad772773469199b1c250d8d5c, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -3592420646564268378, guid: 7b91300ad772773469199b1c250d8d5c, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7b91300ad772773469199b1c250d8d5c, type: 3}
       propertyPath: m_Name
       value: SM_StarterGun
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7b91300ad772773469199b1c250d8d5c, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b91300ad772773469199b1c250d8d5c, type: 3}
