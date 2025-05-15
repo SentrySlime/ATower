@@ -128,7 +128,10 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
     void Start()
     {
         player = GameObject.Find("PlayerTargetPoint");
-        aMainSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AMainSystem>();
+        GameObject tempManager = GameObject.FindGameObjectWithTag("GameManager");
+        if(tempManager != null)
+            aMainSystem = tempManager.GetComponent<AMainSystem>();
+        
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
         previousPlayerPosition = transform.position;
@@ -250,9 +253,11 @@ public class ArealEnemyMovement : MonoBehaviour, INoticePlayer
 
     private void IdleBehaviour()
     {
-
+        if (!player) return;
+            
         if (distanceToPlayer < noticePlayerRange)
         {
+
             Vector3 directionToPlayer = player.transform.position - shootPoint.transform.position;
 
             RaycastHit hit;

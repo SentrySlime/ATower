@@ -34,7 +34,9 @@ public class RoomScript : MonoBehaviour
     void Start()
     {
         SpawnRoom();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        GameObject tempPlayer = GameObject.FindGameObjectWithTag("Player");
+        if(tempPlayer != null)
+            player = tempPlayer.GetComponent<Transform>();
         
     }
 
