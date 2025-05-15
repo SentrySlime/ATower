@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1856004529439608096}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.21, y: -3.265, z: 1.37}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5779255679518579600}
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b164b9440ae2e49909c504b896f96f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IUsed: 0
+  IUsed: 1
   holstered: 0
   obj: {fileID: 6593228928422068522}
   baseWeapon: {fileID: 0}
@@ -4977,16 +4977,16 @@ MonoBehaviour:
   weaponMaterial: {fileID: 2100000, guid: 23fdcbb407cd38c4c9ff9b4309bf8a04, type: 2}
   type: 0
   baseMaxAmmo: 0
-  maxAmmo: 114
-  currentAmmo: 114
+  maxAmmo: 0
+  currentAmmo: 0
   baseAmmoPerShot: 0
   ammoPerShot: 1
   baseInfinteAmmo: 0
   infinteAmmo: 0
   reloadType: 1
   baseMaxMagazine: 0
-  maxMagazine: 6
-  currentMagazine: 6
+  maxMagazine: 0
+  currentMagazine: 0
   baseReloadTime: 0
   reloadTime: 1.5
   baseReloadAmount: 0
@@ -5260,6 +5260,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2e49a67e39524f048a61e4479cad6cfa, type: 3}
       propertyPath: m_Name
       value: Revolver
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2e49a67e39524f048a61e4479cad6cfa, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e49a67e39524f048a61e4479cad6cfa, type: 3}

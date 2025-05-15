@@ -15,13 +15,29 @@ public class WeaponPickUp : Item, IInteractWeaponInterface
         D
     }
 
+    [Header("Item Info")]
+    public string aName;
+    public string aDescription;
+    public Sprite weaponIcon;
 
-    public BaseWeapon baseWeapon;
+    [Header("General references")]
+    public GameObject shootPoint;
+    public GameObject barrel;
+    public GameObject objectToRecoil;
+    public GameObject iconPrefab;
+    public int goldCost = 500;
+
+    [Header("Mesh & Material")]
+    public Mesh weaponMesh;
+    public Material weaponMaterial;
+    
     public WeaponRarity weaponRarity;
-    [SerializeField] GameObject weaponPrefab;
+
+
+    [Header("Misc")]
+    public BaseWeapon baseWeapon;
+    public GameObject weaponPrefab;
     private GameObject currentWeapon;
-    [HideInInspector] public Mesh weaponMesh;
-    [HideInInspector] public Material weaponMaterial;
 
 
 

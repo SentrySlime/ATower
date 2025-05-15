@@ -59,4 +59,9 @@ public class LootSystem : MonoBehaviour
         return itemManager.GetItemForShop();
     }
 
+    public GameObject GetWeaponForShop()
+    {
+        return  weaponManager.GetWeaponForShop();
+    }
+
 }

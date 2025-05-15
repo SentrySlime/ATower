@@ -12,11 +12,19 @@ public class ShopPanel : MonoBehaviour
     GameObject player;
     Inventory inventory;
     FindAndEquipWeapons findAndEquipWeapons;
-    
-    
+
+
+    public GameObject selectedObject;
+    [Header("Weapon related")]
+    public GameObject weaponPanelPrefab;
+    public Transform weaponParent;
+
+
+    [Header("Item related")]
     public GameObject itemPanelPrefab;
     public Transform itemParent;
-    public ItemBase selectedItem;
+
+    [Header("Misc")]
     public GameObject selectedIcon;
     public MeshFilter renderTextureMeshFilter;
     public MeshRenderer renderTextureMeshRenderer;
@@ -38,6 +46,7 @@ public class ShopPanel : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
+            AddWeaponsToShop();
             AddItemsToShop();
         }
     }
@@ -48,24 +57,61 @@ public class ShopPanel : MonoBehaviour
 
         for (int i = 0; i < 5; i++)
         {
+            AddWeaponsToShop();
             AddItemsToShop();
+
         }
     }
 
     public void SetFirstItemDisplay()
     {
+        if (itemParent.childCount == 0) return;
         ItemBase tempItem = itemParent.GetChild(0).GetComponent<ItemPanel>().itemBase;
-        SetTheShowCase(tempItem);
+        SetShowcaseAsItem(tempItem);
 
     }
 
-    public void BuyItem()
+    public void BuyObject()
     {
-        if(!selectedItem) return;
+        if (!selectedObject) return;
 
-        if(inventory.money >= selectedItem.goldCost)
+        ItemPanel panel = selectedObject.GetComponent<ItemPanel>();
+
+        ItemBase itemBase = panel.itemBase;
+        WeaponPickUp weaponPickUp = panel.weaponPickUp;
+        if(itemBase != null)
         {
-            inventory.money -= selectedItem.goldCost;
+            BuyItem(itemBase);
+        }
+        else if(weaponPickUp != null)
+        {
+            BuyWeapon(weaponPickUp);
+        }
+        
+    }
+
+    private void BuyWeapon(WeaponPickUp selectedWeapon)
+    {
+        BaseWeapon tempWeapon = selectedWeapon.weaponPrefab.GetComponentInChildren<BaseWeapon>();
+
+        if (inventory.money >= selectedWeapon.goldCost)
+        {
+            inventory.DecreaseMoney(tempWeapon.goldCost);
+            findAndEquipWeapons.InitializeWeapon(selectedWeapon);
+            NullTheShowCase();
+            Destroy(selectedIcon);
+        }
+        else
+        {
+            print("Not enough money");
+        }
+    }
+
+    private void BuyItem(ItemBase selectedItem)
+    {
+        if (inventory.money >= selectedItem.goldCost)
+        {
+            inventory.DecreaseMoney(selectedItem.goldCost);
             findAndEquipWeapons.EquipItemBase(selectedItem);
             NullTheShowCase();
             Destroy(selectedIcon);
@@ -76,18 +122,34 @@ public class ShopPanel : MonoBehaviour
         }
     }
 
+
+
+
     public void NullTheShowCase()
     {
-        selectedItem = null;
+        selectedObject = null;
         itemName.text = " ";
         itemDescription.text = " ";
         image.sprite = null;
         renderTextureMeshFilter.mesh = null;
     }
 
-    private void SetTheShowCase(ItemBase tempItem)
+    private void SetShowCaseAsWeapon(BaseWeapon tempWeapon)
     {
-        selectedItem = tempItem;
+        BaseWeapon selectedWeapon = tempWeapon;
+        itemName.text = selectedWeapon.aName;
+        itemDescription.text = selectedWeapon.aDescription;
+        image.sprite = selectedWeapon.weaponIcon;
+
+
+        renderTextureMeshFilter.mesh = selectedWeapon.weaponMesh;
+        renderTextureMeshRenderer.material = selectedWeapon.weaponMaterial;
+    }
+
+
+    private void SetShowcaseAsItem(ItemBase tempItem)
+    {
+        ItemBase selectedItem = tempItem;
         itemName.text = tempItem.itemName;
         itemDescription.text = tempItem.itemDescription;
         image.sprite = tempItem.itemIcon;
@@ -95,6 +157,21 @@ public class ShopPanel : MonoBehaviour
 
         renderTextureMeshFilter.mesh = tempItem.itemMesh;
         renderTextureMeshRenderer.material = tempItem.itemMaterial;
+    }
+
+    private void AddWeaponsToShop()
+    {
+        itemPanel = Instantiate(weaponPanelPrefab, weaponParent).GetComponent<ItemPanel>();
+        
+        GameObject tempWeapon = lootSystem.GetWeaponForShop();
+        
+        itemPanel.shopPanel = this;
+        itemPanel.SetPanelFromWeapon(tempWeapon);
+
+        itemPanel.itemName = itemName;
+        itemPanel.itemDescription = itemDescription;
+        itemPanel.image = image;
+
     }
 
     private void AddItemsToShop()

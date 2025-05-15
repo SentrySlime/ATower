@@ -30,31 +30,33 @@ public class ItemShowCase : MonoBehaviour
         }
         else
         {
-            ItemBase tempItem = itemParent.GetChild(0).GetComponent<ItemPanel>().itemBase;
-            SetTheShowCase(tempItem);
+            ItemPanel panel = itemParent.GetChild(0).GetComponent<ItemPanel>();
+            panel.Selected();
+            //ItemBase tempItem = panel.itemBase;
+            //SetTheShowCase(tempItem);
         }
     }
 
-    private void SetTheShowCase(ItemBase tempItem)
-    {
-        itemName.text = tempItem.itemName;
-        itemDescription.text = tempItem.itemDescription;
-        image.sprite = tempItem.itemIcon;
+    //private void SetTheShowCase(ItemBase tempItem)
+    //{
+    //    itemName.text = tempItem.itemName;
+    //    itemDescription.text = tempItem.itemDescription;
+    //    image.sprite = tempItem.itemIcon;
 
 
-        renderTextureMeshFilter.mesh = tempItem.itemMesh;
-        renderTextureMeshRenderer.material = tempItem.itemMaterial;
-    }
+    //    renderTextureMeshFilter.mesh = tempItem.itemMesh;
+    //    renderTextureMeshRenderer.material = tempItem.itemMaterial;
+    //}
 
-    private void SetTheShowCase(BaseWeapon baseWeapon)
-    {
-        itemName.text = baseWeapon.aName;
-        itemDescription.text = baseWeapon.aDescription;
-        image.sprite = baseWeapon.weaponIcon;
+    //private void SetTheShowCase(BaseWeapon baseWeapon)
+    //{
+    //    itemName.text = baseWeapon.aName;
+    //    itemDescription.text = baseWeapon.aDescription;
+    //    image.sprite = baseWeapon.weaponIcon;
 
 
-        renderTextureMeshFilter.mesh = baseWeapon.weaponMesh;
-        renderTextureMeshRenderer.material = baseWeapon.weaponMaterial;
-    }
+    //    renderTextureMeshFilter.mesh = baseWeapon.weaponMesh;
+    //    renderTextureMeshRenderer.material = baseWeapon.weaponMaterial;
+    //}
 
 }

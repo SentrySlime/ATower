@@ -53,6 +53,12 @@ public class WeaponManager : MonoBehaviour
         return weapon;
     }
 
+    public GameObject GetWeaponForShop()
+    {
+        GameObject weaponToDrop = GetShuffledWeapon();
+        return weaponToDrop;
+    }
+
     //public GameObject GetRandomWeapon(bool S, bool A, bool B, bool C, bool D)
     //{
 

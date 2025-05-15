@@ -156,7 +156,7 @@ public class FindAndEquipWeapons : MonoBehaviour
         tempPanel.image = image;
     }
 
-    private void InitializeWeapon(GameObject IncomingWeaponObj)
+    public void InitializeWeapon(GameObject IncomingWeaponObj)
     {
        
         WeaponPickUp weaponPickUp = IncomingWeaponObj.GetComponent<WeaponPickUp>();
@@ -181,6 +181,43 @@ public class FindAndEquipWeapons : MonoBehaviour
             }
 
         }
+    }
+
+    public void InitializeWeapon(WeaponPickUp incomingWeaponPickUp)
+    {
+
+        WeaponPickUp weaponPickUp = incomingWeaponPickUp;
+        
+        if (weaponPickUp != null)
+        {
+            GameObject weaponObj = weaponPickUp.ReturnWeapon();
+            SetNewWeaponIcon(weaponObj);
+
+            inventory.weaponIndex = inventory.heldWeapons.Count;
+
+            inventory.heldWeapons.Add(weaponObj);
+            playerStats.AddStatsToPickedUpWeapon(weaponObj);
+
+            if (baseWeapon != null)
+            {
+                weaponObj.GetComponent<Recoil>().DisableWeapon();
+            }
+            else
+            {
+                SetWeapon(weaponObj);
+            }
+
+        }
+    }
+
+    public void SetUpWeapon(GameObject weaponObj)
+    {
+        SetNewWeaponIcon(weaponObj);
+        inventory.weaponIndex = inventory.heldWeapons.Count;
+        inventory.heldWeapons.Add(weaponObj);
+        playerStats.AddStatsToPickedUpWeapon(weaponObj);
+        weaponObj.GetComponentInChildren<BaseWeapon>();
+        SetWeapon(weaponObj);
     }
 
     

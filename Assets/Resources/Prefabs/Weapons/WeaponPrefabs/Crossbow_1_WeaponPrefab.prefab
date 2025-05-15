@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1856004529439608096}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.21, y: -3.265, z: 1.37}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5779255679518579600}
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b164b9440ae2e49909c504b896f96f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IUsed: 0
+  IUsed: 1
   holstered: 0
   obj: {fileID: 6593228928422068522}
   baseWeapon: {fileID: 0}
@@ -4975,7 +4975,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6593228928422068522}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.68, y: -0.49, z: 1.57}
+  m_LocalPosition: {x: 0.073, y: -0.528, z: 0.742}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2443676075094425664}
@@ -5008,16 +5008,16 @@ MonoBehaviour:
   weaponMaterial: {fileID: 2100000, guid: 42ac6c7f99dcd8e4bb8b3a15c94f660d, type: 2}
   type: 3
   baseMaxAmmo: 0
-  maxAmmo: 72
-  currentAmmo: 72
+  maxAmmo: 0
+  currentAmmo: 0
   baseAmmoPerShot: 0
   ammoPerShot: 1
   baseInfinteAmmo: 0
   infinteAmmo: 0
   reloadType: 0
   baseMaxMagazine: 0
-  maxMagazine: 10
-  currentMagazine: 10
+  maxMagazine: 0
+  currentMagazine: 0
   baseReloadTime: 0
   reloadTime: 5
   baseReloadAmount: 0
@@ -5132,6 +5132,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 63b8312a4d350cc4982d5a7ac079c3c9, type: 3}
       propertyPath: m_Name
       value: SM_Crossbow
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 63b8312a4d350cc4982d5a7ac079c3c9, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63b8312a4d350cc4982d5a7ac079c3c9, type: 3}

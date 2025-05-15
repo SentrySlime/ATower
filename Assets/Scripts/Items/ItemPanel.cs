@@ -9,6 +9,8 @@ public class ItemPanel : MonoBehaviour
     [Header("Border")]
     [HideInInspector] public ItemBase itemBase;
     public BaseWeapon baseWeapon;
+    public WeaponPickUp weaponPickUp;
+
 
     public Image border_Image;
     public Sprite unselected;
@@ -69,7 +71,7 @@ public class ItemPanel : MonoBehaviour
 
         if (shopPanel)
         {
-            shopPanel.selectedItem = itemBase;
+            shopPanel.selectedObject = this.gameObject;
             shopPanel.selectedIcon = this.gameObject;
         }
     }
@@ -87,11 +89,34 @@ public class ItemPanel : MonoBehaviour
 
         buttonImage.sprite = anIcon;
 
-        //if (shopPanel)
-        //{
-        //    goldCost.text = incomingWeapon.goldCost.ToString();
+        if (shopPanel)
+        {
+            goldCost.text = incomingWeapon.goldCost.ToString();
 
-        //}
+        }
+    }
+
+    public void SetPanelFromWeapon(GameObject incomingWeapon)
+    {
+        weaponPickUp = incomingWeapon.GetComponent<WeaponPickUp>();
+        baseWeapon = weaponPickUp.weaponPrefab.GetComponentInChildren<BaseWeapon>();
+
+        if(baseWeapon.weaponMesh != null)
+            itemMesh = baseWeapon.weaponMesh;
+        if (baseWeapon.weaponMaterial != null)
+            itemMaterial = baseWeapon.weaponMaterial;
+
+        aName = baseWeapon.aName;
+        aDescription = baseWeapon.aDescription;
+        anIcon = baseWeapon.weaponIcon;
+
+        buttonImage.sprite = anIcon;
+
+        if (shopPanel)
+        {
+            goldCost.text = baseWeapon.goldCost.ToString();
+
+        }
     }
 
     public void SetPanelFromItemBase(ItemBase incomingItem)
@@ -110,7 +135,6 @@ public class ItemPanel : MonoBehaviour
         if (shopPanel)
         {
             goldCost.text = incomingItem.goldCost.ToString();
-
         }
     }
 

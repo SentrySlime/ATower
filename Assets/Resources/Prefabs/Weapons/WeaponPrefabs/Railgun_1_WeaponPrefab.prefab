@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1856004529439608096}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.222, y: -3.265, z: 1.37}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5779255679518579600}
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b164b9440ae2e49909c504b896f96f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IUsed: 0
+  IUsed: 1
   holstered: 0
   obj: {fileID: 6593228928422068522}
   baseWeapon: {fileID: 0}
@@ -5009,16 +5009,16 @@ MonoBehaviour:
   weaponMaterial: {fileID: 2100000, guid: feb3a2d63bea053428a821a1528d0b74, type: 2}
   type: 5
   baseMaxAmmo: 0
-  maxAmmo: 19
-  currentAmmo: 19
+  maxAmmo: 0
+  currentAmmo: 0
   baseAmmoPerShot: 0
   ammoPerShot: 1
   baseInfinteAmmo: 0
   infinteAmmo: 0
   reloadType: 1
   baseMaxMagazine: 0
-  maxMagazine: 1
-  currentMagazine: 1
+  maxMagazine: 0
+  currentMagazine: 0
   baseReloadTime: 0
   reloadTime: 6
   baseReloadAmount: 0
@@ -5276,6 +5276,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
       propertyPath: m_Name
       value: Railgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f808e222a05da90449370f6bc0c6483c, type: 3}
