@@ -569,5 +569,10 @@ public class BaseWeapon : MonoBehaviour
         baseInfinteAmmo = infinteAmmo;
         baseMaxMagazine = maxMagazine;
     }
+
+    public void HideWeapon()
+    {
+        recoil.gameObject.SetActive(false);
+    }
 }
 

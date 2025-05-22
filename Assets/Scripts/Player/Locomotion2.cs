@@ -67,12 +67,14 @@ public class Locomotion2 : MonoBehaviour
 
     Rigidbody rb;
     PlayerStats playerStats;
+    PlayerHealth playerHealth;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         playerStats = GetComponent<PlayerStats>();
+        playerHealth = GetComponent<PlayerHealth>();
         readyToJump = true;
     }
 
@@ -80,6 +82,7 @@ public class Locomotion2 : MonoBehaviour
 
     private void Update()
     {
+        if(playerHealth.dead) return;
 
         velocityX = rb.velocity.x;
         velocityZ = rb.velocity.z;

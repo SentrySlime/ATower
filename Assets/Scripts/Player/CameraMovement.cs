@@ -37,12 +37,16 @@ public class CameraMovement : MonoBehaviour
     const string xAxis = "Mouse X"; //Strings in direct code generate garbage, storing and re-using them creates no garbage
     const string yAxis = "Mouse Y";
 
+    GameObject player;
     Transform playerPos;
+    PlayerHealth playerHealth;
     public WeaponSocket weaponSocket;
 
     private void Awake()
     {
-        playerPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerPos = player.GetComponent<Transform>();
+        playerHealth = player.GetComponent<PlayerHealth>();
         sensslider = GameObject.FindGameObjectWithTag("Sensitivity").GetComponent<Slider>();
         sensValue = GameObject.FindGameObjectWithTag("SensitivityText").GetComponent<TextMeshProUGUI>();
         weaponSocket = GameObject.FindObjectOfType<WeaponSocket>();
@@ -59,7 +63,9 @@ public class CameraMovement : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (paused) { return; }
+
+
+        if (paused || playerHealth.dead) { return; }
 
         rotation.x += Input.GetAxis(xAxis) * sensitivity;
         rotation.y += Input.GetAxis(yAxis) * sensitivity;

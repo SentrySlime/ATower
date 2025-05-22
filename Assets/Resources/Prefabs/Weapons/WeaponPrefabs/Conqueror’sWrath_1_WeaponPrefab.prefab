@@ -4978,8 +4978,8 @@ MonoBehaviour:
   weaponMaterial: {fileID: 2100000, guid: b0e0f35e36ad5bf4aa87505d92907337, type: 2}
   type: 5
   baseMaxAmmo: 0
-  maxAmmo: 23
-  currentAmmo: 23
+  maxAmmo: 15
+  currentAmmo: 15
   baseAmmoPerShot: 0
   ammoPerShot: 1
   baseInfinteAmmo: 0
@@ -4989,13 +4989,13 @@ MonoBehaviour:
   maxMagazine: 1
   currentMagazine: 1
   baseReloadTime: 0
-  reloadTime: 4
+  reloadTime: 6
   baseReloadAmount: 0
   reloadAmount: 1
   baseDamage: 0
-  damage: 800
+  damage: 900
   baseFireRate: 0
-  fireRate: 0.2
+  fireRate: 0.3
   burstDelay: 1
   burstAmount: 1
   recoilAmount: -3
@@ -5047,7 +5047,7 @@ MonoBehaviour:
   hitEnemyVFX: {fileID: 1879272669879180, guid: aa1d1ef49d9b36941a30b75fa62ee3de, type: 3}
   casingVFX: {fileID: 0}
   mantleAnimation: {fileID: 0}
-  onWeakSpot: 1
+  onWeakSpot: 0
   maxTargets: 20
   chanceToRefract: 101
   refractRange: 50

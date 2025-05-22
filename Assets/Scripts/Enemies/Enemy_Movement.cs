@@ -48,6 +48,7 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
     [Header("Base Attack Stuff")]
     public float attackRate = 2;
     [HideInInspector] public float attackRateTimer = 0;
+    PlayerHealth playerHealth;
 
     public void Start()
     {
@@ -59,7 +60,8 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
         animator = GetComponent<Animator>();
 
         player = GameObject.FindGameObjectWithTag("Player");
-        playerTargetPoint = player.GetComponent<PlayerHealth>().playerTargetPoint;
+        playerHealth = player.GetComponent<PlayerHealth>();
+        playerTargetPoint = playerHealth.playerTargetPoint;
 
         aMainSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AMainSystem>();
 
@@ -123,8 +125,10 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
             }
         }
 
-        AttackLogic();
-
+        if (!playerHealth.dead)
+        {
+            AttackLogic();
+        }
     }
 
     #region Attacks

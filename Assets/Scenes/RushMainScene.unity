@@ -273,6 +273,68 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -13.471, z: 0}
+--- !u!1 &691000319 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7527405179895652824, guid: 7134405e3ac5be64caa0c84524713847, type: 3}
+  m_PrefabInstance: {fileID: 844973872}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &844973872
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7527405179895652823, guid: 7134405e3ac5be64caa0c84524713847, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527405179895652823, guid: 7134405e3ac5be64caa0c84524713847, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527405179895652823, guid: 7134405e3ac5be64caa0c84524713847, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527405179895652823, guid: 7134405e3ac5be64caa0c84524713847, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527405179895652823, guid: 7134405e3ac5be64caa0c84524713847, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527405179895652823, guid: 7134405e3ac5be64caa0c84524713847, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527405179895652823, guid: 7134405e3ac5be64caa0c84524713847, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527405179895652823, guid: 7134405e3ac5be64caa0c84524713847, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527405179895652823, guid: 7134405e3ac5be64caa0c84524713847, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527405179895652823, guid: 7134405e3ac5be64caa0c84524713847, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527405179895652823, guid: 7134405e3ac5be64caa0c84524713847, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7527405179895652824, guid: 7134405e3ac5be64caa0c84524713847, type: 3}
+      propertyPath: m_Name
+      value: "Conqueror\u2019sWrath_1_PickUp"
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7134405e3ac5be64caa0c84524713847, type: 3}
 --- !u!1001 &885425339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -535,11 +597,6 @@ PrefabInstance:
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 9204433005828075702, guid: 2d20109ca01b1fa47a76ecfa83175ace, type: 3}
   m_PrefabInstance: {fileID: 1490019604}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1577776151 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6952844890914244580, guid: 149f2733b71dff9418f7f742af082d7b, type: 3}
-  m_PrefabInstance: {fileID: 179471920}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1579783499
 PrefabInstance:
@@ -829,6 +886,6 @@ PrefabInstance:
     - target: {fileID: 5004350295439402694, guid: 4b80aeee2d0b56948a75b4b1b9af2e42, type: 3}
       propertyPath: startWeapon
       value: 
-      objectReference: {fileID: 1577776151}
+      objectReference: {fileID: 691000319}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b80aeee2d0b56948a75b4b1b9af2e42, type: 3}

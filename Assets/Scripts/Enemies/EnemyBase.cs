@@ -152,7 +152,6 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
                 meshObject.SetActive(false);
             else if (enemy_Movement.playerDistance < 130 && !meshObject.activeInHierarchy)
             {
-                print("Restored");
                 meshObject.SetActive(true);
             }
         }

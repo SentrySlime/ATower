@@ -10,7 +10,7 @@ public class ParasiteProjectile : ProjectileBase, IProjectileRelease
 
     bool canImpact = true;
 
-    float damageInterval = 1;
+    float damageInterval = 0.1f;
     float damageIntervalTimer = 0;
 
     float baseSpeed;

@@ -49,7 +49,7 @@ MonoBehaviour:
   explosivePrefab: {fileID: 0}
   UseAdvancedCalculations: 1
   damage: 75
-  projectileSpeed: 110
+  projectileSpeed: 100
   pierceObjects: 1
   pierceAmount: 6
   isExplosive: 0
@@ -57,15 +57,18 @@ MonoBehaviour:
   explosiveDamage: 10
   explosiveImpactSFX: {fileID: 0}
   homing: 1
-  turnSpeed: 14
+  turnSpeed: 20
+  nonHomingDuration: 0.15
+  homingRange: 30
   target: {fileID: 0}
-  nonHomingDuration: 0.1
   useGravity: 0
   gravityMagnitude: 1
   hitVFX: {fileID: 1879272669879180, guid: 1845e09e109a8fd48bd5f1f5b15d1217, type: 3}
   hitEnemyVFX: {fileID: 1879272669879180, guid: 36113f08340819b4cb8a7f3f43199807, type: 3}
   lifeDuration: 8
   lifeTimer: 0
+  canDestroy: 1
+  weaponParent: {fileID: 0}
   aMainSysteM: {fileID: 0}
   shootSystem: {fileID: 0}
 --- !u!54 &4140537416350080728

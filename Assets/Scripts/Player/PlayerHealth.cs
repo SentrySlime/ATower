@@ -15,7 +15,9 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
     PlayerStats playerStats;
     HealthRegen healthRegen;
     Inventory inventory;
+    GameObject canvas;
     PauseMenu pauseMenu;
+    GameOverScreen gameOverScreen;
 
 
     [Header("Health stuff")]
@@ -29,6 +31,8 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
     public RectTransform hpFill;
     public RectTransform hpBackground;
     public TextMeshProUGUI textHP;
+
+    public bool dead = false;
 
     [Header("DamageVignetteStuff")]
     public CanvasGroup damageVignette;
@@ -58,7 +62,9 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
         playerStats = GetComponent<PlayerStats>();
         healthRegen = GetComponent<HealthRegen>();
         inventory = GetComponent<Inventory>();
-        pauseMenu = GameObject.Find("Canvas").GetComponent<PauseMenu>();
+        canvas = GameObject.Find("Canvas");
+        pauseMenu = canvas.GetComponent<PauseMenu>();
+        gameOverScreen = canvas.GetComponent<GameOverScreen>();
         pauseMenu.GetVignettes(this);
         barHP = GameObject.FindGameObjectWithTag("HPBar").GetComponent<Slider>();
 
@@ -163,7 +169,7 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
     public void Damage(float damage)
     {
-        if (isInvincible) { return; }
+        if (isInvincible && dead) { return; }
 
         if (!canBeDamaged)
         {
@@ -236,8 +242,10 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
     public void PlayerDeath()
     {
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
+        dead = true;
+        gameOverScreen.GameOver();
+        //Scene scene = SceneManager.GetActiveScene();
+        //SceneManager.LoadScene(scene.name);
         //Insert death logic
     }
 
