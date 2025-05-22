@@ -33,6 +33,8 @@ public class ShopPanel : MonoBehaviour
     public TextMeshProUGUI itemDescription;
     public Image image;
 
+    public AudioSource purchaseSFX;
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -78,6 +80,8 @@ public class ShopPanel : MonoBehaviour
     public void BuyObject()
     {
         if (!selectedObject) return;
+
+        purchaseSFX.Play();
 
         ItemPanel panel = selectedObject.GetComponent<ItemPanel>();
 

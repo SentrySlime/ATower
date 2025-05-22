@@ -62,6 +62,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemBase: {fileID: 0}
+  baseWeapon: {fileID: 0}
+  weaponPickUp: {fileID: 0}
   border_Image: {fileID: 1624074802296565147}
   unselected: {fileID: 21300000, guid: 595ca37d6f3b6da4ba5e0b3fd94a96d5, type: 3}
   selected: {fileID: 21300000, guid: eadf3ab217d010f4c925458ba9a0ff3d, type: 3}
@@ -337,7 +339,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -7.586975, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

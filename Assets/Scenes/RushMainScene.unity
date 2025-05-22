@@ -377,6 +377,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5395043017447909032, guid: 2d20109ca01b1fa47a76ecfa83175ace, type: 3}
+      propertyPath: purchaseSFX
+      value: 
+      objectReference: {fileID: 1554122787}
     - target: {fileID: 5749305150611634184, guid: 2d20109ca01b1fa47a76ecfa83175ace, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -527,6 +531,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d20109ca01b1fa47a76ecfa83175ace, type: 3}
+--- !u!82 &1554122787 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9204433005828075702, guid: 2d20109ca01b1fa47a76ecfa83175ace, type: 3}
+  m_PrefabInstance: {fileID: 1490019604}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1577776151 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6952844890914244580, guid: 149f2733b71dff9418f7f742af082d7b, type: 3}
@@ -755,11 +764,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5004350295439402684, guid: 4b80aeee2d0b56948a75b4b1b9af2e42, type: 3}
       propertyPath: maxHealth
-      value: 100
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 5004350295439402684, guid: 4b80aeee2d0b56948a75b4b1b9af2e42, type: 3}
       propertyPath: moveSpeed
-      value: 20
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 5004350295439402684, guid: 4b80aeee2d0b56948a75b4b1b9af2e42, type: 3}
       propertyPath: extraJumps
@@ -767,7 +776,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5004350295439402684, guid: 4b80aeee2d0b56948a75b4b1b9af2e42, type: 3}
       propertyPath: addedDamage
-      value: 0
+      value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004350295439402689, guid: 4b80aeee2d0b56948a75b4b1b9af2e42, type: 3}
+      propertyPath: money
+      value: 9999
       objectReference: {fileID: 0}
     - target: {fileID: 5004350295439402693, guid: 4b80aeee2d0b56948a75b4b1b9af2e42, type: 3}
       propertyPath: m_RootOrder
