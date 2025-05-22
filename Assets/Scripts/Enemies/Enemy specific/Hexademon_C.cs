@@ -10,9 +10,15 @@ public class Hexademon_C : Enemy_Movement
 
     //List<Action>  
 
+    public bool canProjectileAttack = true;
     public bool canRadialAttack = true;
     public bool canMeleeAttack = true;
     public bool canBeamAttack = true;
+
+    [Header("// --- Projectile --- \\")]
+    public GameObject projectile;
+    public AudioSource projectileTelegraphSFX;
+    bool inverted = false;
 
     [Header("// --- RadialAttack --- \\")]
     public GameObject radialTelegraphVFX;
@@ -41,8 +47,6 @@ public class Hexademon_C : Enemy_Movement
     public LineRenderer beamLineRender;
     public AudioSource beamAttackSFX;
 
-    
-
     float beamDamage = 7;
     float beamDamageRate = 0.1f;
 
@@ -50,9 +54,13 @@ public class Hexademon_C : Enemy_Movement
     float beamDamageRateTimer = 0f;
     float beamFollowSpeed = 0.125f;
     float maxBeamFollowSpeed = 0.125f;
-    float yawSpeed = 0.45f;
-    float pitchSpeed = 5.6f;
-    float rotationSpeed = 80;
+    float yawSpeed = 0.001f;
+    float pitchSpeed = 8f;
+    float rotationSpeed = 50;
+
+    [Header("Misc")]
+    float lastSeenTimer = 0f;
+    public bool seenRecently = false;
 
     void Start()
     {
@@ -62,6 +70,22 @@ public class Hexademon_C : Enemy_Movement
     void Update()
     {
         base.Update();
+        
+        if(lineOfSightTimer < 0.2)
+        {
+            lineOfSightTimer += Time.deltaTime;
+        }
+        else if (HasLineOfSight())
+        {
+            lastSeenTimer = 0;
+            lineOfSightTimer = 0;
+        }
+        else
+        {
+            lineOfSightTimer = 0;
+        }
+
+        HadLineOfSightRecently();
     }
 
     public override void AttackLogic()
@@ -74,26 +98,26 @@ public class Hexademon_C : Enemy_Movement
         {
             if (playerDistance < meleeDistance)
             {
-                if(canMeleeAttack)
+                if (canMeleeAttack)
                     MeleeAttack();
-                else if(canRadialAttack)
-                    RadialAttack();
-                else if(canBeamAttack)
+                else if (canRadialAttack)
+                    ProjectileAttack();
+                else if (canBeamAttack)
                     BeamAttack();
 
             }
             else if (playerDistance < beamDistance)
             {
-                if(canBeamAttack)
+                if (canBeamAttack)
                 {
                     if (IsPlayerInfront() && HasLineOfSight())
                     {
                         BeamAttack();
                     }
                 }
-                else if(canRadialAttack)
+                else if (canRadialAttack)
                 {
-                    RadialAttack();
+                    ProjectileAttack();
                 }
                 else
                 {
@@ -113,6 +137,58 @@ public class Hexademon_C : Enemy_Movement
         agent.speed = movementSpeed;
         base.EndAttack();
     }
+
+    #region Projectile
+
+    private void ProjectileAttack()
+    {
+        StartAttack(0);
+        canProjectileAttack = false;
+        projectileTelegraphSFX.Play();
+        Instantiate(radialTelegraphVFX, visionPoint.position, Quaternion.identity, visionPoint);
+        StartCoroutine(DoProjectileAttack());
+    }
+
+    IEnumerator DoProjectileAttack()
+    {
+        yield return new WaitForSeconds(1);
+
+        int count = 3;
+        float angleStep = 45f;
+        float pitch = 35f;
+
+        for (int i = 0; i < count; i++)
+        {
+            // Calculate yaw angle based on direction
+            int index = inverted ? (count - 1 - i) : i;
+            float yaw = (index - 1) * angleStep;
+
+            // Combine pitch (X-axis) and yaw (Y-axis) into a rotation offset
+            Quaternion offset = Quaternion.Euler(-pitch, yaw, 0f); // negative pitch = up
+            Quaternion finalRotation = shootPoint.rotation * offset;
+
+            Instantiate(projectile, shootPoint.position, finalRotation);
+
+            yield return new WaitForSeconds(0.4f);
+        }
+
+        // Toggle direction for next call
+        inverted = !inverted;
+
+        StartCoroutine(ProjectileAttackCooldown());
+        EndAttack();
+    }
+
+
+    IEnumerator ProjectileAttackCooldown()
+    {
+        yield return new WaitForSeconds(5);
+        canProjectileAttack = true;
+
+    }
+
+
+    #endregion
 
     #region Radial
 
@@ -305,14 +381,13 @@ public class Hexademon_C : Enemy_Movement
         beamLineRender.enabled = true;
         beamAttackSFX.Play();
 
-
         beamLineRender.enabled = true;
         beamLineRender.SetPosition(0, shootPoint.position);
         beamLineRender.SetPosition(1, shootPoint.position + shootPoint.forward * 100f);
 
         while (timer < duration)
         {
-            if (HasLineOfSight())
+            if (seenRecently)
             {
                 RotateTowardsPlayer();
 
@@ -365,6 +440,19 @@ public class Hexademon_C : Enemy_Movement
     }
 
     #endregion
+
+    private void HadLineOfSightRecently()
+    {
+        if(lastSeenTimer < 0.3)
+        {
+            lastSeenTimer += Time.deltaTime;
+            seenRecently = true;
+        }
+        else
+        {
+            seenRecently = false;
+        }
+    }
 
     private void RotateTowardsPlayer()
     {

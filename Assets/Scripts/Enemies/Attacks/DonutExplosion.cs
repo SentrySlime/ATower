@@ -68,7 +68,7 @@ public class DonutExplosion : MonoBehaviour
         else if(currentRadius > maxRadius - 2)
         {
             psMain.startColor = Color.clear;
-            collidingObj.SetActive(false);
+            collidingObj.SetActive(false);         
         }
         else if (currentRadius > maxRadius + 7)
         {

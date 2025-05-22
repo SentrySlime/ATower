@@ -2572,6 +2572,7 @@ GameObject:
   - component: {fileID: 2050647442}
   - component: {fileID: 3114299254218847317}
   - component: {fileID: 978926452}
+  - component: {fileID: 7382869045686473056}
   m_Layer: 9
   m_Name: HexaDemon
   m_TagString: Enemy
@@ -2657,6 +2658,7 @@ MonoBehaviour:
   roam: 1
   walkingSFX: {fileID: 0}
   movementSpeed: 0
+  angularSpeed: 0
   minUpdateRate: 0.01
   maxUpdateRate: 0.02
   dotProductForInfront: 0.2
@@ -2665,15 +2667,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4251
   interactDistance_: 125
+  lineOfSightTimer: 0
   isAttacking: 0
   playerDistance: 0
   directionToPlayer: {x: 0, y: 0, z: 0}
   attackRate: 2
   attackRateTimer: 0
   shootPoint: {fileID: 8322496059284410099}
+  canProjectileAttack: 1
   canRadialAttack: 1
   canMeleeAttack: 1
   canBeamAttack: 1
+  projectile: {fileID: 7929977615501413461, guid: 7a9fc87c60e37254bbe591868594b884, type: 3}
+  projectileTelegraphSFX: {fileID: 7382869045686473056}
   radialTelegraphVFX: {fileID: 2619744163513269376, guid: 0035c6bee4ab4e24fa2eefaddfc68ff8, type: 3}
   radialProjectile: {fileID: 7929977615501413461, guid: b5743021a60f540459c5c25ea4ac6bb1, type: 3}
   radialAttackPoint: {fileID: 8349075516388032440}
@@ -2688,6 +2694,7 @@ MonoBehaviour:
   beamTelegraphPosition: {fileID: 3486136028968670087}
   beamLineRender: {fileID: 1700837248}
   beamAttackSFX: {fileID: 978926452}
+  seenRecently: 0
 --- !u!82 &1700837247
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3074,6 +3081,111 @@ AudioSource:
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.20780458
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &7382869045686473056
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6897983572955493780}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 89c29fa82c221b040bfade6e4444bb90, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.8
+  m_Pitch: 1.3
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 0
+  MinDistance: 1
+  MaxDistance: 120
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.61016953
+      outSlope: -0.61016953
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.49166667
+      value: 0.7
+      inSlope: -0.9916422
+      outSlope: -0.9916422
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.002
+      inSlope: -1.3731148
+      outSlope: -1.3731148
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

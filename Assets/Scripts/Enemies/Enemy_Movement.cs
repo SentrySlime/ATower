@@ -17,6 +17,7 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
     public bool roam = false;
     public AudioSource walkingSFX;
     [HideInInspector] public float movementSpeed = 0;
+    [HideInInspector] public float angularSpeed = 0;
     private float newDestinationRate = 0.85f;
     private float newDestinationTimer = 0;
 
@@ -37,7 +38,7 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
     [HideInInspector] public float interactDistance_ = 125f;
     bool foundPlayer = false;
     float playerLookForTimer = 0;
-    float lineOfSightTimer = 0;
+    [HideInInspector] public float lineOfSightTimer = 0;
 
     [Header("MISC")]
     public bool isAttacking = false;
@@ -52,6 +53,7 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
     {
         agent = GetComponent<NavMeshAgent>();
         movementSpeed = agent.speed;
+        angularSpeed = agent.angularSpeed;
 
         enemyBase = GetComponent<EnemyBase>();
         animator = GetComponent<Animator>();
