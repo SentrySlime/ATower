@@ -2550,7 +2550,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6015654969379939474}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.17000055, z: -0.5099935}
+  m_LocalPosition: {x: -0, y: 1.39, z: 0.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4079370532088044214}
@@ -2635,6 +2635,7 @@ MonoBehaviour:
   canDropAmmo: 1
   damagedPS: {fileID: 0}
   meshObject: {fileID: 1710239320598269243}
+  enemy_Movement: {fileID: 0}
 --- !u!114 &4906197610235676358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3029,7 +3030,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: fb46640f453850a4ca1b63cfbc9c30e5, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.06
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3038,9 +3039,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 75
+  MaxDistance: 120
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -3048,23 +3049,32 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.008333334
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.6613304
+      value: 0.69668216
+      inSlope: -1.0162544
+      outSlope: -1.0162544
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3763317
+      outWeight: 0.4777346
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -2.656389
+      outSlope: -2.656389
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0.20780458
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

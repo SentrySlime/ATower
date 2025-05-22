@@ -50,8 +50,8 @@ public class Hexademon_C : Enemy_Movement
     float beamDamageRateTimer = 0f;
     float beamFollowSpeed = 0.125f;
     float maxBeamFollowSpeed = 0.125f;
-    float yawSpeed = 0.5f;
-    float pitchSpeed = 6f;
+    float yawSpeed = 0.45f;
+    float pitchSpeed = 5.6f;
     float rotationSpeed = 80;
 
     void Start()
@@ -72,10 +72,8 @@ public class Hexademon_C : Enemy_Movement
             attackRateTimer += Time.deltaTime;
         else
         {
-
             if (playerDistance < meleeDistance)
             {
-
                 if(canMeleeAttack)
                     MeleeAttack();
                 else if(canRadialAttack)
@@ -101,9 +99,6 @@ public class Hexademon_C : Enemy_Movement
                 {
                     MeleeAttack();
                 }
-
-
-                
             }
         }
     }
@@ -317,50 +312,44 @@ public class Hexademon_C : Enemy_Movement
 
         while (timer < duration)
         {
-            if (!HasLineOfSight()) yield return null;
-
-            RotateTowardsPlayer();
-
-            // Update damage timer
-            if (beamDamageRateTimer < beamDamageRate)
-                beamDamageRateTimer += Time.deltaTime;
-
-            // Smooth aim adjustment
-            Vector3 playerDirection = (player.transform.position - shootPoint.position).normalized;
-
-            // Check dot product limit
-            float alignment = Vector3.Dot(shootPoint.forward, playerDirection);
-            
-            // Smooth aim adjustment within allowed angle
-            Vector3 horizontalAim = Vector3.RotateTowards(shootPoint.forward, playerDirection, yawSpeed * Time.deltaTime, maxBeamFollowSpeed);
-            Vector3 verticalAim = Vector3.RotateTowards(shootPoint.forward, playerDirection, pitchSpeed * Time.deltaTime, maxBeamFollowSpeed);
-
-            Vector3 combinedDirection = new Vector3(horizontalAim.x, verticalAim.y, horizontalAim.z);
-            shootPoint.rotation = Quaternion.LookRotation(combinedDirection);
-            
-
-            // Default hit position far ahead
-            Vector3 hitPosition = shootPoint.position + shootPoint.forward * 100f;
-
-            // Check for actual hit
-            if (Physics.Raycast(shootPoint.position, shootPoint.forward, out RaycastHit hit, 100f))
+            if (HasLineOfSight())
             {
-                hitPosition = hit.point;
+                RotateTowardsPlayer();
 
-                if (hit.transform.CompareTag("Player") && beamDamageRateTimer >= beamDamageRate)
+                if (beamDamageRateTimer < beamDamageRate)
+                    beamDamageRateTimer += Time.deltaTime;
+
+                Vector3 playerDirection = (player.transform.position - shootPoint.position).normalized;
+
+                float alignment = Vector3.Dot(shootPoint.forward, playerDirection);
+
+                Vector3 horizontalAim = Vector3.RotateTowards(shootPoint.forward, playerDirection, yawSpeed * Time.deltaTime, maxBeamFollowSpeed);
+                Vector3 verticalAim = Vector3.RotateTowards(shootPoint.forward, playerDirection, pitchSpeed * Time.deltaTime, maxBeamFollowSpeed);
+
+                Vector3 combinedDirection = new Vector3(horizontalAim.x, verticalAim.y, horizontalAim.z);
+                shootPoint.rotation = Quaternion.LookRotation(combinedDirection);
+
+                Vector3 hitPosition = shootPoint.position + shootPoint.forward * 100f;
+
+                if (Physics.Raycast(shootPoint.position, shootPoint.forward, out RaycastHit hit, 100f))
                 {
-                    aMainSystem.DealDamage(hit.transform.gameObject, beamDamage, false);
-                    beamDamageRateTimer = 0f;
-                }
-            }
+                    hitPosition = hit.point;
 
-            // Update laser line
-            beamLineRender.SetPosition(0, shootPoint.position);
-            beamLineRender.SetPosition(1, hitPosition);
+                    if (hit.transform.CompareTag("Player") && beamDamageRateTimer >= beamDamageRate)
+                    {
+                        aMainSystem.DealDamage(hit.transform.gameObject, beamDamage, false);
+                        beamDamageRateTimer = 0f;
+                    }
+                }
+
+                beamLineRender.SetPosition(0, shootPoint.position);
+                beamLineRender.SetPosition(1, hitPosition);
+            }
 
             // Wait for next frame
             timer += Time.deltaTime;
             yield return null;
+            
         }
 
         // Turn off beam after duration ends

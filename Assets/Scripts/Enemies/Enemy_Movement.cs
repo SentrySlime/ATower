@@ -72,12 +72,12 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
         
         playerDistance = Vector3.Distance(visionPoint.position, playerTargetPoint.transform.position);
 
-        //if (playerDistance > 130)
-        //{
-        //    print("Enemy movement don't do anything when player is too far");
-        //    return;
-        //}
-        
+        if (playerDistance > 130)
+        {
+            print("Enemy movement don't do anything when player is too far");
+            return;
+        }
+
         if (roam)
         {
             Roam();
