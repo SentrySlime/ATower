@@ -13,7 +13,7 @@ public class RoomManager : MonoBehaviour
     public float rate = 0.5f;
     public float timer = 0;
 
-    public int roomOffset = 2;
+    public int roomOffset = 1;
 
     public void GoBack(int index)
     {
@@ -78,8 +78,6 @@ public class RoomManager : MonoBehaviour
 
     public void SetEnabledRooms(RoomScript roomScript)
     {
-        print("Disabled all other rooms");
-
         for (int i = 0; i < rooms.Count; i++)
         {
             if(roomScript == rooms[i])

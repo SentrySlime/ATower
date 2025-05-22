@@ -35,7 +35,9 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
     public Transform visionPoint;
     public LayerMask layerMask;
     [HideInInspector] public float interactDistance_ = 125f;
-    bool foundPlayer = false; 
+    bool foundPlayer = false;
+    float playerLookForTimer = 0;
+    float lineOfSightTimer = 0;
 
     [Header("MISC")]
     public bool isAttacking = false;
@@ -70,11 +72,11 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
         
         playerDistance = Vector3.Distance(visionPoint.position, playerTargetPoint.transform.position);
 
-        if (playerDistance > 130)
-        {
-            print("Enemy movement don't do anything when player is too far");
-            return;
-        }
+        //if (playerDistance > 130)
+        //{
+        //    print("Enemy movement don't do anything when player is too far");
+        //    return;
+        //}
         
         if (roam)
         {
@@ -100,7 +102,8 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
 
         directionToPlayer = (playerTargetPoint.transform.position - visionPoint.position).normalized;
         
-        LookForPlayer();
+        if(!foundPlayer)
+            LookForPlayer();
 
         if (!foundPlayer) { return; }
 
@@ -198,18 +201,28 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
     {
         if (playerDistance < interactDistance_)
         {
-            Debug.DrawRay(visionPoint.position, directionToPlayer * 200, Color.red, 1f);
-
-            RaycastHit hit;
-            if (Physics.Raycast(visionPoint.position, directionToPlayer, out hit, 200/*, ~layerMask*/))
+            if (playerLookForTimer < 1)
             {
-                
-                if (hit.transform.CompareTag("Player"))
-                {
-                    foundPlayer = true;
-                    roam = false;
-                }
+                playerLookForTimer += Time.deltaTime;
+                return;
             }
+            else
+            {
+                playerLookForTimer = 0;
+
+                RaycastHit hit;
+                if (Physics.Raycast(visionPoint.position, directionToPlayer, out hit, 200/*, ~layerMask*/))
+                {
+
+                    if (hit.transform.CompareTag("Player"))
+                    {
+                        foundPlayer = true;
+                        roam = false;
+                    }
+                }
+
+            }
+
         }
     }
 
@@ -254,7 +267,8 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
     public bool HasLineOfSight()
     {
         RaycastHit hit;
-     
+
+        Debug.DrawRay(visionPoint.position, directionToPlayer * 200, Color.red, 1f);
         if (Physics.Raycast(visionPoint.transform.position, directionToPlayer, out hit, playerDistance, layerMask))
         {
             if (hit.transform.CompareTag("Player"))

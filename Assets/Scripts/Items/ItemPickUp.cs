@@ -104,8 +104,7 @@ public class ItemPickUp : Item, IInteractInterface
 
     private void HandleParticleSystem()
     {
-        if(isDevilItem)
-            ps.startColor = Color.red;
+        
     }
 
     private void OnTriggerEnter(Collider other)

@@ -317,6 +317,8 @@ public class Hexademon_C : Enemy_Movement
 
         while (timer < duration)
         {
+            if (!HasLineOfSight()) yield return null;
+
             RotateTowardsPlayer();
 
             // Update damage timer

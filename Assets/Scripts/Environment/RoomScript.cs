@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using UnityEngine.ProBuilder;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class RoomScript : MonoBehaviour
 {
@@ -38,7 +40,6 @@ public class RoomScript : MonoBehaviour
         GameObject tempPlayer = GameObject.FindGameObjectWithTag("Player");
         if(tempPlayer != null)
             player = tempPlayer.GetComponent<Transform>();
-        
     }
 
     public void DisableRoom()
@@ -126,8 +127,7 @@ public class RoomScript : MonoBehaviour
         if(enemyList.Count == 0)
         {
             specialRoom.IniateLockRelease();
-        }
-    
+        }    
     }
 
 }

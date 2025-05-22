@@ -9,6 +9,7 @@ public class Inventory : MonoBehaviour
     [Header("Money")]
     public int money;
     public TextMeshProUGUI moneyText;
+    public GameObject[] moneyText2;
 
     [Header("Weapon")]
     public int weaponIndex = 0;
@@ -36,6 +37,7 @@ public class Inventory : MonoBehaviour
         weaponSocket = GetComponent<WeaponSocket>();
         reloadIcon = GameObject.FindGameObjectWithTag("ReloadImage").GetComponent<Image>();
         moneyText = GameObject.FindGameObjectWithTag("MoneyText").GetComponent<TextMeshProUGUI>();
+        moneyText2 = GameObject.FindGameObjectsWithTag("MoneyText");
         UpdateMoneyText();
 
     }
@@ -129,7 +131,13 @@ public class Inventory : MonoBehaviour
 
     private void UpdateMoneyText()
     {
-        moneyText.text = money.ToString();
+        for (int i = 0; i < moneyText2.Length; i++)
+        {
+            if (moneyText2[i])
+                moneyText2[i].GetComponent<TextMeshProUGUI>().text = money.ToString();
+        }
+
+        //moneyText.text = money.ToString();
     }
 
     public void SwitchWeapon()
