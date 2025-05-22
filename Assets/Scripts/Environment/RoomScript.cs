@@ -23,6 +23,7 @@ public class RoomScript : MonoBehaviour
     public List<GameObject> enemyList = new List<GameObject>();
 
     Transform player;
+    GameObject specialRoomObj;
     SpecialRoom specialRoom;
 
     [HideInInspector] public int roomIndex;
@@ -42,12 +43,21 @@ public class RoomScript : MonoBehaviour
 
     public void DisableRoom()
     {
+        if(specialRoomObj)
+            specialRoomObj.SetActive(false);
+
         if (enemyList.Count != 0)
         {
             for (int i = 0; i < enemyList.Count; i++)
             {
                 if (enemyList[i])
+                {
+                    if(enemyList[i].TryGetComponent<Spawner>(out var spawner))
+                    {
+                        spawner.DisableSpawnlings();
+                    }
                     enemyList[i].SetActive(false);
+                }
             }
         }
 
@@ -56,12 +66,21 @@ public class RoomScript : MonoBehaviour
 
     public void EnableEnemies()
     {
+        if (specialRoomObj)
+            specialRoomObj.SetActive(true);
+
         if (enemyList.Count == 0) { return; }
 
         for (int i = 0; i < enemyList.Count; i++)
         {
             if(enemyList[i])
+            {
                 enemyList[i].SetActive(true);
+                if (enemyList[i].TryGetComponent<Spawner>(out var spawner))
+                {
+                    spawner.EnableSpawnlings();
+                }
+            }
         }
     }
 
@@ -81,9 +100,11 @@ public class RoomScript : MonoBehaviour
         if(roomToSpawn == null) { return; }
 
         blockade.SetActive(false);
-        GameObject spawnedRoom = Instantiate(roomToSpawn, secretPoint.transform.position, secretPoint.transform.rotation);
+        specialRoomObj = Instantiate(roomToSpawn, secretPoint.transform.position, secretPoint.transform.rotation);
 
-        specialRoom = spawnedRoom.GetComponent<SpecialRoom>();
+        specialRoom = specialRoomObj.GetComponent<SpecialRoom>();
+        specialRoom.roomManager = roomManager;
+        specialRoom.roomScript = this;
     }
 
     public void AddEnemy(GameObject enemy)

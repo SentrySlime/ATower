@@ -106,8 +106,6 @@ public class ItemPickUp : Item, IInteractInterface
     {
         if(isDevilItem)
             ps.startColor = Color.red;
-
-        ps.Play();
     }
 
     private void OnTriggerEnter(Collider other)

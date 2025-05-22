@@ -18,6 +18,9 @@ public class Explosion : MonoBehaviour, IExplosionInterface
     float sphereSize = 0;
 
     List<GameObject> hitEnemies = new List<GameObject>();
+    GameObject player;
+    PlayerHealth playerHealth;
+    GameObject playerTargetPoint;
     HitmarkerLogic hitMarkerLogic;
     ScreenShake screenShake;
     PlayerStats playerStats;
@@ -46,9 +49,11 @@ public class Explosion : MonoBehaviour, IExplosionInterface
     {
         mainSystem = incomingMainSystem;
 
-        GameObject tempPlayer = GameObject.FindGameObjectWithTag("Player");
-        screenShake = tempPlayer.GetComponentInChildren<ScreenShake>();
-        playerStats = tempPlayer.GetComponent<PlayerStats>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerHealth = player.GetComponent<PlayerHealth>();
+        playerTargetPoint = playerHealth.playerTargetPoint;
+        screenShake = player.GetComponentInChildren<ScreenShake>();
+        playerStats = player.GetComponent<PlayerStats>();
 
         if(weaponParent != null)
             this.weaponParent = weaponParent;
@@ -76,39 +81,59 @@ public class Explosion : MonoBehaviour, IExplosionInterface
 
         if (enemyOwned)
         {
+            float maxRadius = eRadius * 1.5f;
 
-            layermask = LayerMask.GetMask("Player");
-            Collider[] player = Physics.OverlapSphere(transform.position, eRadius * 1.5f, layermask);
-
-            if (player.Length <= 0) { return; }
-
-            //Add raycast here
-            LayerMask obstacleMask = LayerMask.GetMask("Default", "Environment"); // Adjust based on your layers
-
-
-
-            Vector3 directionToPlayer = (player[0].transform.position - transform.position).normalized;
-            float distanceToPlayer = Vector3.Distance(transform.position, player[0].transform.position);
-
-            if (Physics.Raycast(transform.position, directionToPlayer, distanceToPlayer, obstacleMask))
-            {
-                // Something is in the way
+            float distanceToPlayer = Vector3.Distance(transform.position, playerTargetPoint.transform.position);
+            if (distanceToPlayer > maxRadius)
                 return;
-            }
 
-
-            if (player.Length != 0)
+            Vector3 directionToPlayer = (playerTargetPoint.transform.position - transform.position).normalized;
+            if (Physics.Raycast(transform.position, directionToPlayer, maxRadius, layermask))
             {
-                GameObject thePlayer = player[0].gameObject;
-                DealDamageToPlayer(player[0]);
-                Vector3 playerDirection = thePlayer.transform.position - transform.position;
+
+                DealDamageToPlayer(player);
+                Vector3 playerDirection = player.transform.position - transform.position;
                 //Push the player
-                thePlayer.transform.GetComponent<Locomotion2>().Push();
+                player.GetComponent<Locomotion2>().Push();
                 playerDirection = playerDirection.normalized;
                 Vector3 force = playerDirection * 300;
                 force.y = 30;
-                thePlayer.transform.gameObject.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+                player.transform.gameObject.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
             }
+
+            //---
+            //layermask = LayerMask.GetMask("Player");
+            //Collider[] player = Physics.OverlapSphere(transform.position, eRadius * 1.5f, layermask);
+
+            //if (player.Length <= 0) { return; }
+
+            ////Add raycast here
+            //LayerMask obstacleMask = LayerMask.GetMask("Default", "Environment"); // Adjust based on your layers
+
+
+
+            //Vector3 directionToPlayer = (player[0].transform.position - transform.position).normalized;
+            //float distanceToPlayer = Vector3.Distance(transform.position, player[0].transform.position);
+
+            //if (Physics.Raycast(transform.position, directionToPlayer, distanceToPlayer, obstacleMask))
+            //{
+            //    // Something is in the way
+            //    return;
+            //}
+
+
+            //if (player.Length != 0)
+            //{
+            //    GameObject thePlayer = player[0].gameObject;
+            //    DealDamageToPlayer(player[0]);
+            //    Vector3 playerDirection = thePlayer.transform.position - transform.position;
+            //    //Push the player
+            //    thePlayer.transform.GetComponent<Locomotion2>().Push();
+            //    playerDirection = playerDirection.normalized;
+            //    Vector3 force = playerDirection * 300;
+            //    force.y = 30;
+            //    thePlayer.transform.gameObject.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+            //}
         }
         else
         {
@@ -182,10 +207,10 @@ public class Explosion : MonoBehaviour, IExplosionInterface
     }
 
 
-    private void DealDamageToPlayer(Collider player)
+    private void DealDamageToPlayer(GameObject player)
     {
         if (mainSystem)
-            mainSystem.DealDamage(player.gameObject, eDamage, false);
+            mainSystem.DealDamage(player, eDamage, false);
     }
 
 

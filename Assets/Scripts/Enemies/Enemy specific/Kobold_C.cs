@@ -53,16 +53,16 @@ public class Kobold_C : Enemy_Movement
         }
     }
 
-    public override void StartAttack()
+    public override void StartAttack(float speed)
     {
-        base.StartAttack();
+        base.StartAttack(speed);
     }
 
     #region MeleeAttack
 
     private void MeleeTelegraphAttack()
     {
-        StartAttack();
+        StartAttack(0);
         animator.SetBool("MeleeAttack", true);
         MeleeAttack();
     }
@@ -89,7 +89,7 @@ public class Kobold_C : Enemy_Movement
 
     private void RangedTelegraphAttack()
     {
-        StartAttack();
+        StartAttack(0);
         animator.SetBool("RangedAttack", true);
     }
 

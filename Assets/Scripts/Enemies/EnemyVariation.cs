@@ -33,7 +33,7 @@ public class EnemyVariation : MonoBehaviour
 
     private bool randomBoolean()
     {
-        if (Random.value >= 0.5)
+        if (Random.value >= 0.65)
         {
             return true;
         }

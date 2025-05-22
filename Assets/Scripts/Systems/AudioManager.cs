@@ -4,41 +4,60 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    
+
+    public bool IsMainMusicPlaying = true;
     [SerializeField] AudioSource mainMusic;
+
+    public bool IsDevilMusicPlaying = false;
     [SerializeField] AudioSource devilMusic;
+
+    public bool IsShopMusicPlaying = false;
+    [SerializeField] AudioSource shopMusic;
     float fadeDuration = 1.5f;
 
     private Coroutine currentFade;
 
-    float mainMusicVolume;
-    float devilMusicVolume;
-
     void Start()
     {
-        mainMusicVolume = mainMusic.volume;
-
-        devilMusicVolume = devilMusic.volume;
+ 
         devilMusic.volume = 0f;
+        shopMusic.volume = 0f;
 
         mainMusic.Play();
-        devilMusic.Play(); 
-
+        devilMusic.Play();
+        shopMusic.Play();
     }
 
     public void TriggerMainMusic()
     {
-        StartFade(mainMusic, devilMusic);
+        IsMainMusicPlaying = true;
+        if(IsDevilMusicPlaying)
+        {
+            StartFade(mainMusic, devilMusic);
+            IsDevilMusicPlaying = false;
+        }
+        else if(IsShopMusicPlaying)
+        {
+            IsShopMusicPlaying = false;
+            StartFade(mainMusic, shopMusic);
+        }
+
     }
 
     public void TriggerDevilMusic()
     {
+        IsDevilMusicPlaying = true;
         StartFade(devilMusic, mainMusic);
+    }
+
+    public void TriggerShopMusic()
+    {
+        IsShopMusicPlaying = true;
+        StartFade(shopMusic, mainMusic);
     }
 
     private void StartFade(AudioSource fadeIn, AudioSource fadeOut)
     {
-        
         if (currentFade != null)
             StopCoroutine(currentFade);
 

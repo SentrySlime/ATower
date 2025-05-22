@@ -30,6 +30,7 @@ MonoBehaviour:
   elite: 0
   canExplode: 0
   explodeOnDeath: 0
+  explosiveBarrel: 0
   moneyPrefab: {fileID: 0}
   dieSFX: {fileID: 4964101775347663484, guid: e649196ca321d0347bf26eaa9f3de198, type: 3}
   deathParticles: {fileID: 6730801598990464917, guid: 5d1fddab642531e46b290c6168aaa5c6, type: 3}
@@ -93,7 +94,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5429477027478090629
 Transform:
@@ -174,6 +175,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Breakable
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6e67ff5de21facd4a829b90a3db04b59, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2595811395989533083, guid: 6e67ff5de21facd4a829b90a3db04b59, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -252,6 +257,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2df331caab9bde0429e3a0979eea7f41, type: 3}
       propertyPath: m_Name
       value: SM_Pedestal
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2df331caab9bde0429e3a0979eea7f41, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6602401526114727493, guid: 2df331caab9bde0429e3a0979eea7f41, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2df331caab9bde0429e3a0979eea7f41, type: 3}

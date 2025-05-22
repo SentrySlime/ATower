@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 58c99952e79fc284a9ca50001df45865, type: 2}
+  - {fileID: 2100000, guid: b8f4f5d1b0c935445a189e7fcda08d8d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3249,6 +3249,7 @@ MonoBehaviour:
   roomLock: {fileID: 5924462286090441554}
   VFX: {fileID: 7758759373048107158}
   SFX: {fileID: 1151725149818631336}
+  roomManager: {fileID: 0}
   specialRoomMesh: {fileID: 7002903992556041515}
   flashMesh: {fileID: 7625466890414719727}
 --- !u!1 &2357286749804430798
@@ -6478,8 +6479,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c96d387f84adc4a8151905ee2ad116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  specialRoom: {fileID: 3761180007221601517}
   reciever: {fileID: 1370034870288698764}
   isDevilRoom: 0
+  isShopRoom: 0
+  isTreasureRoom: 0
 --- !u!1 &3489963571777701771
 GameObject:
   m_ObjectHideFlags: 0
@@ -6537,8 +6541,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c96d387f84adc4a8151905ee2ad116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  specialRoom: {fileID: 3761180007221601517}
   reciever: {fileID: 2797814307499963523}
   isDevilRoom: 0
+  isShopRoom: 0
+  isTreasureRoom: 1
 --- !u!1 &3658948281915423131
 GameObject:
   m_ObjectHideFlags: 0
@@ -24660,8 +24667,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraA: {fileID: 3485018735298054286}
   cameraB: {fileID: 6247287338120742133}
-  cameraMatA: {fileID: 2100000, guid: 36e9b286d67183b4ead9097453e9ee9f, type: 2}
-  cameraMatB: {fileID: 2100000, guid: 58c99952e79fc284a9ca50001df45865, type: 2}
+  cameraMatA: {fileID: 2100000, guid: dce99dda1156d384eafa400d80d720fa, type: 2}
+  cameraMatB: {fileID: 2100000, guid: b8f4f5d1b0c935445a189e7fcda08d8d, type: 2}
 --- !u!1 &9041432341200092547
 GameObject:
   m_ObjectHideFlags: 0
@@ -24721,7 +24728,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 36e9b286d67183b4ead9097453e9ee9f, type: 2}
+  - {fileID: 2100000, guid: dce99dda1156d384eafa400d80d720fa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -25110,6 +25117,10 @@ PrefabInstance:
     - target: {fileID: 4704060294960727755, guid: 053a24cefdd30424684c6e5485a85543, type: 3}
       propertyPath: m_Name
       value: RoomLock
+      objectReference: {fileID: 0}
+    - target: {fileID: 4704060294960727755, guid: 053a24cefdd30424684c6e5485a85543, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 053a24cefdd30424684c6e5485a85543, type: 3}

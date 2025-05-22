@@ -16,7 +16,7 @@ public class EnemyManager : MonoBehaviour
     public GameObject ammoPrefab;
     int ammoKillRequirement = 0;
     int minAmmoSpawnChance = 0;
-    int maxAmmoSpawnChance = 5;
+    int maxAmmoSpawnChance = 10;
     int ammoSpawnChance = 0;
 
     [Header("HelpingHandStats")]
@@ -96,6 +96,8 @@ public class EnemyManager : MonoBehaviour
             }
             else
             {
+
+
                 if(ammoSpawnChance < maxAmmoSpawnChance)
                 {
                     ammoSpawnChance++;

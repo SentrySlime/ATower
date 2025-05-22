@@ -46,8 +46,12 @@ public class ShopPanel : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            AddWeaponsToShop();
             AddItemsToShop();
+        }
+
+        for (int i = 0; i < 2; i++)
+        {
+            AddWeaponsToShop();
         }
     }
 

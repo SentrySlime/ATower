@@ -171,6 +171,7 @@ public class PauseMenu : MonoBehaviour
 
     private IEnumerator HideMenu()
     {
+        yield return new WaitForSeconds(0.1f);
         shopPanel.GetComponent<ShopPanel>().PopulateShop();
         yield return new WaitForSeconds(0.1f);
         pauseMenu.SetActive(false);

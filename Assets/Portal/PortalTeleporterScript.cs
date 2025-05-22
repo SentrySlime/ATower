@@ -7,17 +7,22 @@ public class PortalTeleporterScript : MonoBehaviour
 
     Transform player;
     AudioManager audioManager;
+    RoomManager roomManager;
 
-
+    public SpecialRoom specialRoom;
+    
     public Transform reciever;
     private bool playerIsOverlapping = false;
 
     public bool isDevilRoom = false;
+    public bool isShopRoom = false;
+    public bool isTreasureRoom = false;
 
     private void Start()
     {
         audioManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioManager>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        roomManager = specialRoom.roomManager;
     }
 
     
@@ -34,9 +39,24 @@ public class PortalTeleporterScript : MonoBehaviour
             {
 
                 if (isDevilRoom)
+                {
                     DevilRoomLogic();
+                    roomManager.SetEnabledRooms(specialRoom.roomScript);
+                }
+                else if(isShopRoom)
+                {
+                    ShopRoomLogic();
+                    roomManager.SetEnabledRooms(specialRoom.roomScript);
+                }
+                else if (isTreasureRoom)
+                {
+                    roomManager.SetEnabledRooms(specialRoom.roomScript);
+                }
                 else
+                {
+                    roomManager.SetEnabledRooms(roomManager.roomIndex);
                     MainLogic();
+                }
 
                 
                 float rotationDiff = -Quaternion.Angle(transform.rotation, reciever.rotation);
@@ -77,5 +97,9 @@ public class PortalTeleporterScript : MonoBehaviour
         audioManager.TriggerDevilMusic();
     }
 
+    private void ShopRoomLogic()
+    {
+        audioManager.TriggerShopMusic();
+    }
 
 }

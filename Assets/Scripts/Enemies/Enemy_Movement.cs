@@ -5,8 +5,9 @@ using UnityEngine.AI;
 
 public class Enemy_Movement : MonoBehaviour, INoticePlayer
 {
-    [HideInInspector] public NavMeshAgent agent;
     Vector3 lastValidLocation;
+    [HideInInspector] public AMainSystem aMainSystem;
+    [HideInInspector] public NavMeshAgent agent;
     [HideInInspector] public Animator animator;
     [HideInInspector] public EnemyBase enemyBase;
     [HideInInspector] public GameObject player;
@@ -16,12 +17,14 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
     public bool roam = false;
     public AudioSource walkingSFX;
     [HideInInspector] public float movementSpeed = 0;
-    private float newDestinationRate = 0.5f;
+    private float newDestinationRate = 0.85f;
     private float newDestinationTimer = 0;
 
     [Header("Movement perlin")]
     float noiseScale = 1.0f;
     float pathOffsetAmount = 5.0f;
+    public float minUpdateRate = 0.5f;
+    public float maxUpdateRate = 1f;
     float updateRate = 1f;
     float movementTimer = 0f;
     float noiseOffset = 2;
@@ -54,13 +57,25 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
         player = GameObject.FindGameObjectWithTag("Player");
         playerTargetPoint = player.GetComponent<PlayerHealth>().playerTargetPoint;
 
-        updateRate = Random.Range(0.5f, 1f);
+        aMainSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AMainSystem>();
+
+        updateRate = Random.Range(minUpdateRate, maxUpdateRate);
         noiseOffset = Random.Range(0f, 100f);
 
     }
 
     public void Update()
     {
+        if (!visionPoint) return;
+        
+        playerDistance = Vector3.Distance(visionPoint.position, playerTargetPoint.transform.position);
+
+        if (playerDistance > 130)
+        {
+            print("Enemy movement don't do anything when player is too far");
+            return;
+        }
+        
         if (roam)
         {
             Roam();
@@ -83,7 +98,6 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
                 walkingSFX.Pause();
         }
 
-        playerDistance = Vector3.Distance(visionPoint.position, playerTargetPoint.transform.position);
         directionToPlayer = (playerTargetPoint.transform.position - visionPoint.position).normalized;
         
         LookForPlayer();
@@ -110,10 +124,10 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
 
     #region Attacks
 
-    public virtual void StartAttack()
+    public virtual void StartAttack(float speed)
     {
         isAttacking = true;
-        agent.speed = 0;
+        agent.speed = speed;
     }
     public virtual void AttackLogic ()
     {

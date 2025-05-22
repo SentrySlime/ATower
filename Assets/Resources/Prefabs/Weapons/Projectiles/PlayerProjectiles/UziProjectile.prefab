@@ -130,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosivePrefab: {fileID: 0}
   UseAdvancedCalculations: 1
-  damage: 25
+  damage: 20
   projectileSpeed: 350
   pierceObjects: 1
   pierceAmount: 1
@@ -138,15 +138,18 @@ MonoBehaviour:
   explosiveRadius: 1
   explosiveDamage: 10
   explosiveImpactSFX: {fileID: 0}
-  homing: 1
+  homing: 0
   turnSpeed: 2
+  nonHomingDuration: 0.35
+  homingRange: 25
   target: {fileID: 0}
   useGravity: 0
   gravityMagnitude: 1
-  hitVFX: {fileID: 0}
+  hitVFX: {fileID: 1879272669879180, guid: 7bef351ddc33ae044b671a7664396a20, type: 3}
   hitEnemyVFX: {fileID: 2512749170250154484, guid: acce0b4b09260c84eb6e5ddb1239880d, type: 3}
   lifeDuration: 8
   lifeTimer: 0
+  weaponParent: {fileID: 0}
   aMainSysteM: {fileID: 0}
   shootSystem: {fileID: 0}
 --- !u!54 &4140537416350080728
@@ -194,6 +197,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4836675779974994, guid: edc555170136714468e06ae43a7e0c86, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4836675779974994, guid: edc555170136714468e06ae43a7e0c86, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4836675779974994, guid: edc555170136714468e06ae43a7e0c86, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4836675779974994, guid: edc555170136714468e06ae43a7e0c86, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -203,7 +218,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4836675779974994, guid: edc555170136714468e06ae43a7e0c86, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.995
+      value: 0.369
       objectReference: {fileID: 0}
     - target: {fileID: 4836675779974994, guid: edc555170136714468e06ae43a7e0c86, type: 3}
       propertyPath: m_LocalRotation.w

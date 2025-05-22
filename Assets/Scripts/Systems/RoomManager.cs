@@ -8,7 +8,7 @@ public class RoomManager : MonoBehaviour
 
     public List<RoomScript> rooms = new List<RoomScript>();
 
-    public int roomIndex = 3;
+    public int roomIndex = -1;
 
     public float rate = 0.5f;
     public float timer = 0;
@@ -60,12 +60,35 @@ public class RoomManager : MonoBehaviour
 
     public void SetEnabledRooms(int index)
     {
+        roomIndex = index;
+
         for (int i = 0; i < rooms.Count; i++)
         {
             if (i >= index - roomOffset - 1 && i <= index + roomOffset)
             {
                 rooms[i].gameObject.SetActive(true);
                 rooms[i].EnableEnemies();
+            }
+            else
+            {
+                rooms[i].DisableRoom();
+            }
+        }
+    }
+
+    public void SetEnabledRooms(RoomScript roomScript)
+    {
+        print("Disabled all other rooms");
+
+        for (int i = 0; i < rooms.Count; i++)
+        {
+            if(roomScript == rooms[i])
+            {
+                if (!rooms[i].isActiveAndEnabled)
+                {
+                    rooms[i].gameObject.SetActive(true);
+                    rooms[i].EnableEnemies();
+                }
             }
             else
             {

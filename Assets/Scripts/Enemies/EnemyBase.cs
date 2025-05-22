@@ -40,6 +40,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     LootSystem lootSystem;
     AMainSystem aMainSystem;
     GameObject player;
+    
     Inventory inventory;
     //Felix was here
     [Header("Loot")]
@@ -58,6 +59,12 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     List<GameObject> projectileChildren = new List<GameObject>();
 
     [HideInInspector] public event System.Action<EnemyBase> OnEnemyDied;
+
+    [Header("DistanceBasedCulling")]
+    public GameObject meshObject;
+    public Enemy_Movement enemy_Movement;
+    bool inDistanceLastFrame = false;
+    float timer = 0;
 
     void Start()
     {
@@ -113,7 +120,12 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
             Debug.LogWarning("No GameObject with the 'GameManager' tag was found.");
         }
 
-        
+
+        if (TryGetComponent<Enemy_Movement>(out var enemyMovement))
+        {
+            enemy_Movement = enemyMovement;
+
+        }
 
         layerMask = LayerMask.GetMask("Enemy");
 
@@ -123,12 +135,27 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
             var emission = damagedPS.emission;
             emission.rateOverTime = 0;
         }
+
+        //StartCoroutine(InDistance());
+
     }
 
-    void Update()
+    private void Update()
     {
-        
-
+        if(timer < 0.2)
+        {
+            timer += Time.deltaTime;
+        }
+        else if (meshObject && enemy_Movement)
+        {
+            if (enemy_Movement.playerDistance > 130 && meshObject.activeInHierarchy)
+                meshObject.SetActive(false);
+            else if (enemy_Movement.playerDistance < 130 && !meshObject.activeInHierarchy)
+            {
+                print("Restored");
+                meshObject.SetActive(true);
+            }
+        }
     }
 
     public void Damage(float damage)
@@ -286,10 +313,37 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     {
         for (int i = 0; i < projectileChildren.Count; i++)
         {
-            if(projectileChildren[i])
+            if (projectileChildren[i])
+            {
+                if (projectileChildren[i].TryGetComponent<IProjectileRelease>(out var releaseComponent))
+                {
+                    releaseComponent.Release();
+                }
+
                 projectileChildren[i].transform.SetParent(null, true);
+            }
         }
     }
 
-    
+    IEnumerator InDistance()
+    {
+        while(!dead)
+        {
+            if (meshObject && enemy_Movement)
+            {
+                if (enemy_Movement.playerDistance > 130 && meshObject.activeInHierarchy)
+                    meshObject.SetActive(false);
+                else if (enemy_Movement.playerDistance < 130 && !meshObject.activeInHierarchy)
+                {
+                    print("Restored");
+                    meshObject.SetActive(true);
+                }
+            }
+
+            yield return new WaitForSeconds(1);
+        }
+    }
+
+
+
 }

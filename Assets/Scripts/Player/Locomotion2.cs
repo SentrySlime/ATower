@@ -295,10 +295,10 @@ public class Locomotion2 : MonoBehaviour
         }
         else
         {
-            if (SFXList.Count >= 20)
+            if (SFXList.Count >= 10)
             {
                 SFXList[soundCount].PlayOneShot(SFXList[soundCount].clip);
-                if (soundCount >= 18)
+                if (soundCount >= 8)
                     soundCount = 0;
                 else
                     soundCount++;

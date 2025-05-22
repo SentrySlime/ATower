@@ -7,6 +7,8 @@ public class SpecialRoom : MonoBehaviour
     public GameObject roomLock;
     public ParticleSystem VFX;
     public AudioSource SFX;
+    public RoomManager roomManager;
+    public RoomScript roomScript;
 
     public GameObject specialRoomMesh;
     public GameObject flashMesh;

@@ -24,6 +24,8 @@ public class LevelGeneration_2 : MonoBehaviour
     public GameObject startingRoom;
     public GameObject endRoom;
     public GameObject treasureRoom;
+    public GameObject treasureRoom2;
+    public GameObject shopRoom;
     public GameObject devilRoom;
 
     [Header("Room generation stats")]
@@ -39,7 +41,7 @@ public class LevelGeneration_2 : MonoBehaviour
     public int roomCount1 = 0;
     public int roomCount2 = 0;
     public int roomCount3 = 0;
-    int easyRoomCount = 3;
+    int easyRoomCount = 4;
     int mediumRoomCount = 2;
     int hardRoomCount = 2;
 
@@ -92,12 +94,16 @@ public class LevelGeneration_2 : MonoBehaviour
 
     private void GenerateRoom()
     {
-
-
-        if (roomCount1 <= easyRoomCount)
+        if (roomCount1 < easyRoomCount)
         {
             GenerateEasyRoom();
             roomCount1++;
+        }
+        else if(roomCount1 == easyRoomCount)
+        {
+            GenerateTreasureRoom();
+            roomCount1++;
+
         }
         else if (roomCount2 <= mediumRoomCount)
         {
@@ -131,6 +137,15 @@ public class LevelGeneration_2 : MonoBehaviour
         spawnTransform = newRoom.point2.gameObject;
         if (roomManager)
             roomManager.AddRoom(newRoom);
+    }
+
+    private void GenerateTreasureRoom()
+    {
+        RoomScript newRoom = Instantiate(treasureRoom, spawnTransform.transform.position, spawnTransform.transform.rotation).GetComponent<RoomScript>();
+        spawnTransform = newRoom.point2.gameObject;
+        if (roomManager)
+            roomManager.AddRoom(newRoom);
+
     }
 
     private void GenerateEasyRoom()
@@ -265,31 +280,38 @@ public class LevelGeneration_2 : MonoBehaviour
 
     public GameObject GetRandomRoom()
     {
-        if (spawnedDevilRoom && spawnedTreasureRoom)
+        if (spawnedDevilRoom && spawnedTreasureRoom && spawnedShopRoom)
         {
             return null;
         }
 
         List<GameObject> availableRooms = new List<GameObject>();
 
-        if (!spawnedTreasureRoom && treasureRoom != null)
-            availableRooms.Add(treasureRoom);
+        if (!spawnedTreasureRoom && treasureRoom2 != null)
+            availableRooms.Add(treasureRoom2);
 
         if (!spawnedDevilRoom && devilRoom != null)
             availableRooms.Add(devilRoom);
+
+        if (!spawnedShopRoom && shopRoom != null)
+            availableRooms.Add(shopRoom);
 
         if (availableRooms.Count == 0)
             return null;
 
         GameObject chosenRoom = availableRooms[Random.Range(0, availableRooms.Count)];
 
-        if (chosenRoom == treasureRoom)
+        if (chosenRoom == treasureRoom2)
         {
             spawnedTreasureRoom = true;
         }
         else if (chosenRoom == devilRoom)
         {
             spawnedDevilRoom = true;
+        }
+        else if(chosenRoom == shopRoom)
+        {
+            spawnedShopRoom = true;
         }
 
         return chosenRoom;

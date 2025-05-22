@@ -65,9 +65,9 @@ public class Troll_C : Enemy_Movement
         }
     }
 
-    public override void StartAttack()
+    public override void StartAttack(float speed)
     {
-        base.StartAttack();
+        base.StartAttack(speed);
     }
 
     public override void EndAttack()
@@ -81,7 +81,7 @@ public class Troll_C : Enemy_Movement
 
     private void RangedAttack()
     {
-        StartAttack();
+        StartAttack(0);
         InitiateShootAttack();
     }
 
@@ -133,7 +133,7 @@ public class Troll_C : Enemy_Movement
 
     private void MeleeAttack()
     {
-        StartAttack();
+        StartAttack(0);
         MeleeAnimation();
     }
 

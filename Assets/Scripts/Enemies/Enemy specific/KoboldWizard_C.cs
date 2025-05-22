@@ -76,7 +76,7 @@ public class KoboldWizard_C : Enemy_Movement
 
     IEnumerator FireSpireTelegraph()
     {
-        StartAttack();
+        StartAttack(0);
         Vector3 fireSpirePos = player.transform.position;
         Instantiate(fireSpireTelegraphVFX, fireSpirePos, Quaternion.identity);
         yield return new WaitForSeconds(1);
@@ -96,7 +96,7 @@ public class KoboldWizard_C : Enemy_Movement
 
     private void CreateBarrier()
     {
-        StartAttack();
+        StartAttack(0);
         StartCoroutine(CreateBarrierCoroutine());
     }
 

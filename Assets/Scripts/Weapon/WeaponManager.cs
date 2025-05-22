@@ -22,7 +22,7 @@ public class WeaponManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        SortRarity();
+        //SortRarity();
     }
 
     void Update()
@@ -216,7 +216,7 @@ public class WeaponManager : MonoBehaviour
         currentIndex++;
         weapons.Remove(weapon);
         RemoveLists();
-        SortRarity();
+        //SortRarity();
 
         return weapon;
     }

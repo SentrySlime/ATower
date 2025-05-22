@@ -41,7 +41,7 @@ ParticleSystemForceField:
   m_Enabled: 1
   m_Parameters:
     m_Shape: 0
-    m_StartRange: 0.1
+    m_StartRange: 0
     m_EndRange: 15
     m_Length: 1
     m_GravityFocus: 0
@@ -208,7 +208,7 @@ ParticleSystemForceField:
     m_GravityCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 3
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1610,7 +1610,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 1000
+  far clip plane: 10
   field of view: 70
   orthographic: 0
   orthographic size: 5
@@ -2282,7 +2282,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 99999
+  far clip plane: 560
   field of view: 100
   orthographic: 0
   orthographic size: 5

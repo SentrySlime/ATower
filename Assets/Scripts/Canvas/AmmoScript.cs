@@ -59,6 +59,11 @@ public class AmmoScript : MonoBehaviour
     Vector2 magicPistolCellSize = new Vector2(50, 25);
     Vector2 magicPistolSpacing = new Vector2(0, -10);
 
+    [Header("Parasite")]
+    public Sprite parasiteSprite;
+    Vector2 parasiteCellSize = new Vector2(90f, 45f);
+    Vector2 parasiteSpacing = new Vector2(0, -10f);
+
     [Header("Reference")]
     public Sprite ammoSprite;
     Vector2 cellSize;
@@ -261,6 +266,8 @@ public class AmmoScript : MonoBehaviour
             SetCellsAndSpacing(energyRifleSprite, energyRifleCellSize, energyRifleSpacing);
         if (weaponType == BaseWeapon.WeaponType.MagicHandgun)
             SetCellsAndSpacing(magicPistolSprite, magicPistolCellSize, magicPistolSpacing);
+        if (weaponType == BaseWeapon.WeaponType.Parasite)
+            SetCellsAndSpacing(parasiteSprite, parasiteCellSize, parasiteSpacing);
     }
 
     private void SetCellsAndSpacing(Sprite sprite, Vector2 cellsize, Vector2 spacing)

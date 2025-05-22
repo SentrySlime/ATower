@@ -40,7 +40,8 @@ public class BaseWeapon : MonoBehaviour
         Energy,
         EnergyDark,
         EnergyRifle,
-        MagicHandgun
+        MagicHandgun,
+        Parasite
          
     }
 

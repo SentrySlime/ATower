@@ -2277,8 +2277,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c96d387f84adc4a8151905ee2ad116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  specialRoom: {fileID: 1863368477392116062}
   reciever: {fileID: 2797814307499963523}
   isDevilRoom: 1
+  isShopRoom: 0
+  isTreasureRoom: 0
 --- !u!1 &1926210554286651513
 GameObject:
   m_ObjectHideFlags: 0
@@ -2460,6 +2463,8 @@ MonoBehaviour:
   roomLock: {fileID: 9084244221922052744}
   VFX: {fileID: 5155208120461576524}
   SFX: {fileID: 2584471461498662258}
+  roomManager: {fileID: 0}
+  roomScript: {fileID: 0}
   specialRoomMesh: {fileID: 5550982198152539377}
   flashMesh: {fileID: 5041011560609061685}
 --- !u!82 &4459186466820254281
@@ -7439,7 +7444,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5094394040643375264
 Transform:
@@ -9130,7 +9135,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2877726744620533452
 Transform:
@@ -9252,8 +9257,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c96d387f84adc4a8151905ee2ad116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  specialRoom: {fileID: 1863368477392116062}
   reciever: {fileID: 1370034870288698764}
   isDevilRoom: 0
+  isShopRoom: 0
+  isTreasureRoom: 0
 --- !u!1 &3391468737718378230
 GameObject:
   m_ObjectHideFlags: 0
@@ -9270,7 +9278,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1608093176975369054
 Transform:
@@ -9392,8 +9400,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c96d387f84adc4a8151905ee2ad116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  specialRoom: {fileID: 0}
   reciever: {fileID: 1370034870288698764}
   isDevilRoom: 0
+  isShopRoom: 0
+  isTreasureRoom: 0
 --- !u!1 &3489963571777701771
 GameObject:
   m_ObjectHideFlags: 0
@@ -9451,8 +9462,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c96d387f84adc4a8151905ee2ad116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  specialRoom: {fileID: 0}
   reciever: {fileID: 2797814307499963523}
   isDevilRoom: 0
+  isShopRoom: 0
+  isTreasureRoom: 0
 --- !u!1 &3926606226126227527
 GameObject:
   m_ObjectHideFlags: 0
@@ -11669,7 +11683,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7245402613658648335
 Transform:
@@ -12317,7 +12331,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &634467421902782102
 Transform:
@@ -12725,7 +12739,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2198098574490904809
 Transform:
@@ -13038,7 +13052,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4156422256396049267
 Transform:
@@ -13555,7 +13569,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &6015378309691893655
 Transform:
@@ -13868,7 +13882,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5333367759542187597
 Transform:
@@ -14181,7 +14195,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4093988007689880708
 Transform:
@@ -20931,7 +20945,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &6379404869301414432
 Transform:
@@ -21244,7 +21258,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2403081774333144820
 Transform:
@@ -29307,7 +29321,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &103680719842161778
 Transform:
@@ -30406,7 +30420,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7308782611971807320
 Transform:
@@ -30716,7 +30730,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8601976021846101908
 Transform:
@@ -30847,7 +30861,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8432300900080179280
 Transform:
