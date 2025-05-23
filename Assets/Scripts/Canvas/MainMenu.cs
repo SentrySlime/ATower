@@ -9,8 +9,11 @@ public class MainMenu : MonoBehaviour
     public GameObject cameraHolder;
     public RotateRoundAxis rotateRoundAxis;
 
+    public Settings settings;
     public CanvasGroup fadeOut;
     public AudioSource music;
+
+    public GameObject mainMenuPanel;
 
     bool move = false;
     public float moveSpeed = 5;
@@ -66,6 +69,18 @@ public class MainMenu : MonoBehaviour
             fadeOut.alpha = Mathf.Clamp01(fadeOut.alpha);
             music.volume -= Time.deltaTime * musicSpeed;
         }
+    }
+
+    public void MainMenuSettings()
+    {
+        mainMenuPanel.SetActive(false);
+        settings.EnableSetting();
+    }
+
+    public void DisableSettings()
+    {
+        mainMenuPanel.SetActive(true);
+        settings.CloseSettings();
     }
 
     IEnumerator LoadMainScene()

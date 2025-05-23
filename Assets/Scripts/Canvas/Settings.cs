@@ -29,14 +29,20 @@ public class Settings : MonoBehaviour
     Camera mainCamera;
     PSXEffects psxEffects;
 
+    public PSXEffects mainMenuPsxEffects;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        cameraMovement = player.GetComponent<CameraMovement>();
-        weaponSocket = player.GetComponent<WeaponSocket>();
+        if(player)
+        {
+            cameraMovement = player.GetComponent<CameraMovement>();
+            weaponSocket = player.GetComponent<WeaponSocket>();
+        
+            mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+            psxEffects = mainCamera.GetComponentInChildren<PSXEffects>();
 
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        psxEffects = mainCamera.GetComponentInChildren<PSXEffects>();
+        }
 
         sensitivity = PlayerPrefs.GetFloat("Sens", sensitivity);
         sensslider.value = sensitivity;
@@ -54,8 +60,12 @@ public class Settings : MonoBehaviour
 
     public void UpdatePSX()
     {
-        //-----  Major Effects -----\\
-        psxEffects.enabled = psxToggle.isOn;
+        
+        if(psxEffects)
+            psxEffects.enabled = psxToggle.isOn;
+        else
+            if(mainMenuPsxEffects)
+            mainMenuPsxEffects.enabled = psxToggle.isOn;
     }
 
     private void SetSliders()
@@ -80,7 +90,9 @@ public class Settings : MonoBehaviour
         PlayerPrefs.SetFloat("Sens", sensitivity);
         sensslider.value = Mathf.Round(sensslider.value * 100f) / 100f;
         sensValue.text = sensslider.value.ToString();
-        weaponSocket.baseSensitivity = sensitivity;
+        
+        if(weaponSocket)
+            weaponSocket.baseSensitivity = sensitivity;
     }
 
     public void CloseSettings()
