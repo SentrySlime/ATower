@@ -10,16 +10,16 @@ public class MainMenu : MonoBehaviour
     public RotateRoundAxis rotateRoundAxis;
 
     public CanvasGroup fadeOut;
+    public AudioSource music;
 
     bool move = false;
     public float moveSpeed = 5;
     public float rotateSpeed = 1;
     public float fadeSpeed = 1;
+    public float musicSpeed = 1;
 
-    public float rotateDuration = 0.5f;
-    float rotateTimer = 0;
+
     
-    float moveTimer = 0;
 
     void Start()
     {
@@ -64,6 +64,7 @@ public class MainMenu : MonoBehaviour
         {
             fadeOut.alpha += Time.deltaTime * fadeSpeed;
             fadeOut.alpha = Mathf.Clamp01(fadeOut.alpha);
+            music.volume -= Time.deltaTime * musicSpeed;
         }
     }
 

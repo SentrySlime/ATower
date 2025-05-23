@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
 {
     GameObject player;
     GameObject shootPoint;
+    public Settings settings;
     public GameObject shopPanel;
     public GameObject pauseMenu;
     public GameObject inventoryMenu;
@@ -127,6 +128,8 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame(GameObject obj)
     {
+        settings.CloseSettings();
+
         paused = false;
         cmMovement.paused = false;
         Time.timeScale = 1;
@@ -138,6 +141,8 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
+        settings.CloseSettings();
+
         paused = false;
         cmMovement.paused = false;
         Time.timeScale = 1;

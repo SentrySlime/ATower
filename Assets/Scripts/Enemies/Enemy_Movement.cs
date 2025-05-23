@@ -78,7 +78,6 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
 
         if (playerDistance > 130)
         {
-            print("Enemy movement don't do anything when player is too far");
             return;
         }
 

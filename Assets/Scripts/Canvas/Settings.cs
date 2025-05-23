@@ -1,79 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
-    public bool paused;
-    public GameObject pausePanel;
+    public GameObject settingsPanel;
 
     public Toggle psxToggle;
-    public Toggle fishEyeToggle;
-
     public Slider regularFov;
-    public Slider fishEyeFov;
+
+    [Header("Sensitivity")]
+    public Slider sensslider;
+    public TextMeshProUGUI sensValue;
+    public float sensitivity = 1f;
+
+    [Header("Volume")]
+    public Slider volumeSlider;
+    public TextMeshProUGUI volumeValue;
+    float masterVolume = 1;
+
+    GameObject player;
+    CameraMovement cameraMovement;
+    WeaponSocket weaponSocket;
+
 
     Camera mainCamera;
-    GameObject player;
     PSXEffects psxEffects;
-    WideCameraProjector fishEyeEffect;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        cameraMovement = player.GetComponent<CameraMovement>();
+        weaponSocket = player.GetComponent<WeaponSocket>();
+
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         psxEffects = mainCamera.GetComponentInChildren<PSXEffects>();
-        fishEyeEffect = mainCamera.GetComponent<WideCameraProjector>();
 
-        SetSliders();
+        sensitivity = PlayerPrefs.GetFloat("Sens", sensitivity);
+        sensslider.value = sensitivity;
 
-        pausePanel.SetActive(false);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        masterVolume = PlayerPrefs.GetFloat("Volume", masterVolume);
+        volumeSlider.value = masterVolume;
+
+        settingsPanel.SetActive(false);
     }
 
-
-    void Update()
+    public void EnableSetting()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            PauseFunction();
-        }
-
-
-        if(paused)
-            UpdateSettings();
+        settingsPanel.SetActive(true);
     }
 
-    private void UpdateSettings()
+    public void UpdatePSX()
     {
         //-----  Major Effects -----\\
         psxEffects.enabled = psxToggle.isOn;
-        fishEyeEffect.enabled = fishEyeToggle.isOn;
-
-        //-----  Field of View -----\\
-        mainCamera.fieldOfView = regularFov.value;
-        fishEyeEffect.fieldOfView = fishEyeFov.value;
-
-    }
-
-    private void PauseFunction()
-    {
-        if (paused)
-        {
-            paused = false;
-            pausePanel.SetActive(false);
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        else
-        {
-            paused = true;
-            pausePanel.SetActive(true);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
     }
 
     private void SetSliders()
@@ -81,10 +63,28 @@ public class Settings : MonoBehaviour
         regularFov.maxValue = 120;
         regularFov.minValue = 60;
         regularFov.value = mainCamera.fieldOfView;
+    }
 
-        fishEyeFov.maxValue = 180;
-        fishEyeFov.minValue = 90;
-        fishEyeFov.value = fishEyeEffect.fieldOfView;
+    public void UpdateAudio()
+    {
+        masterVolume = volumeSlider.value;
+        PlayerPrefs.SetFloat("Volume", masterVolume);
+        volumeSlider.value = Mathf.Round(volumeSlider.value * 100f) / 100f;
+        volumeValue.text = volumeSlider.value.ToString();
+        AudioListener.volume = masterVolume;
+    }
 
+    public void UpdateSensitivity()
+    {
+        sensitivity = sensslider.value;
+        PlayerPrefs.SetFloat("Sens", sensitivity);
+        sensslider.value = Mathf.Round(sensslider.value * 100f) / 100f;
+        sensValue.text = sensslider.value.ToString();
+        weaponSocket.baseSensitivity = sensitivity;
+    }
+
+    public void CloseSettings()
+    {
+        settingsPanel.SetActive(false);
     }
 }
