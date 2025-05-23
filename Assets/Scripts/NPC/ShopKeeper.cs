@@ -15,9 +15,14 @@ public class ShopKeeper : MonoBehaviour, IInteractInterface
     private void Awake()
     {
         canvas = GameObject.FindGameObjectWithTag("Canvas");
-        pauseMenu = canvas.GetComponent<PauseMenu>();
-        shopPanel = pauseMenu.shopPanel;
-        shopPanelScript = shopPanel.GetComponent<ShopPanel>();
+        if(canvas)
+            pauseMenu = canvas.GetComponent<PauseMenu>();
+        
+        if(pauseMenu)
+            shopPanel = pauseMenu.shopPanel;
+        
+        if(shopPanel)
+            shopPanelScript = shopPanel.GetComponent<ShopPanel>();
     }
 
     private void Start()
