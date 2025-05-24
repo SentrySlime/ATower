@@ -34,6 +34,7 @@ public class ShopPanel : MonoBehaviour
     public Image image;
 
     public AudioSource purchaseSFX;
+    public AudioSource noMoneySFX;
 
     private void Awake()
     {
@@ -81,7 +82,8 @@ public class ShopPanel : MonoBehaviour
     {
         if (!selectedObject) return;
 
-        purchaseSFX.Play();
+        
+        
 
         ItemPanel panel = selectedObject.GetComponent<ItemPanel>();
 
@@ -104,6 +106,7 @@ public class ShopPanel : MonoBehaviour
 
         if (inventory.money >= selectedWeapon.goldCost)
         {
+            purchaseSFX.Play();
             inventory.DecreaseMoney(tempWeapon.goldCost);
             findAndEquipWeapons.InitializeWeapon(selectedWeapon);
             NullTheShowCase();
@@ -111,7 +114,7 @@ public class ShopPanel : MonoBehaviour
         }
         else
         {
-            print("Not enough money");
+            noMoneySFX.Play();
         }
     }
 
@@ -119,6 +122,7 @@ public class ShopPanel : MonoBehaviour
     {
         if (inventory.money >= selectedItem.goldCost)
         {
+            purchaseSFX.Play();
             inventory.DecreaseMoney(selectedItem.goldCost);
             findAndEquipWeapons.EquipItemBase(selectedItem);
             NullTheShowCase();
@@ -126,7 +130,7 @@ public class ShopPanel : MonoBehaviour
         }
         else
         {
-            print("Not enough money");
+            noMoneySFX.Play();
         }
     }
 

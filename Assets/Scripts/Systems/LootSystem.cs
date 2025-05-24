@@ -7,23 +7,21 @@ public class LootSystem : MonoBehaviour
     public WeaponManager weaponManager;
     public ItemManager itemManager;
 
-    public int itemKillRequirement = 0;
+    public int itemTokens = 0;
+    public int tokenRequirement = 100;
 
     void Start()
     {
-
-    }
-
-    void Update()
-    {
-
+        tokenRequirement = Random.Range(85, 100);
+        int tempReduction = Random.Range(8, 15);
+        itemTokens = tokenRequirement - tempReduction;
     }
 
 
-    public void DropLoot(Vector3 spawnPos, float dropChance)
+    public void DropLoot(Vector3 spawnPos, int enemyToken)
     {
 
-        if (!DropCheck(dropChance))
+        if (!DropCheck(enemyToken))
             return;
 
         itemManager.DropItem(spawnPos);
@@ -35,6 +33,18 @@ public class LootSystem : MonoBehaviour
 
         if (number <= dropChance)
             return true;
+        else
+            return false;
+    }
+
+    public bool DropCheck(int incomingToken)
+    {
+        itemTokens += incomingToken;
+        if (itemTokens >= 100)
+        {
+            itemTokens = 0;
+            return true;
+        }
         else
             return false;
     }

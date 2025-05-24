@@ -82,7 +82,7 @@ public class Locomotion2 : MonoBehaviour
 
     private void Update()
     {
-        if(playerHealth.dead) return;
+        
 
         velocityX = rb.velocity.x;
         velocityZ = rb.velocity.z;
@@ -141,6 +141,8 @@ public class Locomotion2 : MonoBehaviour
 
     private void MyInput()
     {
+        if (playerHealth.dead) return;
+
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 

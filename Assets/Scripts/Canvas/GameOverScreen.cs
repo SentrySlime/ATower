@@ -12,6 +12,12 @@ public class GameOverScreen : MonoBehaviour
     GameObject endText;
     TextMeshProUGUI endTextMeshPro;
     GameObject hudPanel;
+    public CanvasGroup fadeOut;
+
+    private void Awake()
+    {
+        
+    }
 
     void Start()
     {
@@ -40,6 +46,7 @@ public class GameOverScreen : MonoBehaviour
     {
         hudPanel.SetActive(false);
         endTextMeshPro.text = "Game Over";
+        fadeOut.alpha = 0.5f;
         endTextMeshPro.enabled = true;
         if (endScreenButtons)
             endScreenButtons.SetActive(true);

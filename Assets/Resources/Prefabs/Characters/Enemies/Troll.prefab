@@ -1032,7 +1032,7 @@ MonoBehaviour:
   spawner: {fileID: 0}
   dropLoot: 1
   itemPrefab: {fileID: 0}
-  dropChance: 1
+  itemTokens: 50
   dead: 0
   gauranteeItemDrop: 0
   enableOnHitEffects: 1
@@ -1040,6 +1040,7 @@ MonoBehaviour:
   canDropAmmo: 1
   damagedPS: {fileID: 0}
   meshObject: {fileID: 3894396396947667310}
+  enemy_Movement: {fileID: 0}
 --- !u!114 &1711520447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1061,6 +1062,7 @@ MonoBehaviour:
   roam: 1
   walkingSFX: {fileID: 0}
   movementSpeed: 0
+  angularSpeed: 0
   minUpdateRate: 0.5
   maxUpdateRate: 1
   dotProductForInfront: 0.2
@@ -1069,6 +1071,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4251
   interactDistance_: 125
+  lineOfSightTimer: 0
   isAttacking: 0
   playerDistance: 0
   directionToPlayer: {x: 0, y: 0, z: 0}
