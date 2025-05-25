@@ -54,7 +54,7 @@ MonoBehaviour:
   spawner: {fileID: 0}
   dropLoot: 0
   itemPrefab: {fileID: 0}
-  dropChance: 0.05
+  itemTokens: 1
   dead: 0
   gauranteeItemDrop: 0
   enableOnHitEffects: 1
@@ -161,7 +161,7 @@ MonoBehaviour:
   spawner: {fileID: 0}
   dropLoot: 1
   itemPrefab: {fileID: 9089351037408256591, guid: dc29b4c24852552499a993df5441b567, type: 3}
-  dropChance: 0.01
+  itemTokens: 1
   dead: 0
   gauranteeItemDrop: 0
   enableOnHitEffects: 1
@@ -191,6 +191,7 @@ MonoBehaviour:
   roam: 1
   walkingSFX: {fileID: 8483853150859079499}
   movementSpeed: 0
+  angularSpeed: 0
   minUpdateRate: 0.5
   maxUpdateRate: 1
   dotProductForInfront: 0.5
@@ -199,6 +200,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4251
   interactDistance_: 125
+  lineOfSightTimer: 0
   isAttacking: 0
   playerDistance: 0
   directionToPlayer: {x: 0, y: 0, z: 0}
@@ -219,7 +221,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8483853150859067443}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1.31
+  m_Radius: 1
   m_Speed: 7
   m_Acceleration: 20
   avoidancePriority: 50

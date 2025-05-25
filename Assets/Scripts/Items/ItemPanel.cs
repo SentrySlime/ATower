@@ -36,10 +36,13 @@ public class ItemPanel : MonoBehaviour
     [HideInInspector] public Mesh itemMesh;
     [HideInInspector] public Material itemMaterial;
 
+    private void Awake()
+    {
+        selectedItem = GetComponentInParent<SelectedItem>();
+    }
 
     void Start()
     {
-        selectedItem = GetComponentInParent<SelectedItem>();
     }
 
 
@@ -50,6 +53,11 @@ public class ItemPanel : MonoBehaviour
 
     public void Selected()
     {
+        if(!selectedItem)
+        {
+            selectedItem = GetComponentInParent<SelectedItem>();
+        }
+
         if (selectedItem)
         {
             selectedItem.SetSelectedPanel(this);

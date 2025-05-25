@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ItemShowCase : MonoBehaviour
 {
     public Transform itemParent;
+    public Transform weaponParent;
 
     public MeshFilter renderTextureMeshFilter;
     public MeshRenderer renderTextureMeshRenderer;
@@ -26,16 +27,32 @@ public class ItemShowCase : MonoBehaviour
     {
         if(itemParent.childCount == 0)
         {
-            NullTheShowCase();
+            SetFirstWeaponDisplay();
         }
         else
         {
             ItemPanel panel = itemParent.GetChild(0).GetComponent<ItemPanel>();
-            panel.Selected();
-            //ItemBase tempItem = panel.itemBase;
-            //SetTheShowCase(tempItem);
+            panel.SetItemDisplay();
+            
         }
     }
+
+    public void SetFirstWeaponDisplay()
+    {
+        if (weaponParent.childCount == 0)
+        {
+            NullTheShowCase();
+        }
+        else
+        {
+            ItemPanel panel = weaponParent.GetChild(0).GetComponent<ItemPanel>();
+            panel.SetItemDisplay();
+        }
+
+    }
+
+
+
 
     //private void SetTheShowCase(ItemBase tempItem)
     //{

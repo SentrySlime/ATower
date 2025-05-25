@@ -73,17 +73,14 @@ public class ShopPanel : MonoBehaviour
     public void SetFirstItemDisplay()
     {
         if (itemParent.childCount == 0) return;
-        ItemBase tempItem = itemParent.GetChild(0).GetComponent<ItemPanel>().itemBase;
-        SetShowcaseAsItem(tempItem);
+        ItemPanel tempItem = itemParent.GetChild(0).GetComponent<ItemPanel>();
+        tempItem.SetItemDisplay();
 
     }
 
     public void BuyObject()
     {
         if (!selectedObject) return;
-
-        
-        
 
         ItemPanel panel = selectedObject.GetComponent<ItemPanel>();
 
@@ -92,10 +89,12 @@ public class ShopPanel : MonoBehaviour
         if(itemBase != null)
         {
             BuyItem(itemBase);
+            SetFirstItemDisplay();
         }
         else if(weaponPickUp != null)
         {
             BuyWeapon(weaponPickUp);
+            SetFirstItemDisplay();
         }
         
     }

@@ -141,7 +141,12 @@ public class Locomotion2 : MonoBehaviour
 
     private void MyInput()
     {
-        if (playerHealth.dead) return;
+        if (playerHealth.dead)
+        {
+            horizontalInput = 0; 
+            verticalInput = 0;
+            return;
+        }
 
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");

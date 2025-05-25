@@ -101,7 +101,9 @@ public class PauseMenu : MonoBehaviour
             {
                 PauseGame();
                 inventoryMenu.SetActive(true);
+
                 itemShowCase.SetFirstItemDisplay();
+                
             }
         }
 

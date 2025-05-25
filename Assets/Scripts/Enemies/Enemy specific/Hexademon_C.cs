@@ -383,7 +383,7 @@ public class Hexademon_C : Enemy_Movement
 
         beamLineRender.enabled = true;
         beamLineRender.SetPosition(0, shootPoint.position);
-        beamLineRender.SetPosition(1, shootPoint.position + shootPoint.forward * 100f);
+        beamLineRender.SetPosition(1, shootPoint.position + shootPoint.forward * beamDistance);
 
         while (timer < duration)
         {
@@ -404,9 +404,9 @@ public class Hexademon_C : Enemy_Movement
                 Vector3 combinedDirection = new Vector3(horizontalAim.x, verticalAim.y, horizontalAim.z);
                 shootPoint.rotation = Quaternion.LookRotation(combinedDirection);
 
-                Vector3 hitPosition = shootPoint.position + shootPoint.forward * 100f;
+                Vector3 hitPosition = shootPoint.position + shootPoint.forward * beamDistance;
 
-                if (Physics.Raycast(shootPoint.position, shootPoint.forward, out RaycastHit hit, 100f))
+                if (Physics.Raycast(shootPoint.position, shootPoint.forward, out RaycastHit hit, beamDistance))
                 {
                     hitPosition = hit.point;
 
