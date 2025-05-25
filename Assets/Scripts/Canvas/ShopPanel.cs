@@ -72,10 +72,52 @@ public class ShopPanel : MonoBehaviour
 
     public void SetFirstItemDisplay()
     {
-        if (itemParent.childCount == 0) return;
+
+        if (itemParent.childCount == 0)
+        {
+            SetFirstWeaponDisplay();
+        }
+
         ItemPanel tempItem = itemParent.GetChild(0).GetComponent<ItemPanel>();
         tempItem.SetItemDisplay();
 
+    }
+
+    public void SetNewItemDisplay()
+    {
+        if (itemParent.childCount <= 1)
+        {
+            //SetNewWeaponDisplay();
+            SetFirstWeaponDisplay();
+            return;
+        }
+
+        ItemPanel tempItem = itemParent.GetChild(1).GetComponent<ItemPanel>();
+        tempItem.SetItemDisplay();
+    }
+
+    public void SetFirstWeaponDisplay()
+    {
+        if (weaponParent.childCount == 0)
+        {
+            NullTheShowCase();
+            return;
+        }
+
+        ItemPanel tempItem = weaponParent.GetChild(0).GetComponent<ItemPanel>();
+        tempItem.SetItemDisplay();
+    }
+
+    public void SetNewWeaponDisplay()
+    {
+        if (weaponParent.childCount == 1)
+        {
+            SetFirstWeaponDisplay();
+            return;
+        }
+
+        ItemPanel tempItem = weaponParent.GetChild(1).GetComponent<ItemPanel>();
+        tempItem.SetItemDisplay();
     }
 
     public void BuyObject()
@@ -89,15 +131,14 @@ public class ShopPanel : MonoBehaviour
         if(itemBase != null)
         {
             BuyItem(itemBase);
-            SetFirstItemDisplay();
         }
         else if(weaponPickUp != null)
         {
             BuyWeapon(weaponPickUp);
-            SetFirstItemDisplay();
         }
         
     }
+
 
     private void BuyWeapon(WeaponPickUp selectedWeapon)
     {
@@ -108,8 +149,8 @@ public class ShopPanel : MonoBehaviour
             purchaseSFX.Play();
             inventory.DecreaseMoney(tempWeapon.goldCost);
             findAndEquipWeapons.InitializeWeapon(selectedWeapon);
-            NullTheShowCase();
             Destroy(selectedIcon);
+            SetNewItemDisplay();
         }
         else
         {
@@ -124,8 +165,8 @@ public class ShopPanel : MonoBehaviour
             purchaseSFX.Play();
             inventory.DecreaseMoney(selectedItem.goldCost);
             findAndEquipWeapons.EquipItemBase(selectedItem);
-            NullTheShowCase();
             Destroy(selectedIcon);
+            SetNewItemDisplay();
         }
         else
         {
