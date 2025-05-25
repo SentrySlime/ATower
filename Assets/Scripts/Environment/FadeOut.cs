@@ -12,13 +12,16 @@ public class FadeOut : MonoBehaviour
 
     [HideInInspector] public GameObject endScreenButtons;
     CanvasGroup canvasToFadeIn;
+    GameObject generatingLevelText;
     GameObject endText;
     Collider triggerCollider;
+
 
     private void Awake()
     {
         endScreenButtons = GameObject.Find("EndScreenButtons");
         canvasToFadeIn = GameObject.Find("FadeImageIn").GetComponent<CanvasGroup>();
+        generatingLevelText = GameObject.Find("GeneratingLevel");
         triggerCollider = GetComponent<Collider>();
         endText = GameObject.Find("EndText");
     }
@@ -26,7 +29,7 @@ public class FadeOut : MonoBehaviour
     void Start()
     {
         DisableObjects();
-        StartCoroutine(FadeIn());
+        //StartCoroutine(FadeIn());
     }
 
     private void DisableObjects()
@@ -35,9 +38,11 @@ public class FadeOut : MonoBehaviour
         endText.GetComponent<TextMeshProUGUI>().enabled = false;
     }
 
-    IEnumerator FadeIn()
+    public IEnumerator FadeIn()
     {
-        yield return new WaitForSeconds(2f);
+        generatingLevelText.SetActive(false);
+
+        yield return new WaitForSeconds(0.1f);
         
         fadeAlpha = 1;
 

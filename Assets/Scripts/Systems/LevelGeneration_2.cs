@@ -51,11 +51,13 @@ public class LevelGeneration_2 : MonoBehaviour
     GameObject previousRoom;
     GameObject previousCorridor;
 
+    FadeOut fadeOut;
     NavMeshManager navMeshManager;
     RoomManager roomManager;
 
     private void Awake()
     {
+        fadeOut = GameObject.Find("EndScreen").GetComponent<FadeOut>();
         navMeshManager = GetComponent<NavMeshManager>();
         roomManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<RoomManager>();
         AssignRoomsToList();
@@ -322,5 +324,7 @@ public class LevelGeneration_2 : MonoBehaviour
         surface_1.BuildNavMesh();
         surface_2.BuildNavMesh();
         roomManager.DisableRooms();
+
+        StartCoroutine(fadeOut.FadeIn());
     }
 }

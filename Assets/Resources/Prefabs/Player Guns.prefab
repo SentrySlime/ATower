@@ -1818,6 +1818,7 @@ MonoBehaviour:
   hpFill: {fileID: 0}
   hpBackground: {fileID: 0}
   textHP: {fileID: 0}
+  dead: 0
   damageVignette: {fileID: 0}
   vignetteAlpha: 0
   vignetteRate: 1
@@ -1842,6 +1843,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   money: 0
   moneyText: {fileID: 0}
+  moneyText2: []
   weaponIndex: 0
   previousIndex: 0
   heldWeapons: []
@@ -2349,8 +2351,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootObj: {fileID: 5004350295882963667}
   paused: 0
-  sensslider: {fileID: 0}
-  sensValue: {fileID: 0}
   sensitivity: 1
   yRotationLimit: 88
   rotation: {x: 0, y: 0}

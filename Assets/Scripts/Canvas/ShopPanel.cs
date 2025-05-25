@@ -76,24 +76,12 @@ public class ShopPanel : MonoBehaviour
         if (itemParent.childCount == 0)
         {
             SetFirstWeaponDisplay();
+            return;
         }
 
         ItemPanel tempItem = itemParent.GetChild(0).GetComponent<ItemPanel>();
         tempItem.SetItemDisplay();
 
-    }
-
-    public void SetNewItemDisplay()
-    {
-        if (itemParent.childCount <= 1)
-        {
-            //SetNewWeaponDisplay();
-            SetFirstWeaponDisplay();
-            return;
-        }
-
-        ItemPanel tempItem = itemParent.GetChild(1).GetComponent<ItemPanel>();
-        tempItem.SetItemDisplay();
     }
 
     public void SetFirstWeaponDisplay()
@@ -105,18 +93,6 @@ public class ShopPanel : MonoBehaviour
         }
 
         ItemPanel tempItem = weaponParent.GetChild(0).GetComponent<ItemPanel>();
-        tempItem.SetItemDisplay();
-    }
-
-    public void SetNewWeaponDisplay()
-    {
-        if (weaponParent.childCount == 1)
-        {
-            SetFirstWeaponDisplay();
-            return;
-        }
-
-        ItemPanel tempItem = weaponParent.GetChild(1).GetComponent<ItemPanel>();
         tempItem.SetItemDisplay();
     }
 
@@ -149,8 +125,10 @@ public class ShopPanel : MonoBehaviour
             purchaseSFX.Play();
             inventory.DecreaseMoney(tempWeapon.goldCost);
             findAndEquipWeapons.InitializeWeapon(selectedWeapon);
+            selectedIcon.transform.SetParent(null);
+            selectedIcon.SetActive(true);
             Destroy(selectedIcon);
-            SetNewItemDisplay();
+            SetFirstItemDisplay();
         }
         else
         {
@@ -165,8 +143,9 @@ public class ShopPanel : MonoBehaviour
             purchaseSFX.Play();
             inventory.DecreaseMoney(selectedItem.goldCost);
             findAndEquipWeapons.EquipItemBase(selectedItem);
+            selectedIcon.transform.SetParent(null);
             Destroy(selectedIcon);
-            SetNewItemDisplay();
+            SetFirstItemDisplay();
         }
         else
         {
