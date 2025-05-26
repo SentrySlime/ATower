@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4773962672540810127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2239080014955014833}
+  - component: {fileID: -9029082765191682471}
+  m_Layer: 0
+  m_Name: PowerStack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2239080014955014833
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4773962672540810127}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 48.970463, y: -2.9625828, z: -13.253172}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-9029082765191682471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4773962672540810127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3c27a65a8f09c64eb7ec27436106a92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: PowerStack
+  itemDescription: Gain increased damage
+  itemIcon: {fileID: 21300000, guid: acd9c7f207643654a908865a87b712cc, type: 3}
+  itemMesh: {fileID: -427269838498998902, guid: ca42c41679bd20e4cad874565da9a83c, type: 3}
+  itemMaterial: {fileID: 2100000, guid: 0470dbf78e1da984096b8041ad6e746d, type: 2}
+  goldCost: 860
+  type: 3
+  isDevilItem: 0
+  maxHp: 0
+  oneMaxHP: 0
+  hpOnHit: 0
+  hpOnCritHit: 0
+  hpOnKill: 0
+  hpOnEliteKill: 0
+  helpingHand: 0
+  hpRegen: 0
+  hpRegenOnEnemyHit: 0
+  healCap: 0
+  canOverheal: 0
+  onlyEliteKillHeal: 0
+  damageReductionPercent: 0
+  damageIgnoreChance: 0
+  moveSpeed: 0
+  extraJumps: 0
+  damage: 0
+  increasedDamage: 0.2
+  critChance: 0
+  canExplodeEnemies: 0
+  moneyIsPower: 0
+  hpIsPower: 0
+  ammoRefills: 0
+  reloadAmount: 0
+  maxMagazineSize: 0
+  reloadSpeed: 0
+  returnAmmoOnkill: 0
+  hasAlternateFastReload: 0
+  heartboundRounds: 0
+  maxAmmo: 0
+  fireBallChance: 0
+  accuracy: 0
+  increasedMoneyDrops: 0
+  moneyIsHealth: 0
+  playerStats: {fileID: 0}
