@@ -17,6 +17,9 @@ public class PlayerStats : MonoBehaviour
     public int healCap = 0;
     public int canOverheal = 0;
     public int onlyEliteKillHeal = 0;
+    public int healOnReload = 0;
+    public float overkillDamageHeal = 0;
+    
 
     [Header("Defense")]
     public float damageReductionPercent = 1.1f;

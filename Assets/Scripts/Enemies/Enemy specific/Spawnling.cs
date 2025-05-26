@@ -163,7 +163,7 @@ public class Spawnling : MonoBehaviour
     private void DoAttack()
     {
         explosionSystem.SpawnExplosion(transform.position, 10, 15, true);
-        enemy.Die(false);
+        enemy.Die(false, 0);
     }
 
     private void NoticePlayer()

@@ -42,6 +42,8 @@ public class ProjectileBase : MonoBehaviour
 
     public GameObject explosiveImpactSFX;
 
+    bool hasExploded = false;
+
     //---------- Homing ----------\\
     [Header("Homing stuff")]
     public bool homing = false;
@@ -307,9 +309,14 @@ public class ProjectileBase : MonoBehaviour
 
     protected void ExplosiveShot(GameObject parent)
     {
+        if (hasExploded) return;
+
         aMainSysteM.SpawnExplosion(transform.position, explosiveRadius, explosiveDamage, parent, weaponParent);
  
-        CheckPierce();
+        hasExploded = true;
+        
+        if(pierceObjects)
+            CheckPierce();
     }
 
 

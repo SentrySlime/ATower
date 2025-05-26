@@ -162,9 +162,12 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
 
         if (gameObject.GetComponent<INoticePlayer>() != null)
             gameObject.GetComponent<INoticePlayer>().NoticePlayer();
-        
 
-        currentHealth -= CalculateDamage(damage);
+
+        float finalDamage = CalculateDamage(damage);
+        float overkillDamage = finalDamage - currentHealth;
+
+        currentHealth -= finalDamage;
 
         if (damagedPS != null)
         {
@@ -173,7 +176,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
         }
 
         if (currentHealth <= 0 && !dead)
-            Die(false);
+            Die(false, overkillDamage);
     }
 
     public void Damage(float damage, bool criticalHit)
@@ -183,8 +186,10 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
             gameObject.GetComponent<INoticePlayer>().NoticePlayer();
 
 
+        float finalDamage = CalculateDamage(damage);
+        float overkillDamage = finalDamage - currentHealth;
 
-        currentHealth -= CalculateDamage(damage);
+        currentHealth -= finalDamage;
 
         if (damagedPS != null)
         {
@@ -193,7 +198,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
         }
 
         if (currentHealth <= 0 && !dead)
-            Die(criticalHit);
+            Die(criticalHit, overkillDamage);
     }
 
     private float CalculateDamage(float damage)
@@ -206,7 +211,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
         return finalDamage;
     }
 
-    public void Die(bool criticalDeath)
+    public void Die(bool criticalDeath, float overkillDamage)
     {
         dead = true;
 
@@ -221,7 +226,9 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
         }
 
         if(shouldReportDeath && moneySpawnPoint)
-            enemyManager.ReportDeath(moneySpawnPoint.position, canDropAmmo, elite);
+        {
+            enemyManager.ReportDeath(moneySpawnPoint.position, canDropAmmo, elite, overkillDamage);
+        }
 
         if (moneySpawnPoint != null)
         {
@@ -246,6 +253,8 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
                tempPS.transform.localScale = new Vector3(deathParticleSize, deathParticleSize, deathParticleSize);
             }
         }
+
+        
 
         OnEnemyDied?.Invoke(this);
 

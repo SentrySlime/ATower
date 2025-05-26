@@ -110,15 +110,17 @@ MonoBehaviour:
   killMarker: {fileID: 0}
   homingTarget: {fileID: 6198504517991691388}
   spawner: {fileID: 0}
-  dropLoot: 1
+  dropLoot: 0
   itemPrefab: {fileID: 0}
-  dropChance: 0.001
+  itemTokens: 1
   dead: 0
   gauranteeItemDrop: 0
   enableOnHitEffects: 0
   shouldReportDeath: 0
-  canDropAmmo: 1
+  canDropAmmo: 0
   damagedPS: {fileID: 0}
+  meshObject: {fileID: 0}
+  enemy_Movement: {fileID: 0}
 --- !u!136 &6198504517991691387
 CapsuleCollider:
   m_ObjectHideFlags: 0

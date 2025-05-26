@@ -48,7 +48,7 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 09341be197aa3774c8f58dbe3de52a51, type: 3}
   itemMesh: {fileID: -1654486973231660434, guid: 5f861339e7e3f194091b58a2d327867a, type: 3}
   itemMaterial: {fileID: 2100000, guid: 079f15705ff81384ab3d2a31c7025d2b, type: 2}
-  goldCost: 870
+  goldCost: 1150
   type: 0
   isDevilItem: 0
   maxHp: 0
@@ -63,6 +63,8 @@ MonoBehaviour:
   healCap: 0
   canOverheal: 0
   onlyEliteKillHeal: 0
+  healOnReload: 0
+  overkillDamageHeal: 10
   damageReductionPercent: 0
   damageIgnoreChance: 0
   moveSpeed: 0

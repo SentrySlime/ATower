@@ -70,6 +70,13 @@ public class ItemBase : MonoBehaviour
 
     [Tooltip("1 point says we can only heal from killing elites")]
     [HideInInspector][Range(-1f, 1f)] public int onlyEliteKillHeal;
+
+    [Tooltip("1 point says we can heal one extra from reloading an empty mag")]
+    [HideInInspector][Range(-100f, 100f)] public int healOnReload;
+
+    [Tooltip("1 point is equal to 1% of overkill damage gained as healing")]
+    [Range(-100f, 100f)] public float overkillDamageHeal;
+
     
 
     #endregion
@@ -197,6 +204,8 @@ public class ItemBase : MonoBehaviour
         playerStats.healCap += healCap;
         playerStats.canOverheal += canOverheal;
         playerStats.onlyEliteKillHeal += onlyEliteKillHeal;
+        playerStats.healOnReload += healOnReload;
+        playerStats.overkillDamageHeal += overkillDamageHeal;
 
         //Defense
         playerStats.damageIgnoreChance += damageIgnoreChance;
@@ -254,6 +263,8 @@ public class ItemBase : MonoBehaviour
         playerStats.healCap -= healCap;
         playerStats.canOverheal -= canOverheal;
         playerStats.onlyEliteKillHeal -= onlyEliteKillHeal;
+        playerStats.healOnReload -= healOnReload;
+        playerStats.overkillDamageHeal -= overkillDamageHeal;
 
         //Defense
         playerStats.damageIgnoreChance -= damageIgnoreChance;

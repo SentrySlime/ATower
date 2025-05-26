@@ -57,7 +57,7 @@ public class EnemyManager : MonoBehaviour
         
     }
 
-    public void ReportDeath(Vector3 deathPosition, bool canDropAmmo, bool elite)
+    public void ReportDeath(Vector3 deathPosition, bool canDropAmmo, bool elite, float overKillDamage)
     {
         totalEnemyDeaths++;
         PlayerStatsEffects(deathPosition);
@@ -69,6 +69,15 @@ public class EnemyManager : MonoBehaviour
                 playerHealth.Heal(playerStats.hpOnEliteKill, true);
         }
         //inventory.IncreaseMoney(moneyToDrop);
+
+        if (overKillDamage > 0)
+        {
+            float healingAmount = overKillDamage * (playerStats.overkillDamageHeal / 100f);
+            float maxAllowedHeal = playerHealth.maxHP * 0.1f;
+            healingAmount = Mathf.Min(healingAmount, maxAllowedHeal);
+
+            playerHealth.Heal(healingAmount, false);
+        }
 
         if (!slowDown)
         {

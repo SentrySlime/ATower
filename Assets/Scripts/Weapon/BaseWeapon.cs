@@ -111,7 +111,9 @@ public class BaseWeapon : MonoBehaviour
     public ScreenShake screenShake;
     [HideInInspector] public WeaponSocket weaponSocket;
     [HideInInspector] public AMainSystem aMainSystem;
+    public GameObject player;
     public PlayerStats playerStats;
+    public PlayerHealth playerHealth;
 
 
     public bool interuptReload = false;
@@ -120,7 +122,9 @@ public class BaseWeapon : MonoBehaviour
 
     public void Awake()
     {
-        playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerStats = player.GetComponent<PlayerStats>();
+        playerHealth = player.GetComponent<PlayerHealth>();
         aMainSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AMainSystem>();
 
         recoil = GetComponentInParent<Recoil>();
@@ -135,27 +139,6 @@ public class BaseWeapon : MonoBehaviour
         if (currentTextObj)
             currentMagazineText = currentTextObj.GetComponent<TextMeshProUGUI>();
 
-        //currentTextObj = GameObject.Find("MaxAmmoText");
-        //if (currentTextObj)
-        //    maxAmmoText = currentTextObj.GetComponent<TextMeshProUGUI>();
-
-
-        //currentTextObj = GameObject.Find("CurrentAmmoText");
-        //if(currentTextObj)
-        //    currentAmmoText = currentTextObj.GetComponent<TextMeshProUGUI>();
-
-
-        //currentTextObj = GameObject.Find("CurrentMagazineText");
-        //if (currentTextObj)
-        //    currentMagazineText = currentTextObj.GetComponent<TextMeshProUGUI>();
-
-
-        //currentTextObj = GameObject.Find("AmmoDivider");
-        //if (currentTextObj)
-        //    ammoDivider = currentTextObj.GetComponent<TextMeshProUGUI>();
-
-
-        
 
 
         SetBaseStatsOnSpawn();
@@ -221,8 +204,12 @@ public class BaseWeapon : MonoBehaviour
 
                 int remainingAmmo = 0;
 
+                if (currentMagazine == 0)
+                    playerHealth.Heal(playerStats.healOnReload, false);
+
                 if (currentAmmo < 0)
                 {
+                    
                     //Use only the ammo we have to reload
                     remainingAmmo = 0 - currentAmmo;
                     currentMagazine = maxMagazine - remainingAmmo;
@@ -274,6 +261,9 @@ public class BaseWeapon : MonoBehaviour
                 {
                     if (currentAmmo != 0 || currentMagazine != maxMagazine)
                     {
+                        if (currentMagazine == 0)
+                            playerHealth.Heal(playerStats.healOnReload, false);
+
                         currentAmmo--;
                         currentMagazine++;
 
