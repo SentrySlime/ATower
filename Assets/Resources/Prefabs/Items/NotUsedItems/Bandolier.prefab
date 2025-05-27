@@ -45,21 +45,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Bandolier
   itemDescription: Reloads extra shots at a time
-  itemIcon: {fileID: 21300000, guid: df98aa8b789762e4d82427001e954701, type: 3}
-  itemMesh: {fileID: 6416302070336371891, guid: 2abadc68828db024fadb046e4685196d, type: 3}
-  itemMaterial: {fileID: 2100000, guid: 93401c4c6f57f26489a4e5fbfa356b26, type: 2}
+  itemIcon: {fileID: 21300000, guid: 491a63eca1c5a7d498fca5e0eb210e3e, type: 3}
+  itemMesh: {fileID: -2432737126924424369, guid: 449b57a9fa7e8e742aa3e2e9e2c1fd97, type: 3}
+  itemMaterial: {fileID: 2100000, guid: 94f849593d1787d4ebad08d273a37d31, type: 2}
+  goldCost: 500
+  type: 4
+  isDevilItem: 0
   maxHp: 0
+  oneMaxHP: 0
+  hpOnHit: 0
+  hpOnCritHit: 0
+  hpOnKill: 0
+  hpOnEliteKill: 0
+  helpingHand: 0
   hpRegen: 0
+  hpRegenOnEnemyHit: 0
+  healCap: 0
+  canOverheal: 0
+  onlyEliteKillHeal: 0
+  healOnReload: 0
+  overkillDamageHeal: 0
   damageReductionPercent: 0
   damageIgnoreChance: 0
   moveSpeed: 0
   extraJumps: 0
-  includeExplosion: 0
-  canExplodeEnemies: 0
   damage: 0
+  increasedDamage: 0
   critChance: 0
-  rocketChance: 0
+  canExplodeEnemies: 0
+  moneyIsPower: 0
+  hpIsPower: 0
   ammoRefills: 0
   reloadAmount: 1
   maxMagazineSize: 0
+  reloadSpeed: 0
+  returnAmmoOnkill: 0
+  hasAlternateFastReload: 0
+  heartboundRounds: 0
+  maxAmmo: 0
+  fireBallChance: 0
+  accuracy: 0
+  increasedMoneyDrops: 0
+  moneyIsHealth: 0
   playerStats: {fileID: 0}
