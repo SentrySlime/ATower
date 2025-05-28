@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class AreaAttack : MonoBehaviour
 {
-    PlayerHealth playerHealth;
+    AMainSystem mainSystem;
 
     public int damage = 3;
 
     float rate = 0.25f;
     float timer = 0;
+
+    private void Start()
+    {
+        mainSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AMainSystem>();
+    }
 
     private void Update()
     {
@@ -21,12 +26,9 @@ public class AreaAttack : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            if(playerHealth == null)
-                playerHealth = other.GetComponent<PlayerHealth>();
-
             if(timer >= rate)
             {
-                playerHealth.Damage(3);
+                mainSystem.DealDamage(other.transform.gameObject, 3, false);               
                 timer = 0;
             }
         }

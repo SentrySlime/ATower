@@ -31,8 +31,6 @@ public class Hexademon_C : Enemy_Movement
     public GameObject meleeVFX;
     public GameObject expandingAttackPosition;
     public AudioSource meleeTelegraphSFX;
-    public LayerMask meleeLayerMask;
-    
     
     float meleeDamage = 30;
     float telegraphScaleSpeed = 9;
@@ -167,7 +165,8 @@ public class Hexademon_C : Enemy_Movement
             Quaternion offset = Quaternion.Euler(-pitch, yaw, 0f); // negative pitch = up
             Quaternion finalRotation = shootPoint.rotation * offset;
 
-            Instantiate(projectile, shootPoint.position, finalRotation);
+            EnemyProjectile enemyProjectile = Instantiate(projectile, shootPoint.position, finalRotation).GetComponent<EnemyProjectile>();
+            enemyProjectile.Initialize(enemyBase);
 
             yield return new WaitForSeconds(0.4f);
         }
@@ -323,11 +322,12 @@ public class Hexademon_C : Enemy_Movement
         if (playerDistance >= 25) { EndAttack(); StartCoroutine(MeleeAttackCooldown()); return; }
 
         RaycastHit hit;
-        if (Physics.Raycast(shootPoint.transform.position, directionToPlayer, out hit, playerDistance + 1, meleeLayerMask))
+        if (Physics.Raycast(visionPoint.transform.position, directionToPlayer, out hit, playerDistance, layerMask))
         {
+
             if (hit.transform.CompareTag("Player"))
             {
-                aMainSystem.DealDamage(hit.transform.gameObject, meleeDamage, false);
+                aMainSystem.DealDamage(hit.transform.gameObject, meleeDamage, false, false, enemyBase);
 
                 //Push the player
                 hit.transform.GetComponent<Locomotion2>().Push();
@@ -338,9 +338,12 @@ public class Hexademon_C : Enemy_Movement
             }
         }
 
+
         StartCoroutine(MeleeAttackCooldown());
         EndAttack();
     }
+
+    
 
     IEnumerator MeleeAttackCooldown()
     {
@@ -412,7 +415,7 @@ public class Hexademon_C : Enemy_Movement
 
                     if (hit.transform.CompareTag("Player") && beamDamageRateTimer >= beamDamageRate)
                     {
-                        aMainSystem.DealDamage(hit.transform.gameObject, beamDamage, false);
+                        aMainSystem.DealDamage(hit.transform.gameObject, beamDamage, false, false, enemyBase);
                         beamDamageRateTimer = 0f;
                     }
                 }

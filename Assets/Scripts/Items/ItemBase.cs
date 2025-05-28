@@ -156,6 +156,9 @@ public class ItemBase : MonoBehaviour
     [Tooltip("Increased percentage of max ammo for all weapons, 0.1 point is 10% increased ammo")]
     [Range(-4f, 4f)] public float maxAmmo = 0;
 
+    [Tooltip("Every point increases magasine size by 1 for every 15 shots in the magazine")]
+    [Range(-35f, 35f)] public int bandolierEffect = 0;
+
     #endregion
 
     #region WeaponSocket
@@ -176,6 +179,9 @@ public class ItemBase : MonoBehaviour
 
     [Tooltip("You take first from money before you take damage from hp")]
     [Range(-1f, 1f)] public int moneyIsHealth = 0;
+
+    [Tooltip("When taking damage from an enemy, deal this much damage back")]
+    [Range(-500f, 500f)] public int thorns = 0;
 
 
     #endregion
@@ -233,7 +239,7 @@ public class ItemBase : MonoBehaviour
         playerStats.hasAlternateFastReload += hasAlternateFastReload;
         playerStats.heartboundRounds += heartboundRounds;
         playerStats.maxAmmo += maxAmmo;
-
+        playerStats.bandolierEffect += bandolierEffect;
 
         //WeaponSocket
         playerStats.fireBallChance += fireBallChance;
@@ -241,6 +247,7 @@ public class ItemBase : MonoBehaviour
 
         //Misc
         playerStats.moneyIsHealth += moneyIsHealth;
+        playerStats.thorns += thorns;
 
         //Restart each one
         playerStats.StartPlayerHP();
@@ -292,6 +299,7 @@ public class ItemBase : MonoBehaviour
         playerStats.hasAlternateFastReload -= hasAlternateFastReload;
         playerStats.heartboundRounds -= heartboundRounds;
         playerStats.maxAmmo -= maxAmmo;
+        playerStats.bandolierEffect -= bandolierEffect;
 
         //WeaponSocket ---
         playerStats.fireBallChance -= fireBallChance;
@@ -299,6 +307,7 @@ public class ItemBase : MonoBehaviour
 
         //Misc
         playerStats.moneyIsHealth -= moneyIsHealth;
+        playerStats.thorns -= thorns;
 
         //Restart each one
         playerStats.StartPlayerHP();

@@ -7,6 +7,8 @@ using System.Linq;
 
 public class ShootRaycast : BaseWeapon
 {
+    HitmarkerLogic hitMarkLogic;
+
     [Header("Line Renderer")]
     public LineRenderer lineRenderer;
     Coroutine lineRenderCoroutine;
@@ -16,7 +18,7 @@ public class ShootRaycast : BaseWeapon
 
     public float hitDistance = 0;
 
-    HitmarkerLogic hitMarkLogic;
+    
 
     
     public GameObject hitmarker;
@@ -62,6 +64,8 @@ public class ShootRaycast : BaseWeapon
     public ParticleSystem casingVFX;
 
     public Animation mantleAnimation;
+
+    
 
     private void Awake()
     {
@@ -214,7 +218,7 @@ public class ShootRaycast : BaseWeapon
 
                 if (ShouldExplode)
                 {
-                    aMainSystem.SpawnExplosion(raycastHit.point, explosiveRadius, explosiveDamage, this);
+                    explosionSystem.SpawnExplosion(raycastHit.point, explosiveRadius, explosiveDamage, weaponParent: this);
                 }
                 else
                 {
@@ -231,7 +235,7 @@ public class ShootRaycast : BaseWeapon
                 {
                     if(ShouldExplode)
                     {
-                        aMainSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i], this);
+                        explosionSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i], this);
                     }
                     else
                     {
@@ -254,7 +258,7 @@ public class ShootRaycast : BaseWeapon
                 {
                     if (ShouldExplode)
                     {
-                        aMainSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i], this);
+                        explosionSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i], this);
                     }
                     else
                     {
@@ -275,7 +279,7 @@ public class ShootRaycast : BaseWeapon
                 {
                     if (ShouldExplode)
                     {
-                        aMainSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i], this);
+                        explosionSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i], this);
                     }
                     else
                     {

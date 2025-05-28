@@ -110,7 +110,9 @@ public class BaseWeapon : MonoBehaviour
     [HideInInspector] public Recoil recoil;
     public ScreenShake screenShake;
     [HideInInspector] public WeaponSocket weaponSocket;
+    GameObject gameManager;
     [HideInInspector] public AMainSystem aMainSystem;
+    [HideInInspector] public ExplosionSystem explosionSystem;
     public GameObject player;
     public PlayerStats playerStats;
     public PlayerHealth playerHealth;
@@ -125,7 +127,10 @@ public class BaseWeapon : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerStats = player.GetComponent<PlayerStats>();
         playerHealth = player.GetComponent<PlayerHealth>();
-        aMainSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AMainSystem>();
+
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        aMainSystem = gameManager.GetComponent<AMainSystem>();
+        explosionSystem = gameManager.GetComponent<ExplosionSystem>();
 
         recoil = GetComponentInParent<Recoil>();
         screenShake = GetComponentInParent<ScreenShake>();

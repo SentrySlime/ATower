@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class ExplosionSystem : MonoBehaviour
 {
-
     public GameObject standardExplosion;
-    private GameObject tempExplosions;   
     private AMainSystem mainSystem;
 
     private void Awake()
@@ -14,43 +12,44 @@ public class ExplosionSystem : MonoBehaviour
         mainSystem = GetComponent<AMainSystem>();
     }
 
-    public void SpawnExplosion(Vector3 explosionPos, float explosionRadius, int damage)
+    public void SpawnExplosion(Vector3 position, float radius, int damage, GameObject parent = null, BaseWeapon weaponParent = null, EnemyBase enemyBase = null)
     {
-        tempExplosions = Instantiate(standardExplosion, explosionPos, Quaternion.identity);
-        tempExplosions.GetComponent<IExplosionInterface>().InitiateExplosion(mainSystem, explosionRadius, damage, false, null);
+        GameObject explosion = Instantiate(
+            standardExplosion,
+            position,
+            Quaternion.identity,
+            parent != null ? parent.transform : null
+        );
+
+        if (parent != null)
+        {
+            var enemy = parent.GetComponent<EnemyBase>();
+            if (enemy != null)
+                enemy.SetProjetile(explosion);
+        }
+
+        explosion.GetComponent<IExplosionInterface>()
+            .InitiateExplosion(mainSystem, radius, damage, enemyBase, weaponParent);
     }
 
-    public void SpawnExplosion(Vector3 explosionPos, float explosionRadius, int damage, GameObject parent, BaseWeapon weaponParent)
-    {
-        tempExplosions = Instantiate(standardExplosion, explosionPos, Quaternion.identity, parent.transform);
-        
-        if(parent.GetComponent<EnemyBase>())
-            parent.GetComponent<EnemyBase>().SetProjetile(tempExplosions);
-        
-        tempExplosions.GetComponent<IExplosionInterface>().InitiateExplosion(mainSystem, explosionRadius, damage, false, weaponParent);
-    }
+    //public void SpawnExplosion2(Vector3 position, float radius, int damage, GameObject parent = null, BaseWeapon weaponParent = null, EnemyBase enemyBase = null)
+    //{
+    //    GameObject explosion = Instantiate(
+    //        standardExplosion,
+    //        position,
+    //        Quaternion.identity,
+    //        parent != null ? parent.transform : null
+    //    );
 
-    public void SpawnExplosion(Vector3 explosionPos, float explosionRadius, int damage, BaseWeapon weaponParent)
-    {
-        tempExplosions = Instantiate(standardExplosion, explosionPos, Quaternion.identity);
-        tempExplosions.GetComponent<IExplosionInterface>().InitiateExplosion(mainSystem, explosionRadius, damage, false, weaponParent);
-    }
+    //    if (enemyBase != null)
+    //    {
+    //        enemyBase.SetProjetile(explosion);
+    //    }
 
-    public void SpawnExplosion(Vector3 explosionPos, float explosionRadius, int damage, GameObject parent, bool enemyOwned)
-    {
-        tempExplosions = Instantiate(standardExplosion, explosionPos, Quaternion.identity, parent.transform);
-        
-        if (parent.GetComponent<EnemyBase>())
-            parent.GetComponent<EnemyBase>().SetProjetile(tempExplosions);
+    //    bool enemyOwned = enemyBase != null;
 
-        tempExplosions.GetComponent<IExplosionInterface>().InitiateExplosion(mainSystem, explosionRadius, damage, enemyOwned, null);
-    }
-
-    public void SpawnExplosion(Vector3 explosionPos, float explosionRadius, int damage, bool enemyOwned)
-    {
-        tempExplosions = Instantiate(standardExplosion, explosionPos, Quaternion.identity);
-
-        tempExplosions.GetComponent<IExplosionInterface>().InitiateExplosion(mainSystem, explosionRadius, damage, enemyOwned, null);
-    }
+    //    explosion.GetComponent<IExplosionInterface>()
+    //        .InitiateExplosion(mainSystem, radius, damage, enemyOwned, weaponParent);
+    //}
 
 }

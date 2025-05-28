@@ -180,6 +180,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 149f2733b71dff9418f7f742af082d7b, type: 3}
+--- !u!1 &179471921 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6952844890914244580, guid: 149f2733b71dff9418f7f742af082d7b, type: 3}
+  m_PrefabInstance: {fileID: 179471920}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &220368528
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,11 +536,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d20109ca01b1fa47a76ecfa83175ace, type: 3}
---- !u!1 &1577776151 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6952844890914244580, guid: 149f2733b71dff9418f7f742af082d7b, type: 3}
-  m_PrefabInstance: {fileID: 179471920}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1579783499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -745,6 +745,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Guns
       objectReference: {fileID: 0}
+    - target: {fileID: 5004350295439402684, guid: 4b80aeee2d0b56948a75b4b1b9af2e42, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004350295439402684, guid: 4b80aeee2d0b56948a75b4b1b9af2e42, type: 3}
+      propertyPath: moveSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004350295439402688, guid: 4b80aeee2d0b56948a75b4b1b9af2e42, type: 3}
+      propertyPath: maxHP
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004350295439402688, guid: 4b80aeee2d0b56948a75b4b1b9af2e42, type: 3}
+      propertyPath: currentHP
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5004350295439402693, guid: 4b80aeee2d0b56948a75b4b1b9af2e42, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -792,6 +808,6 @@ PrefabInstance:
     - target: {fileID: 5004350295439402694, guid: 4b80aeee2d0b56948a75b4b1b9af2e42, type: 3}
       propertyPath: startWeapon
       value: 
-      objectReference: {fileID: 1577776151}
+      objectReference: {fileID: 179471921}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b80aeee2d0b56948a75b4b1b9af2e42, type: 3}

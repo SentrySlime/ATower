@@ -532,8 +532,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -234.99995, y: 148}
-  m_SizeDelta: {x: 200, y: 250.3}
+  m_AnchoredPosition: {x: 34, y: 147}
+  m_SizeDelta: {x: 1087.2, y: 250.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4974147222942250990
 CanvasRenderer:
@@ -590,8 +590,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
-  m_fontSizeBase: 72
+  m_fontSize: 83.4
+  m_fontSizeBase: 83.4
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -626,7 +626,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -452.71338, w: -119.65067}
+  m_margin: {x: 165.50212, y: 0, z: 160.45766, w: -119.65067}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1283,7 +1283,7 @@ MonoBehaviour:
   mainMenuPanel: {fileID: 201510591724687848}
   moveSpeed: 60
   rotateSpeed: 70
-  fadeSpeed: 3
+  fadeSpeed: 6
   musicSpeed: 1
 --- !u!82 &3655073202380137266
 AudioSource:
@@ -1917,7 +1917,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -18, y: 0}
   m_SizeDelta: {x: 9999, y: 9999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4080656917640312520
@@ -2665,7 +2665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8812934926798630796
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3322,9 +3322,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8211050116355947562}
-        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
-        m_MethodName: CloseSettings
+      - m_Target: {fileID: 4648293396487481179}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: DisableSettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3672,9 +3672,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8211050116355947562}
-        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
-        m_MethodName: EnableSetting
+      - m_Target: {fileID: 4648293396487481179}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: MainMenuSettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4300,7 +4300,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6b737011cd26c044f9b8757718721272, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -104,23 +104,18 @@ public class Troll_C : Enemy_Movement
 
         Vector3 direction = playerTargetPoint.transform.position - shootPoint.transform.position;
 
-        // Create a rotation that points towards the player
         Quaternion lookRotation = Quaternion.LookRotation(direction);
 
-        // Instantiate the projectile with the correct rotation
-        // Original projectile
         if (shootProjectile)
-            Instantiate(shootProjectile, shootPoint.transform.position, lookRotation);
+            Instantiate(shootProjectile, shootPoint.transform.position, lookRotation).GetComponent<EnemyProjectile>().Initialize(enemyBase);
 
-        // Left projectile (35 degrees counter-clockwise)
         Quaternion leftRotation = Quaternion.Euler(0, -15, 0) * lookRotation;
         if (shootProjectile)
-            Instantiate(shootProjectile, shootPoint.transform.position, leftRotation);
+            Instantiate(shootProjectile, shootPoint.transform.position, leftRotation).GetComponent<EnemyProjectile>().Initialize(enemyBase);
 
-        // Right projectile (35 degrees clockwise)
         Quaternion rightRotation = Quaternion.Euler(0, 15, 0) * lookRotation;
         if (shootProjectile)
-            Instantiate(shootProjectile, shootPoint.transform.position, rightRotation);
+            Instantiate(shootProjectile, shootPoint.transform.position, rightRotation).GetComponent<EnemyProjectile>().Initialize(enemyBase);
 
 
         EndAttack();
@@ -182,7 +177,10 @@ public class Troll_C : Enemy_Movement
             if (Physics.Raycast(donutExplosionSpawnTransform.position, -transform.up, out hit, 20, donutLayerMask))
             {
                 if (donutExplosion)
-                    Instantiate(donutExplosion, hit.point + new Vector3(0, 2.5f, 0), Quaternion.identity);
+                {
+                    Instantiate(donutExplosion, hit.point + new Vector3(0, 2.5f, 0), Quaternion.identity).GetComponentInChildren<IInitializeProjectile>().Initialize(enemyBase);
+
+                }
             }
         }
 

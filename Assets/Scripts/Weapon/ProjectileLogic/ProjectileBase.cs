@@ -80,6 +80,7 @@ public class ProjectileBase : MonoBehaviour
     [HideInInspector] public BaseWeapon weaponParent;
     //ExplosionSystem explosionSystem;
     [HideInInspector] public AMainSystem aMainSysteM;
+    [HideInInspector] public ExplosionSystem explosionSystem;
     [HideInInspector] public ShootSystem shootSystem;
     HitmarkerLogic hitMarkerLogic;
     List<GameObject> hitEnemies = new List<GameObject>();
@@ -94,7 +95,7 @@ public class ProjectileBase : MonoBehaviour
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
         aMainSysteM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AMainSystem>();
         shootSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShootSystem>();
-        //explosionSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ExplosionSystem>();
+        explosionSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ExplosionSystem>();
         enemyMask = LayerMask.GetMask("Enemy");
 
 
@@ -311,7 +312,7 @@ public class ProjectileBase : MonoBehaviour
     {
         if (hasExploded) return;
 
-        aMainSysteM.SpawnExplosion(transform.position, explosiveRadius, explosiveDamage, parent, weaponParent);
+        explosionSystem.SpawnExplosion(transform.position, explosiveRadius, explosiveDamage, parent, weaponParent);
  
         hasExploded = true;
         

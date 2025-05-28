@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IExplosionInterface
 {
-    void InitiateExplosion(AMainSystem mainsystem, float explosionRadius, int damage, bool enemyOwned, BaseWeapon weaponParent);
+    void InitiateExplosion(AMainSystem mainsystem, float explosionRadius, int damage, EnemyBase enemyBase, BaseWeapon weaponParent);
 }

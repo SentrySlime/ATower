@@ -39,6 +39,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     EnemyManager enemyManager;
     LootSystem lootSystem;
     AMainSystem aMainSystem;
+    ExplosionSystem explosionSystem;
     GameObject player;
     
     Inventory inventory;
@@ -103,6 +104,8 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
                 Debug.LogWarning("GameManager found, but missing AMainSystem component.");
             }
 
+            explosionSystem = gameManagerGO.GetComponent<ExplosionSystem>();
+
             enemyManager = gameManagerGO.GetComponent<EnemyManager>();
             if (enemyManager == null)
             {
@@ -157,29 +160,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
         }
     }
 
-    public void Damage(float damage)
-    {
-
-        if (gameObject.GetComponent<INoticePlayer>() != null)
-            gameObject.GetComponent<INoticePlayer>().NoticePlayer();
-
-
-        float finalDamage = CalculateDamage(damage);
-        float overkillDamage = finalDamage - currentHealth;
-
-        currentHealth -= finalDamage;
-
-        if (damagedPS != null)
-        {
-            damagedPS.emissionRate += damage;
-            damagedPS.emissionRate = Mathf.Clamp(damagedPS.emissionRate, 0, 150);
-        }
-
-        if (currentHealth <= 0 && !dead)
-            Die(false, overkillDamage);
-    }
-
-    public void Damage(float damage, bool criticalHit)
+    public void Damage(float damage, bool criticalHit, EnemyBase enemy)
     {
     
         if (gameObject.GetComponent<INoticePlayer>() != null)
@@ -239,13 +220,13 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
             }
 
             if (explosiveBarrel)
-                aMainSystem.SpawnExplosion(moneySpawnPoint.position, 7, 100, false, null);
+                explosionSystem.SpawnExplosion(moneySpawnPoint.position, 7, 100);
             else if (CanExplode(criticalDeath))
             {
                 if(explodeOnDeath)
-                    aMainSystem.SpawnExplosion(moneySpawnPoint.position, 7, 15, true, null);
+                    explosionSystem.SpawnExplosion(moneySpawnPoint.position, 7, 15, enemyBase: this);
                 else
-                    aMainSystem.SpawnExplosion(moneySpawnPoint.position, 7, (int)maxHealth, null);
+                    explosionSystem.SpawnExplosion(moneySpawnPoint.position, 7, (int)maxHealth);
             }
             else if (deathParticles)
             {

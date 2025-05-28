@@ -47,7 +47,7 @@ public class ItemBaseEditor : Editor
 
         DrawFoldout("Ammo", ref showAmmo, new string[]
         {
-            "ammoRefills", "reloadAmount", "maxMagazineSize", "reloadSpeed", "returnAmmoOnkill", "hasAlternateFastReload", "heartboundRounds", "maxAmmo"
+            "ammoRefills", "reloadAmount", "maxMagazineSize", "reloadSpeed", "returnAmmoOnkill", "hasAlternateFastReload", "heartboundRounds", "maxAmmo", "bandolierEffect"
         });
 
         DrawFoldout("Weapon Socket", ref showWeaponSocket, new string[]
@@ -57,7 +57,7 @@ public class ItemBaseEditor : Editor
 
         DrawFoldout("Misc", ref showMisc, new string[]
         {
-            "hasIncreasedMoneyDrops", "increasedMoneyDrops", "moneyIsHealth"
+            "hasIncreasedMoneyDrops", "increasedMoneyDrops", "moneyIsHealth", "thorns"
         });
 
         serializedObject.ApplyModifiedProperties();

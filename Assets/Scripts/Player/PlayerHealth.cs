@@ -15,6 +15,8 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
     PlayerStats playerStats;
     HealthRegen healthRegen;
     Inventory inventory;
+    GameObject gameManager;
+    AMainSystem mainSystem;
     GameObject canvas;
     PauseMenu pauseMenu;
     GameOverScreen gameOverScreen;
@@ -67,7 +69,8 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
         gameOverScreen = canvas.GetComponent<GameOverScreen>();
         pauseMenu.GetVignettes(this);
         barHP = GameObject.FindGameObjectWithTag("HPBar").GetComponent<Slider>();
-
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        mainSystem = gameManager.GetComponent<AMainSystem>();
         hpFill = GameObject.FindGameObjectWithTag("HPFill").GetComponent<RectTransform>();
         hpBackground = GameObject.FindGameObjectWithTag("HPBackground").GetComponent<RectTransform>();
         textHP = GameObject.FindGameObjectWithTag("textHP").GetComponent<TextMeshProUGUI>();
@@ -111,7 +114,7 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
         if(Input.GetKeyDown(KeyCode.M))
         {
             
-            Damage(40);
+            Damage(40, false);
         }
 
     }
@@ -167,7 +170,7 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
     #region Damage
 
-    public void Damage(float damage)
+    public void Damage(float damage, bool criticalHit , EnemyBase enemyBase = null)
     {
         if (isInvincible && dead) { return; }
 
@@ -187,6 +190,11 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
             vignetteAlpha = 1;
             vignetteTimer = 0;
             damage = damage / damageReductionPercent;
+        }
+
+        if(enemyBase != null)
+        {
+            mainSystem.DealDamage(enemyBase.gameObject, playerStats.thorns, true, false);   
         }
 
         if(playerStats.moneyIsHealth > 0)
@@ -329,10 +337,6 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
         UpdateMaxHP();
     }
 
-    public void Damage(float damage, bool criticalHit)
-    {
-        throw new System.NotImplementedException();
-    }
 
 }
 

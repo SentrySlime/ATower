@@ -37,49 +37,13 @@ public class AMainSystem : MonoBehaviour
         hitMarkerLogic = GameObject.FindGameObjectWithTag("HitMarker").GetComponent<HitmarkerLogic>();
     }
 
-    public void SpawnExplosion(Vector3 position, float radius, int damage, BaseWeapon weaponParent)
-    {
-        explosionSystem.SpawnExplosion(position, radius, damage, weaponParent);
-    }
-
-    public void SpawnExplosion(Vector3 position, float radius, int damage, GameObject parent, BaseWeapon weaponParent)
-    {
-        explosionSystem.SpawnExplosion(position, radius, damage, parent, weaponParent);
-    }
-
-    public void SpawnExplosion(Vector3 position, float radius, int damage, bool enemyOwned, BaseWeapon weaponParent)
-    {
-        explosionSystem.SpawnExplosion(position, radius, damage, enemyOwned);
-    }
-
-    public void SpawnExplosion(Vector3 position, float radius, int damage, GameObject parent, bool enemyOwned)
-    {
-        explosionSystem.SpawnExplosion(position, radius, damage, parent, enemyOwned);
-    }
-
-
-
     public void SpawnPickUpEffects(Vector3 position)
     {
         if(pickUpVFX)
             Instantiate(pickUpVFX, position, Quaternion.identity);
     }
 
-    //Damage calculations
-    public void DealDamage(GameObject incomingObj, float incomingDamage, bool friendly)
-    {
-        if(friendly)
-        {
-            DamageEnemy(incomingObj, incomingDamage, false);
-            UILogic(false);
-        }
-        else
-        {
-            DamagePlayer(incomingObj, incomingDamage);
-        }
-    }
-
-    public void DealDamage(GameObject incomingObj, float incomingDamage, bool friendly, bool weakSpotShot)
+    public void DealDamage(GameObject incomingObj, float incomingDamage, bool friendly, bool weakSpotShot = false, EnemyBase enemyBase = null)
     {
         if (friendly)
         {
@@ -88,7 +52,7 @@ public class AMainSystem : MonoBehaviour
         }
         else
         {
-            DamagePlayer(incomingObj, incomingDamage);
+            DamagePlayer(incomingObj, incomingDamage, enemyBase);
         }
     }
 
@@ -98,6 +62,7 @@ public class AMainSystem : MonoBehaviour
         CalculateDamage(incomingObj, incomingDamage, incomingWeakSpotShot);
     }
 
+    //For enemies
     private void CalculateDamage(GameObject incomingObj, float incomingDamage, bool incomingWeakSpotShot)
     {
         incomingDamage += playerStats.addedDamage;
@@ -140,7 +105,7 @@ public class AMainSystem : MonoBehaviour
         
         PlaySFX(false);
 
-        incomingObj.GetComponent<IDamageInterface>().Damage(incomingDamage);
+        incomingObj.GetComponent<IDamageInterface>().Damage(incomingDamage, false);
     }
 
     private void PlaySFX(bool isCrit)
@@ -173,9 +138,9 @@ public class AMainSystem : MonoBehaviour
 
     #region DealingDamageToPlayer
 
-    private void DamagePlayer(GameObject incomingObj, float incomingDamage)
+    private void DamagePlayer(GameObject incomingObj, float incomingDamage, EnemyBase enemyBase = null)
     {
-        incomingObj.GetComponent<IDamageInterface>().Damage(incomingDamage);
+        incomingObj.GetComponent<IDamageInterface>().Damage(incomingDamage, false, enemyBase);
     }
 
     #endregion

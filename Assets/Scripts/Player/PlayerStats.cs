@@ -49,6 +49,7 @@ public class PlayerStats : MonoBehaviour
     public bool alternateFastReload;
     public int heartboundRounds = 0;
     public float maxAmmo = 0;
+    public int bandolierEffect = 0;
 
     [Header("WeaponSocket")]
     public int fireBallChance = 0;
@@ -57,6 +58,7 @@ public class PlayerStats : MonoBehaviour
     [Header("Misc")]
     public bool increasedMoneyDrop = false;
     public int moneyIsHealth = 0;
+    public int thorns = 0;
 
     PlayerHealth playerHealth;
     Locomotion2 locomotion;
@@ -125,29 +127,46 @@ public class PlayerStats : MonoBehaviour
     public void AddStatsToPickedUpWeapon(GameObject weaponObj)
     {
         BaseWeapon weapon = weaponObj.transform.GetChild(0).GetComponent<BaseWeapon>();
+
         weapon.maxMagazine = weapon.baseMaxMagazine + maxMagazineSize;
+
+        if (bandolierEffect != 0)
+        {
+            int additionalBullets = Mathf.FloorToInt((weapon.baseMaxMagazine / 15f) * bandolierEffect);
+            weapon.maxMagazine += additionalBullets;
+        }
+
         weapon.currentMagazine = weapon.maxMagazine;
 
         weapon.maxAmmo = Mathf.FloorToInt(weapon.baseMaxAmmo + (weapon.baseMaxAmmo * maxAmmo));
-
         weapon.currentAmmo = weapon.maxAmmo;
     }
 
+
     public void AddAllWeaponStats()
     {
-        if(inventory.heldWeapons.Count == 0) { return; }
+        if (inventory.heldWeapons.Count == 0) { return; }
 
         for (int i = 0; i < inventory.heldWeapons.Count; i++)
         {
             BaseWeapon weapon = inventory.heldWeapons[i].transform.GetChild(0).GetComponent<BaseWeapon>();
-            
+
+            // Apply base and player bonus
             weapon.maxMagazine = weapon.baseMaxMagazine + maxMagazineSize;
+
+            // Apply Bandolier effect
+            if (bandolierEffect != 0)
+            {
+                int additionalBullets = Mathf.FloorToInt((weapon.baseMaxMagazine / 15f) * bandolierEffect);
+                weapon.maxMagazine += additionalBullets;
+            }
 
             weapon.maxAmmo = Mathf.FloorToInt(weapon.baseMaxAmmo + (weapon.baseMaxAmmo * maxAmmo));
 
             findAndEquipWeapons.SetWeapon(weaponSocket.equippedWeapon.transform.parent.gameObject);
         }
     }
+
 
 
     private void GetAllScripts()

@@ -5,8 +5,6 @@ using UnityEngine;
 public interface IDamageInterface
 {
 
-    void Damage(float damage);
-
-    void Damage(float damage, bool criticalHit);
+    void Damage(float damage, bool criticalHit ,EnemyBase enemyBase = null);
 
 }

@@ -7,6 +7,7 @@ public class Kobold_C : Enemy_Movement
 {
     [Header("MeleeAttack")]
     float meleeDistance = 6;
+    float meleeDamage = 15;
     public AudioSource meleeAudioSource;
 
 
@@ -78,7 +79,7 @@ public class Kobold_C : Enemy_Movement
     IEnumerator MeleeAttackCoroutine()
     {
         yield return new WaitForSeconds(0.2f);
-        player.GetComponent<PlayerHealth>().Damage(15);
+        aMainSystem.DealDamage(player, meleeDamage, false, false, enemyBase);
         EndAttack();
     }
 
@@ -115,7 +116,9 @@ public class Kobold_C : Enemy_Movement
         Vector3 directionFromShootPoint = playerTargetPoint.transform.position - shootPoint.transform.position;
 
         Quaternion lookRotation = Quaternion.LookRotation(directionFromShootPoint);
-        Instantiate(projectile, shootPoint.position, lookRotation);
+        EnemyProjectile enemyProjectile = Instantiate(projectile, shootPoint.position, lookRotation).GetComponent<EnemyProjectile>();
+        print(enemyBase);
+        enemyProjectile.Initialize(enemyBase);
 
         EndAttack();
     }

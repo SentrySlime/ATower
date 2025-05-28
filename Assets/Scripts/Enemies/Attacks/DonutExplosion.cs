@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DonutExplosion : MonoBehaviour
+public class DonutExplosion : MonoBehaviour, IInitializeProjectile
 {
     public float damage = 20;
 
@@ -17,7 +17,8 @@ public class DonutExplosion : MonoBehaviour
 
     public float maxRadius = 50;
 
-    PlayerHealth playerhp;
+    AMainSystem mainSystem;
+    EnemyBase enemyBase;
 
     public GameObject collidingObj;
     public ParticleSystem ps;
@@ -31,7 +32,7 @@ public class DonutExplosion : MonoBehaviour
         psMain = ps.main;
         donut = ps.shape;
         transform.root.transform.localScale = new Vector3(explosionScale, 1, explosionScale);
-        playerhp = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        mainSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AMainSystem>();
         psMain.startLifetime = maxRadius * 0.018f;
     }
 
@@ -46,7 +47,7 @@ public class DonutExplosion : MonoBehaviour
         if (distance >= tempRadius)
         {
             damageTimer = 0;
-            playerhp.Damage(damage);
+            mainSystem.DealDamage(other.transform.gameObject, damage, false, false, enemyBase);
         }
         
     }
@@ -74,5 +75,11 @@ public class DonutExplosion : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void Initialize(EnemyBase enemy)
+    {
+        print("Anything : " + enemy);
+        enemyBase = enemy;
     }
 }

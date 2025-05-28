@@ -187,7 +187,7 @@ MonoBehaviour:
   maxMagazine: 6
   currentMagazine: 6
   baseReloadTime: 0
-  reloadTime: 3.5
+  reloadTime: 2.5
   baseReloadAmount: 0
   reloadAmount: 1
   baseDamage: 0
@@ -217,7 +217,10 @@ MonoBehaviour:
   screenShake: {fileID: 0}
   weaponSocket: {fileID: 0}
   aMainSystem: {fileID: 0}
+  explosionSystem: {fileID: 0}
+  player: {fileID: 0}
   playerStats: {fileID: 0}
+  playerHealth: {fileID: 0}
   interuptReload: 0
   finishedReload: 0
   renderObjects:

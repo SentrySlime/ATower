@@ -56,6 +56,7 @@ public class EnemyProjectile : MonoBehaviour
     bool cantHome = false;
 
     //---------- Un-Changeable-Stats ----------\\
+    public EnemyBase enemyBase;
     Vector3 firstPos;
     Vector3 secondPos;
     Vector3 velocity;
@@ -115,7 +116,7 @@ public class EnemyProjectile : MonoBehaviour
         
         if (other.CompareTag("Player"))
         {
-            mainSystem.DealDamage(other.transform.gameObject, damage, false);
+            mainSystem.DealDamage(other.transform.gameObject, damage, false, false, enemyBase);
             //other.GetComponent<IDamageInterface>().Damage(damage);
             DestroyProjectile();
         }
@@ -130,6 +131,11 @@ public class EnemyProjectile : MonoBehaviour
         {
             DestroyProjectile();
         }
+    }
+
+    public void Initialize(EnemyBase enemy)
+    {
+        enemyBase = enemy;
     }
 
     public void ArcMovement()
@@ -245,9 +251,11 @@ public class EnemyProjectile : MonoBehaviour
         Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
 
         if (explosion)
-            Instantiate(explosion, spawnPosition, Quaternion.identity);
+        {
+            Instantiate(explosion, spawnPosition, Quaternion.identity).GetComponentInChildren<IInitializeProjectile>().Initialize(enemyBase); 
+        }
         else
-            explosionSystem.SpawnExplosion(transform.position, explosionRadius, explosionDamage, true);
+            explosionSystem.SpawnExplosion(transform.position, explosionRadius, explosionDamage, enemyBase: enemyBase);
     }
 
     public void LifeTimer()

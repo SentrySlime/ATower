@@ -24,6 +24,7 @@ public class Explosion : MonoBehaviour, IExplosionInterface
     HitmarkerLogic hitMarkerLogic;
     ScreenShake screenShake;
     PlayerStats playerStats;
+    EnemyBase enemyBase;
     public BaseWeapon weaponParent;
     public AMainSystem mainSystem;
 
@@ -45,7 +46,7 @@ public class Explosion : MonoBehaviour, IExplosionInterface
     }
 
     //Interface function
-    public void InitiateExplosion(AMainSystem incomingMainSystem, float explosionRadius, int damage, bool enemyOwned, BaseWeapon weaponParent)
+    public void InitiateExplosion(AMainSystem incomingMainSystem, float explosionRadius, int damage, EnemyBase incomingEnemy, BaseWeapon weaponParent)
     {
         mainSystem = incomingMainSystem;
 
@@ -60,7 +61,13 @@ public class Explosion : MonoBehaviour, IExplosionInterface
 
         eDamage = damage;
         eRadius = explosionRadius;
-        eEnemyOwned = enemyOwned;
+        if(incomingEnemy)
+        {
+            eEnemyOwned = true;
+            enemyBase = incomingEnemy;
+        }
+        else
+            eEnemyOwned = false;
 
         transform.localScale = new Vector3(eRadius, eRadius, eRadius);
 
@@ -79,7 +86,7 @@ public class Explosion : MonoBehaviour, IExplosionInterface
 
         screenShake.Screenshake(-1, 1, 1);
 
-        if (enemyOwned)
+        if (eEnemyOwned)
         {
             float maxRadius = eRadius * 1.5f;
 
@@ -101,43 +108,9 @@ public class Explosion : MonoBehaviour, IExplosionInterface
                 player.transform.gameObject.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
             }
 
-            //---
-            //layermask = LayerMask.GetMask("Player");
-            //Collider[] player = Physics.OverlapSphere(transform.position, eRadius * 1.5f, layermask);
-
-            //if (player.Length <= 0) { return; }
-
-            ////Add raycast here
-            //LayerMask obstacleMask = LayerMask.GetMask("Default", "Environment"); // Adjust based on your layers
-
-
-
-            //Vector3 directionToPlayer = (player[0].transform.position - transform.position).normalized;
-            //float distanceToPlayer = Vector3.Distance(transform.position, player[0].transform.position);
-
-            //if (Physics.Raycast(transform.position, directionToPlayer, distanceToPlayer, obstacleMask))
-            //{
-            //    // Something is in the way
-            //    return;
-            //}
-
-
-            //if (player.Length != 0)
-            //{
-            //    GameObject thePlayer = player[0].gameObject;
-            //    DealDamageToPlayer(player[0]);
-            //    Vector3 playerDirection = thePlayer.transform.position - transform.position;
-            //    //Push the player
-            //    thePlayer.transform.GetComponent<Locomotion2>().Push();
-            //    playerDirection = playerDirection.normalized;
-            //    Vector3 force = playerDirection * 300;
-            //    force.y = 30;
-            //    thePlayer.transform.gameObject.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
-            //}
         }
         else
         {
-            print(1);
             Collider[] enemies = Physics.OverlapSphere(transform.position, eRadius * 1.5f, layermask);
             DealDamage(enemies);
         }
@@ -210,7 +183,7 @@ public class Explosion : MonoBehaviour, IExplosionInterface
     private void DealDamageToPlayer(GameObject player)
     {
         if (mainSystem)
-            mainSystem.DealDamage(player, eDamage, false);
+            mainSystem.DealDamage(player, eDamage, false, false, enemyBase);
     }
 
 
