@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class BaseWeapon : MonoBehaviour
 {
-
+    public BaseShootingLogic baseShootingLogic1;
+    public BaseShootingLogic baseShootingLogic2;
 
     public enum ReloadType
     {
@@ -23,7 +24,7 @@ public class BaseWeapon : MonoBehaviour
     public GameObject shootPoint;
     public GameObject barrel;
     public GameObject objectToRecoil;
-    public GameObject iconPrefab;
+    [HideInInspector] public GameObject iconPrefab;
     public int goldCost = 500;
 
     [Header("Mesh & Material")]
@@ -51,8 +52,13 @@ public class BaseWeapon : MonoBehaviour
     [HideInInspector] public int baseMaxAmmo = 0;
     public int maxAmmo = 0;
     public int currentAmmo = 0;
-    [HideInInspector] public int baseAmmoPerShot = 0;
-    public int ammoPerShot = 1;
+
+    [HideInInspector] public int baseAmmoPerShot1 = 0;
+    public int ammoPerShot1 = 1;
+
+    [HideInInspector] public int baseAmmoPerShot2 = 0;
+    public int ammoPerShot2 = 1;
+
     [HideInInspector] public bool baseInfinteAmmo = false;
     public bool infinteAmmo = false;
 
@@ -72,17 +78,11 @@ public class BaseWeapon : MonoBehaviour
     [HideInInspector] public float baseFireRate = 0;
     public float fireRate = 1;
 
-    [Header("Burst")]
-    public float burstDelay = 1;
-    public float burstAmount = 1;
 
     [Header("Recoil Info")]
     public int recoilAmount = 0;
     public float moveAmount = -0.5f;
 
-    [Header("Accuracy")]
-    public float ADSAccuracy = 0;
-    public float HIPAccuracy = 0;
 
     [Header("Screenshake")]
     public float recoilX;
@@ -101,24 +101,19 @@ public class BaseWeapon : MonoBehaviour
     [HideInInspector] public TextMeshProUGUI ammoDivider;
     [HideInInspector] public Image ammoFill;
 
-    //[Header("FiringMode")]
-    public enum FiringMode { fullAuto, semiAuto, burst };
-
-    public FiringMode firingMode;
-
     [HideInInspector] public Camera aimCamera;
     [HideInInspector] public Recoil recoil;
-    public ScreenShake screenShake;
+    [HideInInspector] public ScreenShake screenShake;
     [HideInInspector] public WeaponSocket weaponSocket;
-    GameObject gameManager;
+    [HideInInspector] public GameObject gameManager;
     [HideInInspector] public AMainSystem aMainSystem;
     [HideInInspector] public ExplosionSystem explosionSystem;
-    public GameObject player;
-    public PlayerStats playerStats;
-    public PlayerHealth playerHealth;
+    [HideInInspector] public GameObject player;
+    [HideInInspector] public PlayerStats playerStats;
+    [HideInInspector] public PlayerHealth playerHealth;
 
 
-    public bool interuptReload = false;
+    [HideInInspector] public bool interuptReload = false;
     [HideInInspector] public bool finishedReload = false;
     public GameObject[] renderObjects;
 
@@ -153,6 +148,9 @@ public class BaseWeapon : MonoBehaviour
 
     public void Start()
     {
+
+        
+
         maxAmmoText = iconPrefab.GetComponent<WeaponIcon>().maxAmmoText;
 
         currentAmmoText = iconPrefab.GetComponent<WeaponIcon>().currentAmmoText;
@@ -164,10 +162,12 @@ public class BaseWeapon : MonoBehaviour
 
     }
 
+    
+
     void Update()
     {
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || baseShootingLogic2 && Input.GetMouseButtonDown(1))
         {
             if (HasEmptyMagazine()) { return; }
 
@@ -296,10 +296,44 @@ public class BaseWeapon : MonoBehaviour
         TopLayer();
         //Setting up references to other classes
         aimCamera = camera;
-        recoil.InitializeRecoil(moveAmount, recoilAmount, fireRate, (int)firingMode);
+        recoil.InitializeRecoil(moveAmount, recoilAmount, fireRate);
         screenShake.InitializeShake(recoilX, recoilY, recoilZ);
 
+        if(baseShootingLogic1)
+            InitalizeShootingLogic1();
+
+        if (baseShootingLogic2)
+            InitalizeShootingLogic2();
+
         StartCoroutine(InitalizeCoroutine());
+    }
+
+    private void InitalizeShootingLogic1()
+    {
+        baseShootingLogic1.baseWeapon = this;
+        baseShootingLogic1.player = player;
+        baseShootingLogic1.playerStats = playerStats;
+        baseShootingLogic1.weaponSocket = weaponSocket;
+        baseShootingLogic1.recoil = recoil;
+        baseShootingLogic1.screenShake = screenShake;
+        baseShootingLogic1.gameManager = gameManager;
+        baseShootingLogic1.aMainSystem = aMainSystem;
+        baseShootingLogic1.explosionSystem = explosionSystem;
+        baseShootingLogic1.aimCamera = aimCamera;
+    }
+
+    private void InitalizeShootingLogic2()
+    {
+        baseShootingLogic2.baseWeapon = this;
+        baseShootingLogic2.player = player;
+        baseShootingLogic2.playerStats = playerStats;
+        baseShootingLogic2.weaponSocket = weaponSocket;
+        baseShootingLogic2.recoil = recoil;
+        baseShootingLogic2.screenShake = screenShake;
+        baseShootingLogic2.gameManager = gameManager;
+        baseShootingLogic2.aMainSystem = aMainSystem;
+        baseShootingLogic2.explosionSystem = explosionSystem;
+        baseShootingLogic2.aimCamera = aimCamera;
     }
 
     IEnumerator InitalizeCoroutine()
@@ -367,9 +401,15 @@ public class BaseWeapon : MonoBehaviour
     }
 
     //This is called everytime you shot, as it takes ammo 
-    public virtual void TakeAmmo()
+    public virtual void TakeAmmo1()
     {
-        currentMagazine -= ammoPerShot;
+        currentMagazine -= ammoPerShot1;
+        SetAmmoInfo();
+    }
+
+    public virtual void TakeAmmo2()
+    {
+        currentMagazine -= ammoPerShot2;
         SetAmmoInfo();
     }
 
@@ -504,9 +544,14 @@ public class BaseWeapon : MonoBehaviour
     }
 
     //All guns use this *Do not remove*
-    public virtual void TriggerItem()
+    public virtual void TriggerItem1()
     {
+        baseShootingLogic1.TriggerItem();
+    }
 
+    public virtual void TriggerItem2()
+    {
+        baseShootingLogic2.TriggerItem();
     }
 
     public void TopLayer()
@@ -558,7 +603,8 @@ public class BaseWeapon : MonoBehaviour
     public void SetBaseStatsOnSpawn()
     {
         baseMaxAmmo = maxAmmo;
-        baseAmmoPerShot = ammoPerShot;
+        baseAmmoPerShot1 = ammoPerShot1;
+        baseAmmoPerShot2 = ammoPerShot2;
         baseInfinteAmmo = infinteAmmo;
         baseMaxMagazine = maxMagazine;
     }

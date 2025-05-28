@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class ShootProjectile : BaseWeapon
+public class ShootProjectile : BaseShootingLogic
 {
 
     [Header("Weapon attributes")]
@@ -41,14 +41,8 @@ public class ShootProjectile : BaseWeapon
     {
         layerMask = LayerMask.GetMask("Player", "Projectile");
         raycastShootPoint = GameObject.FindGameObjectWithTag("ShootPoint");
-        base.Awake();
     }
 
-    public void Start()
-    {
-        base.Start();
-
-    }
 
     public override void TriggerItem()
     {
@@ -117,7 +111,7 @@ public class ShootProjectile : BaseWeapon
             shootPoint.transform.Rotate(((minXoffset + maxXoffset)), ((minYOffset + maxYOffset)), 0);
             Quaternion rotation = Quaternion.LookRotation(shootPoint.transform.forward, Vector3.up);
 
-            Instantiate(projectile, shootPoint.transform.position, rotation).GetComponent<ProjectileBase>().weaponParent = this;
+            Instantiate(projectile, shootPoint.transform.position, rotation).GetComponent<ProjectileBase>().weaponParent = baseWeapon;
             shootPoint.transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
         else
@@ -177,7 +171,7 @@ public class ShootProjectile : BaseWeapon
                 shootPoint.transform.Rotate(((minXoffset + maxXoffset)), ((minYOffset + maxYOffset)), 0);
 
                 //----
-                Instantiate(projectile, shootPoint.transform.position, shootPoint.transform.rotation).GetComponent<ProjectileBase>().weaponParent = this;
+                Instantiate(projectile, shootPoint.transform.position, shootPoint.transform.rotation).GetComponent<ProjectileBase>().weaponParent = baseWeapon;
 
 
                 //shotProjectile.AddForce(shotProjectile.transform.forward * shotSpeed, ForceMode.Impulse);
@@ -202,8 +196,6 @@ public class ShootProjectile : BaseWeapon
 
 
         #endregion
-
-        MantleWeapon();
 
     }
 

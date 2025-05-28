@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3201373492876456359}
   - component: {fileID: 3201373492876456345}
   m_Layer: 10
-  m_Name: MagicTomeProjectile
+  m_Name: GrenadeLauncherProjectile_1
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,32 +47,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosivePrefab: {fileID: 6181682070259854663, guid: 22c33e41a1ca8c74a9de4a0767131945, type: 3}
   UseAdvancedCalculations: 1
-  damage: 70
-  projectileSpeed: 50
+  damage: 0
+  projectileSpeed: 80
   pierceObjects: 0
   pierceAmount: 0
-  isExplosive: 0
+  isExplosive: 1
   explosiveRadius: 12
   explosiveDamage: 200
   explosiveImpactSFX: {fileID: 0}
-  homing: 1
+  homing: 0
   turnSpeed: 12
   nonHomingDuration: 0.35
   homingRange: 25
   target: {fileID: 0}
-  burning: 1
-  burningDamage: 10
-  burnChance: 100
-  useGravity: 0
+  useGravity: 1
   gravityMagnitude: 4
   hitVFX: {fileID: 0}
   hitEnemyVFX: {fileID: 0}
   lifeDuration: 8
   lifeTimer: 0
-  canDestroy: 1
   weaponParent: {fileID: 0}
   aMainSysteM: {fileID: 0}
-  explosionSystem: {fileID: 0}
   shootSystem: {fileID: 0}
 --- !u!135 &3201373492876456345
 SphereCollider:

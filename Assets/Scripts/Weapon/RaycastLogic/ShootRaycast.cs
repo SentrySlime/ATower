@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using System.Linq;
 
-public class ShootRaycast : BaseWeapon
+public class ShootRaycast : BaseShootingLogic
 {
     HitmarkerLogic hitMarkLogic;
 
@@ -62,13 +62,12 @@ public class ShootRaycast : BaseWeapon
 
     public Animation mantleAnimation;
 
-    
-
+    //---
+   
     private void Awake()
     {
         if(lineRenderer)
             lineRenderer.enabled = false;
-
 
         //This layermask sends a single raycast and should basically only hit terrain
         layermask = LayerMask.GetMask("Player", "Enemy", "Projectile", "Items", "Breakable", "Ignore Raycast");
@@ -79,22 +78,18 @@ public class ShootRaycast : BaseWeapon
         //This layermask is only for shotguns
         layermask3 = LayerMask.GetMask("Player", "Projectile", "Items", "Ignore Raycast");
 
-        //shootPoint = GameObject.Find("FX").GetComponent<GameObject>();
-        shootPoint = GameObject.FindGameObjectWithTag("ShootPoint");
-        
-        base.Awake();
+
     }
 
     public void Start()
     {
-        base.Start();
+
         layermask = ~layermask;
     }
 
 
     public override void TriggerItem()
     {
-
 
         #region NotShooting
         if (casingVFX != null)
@@ -134,6 +129,8 @@ public class ShootRaycast : BaseWeapon
         #region Shooting
         if (!isShotgun)
         {
+
+            
 
             //This is where we se the random numbers for the accuracy
             #region RandomNumbers Accuracy
@@ -215,16 +212,23 @@ public class ShootRaycast : BaseWeapon
 
                 if (ShouldExplode)
                 {
-                    explosionSystem.SpawnExplosion(raycastHit.point, explosiveRadius, explosiveDamage, weaponParent: this);
+                    explosionSystem.SpawnExplosion(raycastHit.point, explosiveRadius, explosiveDamage, weaponParent: baseWeapon);
                 }
                 else
                 {
                     Vector3 hitDirection = transform.position - raycastHit.point;
                     Instantiate(hitVFX, raycastHit.point, Quaternion.LookRotation(hitDirection));
-                    if(lineRenderer)
-                        SpawnLinerenderer(effectPosition.position, raycastHit.point, false);
                 }
             }
+
+
+            if(enemiesToDamage == null || enemiesToDamage.Count == 0)
+            {
+
+                if (lineRenderer)
+                    SpawnLinerenderer(effectPosition.position, raycastHit.point, false);
+            }
+
 
             for (int i = 0; i < tempPierce; i++)
             {
@@ -232,7 +236,7 @@ public class ShootRaycast : BaseWeapon
                 {
                     if(ShouldExplode)
                     {
-                        explosionSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i], this);
+                        explosionSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i], weaponParent: baseWeapon);
                     }
                     else
                     {
@@ -244,7 +248,6 @@ public class ShootRaycast : BaseWeapon
 
                         StartCoroutine(AttachEffectNextFrame(tempVFX, alreadyDamaged[i].transform));
                         
-                        
                         if (lineRenderer)
                             SpawnLinerenderer(effectPosition.position, hits[i].point, true);
                         DealDamage(alreadyDamaged[i], false, hits[i].point);
@@ -255,7 +258,7 @@ public class ShootRaycast : BaseWeapon
                 {
                     if (ShouldExplode)
                     {
-                        explosionSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i], this);
+                        explosionSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i], weaponParent: baseWeapon);
                     }
                     else
                     {
@@ -276,7 +279,7 @@ public class ShootRaycast : BaseWeapon
                 {
                     if (ShouldExplode)
                     {
-                        explosionSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i], this);
+                        explosionSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i], weaponParent: baseWeapon);
                     }
                     else
                     {
@@ -372,7 +375,6 @@ public class ShootRaycast : BaseWeapon
 
         #endregion
 
-        MantleWeapon();
     }
 
 

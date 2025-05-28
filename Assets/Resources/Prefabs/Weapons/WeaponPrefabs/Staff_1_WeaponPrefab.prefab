@@ -4960,6 +4960,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5779255679518579600}
   - component: {fileID: 9042178775537694539}
+  - component: {fileID: 7343509923176242053}
   m_Layer: 0
   m_Name: Weapon_Body
   m_TagString: Untagged
@@ -4996,6 +4997,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e349ae517b1e9cd47bc447ed7b2ff950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootPoint: {fileID: 5778652067730987094}
+  ADSAccuracy: 3
+  HIPAccuracy: 4
+  damage: 1
+  player: {fileID: 0}
+  playerStats: {fileID: 0}
+  baseWeapon: {fileID: 0}
+  recoil: {fileID: 0}
+  weaponSocket: {fileID: 0}
+  screenShake: {fileID: 0}
+  aimCamera: {fileID: 0}
+  gameManager: {fileID: 0}
+  aMainSystem: {fileID: 0}
+  explosionSystem: {fileID: 0}
+  projectile: {fileID: 8458187518107989519, guid: 0a5c3cbd025c3ad4195f51753197ddb2, type: 3}
+  shotSpeed: 1
+  shootAmount: 1
+  shotSize: 1
+  pierceAmount: 1
+  isShotgun: 0
+  UseHorizontal: 1
+  UseVertical: 1
+  shootSFX: {fileID: 4964101775347663484, guid: a75f0bdd5e53620429c73b197d92ccce, type: 3}
+  muzzleFlash: {fileID: 3870366076701474902}
+  casingVFX: {fileID: 0}
+  mantleAnimation: {fileID: 0}
+--- !u!114 &7343509923176242053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593228928422068522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b77b6966dd49f5459da2b46c1c87a37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseShootingLogic1: {fileID: 9042178775537694539}
   aName: ShamanStaff
   aDescription: The staff of a fallen shaman
   weaponIcon: {fileID: 21300000, guid: ed69a450df154744ea4184f8ddb5a1d9, type: 3}
@@ -5026,12 +5066,10 @@ MonoBehaviour:
   damage: 1
   baseFireRate: 0
   fireRate: 0.09
-  burstDelay: 0.08
-  burstAmount: 6
+  burstDelay: 1
+  burstAmount: 1
   recoilAmount: 0
   moveAmount: 0.6
-  ADSAccuracy: 3
-  HIPAccuracy: 4
   recoilX: -5
   recoilY: 0.3
   recoilZ: 0.2
@@ -5048,24 +5086,15 @@ MonoBehaviour:
   recoil: {fileID: 0}
   screenShake: {fileID: 0}
   weaponSocket: {fileID: 0}
+  gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
+  explosionSystem: {fileID: 0}
+  player: {fileID: 0}
   playerStats: {fileID: 0}
+  playerHealth: {fileID: 0}
   interuptReload: 0
   finishedReload: 0
-  renderObjects:
-  - {fileID: 6898411181587814841}
-  projectile: {fileID: 8458187518107989519, guid: 0a5c3cbd025c3ad4195f51753197ddb2, type: 3}
-  shotSpeed: 1
-  shootAmount: 1
-  shotSize: 1
-  pierceAmount: 1
-  isShotgun: 0
-  UseHorizontal: 1
-  UseVertical: 1
-  shootSFX: {fileID: 4964101775347663484, guid: a75f0bdd5e53620429c73b197d92ccce, type: 3}
-  muzzleFlash: {fileID: 3870366076701474902}
-  casingVFX: {fileID: 0}
-  mantleAnimation: {fileID: 0}
+  renderObjects: []
 --- !u!1001 &3996602068226753358
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5235,11 +5264,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c47752c6b79f566408d66b08e197484d, type: 3}
---- !u!1 &6898411181587814841 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c47752c6b79f566408d66b08e197484d, type: 3}
-  m_PrefabInstance: {fileID: 6016102917152629992}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6122578577472848643 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c47752c6b79f566408d66b08e197484d, type: 3}

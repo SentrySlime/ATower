@@ -4929,6 +4929,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5779255679518579600}
   - component: {fileID: 6593228928422068517}
+  - component: {fileID: 5482695673029059411}
   m_Layer: 0
   m_Name: Weapon_Body
   m_TagString: Untagged
@@ -4965,8 +4966,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f64b5086b30334087b89dea5fa7b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootPoint: {fileID: 1856004530348900990}
+  ADSAccuracy: 1
+  HIPAccuracy: 5
+  damage: 49
+  playerStats: {fileID: 0}
+  screenShake: {fileID: 0}
+  aimCamera: {fileID: 0}
+  weaponSocket: {fileID: 0}
+  recoil: {fileID: 0}
+  player: {fileID: 0}
+  gameManager: {fileID: 0}
+  aMainSystem: {fileID: 0}
+  explosionSystem: {fileID: 0}
+  lineRenderer: {fileID: 0}
+  curve: 0
+  lineDuration: 0.9
+  lineTimer: 0
+  hitDistance: 0
+  hitmarker: {fileID: 0}
+  isShotgun: 0
+  shootAmount: 1
+  shotSize: 1
+  pierceAmount: 2
+  ShouldExplode: 0
+  explosiveDamage: 1
+  explosiveRadius: 1
+  SFXList: []
+  shootSFX: {fileID: 4964101775347663484, guid: 81804116d578ad2438d5dcf6d40c671e, type: 3}
+  hitSFX: {fileID: 4964101775347663484, guid: b244e633c20fdda4895818242ba7786b, type: 3}
+  effectPosition: {fileID: 0}
+  shootEffect: {fileID: 0}
+  muzzleFlash: {fileID: 3023387803275709626}
+  hitVFX: {fileID: 1879272669879180, guid: 15b9dd0ff0b73454aad08fc61f1d3084, type: 3}
+  hitEnemyVFX: {fileID: 2512749170250154484, guid: acce0b4b09260c84eb6e5ddb1239880d, type: 3}
+  casingVFX: {fileID: 1856004529903584604}
+  mantleAnimation: {fileID: 0}
+--- !u!114 &5482695673029059411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593228928422068522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b77b6966dd49f5459da2b46c1c87a37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseShootingLogic1: {fileID: 6593228928422068517}
   aName: StartingGun
-  aDescription: Big iron on his hip
+  aDescription: A reliable hand gun
   weaponIcon: {fileID: 21300000, guid: da9509e1194ac1340880e90af871c9ce, type: 3}
   shootPoint: {fileID: 0}
   barrel: {fileID: 1856004530348900990}
@@ -4977,8 +5027,8 @@ MonoBehaviour:
   weaponMaterial: {fileID: 2100000, guid: 65f87dcfa315aed4cabbb2ead433180e, type: 2}
   type: 0
   baseMaxAmmo: 0
-  maxAmmo: 114
-  currentAmmo: 114
+  maxAmmo: 100
+  currentAmmo: 100
   baseAmmoPerShot: 0
   ammoPerShot: 1
   baseInfinteAmmo: 0
@@ -5018,35 +5068,15 @@ MonoBehaviour:
   screenShake: {fileID: 0}
   weaponSocket: {fileID: 0}
   aMainSystem: {fileID: 0}
+  explosionSystem: {fileID: 0}
+  player: {fileID: 0}
   playerStats: {fileID: 0}
+  playerHealth: {fileID: 0}
   interuptReload: 0
   finishedReload: 0
   renderObjects:
   - {fileID: 3696280949258877793}
   - {fileID: 8566576601790005155}
-  lineRenderer: {fileID: 0}
-  curve: 0
-  lineDuration: 0.9
-  lineTimer: 0
-  hitDistance: 0
-  hitmarker: {fileID: 0}
-  isShotgun: 0
-  shootAmount: 1
-  shotSize: 1
-  pierceAmount: 2
-  ShouldExplode: 0
-  explosiveDamage: 1
-  explosiveRadius: 1
-  SFXList: []
-  shootSFX: {fileID: 4964101775347663484, guid: 81804116d578ad2438d5dcf6d40c671e, type: 3}
-  hitSFX: {fileID: 4964101775347663484, guid: b244e633c20fdda4895818242ba7786b, type: 3}
-  effectPosition: {fileID: 0}
-  shootEffect: {fileID: 0}
-  muzzleFlash: {fileID: 3023387803275709626}
-  hitVFX: {fileID: 1879272669879180, guid: 15b9dd0ff0b73454aad08fc61f1d3084, type: 3}
-  hitEnemyVFX: {fileID: 2512749170250154484, guid: acce0b4b09260c84eb6e5ddb1239880d, type: 3}
-  casingVFX: {fileID: 1856004529903584604}
-  mantleAnimation: {fileID: 0}
 --- !u!1001 &3119473796213784638
 PrefabInstance:
   m_ObjectHideFlags: 0

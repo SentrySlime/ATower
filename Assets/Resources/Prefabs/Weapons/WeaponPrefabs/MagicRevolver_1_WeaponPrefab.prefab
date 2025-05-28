@@ -53,7 +53,6 @@ MonoBehaviour:
   moveAmount: 0
   lerpDuration: 0.1
   lerpBackDuration: 0.3
-  fireMode: 0
   rotating: 0
   targetPosition: {x: 0, y: 0, z: 0}
   reloadTimer: 0
@@ -4961,6 +4960,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5779255679518579600}
   - component: {fileID: 9042178775537694539}
+  - component: {fileID: 8157002962122630130}
   m_Layer: 0
   m_Name: Weapon_Body
   m_TagString: Untagged
@@ -4996,6 +4996,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e349ae517b1e9cd47bc447ed7b2ff950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootPoint: {fileID: 5778652067730987094}
+  ADSAccuracy: 1
+  HIPAccuracy: 1
+  damage: 1
+  player: {fileID: 0}
+  playerStats: {fileID: 0}
+  baseWeapon: {fileID: 0}
+  recoil: {fileID: 0}
+  weaponSocket: {fileID: 0}
+  screenShake: {fileID: 0}
+  aimCamera: {fileID: 0}
+  gameManager: {fileID: 0}
+  aMainSystem: {fileID: 0}
+  explosionSystem: {fileID: 0}
+  firingMode: 1
+  projectile: {fileID: 3201373492876456356, guid: 159238a8541bac34385b920b7e769fe9, type: 3}
+  shotSpeed: 150
+  shootAmount: 1
+  shotSize: 1
+  pierceAmount: 1
+  isShotgun: 0
+  UseHorizontal: 1
+  UseVertical: 1
+  shootSFX: {fileID: 4964101775347663484, guid: 0f2c1ad0607fd94458f7da48dad9c000, type: 3}
+  muzzleFlash: {fileID: 3687609282251090893}
+  casingVFX: {fileID: 0}
+  mantleAnimation: {fileID: 0}
+--- !u!114 &8157002962122630130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593228928422068522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b77b6966dd49f5459da2b46c1c87a37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseShootingLogic1: {fileID: 9042178775537694539}
+  baseShootingLogic2: {fileID: 0}
   aName: MagicRevolver
   aDescription: A revolver imbued with the magic power of runes
   weaponIcon: {fileID: 21300000, guid: cf124b910080df9489fc96790c747a37, type: 3}
@@ -5010,8 +5051,10 @@ MonoBehaviour:
   baseMaxAmmo: 0
   maxAmmo: 150
   currentAmmo: 150
-  baseAmmoPerShot: 0
-  ammoPerShot: 1
+  baseAmmoPerShot1: 0
+  ammoPerShot1: 1
+  baseAmmoPerShot2: 0
+  ammoPerShot2: 1
   baseInfinteAmmo: 0
   infinteAmmo: 0
   reloadType: 1
@@ -5030,8 +5073,6 @@ MonoBehaviour:
   burstAmount: 1
   recoilAmount: -20
   moveAmount: -0.3
-  ADSAccuracy: 1
-  HIPAccuracy: 1
   recoilX: -25
   recoilY: 1
   recoilZ: 0.6
@@ -5048,25 +5089,17 @@ MonoBehaviour:
   recoil: {fileID: 0}
   screenShake: {fileID: 0}
   weaponSocket: {fileID: 0}
+  gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
+  explosionSystem: {fileID: 0}
+  player: {fileID: 0}
   playerStats: {fileID: 0}
+  playerHealth: {fileID: 0}
   interuptReload: 0
   finishedReload: 0
   renderObjects:
   - {fileID: 7600481199244424061}
   - {fileID: 6010637072426048203}
-  projectile: {fileID: 3201373492876456356, guid: 159238a8541bac34385b920b7e769fe9, type: 3}
-  shotSpeed: 150
-  shootAmount: 1
-  shotSize: 1
-  pierceAmount: 1
-  isShotgun: 0
-  UseHorizontal: 1
-  UseVertical: 1
-  shootSFX: {fileID: 4964101775347663484, guid: 0f2c1ad0607fd94458f7da48dad9c000, type: 3}
-  muzzleFlash: {fileID: 3687609282251090893}
-  casingVFX: {fileID: 0}
-  mantleAnimation: {fileID: 0}
 --- !u!114 &7418970766321959300
 MonoBehaviour:
   m_ObjectHideFlags: 0

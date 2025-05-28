@@ -52,7 +52,6 @@ MonoBehaviour:
   moveAmount: 0
   lerpDuration: 0.1
   lerpBackDuration: 0.3
-  fireMode: 0
   rotating: 0
   targetPosition: {x: 0, y: 0, z: 0}
   reloadTimer: 0
@@ -81,13 +80,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1856004530348900990}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.06, y: 1, z: -0}
+  m_LocalPosition: {x: -0.06, y: 0.52, z: 0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3117866166344409208}
   - {fileID: 7861742291453212263}
   m_Father: {fileID: 5779255679518579600}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5778652067730987094
 GameObject:
@@ -129,6 +128,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5779255679518579600}
   - component: {fileID: 9042178775537694539}
+  - component: {fileID: 2550281366269977468}
+  - component: {fileID: 6978080914629546102}
   m_Layer: 0
   m_Name: Weapon_Body
   m_TagString: Untagged
@@ -147,8 +148,8 @@ Transform:
   m_LocalPosition: {x: 0.98, y: -0.65, z: 1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1856004530348900985}
   - {fileID: 7689816347711831454}
+  - {fileID: 1856004530348900985}
   m_Father: {fileID: 1856004529439608098}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -2.4, y: 0, z: 0}
@@ -164,6 +165,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e349ae517b1e9cd47bc447ed7b2ff950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootPoint: {fileID: 5778652067730987094}
+  ADSAccuracy: 1
+  HIPAccuracy: 1
+  damage: 1
+  player: {fileID: 0}
+  playerStats: {fileID: 0}
+  baseWeapon: {fileID: 0}
+  recoil: {fileID: 0}
+  weaponSocket: {fileID: 0}
+  screenShake: {fileID: 0}
+  aimCamera: {fileID: 0}
+  gameManager: {fileID: 0}
+  aMainSystem: {fileID: 0}
+  explosionSystem: {fileID: 0}
+  firingMode: 1
+  burstDelay: 1
+  burstAmount: 1
+  projectile: {fileID: 3201373492876456356, guid: c40401b6763d1b7488aee84dbe3bf083, type: 3}
+  shotSpeed: 150
+  shootAmount: 1
+  shotSize: 1
+  pierceAmount: 1
+  isShotgun: 0
+  UseHorizontal: 1
+  UseVertical: 1
+  shootSFX: {fileID: 4964101775347663484, guid: 32ede26971527a646a6fd63b6626cc26, type: 3}
+  muzzleFlash: {fileID: 3023387803275709626}
+  casingVFX: {fileID: 0}
+  mantleAnimation: {fileID: 0}
+--- !u!114 &2550281366269977468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593228928422068522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b77b6966dd49f5459da2b46c1c87a37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseShootingLogic1: {fileID: 9042178775537694539}
+  baseShootingLogic2: {fileID: 6978080914629546102}
   aName: MagicTome
   aDescription: A magic tome containing only a single spell
   weaponIcon: {fileID: 21300000, guid: 11e056d2b61aaec4191d427c11f6cb09, type: 3}
@@ -178,8 +222,10 @@ MonoBehaviour:
   baseMaxAmmo: 0
   maxAmmo: 50
   currentAmmo: 50
-  baseAmmoPerShot: 0
-  ammoPerShot: 1
+  baseAmmoPerShot1: 0
+  ammoPerShot1: 1
+  baseAmmoPerShot2: 0
+  ammoPerShot2: 1
   baseInfinteAmmo: 0
   infinteAmmo: 0
   reloadType: 0
@@ -193,13 +239,9 @@ MonoBehaviour:
   baseDamage: 0
   damage: 1
   baseFireRate: 0
-  fireRate: 0.35
-  burstDelay: 1
-  burstAmount: 1
+  fireRate: 0.5
   recoilAmount: -6
   moveAmount: -0.01
-  ADSAccuracy: 1
-  HIPAccuracy: 1
   recoilX: -20
   recoilY: 7
   recoilZ: 0.9
@@ -211,11 +253,11 @@ MonoBehaviour:
   currentMagazineText: {fileID: 0}
   ammoDivider: {fileID: 0}
   ammoFill: {fileID: 0}
-  firingMode: 0
   aimCamera: {fileID: 0}
   recoil: {fileID: 0}
   screenShake: {fileID: 0}
   weaponSocket: {fileID: 0}
+  gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
   explosionSystem: {fileID: 0}
   player: {fileID: 0}
@@ -225,6 +267,35 @@ MonoBehaviour:
   finishedReload: 0
   renderObjects:
   - {fileID: 7060632206731552548}
+--- !u!114 &6978080914629546102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593228928422068522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e349ae517b1e9cd47bc447ed7b2ff950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootPoint: {fileID: 5778652067730987094}
+  ADSAccuracy: 25
+  HIPAccuracy: 25
+  damage: 1
+  player: {fileID: 0}
+  playerStats: {fileID: 0}
+  baseWeapon: {fileID: 0}
+  recoil: {fileID: 0}
+  weaponSocket: {fileID: 0}
+  screenShake: {fileID: 0}
+  aimCamera: {fileID: 0}
+  gameManager: {fileID: 0}
+  aMainSystem: {fileID: 0}
+  explosionSystem: {fileID: 0}
+  firingMode: 2
+  burstDelay: 0.1
+  burstAmount: 5
   projectile: {fileID: 3201373492876456356, guid: c40401b6763d1b7488aee84dbe3bf083, type: 3}
   shotSpeed: 150
   shootAmount: 1
@@ -406,7 +477,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 2c613265f3db1814eb2556f919fab3be, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2c613265f3db1814eb2556f919fab3be, type: 3}
       propertyPath: m_LocalScale.x

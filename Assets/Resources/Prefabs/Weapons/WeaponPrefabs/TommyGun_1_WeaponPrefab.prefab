@@ -4960,6 +4960,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5779255679518579600}
   - component: {fileID: 9042178775537694539}
+  - component: {fileID: 4985439069473925064}
   m_Layer: 0
   m_Name: Weapon_Body
   m_TagString: Untagged
@@ -4996,8 +4997,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e349ae517b1e9cd47bc447ed7b2ff950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootPoint: {fileID: 5778652067730987094}
+  ADSAccuracy: 1
+  HIPAccuracy: 1
+  damage: 1
+  player: {fileID: 0}
+  playerStats: {fileID: 0}
+  baseWeapon: {fileID: 0}
+  recoil: {fileID: 0}
+  weaponSocket: {fileID: 0}
+  screenShake: {fileID: 0}
+  aimCamera: {fileID: 0}
+  gameManager: {fileID: 0}
+  aMainSystem: {fileID: 0}
+  explosionSystem: {fileID: 0}
+  projectile: {fileID: 8458187518107989519, guid: c2867901090d3b948a65587f9dc6f3a2, type: 3}
+  shotSpeed: 150
+  shootAmount: 1
+  shotSize: 1
+  pierceAmount: 1
+  isShotgun: 0
+  UseHorizontal: 1
+  UseVertical: 1
+  shootSFX: {fileID: 4964101775347663484, guid: 09b38970b3c237b47b9cbb4020d7b368, type: 3}
+  muzzleFlash: {fileID: 3023387803275709626}
+  casingVFX: {fileID: 0}
+  mantleAnimation: {fileID: 0}
+--- !u!114 &4985439069473925064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593228928422068522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b77b6966dd49f5459da2b46c1c87a37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseShootingLogic1: {fileID: 9042178775537694539}
   aName: TommyGun
-  aDescription: Old fashioned tommygun favored by the unground mobsters
+  aDescription: Old fashioned gun favoured by underground mobsters
   weaponIcon: {fileID: 21300000, guid: c8506a48b72168a4e94f1dab0194a5ca, type: 3}
   shootPoint: {fileID: 5778652067730987094}
   barrel: {fileID: 1856004530348900990}
@@ -5030,8 +5070,6 @@ MonoBehaviour:
   burstAmount: 1
   recoilAmount: -1
   moveAmount: -0.1
-  ADSAccuracy: 1
-  HIPAccuracy: 1
   recoilX: -3
   recoilY: 1
   recoilZ: 0.4
@@ -5048,6 +5086,7 @@ MonoBehaviour:
   recoil: {fileID: 0}
   screenShake: {fileID: 0}
   weaponSocket: {fileID: 0}
+  gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
   explosionSystem: {fileID: 0}
   player: {fileID: 0}
@@ -5057,18 +5096,6 @@ MonoBehaviour:
   finishedReload: 0
   renderObjects:
   - {fileID: 4559284915875843835}
-  projectile: {fileID: 8458187518107989519, guid: c2867901090d3b948a65587f9dc6f3a2, type: 3}
-  shotSpeed: 150
-  shootAmount: 1
-  shotSize: 1
-  pierceAmount: 1
-  isShotgun: 0
-  UseHorizontal: 1
-  UseVertical: 1
-  shootSFX: {fileID: 4964101775347663484, guid: 09b38970b3c237b47b9cbb4020d7b368, type: 3}
-  muzzleFlash: {fileID: 3023387803275709626}
-  casingVFX: {fileID: 0}
-  mantleAnimation: {fileID: 0}
 --- !u!1001 &3119473796213784638
 PrefabInstance:
   m_ObjectHideFlags: 0

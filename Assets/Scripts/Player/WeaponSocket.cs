@@ -67,9 +67,6 @@ public class WeaponSocket : MonoBehaviour
     float burstDelay = 0.1f;
     //float burstTimer = 0;
 
-    public enum FireMode { fullAuto, semi, burst };
-    public FireMode fireMode;
-
     Coroutine burstFireCoroutine;
     private void Awake()
     {
@@ -122,40 +119,102 @@ public class WeaponSocket : MonoBehaviour
         }
         else
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                if(reloadIcon.enabled) 
-                { 
-                    if(!equippedWeapon.HasEmptyMagazine())
-                        StopReload(); 
-                    
-                    if(equippedWeapon.currentMagazine < equippedWeapon.ammoPerShot)
-                        return; 
-                }
-
-                if (fireMode == FireMode.semi)
-                {
-                    CheckForFire();
-                    currentTimer = 0;
-                }
-                else if (fireMode == FireMode.burst)
-                {
-                    burstFireCoroutine = StartCoroutine(BurstFire());
-                }
-            }
-            else if (Input.GetMouseButton(0))
-            {
-                if (fireMode == FireMode.fullAuto)
-                {
-
-                    CheckForFire();
-                    currentTimer = 0;
-                    
-                }
-            }
+            BasShootLogic1();
         }
 
-        if (Input.GetMouseButton(1) )
+        if (!equippedWeapon.baseShootingLogic2)
+            ADSLogic();
+
+
+        if (equippedWeapon != null)
+        {
+            equippedWeapon.objectToRecoil.gameObject.transform.localPosition = Vector3.Lerp(adsPos, hipPos, adsProgress);
+
+            cameraObj.fieldOfView = Mathf.Lerp(zoomedCameraFOV, baseCameraFOV, adsProgress);
+            weaponCamera.fieldOfView = Mathf.Lerp(zoomedCameraFOV, baseCameraFOV, adsProgress);
+
+            cameraMovement.Sensitivity = Mathf.Lerp(zoomedSensitivity, baseSensitivity, adsProgress);
+            crosshair.alpha = adsProgress;
+        }
+    }
+
+    private void BasShootLogic1()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (reloadIcon.enabled)
+            {
+                if (!equippedWeapon.HasEmptyMagazine())
+                    StopReload();
+
+                if (equippedWeapon.currentMagazine < equippedWeapon.ammoPerShot1)
+                    return;
+            }
+
+            if(equippedWeapon.baseShootingLogic1.firingMode == BaseShootingLogic.FiringMode.semiAuto)
+            {
+                CheckForFire(false);
+                currentTimer = 0;
+            }
+            else if (equippedWeapon.baseShootingLogic1.firingMode == BaseShootingLogic.FiringMode.burst)
+            {
+                burstFireCoroutine = StartCoroutine(BurstFire(false));
+            }
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            if (equippedWeapon.baseShootingLogic1.firingMode == BaseShootingLogic.FiringMode.fullAuto)
+            {
+
+                CheckForFire(false);
+                currentTimer = 0;
+
+            }
+        }
+        else if(equippedWeapon.baseShootingLogic2)
+        {
+            BasShootLogic2();
+        }
+    }
+
+    private void BasShootLogic2()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (reloadIcon.enabled)
+            {
+                if (!equippedWeapon.HasEmptyMagazine())
+                    StopReload();
+
+                if (equippedWeapon.currentMagazine < equippedWeapon.ammoPerShot2)
+                    return;
+            }
+
+            if (equippedWeapon.baseShootingLogic2.firingMode == BaseShootingLogic.FiringMode.semiAuto)
+            {
+                CheckForFire(true);
+                currentTimer = 0;
+            }
+            else if (equippedWeapon.baseShootingLogic2.firingMode == BaseShootingLogic.FiringMode.burst)
+            {
+                burstFireCoroutine = StartCoroutine(BurstFire(true));
+            }
+        }
+        else if (Input.GetMouseButton(1))
+        {
+            if (equippedWeapon.baseShootingLogic2.firingMode == BaseShootingLogic.FiringMode.fullAuto)
+            {
+
+                CheckForFire(true);
+                currentTimer = 0;
+
+            }
+        }
+    }
+
+    private void ADSLogic()
+    {
+        if (Input.GetMouseButton(1))
         {
             if (adsProgress < 0.1)
             {
@@ -180,36 +239,31 @@ public class WeaponSocket : MonoBehaviour
                 adsProgress += adsSpeed * Time.deltaTime;
             }
         }
-
-        if (equippedWeapon != null)
-        {
-            equippedWeapon.objectToRecoil.gameObject.transform.localPosition = Vector3.Lerp(adsPos, hipPos, adsProgress);
-
-            cameraObj.fieldOfView = Mathf.Lerp(zoomedCameraFOV, baseCameraFOV, adsProgress);
-            weaponCamera.fieldOfView = Mathf.Lerp(zoomedCameraFOV, baseCameraFOV, adsProgress);
-
-            cameraMovement.Sensitivity = Mathf.Lerp(zoomedSensitivity, baseSensitivity, adsProgress);
-            crosshair.alpha = adsProgress;
-        }
     }
 
-    public void CheckForFire()
+    public void CheckForFire(bool isSecondary)
     {
         
         if (equippedWeapon == null || reloadIcon.isActiveAndEnabled) { return; }
 
         int percentageOfPlayerHp = playerHealth.CalculatePercentage(5);
 
-        if (equippedWeapon.currentMagazine >= equippedWeapon.ammoPerShot)
+        if (equippedWeapon.currentMagazine >= equippedWeapon.ammoPerShot1 && !isSecondary)
         {
-            equippedWeapon.TakeAmmo();
-            ammoScript.UseAmountOfAmmo(equippedWeapon.ammoPerShot);
-            Fire();
+            equippedWeapon.TakeAmmo1();
+            ammoScript.UseAmountOfAmmo(equippedWeapon.ammoPerShot1);
+            Fire(isSecondary);
+        }
+        else if(equippedWeapon.currentMagazine >= equippedWeapon.ammoPerShot2 && isSecondary)
+        {
+            equippedWeapon.TakeAmmo2();
+            ammoScript.UseAmountOfAmmo(equippedWeapon.ammoPerShot2);
+            Fire(isSecondary);
         }
         else if (playerStats.heartboundRounds > 0 && playerHealth.currentHP - percentageOfPlayerHp > 0)
         {
             playerHealth.RemoveHealth(percentageOfPlayerHp);
-            Fire();
+            Fire(isSecondary);
         }
         else if (equippedWeapon.currentMagazine <= 0 && equippedWeapon.currentAmmo != 0)
         {
@@ -223,10 +277,14 @@ public class WeaponSocket : MonoBehaviour
 
     }
 
-    public void Fire()
+    public void Fire(bool isSecondary)
     {
         recoilScript.CallFire();
-        equippedWeapon.TriggerItem();
+        if (isSecondary)
+            equippedWeapon.TriggerItem2();
+        else
+            equippedWeapon.TriggerItem1();
+
         shootSystem.FireHomingRocket(false, equippedWeapon.barrel, 30, playerStats.fireBallChance);
     }
 
@@ -247,23 +305,32 @@ public class WeaponSocket : MonoBehaviour
         hipPos = hipFire;
         maxTimer = fireRate;
         adsSpeed = AdsSpeed;
-        if (equippedWeapon.firingMode == BaseWeapon.FiringMode.fullAuto)
-            fireMode = FireMode.fullAuto;
-        else if (equippedWeapon.firingMode == BaseWeapon.FiringMode.semiAuto)
-            fireMode = FireMode.semi;
-        else if (equippedWeapon.firingMode == BaseWeapon.FiringMode.burst)
-            fireMode = FireMode.burst;
     }
 
-    private IEnumerator BurstFire()
+    private IEnumerator BurstFire(bool isSecondary)
     {
         currentTimer = 0;
-        for (int i = 0; i < equippedWeapon.burstAmount; i++)
+        
+        if(!isSecondary)
         {
-            CheckForFire();
-            yield return new WaitForSeconds(equippedWeapon.burstDelay);
+            for (int i = 0; i < equippedWeapon.baseShootingLogic1.burstAmount; i++)
+            {
+                CheckForFire(isSecondary);
+                yield return new WaitForSeconds(equippedWeapon.baseShootingLogic1.burstDelay);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < equippedWeapon.baseShootingLogic2.burstAmount; i++)
+            {
+                CheckForFire(isSecondary);
+                yield return new WaitForSeconds(equippedWeapon.baseShootingLogic2.burstDelay);
+            }
         }
 
+        
+
+        
 
         yield return null;
     }

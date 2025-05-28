@@ -4929,6 +4929,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5779255679518579600}
   - component: {fileID: 6593228928422068517}
+  - component: {fileID: 7872218907589719915}
   m_Layer: 0
   m_Name: Weapon_Body
   m_TagString: Untagged
@@ -4965,9 +4966,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f64b5086b30334087b89dea5fa7b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootPoint: {fileID: 1856004530348900990}
+  ADSAccuracy: 2
+  HIPAccuracy: 5
+  damage: 20
+  player: {fileID: 0}
+  playerStats: {fileID: 0}
+  baseWeapon: {fileID: 0}
+  recoil: {fileID: 0}
+  weaponSocket: {fileID: 0}
+  screenShake: {fileID: 0}
+  aimCamera: {fileID: 0}
+  gameManager: {fileID: 0}
+  aMainSystem: {fileID: 0}
+  explosionSystem: {fileID: 0}
+  lineRenderer: {fileID: 0}
+  curve: 0
+  lineDuration: 0.9
+  lineTimer: 0
+  hitDistance: 0
+  hitmarker: {fileID: 0}
+  isShotgun: 0
+  shootAmount: 1
+  shotSize: 0.5
+  pierceAmount: 1
+  ShouldExplode: 0
+  explosiveDamage: 1
+  explosiveRadius: 1
+  SFXList: []
+  shootSFX: {fileID: 4964101775347663484, guid: 09b38970b3c237b47b9cbb4020d7b368, type: 3}
+  hitSFX: {fileID: 4964101775347663484, guid: b244e633c20fdda4895818242ba7786b, type: 3}
+  effectPosition: {fileID: 0}
+  shootEffect: {fileID: 0}
+  muzzleFlash: {fileID: 3023387803275709626}
+  hitVFX: {fileID: 1879272669879180, guid: 15b9dd0ff0b73454aad08fc61f1d3084, type: 3}
+  hitEnemyVFX: {fileID: 2512749170250154484, guid: acce0b4b09260c84eb6e5ddb1239880d, type: 3}
+  casingVFX: {fileID: 1856004529903584604}
+  mantleAnimation: {fileID: 0}
+--- !u!114 &7872218907589719915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593228928422068522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b77b6966dd49f5459da2b46c1c87a37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseShootingLogic1: {fileID: 6593228928422068517}
   aName: PPSH
-  aDescription: The impetus for the development of the PPSh came from the Winter
-    War
+  aDescription: The impetus for the development of the PPSH came from the winter
+    war
   weaponIcon: {fileID: 21300000, guid: 54307e239553aae4dad5bd1605574ded, type: 3}
   shootPoint: {fileID: 0}
   barrel: {fileID: 1856004530348900990}
@@ -5000,8 +5051,6 @@ MonoBehaviour:
   burstAmount: 1
   recoilAmount: -1
   moveAmount: -0.1
-  ADSAccuracy: 2
-  HIPAccuracy: 5
   recoilX: -1.5
   recoilY: 0.4
   recoilZ: 0.1
@@ -5018,35 +5067,16 @@ MonoBehaviour:
   recoil: {fileID: 0}
   screenShake: {fileID: 0}
   weaponSocket: {fileID: 0}
+  gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
+  explosionSystem: {fileID: 0}
+  player: {fileID: 0}
   playerStats: {fileID: 0}
+  playerHealth: {fileID: 0}
   interuptReload: 0
   finishedReload: 0
   renderObjects:
   - {fileID: 5478958427004091082}
-  lineRenderer: {fileID: 0}
-  curve: 0
-  lineDuration: 0.9
-  lineTimer: 0
-  hitDistance: 0
-  hitmarker: {fileID: 0}
-  isShotgun: 0
-  shootAmount: 1
-  shotSize: 0.5
-  pierceAmount: 1
-  ShouldExplode: 0
-  explosiveDamage: 1
-  explosiveRadius: 1
-  SFXList: []
-  shootSFX: {fileID: 4964101775347663484, guid: 09b38970b3c237b47b9cbb4020d7b368, type: 3}
-  hitSFX: {fileID: 4964101775347663484, guid: b244e633c20fdda4895818242ba7786b, type: 3}
-  effectPosition: {fileID: 0}
-  shootEffect: {fileID: 0}
-  muzzleFlash: {fileID: 3023387803275709626}
-  hitVFX: {fileID: 1879272669879180, guid: 15b9dd0ff0b73454aad08fc61f1d3084, type: 3}
-  hitEnemyVFX: {fileID: 2512749170250154484, guid: acce0b4b09260c84eb6e5ddb1239880d, type: 3}
-  casingVFX: {fileID: 1856004529903584604}
-  mantleAnimation: {fileID: 0}
 --- !u!1001 &3119473796213784638
 PrefabInstance:
   m_ObjectHideFlags: 0

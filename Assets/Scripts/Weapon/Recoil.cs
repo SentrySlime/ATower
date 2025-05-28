@@ -20,9 +20,6 @@ public class Recoil : MonoBehaviour
     public float lerpDuration = 0.05f;
     public float lerpBackDuration = 0.5f;
 
-    public enum FireMode { fullAuto, semi, burst };
-    public FireMode fireMode;
-
     [SerializeField] public bool rotating;
     bool moving;
     bool hasSetRecoil = false;
@@ -145,7 +142,7 @@ public class Recoil : MonoBehaviour
         }
     }
 
-    public void InitializeRecoil(float move, int angle, float fireRate, int firingMode)
+    public void InitializeRecoil(float move, int angle, float fireRate)
     {
         if (hasSetRecoil) return;
 
@@ -157,30 +154,7 @@ public class Recoil : MonoBehaviour
 
         startRotation = obj.transform.localRotation;
         startPos = transform.localPosition;
-
-        if (firingMode == 0)
-            fireMode = FireMode.fullAuto;
-        else if (firingMode == 1)
-            fireMode = FireMode.semi;
-        if (firingMode == 2)
-            fireMode = FireMode.burst;
-
     }
-
-    private IEnumerator BurstFire()
-    {
-        isBurstFiring = true;
-        currentTimer = 0;
-        for (int i = 0; i < weaponSocket.equippedWeapon.burstAmount; i++)
-        {
-            Fire();
-            yield return new WaitForSeconds(weaponSocket.equippedWeapon.burstDelay);
-        }
-
-        isBurstFiring = false;
-        yield return null;
-    }
-
 
     public void HolsteredReload()
     {

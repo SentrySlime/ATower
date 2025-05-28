@@ -1789,7 +1789,7 @@ MonoBehaviour:
   reload_SFX: {fileID: 5004350295680756141}
   hipPos: {x: 0, y: 0, z: 0}
   adsPos: {x: 0, y: 0, z: 0}
-  adsProgress: 0
+  adsProgress: 1
   adsSpeed: 6
   crosshair: {fileID: 0}
   reloadGroup: {fileID: 0}
@@ -1798,7 +1798,6 @@ MonoBehaviour:
   weaponIcon: {fileID: 0}
   interupptedBool: 0
   currentTimer: 0
-  fireMode: 0
 --- !u!114 &5004350295439402688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1930,6 +1929,8 @@ MonoBehaviour:
   healCap: 0
   canOverheal: 0
   onlyEliteKillHeal: 0
+  healOnReload: 0
+  overkillDamageHeal: 0
   damageReductionPercent: 1
   damageIgnoreChance: 0
   moveSpeed: 20
@@ -1950,10 +1951,12 @@ MonoBehaviour:
   alternateFastReload: 0
   heartboundRounds: 0
   maxAmmo: 0
+  bandolierEffect: 0
   fireBallChance: 0
   accuracy: 0
   increasedMoneyDrop: 0
   moneyIsHealth: 0
+  thorns: 0
 --- !u!114 &1655174549
 MonoBehaviour:
   m_ObjectHideFlags: 0

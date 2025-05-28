@@ -109,6 +109,8 @@ public class ItemPanel : MonoBehaviour
         weaponPickUp = incomingWeapon.GetComponent<WeaponPickUp>();
         baseWeapon = weaponPickUp.weaponPrefab.GetComponentInChildren<BaseWeapon>();
 
+        if (!baseWeapon) return;
+
         if(baseWeapon.weaponMesh != null)
             itemMesh = baseWeapon.weaponMesh;
         if (baseWeapon.weaponMaterial != null)

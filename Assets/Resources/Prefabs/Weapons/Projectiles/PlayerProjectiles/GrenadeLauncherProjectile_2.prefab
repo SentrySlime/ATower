@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3201373492876456359}
   - component: {fileID: 3201373492876456345}
   m_Layer: 10
-  m_Name: LuncherProjectile
+  m_Name: GrenadeLauncherProjectile_2
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,22 +52,27 @@ MonoBehaviour:
   pierceObjects: 0
   pierceAmount: 0
   isExplosive: 1
-  explosiveRadius: 12
-  explosiveDamage: 200
+  explosiveRadius: 5
+  explosiveDamage: 600
   explosiveImpactSFX: {fileID: 0}
   homing: 0
   turnSpeed: 12
   nonHomingDuration: 0.35
   homingRange: 25
   target: {fileID: 0}
+  burning: 0
+  burningDamage: 1
+  burnChance: 0
   useGravity: 1
   gravityMagnitude: 4
   hitVFX: {fileID: 0}
   hitEnemyVFX: {fileID: 0}
   lifeDuration: 8
   lifeTimer: 0
+  canDestroy: 1
   weaponParent: {fileID: 0}
   aMainSysteM: {fileID: 0}
+  explosionSystem: {fileID: 0}
   shootSystem: {fileID: 0}
 --- !u!135 &3201373492876456345
 SphereCollider:

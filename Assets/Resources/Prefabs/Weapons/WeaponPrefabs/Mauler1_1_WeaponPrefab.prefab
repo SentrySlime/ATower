@@ -52,7 +52,6 @@ MonoBehaviour:
   moveAmount: 0
   lerpDuration: 0.1
   lerpBackDuration: 0.3
-  fireMode: 0
   rotating: 0
   targetPosition: {x: 0, y: 0, z: 0}
   reloadTimer: 0
@@ -4960,6 +4959,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5779255679518579600}
   - component: {fileID: 9042178775537694539}
+  - component: {fileID: 2353261229388868000}
+  - component: {fileID: 6595493837476178236}
   m_Layer: 0
   m_Name: Weapon_Body
   m_TagString: Untagged
@@ -4998,8 +4999,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e349ae517b1e9cd47bc447ed7b2ff950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootPoint: {fileID: 5778652067730987094}
+  ADSAccuracy: 2.5
+  HIPAccuracy: 15
+  damage: 1
+  player: {fileID: 0}
+  playerStats: {fileID: 0}
+  baseWeapon: {fileID: 0}
+  recoil: {fileID: 0}
+  weaponSocket: {fileID: 0}
+  screenShake: {fileID: 0}
+  aimCamera: {fileID: 0}
+  gameManager: {fileID: 0}
+  aMainSystem: {fileID: 0}
+  explosionSystem: {fileID: 0}
+  firingMode: 0
+  burstDelay: 1
+  burstAmount: 1
+  projectile: {fileID: 8458187518107989519, guid: e7ff468585e3b3344a858ac4403c81f6, type: 3}
+  shotSpeed: 150
+  shootAmount: 1
+  shotSize: 1
+  pierceAmount: 1
+  isShotgun: 0
+  UseHorizontal: 1
+  UseVertical: 1
+  shootSFX: {fileID: 4964101775347663484, guid: b8de2be1818b5bc4ea0323f80b158d24, type: 3}
+  muzzleFlash: {fileID: 7454482075363186293}
+  casingVFX: {fileID: 0}
+  mantleAnimation: {fileID: 0}
+--- !u!114 &2353261229388868000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593228928422068522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b77b6966dd49f5459da2b46c1c87a37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseShootingLogic1: {fileID: 9042178775537694539}
+  baseShootingLogic2: {fileID: 6595493837476178236}
   aName: Mauler
-  aDescription: Carbine rifle fused with the carcase of a hexademon
+  aDescription: Carbine fused with the carcase of a hexademon
   weaponIcon: {fileID: 21300000, guid: eee8f268d9d6ef943b25e59a79abdbc0, type: 3}
   shootPoint: {fileID: 5778652067730987094}
   barrel: {fileID: 1856004530348900990}
@@ -5007,33 +5051,31 @@ MonoBehaviour:
   iconPrefab: {fileID: 0}
   goldCost: 1580
   weaponMesh: {fileID: 996101317834215552, guid: a395fea86d708ab479804ef187161c3d, type: 3}
-  weaponMaterial: {fileID: 2100000, guid: f9fc2eac1670fc848a9c7d4f66d03b2d, type: 2}
+  weaponMaterial: {fileID: 2100000, guid: e70f85e8de991de42900378499d60869, type: 2}
   type: 7
   baseMaxAmmo: 0
-  maxAmmo: 570
-  currentAmmo: 570
-  baseAmmoPerShot: 0
-  ammoPerShot: 1
+  maxAmmo: 400
+  currentAmmo: 400
+  baseAmmoPerShot1: 0
+  ammoPerShot1: 1
+  baseAmmoPerShot2: 0
+  ammoPerShot2: 5
   baseInfinteAmmo: 0
   infinteAmmo: 0
   reloadType: 0
   baseMaxMagazine: 0
-  maxMagazine: 35
-  currentMagazine: 35
+  maxMagazine: 30
+  currentMagazine: 30
   baseReloadTime: 0
-  reloadTime: 4
+  reloadTime: 5
   baseReloadAmount: 0
   reloadAmount: 1
   baseDamage: 0
   damage: 1
   baseFireRate: 0
-  fireRate: 0.075
-  burstDelay: 1
-  burstAmount: 1
+  fireRate: 0.1
   recoilAmount: -2
   moveAmount: -0.15
-  ADSAccuracy: 2.5
-  HIPAccuracy: 15
   recoilX: -2
   recoilY: 1
   recoilZ: 0.15
@@ -5045,27 +5087,70 @@ MonoBehaviour:
   currentMagazineText: {fileID: 0}
   ammoDivider: {fileID: 0}
   ammoFill: {fileID: 0}
-  firingMode: 0
   aimCamera: {fileID: 0}
   recoil: {fileID: 0}
   screenShake: {fileID: 0}
   weaponSocket: {fileID: 0}
+  gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
+  explosionSystem: {fileID: 0}
+  player: {fileID: 0}
   playerStats: {fileID: 0}
+  playerHealth: {fileID: 0}
   interuptReload: 0
   finishedReload: 0
   renderObjects:
   - {fileID: 7972655928119541096}
-  projectile: {fileID: 8458187518107989519, guid: e7ff468585e3b3344a858ac4403c81f6, type: 3}
-  shotSpeed: 150
-  shootAmount: 1
-  shotSize: 1
-  pierceAmount: 1
+--- !u!114 &6595493837476178236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593228928422068522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f64b5086b30334087b89dea5fa7b26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootPoint: {fileID: 5778652067730987094}
+  ADSAccuracy: 1
+  HIPAccuracy: 1
+  damage: 150
+  player: {fileID: 0}
+  playerStats: {fileID: 0}
+  baseWeapon: {fileID: 0}
+  recoil: {fileID: 0}
+  weaponSocket: {fileID: 0}
+  screenShake: {fileID: 0}
+  aimCamera: {fileID: 0}
+  gameManager: {fileID: 0}
+  aMainSystem: {fileID: 0}
+  explosionSystem: {fileID: 0}
+  firingMode: 1
+  burstDelay: 1
+  burstAmount: 1
+  lineRenderer: {fileID: 7921476482363610212, guid: dbd2def43faf82b46a5a5f72ccc46e66, type: 3}
+  curve: 0
+  lineDuration: 0.9
+  lineTimer: 0
+  hitDistance: 0
+  hitmarker: {fileID: 0}
   isShotgun: 0
-  UseHorizontal: 1
-  UseVertical: 1
-  shootSFX: {fileID: 4964101775347663484, guid: b8de2be1818b5bc4ea0323f80b158d24, type: 3}
+  shootAmount: 1
+  shotSize: 1.5
+  pierceAmount: 10
+  ShouldExplode: 0
+  explosiveDamage: 1
+  explosiveRadius: 1
+  SFXList: []
+  shootSFX: {fileID: 4964101775347663484, guid: 394ff8fb76cc76443ae629d2e2889d5e, type: 3}
+  hitSFX: {fileID: 7201874395979686177, guid: fdb9a446e8307fb46b004bc9595a88ce, type: 3}
+  effectPosition: {fileID: 1856004530348900985}
+  shootEffect: {fileID: 0}
   muzzleFlash: {fileID: 7454482075363186293}
+  hitVFX: {fileID: 1879272669879180, guid: da7d34a7c7418a443a7fbe3a4f432cba, type: 3}
+  hitEnemyVFX: {fileID: 1879272669879180, guid: aa1d1ef49d9b36941a30b75fa62ee3de, type: 3}
   casingVFX: {fileID: 0}
   mantleAnimation: {fileID: 0}
 --- !u!1 &8907696893031157402

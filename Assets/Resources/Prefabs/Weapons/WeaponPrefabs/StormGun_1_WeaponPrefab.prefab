@@ -9764,6 +9764,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5779255679518579600}
   - component: {fileID: 7287438756357616981}
+  - component: {fileID: 8814061378576426551}
   m_Layer: 0
   m_Name: Weapon_Body
   m_TagString: Untagged
@@ -9800,8 +9801,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a8d7a71bfe53d04ba2bf5a1700d90f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootPoint: {fileID: 1856004530348900990}
+  ADSAccuracy: 1
+  HIPAccuracy: 1
+  damage: 15
+  player: {fileID: 0}
+  playerStats: {fileID: 0}
+  baseWeapon: {fileID: 0}
+  recoil: {fileID: 0}
+  weaponSocket: {fileID: 0}
+  screenShake: {fileID: 0}
+  aimCamera: {fileID: 0}
+  gameManager: {fileID: 0}
+  aMainSystem: {fileID: 0}
+  explosionSystem: {fileID: 0}
+  lineRenderer: {fileID: 3873093300375810148, guid: d5ccb6bf1e1cead4a949fcbd790914f1, type: 3}
+  curve: 1
+  lineDuration: 0.9
+  lineTimer: 0
+  hitDistance: 0
+  hitmarker: {fileID: 0}
+  isShotgun: 0
+  shootAmount: 1
+  shotSize: 1.5
+  pierceAmount: 1
+  ShouldExplode: 0
+  explosiveDamage: 1
+  explosiveRadius: 1
+  SFXList: []
+  shootSFX: {fileID: 4964101775347663484, guid: def59220176b85d4c92e335331fe5e35, type: 3}
+  hitSFX: {fileID: 7201874395979686177, guid: fdb9a446e8307fb46b004bc9595a88ce, type: 3}
+  effectPosition: {fileID: 5502287252857412224}
+  shootEffect: {fileID: 0}
+  muzzleFlash: {fileID: 5159709355697822310}
+  hitVFX: {fileID: 3463168027487975298, guid: 48f64310a75aaa74ea673854834beeab, type: 3}
+  hitEnemyVFX: {fileID: 7468110898010713756, guid: be650337c1758f04c8801b5e168bb317, type: 3}
+  casingVFX: {fileID: 0}
+  mantleAnimation: {fileID: 0}
+  onWeakSpot: 0
+  maxTargets: 1
+  chanceToRefract: 50
+  refractRange: 50
+  bouncingLineRender: {fileID: 0}
+--- !u!114 &8814061378576426551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593228928422068522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b77b6966dd49f5459da2b46c1c87a37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseShootingLogic1: {fileID: 7287438756357616981}
   aName: Stormgun
-  aDescription: Made from the eye of a hexademon and lightning in a bottle
+  aDescription: Made from the eye if a hexademon and lightning in a bottle
   weaponIcon: {fileID: 21300000, guid: fb22d0bd0cd78564bb4a097bd61d0a62, type: 3}
   shootPoint: {fileID: 0}
   barrel: {fileID: 1856004530348900990}
@@ -9834,8 +9890,6 @@ MonoBehaviour:
   burstAmount: 1
   recoilAmount: -3
   moveAmount: -0.8
-  ADSAccuracy: 1
-  HIPAccuracy: 1
   recoilX: -1
   recoilY: 6
   recoilZ: 0.8
@@ -9852,41 +9906,17 @@ MonoBehaviour:
   recoil: {fileID: 0}
   screenShake: {fileID: 0}
   weaponSocket: {fileID: 0}
+  gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
+  explosionSystem: {fileID: 0}
+  player: {fileID: 0}
   playerStats: {fileID: 0}
+  playerHealth: {fileID: 0}
   interuptReload: 0
   finishedReload: 0
   renderObjects:
   - {fileID: 2674554803156641919}
   - {fileID: 6867273503591875981}
-  lineRenderer: {fileID: 3873093300375810148, guid: d5ccb6bf1e1cead4a949fcbd790914f1, type: 3}
-  curve: 1
-  lineDuration: 0.9
-  lineTimer: 0
-  hitDistance: 0
-  hitmarker: {fileID: 0}
-  isShotgun: 0
-  shootAmount: 1
-  shotSize: 1.5
-  pierceAmount: 1
-  ShouldExplode: 0
-  explosiveDamage: 1
-  explosiveRadius: 1
-  SFXList: []
-  shootSFX: {fileID: 4964101775347663484, guid: def59220176b85d4c92e335331fe5e35, type: 3}
-  hitSFX: {fileID: 7201874395979686177, guid: fdb9a446e8307fb46b004bc9595a88ce, type: 3}
-  effectPosition: {fileID: 5502287252857412224}
-  shootEffect: {fileID: 0}
-  muzzleFlash: {fileID: 5159709355697822310}
-  hitVFX: {fileID: 3463168027487975298, guid: 48f64310a75aaa74ea673854834beeab, type: 3}
-  hitEnemyVFX: {fileID: 7468110898010713756, guid: be650337c1758f04c8801b5e168bb317, type: 3}
-  casingVFX: {fileID: 0}
-  mantleAnimation: {fileID: 0}
-  onWeakSpot: 0
-  maxTargets: 1
-  chanceToRefract: 50
-  refractRange: 50
-  bouncingLineRender: {fileID: 0}
 --- !u!1001 &3355620291365919259
 PrefabInstance:
   m_ObjectHideFlags: 0

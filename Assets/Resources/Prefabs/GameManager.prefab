@@ -62,19 +62,16 @@ MonoBehaviour:
   - {fileID: 6931329448293354149, guid: be883186d4de3cc47917f9cfac817c04, type: 3}
   - {fileID: 2356860116122222479, guid: 5c42d8417fcb1014b9ac79de79bf8fbd, type: 3}
   - {fileID: 7527335582870803992, guid: 76e18f5081c5c50449be5e3a058b1627, type: 3}
+  - {fileID: 2356860116122222479, guid: 7b0dad011cb496d4bb19b6703c1b87ff, type: 3}
   - {fileID: 2749742489556895009, guid: 6c3bf8a88effc3746b070689c03d395a, type: 3}
+  - {fileID: 2356860116122222479, guid: 2968d681a60a7494cb5f1f9f90011999, type: 3}
   - {fileID: 6931329448293354149, guid: 4c8cd8a1598265e42ab6649c5b311cc9, type: 3}
   - {fileID: 7527405179895652824, guid: 7972746ee7c36624e92985bac751a637, type: 3}
-  - {fileID: 7527335582870803992, guid: fdf9c5910b0807b4a9018e07d29b82c4, type: 3}
-  - {fileID: 6952844890914244580, guid: 297d7e38b46066445806f8bf6abea0da, type: 3}
   - {fileID: 4962411745360347528, guid: 9f259f18d802dc54fb9b2324518abd61, type: 3}
   - {fileID: 6952844890914244580, guid: 32be05b989b007044829d2923610cd45, type: 3}
-  - {fileID: 6952844890914244580, guid: 53ee614294fe7bd40984f6032008952e, type: 3}
   - {fileID: 4962411745360347528, guid: be0840f534ba37742b31f051025b7176, type: 3}
   - {fileID: 7527405179895652824, guid: f7bc37a124fda8141b7706c364b7ec04, type: 3}
-  - {fileID: 6952844890914244580, guid: 520e8d8d69205634bbfbdf44cac4d933, type: 3}
-  - {fileID: 6952844890914244580, guid: f33da1b3a62dfa249b09a139e73d12d1, type: 3}
-  - {fileID: 2356860116122222479, guid: 2968d681a60a7494cb5f1f9f90011999, type: 3}
+  - {fileID: 6952844890914244580, guid: 27e0320c76dafc341a0b72a957ace51c, type: 3}
   pickUps: []
   s_Tier: []
   a_Tier: []
@@ -172,7 +169,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponManager: {fileID: 7614514148234217132}
   itemManager: {fileID: 1170188830}
-  itemKillRequirement: 0
+  itemTokens: 0
+  tokenRequirement: 100
 --- !u!114 &2026563273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,8 +200,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0f882e641965864986411325ed251ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsMainMusicPlaying: 1
   mainMusic: {fileID: 611839642}
+  IsDevilMusicPlaying: 0
   devilMusic: {fileID: 501283116908330990}
+  IsShopMusicPlaying: 0
   shopMusic: {fileID: 1705584287}
 --- !u!82 &611839642
 AudioSource:
@@ -217,7 +218,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 22726c8077a38ea41a108778e2f2a29f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 0.125
   m_Pitch: 1
   Loop: 1
   Mute: 0

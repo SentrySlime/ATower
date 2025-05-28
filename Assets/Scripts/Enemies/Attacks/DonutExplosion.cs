@@ -79,7 +79,6 @@ public class DonutExplosion : MonoBehaviour, IInitializeProjectile
 
     public void Initialize(EnemyBase enemy)
     {
-        print("Anything : " + enemy);
         enemyBase = enemy;
     }
 }
