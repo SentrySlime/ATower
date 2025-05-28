@@ -9618,7 +9618,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2356860116122222464}
   - component: {fileID: 2356860116122222465}
-  - component: {fileID: 2356860116122222478}
   - component: {fileID: 4018527784782629946}
   m_Layer: 13
   m_Name: Parasite_1_PickUp
@@ -9672,19 +9671,6 @@ MonoBehaviour:
   weaponRarity: 0
   baseWeapon: {fileID: 0}
   weaponPrefab: {fileID: 1856004529439608096, guid: d1926874bb0430849b6bf278e622d792, type: 3}
---- !u!65 &2356860116122222478
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2356860116122222479}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.8184943, y: 1.0845652, z: 3.2322314}
-  m_Center: {x: -0.014159918, y: 0.07044411, z: 0.003914714}
 --- !u!135 &4018527784782629946
 SphereCollider:
   m_ObjectHideFlags: 0

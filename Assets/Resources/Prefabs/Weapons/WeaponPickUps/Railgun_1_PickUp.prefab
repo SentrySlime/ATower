@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7527405179895652823}
   - component: {fileID: 7527405179895652822}
-  - component: {fileID: 7527405179895652825}
   - component: {fileID: 8132331096311311786}
   m_Layer: 13
   m_Name: Railgun_1_PickUp
@@ -51,24 +50,19 @@ MonoBehaviour:
   itemName: 
   itemDescription: 
   itemIcon: {fileID: 0}
-  baseWeapon: {fileID: 0}
-  weaponRarity: 0
-  weaponPrefab: {fileID: 1856004529439608096, guid: fd13f768b068fb547919d521761949c5, type: 3}
+  aName: 
+  aDescription: 
+  weaponIcon: {fileID: 0}
+  shootPoint: {fileID: 0}
+  barrel: {fileID: 0}
+  objectToRecoil: {fileID: 0}
+  iconPrefab: {fileID: 0}
+  goldCost: 500
   weaponMesh: {fileID: 0}
   weaponMaterial: {fileID: 0}
---- !u!65 &7527405179895652825
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7527405179895652824}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.4250958, y: 0.7227416, z: 2.4070973}
-  m_Center: {x: 0.0020388365, y: -0.044850588, z: -0.039572954}
+  weaponRarity: 0
+  baseWeapon: {fileID: 0}
+  weaponPrefab: {fileID: 1856004529439608096, guid: fd13f768b068fb547919d521761949c5, type: 3}
 --- !u!135 &8132331096311311786
 SphereCollider:
   m_ObjectHideFlags: 0

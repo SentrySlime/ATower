@@ -9618,7 +9618,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6931329448293354154}
   - component: {fileID: 6931329448293354155}
-  - component: {fileID: 6931329448293354148}
   - component: {fileID: 2724401682568691992}
   m_Layer: 13
   m_Name: PPSH_1_PickUp
@@ -9659,24 +9658,19 @@ MonoBehaviour:
   itemName: 
   itemDescription: 
   itemIcon: {fileID: 0}
-  baseWeapon: {fileID: 0}
-  weaponRarity: 0
-  weaponPrefab: {fileID: 1856004529439608096, guid: 5807b216e1094014e81811027d3ac9e4, type: 3}
+  aName: 
+  aDescription: 
+  weaponIcon: {fileID: 0}
+  shootPoint: {fileID: 0}
+  barrel: {fileID: 0}
+  objectToRecoil: {fileID: 0}
+  iconPrefab: {fileID: 0}
+  goldCost: 500
   weaponMesh: {fileID: 0}
   weaponMaterial: {fileID: 0}
---- !u!65 &6931329448293354148
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6931329448293354149}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.4250958, y: 0.7227416, z: 1.5754023}
-  m_Center: {x: 0.0020388365, y: -0.044850588, z: -0.10271287}
+  weaponRarity: 0
+  baseWeapon: {fileID: 0}
+  weaponPrefab: {fileID: 1856004529439608096, guid: 5807b216e1094014e81811027d3ac9e4, type: 3}
 --- !u!135 &2724401682568691992
 SphereCollider:
   m_ObjectHideFlags: 0

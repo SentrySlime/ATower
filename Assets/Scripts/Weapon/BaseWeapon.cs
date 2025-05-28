@@ -369,7 +369,6 @@ public class BaseWeapon : MonoBehaviour
     //This is called everytime you shot, as it takes ammo 
     public virtual void TakeAmmo()
     {
-
         currentMagazine -= ammoPerShot;
         SetAmmoInfo();
     }
@@ -411,7 +410,6 @@ public class BaseWeapon : MonoBehaviour
 
     public void RefillMag()
     {
-        currentMagazine = maxMagazine;
         currentMagazine = maxMagazine;
     }
 

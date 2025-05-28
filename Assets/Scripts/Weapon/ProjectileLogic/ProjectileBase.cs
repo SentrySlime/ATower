@@ -56,6 +56,14 @@ public class ProjectileBase : MonoBehaviour
     float homingCheckTimer = 0;
     bool cantHome = false;
 
+    //---------- Burning ----------\\
+    [Header("Burning Effect")]
+    public bool burning = false;
+    public float burningDamage = 1;
+
+    [Tooltip("1 is equal to 1% chance to apply the status effect")]
+    [Range(0f, 100f)] public int burnChance = 0;
+
     //---------- Gravity ----------\\
     [Header("Gravity")]
     public bool useGravity = false;
@@ -286,9 +294,19 @@ public class ProjectileBase : MonoBehaviour
     {
         //hitMarkerLogic.EnableHitMarker();
         aMainSysteM.DealDamage(enemyRoot, damage, true, incomingWeakSpotShot);
+        
+        if(burning)
+            ApplyBurningEffect(enemyRoot);
+        
         //enemyRoot.GetComponentInParent<IDamageInterface>().Damage(damage);
         hitEnemies.Add(enemyRoot);
         CheckPierce();
+    }
+
+    protected void ApplyBurningEffect(GameObject enemyRoot)
+    {
+        if(enemyRoot.TryGetComponent<BurningStatusEffect>(out var burn))
+            burn.StartEffect(burnChance, burningDamage);
     }
 
     protected void AdvancedCollision()

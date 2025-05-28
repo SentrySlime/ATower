@@ -43,11 +43,19 @@ public class AMainSystem : MonoBehaviour
             Instantiate(pickUpVFX, position, Quaternion.identity);
     }
 
-    public void DealDamage(GameObject incomingObj, float incomingDamage, bool friendly, bool weakSpotShot = false, EnemyBase enemyBase = null)
+    public void DealDamage(GameObject incomingObj, float incomingDamage, bool friendly, bool weakSpotShot = false, EnemyBase enemyBase = null, IDamageInterface iDamageInterface = null)
     {
         if (friendly)
         {
-            DamageEnemy(incomingObj, incomingDamage, weakSpotShot);
+
+            if(iDamageInterface == null)
+            {
+                iDamageInterface = incomingObj.GetComponent<IDamageInterface>();
+            }
+
+            DamageEnemy(iDamageInterface, incomingDamage, weakSpotShot);
+            
+            
             UILogic(weakSpotShot);
         }
         else
@@ -57,13 +65,13 @@ public class AMainSystem : MonoBehaviour
     }
 
     #region DealingDamageToenemies
-    private void DamageEnemy(GameObject incomingObj, float incomingDamage, bool incomingWeakSpotShot)
+    private void DamageEnemy(IDamageInterface damageInterface, float incomingDamage, bool incomingWeakSpotShot)
     {
-        CalculateDamage(incomingObj, incomingDamage, incomingWeakSpotShot);
+        CalculateDamage(damageInterface, incomingDamage, incomingWeakSpotShot);
     }
 
     //For enemies
-    private void CalculateDamage(GameObject incomingObj, float incomingDamage, bool incomingWeakSpotShot)
+    private void CalculateDamage(IDamageInterface damageInterface, float incomingDamage, bool incomingWeakSpotShot)
     {
         incomingDamage += playerStats.addedDamage;
 
@@ -99,13 +107,13 @@ public class AMainSystem : MonoBehaviour
         {
             PlaySFX(true);
             incomingDamage *= playerStats.criticalMultiplier;
-            incomingObj.GetComponent<IDamageInterface>().Damage(incomingDamage, true);
+            damageInterface.Damage(incomingDamage, true);
             return;
         }
         
         PlaySFX(false);
 
-        incomingObj.GetComponent<IDamageInterface>().Damage(incomingDamage, false);
+        damageInterface.Damage(incomingDamage, false);
     }
 
     private void PlaySFX(bool isCrit)

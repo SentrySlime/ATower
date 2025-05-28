@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6952844890914244587}
   - component: {fileID: 6952844890914244586}
-  - component: {fileID: 6952844890914244581}
   - component: {fileID: 5571308858740773949}
   m_Layer: 13
   m_Name: smg_1_PickUp
@@ -51,21 +50,19 @@ MonoBehaviour:
   itemName: 
   itemDescription: 
   itemIcon: {fileID: 0}
+  aName: 
+  aDescription: 
+  weaponIcon: {fileID: 0}
+  shootPoint: {fileID: 0}
+  barrel: {fileID: 0}
+  objectToRecoil: {fileID: 0}
+  iconPrefab: {fileID: 0}
+  goldCost: 500
+  weaponMesh: {fileID: 0}
+  weaponMaterial: {fileID: 0}
   weaponRarity: 0
+  baseWeapon: {fileID: 0}
   weaponPrefab: {fileID: 1856004529439608096, guid: 05924d9ef4a274e4f9b7c50844184703, type: 3}
---- !u!65 &6952844890914244581
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6952844890914244580}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.4250958, y: 0.7227416, z: 1.5754023}
-  m_Center: {x: 0.0020388365, y: -0.044850588, z: -0.10271287}
 --- !u!135 &5571308858740773949
 SphereCollider:
   m_ObjectHideFlags: 0

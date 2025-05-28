@@ -9618,7 +9618,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6931329448293354154}
   - component: {fileID: 6931329448293354155}
-  - component: {fileID: 6931329448293354148}
   - component: {fileID: 7709938463506493877}
   m_Layer: 13
   m_Name: Crossbow_1_PickUp
@@ -9659,24 +9658,19 @@ MonoBehaviour:
   itemName: RepeaterCrossbow
   itemDescription: The vampire hunters favourite
   itemIcon: {fileID: 21300000, guid: 9b6a9bdde13b978469a51e73b931ee53, type: 3}
-  baseWeapon: {fileID: 0}
-  weaponRarity: 0
-  weaponPrefab: {fileID: 1856004529439608096, guid: 27a5c21993725724587890a8e3699732, type: 3}
+  aName: 
+  aDescription: 
+  weaponIcon: {fileID: 0}
+  shootPoint: {fileID: 0}
+  barrel: {fileID: 0}
+  objectToRecoil: {fileID: 0}
+  iconPrefab: {fileID: 0}
+  goldCost: 500
   weaponMesh: {fileID: 0}
   weaponMaterial: {fileID: 0}
---- !u!65 &6931329448293354148
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6931329448293354149}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.66201735, y: 0.7998786, z: 2.9528542}
-  m_Center: {x: -0.0062258244, y: -0.13300729, z: -0.13026237}
+  weaponRarity: 0
+  baseWeapon: {fileID: 0}
+  weaponPrefab: {fileID: 1856004529439608096, guid: 27a5c21993725724587890a8e3699732, type: 3}
 --- !u!135 &7709938463506493877
 SphereCollider:
   m_ObjectHideFlags: 0

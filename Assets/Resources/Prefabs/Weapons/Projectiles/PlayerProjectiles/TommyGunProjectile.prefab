@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4140537416350080728}
   - component: {fileID: 2889861736430218442}
   m_Layer: 10
-  m_Name: UziProjectile
+  m_Name: TommyGunProjectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosivePrefab: {fileID: 0}
   UseAdvancedCalculations: 1
-  damage: 20
+  damage: 6
   projectileSpeed: 350
   pierceObjects: 1
   pierceAmount: 1
@@ -143,14 +143,19 @@ MonoBehaviour:
   nonHomingDuration: 0.35
   homingRange: 25
   target: {fileID: 0}
+  burning: 1
+  burningDamage: 2
+  burnChance: 10
   useGravity: 0
   gravityMagnitude: 1
   hitVFX: {fileID: 1879272669879180, guid: 7bef351ddc33ae044b671a7664396a20, type: 3}
   hitEnemyVFX: {fileID: 2512749170250154484, guid: acce0b4b09260c84eb6e5ddb1239880d, type: 3}
   lifeDuration: 8
   lifeTimer: 0
+  canDestroy: 1
   weaponParent: {fileID: 0}
   aMainSysteM: {fileID: 0}
+  explosionSystem: {fileID: 0}
   shootSystem: {fileID: 0}
 --- !u!54 &4140537416350080728
 Rigidbody:

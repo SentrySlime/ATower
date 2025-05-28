@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: ArmorOfThorns
-  itemDescription: Deal damage to enemies that damage you
+  itemDescription: Deal damage to enemies that damage you and increased damage reduction
   itemIcon: {fileID: 21300000, guid: 2c5d8878d068e8347a8c2f8a35daf875, type: 3}
   itemMesh: {fileID: -8937674819838897120, guid: aaab1c4bac3e490489bdde04395cc3a8, type: 3}
   itemMaterial: {fileID: 2100000, guid: a1fa27d9a8e490e4886092932e2d77e2, type: 2}
@@ -83,6 +83,7 @@ MonoBehaviour:
   hasAlternateFastReload: 0
   heartboundRounds: 0
   maxAmmo: 0
+  bandolierEffect: 0
   fireBallChance: 0
   accuracy: 0
   increasedMoneyDrops: 0

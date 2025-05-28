@@ -8,42 +8,46 @@ public class HitmarkerLogic : MonoBehaviour
     private GameObject hitMarker;
     private GameObject critHitMarker;
 
+    private float hitMarkerTimer = 0f;
+    private float critHitMarkerTimer = 0f;
+
+    private const float markerDuration = 0.2f;
+
     void Start()
     {
         hitMarker = transform.GetChild(0).gameObject;
         critHitMarker = transform.GetChild(1).gameObject;
     }
 
-    public void EnableCritHitMarker()
+    void Update()
     {
-        StopCoroutine(DisableCritHitmarker());
+        if (hitMarker.activeSelf)
+        {
+            hitMarkerTimer -= Time.deltaTime;
+            if (hitMarkerTimer <= 0f)
+                hitMarker.SetActive(false);
+        }
 
-        critHitMarker.SetActive(true);
-
-        StartCoroutine(DisableCritHitmarker());
-    }
-
-    IEnumerator DisableCritHitmarker()
-    {
-        yield return new WaitForSeconds(.2f);
-
-        critHitMarker.SetActive(false);
+        if (critHitMarker.activeSelf)
+        {
+            critHitMarkerTimer -= Time.deltaTime;
+            if (critHitMarkerTimer <= 0f)
+                critHitMarker.SetActive(false);
+        }
     }
 
     public void EnableHitMarker()
     {
-        StopCoroutine(DisableHitmarker());
+        if (!hitMarker.activeSelf)
+            hitMarker.SetActive(true);
 
-        hitMarker.SetActive(true);
-
-        StartCoroutine(DisableHitmarker());
+        hitMarkerTimer = markerDuration;
     }
 
-    IEnumerator DisableHitmarker()
+
+    public void EnableCritHitMarker()
     {
-        yield return new WaitForSeconds(.2f);
-
-        hitMarker.SetActive(false);
+        critHitMarker.SetActive(true);
+        critHitMarkerTimer = markerDuration; // Extend timer every crit
     }
-
 }

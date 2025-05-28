@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2749742489556895022}
   - component: {fileID: 2749742489556895023}
-  - component: {fileID: 2749742489556895008}
   - component: {fileID: 2619440849077950242}
   m_Layer: 13
   m_Name: Mauler_1_PickUp
@@ -51,21 +50,19 @@ MonoBehaviour:
   itemName: 
   itemDescription: 
   itemIcon: {fileID: 0}
+  aName: 
+  aDescription: 
+  weaponIcon: {fileID: 0}
+  shootPoint: {fileID: 0}
+  barrel: {fileID: 0}
+  objectToRecoil: {fileID: 0}
+  iconPrefab: {fileID: 0}
+  goldCost: 500
+  weaponMesh: {fileID: 0}
+  weaponMaterial: {fileID: 0}
   weaponRarity: 0
+  baseWeapon: {fileID: 0}
   weaponPrefab: {fileID: 1856004529439608096, guid: c0fef4b126baacf4c82d101bc0bd7c2b, type: 3}
---- !u!65 &2749742489556895008
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2749742489556895009}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5888927, y: 0.6268616, z: 2.7110624}
-  m_Center: {x: 0.007498622, y: 0.111215115, z: 0.006485462}
 --- !u!135 &2619440849077950242
 SphereCollider:
   m_ObjectHideFlags: 0

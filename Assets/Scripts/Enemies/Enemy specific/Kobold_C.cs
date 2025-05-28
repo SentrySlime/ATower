@@ -117,7 +117,6 @@ public class Kobold_C : Enemy_Movement
 
         Quaternion lookRotation = Quaternion.LookRotation(directionFromShootPoint);
         EnemyProjectile enemyProjectile = Instantiate(projectile, shootPoint.position, lookRotation).GetComponent<EnemyProjectile>();
-        print(enemyBase);
         enemyProjectile.Initialize(enemyBase);
 
         EndAttack();

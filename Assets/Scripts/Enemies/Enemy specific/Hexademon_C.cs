@@ -52,9 +52,9 @@ public class Hexademon_C : Enemy_Movement
     float beamDamageRateTimer = 0f;
     float beamFollowSpeed = 0.125f;
     float maxBeamFollowSpeed = 0.125f;
-    float yawSpeed = 0.001f;
-    float pitchSpeed = 8f;
-    float rotationSpeed = 50;
+    float yawSpeed = 0.1f;
+    float pitchSpeed = 14f;
+    float rotationSpeed = 90;
 
     [Header("Misc")]
     float lastSeenTimer = 0f;

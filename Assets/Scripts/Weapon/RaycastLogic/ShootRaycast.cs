@@ -18,9 +18,6 @@ public class ShootRaycast : BaseWeapon
 
     public float hitDistance = 0;
 
-    
-
-    
     public GameObject hitmarker;
 
     [Header("Shotgun")]
