@@ -15,7 +15,7 @@ public class CameraMovement : MonoBehaviour
     public float Sensitivity
     {
         get { return sensitivity; }
-        set { sensitivity = value; }
+       set { sensitivity = value; }
     }
 
     [Tooltip("Limits vertical camera rotation. Prevents the flipping that happens when rotation goes above 90.")]

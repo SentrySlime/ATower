@@ -72,9 +72,7 @@ public class BaseWeapon : MonoBehaviour
     [HideInInspector] public int baseReloadAmount = 0;
     public int reloadAmount = 1;
 
-    [Header("DPS")]
-    [HideInInspector] public float baseDamage = 0;
-    public float damage = 1;
+    
     [HideInInspector] public float baseFireRate = 0;
     public float fireRate = 1;
 
@@ -290,7 +288,7 @@ public class BaseWeapon : MonoBehaviour
     }
 
     //This should be called when switching weapons
-    public virtual void Initialize(Camera camera)
+    public virtual void Initialize(Camera camera = null)
     {
 
         TopLayer();
@@ -306,6 +304,11 @@ public class BaseWeapon : MonoBehaviour
             InitalizeShootingLogic2();
 
         StartCoroutine(InitalizeCoroutine());
+    }
+
+    public void SetAdsFor()
+    {
+         weaponSocket.SetAds(adsPos, hipPos, fireRate, adsSpeed);
     }
 
     private void InitalizeShootingLogic1()

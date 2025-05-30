@@ -22,6 +22,8 @@ public class WeaponSocket : MonoBehaviour
     PlayerStats playerStats;
     PlayerHealth playerHealth;
     AmmoScript ammoScript;
+    GameObject gameManager;
+    Settings settings;
 
     [Header("Visible Cursor")]
     public bool hideCursor;
@@ -80,7 +82,9 @@ public class WeaponSocket : MonoBehaviour
         pauseMenu = GameObject.FindGameObjectWithTag("Canvas").GetComponent<PauseMenu>();
         reloadGroup = GameObject.FindGameObjectWithTag("ReloadGroup").GetComponent<CanvasGroup>();
         reloadFinish = reloadGroup.transform.Find("ReloadFinish").GetComponent<Image>();
-        shootSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShootSystem>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        shootSystem = gameManager.GetComponent<ShootSystem>();
+        settings = GameObject.Find("SettingsMenu").GetComponent<Settings>();
         ammoScript = GameObject.Find("AmmoBar").GetComponent<AmmoScript>();
         playerStats = GetComponent<PlayerStats>();
         playerHealth = GetComponent<PlayerHealth>();
@@ -455,8 +459,10 @@ public class WeaponSocket : MonoBehaviour
         baseCameraFOV = cameraObj.fieldOfView;
         zoomedCameraFOV = baseCameraFOV * 0.7f;
 
-        baseSensitivity = cameraMovement.Sensitivity;
-        zoomedSensitivity = cameraMovement.Sensitivity * 0.7f;
+        baseSensitivity = settings.sensitivity;
+        zoomedSensitivity = settings.sensitivity * 0.7f;
+
+        cameraMovement.sensitivity = baseSensitivity;
     }
 
     public IEnumerator ReloadFinish()

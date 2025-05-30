@@ -82,16 +82,16 @@ public class CameraMovement2 : MonoBehaviour
 
     void Update()
     {
-        currentSens = sensslider.value;
+        //currentSens = sensslider.value;
 
-        if (currentSens != previousSens)
-        {
-            previousSens = currentSens;
-            sensitivity = sensslider.value;
-            sensslider.value = Mathf.Round(sensslider.value * 100f) / 100f;
-            sensValue.text = "Sensitivity: " + sensslider.value.ToString();
-            weaponSocket.SetFOVnSens();
-        }
+        //if (currentSens != previousSens)
+        //{
+        //    previousSens = currentSens;
+        //    sensitivity = sensslider.value;
+        //    sensslider.value = Mathf.Round(sensslider.value * 100f) / 100f;
+        //    sensValue.text = "Sensitivity: " + sensslider.value.ToString();
+        //    weaponSocket.SetFOVnSens();
+        //}
 
         //rotation.x += Input.GetAxis(xAxis) * sensitivity;
         //rotation.y += Input.GetAxis(yAxis) * sensitivity;

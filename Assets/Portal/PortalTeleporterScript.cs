@@ -28,6 +28,8 @@ public class PortalTeleporterScript : MonoBehaviour
     
     void Update()
     {
+        
+
         if (playerIsOverlapping)
         {
             Vector3 portalToPlayer = player.position - transform.position;
@@ -41,20 +43,25 @@ public class PortalTeleporterScript : MonoBehaviour
                 if (isDevilRoom)
                 {
                     DevilRoomLogic();
-                    roomManager.SetEnabledRooms(specialRoom.roomScript);
+                    if (roomManager)
+                        roomManager.SetEnabledRooms(specialRoom.roomScript);
                 }
                 else if(isShopRoom)
                 {
                     ShopRoomLogic();
-                    roomManager.SetEnabledRooms(specialRoom.roomScript);
+                    if (roomManager)
+                        roomManager.SetEnabledRooms(specialRoom.roomScript);
+
                 }
                 else if (isTreasureRoom)
                 {
-                    roomManager.SetEnabledRooms(specialRoom.roomScript);
+                    if (roomManager)
+                        roomManager.SetEnabledRooms(specialRoom.roomScript);
                 }
                 else
                 {
-                    roomManager.SetEnabledRooms(roomManager.roomIndex);
+                    if (roomManager)
+                        roomManager.SetEnabledRooms(roomManager.roomIndex);
                     MainLogic();
                 }
 
