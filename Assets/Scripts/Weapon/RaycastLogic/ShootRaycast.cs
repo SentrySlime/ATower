@@ -216,8 +216,14 @@ public class ShootRaycast : BaseShootingLogic
                 }
                 else
                 {
-                    Vector3 hitDirection = transform.position - raycastHit.point;
-                    Instantiate(hitVFX, raycastHit.point, Quaternion.LookRotation(hitDirection));
+
+                    //raycastHit.normal
+                    // Create a rotation that faces away from the surface, using only the surface normal
+                    Quaternion hitRotation = Quaternion.LookRotation(raycastHit.normal);
+
+                    // Instantiate the VFX at the hit point, facing away from the surface
+                    Instantiate(hitVFX, raycastHit.point, hitRotation);
+
                 }
             }
 
@@ -297,12 +303,22 @@ public class ShootRaycast : BaseShootingLogic
                 }
                 else if (alreadyDamaged[i].transform.CompareTag("Ground"))
                 {
-                    var fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal);
-                    var tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
-                    Vector3 hitDirection = transform.position - raycastHit.point;
+                    // Project the forward direction of the object onto the plane defined by the hit normal
+                    Vector3 fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal).normalized;
+
+                    // Create a rotation that looks in the projected forward direction, with the hit normal as the up direction
+                    Quaternion tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
+
+                    // Determine the direction from the hit point back to the object
+                    Vector3 hitDirection = (transform.position - raycastHit.point).normalized;
+
+                    // Optionally spawn a line renderer from effect position to hit point
                     if (lineRenderer)
-                        SpawnLinerenderer(effectPosition.position, hits[i].point, false);
-                    Instantiate(hitVFX, hits[i].point, Quaternion.LookRotation(hitDirection), alreadyDamaged[i].transform);
+                        SpawnLinerenderer(effectPosition.position, raycastHit.point, false);
+
+                    // Instantiate the VFX with proper orientation using the surface normal
+                    Instantiate(hitVFX, raycastHit.point, Quaternion.LookRotation(hitDirection, raycastHit.normal), alreadyDamaged[i].transform);
+
 
                     break;
                 }
