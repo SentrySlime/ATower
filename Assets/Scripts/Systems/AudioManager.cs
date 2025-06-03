@@ -13,8 +13,11 @@ public class AudioManager : MonoBehaviour
 
     public bool IsShopMusicPlaying = false;
     [SerializeField] AudioSource shopMusic;
-    float fadeDuration = 1.5f;
 
+    public bool IsBlacksmithMusicPlaying = false;
+    [SerializeField] AudioSource blackSmithMusic;
+
+    float fadeDuration = 1.5f;
     private Coroutine currentFade;
 
     void Start()
@@ -22,10 +25,12 @@ public class AudioManager : MonoBehaviour
  
         devilMusic.volume = 0f;
         shopMusic.volume = 0f;
+        blackSmithMusic.volume = 0f;
 
         mainMusic.Play();
         devilMusic.Play();
         shopMusic.Play();
+        blackSmithMusic.Play();
     }
 
     public void TriggerMainMusic()
@@ -41,7 +46,11 @@ public class AudioManager : MonoBehaviour
             IsShopMusicPlaying = false;
             StartFade(mainMusic, shopMusic);
         }
-
+        else if (IsBlacksmithMusicPlaying)
+        {
+            IsBlacksmithMusicPlaying = false;
+            StartFade(mainMusic, blackSmithMusic);
+        }
     }
 
     public void TriggerDevilMusic()
@@ -54,6 +63,12 @@ public class AudioManager : MonoBehaviour
     {
         IsShopMusicPlaying = true;
         StartFade(shopMusic, mainMusic);
+    }
+
+    public void TriggerBlacksmithMusic()
+    {
+        IsBlacksmithMusicPlaying = true;
+        StartFade(blackSmithMusic, mainMusic);
     }
 
     private void StartFade(AudioSource fadeIn, AudioSource fadeOut)

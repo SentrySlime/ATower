@@ -29,7 +29,7 @@ public class BlackSmith : MonoBehaviour, IInteractInterface
 
     public void Interact()
     {
-        if (active || weaponSocket.equippedWeapon == null || weaponSocket.interupptedBool) return;
+        if (active || weaponSocket.equippedWeapon == null || weaponSocket.interupptedBool || weaponSocket.equippedWeapon.upgraded) return;
         StartCoroutine(StartBlackSmith());
     }
 
