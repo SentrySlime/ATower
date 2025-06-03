@@ -67,13 +67,13 @@ public class EnemyProjectile : MonoBehaviour
     ExplosionSystem explosionSystem;
     float lifeTimer = 0;
 
-    private void Awake()
+    public virtual void Awake()
     {
         mainSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AMainSystem>();
         explosionSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ExplosionSystem>();
     }
 
-    void Start()
+    public virtual void Start()
     {
         firstPos = transform.position;
         pos = transform.position;
@@ -89,7 +89,7 @@ public class EnemyProjectile : MonoBehaviour
         //Destroy(gameObject, lifeDuration);
     }
 
-    void Update()
+    public virtual void Update()
     {
         if (sineMove)
             MoveSine();

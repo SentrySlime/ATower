@@ -17,6 +17,12 @@ public class KoboldWizard_C : Enemy_Movement
     public bool canCreateBarrier = true;
     float barrierRate = 6;
 
+    [Header("shield")]
+    public GameObject kobold;
+    public Transform spawnPos;
+    public GameObject spawnVFX;
+    public GameObject spawnSFX;
+
     void Start()
     {
         base.Start();
@@ -43,7 +49,8 @@ public class KoboldWizard_C : Enemy_Movement
 
             if(playerDistance < fireSpireDistance && HasLineOfSight())
             {
-                StartFireSpire();
+                SpawnKobold();
+                //StartFireSpire();
             }
 
             //if (playerDistance < meleeDistance)
@@ -124,6 +131,37 @@ public class KoboldWizard_C : Enemy_Movement
     {
         StartCoroutine(ResetBarrier());
     }
+
+    #endregion
+
+    #region Projectile
+
+    private void SpawnKobold()
+    {
+        StartAttack(0);
+        StartCoroutine(SpawnKoboldTelegraph());
+    }
+
+    private  IEnumerator SpawnKoboldTelegraph()
+    {
+        animator.SetBool("Evocation", true);
+
+        Instantiate(spawnVFX, spawnPos.position, transform.rotation);
+
+        yield return new WaitForSeconds(1);
+
+        StartCoroutine(DoSpawnKobold());
+    }
+
+    private IEnumerator DoSpawnKobold()
+    {
+        Instantiate(kobold, spawnPos.position, transform.rotation);
+
+        yield return new WaitForSeconds(1);
+
+        EndAttack();
+    }
+
 
     #endregion
 }

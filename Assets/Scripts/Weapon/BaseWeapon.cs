@@ -111,6 +111,7 @@ public class BaseWeapon : MonoBehaviour
     [HideInInspector] public PlayerHealth playerHealth;
 
 
+    [HideInInspector] public bool upgraded = false;
     [HideInInspector] public bool interuptReload = false;
     [HideInInspector] public bool finishedReload = false;
     public GameObject[] renderObjects;
@@ -614,7 +615,21 @@ public class BaseWeapon : MonoBehaviour
 
     public void HideWeapon()
     {
-        recoil.gameObject.SetActive(false);
+        for (int i = 0; i < renderObjects.Length; i++)
+        {
+            renderObjects[i].SetActive(false);
+        }
+        //recoil.gameObject.SetActive(false);
     }
+
+    public void ShowWeapon()
+    {
+        for (int i = 0; i < renderObjects.Length; i++)
+        {
+            renderObjects[i].SetActive(true);
+        }
+        //recoil.gameObject.SetActive(false);
+    }
+
 }
 

@@ -14,25 +14,14 @@ public class WeaponPickUp : Item, IInteractWeaponInterface
         C,
         D
     }
-
-    [Header("Item Info")]
-    public string aName;
-    public string aDescription;
-    public Sprite weaponIcon;
-
-    [Header("General references")]
-    public GameObject shootPoint;
-    public GameObject barrel;
-    public GameObject objectToRecoil;
-    public GameObject iconPrefab;
+   
     public int goldCost = 500;
 
     [Header("Mesh & Material")]
-    public Mesh weaponMesh;
-    public Material weaponMaterial;
+    [HideInInspector] public Mesh weaponMesh;
+    [HideInInspector] public Material weaponMaterial;
     
     public WeaponRarity weaponRarity;
-
 
     [Header("Misc")]
     public BaseWeapon baseWeapon;
