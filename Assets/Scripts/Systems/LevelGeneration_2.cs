@@ -43,8 +43,8 @@ public class LevelGeneration_2 : MonoBehaviour
     public int roomCount1 = 0;
     public int roomCount2 = 0;
     public int roomCount3 = 0;
-    int easyRoomCount = 4;
-    int mediumRoomCount = 2;
+    int easyRoomCount = 5;
+    int mediumRoomCount = 3;
     int hardRoomCount = 2;
 
     bool spawnRoom = false;

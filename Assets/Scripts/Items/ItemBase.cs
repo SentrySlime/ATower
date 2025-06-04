@@ -14,7 +14,7 @@ public class ItemBase : MonoBehaviour
     public Mesh itemMesh;
     public Material itemMaterial;
     public int goldCost = 500;
-
+    public GameObject interactSFX;
 
     public enum ItemType
     {
@@ -124,7 +124,9 @@ public class ItemBase : MonoBehaviour
 
     [Tooltip("If this is true, you get 1% damage for every 100 money")]
     [Range(-1f, 1f)] public int hpIsPower = 0;
-    
+
+    [Tooltip("1 point is equal to one extra point of damage chain lightning will do")]
+    [Range(-200f, 200f)] public int chainLightningDamage = 0;
 
     #endregion
 
@@ -159,12 +161,18 @@ public class ItemBase : MonoBehaviour
     [Tooltip("Every point increases magasine size by 1 for every 15 shots in the magazine")]
     [Range(-35f, 35f)] public int bandolierEffect = 0;
 
+    
+    
     #endregion
 
     #region WeaponSocket
     [Header("WeaponSocket ---------------------------------------------------")]
     [Tooltip("1 point is equal to 1% chance to fire a rocket")]
     [Range(-100, 100f)] public int fireBallChance = 0;
+
+    [Tooltip("1 point is equal to extra target hit by chain lightning")]
+    [Range(-10, 10f)] public int chainLightningTargets = 0;
+    
 
     [Tooltip("1 point is equal to 1 point lower accuracy")]
     [Range(-30, 30f)] public int accuracy = 0;
@@ -228,6 +236,7 @@ public class ItemBase : MonoBehaviour
         playerStats.criticalChance += critChance;
         playerStats.hpIsPower += hpIsPower;
         playerStats.canExplode += canExplodeEnemies;
+        playerStats.chainLightningDamage += chainLightningDamage;
 
 
         //Ammo ---
@@ -244,6 +253,7 @@ public class ItemBase : MonoBehaviour
         //WeaponSocket
         playerStats.fireBallChance += fireBallChance;
         playerStats.accuracy += accuracy;
+        playerStats.chainLightningTargets += chainLightningTargets;
 
         //Misc
         playerStats.moneyIsHealth += moneyIsHealth;
@@ -288,6 +298,7 @@ public class ItemBase : MonoBehaviour
         playerStats.moneyIsPower -= moneyIsPower;
         playerStats.hpIsPower -= hpIsPower;
         playerStats.canExplode -= canExplodeEnemies;
+        playerStats.chainLightningDamage -= chainLightningDamage;
 
 
         //Ammo
@@ -304,6 +315,7 @@ public class ItemBase : MonoBehaviour
         //WeaponSocket ---
         playerStats.fireBallChance -= fireBallChance;
         playerStats.accuracy -= accuracy;
+        playerStats.chainLightningTargets += chainLightningTargets;
 
         //Misc
         playerStats.moneyIsHealth -= moneyIsHealth;

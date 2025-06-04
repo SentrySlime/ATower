@@ -329,64 +329,119 @@ public class ShootRaycast : BaseShootingLogic
         }
         else
         {
+            //for (int i = 0; i < shootAmount; i++)
+            //{
+
+            //    #region RandomNumbers Accuracy
+            //    if (weaponSocket.adsProgress < 0.9)
+            //    {
+            //        minYOffset = Random.Range(-tempADSAccuracy, 0);
+            //        maxYOffset = Random.Range(tempADSAccuracy, 0);
+
+            //        minXoffset = Random.Range(-tempADSAccuracy, 0);
+            //        maxXoffset = Random.Range(tempADSAccuracy, 0);
+            //    }
+            //    else
+            //    {
+            //        minYOffset = Random.Range(-tempHIPAccuracy, 0);
+            //        maxYOffset = Random.Range(tempHIPAccuracy, 0);
+
+            //        minXoffset = Random.Range(-tempHIPAccuracy, 0);
+            //        maxXoffset = Random.Range(tempHIPAccuracy, 0);
+            //    }
+
+            //    #endregion
+
+            //    shootPoint.transform.Rotate(((minXoffset + maxXoffset)), ((minYOffset + maxYOffset)), 0);
+
+            //    RaycastHit hit;
+            //    if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.forward, out hit, weaponRange, ~layermask3))
+            //    {
+            //        if(hit.transform.CompareTag("Enemy"))
+            //        {
+            //            DealDamage(hit.transform.root.gameObject, false, hit.point);
+            //            hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
+
+            //            Instantiate(hitEnemyVFX, hit.point, Quaternion.Inverse(transform.rotation), hit.transform);
+
+            //        }
+            //        if (hit.transform.CompareTag("WeakSpot"))
+            //        {
+            //            DealDamage(hit.transform.root.gameObject, true, hit.point);
+            //            hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
+
+            //            Instantiate(hitEnemyVFX, hit.point, Quaternion.Inverse(transform.rotation), hit.transform);
+            //        }
+
+            //        else if(hit.transform.CompareTag("Breakable"))
+            //        {
+            //            DealDamage(hit.transform.gameObject, false, hit.point);
+            //            hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
+            //            Instantiate(hitVFX, hit.point, Quaternion.Inverse(transform.rotation));
+            //        }
+            //        else
+            //            Instantiate(hitVFX, hit.point, Quaternion.Inverse(transform.rotation));
+
+            //    }
+
+            //    shootPoint.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+            //}
+
             for (int i = 0; i < shootAmount; i++)
             {
+                // Accuracy offsets
+                float xOffset, yOffset;
 
-                #region RandomNumbers Accuracy
-                if (weaponSocket.adsProgress < 0.9)
+                if (weaponSocket.adsProgress < 0.9f)
                 {
-                    minYOffset = Random.Range(-tempADSAccuracy, 0);
-                    maxYOffset = Random.Range(tempADSAccuracy, 0);
-
-                    minXoffset = Random.Range(-tempADSAccuracy, 0);
-                    maxXoffset = Random.Range(tempADSAccuracy, 0);
+                    yOffset = Random.Range(-tempADSAccuracy, tempADSAccuracy);
+                    xOffset = Random.Range(-tempADSAccuracy, tempADSAccuracy);
                 }
                 else
                 {
-                    minYOffset = Random.Range(-tempHIPAccuracy, 0);
-                    maxYOffset = Random.Range(tempHIPAccuracy, 0);
-
-                    minXoffset = Random.Range(-tempHIPAccuracy, 0);
-                    maxXoffset = Random.Range(tempHIPAccuracy, 0);
+                    yOffset = Random.Range(-tempHIPAccuracy, tempHIPAccuracy);
+                    xOffset = Random.Range(-tempHIPAccuracy, tempHIPAccuracy);
                 }
 
-                #endregion
+                // Calculate adjusted direction
+                Quaternion yaw = Quaternion.AngleAxis(xOffset, Vector3.up); // horizontal spread
+                Quaternion pitch = Quaternion.AngleAxis(yOffset, Vector3.left); // vertical spread
 
-                shootPoint.transform.Rotate(((minXoffset + maxXoffset)), ((minYOffset + maxYOffset)), 0);
+                //Vector3 adjustedForward = new Vector3(shootPoint.transform.forward.x, 0, shootPoint.transform.forward.z);
 
-                RaycastHit hit;
-                if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.forward, out hit, weaponRange, ~layermask3))
+                //Vector3 adjustedDirection = yaw * pitch * adjustedForward;
+
+                Vector3 adjustedDirection = yaw * pitch * shootPoint.transform.forward;
+
+                // Perform raycast
+                if (Physics.Raycast(shootPoint.transform.position, adjustedDirection, out RaycastHit hit, weaponRange, ~layermask3))
                 {
-                    if(hit.transform.CompareTag("Enemy"))
+                    if (hit.transform.CompareTag("Enemy"))
                     {
                         DealDamage(hit.transform.root.gameObject, false, hit.point);
                         hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
-
                         Instantiate(hitEnemyVFX, hit.point, Quaternion.Inverse(transform.rotation), hit.transform);
-
                     }
-                    if (hit.transform.CompareTag("WeakSpot"))
+                    else if (hit.transform.CompareTag("WeakSpot"))
                     {
                         DealDamage(hit.transform.root.gameObject, true, hit.point);
                         hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
-
                         Instantiate(hitEnemyVFX, hit.point, Quaternion.Inverse(transform.rotation), hit.transform);
                     }
-
-                    else if(hit.transform.CompareTag("Breakable"))
+                    else if (hit.transform.CompareTag("Breakable"))
                     {
                         DealDamage(hit.transform.gameObject, false, hit.point);
                         hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
                         Instantiate(hitVFX, hit.point, Quaternion.Inverse(transform.rotation));
                     }
                     else
+                    {
                         Instantiate(hitVFX, hit.point, Quaternion.Inverse(transform.rotation));
-
+                    }
                 }
-
-                shootPoint.transform.localRotation = Quaternion.Euler(0, 0, 0);
-
             }
+
         }
 
         #endregion

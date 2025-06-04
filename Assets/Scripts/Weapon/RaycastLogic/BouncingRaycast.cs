@@ -101,13 +101,6 @@ public class BouncingRaycast : ShootRaycast
         }
     }
 
-    //private void SpawnLinerenderer(Vector3 start, Vector3 end)
-    //{
-    //    LineRenderer tempLineRender = Instantiate(bouncingLineRender, Vector3.zero, Quaternion.identity).GetComponent<LineRenderer>();
-    //    tempLineRender.SetPosition(0, start);
-    //    tempLineRender.SetPosition(1, end);
-    //}
-
     private Vector3 CalculateDirection(Vector3 start, GameObject enemy)
     {
         return (enemy.GetComponentInParent<EnemyBase>().homingTarget.transform.position - start).normalized;

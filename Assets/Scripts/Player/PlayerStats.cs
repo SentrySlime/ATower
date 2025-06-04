@@ -37,7 +37,8 @@ public class PlayerStats : MonoBehaviour
     public int canExplode = 0;
     public int moneyIsPower = 0;
     public int hpIsPower = 0;
-    
+    public int chainLightningTargets = 0;
+    public int chainLightningDamage = 0;
 
     [Header("Ammo")]
     public int ammoRefills = 0;

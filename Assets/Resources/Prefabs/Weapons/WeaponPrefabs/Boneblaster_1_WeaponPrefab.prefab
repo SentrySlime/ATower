@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1020212011837037851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 183410292388418682}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &183410292388418682
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020212011837037851}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1856004529439608098}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1856004529439608096
 GameObject:
   m_ObjectHideFlags: 0
@@ -29,6 +59,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5779255679518579600}
+  - {fileID: 183410292388418682}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9788,7 +9819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f64b5086b30334087b89dea5fa7b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootPoint: {fileID: 1856004530348900990}
+  shootPoint: {fileID: 1020212011837037851}
   ADSAccuracy: 4
   HIPAccuracy: 5
   damage: 16
@@ -9803,6 +9834,8 @@ MonoBehaviour:
   aMainSystem: {fileID: 0}
   explosionSystem: {fileID: 0}
   firingMode: 1
+  burstDelay: 1
+  burstAmount: 1
   lineRenderer: {fileID: 0}
   curve: 0
   lineDuration: 0.9
@@ -9862,18 +9895,14 @@ MonoBehaviour:
   infinteAmmo: 0
   reloadType: 0
   baseMaxMagazine: 0
-  maxMagazine: 16
-  currentMagazine: 16
+  maxMagazine: 160
+  currentMagazine: 160
   baseReloadTime: 0
   reloadTime: 3.5
   baseReloadAmount: 0
   reloadAmount: 1
-  baseDamage: 0
-  damage: 16
   baseFireRate: 0
   fireRate: 0.1
-  burstDelay: 1
-  burstAmount: 1
   recoilAmount: -25
   moveAmount: -0.4
   recoilX: -25
@@ -9887,7 +9916,6 @@ MonoBehaviour:
   currentMagazineText: {fileID: 0}
   ammoDivider: {fileID: 0}
   ammoFill: {fileID: 0}
-  firingMode: 1
   aimCamera: {fileID: 0}
   recoil: {fileID: 0}
   screenShake: {fileID: 0}
@@ -9898,6 +9926,7 @@ MonoBehaviour:
   player: {fileID: 0}
   playerStats: {fileID: 0}
   playerHealth: {fileID: 0}
+  upgraded: 0
   interuptReload: 0
   finishedReload: 0
   renderObjects:

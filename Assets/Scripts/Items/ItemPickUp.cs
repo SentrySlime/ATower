@@ -47,7 +47,6 @@ public class ItemPickUp : Item, IInteractInterface
             SetItemInfo();
         }
     }
-
     
 
     void Update()
@@ -57,8 +56,13 @@ public class ItemPickUp : Item, IInteractInterface
 
     public void Interact()
     {
-        //EquipItem();
-        if(isDevilItem && devilItem)
+        if (itemPrefab.interactSFX)
+        {
+
+            Instantiate(itemPrefab.interactSFX, transform.position, Quaternion.identity);
+        }
+
+        if (isDevilItem && devilItem)
             devilItem.DestroyOtherItem(this);
     }
 

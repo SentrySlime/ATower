@@ -40,7 +40,7 @@ public class LootSystem : MonoBehaviour
     public bool DropCheck(int incomingToken)
     {
         itemTokens += incomingToken;
-        if (itemTokens >= 100)
+        if (itemTokens >= tokenRequirement)
         {
             itemTokens = 0;
             return true;

@@ -22,13 +22,14 @@ public class AMainSystem : MonoBehaviour
     ShootSystem shootSystem;
     HitmarkerLogic hitMarkerLogic;
     ExplosionSystem explosionSystem;
-
+    ChainLightning chainLightning;
     
 
     private void Awake()
     {
         shootSystem = GetComponent<ShootSystem>();
         explosionSystem = GetComponent<ExplosionSystem>();
+        chainLightning = GetComponent<ChainLightning>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerStats = player.GetComponent<PlayerStats>();
         playerHealth = player.GetComponent<PlayerHealth>();
@@ -43,10 +44,12 @@ public class AMainSystem : MonoBehaviour
             Instantiate(pickUpVFX, position, Quaternion.identity);
     }
 
-    public void DealDamage(GameObject incomingObj, float incomingDamage, bool friendly, bool weakSpotShot = false, EnemyBase enemyBase = null, IDamageInterface iDamageInterface = null)
+    public void DealDamage(GameObject incomingObj, float incomingDamage, bool friendly, bool weakSpotShot = false, EnemyBase enemyBase = null, IDamageInterface iDamageInterface = null, bool canTriggerChainLightning = false)
     {
         if (friendly)
         {
+            if(canTriggerChainLightning == false)
+                chainLightning.DoLightning(incomingObj);
 
             if(iDamageInterface == null)
             {
@@ -67,6 +70,7 @@ public class AMainSystem : MonoBehaviour
     #region DealingDamageToenemies
     private void DamageEnemy(IDamageInterface damageInterface, float incomingDamage, bool incomingWeakSpotShot)
     {
+        
         CalculateDamage(damageInterface, incomingDamage, incomingWeakSpotShot);
     }
 

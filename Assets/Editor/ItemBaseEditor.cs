@@ -24,6 +24,7 @@ public class ItemBaseEditor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("goldCost"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("type"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("isDevilItem"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("interactSFX"));
 
         DrawFoldout("Health", ref showHealth, new string[]
         {
@@ -42,7 +43,7 @@ public class ItemBaseEditor : Editor
 
         DrawFoldout("Damage", ref showDamage, new string[]
         {
-            "damage", "increasedDamage", "critChance", "canExplodeEnemies", "moneyIsPower", "hpIsPower"
+            "damage", "increasedDamage", "critChance", "canExplodeEnemies", "moneyIsPower", "hpIsPower", "chainLightningDamage"
         });
 
         DrawFoldout("Ammo", ref showAmmo, new string[]
@@ -52,7 +53,7 @@ public class ItemBaseEditor : Editor
 
         DrawFoldout("Weapon Socket", ref showWeaponSocket, new string[]
         {
-            "fireBallChance", "accuracy" ,
+            "fireBallChance", "accuracy" , "chainLightningTargets"
         });
 
         DrawFoldout("Misc", ref showMisc, new string[]

@@ -18,9 +18,9 @@ public class RotateRoundAxis : MonoBehaviour
     void Update()
     {
 
-        transform.Rotate(Vector3.forward, rotateX);
-        transform.Rotate(Vector3.up, rotateY);
-        transform.Rotate(Vector3.right, rotateZ);
+        transform.Rotate(Vector3.forward, rotateX * Time.deltaTime);
+        transform.Rotate(Vector3.up, rotateY * Time.deltaTime);
+        transform.Rotate(Vector3.right, rotateZ * Time.deltaTime);
 
     }
 }

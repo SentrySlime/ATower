@@ -44,11 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: ThunderLute
-  itemDescription: Ich bin lightning
+  itemDescription: ...and his music was electric.
   itemIcon: {fileID: 21300000, guid: f62a35de54d20ba47abc546b41e6d143, type: 3}
   itemMesh: {fileID: -2834675886540327712, guid: 17070c35db24a8e4d805dd30e6a59871, type: 3}
   itemMaterial: {fileID: 2100000, guid: fe4af1723ee873a4a91501f9adaf0737, type: 2}
-  goldCost: 870
+  goldCost: 1650
+  interactSFX: {fileID: 8552275175276907877, guid: 28e514c1969276b43bdd537ac01a3468, type: 3}
   type: 3
   isDevilItem: 0
   maxHp: 0
@@ -75,6 +76,7 @@ MonoBehaviour:
   canExplodeEnemies: 0
   moneyIsPower: 0
   hpIsPower: 0
+  chainLightningDamage: 50
   ammoRefills: 0
   reloadAmount: 0
   maxMagazineSize: 0
@@ -85,6 +87,7 @@ MonoBehaviour:
   maxAmmo: 0
   bandolierEffect: 0
   fireBallChance: 0
+  chainLightningTargets: 2
   accuracy: 0
   increasedMoneyDrops: 0
   moneyIsHealth: 0

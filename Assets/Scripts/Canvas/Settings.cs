@@ -46,7 +46,9 @@ public class Settings : MonoBehaviour
 
         sensitivity = PlayerPrefs.GetFloat("Sens", sensitivity);
         sensslider.value = sensitivity;
-        weaponSocket.SetFOVnSens();
+
+        if(weaponSocket)
+            weaponSocket.SetFOVnSens();
 
 
         masterVolume = PlayerPrefs.GetFloat("Volume", masterVolume);
@@ -94,8 +96,8 @@ public class Settings : MonoBehaviour
         sensValue.text = sensslider.value.ToString();
             
         //weaponSocket.baseSensitivity = sensitivity;
-
-        weaponSocket.SetFOVnSens();
+        if(weaponSocket)
+            weaponSocket.SetFOVnSens();
     }
 
     public void CloseSettings()

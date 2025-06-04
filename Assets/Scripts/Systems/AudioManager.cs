@@ -25,12 +25,16 @@ public class AudioManager : MonoBehaviour
  
         devilMusic.volume = 0f;
         shopMusic.volume = 0f;
-        blackSmithMusic.volume = 0f;
+
+        if(blackSmithMusic)
+            blackSmithMusic.volume = 0f;
 
         mainMusic.Play();
         devilMusic.Play();
         shopMusic.Play();
-        blackSmithMusic.Play();
+
+        if(blackSmithMusic)
+            blackSmithMusic.Play();
     }
 
     public void TriggerMainMusic()
