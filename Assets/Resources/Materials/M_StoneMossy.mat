@@ -9,14 +9,13 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: M_StoneMossy
   m_Shader: {fileID: 4800000, guid: 94cb0d6305cd4a743b1d2ec684e277de, type: 3}
-  m_ShaderKeywords: DIFF_FRAGMENT OPAQUE SPEC_GOURAUD _DIFFMODEL_VERTEX _DRAWDIST_ON
+  m_ShaderKeywords: DIFF_FRAGMENT OPAQUE SPEC_GOURAUD _DIFFMODEL_FRAGMENT _DRAWDIST_ON
     _EMISSION _SPECMODEL_GOURAUD
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -92,6 +91,7 @@ Material:
     - _DrawDist: 1
     - _DstBlend: 0
     - _EmissionAmt: 0
+    - _Gloss: 0.5
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -116,4 +116,5 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ScrollSpeed: {r: 0.1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
