@@ -47,7 +47,7 @@ public class Obelisk : MonoBehaviour
 
     void Start()
     {
-        Invoke("SetBack", 8);
+        Invoke("SetBack", 16);
     }
 
     void Update()
