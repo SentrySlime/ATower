@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obelisk : MonoBehaviour
+public class Obelisk : MonoBehaviour, IInteractInterface
 {
 
     public GameObject obelisk;
@@ -22,20 +23,18 @@ public class Obelisk : MonoBehaviour
     public ParticleSystem holyAura2;
 
     [Header("Ring particles")]
-    public GameObject ring1;
-    public ParticleSystem ring1PS;
-    public GameObject ring2;
-    public ParticleSystem ring2PS;
     public GameObject ring3;
     public ParticleSystem ring3PS;
-
-    
 
     [Header("Obelisk")]
     public float currentRotation = 0;
     public int rotationSpeedForward;
     public float rotationSpeedBackwards;
 
+    [Header("HolyMove")]
+    public bool holyRotate = false;
+    public int holyRotationSpeed = 1;
+    private Vector3 startPosition;
 
     [Header("Shard")]
     public float currentShardRotation = 0;
@@ -45,23 +44,46 @@ public class Obelisk : MonoBehaviour
     [Header("Emissive pulses")]
     public EmissivePulse[] emissivePulses;
 
+    [Header("SFX")]
+    public AudioSource cursedSFX;
+    public AudioSource rewindSFX;
+    public AudioSource slamSFX;
+    public AudioSource holyStartSFX;
+    public AudioSource blessingSFX;
+
     void Start()
     {
-        Invoke("SetBack", 16);
+        startPosition = transform.position;
     }
 
     void Update()
     {
 
-        if(canRotate)
+        float newY = startPosition.y + Mathf.Sin(Time.time * 1f) * 0.5f;
+        transform.position = new Vector3(startPosition.x, newY, startPosition.z);
+
+        if (canRotate)
         {
-            if (rotateBack)
+            // Float up and down
+            
+
+            if (holyRotate)
+                HolyRotate();
+            else if (rotateBack)
                 RotateBack();
             else
                 RotateForward();
         }
+        
 
     }
+
+
+    public void Interact()
+    {
+        SetBack();
+    }
+
 
     private void SetBack()
     {
@@ -70,7 +92,8 @@ public class Obelisk : MonoBehaviour
     }
 
     IEnumerator SetBackCo()
-    { 
+    {
+        StartCoroutine(RewindSFX());
         yield return new WaitForSeconds(0.3f);
         canRotate = true;
         rotateBack = true;
@@ -78,15 +101,15 @@ public class Obelisk : MonoBehaviour
 
     private void RotateBack()
     {
+        StartCoroutine(CursedSFX());
+        
+
         rotationSpeedBackwards = Mathf.Max(currentRotation, 5f) * 8f;
 
         if (currentRotation > 0)
         {
             currentRotation += Time.deltaTime * -rotationSpeedBackwards;
             obelisk.transform.rotation = Quaternion.Euler(0, currentRotation, 0);
-
-            ring1.transform.rotation = Quaternion.Euler(45, currentRotation, currentRotation);
-            ring2.transform.rotation = Quaternion.Euler(-45, currentRotation, currentRotation);
             ring3.transform.rotation = Quaternion.Euler(90, currentRotation, currentRotation);
         }
 
@@ -97,6 +120,8 @@ public class Obelisk : MonoBehaviour
         }
         else if(!hasCalledShards)
         {
+            StartCoroutine(SlamSFX());
+
             shards.transform.rotation = Quaternion.identity;
             obelisk.transform.rotation = Quaternion.identity;
             StartCoroutine(FadeOutCursedAura());
@@ -110,48 +135,41 @@ public class Obelisk : MonoBehaviour
         }
     }
 
+
     IEnumerator FadeOutCursedAura()
     {
         float duration = 1f; 
         float elapsed = 0f;
 
         ParticleSystem.MainModule main = cursedAuraVFX.main;
-        ParticleSystem.MainModule ringps1 = ring1PS.main;
-        ParticleSystem.MainModule ringps2 = ring2PS.main;
         ParticleSystem.MainModule ringps3 = ring3PS.main;
 
         Color startColor = main.startColor.color;
 
+        
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             float alpha = Mathf.Lerp(startColor.a, 0f, elapsed / duration);
             Color newColor = new Color(startColor.r, startColor.g, startColor.b, alpha);
             main.startColor = newColor;
-            ringps1.startColor = newColor;
-            ringps2.startColor = newColor;
             ringps3.startColor = newColor;
 
 
             yield return null;
         }
 
+        StartCoroutine(HolyStartSFX());
         main.startColor = new Color(startColor.r, startColor.g, startColor.b, 0f);
-        ringps1.startColor = new Color(startColor.r, startColor.g, startColor.b, 0f);
-        ringps2.startColor = new Color(startColor.r, startColor.g, startColor.b, 0f);
         ringps3.startColor = new Color(startColor.r, startColor.g, startColor.b, 0f);
-        StartCoroutine(FadeInBlessedAura());
-        StartCoroutine(FadePulseColor());
-
         
-
+        StartCoroutine(FadePulseColor());
+        StartCoroutine(FadeInBlessedAura());
     }
 
     IEnumerator FadePulseColor()
     {
-        
-
-        float duration = 0.1f;
+        float duration = 1f;
         float elapsed = 0f;
 
         Color targetColor = new Color(1f, 1f, 1f, 1f);
@@ -189,18 +207,15 @@ public class Obelisk : MonoBehaviour
     IEnumerator FadeInBlessedAura()
     {
 
+        StartCoroutine(BlessedSFX());
         blessedAura.SetActive(true);
         blessedAuraVFX.Play();
-
 
         float duration = 1f;
         float elapsed = 0f;
 
-        
         ParticleSystem.MainModule main = blessedAuraVFX.main;
-        ParticleSystem.MainModule main2 = holyAura2.main;
-
-        
+        ParticleSystem.MainModule main2 = holyAura2.main;        
 
         // Define the final target color you want to fade in to
         Color targetColor = new Color(1f, 1f, 1f, 1f); // Example: white, fully opaque
@@ -221,11 +236,11 @@ public class Obelisk : MonoBehaviour
         }
 
         main.startColor = targetColor; 
-        main2.startColor = targetColor; 
+        main2.startColor = targetColor;
+
+        
+        holyRotate = true;
     }
-
-
-
 
 
     private void RotateForward()
@@ -233,14 +248,70 @@ public class Obelisk : MonoBehaviour
         currentRotation += Time.deltaTime * rotationSpeedForward;
 
         obelisk.transform.rotation = Quaternion.Euler(0, currentRotation, 0);
-
-        ring1.transform.rotation = Quaternion.Euler(45, currentRotation, currentRotation);
-        ring2.transform.rotation = Quaternion.Euler(-45, currentRotation, currentRotation);
         ring3.transform.rotation = Quaternion.Euler(90, currentRotation, currentRotation);
 
         currentShardRotation += Time.deltaTime * -rotationSpeedForward;
         shards.transform.rotation = Quaternion.Euler(0, currentShardRotation, 0);
 
     }
+
+    private void HolyRotate()
+    {
+        // Rotate
+        currentRotation += Time.deltaTime * holyRotationSpeed;
+        transform.rotation = Quaternion.Euler(0, currentRotation, 0);
+    }
+
+    IEnumerator CursedSFX()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        cursedSFX.Stop();
+    }
+
+    IEnumerator HolyStartSFX()
+    {
+        yield return null;
+
+        holyStartSFX.Play();
+    }
+
+    IEnumerator BlessedSFX()
+    {
+        yield return new WaitForSeconds(1f);
+
+        float fadeInDuration = 1;
+
+        blessingSFX.volume = 0f;
+        blessingSFX.Play();
+
+        float timer = 0f;
+        while (timer < fadeInDuration)
+        {
+            timer += Time.deltaTime;
+            blessingSFX.volume = Mathf.Lerp(0f, 0.5f, timer / fadeInDuration);
+            yield return null;
+        }
+
+        blessingSFX.volume = 0.5f; // Ensure it's exactly 1 at the end
+    }
+
+    IEnumerator SlamSFX()
+    {
+        yield return null;
+
+        slamSFX.Play();
+    }
+
+    IEnumerator RewindSFX()
+    {
+        yield return null;
+
+        rewindSFX.Play();
+    }
+
+
+
+
 
 }
