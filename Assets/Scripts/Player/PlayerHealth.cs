@@ -194,7 +194,8 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
         if(enemyBase != null)
         {
-            mainSystem.DealDamage(enemyBase.gameObject, playerStats.thorns, true, false);   
+            if(playerStats.thorns > 0)
+                mainSystem.DealDamage(enemyBase.gameObject, playerStats.thorns, true, false);   
         }
 
         if(playerStats.moneyIsHealth > 0)

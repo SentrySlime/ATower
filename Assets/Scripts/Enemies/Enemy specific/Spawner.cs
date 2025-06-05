@@ -13,12 +13,15 @@ public class Spawner : MonoBehaviour
 
     private List<GameObject> spawnList = new List<GameObject>();
 
+    EnemyBase enemyBase;
+
     private int minionCount = 0;
 
     void Start()
     {
         //Invoke("InitateSpawn", 1);
         InvokeRepeating("InitateSpawn", 1, 3);
+        enemyBase = GetComponent<EnemyBase>();
     }
 
     
@@ -29,7 +32,7 @@ public class Spawner : MonoBehaviour
 
     private void InitateSpawn()
     {
-        if(minionCount > 5)  { return; }
+        if(minionCount > 4)  { return; }
 
         animator.SetBool("Spawn", true);
         Invoke("Spawn", 1f);
@@ -41,6 +44,7 @@ public class Spawner : MonoBehaviour
         spawnPS2.Play();
         GameObject tempSpawnling = Instantiate(spawnling, spawnPosition.position, transform.rotation);
         spawnList.Add(tempSpawnling);
+        enemyBase.roomScript.AddEnemy(tempSpawnling);
         tempSpawnling.GetComponent<EnemyBase>().spawner = this;
         minionCount++;
         animator.SetBool("Spawn", false);

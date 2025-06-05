@@ -18,5 +18,6 @@ public class EnemySpawner : MonoBehaviour
     {
         spawnedEnemy = Instantiate(enemyToSpawn, transform.position, transform.rotation);
         roomScript.AddEnemy(spawnedEnemy);
+        spawnedEnemy.GetComponent<EnemyBase>().roomScript = roomScript;
     }
 }

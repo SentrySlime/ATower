@@ -52,7 +52,6 @@ MonoBehaviour:
   moveAmount: 0
   lerpDuration: 0.1
   lerpBackDuration: 0.3
-  fireMode: 0
   rotating: 0
   targetPosition: {x: 0, y: 0, z: 0}
   reloadTimer: 0
@@ -5011,6 +5010,9 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
   explosionSystem: {fileID: 0}
+  firingMode: 0
+  burstDelay: 1
+  burstAmount: 1
   projectile: {fileID: 8458187518107989519, guid: 0a5c3cbd025c3ad4195f51753197ddb2, type: 3}
   shotSpeed: 1
   shootAmount: 1
@@ -5036,6 +5038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseShootingLogic1: {fileID: 9042178775537694539}
+  baseShootingLogic2: {fileID: 0}
   aName: ShamanStaff
   aDescription: The staff of a fallen shaman
   weaponIcon: {fileID: 21300000, guid: ed69a450df154744ea4184f8ddb5a1d9, type: 3}
@@ -5050,8 +5053,10 @@ MonoBehaviour:
   baseMaxAmmo: 0
   maxAmmo: 0
   currentAmmo: 0
-  baseAmmoPerShot: 0
-  ammoPerShot: 1
+  baseAmmoPerShot1: 0
+  ammoPerShot1: 1
+  baseAmmoPerShot2: 0
+  ammoPerShot2: 1
   baseInfinteAmmo: 0
   infinteAmmo: 0
   reloadType: 0
@@ -5062,12 +5067,8 @@ MonoBehaviour:
   reloadTime: 1
   baseReloadAmount: 0
   reloadAmount: 1
-  baseDamage: 0
-  damage: 1
   baseFireRate: 0
   fireRate: 0.09
-  burstDelay: 1
-  burstAmount: 1
   recoilAmount: 0
   moveAmount: 0.6
   recoilX: -5
@@ -5081,7 +5082,6 @@ MonoBehaviour:
   currentMagazineText: {fileID: 0}
   ammoDivider: {fileID: 0}
   ammoFill: {fileID: 0}
-  firingMode: 0
   aimCamera: {fileID: 0}
   recoil: {fileID: 0}
   screenShake: {fileID: 0}
@@ -5092,9 +5092,11 @@ MonoBehaviour:
   player: {fileID: 0}
   playerStats: {fileID: 0}
   playerHealth: {fileID: 0}
+  upgraded: 0
   interuptReload: 0
   finishedReload: 0
-  renderObjects: []
+  renderObjects:
+  - {fileID: 6898411181587814841}
 --- !u!1001 &3996602068226753358
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5264,6 +5266,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c47752c6b79f566408d66b08e197484d, type: 3}
+--- !u!1 &6898411181587814841 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c47752c6b79f566408d66b08e197484d, type: 3}
+  m_PrefabInstance: {fileID: 6016102917152629992}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6122578577472848643 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c47752c6b79f566408d66b08e197484d, type: 3}

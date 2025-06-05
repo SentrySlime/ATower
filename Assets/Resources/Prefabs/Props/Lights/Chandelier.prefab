@@ -284,7 +284,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.1
+      scalar: 4
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -865,7 +865,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 150
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5088,7 +5088,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.1
+      scalar: 4
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5669,7 +5669,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 150
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -9633,11 +9633,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 742469463772762297}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.092, y: 2.707, z: -0.466}
+  m_LocalPosition: {x: 0.092, y: 0.84, z: -0.466}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 742469464654356344}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &742469463772762299
 Light:
@@ -9688,7 +9688,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 11137
   m_RenderingLayerMask: 1
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0
@@ -9712,7 +9712,7 @@ GameObject:
   - component: {fileID: 742469464144343637}
   - component: {fileID: 742469464144343639}
   - component: {fileID: 742469464144343638}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: VFX (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9731,7 +9731,7 @@ Transform:
   m_LocalScale: {x: 0.17, y: 0.22, z: 0.19}
   m_Children: []
   m_Father: {fileID: 742469464654356344}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &742469464144343639
 ParticleSystem:
@@ -9985,7 +9985,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.1
+      scalar: 4
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -10566,7 +10566,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 150
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -14532,10 +14532,10 @@ Transform:
   m_LocalPosition: {x: 4.22, y: 17.6, z: 123.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 742469464144343637}
   - {fileID: 742469463772762298}
   - {fileID: 2955980020116835041}
   - {fileID: 679637693745300399}
+  - {fileID: 742469464144343637}
   - {fileID: 1456423315767675031}
   - {fileID: 1568118113287205617}
   - {fileID: 6769405166448529107}
@@ -14573,7 +14573,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 742469464654356344}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &2348100923226787412
 ParticleSystem:
@@ -19631,7 +19631,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.1
+      scalar: 4
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -20212,7 +20212,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 150
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -24435,7 +24435,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.1
+      scalar: 4
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -25016,7 +25016,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 150
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -28964,7 +28964,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 08bbe43b58190194dbb90fff2089a94d, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 08bbe43b58190194dbb90fff2089a94d, type: 3}
       propertyPath: m_LocalPosition.x

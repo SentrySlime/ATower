@@ -88,7 +88,8 @@ public class BlackSmith : MonoBehaviour, IInteractInterface
         baseWeapon.fireRate *= 0.5f;
         baseWeapon.SetAdsFor();
 
-        baseWeapon.maxMagazine = Mathf.CeilToInt(baseWeapon.maxMagazine * 1.5f);
+        baseWeapon.baseMaxMagazine = Mathf.CeilToInt(baseWeapon.baseMaxMagazine * 1.5f);
+        baseWeapon.maxMagazine = baseWeapon.baseMaxMagazine;
         baseWeapon.currentMagazine = baseWeapon.maxMagazine;
         
         baseWeapon.upgraded = true;

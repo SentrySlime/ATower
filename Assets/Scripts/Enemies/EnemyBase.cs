@@ -62,6 +62,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     [HideInInspector] public event System.Action<EnemyBase> OnEnemyDied;
 
     [Header("DistanceBasedCulling")]
+    [HideInInspector] public RoomScript roomScript;
     public GameObject meshObject;
     public Enemy_Movement enemy_Movement;
     bool inDistanceLastFrame = false;
