@@ -36,7 +36,7 @@ public class ItemBase : MonoBehaviour
 
     //Health ---
     [Tooltip("One point is equal to one max HP")]
-    [Range(-200, 200f)] public int maxHp;
+    [Range(-200, 200f)] public int addedHealth;
 
     [Tooltip("Sets HP to 1")]
     [Range(-1, 1f)] public int oneMaxHP;
@@ -206,7 +206,7 @@ public class ItemBase : MonoBehaviour
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
 
         //Health ---
-        playerStats.maxHealth += maxHp;
+        playerStats.addedHealth += addedHealth;
         playerStats.oneMaxHP += oneMaxHP;
         playerStats.hpRegen += hpRegen;
         playerStats.hpOnHit += hpOnHit;
@@ -268,7 +268,7 @@ public class ItemBase : MonoBehaviour
     public virtual void UnEquipItem()
     {
         //Health ---
-        playerStats.maxHealth -= maxHp;
+        playerStats.addedHealth -= addedHealth;
         playerStats.oneMaxHP -= oneMaxHP;
         playerStats.hpRegen -= hpRegen;
         playerStats.hpOnHit -= hpOnHit;

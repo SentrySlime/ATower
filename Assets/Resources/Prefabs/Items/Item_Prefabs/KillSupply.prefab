@@ -44,11 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: KillSupply
-  itemDescription: 'On kill puts ammo from reserves directly into the weapon '
+  itemDescription: 'On kill chance to put ammo from reserves directly into the weapon '
   itemIcon: {fileID: 21300000, guid: 4791f4bcb6f6ad647a666beb5e3ab257, type: 3}
   itemMesh: {fileID: 4351848860212355815, guid: 40c68cc7108fd4a4aadb85c80a291a72, type: 3}
   itemMaterial: {fileID: 2100000, guid: 576551aa49fe08841ba2de66a15be58b, type: 2}
   goldCost: 1815
+  interactSFX: {fileID: 0}
   type: 0
   isDevilItem: 0
   maxHp: 0
@@ -75,6 +76,7 @@ MonoBehaviour:
   canExplodeEnemies: 0
   moneyIsPower: 0
   hpIsPower: 0
+  chainLightningDamage: 0
   ammoRefills: 0
   reloadAmount: 0
   maxMagazineSize: 0
@@ -85,6 +87,7 @@ MonoBehaviour:
   maxAmmo: 0
   bandolierEffect: 0
   fireBallChance: 0
+  chainLightningTargets: 0
   accuracy: 0
   increasedMoneyDrops: 0
   moneyIsHealth: 0

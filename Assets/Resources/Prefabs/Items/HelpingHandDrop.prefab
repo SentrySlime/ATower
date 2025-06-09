@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3289367216350407283}
   - component: {fileID: 3289367216350407280}
   - component: {fileID: 3289367216350407281}
+  - component: {fileID: 143554876140632305}
   m_Layer: 2
   m_Name: HelpingHandDrop
   m_TagString: Untagged
@@ -112,6 +113,19 @@ MonoBehaviour:
   healAmount: 12
   playerHealth: {fileID: 0}
   mainSystem: {fileID: 0}
+--- !u!114 &143554876140632305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3289367216350407278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec62c0d9cedd62d42b9d21ee30367e3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: heal
 --- !u!1001 &5222125705116236442
 PrefabInstance:
   m_ObjectHideFlags: 0

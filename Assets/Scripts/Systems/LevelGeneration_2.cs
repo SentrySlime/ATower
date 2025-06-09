@@ -28,6 +28,7 @@ public class LevelGeneration_2 : MonoBehaviour
     public GameObject shopRoom;
     public GameObject devilRoom;
     public GameObject blackSmithroom;
+    public GameObject obeliskRoom;
 
     [Header("Room generation stats")]
     public int roomAmount = 12;
@@ -36,6 +37,7 @@ public class LevelGeneration_2 : MonoBehaviour
     [HideInInspector] public bool spawnedDevilRoom = false;
     [HideInInspector] public bool spawnedShopRoom = false;
     [HideInInspector] public bool spawnedBlackSmithRoom = false;
+    [HideInInspector] public bool spawnedObeliskRoom = false;
     [HideInInspector] public List<GameObject> allSurfaces = new List<GameObject>();
     [HideInInspector] public GameObject spawnTransform;
 
@@ -284,7 +286,7 @@ public class LevelGeneration_2 : MonoBehaviour
 
     public GameObject GetRandomRoom()
     {
-        if (spawnedDevilRoom && spawnedTreasureRoom && spawnedShopRoom && blackSmithroom)
+        if (spawnedDevilRoom && spawnedTreasureRoom && spawnedShopRoom && spawnedBlackSmithRoom && spawnedObeliskRoom)
         {
             return null;
         }
@@ -302,6 +304,9 @@ public class LevelGeneration_2 : MonoBehaviour
 
         if (!spawnedBlackSmithRoom && blackSmithroom != null)
             availableRooms.Add(blackSmithroom);
+
+        if (!spawnedObeliskRoom && obeliskRoom != null)
+            availableRooms.Add(obeliskRoom);
 
         if (availableRooms.Count == 0)
             return null;
@@ -324,7 +329,10 @@ public class LevelGeneration_2 : MonoBehaviour
         {
             spawnedBlackSmithRoom = true;
         }
-
+        else if (chosenRoom == obeliskRoom)
+        {
+            spawnedObeliskRoom = true;
+        }
         return chosenRoom;
     }
 

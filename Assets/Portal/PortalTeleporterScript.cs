@@ -18,6 +18,7 @@ public class PortalTeleporterScript : MonoBehaviour
     public bool isShopRoom = false;
     public bool isTreasureRoom = false;
     public bool isBlackSmith = false;
+    public bool isAmbiens = false;
 
 
     private void Start()
@@ -58,6 +59,12 @@ public class PortalTeleporterScript : MonoBehaviour
                 else if (isBlackSmith)
                 {
                     BlackSmithRoomLogic();
+                    if (roomManager)
+                        roomManager.SetEnabledRooms(specialRoom.roomScript);
+                }
+                else if (isAmbiens)
+                {
+                    AmbiensLogic();
                     if (roomManager)
                         roomManager.SetEnabledRooms(specialRoom.roomScript);
                 }
@@ -120,6 +127,11 @@ public class PortalTeleporterScript : MonoBehaviour
     private void BlackSmithRoomLogic()
     {
         audioManager.TriggerBlacksmithMusic();
+    }
+
+    private void AmbiensLogic()
+    {
+        audioManager.TriggerAmbiens();
     }
 
 }

@@ -19,6 +19,8 @@ public class EnemyManager : MonoBehaviour
     int maxAmmoSpawnChance = 10;
     int ammoSpawnChance = 0;
 
+    [HideInInspector] public event System.Action enemyDeathReport;
+
     [Header("HelpingHandStats")]
     public GameObject helpingHandPrefab;
     int helpingHandKillRequirement = 0;
@@ -60,6 +62,9 @@ public class EnemyManager : MonoBehaviour
     public void ReportDeath(Vector3 deathPosition, bool canDropAmmo, bool elite, float overKillDamage)
     {
         totalEnemyDeaths++;
+
+        enemyDeathReport?.Invoke();
+        
         PlayerStatsEffects(deathPosition);
         if(canDropAmmo)
             CheckForAmmoDrop(deathPosition);
@@ -85,6 +90,8 @@ public class EnemyManager : MonoBehaviour
             if (enemyDeaths >= 5)
                 ActiveSlowDown();
         }
+
+
 
     }
 
@@ -192,9 +199,13 @@ public class EnemyManager : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-        if(weaponSocket.equippedWeapon != null)
+        if (weaponSocket.equippedWeapon != null)
         {
-            weaponSocket.equippedWeapon.GiveAmmoToMagazine(playerStats.returnAmmoOnkill);
+            if (Random.Range(0, 4) == 0)
+            {
+                weaponSocket.equippedWeapon.GiveAmmoToMagazine(playerStats.returnAmmoOnkill);
+            }
         }
     }
+
 }

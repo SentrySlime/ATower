@@ -4815,6 +4815,7 @@ GameObject:
   - component: {fileID: 9089351037408256576}
   - component: {fileID: 9089351037408256584}
   - component: {fileID: 9089351037408256585}
+  - component: {fileID: 6990077908501128160}
   m_Layer: 6
   m_Name: ammo_Refill
   m_TagString: Interact
@@ -4867,6 +4868,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.68
   m_Center: {x: 0, y: -0.2, z: 0}
+--- !u!114 &6990077908501128160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089351037408256591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec62c0d9cedd62d42b9d21ee30367e3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: refill ammo of held weapon
 --- !u!1001 &5708430338275863115
 PrefabInstance:
   m_ObjectHideFlags: 0

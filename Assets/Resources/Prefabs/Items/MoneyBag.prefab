@@ -4815,6 +4815,7 @@ GameObject:
   - component: {fileID: 9089351037408256576}
   - component: {fileID: 9089351037408256585}
   - component: {fileID: 9168868432200780699}
+  - component: {fileID: 8339028319277470130}
   m_Layer: 6
   m_Name: MoneyBag
   m_TagString: Interact
@@ -4867,6 +4868,19 @@ MonoBehaviour:
   itemDescription: Contains a lot of gold
   itemIcon: {fileID: 21300000, guid: d73e016e47b9ed64ebc7fa9c25a01212, type: 3}
   FX: {fileID: 0}
+--- !u!114 &8339028319277470130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089351037408256591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec62c0d9cedd62d42b9d21ee30367e3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: take gold bag
 --- !u!1001 &6485172605555094541
 PrefabInstance:
   m_ObjectHideFlags: 0

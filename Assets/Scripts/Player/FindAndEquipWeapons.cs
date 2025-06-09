@@ -43,6 +43,7 @@ public class FindAndEquipWeapons : MonoBehaviour
     [HideInInspector] public Image image;
     [HideInInspector] public SelectedItem selectedItem;
     [HideInInspector] public GameObject interactPrompt;
+    [HideInInspector] public TextMeshProUGUI interactText;
 
     [Header("Weapon panel")]
     public GameObject weaponPanel;
@@ -77,6 +78,8 @@ public class FindAndEquipWeapons : MonoBehaviour
 
         //---
         interactPrompt = GameObject.Find("Interact_Prompt").gameObject;
+        interactText = interactPrompt.GetComponentInChildren<TextMeshProUGUI>();
+        interactText = interactPrompt.transform.Find("Interact").GetComponent<TextMeshProUGUI>();
 
         interactPrompt.SetActive(false);
 
@@ -272,8 +275,13 @@ public class FindAndEquipWeapons : MonoBehaviour
         {
             if (hit.transform.CompareTag("PickUp") || hit.transform.CompareTag("Interact"))
             {
+
+                interactText.text = "to " + hit.transform.GetComponent<InteractInfo>().description;
+
                 if (!interactPrompt.activeInHierarchy)
                     interactPrompt.SetActive(true);
+
+                
             }
 
 

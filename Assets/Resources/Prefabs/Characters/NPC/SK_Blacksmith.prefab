@@ -7680,6 +7680,7 @@ GameObject:
   - component: {fileID: 655264052331334329}
   - component: {fileID: 7962477540025571883}
   - component: {fileID: 4702608399009253764}
+  - component: {fileID: 3855138010177280096}
   m_Layer: 0
   m_Name: SK_Blacksmith
   m_TagString: Interact
@@ -7856,6 +7857,19 @@ MonoBehaviour:
   renderTextureMeshRenderer: {fileID: 0}
   defaultMaterial: {fileID: 2100000, guid: 755a6885f861b914d8fbf01b13ec1f5b, type: 2}
   defaultMesh: {fileID: 8640160984809115068, guid: ab79ee667a5be794e87cfa7e4ba8b9f0, type: 3}
+--- !u!114 &3855138010177280096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7760661634054233758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec62c0d9cedd62d42b9d21ee30367e3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: upgrade weapon for 1000 G
 --- !u!1 &7845732392240749109
 GameObject:
   m_ObjectHideFlags: 0

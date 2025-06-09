@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 4327125868536132360}
   - component: {fileID: 1263755134}
   - component: {fileID: 4171214199053366953}
+  - component: {fileID: 4777486867544806593}
   m_Layer: 0
   m_Name: Wodden_Chest
   m_TagString: Interact
@@ -207,6 +208,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4777486867544806593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4327125868536132374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec62c0d9cedd62d42b9d21ee30367e3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: open the chest
 --- !u!1 &4327125868913518528
 GameObject:
   m_ObjectHideFlags: 0

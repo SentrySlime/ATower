@@ -9717,6 +9717,7 @@ GameObject:
   - component: {fileID: 6883399814758267450}
   - component: {fileID: 5606233483593109835}
   - component: {fileID: 8041766769680303873}
+  - component: {fileID: 6646871548278616031}
   m_Layer: 6
   m_Name: ItemPickUp
   m_TagString: PickUp
@@ -9893,6 +9894,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6646871548278616031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6883399814758267453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec62c0d9cedd62d42b9d21ee30367e3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: pick up item
 --- !u!1 &7774565017396051312
 GameObject:
   m_ObjectHideFlags: 0

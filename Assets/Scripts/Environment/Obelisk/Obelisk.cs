@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class Obelisk : MonoBehaviour, IInteractInterface
 {
+    GameObject gameManager;
+    CurseManager curseManager;
+    InteractInfo interactInfo;
 
     public GameObject obelisk;
-    public RotateRoundAxis rotateRoundAxis1;
     public GameObject shards;
-    public RotateRoundAxis rotateRoundAxis2;
 
-    public bool rotateBack;
-    public bool canRotate;
+    bool rotateBack;
+    bool canRotate;
 
     [Header("Aura particles")]
     public GameObject cursedAura;
@@ -27,9 +28,9 @@ public class Obelisk : MonoBehaviour, IInteractInterface
     public ParticleSystem ring3PS;
 
     [Header("Obelisk")]
-    public float currentRotation = 0;
-    public int rotationSpeedForward;
-    public float rotationSpeedBackwards;
+    float currentRotation = 0;
+    int rotationSpeedForward = 100;
+    float rotationSpeedBackwards = 2000;
 
     [Header("HolyMove")]
     public bool holyRotate = false;
@@ -37,7 +38,7 @@ public class Obelisk : MonoBehaviour, IInteractInterface
     private Vector3 startPosition;
 
     [Header("Shard")]
-    public float currentShardRotation = 0;
+    float currentShardRotation = 0;
     bool hasCalledShards = false;
     public ObeliskShard[] obeliskShards;
 
@@ -54,6 +55,9 @@ public class Obelisk : MonoBehaviour, IInteractInterface
     void Start()
     {
         startPosition = transform.position;
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        curseManager = gameManager.GetComponent<CurseManager>();
+        interactInfo = GetComponent<InteractInfo>();
     }
 
     void Update()
@@ -81,6 +85,7 @@ public class Obelisk : MonoBehaviour, IInteractInterface
 
     public void Interact()
     {
+        gameObject.transform.tag = "Untagged";
         SetBack();
     }
 
@@ -240,6 +245,7 @@ public class Obelisk : MonoBehaviour, IInteractInterface
 
         
         holyRotate = true;
+        curseManager.SpawnCurse();
     }
 
 

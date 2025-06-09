@@ -50,9 +50,10 @@ MonoBehaviour:
   itemMesh: {fileID: 9157310088157048165, guid: b6e7947926b761e4b8785b563df760d4, type: 3}
   itemMaterial: {fileID: 2100000, guid: 17dca9c73a786374d9239f56721b286b, type: 2}
   goldCost: 1200
+  interactSFX: {fileID: 0}
   type: 0
   isDevilItem: 0
-  maxHp: 25
+  addedHealth: 25
   oneMaxHP: 0
   hpOnHit: 0
   hpOnCritHit: 0
@@ -64,6 +65,8 @@ MonoBehaviour:
   healCap: 0
   canOverheal: 0
   onlyEliteKillHeal: 0
+  healOnReload: 0
+  overkillDamageHeal: 0
   damageReductionPercent: 0
   damageIgnoreChance: 0
   moveSpeed: 0
@@ -74,6 +77,7 @@ MonoBehaviour:
   canExplodeEnemies: 0
   moneyIsPower: 0
   hpIsPower: 0
+  chainLightningDamage: 0
   ammoRefills: 0
   reloadAmount: 0
   maxMagazineSize: 0
@@ -82,8 +86,11 @@ MonoBehaviour:
   hasAlternateFastReload: 0
   heartboundRounds: 0
   maxAmmo: 0
+  bandolierEffect: 0
   fireBallChance: 0
+  chainLightningTargets: 0
   accuracy: 0
   increasedMoneyDrops: 0
   moneyIsHealth: 0
+  thorns: 0
   playerStats: {fileID: 0}

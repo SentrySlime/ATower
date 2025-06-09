@@ -5,7 +5,10 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     [Header("Player HP")]
-    public int maxHealth;
+    int baseHealth = 100;
+    public int addedHealth = 0;
+    public float increasedHealth = 1;
+    public int finalHealth = 0;
     public int oneMaxHP = 0;
     public int hpOnHit = 0;
     public int hpOnCritHit = 0;
@@ -70,6 +73,7 @@ public class PlayerStats : MonoBehaviour
     private void Awake()
     {
         GetAllScripts();
+        GetFinalHealth();
     }
 
     // Start is called before the first frame update
@@ -85,31 +89,38 @@ public class PlayerStats : MonoBehaviour
         locomotion.UpdateJumps(extraJumps);
     }
 
+    public void GetFinalHealth()
+    {
+        finalHealth = Mathf.Clamp((int)((baseHealth + addedHealth) * increasedHealth), 1, 9999);
+    }
+
     public void StartPlayerHP()
     {
         playerHealth.damageReductionPercent = damageReductionPercent;
         playerHealth.damageIgnoreChance = damageIgnoreChance;
 
+        GetFinalHealth();
         
         if (oneMaxHP > 0)
         {
-            playerHealth.maxHP = 1;
-            playerHealth.currentHP = 1;
+            finalHealth = 1;
+            playerHealth.maxHP = finalHealth;
+            playerHealth.currentHP = finalHealth;
 
         }
-        else if(maxHealth > playerHealth.maxHP)
+        else if(finalHealth > playerHealth.maxHP)
         {
-            int tempHP = maxHealth - playerHealth.maxHP;
-            playerHealth.maxHP = maxHealth;
+            int tempHP = finalHealth - playerHealth.maxHP;
+            playerHealth.maxHP = finalHealth;
             playerHealth.currentHP += tempHP;
         }
-        else if(maxHealth < playerHealth.maxHP)
+        else if(finalHealth < playerHealth.maxHP)
         {
-            playerHealth.maxHP = maxHealth;
+            playerHealth.maxHP = finalHealth;
 
-            if(playerHealth.currentHP > maxHealth && canOverheal <= 0)
+            if(playerHealth.currentHP > finalHealth && canOverheal <= 0)
             {
-                playerHealth.currentHP = maxHealth;
+                playerHealth.currentHP = finalHealth;
             }
             
         }
@@ -117,13 +128,15 @@ public class PlayerStats : MonoBehaviour
         {
             if (canOverheal <= 0)
             {
-                playerHealth.currentHP = maxHealth;
+                playerHealth.currentHP = finalHealth;
             }
         }
 
 
         playerHealth.ItemUpdateHealth();
     }
+
+    
 
     public void AddStatsToPickedUpWeapon(GameObject weaponObj)
     {

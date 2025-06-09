@@ -75,11 +75,9 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
         hpBackground = GameObject.FindGameObjectWithTag("HPBackground").GetComponent<RectTransform>();
         textHP = GameObject.FindGameObjectWithTag("textHP").GetComponent<TextMeshProUGUI>();
 
-        maxHP = playerStats.maxHealth;
-
-        UpdateMaxHP();
-        StartHealth();
-        UpdateHP();
+        playerStats.GetFinalHealth();
+        maxHP = playerStats.finalHealth;
+        InitializeHealth();
     }
 
     void Start()
@@ -338,6 +336,12 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
         UpdateMaxHP();
     }
 
+    public void InitializeHealth()
+    {
+        UpdateMaxHP();
+        StartHealth();
+        UpdateHP();
+    }
 
 }
 

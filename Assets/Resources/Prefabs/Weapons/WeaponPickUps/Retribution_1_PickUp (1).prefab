@@ -9619,6 +9619,7 @@ GameObject:
   - component: {fileID: 7527335582870803991}
   - component: {fileID: 7527335582870803990}
   - component: {fileID: 7411667932222799908}
+  - component: {fileID: -1236570722987672581}
   m_Layer: 13
   m_Name: Retribution_1_PickUp (1)
   m_TagString: PickUp
@@ -9658,13 +9659,6 @@ MonoBehaviour:
   itemName: 
   itemDescription: 
   itemIcon: {fileID: 0}
-  aName: 
-  aDescription: 
-  weaponIcon: {fileID: 0}
-  shootPoint: {fileID: 0}
-  barrel: {fileID: 0}
-  objectToRecoil: {fileID: 0}
-  iconPrefab: {fileID: 0}
   goldCost: 500
   weaponMesh: {fileID: 0}
   weaponMaterial: {fileID: 0}
@@ -9684,6 +9678,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.4
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-1236570722987672581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7527335582870803992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec62c0d9cedd62d42b9d21ee30367e3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: pick up weapon
 --- !u!1001 &5849797970727860115
 PrefabInstance:
   m_ObjectHideFlags: 0
