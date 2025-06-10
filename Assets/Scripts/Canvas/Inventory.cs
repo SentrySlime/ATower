@@ -30,6 +30,8 @@ public class Inventory : MonoBehaviour
     [Header("Items")]
     public List<GameObject> heldItems = new List<GameObject>();
 
+    [HideInInspector] public event System.Action<int> goldReport;
+
     void Start()
     {
         findAndEquipWeapons = GetComponent<FindAndEquipWeapons>();
@@ -118,6 +120,7 @@ public class Inventory : MonoBehaviour
 
     public void IncreaseMoney(int incomingAmount)
     {
+        goldReport?.Invoke(incomingAmount);
         money += incomingAmount;
         UpdateMoneyText();
     }

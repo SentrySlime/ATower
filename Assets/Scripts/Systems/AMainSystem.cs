@@ -23,7 +23,9 @@ public class AMainSystem : MonoBehaviour
     HitmarkerLogic hitMarkerLogic;
     ExplosionSystem explosionSystem;
     ChainLightning chainLightning;
-    
+
+    [HideInInspector] public event System.Action<int> criHitReport;
+    [HideInInspector] public event System.Action<int> weakSpotHitCondition;
 
     private void Awake()
     {
@@ -57,9 +59,9 @@ public class AMainSystem : MonoBehaviour
             }
 
             DamageEnemy(iDamageInterface, incomingDamage, weakSpotShot);
-            
-            
             UILogic(weakSpotShot);
+            if (weakSpotShot)
+                weakSpotHitCondition?.Invoke(1);
         }
         else
         {
@@ -110,6 +112,7 @@ public class AMainSystem : MonoBehaviour
         if (playerStats.criticalChance > critChance)
         {
             PlaySFX(true);
+            criHitReport?.Invoke(1);
             incomingDamage *= playerStats.criticalMultiplier;
             damageInterface.Damage(incomingDamage, true);
             return;

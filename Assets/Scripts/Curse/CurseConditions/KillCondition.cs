@@ -10,20 +10,17 @@ public class KillCondition : CurseCondition
 
     void Start()
     {
+        curse.conditionDescription.text = description;
+        curse.conditionCount.text = currentKillCount + " / " + requiredKillCount;
         enemyManager.enemyDeathReport += ConditionCheck;
     }
 
-    
-    void Update()
-    {
-        
-    }
-
-    public override void ConditionCheck()
+    public override void ConditionCheck(int value)
     {
         if (complete) return;
 
-        currentKillCount++;
+        currentKillCount += value;
+        curse.conditionCount.text = currentKillCount + " / " + requiredKillCount;
         if (currentKillCount >= requiredKillCount)
         {
             complete = true;

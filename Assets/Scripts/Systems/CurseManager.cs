@@ -21,6 +21,8 @@ public class CurseManager : MonoBehaviour
         playerStats = player.GetComponent<PlayerStats>();
 
         enemyManager = GetComponent<EnemyManager>();
+
+        SpawnCurse();
     }
 
     

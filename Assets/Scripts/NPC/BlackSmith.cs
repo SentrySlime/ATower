@@ -7,9 +7,18 @@ public class BlackSmith : MonoBehaviour, IInteractInterface
 {
 
     GameObject player;
+    Inventory inventory;
     WeaponSocket weaponSocket;
     BaseWeapon baseWeapon;
 
+    [Header("Stats")]
+    public int goldCost = 950;
+
+    [Header("SFX & VFX")]
+    public AudioSource noMoneySFX;
+    public AudioSource purchaseSFX;
+
+    [Header("SFX & VFX")]
     public ParticleSystem hitVFX;
     public AudioSource hitSFX;
     public MeshFilter renderTextureMeshFilter;
@@ -24,13 +33,25 @@ public class BlackSmith : MonoBehaviour, IInteractInterface
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        inventory = player.GetComponent<Inventory>();
         weaponSocket = player.GetComponent<WeaponSocket>();
     }
 
     public void Interact()
     {
         if (active || weaponSocket.equippedWeapon == null || weaponSocket.interupptedBool || weaponSocket.equippedWeapon.upgraded) return;
-        StartCoroutine(StartBlackSmith());
+
+        if(inventory.money <= goldCost)
+        {
+            noMoneySFX.Play();
+            return;
+        }
+        else
+        {
+            purchaseSFX.Play();
+            inventory.DecreaseMoney(goldCost);
+            StartCoroutine(StartBlackSmith());
+        }
     }
 
     private IEnumerator StartBlackSmith()

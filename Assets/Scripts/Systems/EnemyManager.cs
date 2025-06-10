@@ -19,7 +19,7 @@ public class EnemyManager : MonoBehaviour
     int maxAmmoSpawnChance = 10;
     int ammoSpawnChance = 0;
 
-    [HideInInspector] public event System.Action enemyDeathReport;
+    [HideInInspector] public event System.Action<int> enemyDeathReport;
 
     [Header("HelpingHandStats")]
     public GameObject helpingHandPrefab;
@@ -63,7 +63,7 @@ public class EnemyManager : MonoBehaviour
     {
         totalEnemyDeaths++;
 
-        enemyDeathReport?.Invoke();
+        enemyDeathReport?.Invoke(1);
         
         PlayerStatsEffects(deathPosition);
         if(canDropAmmo)
