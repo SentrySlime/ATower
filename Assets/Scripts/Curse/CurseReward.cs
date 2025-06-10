@@ -9,4 +9,6 @@ public abstract class CurseReward : MonoBehaviour
     [HideInInspector] public Curse curse;
 
     public abstract void Reward();
+
+    public abstract string ReturnDescription();
 }

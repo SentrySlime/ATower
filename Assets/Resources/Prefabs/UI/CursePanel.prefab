@@ -179,14 +179,14 @@ MonoBehaviour:
   m_text: Health reduced by -50%
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1ee00eb062e14d545a7c35786a92abdb, type: 2}
-  m_sharedMaterial: {fileID: 5582886374717215262, guid: 1ee00eb062e14d545a7c35786a92abdb, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 700d9a5ed175c3349aba231ee95c3b2b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190335
-  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
+    rgba: 4294901923
+  m_fontColor: {r: 0.63887596, g: 0, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -313,7 +313,7 @@ MonoBehaviour:
   m_text: Hit 500 weakspots
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1ee00eb062e14d545a7c35786a92abdb, type: 2}
-  m_sharedMaterial: {fileID: 5582886374717215262, guid: 1ee00eb062e14d545a7c35786a92abdb, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 700d9a5ed175c3349aba231ee95c3b2b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -413,8 +413,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 169.6, y: 0}
-  m_SizeDelta: {x: 106.1, y: 50}
+  m_AnchoredPosition: {x: 186.6, y: 0}
+  m_SizeDelta: {x: 154.2, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6292971300924954166
 CanvasRenderer:
@@ -444,10 +444,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0 / 25
+  m_text: 9999 / 9999
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1ee00eb062e14d545a7c35786a92abdb, type: 2}
-  m_sharedMaterial: {fileID: 5582886374717215262, guid: 1ee00eb062e14d545a7c35786a92abdb, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 700d9a5ed175c3349aba231ee95c3b2b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -471,8 +471,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -599,6 +599,7 @@ GameObject:
   - component: {fileID: 5758363798906874740}
   - component: {fileID: 5483665185727823549}
   - component: {fileID: 624010710369628900}
+  - component: {fileID: 1057799875733963483}
   m_Layer: 5
   m_Name: CursePanel
   m_TagString: Untagged
@@ -653,6 +654,18 @@ MonoBehaviour:
   conditionDescription: {fileID: 5191122295843729964}
   conditionCount: {fileID: 4427337380860067600}
   downSideDescription: {fileID: 695542848722943236}
+--- !u!225 &1057799875733963483
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6099921136845600084}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &6538196741557658013
 GameObject:
   m_ObjectHideFlags: 0
@@ -711,7 +724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.008962935, b: 0, a: 0.8235294}
+  m_Color: {r: 0.9747987, g: 0, b: 1, a: 0.8235294}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

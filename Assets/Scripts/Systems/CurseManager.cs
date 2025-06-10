@@ -10,9 +10,9 @@ public class CurseManager : MonoBehaviour
     EnemyManager enemyManager;
     public GameObject curseObject;
 
-    public GameObject curseCondition;
-    public GameObject curseDownside;
-    public GameObject curseReward;
+    public GameObject[] curseCondition;
+    public GameObject[] curseDownside;
+    public GameObject[] curseReward;
 
 
     void Start()
@@ -29,12 +29,10 @@ public class CurseManager : MonoBehaviour
     public void SpawnCurse()
     {
         Curse curse = Instantiate(curseObject).GetComponent<Curse>();
-        curse.curseCondition = Instantiate(curseCondition).GetComponent<CurseCondition>();
-        curse.curseDownside = Instantiate(curseDownside).GetComponent<CurseDownside>();
-        curse.curseReward = Instantiate(curseReward).GetComponent<CurseReward>();
+        curse.curseCondition = Instantiate(curseCondition[Random.Range(0, curseCondition.Length)]).GetComponent<CurseCondition>();
+        curse.curseDownside = Instantiate(curseDownside[Random.Range(0, curseDownside.Length)]).GetComponent<CurseDownside>();
+        curse.curseReward = Instantiate(curseReward[Random.Range(0, curseReward.Length)]).GetComponent<CurseReward>();
         curse.InitializeCurse();
     }
-
-
 
 }

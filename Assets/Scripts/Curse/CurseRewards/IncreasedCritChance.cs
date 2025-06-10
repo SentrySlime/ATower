@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageIncrease : CurseReward
+public class IncreasedCritChance : CurseReward
 {
     [Header("Reward")]
-    public float increasedDamage = 0.25f;
+    public float critChance = 15f;
 
     public override void Reward()
     {
-        playerStats.increasedDamage += increasedDamage;
+        playerStats.criticalChance += critChance;
     }
 
     public override string ReturnDescription()
     {
-        return "damage +" + (increasedDamage * 100) + "%";
+        return "crit chance +" + critChance + "%";
     }
+
 }

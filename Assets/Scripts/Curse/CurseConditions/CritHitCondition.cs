@@ -11,6 +11,8 @@ public class CritHitCondition : CurseCondition
 
     void Start()
     {
+        curse.conditionDescription.text = description;
+        curse.conditionCount.text = currentCritCount + " / " + requiredCritCount;
         aMainSystem.criHitReport += ConditionCheck;
     }
 
@@ -19,6 +21,7 @@ public class CritHitCondition : CurseCondition
         if (complete) return;
 
         currentCritCount += value;
+        curse.conditionCount.text = currentCritCount + " / " + requiredCritCount;
         if (currentCritCount >= requiredCritCount)
         {
             complete = true;

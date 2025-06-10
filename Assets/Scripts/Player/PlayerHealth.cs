@@ -130,7 +130,8 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
             return;
 
         int preHp = currentHP;
-        int healthToAdd = (int)incomingHealth;
+        
+        int healthToAdd = Mathf.RoundToInt(incomingHealth * (1 + playerStats.increasedHealing));
 
         if (playerStats.canOverheal > 0)
         {
@@ -216,6 +217,15 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
         {
             currentHP -= ((int)damage);
             UpdateHP();
+        }
+
+        if(playerStats.moneyToLoseOnDamage > 0)
+            inventory.DecreaseMoney(playerStats.moneyToLoseOnDamage);
+
+        if (playerStats.maxHealthToLoseOnDamage > 0)
+        {
+            playerStats.addedHealth -= playerStats.maxHealthToLoseOnDamage;
+            playerStats.StartPlayerHP();
         }
 
         currentHP = Mathf.Clamp(currentHP, 0, 9999);

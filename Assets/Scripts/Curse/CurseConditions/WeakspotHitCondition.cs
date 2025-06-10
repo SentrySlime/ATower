@@ -11,6 +11,8 @@ public class WeakspotHitCondition : CurseCondition
 
     void Start()
     {
+        curse.conditionDescription.text = description;
+        curse.conditionCount.text = currentWeakSpotCount + " / " + requiredWeakSpotHitCount;
         aMainSystem.weakSpotHitCondition += ConditionCheck;
     }
 
@@ -19,6 +21,7 @@ public class WeakspotHitCondition : CurseCondition
         if (complete) return;
 
         currentWeakSpotCount += value;
+        curse.conditionCount.text = currentWeakSpotCount + " / " + requiredWeakSpotHitCount;
         if (currentWeakSpotCount >= requiredWeakSpotHitCount)
         {
             complete = true;

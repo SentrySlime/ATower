@@ -3,27 +3,19 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class CursePanel : MonoBehaviour
+public class BlessingText : MonoBehaviour
 {
-    public TextMeshProUGUI conditionDescription;
-    public TextMeshProUGUI conditionCount;
-    public TextMeshProUGUI downSideDescription;
-
     CanvasGroup canvasGroup;
 
     void Start()
     {
         canvasGroup = GetComponent<CanvasGroup>();
-    }
-
-    public void FadeOut()
-    {
         StartCoroutine(FadeBlessing());
     }
 
-    IEnumerator FadeBlessing()
+    IEnumerator FadeBlessing ()
     {
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(4.5f);
 
         while (canvasGroup.alpha > 0)
         {

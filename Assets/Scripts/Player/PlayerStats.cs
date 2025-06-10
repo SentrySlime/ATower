@@ -22,7 +22,7 @@ public class PlayerStats : MonoBehaviour
     public int onlyEliteKillHeal = 0;
     public int healOnReload = 0;
     public float overkillDamageHeal = 0;
-    
+    public float increasedHealing = 0;
 
     [Header("Defense")]
     public float damageReductionPercent = 1.1f;
@@ -64,6 +64,11 @@ public class PlayerStats : MonoBehaviour
     public int moneyIsHealth = 0;
     public int thorns = 0;
 
+    [Header("CurseStats")]
+    public int moneyToLoseOnDamage = 0;
+    public int maxHealthToLoseOnDamage = 0;
+
+
     PlayerHealth playerHealth;
     Locomotion2 locomotion;
     WeaponSocket weaponSocket;
@@ -76,7 +81,6 @@ public class PlayerStats : MonoBehaviour
         GetFinalHealth();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         StartLocomotion();

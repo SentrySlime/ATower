@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3313182730059938208}
-  - component: {fileID: 4285821622669799675}
+  - component: {fileID: -3001913705378826509}
   m_Layer: 0
-  m_Name: DamageIncrease
+  m_Name: HealingIncreased
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4285821622669799675
+--- !u!114 &-3001913705378826509
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,10 +40,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2576463491294457778}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41b3a1cc9f9f9054db33343dfcf2f88c, type: 3}
+  m_Script: {fileID: 11500000, guid: 2873d9fa54839034c8f80a3400bf0226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   playerStats: {fileID: 0}
   curse: {fileID: 0}
-  increasedDamage: 0.35
+  increasedHealing: 0.25

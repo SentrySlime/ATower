@@ -38,6 +38,9 @@ public class ItemBase : MonoBehaviour
     [Tooltip("One point is equal to one max HP")]
     [Range(-200, 200f)] public int addedHealth;
 
+    [Tooltip("One point is equal to one max HP")]
+    [Range(-2, 2f)] public float increasedHealth;
+
     [Tooltip("Sets HP to 1")]
     [Range(-1, 1f)] public int oneMaxHP;
 

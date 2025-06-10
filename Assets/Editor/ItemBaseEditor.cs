@@ -28,7 +28,7 @@ public class ItemBaseEditor : Editor
 
         DrawFoldout("Health", ref showHealth, new string[]
         {
-            "addedHealth", "oneMaxHP", "hpOnHit", "hpOnCritHit", "hpOnKill", "hpOnEliteKill" ,"helpingHand", "hpRegen", "hpRegenOnEnemyHit", "healCap", "canOverheal", "onlyEliteKillHeal", "healOnReload", "overkillDamageHeal"
+            "addedHealth", "increasedHealth", "oneMaxHP", "hpOnHit", "hpOnCritHit", "hpOnKill", "hpOnEliteKill" ,"helpingHand", "hpRegen", "hpRegenOnEnemyHit", "healCap", "canOverheal", "onlyEliteKillHeal", "healOnReload", "overkillDamageHeal"
         });
 
         DrawFoldout("Defense", ref showDefense, new string[]

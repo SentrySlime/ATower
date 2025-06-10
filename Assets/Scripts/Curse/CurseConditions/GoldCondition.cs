@@ -10,6 +10,8 @@ public class GoldCondition : CurseCondition
 
     void Start()
     {
+        curse.conditionDescription.text = description;
+        curse.conditionCount.text = currentGoldCount + " / " + requiredGoldCount;
         inventory.goldReport += ConditionCheck;
     }
 
@@ -18,6 +20,7 @@ public class GoldCondition : CurseCondition
         if (complete) return;
 
         currentGoldCount += value;
+        curse.conditionCount.text = currentGoldCount + " / " + requiredGoldCount;
         if (currentGoldCount >= requiredGoldCount)
         {
             complete = true;

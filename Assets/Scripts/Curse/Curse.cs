@@ -25,6 +25,10 @@ public class Curse : MonoBehaviour
     public TextMeshProUGUI downSideDescription;
     Transform cursePanelParent;
 
+    [Header("Blessing")]
+    public GameObject blessingObj;
+    Transform blessingParent;
+
     [Header("Curse parts")]
     public CurseCondition curseCondition;
     public CurseDownside curseDownside;
@@ -43,6 +47,7 @@ public class Curse : MonoBehaviour
         inventory = player.GetComponent<Inventory>();
 
         cursePanelParent = GameObject.Find("CurseParent").transform;
+        blessingParent = GameObject.Find("BlessingParent").transform;
 
         cursePanel = Instantiate(cursePanelObj, cursePanelParent).GetComponent<CursePanel>();
 
@@ -56,7 +61,6 @@ public class Curse : MonoBehaviour
         
     }
 
-
     public void InitializeCurse()
     {
         SetCurseCondition();
@@ -69,14 +73,23 @@ public class Curse : MonoBehaviour
 
     public void ConditionMet()
     {
+        string rewardDescription = curseReward.ReturnDescription();
+        TextMeshProUGUI blessing = Instantiate(blessingObj, blessingParent).GetComponent<TextMeshProUGUI>();
+        blessing.text = rewardDescription;
+
+        cursePanel.conditionCount.color = Color.green;
+
         curseDownside.RemoveCurseDownSide();
         curseReward.Reward();
-        
-        DestroyCurse();
+
+        StartCoroutine(DestroyCurse());
     }
 
-    private void DestroyCurse()
+    IEnumerator DestroyCurse()
     {
+        yield return new WaitForSeconds(1);
+
+        cursePanel.FadeOut();
         Destroy(curseCondition.gameObject);
         Destroy(curseDownside.gameObject);
         Destroy(curseReward.gameObject);
@@ -90,6 +103,7 @@ public class Curse : MonoBehaviour
         curseCondition.curseManager = curseManager;
         curseCondition.enemyManager = enemyManager;
         curseCondition.inventory = inventory;
+        curseCondition.aMainSystem = aMainSystem;
     }
     private void SetCurseDownside()
     {
