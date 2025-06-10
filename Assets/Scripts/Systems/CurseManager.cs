@@ -19,10 +19,7 @@ public class CurseManager : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerStats = player.GetComponent<PlayerStats>();
-
         enemyManager = GetComponent<EnemyManager>();
-
-        SpawnCurse();
     }
 
     
