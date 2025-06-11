@@ -10,6 +10,7 @@ public class ShootSystem : MonoBehaviour
 
     [Header("CrimsonDagger")]
     public GameObject crimsonDagger;
+    public GameObject crimsonDaggerSFX;
     public float accuracyDagger = 90;
 
     [Header("PestilentSwarm")]
@@ -73,6 +74,8 @@ public class ShootSystem : MonoBehaviour
 
     IEnumerator DoRadialAttack2(Vector3 shootPoint)
     {
+        Instantiate(crimsonDaggerSFX, shootPoint, Quaternion.identity);
+
         int repeatCount = 3;
         float fireRate = 0.1f;
         int projectileCount = 3;

@@ -9822,7 +9822,7 @@ MonoBehaviour:
   shootPoint: {fileID: 1020212011837037851}
   ADSAccuracy: 4
   HIPAccuracy: 5
-  damage: 16
+  damage: 22
   player: {fileID: 0}
   playerStats: {fileID: 0}
   baseWeapon: {fileID: 0}
@@ -9843,8 +9843,8 @@ MonoBehaviour:
   hitDistance: 0
   hitmarker: {fileID: 0}
   isShotgun: 1
-  shootAmount: 8
-  shotSize: 0.6
+  shootAmount: 6
+  shotSize: 1
   pierceAmount: 1
   ShouldExplode: 0
   explosiveDamage: 45
@@ -9888,15 +9888,15 @@ MonoBehaviour:
   maxAmmo: 160
   currentAmmo: 160
   baseAmmoPerShot1: 0
-  ammoPerShot1: 1
+  ammoPerShot1: 2
   baseAmmoPerShot2: 0
-  ammoPerShot2: 1
+  ammoPerShot2: 2
   baseInfinteAmmo: 0
   infinteAmmo: 0
   reloadType: 0
   baseMaxMagazine: 0
-  maxMagazine: 160
-  currentMagazine: 160
+  maxMagazine: 16
+  currentMagazine: 16
   baseReloadTime: 0
   reloadTime: 3.5
   baseReloadAmount: 0
@@ -9923,6 +9923,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
   explosionSystem: {fileID: 0}
+  shootSystem: {fileID: 0}
   player: {fileID: 0}
   playerStats: {fileID: 0}
   playerHealth: {fileID: 0}
