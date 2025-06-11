@@ -17,6 +17,7 @@ public class Curse : MonoBehaviour
     Inventory inventory;
     Coin coin;
 
+
     [Header("CursePanel")]
     public GameObject cursePanelObj;
     CursePanel cursePanel;

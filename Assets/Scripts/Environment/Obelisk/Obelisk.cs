@@ -14,6 +14,10 @@ public class Obelisk : MonoBehaviour, IInteractInterface
 
     bool rotateBack;
     bool canRotate;
+    [Header("CurseShards")]
+    public InteractableObeliskShard[] obeliskShardsInteractable;
+
+    public GameObject reward;
 
     [Header("Aura particles")]
     public GameObject cursedAura;
@@ -58,6 +62,7 @@ public class Obelisk : MonoBehaviour, IInteractInterface
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
         curseManager = gameManager.GetComponent<CurseManager>();
         interactInfo = GetComponent<InteractInfo>();
+        SetObeliskShardsReward();
     }
 
     void Update()
@@ -85,6 +90,9 @@ public class Obelisk : MonoBehaviour, IInteractInterface
 
     public void Interact()
     {
+        for (int i = 0; i < obeliskShardsInteractable.Length; i++)
+            obeliskShardsInteractable[i].gameObject.SetActive(false);
+
         gameObject.transform.tag = "Untagged";
         SetBack();
     }
@@ -245,7 +253,7 @@ public class Obelisk : MonoBehaviour, IInteractInterface
 
         
         holyRotate = true;
-        curseManager.SpawnCurse();
+        curseManager.SpawnCurse(reward);
     }
 
 
@@ -316,8 +324,13 @@ public class Obelisk : MonoBehaviour, IInteractInterface
         rewindSFX.Play();
     }
 
+    private void SetObeliskShardsReward()
+    {
+        GameObject[] reward = curseManager.GetCurseRewards();
 
-
-
-
+        for (int i = 0; i < obeliskShardsInteractable.Length; i++)
+        {
+            obeliskShardsInteractable[i].SetReward(reward[i], this);
+        }
+    }
 }

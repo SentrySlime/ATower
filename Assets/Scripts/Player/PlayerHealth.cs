@@ -199,7 +199,7 @@ public class PlayerHealth : MonoBehaviour, IDamageInterface
 
         if(playerStats.moneyIsHealth > 0)
         {
-            int damageCost = (int)damage * 4;
+            int damageCost = (int)damage * 10;
             int moneyAvailable = inventory.money;
 
             int moneyToDeduct = Math.Min(moneyAvailable, damageCost);

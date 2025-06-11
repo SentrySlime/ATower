@@ -264,13 +264,13 @@ public class ProjectileBase : MonoBehaviour
         {
             ExplosiveShot(other.transform.root.gameObject);
         }
-        else if (!pierceObjects)
-        {
-            if (other.CompareTag("Player")) { return; }
-            EndObjectLife();
+        //else if (!pierceObjects)
+        //{
+        //    if (other.CompareTag("Player")) { return; }
+        //    EndObjectLife();
 
 
-        }
+        //}
         else
             CheckPierce();
     }
@@ -285,6 +285,8 @@ public class ProjectileBase : MonoBehaviour
                 DealDamage(hitEnemy, incomingWeakSpotShot);
             }
         }
+
+        CheckPierce();
     }
 
 
@@ -342,6 +344,9 @@ public class ProjectileBase : MonoBehaviour
 
     protected void CheckPierce()
     {
+        if(!pierceObjects)
+            EndObjectLife();
+
         pierceAmount--;
 
         if (pierceAmount < 0)

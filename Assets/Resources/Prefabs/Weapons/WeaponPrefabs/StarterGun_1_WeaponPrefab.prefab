@@ -52,7 +52,6 @@ MonoBehaviour:
   moveAmount: 0
   lerpDuration: 0.1
   lerpBackDuration: 0.2
-  fireMode: 0
   rotating: 0
   targetPosition: {x: 0, y: 0, z: 0}
   reloadTimer: 0
@@ -4969,16 +4968,20 @@ MonoBehaviour:
   shootPoint: {fileID: 1856004530348900990}
   ADSAccuracy: 1
   HIPAccuracy: 5
-  damage: 49
+  damage: 35
+  player: {fileID: 0}
   playerStats: {fileID: 0}
+  baseWeapon: {fileID: 0}
+  recoil: {fileID: 0}
+  weaponSocket: {fileID: 0}
   screenShake: {fileID: 0}
   aimCamera: {fileID: 0}
-  weaponSocket: {fileID: 0}
-  recoil: {fileID: 0}
-  player: {fileID: 0}
   gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
   explosionSystem: {fileID: 0}
+  firingMode: 0
+  burstDelay: 1
+  burstAmount: 1
   lineRenderer: {fileID: 0}
   curve: 0
   lineDuration: 0.9
@@ -5015,6 +5018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseShootingLogic1: {fileID: 6593228928422068517}
+  baseShootingLogic2: {fileID: 0}
   aName: StartingGun
   aDescription: A reliable hand gun
   weaponIcon: {fileID: 21300000, guid: da9509e1194ac1340880e90af871c9ce, type: 3}
@@ -5029,8 +5033,10 @@ MonoBehaviour:
   baseMaxAmmo: 0
   maxAmmo: 100
   currentAmmo: 100
-  baseAmmoPerShot: 0
-  ammoPerShot: 1
+  baseAmmoPerShot1: 0
+  ammoPerShot1: 1
+  baseAmmoPerShot2: 0
+  ammoPerShot2: 1
   baseInfinteAmmo: 0
   infinteAmmo: 1
   reloadType: 0
@@ -5041,16 +5047,10 @@ MonoBehaviour:
   reloadTime: 1.5
   baseReloadAmount: 0
   reloadAmount: 1
-  baseDamage: 0
-  damage: 49
   baseFireRate: 0
   fireRate: 0.3
-  burstDelay: 1
-  burstAmount: 1
   recoilAmount: -7
   moveAmount: -0.15
-  ADSAccuracy: 1
-  HIPAccuracy: 5
   recoilX: -9
   recoilY: 1.5
   recoilZ: 0.7
@@ -5062,16 +5062,17 @@ MonoBehaviour:
   currentMagazineText: {fileID: 0}
   ammoDivider: {fileID: 0}
   ammoFill: {fileID: 0}
-  firingMode: 0
   aimCamera: {fileID: 0}
   recoil: {fileID: 0}
   screenShake: {fileID: 0}
   weaponSocket: {fileID: 0}
+  gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
   explosionSystem: {fileID: 0}
   player: {fileID: 0}
   playerStats: {fileID: 0}
   playerHealth: {fileID: 0}
+  upgraded: 0
   interuptReload: 0
   finishedReload: 0
   renderObjects:

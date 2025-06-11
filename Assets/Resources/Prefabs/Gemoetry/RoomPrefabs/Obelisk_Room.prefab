@@ -37430,14 +37430,14 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8237249680640991410, guid: 053a24cefdd30424684c6e5485a85543, type: 3}
   m_PrefabInstance: {fileID: 1405060296094635417}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &7758759373048107158 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 8706408538068092175, guid: 053a24cefdd30424684c6e5485a85543, type: 3}
-  m_PrefabInstance: {fileID: 1405060296094635417}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7625466890414719727 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8839685743528236918, guid: 053a24cefdd30424684c6e5485a85543, type: 3}
+  m_PrefabInstance: {fileID: 1405060296094635417}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7758759373048107158 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8706408538068092175, guid: 053a24cefdd30424684c6e5485a85543, type: 3}
   m_PrefabInstance: {fileID: 1405060296094635417}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2019656336001385613
@@ -37814,6 +37814,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4003941478712112184, guid: c4afb56a5b5b55e4cad064aa28ecf11c, type: 3}
   m_PrefabInstance: {fileID: 2882385940063540189}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5126222862637699906 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8008607629671710879, guid: c4afb56a5b5b55e4cad064aa28ecf11c, type: 3}
+  m_PrefabInstance: {fileID: 2882385940063540189}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505879bec5cb9a04ba93ee807958f6ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2959119121786533609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38029,6 +38040,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'SM_Obelisk '
       objectReference: {fileID: 0}
+    - target: {fileID: 7755965927582440381, guid: 203293da8eae0b845beb64f611d9770c, type: 3}
+      propertyPath: obeliskShardsInteractable.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7755965927582440381, guid: 203293da8eae0b845beb64f611d9770c, type: 3}
+      propertyPath: obeliskShardsInteractable.Array.data[0]
+      value: 
+      objectReference: {fileID: 4072017743005909869}
+    - target: {fileID: 7755965927582440381, guid: 203293da8eae0b845beb64f611d9770c, type: 3}
+      propertyPath: obeliskShardsInteractable.Array.data[1]
+      value: 
+      objectReference: {fileID: 5126222862637699906}
+    - target: {fileID: 7755965927582440381, guid: 203293da8eae0b845beb64f611d9770c, type: 3}
+      propertyPath: obeliskShardsInteractable.Array.data[2]
+      value: 
+      objectReference: {fileID: 3866082335715796511}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 203293da8eae0b845beb64f611d9770c, type: 3}
 --- !u!4 &5552545453153052565 stripped
@@ -38907,6 +38934,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4afb56a5b5b55e4cad064aa28ecf11c, type: 3}
+--- !u!114 &4072017743005909869 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8008607629671710879, guid: c4afb56a5b5b55e4cad064aa28ecf11c, type: 3}
+  m_PrefabInstance: {fileID: 6316013313618887666}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505879bec5cb9a04ba93ee807958f6ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6932771739989587914 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4003941478712112184, guid: c4afb56a5b5b55e4cad064aa28ecf11c, type: 3}
@@ -38973,6 +39011,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4afb56a5b5b55e4cad064aa28ecf11c, type: 3}
+--- !u!114 &3866082335715796511 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8008607629671710879, guid: c4afb56a5b5b55e4cad064aa28ecf11c, type: 3}
+  m_PrefabInstance: {fileID: 6522161497946220160}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505879bec5cb9a04ba93ee807958f6ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7859771855937606328 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4003941478712112184, guid: c4afb56a5b5b55e4cad064aa28ecf11c, type: 3}

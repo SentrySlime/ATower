@@ -8,6 +8,15 @@ public abstract class CurseReward : MonoBehaviour
     [HideInInspector] public PlayerStats playerStats;
     [HideInInspector] public Curse curse;
 
+    public enum RewardCategory
+    {
+        Damage,
+        Utility,
+        Health
+    }
+
+    public RewardCategory rewardCategory;
+
     public abstract void Reward();
 
     public abstract string ReturnDescription();
