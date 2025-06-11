@@ -8,7 +8,7 @@ public class PestilentSwarm : MonoBehaviour
     AMainSystem mainSystem;
     EnemyBase enemyBase;
 
-    public List<GameObject> swarms = new List<GameObject>();
+    List<GameObject> swarms = new List<GameObject>();
 
     public GameObject effects;
 

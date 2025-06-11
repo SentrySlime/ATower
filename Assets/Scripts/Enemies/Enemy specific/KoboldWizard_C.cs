@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class KoboldWizard_C : Enemy_Movement
 {
@@ -146,22 +147,44 @@ public class KoboldWizard_C : Enemy_Movement
     {
         animator.SetBool("Evocation", true);
 
-        Instantiate(spawnVFX, spawnPos.position, transform.rotation);
+        
+        Vector3 randomPosition = GetRandomNavMeshPosition(transform.position, 15, 30);
+
+        Instantiate(spawnVFX, randomPosition, transform.rotation);
 
         yield return new WaitForSeconds(1);
 
-        StartCoroutine(DoSpawnKobold());
+        StartCoroutine(DoSpawnKobold(randomPosition));
     }
 
-    private IEnumerator DoSpawnKobold()
+    private IEnumerator DoSpawnKobold(Vector3 position)
     {
-        Instantiate(kobold, spawnPos.position, transform.rotation);
+        Instantiate(kobold, position, transform.rotation);
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.1f);
 
         EndAttack();
     }
 
+    Vector3 GetRandomNavMeshPosition(Vector3 center, float minRange, float maxRange)
+    {
+        for (int i = 0; i < 30; i++) // attempt up to 30 times
+        {
+            // First: pick a random direction on the horizontal plane (XZ)
+            Vector2 randomCircle = Random.insideUnitCircle.normalized * Random.Range(minRange, maxRange);
+            Vector3 randomDirection = new Vector3(randomCircle.x, 0, randomCircle.y);
+            randomDirection += center;
+
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(randomDirection, out hit, 2.0f, NavMesh.AllAreas))
+            {
+                return hit.position;
+            }
+        }
+
+        // fallback: return original position
+        return center;
+    }
 
     #endregion
 }
