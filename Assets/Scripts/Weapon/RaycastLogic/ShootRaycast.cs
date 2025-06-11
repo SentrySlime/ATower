@@ -4,10 +4,12 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Linq;
+using System;
 
 public class ShootRaycast : BaseShootingLogic
 {
     HitmarkerLogic hitMarkLogic;
+
 
     [Header("Line Renderer")]
     public LineRenderer lineRenderer;
@@ -130,25 +132,25 @@ public class ShootRaycast : BaseShootingLogic
         if (!isShotgun)
         {
 
-            
+            print("First");
 
             //This is where we se the random numbers for the accuracy
             #region RandomNumbers Accuracy
             if (weaponSocket.adsProgress < 0.9)
             {
-                minYOffset = Random.Range(-tempADSAccuracy, 0);
-                maxYOffset = Random.Range(tempADSAccuracy, 0);
+                minYOffset = UnityEngine.Random.Range(-tempADSAccuracy, 0);
+                maxYOffset = UnityEngine.Random.Range(tempADSAccuracy, 0);
 
-                minXoffset = Random.Range(-tempADSAccuracy, 0);
-                maxXoffset = Random.Range(tempADSAccuracy, 0);
+                minXoffset = UnityEngine.Random.Range(-tempADSAccuracy, 0);
+                maxXoffset = UnityEngine.Random.Range(tempADSAccuracy, 0);
             }
             else
             {
-                minYOffset = Random.Range(-tempHIPAccuracy, 0);
-                maxYOffset = Random.Range(tempHIPAccuracy, 0);
+                minYOffset = UnityEngine.Random.Range(-tempHIPAccuracy, 0);
+                maxYOffset = UnityEngine.Random.Range(tempHIPAccuracy, 0);
 
-                minXoffset = Random.Range(-tempHIPAccuracy, 0);
-                maxXoffset = Random.Range(tempHIPAccuracy, 0);
+                minXoffset = UnityEngine.Random.Range(-tempHIPAccuracy, 0);
+                maxXoffset = UnityEngine.Random.Range(tempHIPAccuracy, 0);
             }
 
             #endregion
@@ -162,6 +164,7 @@ public class ShootRaycast : BaseShootingLogic
             if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.forward, out raycastHit, weaponRange, layermask))
             {
                 hitDistance = Vector3.Distance(shootPoint.transform.position, raycastHit.point);
+                print("second");
             }
             else
             {
@@ -171,11 +174,18 @@ public class ShootRaycast : BaseShootingLogic
             //This spherecast gets all enemies that we hit (does not apply to shotguns)
             RaycastHit[] hits = Physics.SphereCastAll(shootPoint.transform.position, shotSize, shootPoint.transform.forward, hitDistance, layermask2);
 
-            hits = hits.OrderBy(go => go.distance).ToArray();
+            print($"SphereCast hit count: {hits.Length}");
+
+
+            Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+
+            //hits = hits.OrderBy(go => go.distance).ToArray();
 
 
             List<GameObject> alreadyDamaged = new List<GameObject>();
             List<GameObject> enemiesToDamage = new List<GameObject>();
+
+            print("third");
 
             for (int i = 0; i < hits.Length; i++)
             {
@@ -238,6 +248,8 @@ public class ShootRaycast : BaseShootingLogic
 
             for (int i = 0; i < tempPierce; i++)
             {
+                print("fourth");
+
                 if (enemiesToDamage[i].transform.CompareTag("Enemy"))
                 {
                     if(ShouldExplode)
@@ -254,6 +266,12 @@ public class ShootRaycast : BaseShootingLogic
 
                         StartCoroutine(AttachEffectNextFrame(tempVFX, alreadyDamaged[i].transform));
                         
+                        if(playerStats.pestilentSwarm > 0)
+                        {
+                            baseWeapon.shootSystem.PestilentSwarm(hits[i], hitDirection, alreadyDamaged[i].transform);
+                            
+                        }
+
                         if (lineRenderer)
                             SpawnLinerenderer(effectPosition.position, hits[i].point, true);
                         DealDamage(alreadyDamaged[i], false, hits[i].point);
@@ -273,6 +291,11 @@ public class ShootRaycast : BaseShootingLogic
                         Vector3 hitDirection = transform.position - raycastHit.point;
                         
                         GameObject tempVFX = Instantiate(hitEnemyVFX, hits[i].point, Quaternion.LookRotation(hitDirection));
+
+                        if (playerStats.pestilentSwarm > 0)
+                        {
+                            baseWeapon.shootSystem.PestilentSwarm(hits[i], hitDirection, alreadyDamaged[i].transform);
+                        }
 
                         StartCoroutine(AttachEffectNextFrame(tempVFX, alreadyDamaged[i].transform));
                         
@@ -395,13 +418,13 @@ public class ShootRaycast : BaseShootingLogic
 
                 if (weaponSocket.adsProgress < 0.9f)
                 {
-                    yOffset = Random.Range(-tempADSAccuracy, tempADSAccuracy);
-                    xOffset = Random.Range(-tempADSAccuracy, tempADSAccuracy);
+                    yOffset = UnityEngine.Random.Range(-tempADSAccuracy, tempADSAccuracy);
+                    xOffset = UnityEngine.Random.Range(-tempADSAccuracy, tempADSAccuracy);
                 }
                 else
                 {
-                    yOffset = Random.Range(-tempHIPAccuracy, tempHIPAccuracy);
-                    xOffset = Random.Range(-tempHIPAccuracy, tempHIPAccuracy);
+                    yOffset = UnityEngine.Random.Range(-tempHIPAccuracy, tempHIPAccuracy);
+                    xOffset = UnityEngine.Random.Range(-tempHIPAccuracy, tempHIPAccuracy);
                 }
 
                 // Calculate adjusted direction
@@ -422,12 +445,27 @@ public class ShootRaycast : BaseShootingLogic
                         DealDamage(hit.transform.root.gameObject, false, hit.point);
                         hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
                         Instantiate(hitEnemyVFX, hit.point, Quaternion.Inverse(transform.rotation), hit.transform);
+
+                        if (playerStats.pestilentSwarm > 0)
+                        {
+                            Vector3 hitDirection = transform.position - hit.point;
+                            baseWeapon.shootSystem.PestilentSwarm(hit, hitDirection, hit.transform);
+                        }
+
+
                     }
                     else if (hit.transform.CompareTag("WeakSpot"))
                     {
                         DealDamage(hit.transform.root.gameObject, true, hit.point);
                         hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
                         Instantiate(hitEnemyVFX, hit.point, Quaternion.Inverse(transform.rotation), hit.transform);
+
+                        if (playerStats.pestilentSwarm > 0)
+                        {
+                            Vector3 hitDirection = transform.position - hit.point;
+                            baseWeapon.shootSystem.PestilentSwarm(hit, hitDirection, hit.transform);
+                        }
+
                     }
                     else if (hit.transform.CompareTag("Breakable"))
                     {
@@ -492,7 +530,7 @@ public class ShootRaycast : BaseShootingLogic
 
             float curveIntensity = Mathf.Clamp(distance * 0.3f, 5f, 50f);
 
-            Vector3 controlPoint = (start + end) * 0.5f + (Random.onUnitSphere + Vector3.up).normalized * curveIntensity;
+            Vector3 controlPoint = (start + end) * 0.5f + (UnityEngine.Random.onUnitSphere + Vector3.up).normalized * curveIntensity;
             
             if(enemy)
                 Instantiate(hitEnemyVFX, end, Quaternion.Inverse(transform.rotation));

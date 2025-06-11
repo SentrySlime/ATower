@@ -392,12 +392,13 @@ public class ProjectileBase : MonoBehaviour
 
     protected void HomingLogic()
     {
+
         if (homingTimer < nonHomingDuration)
         {
             MoveForward();
             homingTimer += Time.deltaTime;
         }
-        else if (cantHome)
+        else if (cantHome || !target)
         {
             MoveForward();
             HomingCheckTimer();

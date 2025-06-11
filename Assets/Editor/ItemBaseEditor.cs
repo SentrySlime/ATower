@@ -43,7 +43,7 @@ public class ItemBaseEditor : Editor
 
         DrawFoldout("Damage", ref showDamage, new string[]
         {
-            "damage", "increasedDamage", "critChance", "canExplodeEnemies", "moneyIsPower", "hpIsPower", "chainLightningDamage"
+            "damage", "increasedDamage", "critChance", "canExplodeEnemies", "moneyIsPower", "hpIsPower", "chainLightningDamage", "crimsonDagger"
         });
 
         DrawFoldout("Ammo", ref showAmmo, new string[]

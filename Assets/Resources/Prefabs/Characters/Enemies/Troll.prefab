@@ -5787,6 +5787,7 @@ GameObject:
   - component: {fileID: 4236415218429465450}
   - component: {fileID: 4236415218429465455}
   - component: {fileID: 1598884561}
+  - component: {fileID: -5393836837660612398}
   m_Layer: 9
   m_Name: Troll
   m_TagString: Enemy
@@ -5845,6 +5846,7 @@ MonoBehaviour:
   shouldReportDeath: 1
   canDropAmmo: 1
   damagedPS: {fileID: 0}
+  roomScript: {fileID: 0}
   meshObject: {fileID: 3894396396947667310}
   enemy_Movement: {fileID: 0}
 --- !u!114 &1711520447
@@ -5961,6 +5963,19 @@ MonoBehaviour:
   statusEffectParticles: {fileID: 684397484}
   effectDuration: 5
   baseFrequency: 1
+--- !u!114 &-5393836837660612398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4236415218429465454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff8368f562de0514fb375af69392fe5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effects: {fileID: 8240258288333259156, guid: 8a9fb2c0301eee64ca6dc385658bcdff, type: 3}
 --- !u!1 &4236415219618307164
 GameObject:
   m_ObjectHideFlags: 0

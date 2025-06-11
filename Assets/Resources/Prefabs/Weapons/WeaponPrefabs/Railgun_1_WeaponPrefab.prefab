@@ -4911,7 +4911,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1856004530348900990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.173, y: 0.018, z: 1.625}
+  m_LocalPosition: {x: 0.12, y: 0.018, z: 1.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2570130017103152218}
@@ -4975,7 +4975,6 @@ GameObject:
   - component: {fileID: 5779255679518579600}
   - component: {fileID: 6593228928422068517}
   - component: {fileID: 7947369351111584678}
-  - component: {fileID: 6276951348630332230}
   m_Layer: 0
   m_Name: Weapon_Body
   m_TagString: Untagged
@@ -5065,7 +5064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseShootingLogic1: {fileID: 6593228928422068517}
-  baseShootingLogic2: {fileID: 6276951348630332230}
+  baseShootingLogic2: {fileID: 0}
   aName: Railgun
   aDescription: Technology refined like this is extremely rare to encounter in the
     depths
@@ -5120,64 +5119,13 @@ MonoBehaviour:
   player: {fileID: 0}
   playerStats: {fileID: 0}
   playerHealth: {fileID: 0}
+  upgraded: 0
   interuptReload: 0
   finishedReload: 0
   renderObjects:
   - {fileID: 6015780298741021061}
   - {fileID: 6503401797055502000}
   - {fileID: 8378595537554814757}
---- !u!114 &6276951348630332230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6593228928422068522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90f64b5086b30334087b89dea5fa7b26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shootPoint: {fileID: 1856004530348900990}
-  ADSAccuracy: 1
-  HIPAccuracy: 1
-  damage: 2100
-  player: {fileID: 0}
-  playerStats: {fileID: 0}
-  baseWeapon: {fileID: 0}
-  recoil: {fileID: 0}
-  weaponSocket: {fileID: 0}
-  screenShake: {fileID: 0}
-  aimCamera: {fileID: 0}
-  gameManager: {fileID: 0}
-  aMainSystem: {fileID: 0}
-  explosionSystem: {fileID: 0}
-  firingMode: 1
-  burstDelay: 1
-  burstAmount: 1
-  lineRenderer: {fileID: 0}
-  curve: 0
-  lineDuration: 0.9
-  lineTimer: 0
-  hitDistance: 0
-  hitmarker: {fileID: 0}
-  isShotgun: 0
-  shootAmount: 1
-  shotSize: 1.5
-  pierceAmount: 10
-  ShouldExplode: 0
-  explosiveDamage: 1
-  explosiveRadius: 1
-  SFXList: []
-  shootSFX: {fileID: 4964101775347663484, guid: 394ff8fb76cc76443ae629d2e2889d5e, type: 3}
-  hitSFX: {fileID: 7201874395979686177, guid: fdb9a446e8307fb46b004bc9595a88ce, type: 3}
-  effectPosition: {fileID: 5502287252857412224}
-  shootEffect: {fileID: 5041501958831826202, guid: 97509b8efd7feb74fa5b4ba36aa4145b, type: 3}
-  muzzleFlash: {fileID: 0}
-  hitVFX: {fileID: 1879272669879180, guid: e000aa721affc9f4388070a6965b8738, type: 3}
-  hitEnemyVFX: {fileID: 425359807012254669, guid: bec38f1dba5948e4e9e0937fa9f41ba0, type: 3}
-  casingVFX: {fileID: 1856004529903584604}
-  mantleAnimation: {fileID: 0}
 --- !u!114 &6037166255301704000
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4929,7 +4929,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 1.5
-      minScalar: 0.75
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4981,7 +4981,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 40
+      scalar: 30
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5034,8 +5034,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.49056602, g: 0.035040427, b: 0, a: 1}
-      maxColor: {r: 0.9811321, g: 0.1610537, b: 0.1610537, a: 1}
+      minColor: {r: 0.49019608, g: 0, b: 0.10492428, a: 1}
+      maxColor: {r: 0.98039216, g: 0.16078429, b: 0.39440992, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5097,8 +5097,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1.5
-      minScalar: 0.3
+      scalar: 4
+      minScalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5678,7 +5678,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 29999
+      scalar: 999
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -9636,8 +9636,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6413191631987962784}
   - component: {fileID: 512296962237348463}
+  - component: {fileID: 714739939333412371}
   m_Layer: 0
-  m_Name: Death_Particle
+  m_Name: PestilentSwarmTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9673,6 +9674,102 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTimer: 2
+--- !u!82 &714739939333412371
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8240258288333259156}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 0a97c3de1d26cf14a936fd45b19fd483, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 0
+  MinDistance: 1
+  MaxDistance: 200
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1536167666349059938
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9686,7 +9783,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: lengthInSec
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: scalingMode
@@ -9694,7 +9791,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: ShapeModule.type
-      value: 0
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: SizeModule.enabled
@@ -9702,7 +9803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: CollisionModule.radiusScale
-      value: 69.8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: ShapeModule.radiusThickness
@@ -9710,7 +9811,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: TrailModule.lifetime.scalar
-      value: 0.1
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: InitialModule.maxNumParticles
@@ -9718,7 +9819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.015
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
@@ -9726,7 +9827,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: InitialModule.startSize.minScalar
-      value: 0.005
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: ShapeModule.randomDirectionAmount
@@ -9734,15 +9835,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: TrailModule.widthOverTrail.scalar
-      value: 50
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 250
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: InitialModule.startSpeed.minScalar
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: InitialModule.gravityModifier.scalar
@@ -9762,11 +9867,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: TrailModule.colorOverLifetime.maxGradient.key0.b
-      value: 0
+      value: 0.38475227
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: TrailModule.colorOverLifetime.maxGradient.key0.g
-      value: 0.028497491
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1938086735303856977, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].time
@@ -9823,19 +9928,19 @@ PrefabInstance:
     - target: {fileID: 4258558906336918549, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -1928204645961537321, guid: 3326d80325f576d47ae0ca38770d8a3a, type: 3}
+      objectReference: {fileID: -5336384108498891189, guid: 9e668cb446c67f74f993df4182d0e649, type: 3}
     - target: {fileID: 4258558906336918549, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: m_Mesh1
       value: 
-      objectReference: {fileID: 212370497460711607, guid: 97580f523e4ae534990a52bba6963158, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 4258558906336918549, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: m_Mesh2
       value: 
-      objectReference: {fileID: 70948873267775455, guid: 1f1b2f421a5eb9846b490694a9bc7322, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 4258558906336918549, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: m_Mesh3
       value: 
-      objectReference: {fileID: 2534964839176971238, guid: dcb399474802a3a499356ca154772845, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 4258558906336918549, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: m_RenderAlignment
       value: 2
@@ -9843,7 +9948,7 @@ PrefabInstance:
     - target: {fileID: 4258558906336918549, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 60a47cdaebb6b0043a4810028300f33d, type: 2}
+      objectReference: {fileID: 2100000, guid: ea45ec1a09ecc914784ac6b2c44adc60, type: 2}
     - target: {fileID: 6862825028397151158, guid: 7cbc6ccc4f5971b468aad334f438bf45, type: 3}
       propertyPath: m_RootOrder
       value: 2

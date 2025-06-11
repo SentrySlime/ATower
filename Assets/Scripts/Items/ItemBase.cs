@@ -131,6 +131,9 @@ public class ItemBase : MonoBehaviour
     [Tooltip("1 point is equal to one extra point of damage chain lightning will do")]
     [Range(-200f, 200f)] public int chainLightningDamage = 0;
 
+    [Tooltip("1 point decides if we have it or not")]
+    [Range(-1f, 1f)] public int crimsonDagger = 0;
+
     #endregion
 
     #region Ammo
@@ -240,6 +243,8 @@ public class ItemBase : MonoBehaviour
         playerStats.hpIsPower += hpIsPower;
         playerStats.canExplode += canExplodeEnemies;
         playerStats.chainLightningDamage += chainLightningDamage;
+        playerStats.crimsonDagger += crimsonDagger;
+        
 
 
         //Ammo ---
@@ -302,7 +307,7 @@ public class ItemBase : MonoBehaviour
         playerStats.hpIsPower -= hpIsPower;
         playerStats.canExplode -= canExplodeEnemies;
         playerStats.chainLightningDamage -= chainLightningDamage;
-
+        playerStats.crimsonDagger -= crimsonDagger;
 
         //Ammo
         playerStats.ammoRefills -= ammoRefills;

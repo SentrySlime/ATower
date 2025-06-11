@@ -23785,6 +23785,7 @@ GameObject:
   - component: {fileID: 2841669339965917917}
   - component: {fileID: 3287092181688524969}
   - component: {fileID: 1582424945477327745}
+  - component: {fileID: 7328834041545036173}
   m_Layer: 9
   m_Name: Spawnling
   m_TagString: Enemy
@@ -23844,6 +23845,7 @@ MonoBehaviour:
   shouldReportDeath: 0
   canDropAmmo: 0
   damagedPS: {fileID: 0}
+  roomScript: {fileID: 0}
   meshObject: {fileID: 7848565427314895318}
   enemy_Movement: {fileID: 0}
 --- !u!114 &2477631447712588769
@@ -24124,6 +24126,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7328834041545036173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4872972237810406103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff8368f562de0514fb375af69392fe5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effects: {fileID: 8240258288333259156, guid: 8a9fb2c0301eee64ca6dc385658bcdff, type: 3}
 --- !u!1 &5399035341890470146
 GameObject:
   m_ObjectHideFlags: 0
@@ -38506,11 +38521,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c543cea3d7743a04d8b9bc3baec385d0, type: 3}
---- !u!4 &94899975276757590 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -2198888584636164399, guid: c543cea3d7743a04d8b9bc3baec385d0, type: 3}
-  m_PrefabInstance: {fileID: 6929594509219665031}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7467078136181846892 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c543cea3d7743a04d8b9bc3baec385d0, type: 3}
@@ -38519,5 +38529,10 @@ Transform:
 --- !u!1 &7848565427314895318 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c543cea3d7743a04d8b9bc3baec385d0, type: 3}
+  m_PrefabInstance: {fileID: 6929594509219665031}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &94899975276757590 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2198888584636164399, guid: c543cea3d7743a04d8b9bc3baec385d0, type: 3}
   m_PrefabInstance: {fileID: 6929594509219665031}
   m_PrefabAsset: {fileID: 0}

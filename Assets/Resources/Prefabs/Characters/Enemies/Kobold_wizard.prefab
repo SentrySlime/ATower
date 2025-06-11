@@ -981,6 +981,7 @@ GameObject:
   - component: {fileID: 6409973813948525185}
   - component: {fileID: 516599715}
   - component: {fileID: 645874652930118453}
+  - component: {fileID: 8602459205496201984}
   m_Layer: 9
   m_Name: Kobold_wizard
   m_TagString: Enemy
@@ -1236,6 +1237,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8602459205496201984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6067937393770942415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff8368f562de0514fb375af69392fe5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effects: {fileID: 8240258288333259156, guid: 8a9fb2c0301eee64ca6dc385658bcdff, type: 3}
 --- !u!1 &6228674157994561433
 GameObject:
   m_ObjectHideFlags: 0

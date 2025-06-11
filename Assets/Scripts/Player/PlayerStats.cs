@@ -42,6 +42,8 @@ public class PlayerStats : MonoBehaviour
     public int hpIsPower = 0;
     public int chainLightningTargets = 0;
     public int chainLightningDamage = 0;
+    public int crimsonDagger = 0;
+    public int pestilentSwarm = 0;
 
     [Header("Ammo")]
     public int ammoRefills = 0;

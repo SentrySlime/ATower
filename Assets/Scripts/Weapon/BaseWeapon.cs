@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class BaseWeapon : MonoBehaviour
 {
+
     public BaseShootingLogic baseShootingLogic1;
     public BaseShootingLogic baseShootingLogic2;
 
@@ -106,6 +107,7 @@ public class BaseWeapon : MonoBehaviour
     [HideInInspector] public GameObject gameManager;
     [HideInInspector] public AMainSystem aMainSystem;
     [HideInInspector] public ExplosionSystem explosionSystem;
+    [HideInInspector] public ShootSystem shootSystem;
     [HideInInspector] public GameObject player;
     [HideInInspector] public PlayerStats playerStats;
     [HideInInspector] public PlayerHealth playerHealth;
@@ -125,6 +127,7 @@ public class BaseWeapon : MonoBehaviour
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
         aMainSystem = gameManager.GetComponent<AMainSystem>();
         explosionSystem = gameManager.GetComponent<ExplosionSystem>();
+        shootSystem = gameManager.GetComponent<ShootSystem>();
 
         recoil = GetComponentInParent<Recoil>();
         screenShake = GetComponentInParent<ScreenShake>();

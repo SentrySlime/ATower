@@ -33,6 +33,7 @@ public class EnemyManager : MonoBehaviour
     HealthRegen healthRegen;
     WeaponSocket weaponSocket;
     AMainSystem mainSystem;
+    ShootSystem shootSystem;
 
     void Start()
     {
@@ -43,6 +44,7 @@ public class EnemyManager : MonoBehaviour
         healthRegen = player.GetComponent<HealthRegen>();
         weaponSocket = player.GetComponent<WeaponSocket>();
         mainSystem = GetComponent<AMainSystem>();
+        shootSystem = GetComponent<ShootSystem>();
     }
 
     
@@ -83,6 +85,10 @@ public class EnemyManager : MonoBehaviour
 
             playerHealth.Heal(healingAmount, false);
         }
+
+        if (playerStats.crimsonDagger > 0)
+            shootSystem.CrimsonDagger(deathPosition);
+
 
         if (!slowDown)
         {
