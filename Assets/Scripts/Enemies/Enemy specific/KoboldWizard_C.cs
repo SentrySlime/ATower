@@ -11,18 +11,30 @@ public class KoboldWizard_C : Enemy_Movement
     public float fireSpireDistance = 110;
     public GameObject fireSpireTelegraphVFX;
     public GameObject fireSpireVFX;
-
+    public LayerMask fireSpireLayermask;
+    bool canFireSpire = true;
+    
+    
     [Header("shield")]
     public GameObject barrier;
     public EnemyBase existingBarrier;
-    public bool canCreateBarrier = true;
-    float barrierRate = 6;
+    bool canCreateBarrier = true;
+    float barrierRate = 8;
 
-    [Header("shield")]
+    [Header("Summon")]
     public GameObject kobold;
     public Transform spawnPos;
     public GameObject spawnVFX;
     public GameObject spawnSFX;
+    List<GameObject> spawnList = new List<GameObject>();
+    bool canSummon = true;
+    int minionCount = 0;
+
+    [Header("Shard")]
+    public GameObject shard;
+    public Transform shardSpawnPoint;
+    EnemyBase existingShard;
+    bool canCreateShard = true;
 
     void Start()
     {
@@ -39,33 +51,32 @@ public class KoboldWizard_C : Enemy_Movement
     {
 
         if (isAttacking) return;
-        
-        if (canCreateBarrier)
-            CreateBarrier();
+
+        //if (canCreateBarrier)
+        //    CreateBarrier();
 
         if (attackRateTimer < attackRate)
             attackRateTimer += Time.deltaTime;
         else
         {
 
-            if(playerDistance < fireSpireDistance && HasLineOfSight())
-            {
+            if (canCreateBarrier)
+                CreateBarrier();
+            else if (canFireSpire && DistanceAndLineOS())
+                StartFireSpire();
+            else if (canSummon && CanSummon())
                 SpawnKobold();
-                //StartFireSpire();
-            }
-
-            //if (playerDistance < meleeDistance)
-            //{
-            //    MeleeAttack();
-            //}
-            //else if (playerDistance < rangedDistance)
-            //{
-            //    if (IsPlayerInfront() && HasLineOfSight())
-            //    {
-            //        RangedAttack();
-            //    }
-            //}
+            else if (canCreateShard)
+                SpawnShard();
         }
+    }
+
+    private bool DistanceAndLineOS()
+    {
+        if (playerDistance < fireSpireDistance && HasLineOfSight())
+            return true;
+        else
+            return false;
     }
 
     public override void EndAttack()
@@ -73,32 +84,6 @@ public class KoboldWizard_C : Enemy_Movement
         base.EndAttack();
         animator.SetBool("Evocation", false);
     }
-
-    #region FireSpire
-
-    private void StartFireSpire()
-    {
-        animator.SetBool("Evocation", true);
-        StartCoroutine(FireSpireTelegraph());
-    }
-
-    IEnumerator FireSpireTelegraph()
-    {
-        StartAttack(0);
-        Vector3 fireSpirePos = player.transform.position;
-        Instantiate(fireSpireTelegraphVFX, fireSpirePos, Quaternion.identity);
-        yield return new WaitForSeconds(1);
-        FireSpire(fireSpirePos);
-    }
-
-    private void FireSpire(Vector3 spawnPos)
-    {
-        animator.SetBool("Evocation", true);
-        Instantiate(fireSpireVFX, spawnPos, Quaternion.identity);
-        EndAttack();
-    }
-
-    #endregion
 
     #region Barrier
 
@@ -135,12 +120,70 @@ public class KoboldWizard_C : Enemy_Movement
 
     #endregion
 
-    #region Projectile
+    #region FireSpire
+
+    private void StartFireSpire()
+    {
+        canFireSpire = false;
+        animator.SetBool("Evocation", true);
+        StartCoroutine(FireSpireTelegraph());
+    }
+
+    IEnumerator FireSpireTelegraph()
+    {
+        StartAttack(0);
+
+        Vector3 fireSpirePos = player.transform.position;
+
+        RaycastHit hit;
+        if (Physics.Raycast(fireSpirePos, -transform.up, out hit, 20, fireSpireLayermask))
+        {
+            fireSpirePos = hit.point;
+
+            if (fireSpireTelegraphVFX)
+            {
+                Instantiate(fireSpireTelegraphVFX, fireSpirePos, Quaternion.identity);
+            }
+        }
+        else
+        {
+            if (fireSpireTelegraphVFX)
+            {
+                Instantiate(fireSpireTelegraphVFX, fireSpirePos, Quaternion.identity);
+            }
+        }
+
+        yield return new WaitForSeconds(1);
+        FireSpire(fireSpirePos);
+    }
+
+    private void FireSpire(Vector3 spawnPos)
+    {
+        animator.SetBool("Evocation", true);
+        Instantiate(fireSpireVFX, spawnPos, Quaternion.identity);
+        StartCoroutine (FireSpireCooldown());
+        EndAttack();
+    }
+
+    IEnumerator FireSpireCooldown()
+    {
+        yield return new WaitForSeconds(14);
+        canFireSpire = true;
+    }
+
+    #endregion
+
+    #region Summon
 
     private void SpawnKobold()
     {
+        canSummon = false;
         StartAttack(0);
-        StartCoroutine(SpawnKoboldTelegraph());
+
+        for (int i = 0; i < 2; i++)
+        {
+            StartCoroutine(SpawnKoboldTelegraph());
+        }
     }
 
     private  IEnumerator SpawnKoboldTelegraph()
@@ -159,10 +202,20 @@ public class KoboldWizard_C : Enemy_Movement
 
     private IEnumerator DoSpawnKobold(Vector3 position)
     {
-        Instantiate(kobold, position, transform.rotation);
+        GameObject minion = Instantiate(kobold, position, transform.rotation);
+
+        print("1");
+
+        spawnList.Add(minion);
+        if(enemyBase.roomScript)
+            enemyBase.roomScript.AddEnemy(minion);
+        minion.GetComponent<EnemyBase>().koboldWizard = this;
+        minionCount++;
+
 
         yield return new WaitForSeconds(0.1f);
 
+        StartCoroutine(SummonCooldown());
         EndAttack();
     }
 
@@ -185,6 +238,60 @@ public class KoboldWizard_C : Enemy_Movement
         // fallback: return original position
         return center;
     }
+
+    IEnumerator SummonCooldown()
+    {
+        yield return new WaitForSeconds(11);
+        canSummon = true;
+    }
+
+    private bool CanSummon()
+    {
+        if (minionCount < 4)
+            return true;
+        else
+            return false;
+    }
+
+    public void DecreaseMinionCount(GameObject gameObject)
+    {
+        spawnList.Remove(gameObject);
+        minionCount--;
+    }
+
+    #endregion
+
+    #region Shard
+
+    private void SpawnShard()
+    {
+        canCreateShard = false;
+        StartAttack(0);
+        StartCoroutine(DoSpawnShard());
+    }
+
+    private IEnumerator DoSpawnShard()
+    {
+        yield return new WaitForSeconds(1);
+
+        GameObject tempShard = Instantiate(shard, shardSpawnPoint.position, transform.rotation, shardSpawnPoint);
+        existingShard = tempShard.GetComponent<EnemyBase>();
+        existingShard.OnEnemyDied += ShardReset;
+
+        EndAttack();
+    }
+
+    public void ShardReset(EnemyBase barrier)
+    {
+        StartCoroutine(ShardCooldown());
+    }
+
+    IEnumerator ShardCooldown()
+    {
+        yield return new WaitForSeconds(5);
+        canCreateShard = true;
+    }
+
 
     #endregion
 }

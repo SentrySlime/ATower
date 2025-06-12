@@ -134,6 +134,10 @@ public class ItemBase : MonoBehaviour
     [Tooltip("1 point decides if we have it or not")]
     [Range(-1f, 1f)] public int crimsonDagger = 0;
 
+    [Tooltip("1 point decides if we have it or not")]
+    [Range(-1f, 1f)] public int pestilentSwarm = 0;
+    
+
     #endregion
 
     #region Ammo
@@ -244,6 +248,7 @@ public class ItemBase : MonoBehaviour
         playerStats.canExplode += canExplodeEnemies;
         playerStats.chainLightningDamage += chainLightningDamage;
         playerStats.crimsonDagger += crimsonDagger;
+        playerStats.pestilentSwarm += pestilentSwarm;
         
 
 
@@ -308,6 +313,8 @@ public class ItemBase : MonoBehaviour
         playerStats.canExplode -= canExplodeEnemies;
         playerStats.chainLightningDamage -= chainLightningDamage;
         playerStats.crimsonDagger -= crimsonDagger;
+        playerStats.pestilentSwarm -= pestilentSwarm;
+
 
         //Ammo
         playerStats.ammoRefills -= ammoRefills;

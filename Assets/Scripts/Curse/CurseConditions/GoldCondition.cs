@@ -20,6 +20,7 @@ public class GoldCondition : CurseCondition
         if (complete) return;
 
         currentGoldCount += value;
+        Mathf.Clamp(currentGoldCount, 0, requiredGoldCount);
         curse.conditionCount.text = currentGoldCount + " / " + requiredGoldCount;
         if (currentGoldCount >= requiredGoldCount)
         {

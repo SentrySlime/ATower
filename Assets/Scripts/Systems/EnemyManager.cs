@@ -65,8 +65,11 @@ public class EnemyManager : MonoBehaviour
     {
         totalEnemyDeaths++;
 
-        enemyDeathReport?.Invoke(1);
-        
+        if(elite)
+            enemyDeathReport?.Invoke(5);
+        else
+            enemyDeathReport?.Invoke(1);
+
         PlayerStatsEffects(deathPosition);
         if(canDropAmmo)
             CheckForAmmoDrop(deathPosition);

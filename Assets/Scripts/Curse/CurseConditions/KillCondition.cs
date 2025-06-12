@@ -20,6 +20,7 @@ public class KillCondition : CurseCondition
         if (complete) return;
 
         currentKillCount += value;
+        Mathf.Clamp(currentKillCount, 0, requiredKillCount);
         curse.conditionCount.text = currentKillCount + " / " + requiredKillCount;
         if (currentKillCount >= requiredKillCount)
         {

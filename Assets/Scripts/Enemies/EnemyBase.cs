@@ -32,6 +32,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
 
     //HealingGun healingGun;
     [HideInInspector] public Spawner spawner;
+    [HideInInspector] public KoboldWizard_C koboldWizard;
     HitmarkerLogic hitMarkerLogic;
     LayerMask layerMask;
     PlayerHealth playerHealth;
@@ -242,6 +243,9 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
 
         if (spawner)
             spawner.DecreaseMinionCount();
+
+        if (koboldWizard)
+            koboldWizard.DecreaseMinionCount(gameObject);
             
         if(dieSFX)
             Instantiate(dieSFX);

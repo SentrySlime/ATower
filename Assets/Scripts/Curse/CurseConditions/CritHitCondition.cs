@@ -21,6 +21,7 @@ public class CritHitCondition : CurseCondition
         if (complete) return;
 
         currentCritCount += value;
+        Mathf.Clamp(currentCritCount, 0, requiredCritCount);
         curse.conditionCount.text = currentCritCount + " / " + requiredCritCount;
         if (currentCritCount >= requiredCritCount)
         {

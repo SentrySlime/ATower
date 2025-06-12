@@ -146,25 +146,33 @@ public class PlayerStats : MonoBehaviour
 
     public void AddStatsToPickedUpWeapon(GameObject weaponObj)
     {
+
         BaseWeapon weapon = weaponObj.transform.GetChild(0).GetComponent<BaseWeapon>();
 
         weapon.maxMagazine = weapon.baseMaxMagazine + maxMagazineSize;
+
+        weapon.maxMagazine = Mathf.Clamp(weapon.maxMagazine, 1, 999); 
 
         if (bandolierEffect != 0)
         {
             int additionalBullets = Mathf.FloorToInt((weapon.baseMaxMagazine / 15f) * bandolierEffect);
             weapon.maxMagazine += additionalBullets;
+            weapon.maxMagazine = Mathf.Clamp(weapon.maxMagazine, 1, 999);
         }
 
         weapon.currentMagazine = weapon.maxMagazine;
 
         weapon.maxAmmo = Mathf.FloorToInt(weapon.baseMaxAmmo + (weapon.baseMaxAmmo * maxAmmo));
         weapon.currentAmmo = weapon.maxAmmo;
+
+        
     }
 
 
     public void AddAllWeaponStats()
     {
+        print("2");
+
         if (inventory.heldWeapons.Count == 0) { return; }
 
         for (int i = 0; i < inventory.heldWeapons.Count; i++)
@@ -173,15 +181,21 @@ public class PlayerStats : MonoBehaviour
 
             // Apply base and player bonus
             weapon.maxMagazine = weapon.baseMaxMagazine + maxMagazineSize;
+            weapon.maxMagazine = Mathf.Clamp(weapon.maxMagazine, 1, 999);
 
             // Apply Bandolier effect
             if (bandolierEffect != 0)
             {
                 int additionalBullets = Mathf.FloorToInt((weapon.baseMaxMagazine / 15f) * bandolierEffect);
                 weapon.maxMagazine += additionalBullets;
+                weapon.maxMagazine = Mathf.Clamp(weapon.maxMagazine, 1, 999);
             }
 
             weapon.maxAmmo = Mathf.FloorToInt(weapon.baseMaxAmmo + (weapon.baseMaxAmmo * maxAmmo));
+
+            weapon.currentMagazine = weapon.maxMagazine;
+
+            weapon.SetAmmoInfo();
 
             findAndEquipWeapons.SetWeapon(weaponSocket.equippedWeapon.transform.parent.gameObject);
         }

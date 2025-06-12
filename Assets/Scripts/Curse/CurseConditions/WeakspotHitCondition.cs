@@ -21,6 +21,7 @@ public class WeakspotHitCondition : CurseCondition
         if (complete) return;
 
         currentWeakSpotCount += value;
+        Mathf.Clamp(currentWeakSpotCount, 0, requiredWeakSpotHitCount);
         curse.conditionCount.text = currentWeakSpotCount + " / " + requiredWeakSpotHitCount;
         if (currentWeakSpotCount >= requiredWeakSpotHitCount)
         {

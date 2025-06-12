@@ -450,6 +450,104 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.003
   m_Center: {x: 0, y: 0.003, z: 0}
+--- !u!1 &975699158013220816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2970045999233636286}
+  - component: {fileID: 8086583139109757253}
+  - component: {fileID: 2965453796461822969}
+  - component: {fileID: 637046125836704585}
+  m_Layer: 9
+  m_Name: ShardRotator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2970045999233636286
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975699158013220816}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 7.76, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_Children:
+  - {fileID: 8405304792944502650}
+  m_Father: {fileID: 6881065122814924149}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &8086583139109757253
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975699158013220816}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &2965453796461822969
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975699158013220816}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &637046125836704585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975699158013220816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9537760147db3a9418c7b50b16d58221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateX: 0
+  rotateY: 3
+  rotateZ: 0
 --- !u!1 &1100432566839740002
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,6 +578,87 @@ Transform:
   m_Father: {fileID: 1287192947161838741}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1350822466519348052
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8405304792944502650}
+  - component: {fileID: 7395582409962059415}
+  - component: {fileID: 7905832663374360976}
+  m_Layer: 9
+  m_Name: 'ShardSpawnPoint '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8405304792944502650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350822466519348052}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 7.24}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2970045999233636286}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &7395582409962059415
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350822466519348052}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &7905832663374360976
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350822466519348052}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1893286691829751550
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,6 +1183,7 @@ Transform:
   - {fileID: 3011762209005447522}
   - {fileID: 6409973813289428411}
   - {fileID: 3355992626028566947}
+  - {fileID: 2970045999233636286}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -120, z: 0}
@@ -1038,9 +1218,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f62242947bcb804c98fa0c285b6e8dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1000
-  currentHealth: 1000
-  elite: 0
+  maxHealth: 2500
+  currentHealth: 2500
+  elite: 1
   canExplode: 1
   explodeOnDeath: 0
   explosiveBarrel: 0
@@ -1052,6 +1232,7 @@ MonoBehaviour:
   killMarker: {fileID: 0}
   homingTarget: {fileID: 6409973813289428410}
   spawner: {fileID: 0}
+  koboldWizard: {fileID: 0}
   dropLoot: 1
   itemPrefab: {fileID: 0}
   itemTokens: 1
@@ -1120,18 +1301,22 @@ MonoBehaviour:
   isAttacking: 0
   playerDistance: 0
   directionToPlayer: {x: 0, y: 0, z: 0}
-  attackRate: 4
+  attackRate: 2
   attackRateTimer: 0
   fireSpireDistance: 110
   fireSpireTelegraphVFX: {fileID: 1101982546532789126, guid: 8845e36e566505a43a02120603832b75, type: 3}
   fireSpireVFX: {fileID: 1609992200824999608, guid: 3f503bb15787d5e439966d0e11c6d22f, type: 3}
+  fireSpireLayermask:
+    serializedVersion: 2
+    m_Bits: 6331
   barrier: {fileID: 5206377327788692538, guid: eeda3240234d568499cbf60521f2526f, type: 3}
   existingBarrier: {fileID: 0}
-  canCreateBarrier: 1
   kobold: {fileID: 8483853150859067443, guid: 5df13ed240826ef40b1708cac9ccdce9, type: 3}
   spawnPos: {fileID: 3355992626028566947}
   spawnVFX: {fileID: 1101982546532789126, guid: 33be6c23747add942985240b50a39388, type: 3}
   spawnSFX: {fileID: 0}
+  shard: {fileID: 811230296748248167, guid: 793345c7a07929a43afb9e2152a7fddc, type: 3}
+  shardSpawnPoint: {fileID: 8405304792944502650}
 --- !u!82 &645874652930118453
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1144,7 +1329,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 44dd4f9058dab6b4fbeb18e7ca85ba79, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.55
+  m_Volume: 0.75
   m_Pitch: 1.3
   Loop: 1
   Mute: 0
@@ -1165,17 +1350,17 @@ AudioSource:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: -2
-      outSlope: -2
+      inSlope: -1.3277001
+      outSlope: -1.3277001
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.25
-      value: 0.5
-      inSlope: -1.5999999
-      outSlope: -1.5999999
+      time: 0.31285858
+      value: 0.5846176
+      inSlope: -1.4900291
+      outSlope: -1.4900291
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -1183,8 +1368,8 @@ AudioSource:
     - serializedVersion: 3
       time: 0.6666667
       value: 0
-      inSlope: -1.1999999
-      outSlope: -1.1999999
+      inSlope: -1.6523579
+      outSlope: -1.6523579
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334

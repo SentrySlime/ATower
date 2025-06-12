@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: PestilentSwarm
-  itemDescription: Killing enemies spawn homing daggers, but reduced accuracy
+  itemDescription: Applies parasites on hit, explodes at max stacks, but greatly
+    reduced magasine size
   itemIcon: {fileID: 21300000, guid: 647bf4c83c38810409e3f347ac53c84b, type: 3}
   itemMesh: {fileID: -5336384108498891189, guid: 9e668cb446c67f74f993df4182d0e649, type: 3}
   itemMaterial: {fileID: 2100000, guid: ea45ec1a09ecc914784ac6b2c44adc60, type: 2}
@@ -78,9 +79,11 @@ MonoBehaviour:
   moneyIsPower: 0
   hpIsPower: 0
   chainLightningDamage: 0
+  crimsonDagger: 0
+  pestilentSwarm: 1
   ammoRefills: 0
   reloadAmount: 0
-  maxMagazineSize: 0
+  maxMagazineSize: -10
   reloadSpeed: 0
   returnAmmoOnkill: 0
   hasAlternateFastReload: 0

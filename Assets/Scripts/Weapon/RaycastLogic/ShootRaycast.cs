@@ -643,8 +643,7 @@ public class ShootRaycast : BaseShootingLogic
 
                     if (playerStats.pestilentSwarm > 0)
                     {
-                        baseWeapon.shootSystem.PestilentSwarm(hits[i], hitDirection, alreadyDamaged[i].transform);
-
+                        baseWeapon.shootSystem.PestilentSwarm(hits[i].point, hitDirection, alreadyDamaged[i].transform);
                     }
 
                     if (lineRenderer)
@@ -669,7 +668,7 @@ public class ShootRaycast : BaseShootingLogic
 
                     if (playerStats.pestilentSwarm > 0)
                     {
-                        baseWeapon.shootSystem.PestilentSwarm(hits[i], hitDirection, alreadyDamaged[i].transform);
+                        baseWeapon.shootSystem.PestilentSwarm(hits[i].point, hitDirection, alreadyDamaged[i].transform);
                     }
 
                     StartCoroutine(AttachEffectNextFrame(tempVFX, alreadyDamaged[i].transform));

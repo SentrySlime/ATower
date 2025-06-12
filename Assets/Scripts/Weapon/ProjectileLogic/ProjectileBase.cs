@@ -154,11 +154,23 @@ public class ProjectileBase : MonoBehaviour
             if (isExplosive)
             {
                 ExplosiveShot(other.transform.root.gameObject);
+
+                if (playerStats.pestilentSwarm > 0)
+                {
+                    shootSystem.PestilentSwarm(hitPos, -transform.forward, other.transform.root.transform);
+                }
+
             }
             else
             {
                 if (hitEnemyVFX)
                     Instantiate(hitEnemyVFX, hitPos, Quaternion.LookRotation(-transform.forward));
+
+                if (playerStats.pestilentSwarm > 0)
+                {
+                    shootSystem.PestilentSwarm(hitPos, -transform.forward, other.transform.root.transform);
+                }
+
                 ImpactBehaviour(other.transform.root.gameObject, false, hitPos);
             }
         }
@@ -167,11 +179,23 @@ public class ProjectileBase : MonoBehaviour
             if (isExplosive)
             {
                 ExplosiveShot(other.transform.root.gameObject);
+
+                if (playerStats.pestilentSwarm > 0)
+                {
+                    shootSystem.PestilentSwarm(hitPos, -transform.forward, other.transform.root.transform);
+                }
+
             }
             else
             {
                 if (hitEnemyVFX)
                     Instantiate(hitEnemyVFX, hitPos, Quaternion.LookRotation(-transform.forward));
+
+                if (playerStats.pestilentSwarm > 0)
+                {
+                    shootSystem.PestilentSwarm(hitPos, -transform.forward, other.transform.root.transform);
+                }
+
                 ImpactBehaviour(other.transform.root.gameObject, true, hitPos);
             }
         }

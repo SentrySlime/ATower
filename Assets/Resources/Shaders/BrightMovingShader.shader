@@ -13,7 +13,9 @@ Shader "Custom/BrightMovingShader"
 
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { "Queue"="Transparent" "RenderType"="Transparent" }
+        Blend SrcAlpha OneMinusSrcAlpha
+        ZWrite Off
         Pass
         {
             Tags { "LightMode"="ForwardBase" }
@@ -84,6 +86,7 @@ Shader "Custom/BrightMovingShader"
 
                 fixed3 emission = tex2D(_EmissionMap, i.uv).rgb * _EmissionColor.rgb;
 
+                // Output final color with proper alpha
                 return fixed4(diffuse + specular + emission, albedoTex.a);
             }
             ENDCG
