@@ -504,19 +504,8 @@ public class ShootRaycast : BaseShootingLogic
 
     private void FiringLogic()
     {
-        print("What");
-
         float tempADSAccuracy = ADSAccuracy + playerStats.accuracy;
         float tempHIPAccuracy = HIPAccuracy + playerStats.accuracy;
-
-        
-        for (int i = 0; i < hits.Length; i++)
-        {
-            if (hits[i].collider != null)
-            {
-                Debug.Log(hits[i].collider.transform.gameObject.name);
-            }
-        }
 
         //This is where we se the random numbers for the accuracy
         #region RandomNumbers Accuracy

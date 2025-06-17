@@ -171,7 +171,6 @@ public class PlayerStats : MonoBehaviour
 
     public void AddAllWeaponStats()
     {
-        print("2");
 
         if (inventory.heldWeapons.Count == 0) { return; }
 
