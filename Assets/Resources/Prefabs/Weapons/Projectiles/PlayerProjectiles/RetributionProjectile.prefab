@@ -48,12 +48,12 @@ MonoBehaviour:
   explosivePrefab: {fileID: 6181682070259854663, guid: 1bc228bb5343563459938d66db7cb4dd, type: 3}
   UseAdvancedCalculations: 1
   damage: 200
-  projectileSpeed: 120
+  projectileSpeed: 200
   pierceObjects: 0
   pierceAmount: 0
   isExplosive: 1
-  explosiveRadius: 1
-  explosiveDamage: 200
+  explosiveRadius: 1.5
+  explosiveDamage: 250
   explosiveImpactSFX: {fileID: 0}
   homing: 0
   turnSpeed: 11
@@ -70,6 +70,7 @@ MonoBehaviour:
   lifeDuration: 8
   lifeTimer: 0
   canDestroy: 1
+  playerStats: {fileID: 0}
   weaponParent: {fileID: 0}
   aMainSysteM: {fileID: 0}
   explosionSystem: {fileID: 0}

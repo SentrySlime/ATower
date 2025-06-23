@@ -49,6 +49,11 @@ public class ParasiteProjectile : ProjectileBase, IProjectileRelease
         else
         {
 
+            if (playerStats.pestilentSwarm > 0)
+            {
+                shootSystem.PestilentSwarm(transform.position, -transform.forward, enemy.transform);
+            }
+
             DealDamage(enemy, false);
             Instantiate(hitEnemyVFX, transform.position, Quaternion.LookRotation(-transform.forward));
             damageIntervalTimer = 0;

@@ -190,7 +190,6 @@ public class KoboldWizard_C : Enemy_Movement
     {
         animator.SetBool("Evocation", true);
 
-        
         Vector3 randomPosition = GetRandomNavMeshPosition(transform.position, 15, 30);
 
         Instantiate(spawnVFX, randomPosition, transform.rotation);
@@ -221,9 +220,9 @@ public class KoboldWizard_C : Enemy_Movement
 
     Vector3 GetRandomNavMeshPosition(Vector3 center, float minRange, float maxRange)
     {
-        for (int i = 0; i < 30; i++) // attempt up to 30 times
+        for (int i = 0; i < 30; i++) 
         {
-            // First: pick a random direction on the horizontal plane (XZ)
+            
             Vector2 randomCircle = Random.insideUnitCircle.normalized * Random.Range(minRange, maxRange);
             Vector3 randomDirection = new Vector3(randomCircle.x, 0, randomCircle.y);
             randomDirection += center;
@@ -231,11 +230,19 @@ public class KoboldWizard_C : Enemy_Movement
             NavMeshHit hit;
             if (NavMesh.SamplePosition(randomDirection, out hit, 2.0f, NavMesh.AllAreas))
             {
-                return hit.position;
+                Vector3 origin = visionPoint != null ? visionPoint.position : center + Vector3.up * 1.5f;
+
+                Vector3 dir = hit.position - origin;
+
+                float distance = dir.magnitude;
+
+                if(!Physics.Raycast(origin, dir.normalized, distance, layerMask))
+                {
+                    return hit.position;
+                }
             }
         }
 
-        // fallback: return original position
         return center;
     }
 

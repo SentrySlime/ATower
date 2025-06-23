@@ -5042,7 +5042,8 @@ MonoBehaviour:
   baseShootingLogic1: {fileID: 9042178775537694539}
   baseShootingLogic2: {fileID: 0}
   aName: Mauler
-  aDescription: Carbine fused with the carcase of a hexademon
+  aDescription: Carbine fused with the carcase of a hexademon, loaded with homing
+    rounds
   weaponIcon: {fileID: 21300000, guid: eee8f268d9d6ef943b25e59a79abdbc0, type: 3}
   shootPoint: {fileID: 5778652067730987094}
   barrel: {fileID: 1856004530348900990}
@@ -5091,9 +5092,11 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
   explosionSystem: {fileID: 0}
+  shootSystem: {fileID: 0}
   player: {fileID: 0}
   playerStats: {fileID: 0}
   playerHealth: {fileID: 0}
+  upgraded: 0
   interuptReload: 0
   finishedReload: 0
   renderObjects:

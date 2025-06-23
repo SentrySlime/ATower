@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &689382764994747581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3226176088356199453}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3226176088356199453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689382764994747581}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1856004529439608098}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1856004529439608096
 GameObject:
   m_ObjectHideFlags: 0
@@ -29,6 +59,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5779255679518579600}
+  - {fileID: 3226176088356199453}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4980,6 +5011,8 @@ MonoBehaviour:
   aMainSystem: {fileID: 0}
   explosionSystem: {fileID: 0}
   firingMode: 1
+  burstDelay: 1
+  burstAmount: 1
   lineRenderer: {fileID: 7921476482363610212, guid: dbd2def43faf82b46a5a5f72ccc46e66, type: 3}
   curve: 0
   lineDuration: 0.9
@@ -5051,12 +5084,8 @@ MonoBehaviour:
   reloadTime: 6
   baseReloadAmount: 0
   reloadAmount: 1
-  baseDamage: 0
-  damage: 500
   baseFireRate: 0
   fireRate: 0.3
-  burstDelay: 1
-  burstAmount: 1
   recoilAmount: -3
   moveAmount: -0.8
   recoilX: -25
@@ -5070,7 +5099,6 @@ MonoBehaviour:
   currentMagazineText: {fileID: 0}
   ammoDivider: {fileID: 0}
   ammoFill: {fileID: 0}
-  firingMode: 1
   aimCamera: {fileID: 0}
   recoil: {fileID: 0}
   screenShake: {fileID: 0}
@@ -5078,9 +5106,11 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
   explosionSystem: {fileID: 0}
+  shootSystem: {fileID: 0}
   player: {fileID: 0}
   playerStats: {fileID: 0}
   playerHealth: {fileID: 0}
+  upgraded: 0
   interuptReload: 0
   finishedReload: 0
   renderObjects:

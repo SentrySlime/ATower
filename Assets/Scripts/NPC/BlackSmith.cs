@@ -105,7 +105,7 @@ public class BlackSmith : MonoBehaviour, IInteractInterface
     {
         BaseShootingLogic shootingLogic = weaponSocket.equippedWeapon.baseShootingLogic1;
         shootingLogic.damage *= 1.5f;
-        
+           
         baseWeapon.fireRate *= 0.5f;
         baseWeapon.SetAdsFor();
 

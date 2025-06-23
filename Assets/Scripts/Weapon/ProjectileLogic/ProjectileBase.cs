@@ -84,7 +84,7 @@ public class ProjectileBase : MonoBehaviour
     float projectileSize;
     Vector3 firstPos;
     Vector3 secondPos;
-    PlayerStats playerStats;
+    [HideInInspector] public PlayerStats playerStats;
     [HideInInspector] public BaseWeapon weaponParent;
     //ExplosionSystem explosionSystem;
     [HideInInspector] public AMainSystem aMainSysteM;
@@ -288,13 +288,6 @@ public class ProjectileBase : MonoBehaviour
         {
             ExplosiveShot(other.transform.root.gameObject);
         }
-        //else if (!pierceObjects)
-        //{
-        //    if (other.CompareTag("Player")) { return; }
-        //    EndObjectLife();
-
-
-        //}
         else
             CheckPierce();
     }
@@ -318,7 +311,6 @@ public class ProjectileBase : MonoBehaviour
 
     protected void DealDamage(GameObject enemyRoot, bool incomingWeakSpotShot)
     {
-        //hitMarkerLogic.EnableHitMarker();
         aMainSysteM.DealDamage(enemyRoot, damage, true, incomingWeakSpotShot);
         
         if(burning)

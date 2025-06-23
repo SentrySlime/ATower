@@ -217,6 +217,7 @@ public class ItemBase : MonoBehaviour
 
         //Health ---
         playerStats.addedHealth += addedHealth;
+        playerStats.increasedHealth += increasedHealth;
         playerStats.oneMaxHP += oneMaxHP;
         playerStats.hpRegen += hpRegen;
         playerStats.hpOnHit += hpOnHit;
@@ -282,6 +283,7 @@ public class ItemBase : MonoBehaviour
     {
         //Health ---
         playerStats.addedHealth -= addedHealth;
+        playerStats.increasedHealth -= increasedHealth;
         playerStats.oneMaxHP -= oneMaxHP;
         playerStats.hpRegen -= hpRegen;
         playerStats.hpOnHit -= hpOnHit;
