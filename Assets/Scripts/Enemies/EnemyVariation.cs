@@ -5,15 +5,20 @@ using UnityEngine;
 public class EnemyVariation : MonoBehaviour
 {
     public List<GameObject> variationParts = new List<GameObject>();
-    
+
+    public bool randomize = true;
+
     void Start()
     {
+        
+
         for (int i = 0; i < variationParts.Count; i++)
         {
             variationParts[i].SetActive(false);
         }
 
-        RandomizeParts();
+        if(randomize)
+            RandomizeParts();
     }
 
     

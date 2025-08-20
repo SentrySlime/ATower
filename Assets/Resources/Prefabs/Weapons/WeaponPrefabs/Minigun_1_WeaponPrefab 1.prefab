@@ -4853,7 +4853,7 @@ MonoBehaviour:
   recoilAmount: 0
   moveAmount: 0
   lerpDuration: 0.1
-  lerpBackDuration: 0.6
+  lerpBackDuration: 0.2
   rotating: 0
   targetPosition: {x: 0, y: 0, z: 0}
   reloadTimer: 0
@@ -19320,7 +19320,7 @@ MonoBehaviour:
   shootPoint: {fileID: 1856004530348900990}
   ADSAccuracy: 4
   HIPAccuracy: 8
-  damage: 40
+  damage: 50
   player: {fileID: 0}
   playerStats: {fileID: 0}
   baseWeapon: {fileID: 0}
@@ -19334,6 +19334,7 @@ MonoBehaviour:
   firingMode: 0
   burstDelay: 1
   burstAmount: 1
+  includeBreakable: 0
   lineRenderer: {fileID: 0}
   curve: 0
   lineDuration: 0.9
@@ -19347,6 +19348,7 @@ MonoBehaviour:
   ShouldExplode: 0
   explosiveDamage: 1
   explosiveRadius: 1
+  weaponRange: 999
   SFXList: []
   shootSFX: {fileID: 4964101775347663484, guid: 09b38970b3c237b47b9cbb4020d7b368, type: 3}
   hitSFX: {fileID: 4964101775347663484, guid: b244e633c20fdda4895818242ba7786b, type: 3}
@@ -19393,19 +19395,19 @@ MonoBehaviour:
   infinteAmmo: 0
   reloadType: 0
   baseMaxMagazine: 0
-  maxMagazine: 150
-  currentMagazine: 150
+  maxMagazine: 115
+  currentMagazine: 115
   baseReloadTime: 0
   reloadTime: 8
   baseReloadAmount: 0
   reloadAmount: 1
   baseFireRate: 0
-  fireRate: 0.01
-  recoilAmount: -6
-  moveAmount: -0.4
-  recoilX: -5
-  recoilY: 0.5
-  recoilZ: 0.4
+  fireRate: 0.02
+  recoilAmount: -1
+  moveAmount: -0.3
+  recoilX: -3
+  recoilY: 0.3
+  recoilZ: 0.3
   hipPos: {x: 0.99, y: -0.67, z: 2.41}
   adsPos: {x: 0.99, y: -0.67, z: 2.41}
   adsSpeed: 6

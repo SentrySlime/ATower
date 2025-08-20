@@ -52,7 +52,6 @@ MonoBehaviour:
   moveAmount: 0
   lerpDuration: 0.1
   lerpBackDuration: 0.6
-  fireMode: 0
   rotating: 0
   targetPosition: {x: 0, y: 0, z: 0}
   reloadTimer: 0
@@ -5011,6 +5010,10 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
   explosionSystem: {fileID: 0}
+  firingMode: 0
+  burstDelay: 1
+  burstAmount: 1
+  includeBreakable: 0
   lineRenderer: {fileID: 0}
   curve: 0
   lineDuration: 0.9
@@ -5024,6 +5027,7 @@ MonoBehaviour:
   ShouldExplode: 0
   explosiveDamage: 25
   explosiveRadius: 0.5
+  weaponRange: 999
   SFXList: []
   shootSFX: {fileID: 4964101775347663484, guid: 81804116d578ad2438d5dcf6d40c671e, type: 3}
   hitSFX: {fileID: 4964101775347663484, guid: b244e633c20fdda4895818242ba7786b, type: 3}
@@ -5047,6 +5051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseShootingLogic1: {fileID: 6593228928422068517}
+  baseShootingLogic2: {fileID: 0}
   aName: UZI
   aDescription: Imbued with runes and shaman magic for extra oomph
   weaponIcon: {fileID: 21300000, guid: 9810c2f252bb2f846bda2c59558e4657, type: 3}
@@ -5061,8 +5066,10 @@ MonoBehaviour:
   baseMaxAmmo: 0
   maxAmmo: 350
   currentAmmo: 350
-  baseAmmoPerShot: 0
-  ammoPerShot: 1
+  baseAmmoPerShot1: 0
+  ammoPerShot1: 1
+  baseAmmoPerShot2: 0
+  ammoPerShot2: 1
   baseInfinteAmmo: 0
   infinteAmmo: 0
   reloadType: 0
@@ -5073,12 +5080,8 @@ MonoBehaviour:
   reloadTime: 3.4
   baseReloadAmount: 0
   reloadAmount: 1
-  baseDamage: 0
-  damage: 30
   baseFireRate: 0
   fireRate: 0.025
-  burstDelay: 1
-  burstAmount: 1
   recoilAmount: -1
   moveAmount: -0.1
   recoilX: -2
@@ -5092,7 +5095,6 @@ MonoBehaviour:
   currentMagazineText: {fileID: 0}
   ammoDivider: {fileID: 0}
   ammoFill: {fileID: 0}
-  firingMode: 0
   aimCamera: {fileID: 0}
   recoil: {fileID: 0}
   screenShake: {fileID: 0}
@@ -5100,9 +5102,11 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
   explosionSystem: {fileID: 0}
+  shootSystem: {fileID: 0}
   player: {fileID: 0}
   playerStats: {fileID: 0}
   playerHealth: {fileID: 0}
+  upgraded: 0
   interuptReload: 0
   finishedReload: 0
   renderObjects:
@@ -5157,11 +5161,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4074934030344262, guid: f54bb1ec5b694b74ba4f1ff9c5556eee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.046000108
+      value: -0.046
       objectReference: {fileID: 0}
     - target: {fileID: 4074934030344262, guid: f54bb1ec5b694b74ba4f1ff9c5556eee, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.338
+      value: 0.254
       objectReference: {fileID: 0}
     - target: {fileID: 4074934030344262, guid: f54bb1ec5b694b74ba4f1ff9c5556eee, type: 3}
       propertyPath: m_LocalRotation.w

@@ -10,12 +10,16 @@ public class SpecialRoom : MonoBehaviour
     public RoomManager roomManager;
     public RoomScript roomScript;
 
+    public GameObject gate;
+
     public GameObject specialRoomMesh;
     public GameObject flashMesh;
     Material material;
     Material flashMaterial;
 
-    float fadeDuration = 1.8f;
+    float fadeDuration = 2f;
+
+    float moveSpeed = 5f;
 
     bool unlocked = false;
 
@@ -36,6 +40,8 @@ public class SpecialRoom : MonoBehaviour
     public void IniateLockRelease()
     {
         if (unlocked) return;
+        if (SFX)
+            SFX.Play();
         unlocked = true;
         StartCoroutine(ReleaseLock());
     }
@@ -43,24 +49,34 @@ public class SpecialRoom : MonoBehaviour
     IEnumerator ReleaseLock()
     {
 
-        StartCoroutine(FadeEmission());
+        //StartCoroutine(FadeEmission());
 
+        StartCoroutine(MoveGate());
         
 
-
         yield return new WaitForSeconds(fadeDuration);
-
-        if (SFX)
-            SFX.Play();
 
         if (VFX)
             VFX.Play();
 
-        StartCoroutine(FadeFlash());
-        StartCoroutine(FadeAlpha());
+        //StartCoroutine(FadeFlash());
+        //StartCoroutine(FadeAlpha());
     }
 
-    
+    private IEnumerator MoveGate()
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < fadeDuration)
+        {
+
+            gate.transform.position += transform.up * moveSpeed * Time.deltaTime;
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+    }
 
     private IEnumerator FadeEmission()
     {

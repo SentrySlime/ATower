@@ -346,14 +346,11 @@ public class ProjectileBase : MonoBehaviour
 
     protected void ExplosiveShot(GameObject parent)
     {
-        if (hasExploded) return;
 
         explosionSystem.SpawnExplosion(transform.position, explosiveRadius, explosiveDamage, parent, weaponParent);
  
         hasExploded = true;
-        
-        if(pierceObjects)
-            CheckPierce();
+        CheckPierce();
     }
 
 
@@ -361,7 +358,9 @@ public class ProjectileBase : MonoBehaviour
     protected void CheckPierce()
     {
         if(!pierceObjects)
+        {
             EndObjectLife();
+        }
 
         pierceAmount--;
 
@@ -386,8 +385,8 @@ public class ProjectileBase : MonoBehaviour
 
     protected void EndObjectLife()
     {
-        if(canDestroy)
-        //-----Eventually pool this object
+        if (canDestroy)
+            //-----Eventually pool this object
         Destroy(gameObject);
     }
 

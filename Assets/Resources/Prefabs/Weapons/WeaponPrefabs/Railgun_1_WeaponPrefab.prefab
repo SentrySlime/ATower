@@ -5028,6 +5028,7 @@ MonoBehaviour:
   firingMode: 1
   burstDelay: 1
   burstAmount: 1
+  includeBreakable: 0
   lineRenderer: {fileID: 7921476482363610212, guid: 4064454daf2672d42969e4f25bd776d1, type: 3}
   curve: 0
   lineDuration: 0.9
@@ -5037,10 +5038,11 @@ MonoBehaviour:
   isShotgun: 0
   shootAmount: 1
   shotSize: 1
-  pierceAmount: 3
+  pierceAmount: 6
   ShouldExplode: 0
   explosiveDamage: 1
   explosiveRadius: 1
+  weaponRange: 999
   SFXList: []
   shootSFX: {fileID: 4964101775347663484, guid: 394ff8fb76cc76443ae629d2e2889d5e, type: 3}
   hitSFX: {fileID: 7201874395979686177, guid: fdb9a446e8307fb46b004bc9595a88ce, type: 3}
@@ -5116,6 +5118,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
   explosionSystem: {fileID: 0}
+  shootSystem: {fileID: 0}
   player: {fileID: 0}
   playerStats: {fileID: 0}
   playerHealth: {fileID: 0}

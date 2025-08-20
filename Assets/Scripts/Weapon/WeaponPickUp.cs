@@ -4,24 +4,13 @@ using UnityEngine;
 
 public class WeaponPickUp : Item, IInteractWeaponInterface
 {
-    
-
-    public enum WeaponRarity
-    {
-        S,
-        A,
-        B,
-        C,
-        D
-    }
+    public LootSystem.Rarity rarity;
    
     public int goldCost = 500;
 
     [Header("Mesh & Material")]
     [HideInInspector] public Mesh weaponMesh;
     [HideInInspector] public Material weaponMaterial;
-    
-    public WeaponRarity weaponRarity;
 
     [Header("Misc")]
     public BaseWeapon baseWeapon;

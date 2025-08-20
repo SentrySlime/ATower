@@ -48,9 +48,13 @@ public class AMainSystem : MonoBehaviour
 
     public void DealDamage(GameObject incomingObj, float incomingDamage, bool friendly, bool weakSpotShot = false, EnemyBase enemyBase = null, IDamageInterface iDamageInterface = null, bool canTriggerChainLightning = false)
     {
+        print("Dealing Damage 1");
+
         if (friendly)
         {
-            if(canTriggerChainLightning == false)
+            print("Dealing Damage 2");
+
+            if (canTriggerChainLightning == false)
                 chainLightning.DoLightning(incomingObj);
 
             if(iDamageInterface == null)
@@ -65,6 +69,7 @@ public class AMainSystem : MonoBehaviour
         }
         else
         {
+            print("Dealing Damage 2 : side");
             DamagePlayer(incomingObj, incomingDamage, enemyBase);
         }
     }
@@ -72,7 +77,7 @@ public class AMainSystem : MonoBehaviour
     #region DealingDamageToenemies
     private void DamageEnemy(IDamageInterface damageInterface, float incomingDamage, bool incomingWeakSpotShot)
     {
-        
+        print("Dealing Damage 3");
         CalculateDamage(damageInterface, incomingDamage, incomingWeakSpotShot);
     }
 
@@ -119,7 +124,7 @@ public class AMainSystem : MonoBehaviour
         }
         
         PlaySFX(false);
-
+        print("Dealing Damage 4");
         damageInterface.Damage(incomingDamage, false);
     }
 

@@ -11,7 +11,9 @@ public class ShootRaycast : BaseShootingLogic
     HitmarkerLogic hitMarkLogic;
 
     [Header("Stuff")]
-    public RaycastHit[] hits = new RaycastHit[11];
+    public RaycastHit[] hits = new RaycastHit[81];
+
+    public bool includeBreakable = false;
 
     [Header("Line Renderer")]
     public LineRenderer lineRenderer;
@@ -41,7 +43,7 @@ public class ShootRaycast : BaseShootingLogic
     LayerMask layermask2;
     LayerMask layermask3;
 
-    float weaponRange = 999;
+    public float weaponRange = 999;
 
     float minYOffset = 0;
     float maxYOffset = 0;
@@ -71,7 +73,7 @@ public class ShootRaycast : BaseShootingLogic
     private void Awake()
     {
         if (hits == null || hits.Length == 0)
-        hits = new RaycastHit[11];
+        hits = new RaycastHit[51];
 
         if(lineRenderer)
             lineRenderer.enabled = false;
@@ -131,10 +133,6 @@ public class ShootRaycast : BaseShootingLogic
             Instantiate(shootEffect, effectPosition.position, transform.rotation);
         }
 
-        //float tempADSAccuracy = ADSAccuracy + playerStats.accuracy;
-        //float tempHIPAccuracy = HIPAccuracy + playerStats.accuracy;
-
-
         #region Shooting
 
         if (isShotgun)
@@ -148,355 +146,7 @@ public class ShootRaycast : BaseShootingLogic
             FiringLogic();
 
 
-        //if (!isShotgun)
-        //{
-
-        //    for (int i = 0; i < hits.Length; i++)
-        //    {
-        //        if (hits[i].collider != null)
-        //        {
-        //            Debug.Log(hits[i].collider.transform.gameObject.name);
-        //        }
-        //    }
-
-        //    //This is where we se the random numbers for the accuracy
-        //    #region RandomNumbers Accuracy
-        //    if (weaponSocket.adsProgress < 0.9)
-        //    {
-        //        minYOffset = UnityEngine.Random.Range(-tempADSAccuracy, 0);
-        //        maxYOffset = UnityEngine.Random.Range(tempADSAccuracy, 0);
-
-        //        minXoffset = UnityEngine.Random.Range(-tempADSAccuracy, 0);
-        //        maxXoffset = UnityEngine.Random.Range(tempADSAccuracy, 0);
-        //    }
-        //    else
-        //    {
-        //        minYOffset = UnityEngine.Random.Range(-tempHIPAccuracy, 0);
-        //        maxYOffset = UnityEngine.Random.Range(tempHIPAccuracy, 0);
-
-        //        minXoffset = UnityEngine.Random.Range(-tempHIPAccuracy, 0);
-        //        maxXoffset = UnityEngine.Random.Range(tempHIPAccuracy, 0);
-        //    }
-
-        //    #endregion
-
-        //    shootPoint.transform.Rotate(((minXoffset + maxXoffset)), ((minYOffset + maxYOffset)), 0);
-
-        //    //Only hitmarkers on enemy hit
-        //    //Different VFX on enemy hit and object hit
-        //    RaycastHit raycastHit;
-        //    //This is a small raycast to check the distance that the SphereCast should go to
-        //    if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.forward, out raycastHit, weaponRange, layermask))
-        //    {
-        //        hitDistance = Vector3.Distance(shootPoint.transform.position, raycastHit.point);
-        //    }
-        //    else
-        //    {
-        //        hitDistance = weaponRange;
-        //    }
-
-
-        //    //This spherecast gets all enemies that we hit (does not apply to shotguns)
-        //    int hitCount = Physics.SphereCastNonAlloc(shootPoint.transform.position, shotSize, shootPoint.transform.forward, hits, hitDistance, layermask2);
-        //    Array.Sort(hits, 0, hitCount, Comparer<RaycastHit>.Create((a, b) => a.distance.CompareTo(b.distance)));
-
-        //    List<GameObject> alreadyDamaged = new List<GameObject>();
-        //    List<RaycastHit> filteredHits = new List<RaycastHit>();
-
-        //    for (int i = 0; i < hitCount; i++)
-        //    {
-        //        Transform hitTransform = hits[i].transform;
-        //        GameObject rootObj = hitTransform.root.gameObject;
-
-        //        if (!alreadyDamaged.Contains(rootObj))
-        //        {
-        //            if (hitTransform.CompareTag("Breakable"))
-        //            {
-        //                alreadyDamaged.Add(hitTransform.gameObject);
-        //                filteredHits.Add(hits[i]); // Store full RaycastHit
-        //            }
-        //            else
-        //            {
-        //                alreadyDamaged.Add(rootObj);
-        //                filteredHits.Add(hits[i]); // Store full RaycastHit
-        //            }
-        //        }
-        //    }
-
-
-
-
-        //    Debug.DrawLine(aimCamera.transform.position, shootPoint.transform.forward * 999, Color.red, .2f);
-        //    int tempPierce;
-
-        //    if (pierceAmount <= alreadyDamaged.Count)
-        //    {
-        //        tempPierce = pierceAmount;
-
-        //    }
-        //    else
-        //    {
-        //        tempPierce = alreadyDamaged.Count;
-
-        //        if (ShouldExplode)
-        //        {
-        //            explosionSystem.SpawnExplosion(raycastHit.point, explosiveRadius, explosiveDamage, weaponParent: baseWeapon);
-        //        }
-        //        else
-        //        {
-
-        //            //raycastHit.normal
-        //            // Create a rotation that faces away from the surface, using only the surface normal
-        //            Quaternion hitRotation = Quaternion.LookRotation(raycastHit.normal);
-
-        //            // Instantiate the VFX at the hit point, facing away from the surface
-        //            Instantiate(hitVFX, raycastHit.point, hitRotation);
-
-        //        }
-        //    }
-
-
-        //    if(filteredHits == null || filteredHits.Count == 0)
-        //    {
-
-        //        if (lineRenderer)
-        //            SpawnLinerenderer(effectPosition.position, raycastHit.point, false);
-        //    }
-
-        //    for (int i = 0; i < tempPierce; i++)
-        //    {
-
-        //        if (filteredHits[i].transform.CompareTag("Enemy"))
-        //        {
-        //            if(ShouldExplode)
-        //            {
-        //                explosionSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i], weaponParent: baseWeapon);
-        //            }
-        //            else
-        //            {
-        //                var fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal);
-        //                var tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
-        //                Vector3 hitDirection = transform.position - raycastHit.point;
-
-        //                GameObject tempVFX = Instantiate(hitEnemyVFX, hits[i].point, Quaternion.LookRotation(hitDirection));
-
-        //                StartCoroutine(AttachEffectNextFrame(tempVFX, alreadyDamaged[i].transform));
-
-        //                if(playerStats.pestilentSwarm > 0)
-        //                {
-        //                    baseWeapon.shootSystem.PestilentSwarm(hits[i], hitDirection, alreadyDamaged[i].transform);
-
-        //                }
-
-        //                if (lineRenderer)
-        //                    SpawnLinerenderer(effectPosition.position, hits[i].point, true);
-        //                DealDamage(alreadyDamaged[i], false, hits[i].point);
-        //            }
-
-        //        }
-        //        else if (filteredHits[i].transform.CompareTag("WeakSpot"))
-        //        {
-        //            if (ShouldExplode)
-        //            {
-        //                explosionSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i], weaponParent: baseWeapon);
-        //            }
-        //            else
-        //            {
-        //                var fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal);
-        //                var tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
-        //                Vector3 hitDirection = transform.position - raycastHit.point;
-
-        //                GameObject tempVFX = Instantiate(hitEnemyVFX, hits[i].point, Quaternion.LookRotation(hitDirection));
-
-        //                if (playerStats.pestilentSwarm > 0)
-        //                {
-        //                    baseWeapon.shootSystem.PestilentSwarm(hits[i], hitDirection, alreadyDamaged[i].transform);
-        //                }
-
-        //                StartCoroutine(AttachEffectNextFrame(tempVFX, alreadyDamaged[i].transform));
-
-        //                if (lineRenderer)
-        //                    SpawnLinerenderer(effectPosition.position, hits[i].point, true);
-        //                DealDamage(alreadyDamaged[i], true, hits[i].point);
-        //            }
-        //        }
-        //        else if(alreadyDamaged[i].transform.CompareTag("Breakable"))
-        //        {
-        //            if (ShouldExplode)
-        //            {
-        //                explosionSystem.SpawnExplosion(hits[i].point, explosiveRadius, explosiveDamage, alreadyDamaged[i], weaponParent: baseWeapon);
-        //            }
-        //            else
-        //            {
-        //                var fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal);
-        //                var tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
-        //                Vector3 hitDirection = transform.position - raycastHit.point;
-        //                GameObject tempVFX = Instantiate(hitVFX, hits[i].point, Quaternion.LookRotation(hitDirection));
-        //                if (lineRenderer)
-        //                    SpawnLinerenderer(effectPosition.position, hits[i].point, false);
-        //                StartCoroutine(AttachEffectNextFrame(tempVFX, alreadyDamaged[i].transform));
-        //                DealDamage(alreadyDamaged[i], false, hits[i].point);
-        //                tempPierce = 0;
-
-        //            }
-        //        }
-        //        else if (alreadyDamaged[i].transform.CompareTag("Ground"))
-        //        {
-        //            // Project the forward direction of the object onto the plane defined by the hit normal
-        //            Vector3 fwd = Vector3.ProjectOnPlane(transform.forward, raycastHit.normal).normalized;
-
-        //            // Create a rotation that looks in the projected forward direction, with the hit normal as the up direction
-        //            Quaternion tempRot = Quaternion.LookRotation(fwd, raycastHit.normal);
-
-        //            // Determine the direction from the hit point back to the object
-        //            Vector3 hitDirection = (transform.position - raycastHit.point).normalized;
-
-        //            // Optionally spawn a line renderer from effect position to hit point
-        //            if (lineRenderer)
-        //                SpawnLinerenderer(effectPosition.position, raycastHit.point, false);
-
-        //            // Instantiate the VFX with proper orientation using the surface normal
-        //            Instantiate(hitVFX, raycastHit.point, Quaternion.LookRotation(hitDirection, raycastHit.normal), alreadyDamaged[i].transform);
-
-
-        //            break;
-        //        }
-
-        //    }
-
-        //    shootPoint.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        //}
-        //else
-        //{
-        //    //for (int i = 0; i < shootAmount; i++)
-        //    //{
-
-        //    //    #region RandomNumbers Accuracy
-        //    //    if (weaponSocket.adsProgress < 0.9)
-        //    //    {
-        //    //        minYOffset = Random.Range(-tempADSAccuracy, 0);
-        //    //        maxYOffset = Random.Range(tempADSAccuracy, 0);
-
-        //    //        minXoffset = Random.Range(-tempADSAccuracy, 0);
-        //    //        maxXoffset = Random.Range(tempADSAccuracy, 0);
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        minYOffset = Random.Range(-tempHIPAccuracy, 0);
-        //    //        maxYOffset = Random.Range(tempHIPAccuracy, 0);
-
-        //    //        minXoffset = Random.Range(-tempHIPAccuracy, 0);
-        //    //        maxXoffset = Random.Range(tempHIPAccuracy, 0);
-        //    //    }
-
-        //    //    #endregion
-
-        //    //    shootPoint.transform.Rotate(((minXoffset + maxXoffset)), ((minYOffset + maxYOffset)), 0);
-
-        //    //    RaycastHit hit;
-        //    //    if (Physics.Raycast(shootPoint.transform.position, shootPoint.transform.forward, out hit, weaponRange, ~layermask3))
-        //    //    {
-        //    //        if(hit.transform.CompareTag("Enemy"))
-        //    //        {
-        //    //            DealDamage(hit.transform.root.gameObject, false, hit.point);
-        //    //            hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
-
-        //    //            Instantiate(hitEnemyVFX, hit.point, Quaternion.Inverse(transform.rotation), hit.transform);
-
-        //    //        }
-        //    //        if (hit.transform.CompareTag("WeakSpot"))
-        //    //        {
-        //    //            DealDamage(hit.transform.root.gameObject, true, hit.point);
-        //    //            hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
-
-        //    //            Instantiate(hitEnemyVFX, hit.point, Quaternion.Inverse(transform.rotation), hit.transform);
-        //    //        }
-
-        //    //        else if(hit.transform.CompareTag("Breakable"))
-        //    //        {
-        //    //            DealDamage(hit.transform.gameObject, false, hit.point);
-        //    //            hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
-        //    //            Instantiate(hitVFX, hit.point, Quaternion.Inverse(transform.rotation));
-        //    //        }
-        //    //        else
-        //    //            Instantiate(hitVFX, hit.point, Quaternion.Inverse(transform.rotation));
-
-        //    //    }
-
-        //    //    shootPoint.transform.localRotation = Quaternion.Euler(0, 0, 0);
-
-        //    //}
-
-        //    for (int i = 0; i < shootAmount; i++)
-        //    {
-        //        // Accuracy offsets
-        //        float xOffset, yOffset;
-
-        //        if (weaponSocket.adsProgress < 0.9f)
-        //        {
-        //            yOffset = UnityEngine.Random.Range(-tempADSAccuracy, tempADSAccuracy);
-        //            xOffset = UnityEngine.Random.Range(-tempADSAccuracy, tempADSAccuracy);
-        //        }
-        //        else
-        //        {
-        //            yOffset = UnityEngine.Random.Range(-tempHIPAccuracy, tempHIPAccuracy);
-        //            xOffset = UnityEngine.Random.Range(-tempHIPAccuracy, tempHIPAccuracy);
-        //        }
-
-        //        // Calculate adjusted direction
-        //        Quaternion yaw = Quaternion.AngleAxis(xOffset, Vector3.up); // horizontal spread
-        //        Quaternion pitch = Quaternion.AngleAxis(yOffset, Vector3.left); // vertical spread
-
-        //        //Vector3 adjustedForward = new Vector3(shootPoint.transform.forward.x, 0, shootPoint.transform.forward.z);
-
-        //        //Vector3 adjustedDirection = yaw * pitch * adjustedForward;
-
-        //        Vector3 adjustedDirection = yaw * pitch * shootPoint.transform.forward;
-
-        //        // Perform raycast
-        //        if (Physics.Raycast(shootPoint.transform.position, adjustedDirection, out RaycastHit hit, weaponRange, ~layermask3))
-        //        {
-        //            if (hit.transform.CompareTag("Enemy"))
-        //            {
-        //                DealDamage(hit.transform.root.gameObject, false, hit.point);
-        //                hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
-        //                Instantiate(hitEnemyVFX, hit.point, Quaternion.Inverse(transform.rotation), hit.transform);
-
-        //                if (playerStats.pestilentSwarm > 0)
-        //                {
-        //                    Vector3 hitDirection = transform.position - hit.point;
-        //                    baseWeapon.shootSystem.PestilentSwarm(hit, hitDirection, hit.transform);
-        //                }
-
-
-        //            }
-        //            else if (hit.transform.CompareTag("WeakSpot"))
-        //            {
-        //                DealDamage(hit.transform.root.gameObject, true, hit.point);
-        //                hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
-        //                Instantiate(hitEnemyVFX, hit.point, Quaternion.Inverse(transform.rotation), hit.transform);
-
-        //                if (playerStats.pestilentSwarm > 0)
-        //                {
-        //                    Vector3 hitDirection = transform.position - hit.point;
-        //                    baseWeapon.shootSystem.PestilentSwarm(hit, hitDirection, hit.transform);
-        //                }
-
-        //            }
-        //            else if (hit.transform.CompareTag("Breakable"))
-        //            {
-        //                DealDamage(hit.transform.gameObject, false, hit.point);
-        //                hitDistance = Vector3.Distance(shootPoint.transform.position, hit.point);
-        //                Instantiate(hitVFX, hit.point, Quaternion.Inverse(transform.rotation));
-        //            }
-        //            else
-        //            {
-        //                Instantiate(hitVFX, hit.point, Quaternion.Inverse(transform.rotation));
-        //            }
-        //        }
-        //    }
-
-        //}
+        
 
         #endregion
 
@@ -551,8 +201,12 @@ public class ShootRaycast : BaseShootingLogic
         List<GameObject> alreadyDamaged = new List<GameObject>();
         List<RaycastHit> filteredHits = new List<RaycastHit>();
 
+
+        print("Hitcount : " + hitCount);
+
         for (int i = 0; i < hitCount; i++)
         {
+
             Transform hitTransform = hits[i].transform;
             GameObject rootObj = hitTransform.root.gameObject;
 
@@ -573,17 +227,18 @@ public class ShootRaycast : BaseShootingLogic
 
 
 
-
         Debug.DrawLine(aimCamera.transform.position, shootPoint.transform.forward * 999, Color.red, .2f);
         int tempPierce;
 
         if (pierceAmount <= alreadyDamaged.Count)
         {
+            
             tempPierce = pierceAmount;
 
         }
         else
         {
+            
             tempPierce = alreadyDamaged.Count;
 
             if (ShouldExplode)
@@ -592,8 +247,6 @@ public class ShootRaycast : BaseShootingLogic
             }
             else
             {
-
-                //raycastHit.normal
                 // Create a rotation that faces away from the surface, using only the surface normal
                 Quaternion hitRotation = Quaternion.LookRotation(raycastHit.normal);
 
@@ -610,6 +263,7 @@ public class ShootRaycast : BaseShootingLogic
             if (lineRenderer)
                 SpawnLinerenderer(effectPosition.position, raycastHit.point, false);
         }
+
 
         for (int i = 0; i < tempPierce; i++)
         {
@@ -683,7 +337,9 @@ public class ShootRaycast : BaseShootingLogic
                         SpawnLinerenderer(effectPosition.position, hits[i].point, false);
                     StartCoroutine(AttachEffectNextFrame(tempVFX, alreadyDamaged[i].transform));
                     DealDamage(alreadyDamaged[i], false, hits[i].point);
-                    tempPierce = 0;
+                    
+                    if(!includeBreakable)
+                        tempPierce = 0;
 
                 }
             }
@@ -705,8 +361,8 @@ public class ShootRaycast : BaseShootingLogic
                 // Instantiate the VFX with proper orientation using the surface normal
                 Instantiate(hitVFX, raycastHit.point, Quaternion.LookRotation(hitDirection, raycastHit.normal), alreadyDamaged[i].transform);
 
-
-                break;
+                if(!includeBreakable)
+                    break;
             }
 
         }
@@ -715,9 +371,38 @@ public class ShootRaycast : BaseShootingLogic
         
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        // Make sure the shootPoint is assigned and valid
+        if (shootPoint == null) return;
+
+        // Example: show the SphereCast path
+        Gizmos.color = Color.yellow;
+
+        Vector3 origin = shootPoint.transform.position;
+        Vector3 direction = shootPoint.transform.forward;
+
+        // Use the same distance your SphereCast uses in FiringLogic
+        float distance = hitDistance; // You might cache this or use weaponRange
+
+        // Draw the cast path
+        Gizmos.DrawRay(origin, direction * distance);
+
+        // Draw spheres at intervals along the path
+        int steps = 10;
+        for (int i = 0; i <= steps; i++)
+        {
+            float stepDistance = distance * (i / (float)steps);
+            Vector3 point = origin + direction * stepDistance;
+            Gizmos.DrawWireSphere(point, shotSize);
+        }
+    }
+
 
     public void DealDamage(GameObject incomingObj, bool incomingWeakSpotShot, Vector3 hitPos)
     {
+        
+
         if (incomingObj.GetComponent<IDamageInterface>() != null)
         {
             aMainSystem.DealDamage(incomingObj, damage, true, incomingWeakSpotShot);
@@ -729,6 +414,7 @@ public class ShootRaycast : BaseShootingLogic
             }
             else
             {
+                
                 OnHit(incomingObj, incomingWeakSpotShot, hitPos);
             }
         }

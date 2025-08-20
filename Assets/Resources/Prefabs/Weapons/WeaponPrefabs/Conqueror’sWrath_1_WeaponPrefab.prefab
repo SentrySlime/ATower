@@ -5013,6 +5013,7 @@ MonoBehaviour:
   firingMode: 1
   burstDelay: 1
   burstAmount: 1
+  includeBreakable: 0
   lineRenderer: {fileID: 7921476482363610212, guid: dbd2def43faf82b46a5a5f72ccc46e66, type: 3}
   curve: 0
   lineDuration: 0.9
@@ -5021,11 +5022,12 @@ MonoBehaviour:
   hitmarker: {fileID: 0}
   isShotgun: 0
   shootAmount: 1
-  shotSize: 1
+  shotSize: 1.5
   pierceAmount: 1
   ShouldExplode: 0
   explosiveDamage: 1
   explosiveRadius: 1
+  weaponRange: 999
   SFXList: []
   shootSFX: {fileID: 4964101775347663484, guid: 394ff8fb76cc76443ae629d2e2889d5e, type: 3}
   hitSFX: {fileID: 7201874395979686177, guid: fdb9a446e8307fb46b004bc9595a88ce, type: 3}

@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class LootSystem : MonoBehaviour
 {
+
+    public enum Rarity
+    {
+        common,
+        rare,
+        epic,
+        legendary
+    }
+
     public WeaponManager weaponManager;
     public ItemManager itemManager;
 
@@ -49,9 +58,9 @@ public class LootSystem : MonoBehaviour
             return false;
     }
 
-    public void DropWeapon(Vector3 pos)
+    public void DropWeapon(Vector3 pos, LootSystem.Rarity rarity)
     {
-        weaponManager.DropWeapon(pos);
+        weaponManager.DropWeapon(pos, rarity);
     }
 
     public void DropItem(Vector3 pos)

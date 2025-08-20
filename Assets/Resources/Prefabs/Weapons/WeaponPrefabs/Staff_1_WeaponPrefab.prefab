@@ -5061,14 +5061,14 @@ MonoBehaviour:
   infinteAmmo: 0
   reloadType: 0
   baseMaxMagazine: 0
-  maxMagazine: 150
-  currentMagazine: 150
+  maxMagazine: 200
+  currentMagazine: 200
   baseReloadTime: 0
   reloadTime: 1
   baseReloadAmount: 0
   reloadAmount: 1
   baseFireRate: 0
-  fireRate: 0.09
+  fireRate: 0.08
   recoilAmount: 0
   moveAmount: 0.6
   recoilX: -5
@@ -5089,6 +5089,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
   explosionSystem: {fileID: 0}
+  shootSystem: {fileID: 0}
   player: {fileID: 0}
   playerStats: {fileID: 0}
   playerHealth: {fileID: 0}

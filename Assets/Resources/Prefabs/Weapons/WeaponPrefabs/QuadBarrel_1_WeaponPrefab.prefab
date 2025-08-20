@@ -4983,6 +4983,7 @@ MonoBehaviour:
   firingMode: 1
   burstDelay: 1
   burstAmount: 1
+  includeBreakable: 0
   lineRenderer: {fileID: 0}
   curve: 0
   lineDuration: 0.9
@@ -4996,6 +4997,7 @@ MonoBehaviour:
   ShouldExplode: 1
   explosiveDamage: 30
   explosiveRadius: 1
+  weaponRange: 999
   SFXList: []
   shootSFX: {fileID: 4964101775347663484, guid: ab6cebfc42b29e248b527440c69a010c, type: 3}
   hitSFX: {fileID: 4964101775347663484, guid: b244e633c20fdda4895818242ba7786b, type: 3}
@@ -5022,7 +5024,7 @@ MonoBehaviour:
   baseShootingLogic2: {fileID: 117020917372242328}
   aName: QuadBarrel
   aDescription: Able to fire one shot or all 4 shots at once
-  weaponIcon: {fileID: 21300000, guid: 990f2e30a08ab534794a43a3d57443bb, type: 3}
+  weaponIcon: {fileID: 21300000, guid: 23efe55ac995b5b49a70421a78692961, type: 3}
   shootPoint: {fileID: 0}
   barrel: {fileID: 1856004530348900990}
   objectToRecoil: {fileID: 6593228928422068522}
@@ -5108,6 +5110,7 @@ MonoBehaviour:
   firingMode: 1
   burstDelay: 1
   burstAmount: 1
+  includeBreakable: 0
   lineRenderer: {fileID: 0}
   curve: 0
   lineDuration: 0.9
@@ -5121,6 +5124,7 @@ MonoBehaviour:
   ShouldExplode: 1
   explosiveDamage: 20
   explosiveRadius: 1
+  weaponRange: 999
   SFXList: []
   shootSFX: {fileID: 4964101775347663484, guid: ab6cebfc42b29e248b527440c69a010c, type: 3}
   hitSFX: {fileID: 4964101775347663484, guid: b244e633c20fdda4895818242ba7786b, type: 3}

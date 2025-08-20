@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 public class WeaponManager : MonoBehaviour
@@ -13,11 +15,10 @@ public class WeaponManager : MonoBehaviour
     private List<GameObject> shuffledWeapons = new List<GameObject>();
     private int currentIndex = 0;
 
-    public List<GameObject> s_Tier = new List<GameObject>();
-    public List<GameObject> a_Tier = new List<GameObject>();
-    public List<GameObject> b_Tier = new List<GameObject>();
-    public List<GameObject> c_Tier = new List<GameObject>();
-    public List<GameObject> d_Tier = new List<GameObject>();
+    public List<GameObject> Legendary = new List<GameObject>();
+    public List<GameObject> Epic = new List<GameObject>();
+    public List<GameObject> Rare = new List<GameObject>();
+    public List<GameObject> Common = new List<GameObject>();
 
     void Start()
     {
@@ -33,15 +34,16 @@ public class WeaponManager : MonoBehaviour
             {
                 return;
             }
-            DropWeapon(player.transform.position);
+            //DropWeapon(player.transform.position);
         }
     }
 
-    public void DropWeapon(Vector3 spawnPos)
+    public void DropWeapon(Vector3 spawnPos, LootSystem.Rarity rarity)
     {
-
+        
         //GameObject weaponToDrop = GetRandomWeapon();
-        GameObject weaponToDrop = GetShuffledWeapon();
+        //GameObject weaponToDrop = GetShuffledWeapon();
+        GameObject weaponToDrop = GetRandomByRarity(rarity);
         Instantiate(weaponToDrop, spawnPos, Quaternion.identity);
     }
 
@@ -58,6 +60,26 @@ public class WeaponManager : MonoBehaviour
         GameObject weaponToDrop = GetShuffledWeapon();
         return weaponToDrop;
     }
+
+    public GameObject GetRandomByRarity(LootSystem.Rarity rarity)
+    {
+        var candidates = weapons
+            .Where(go => go.TryGetComponent(out WeaponPickUp w) && w.rarity == rarity)
+            .ToList();
+
+        if (candidates.Count == 0) return null;
+
+        int i = -1;
+
+        if (candidates.Count == 1)
+            i = 0;
+        else
+            i = UnityEngine.Random.Range(0, candidates.Count);
+        
+        weapons.Remove(candidates[i]);
+        return candidates[i];
+    }
+
 
     //public GameObject GetRandomWeapon(bool S, bool A, bool B, bool C, bool D)
     //{
@@ -168,27 +190,24 @@ public class WeaponManager : MonoBehaviour
     {
         for (int i = 0; i < weapons.Count; i++)
         {
-            if (weapons[i].GetComponent<WeaponPickUp>().weaponRarity == WeaponPickUp.WeaponRarity.S)
-                s_Tier.Add(weapons[i]);
-            else if (weapons[i].GetComponent<WeaponPickUp>().weaponRarity == WeaponPickUp.WeaponRarity.A)
-                a_Tier.Add(weapons[i]);
-            else if (weapons[i].GetComponent<WeaponPickUp>().weaponRarity == WeaponPickUp.WeaponRarity.B)
-                b_Tier.Add(weapons[i]);
-            else if (weapons[i].GetComponent<WeaponPickUp>().weaponRarity == WeaponPickUp.WeaponRarity.C)
-                c_Tier.Add(weapons[i]);
-            else if (weapons[i].GetComponent<WeaponPickUp>().weaponRarity == WeaponPickUp.WeaponRarity.D)
-                d_Tier.Add(weapons[i]);
+            if (weapons[i].GetComponent<WeaponPickUp>().rarity == LootSystem.Rarity.legendary)
+                Legendary.Add(weapons[i]);
+            else if (weapons[i].GetComponent<WeaponPickUp>().rarity == LootSystem.Rarity.epic)
+                Epic.Add(weapons[i]);
+            else if (weapons[i].GetComponent<WeaponPickUp>().rarity == LootSystem.Rarity.rare)
+                Rare.Add(weapons[i]);
+            else if (weapons[i].GetComponent<WeaponPickUp>().rarity == LootSystem.Rarity.common)
+                Common.Add(weapons[i]);
         }
     }
 
     private void RemoveLists()
     {
 
-        s_Tier.Clear();
-        a_Tier.Clear();
-        b_Tier.Clear();
-        c_Tier.Clear();
-        d_Tier.Clear();
+        Legendary.Clear();
+        Epic.Clear();
+        Rare.Clear();
+        Common.Clear();
 
     }
 

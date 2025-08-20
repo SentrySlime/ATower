@@ -32,7 +32,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
 
     //HealingGun healingGun;
     [HideInInspector] public Spawner spawner;
-    [HideInInspector] public KoboldWizard_C koboldWizard;
+    [HideInInspector] public Enemy_Movement koboldWizard;
     HitmarkerLogic hitMarkerLogic;
     LayerMask layerMask;
     PlayerHealth playerHealth;
@@ -66,6 +66,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
     [HideInInspector] public RoomScript roomScript;
     public GameObject meshObject;
     public Enemy_Movement enemy_Movement;
+    public int cullingDistance = 130;
     bool inDistanceLastFrame = false;
     float timer = 0;
 
@@ -153,9 +154,9 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
         }
         else if (meshObject && enemy_Movement)
         {
-            if (enemy_Movement.playerDistance > 130 && meshObject.activeInHierarchy)
+            if (enemy_Movement.playerDistance > cullingDistance && meshObject.activeInHierarchy)
                 meshObject.SetActive(false);
-            else if (enemy_Movement.playerDistance < 130 && !meshObject.activeInHierarchy)
+            else if (enemy_Movement.playerDistance < cullingDistance && !meshObject.activeInHierarchy)
             {
                 meshObject.SetActive(true);
             }
@@ -245,7 +246,7 @@ public class EnemyBase : MonoBehaviour, IDamageInterface
             spawner.DecreaseMinionCount();
 
         if (koboldWizard)
-            koboldWizard.DecreaseMinionCount(gameObject);
+            koboldWizard.GetComponent<KoboldWizard_C>().DecreaseMinionCount(gameObject);
             
         if(dieSFX)
             Instantiate(dieSFX);

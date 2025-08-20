@@ -2459,6 +2459,7 @@ MonoBehaviour:
   SFX: {fileID: 2584471461498662258}
   roomManager: {fileID: 0}
   roomScript: {fileID: 0}
+  gate: {fileID: 6722383912934889747}
   specialRoomMesh: {fileID: 5550982198152539377}
   flashMesh: {fileID: 5041011560609061685}
 --- !u!82 &4459186466820254281
@@ -31353,12 +31354,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3902182524123855674, guid: 053a24cefdd30424684c6e5485a85543, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4704060294960727755, guid: 053a24cefdd30424684c6e5485a85543, type: 3}
       propertyPath: m_Name
       value: RoomLock
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 053a24cefdd30424684c6e5485a85543, type: 3}
+--- !u!1 &5041011560609061685 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8839685743528236918, guid: 053a24cefdd30424684c6e5485a85543, type: 3}
+  m_PrefabInstance: {fileID: 4564849121154321475}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &5155208120461576524 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8706408538068092175, guid: 053a24cefdd30424684c6e5485a85543, type: 3}
+  m_PrefabInstance: {fileID: 4564849121154321475}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6722383912934889747 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7067043480742171984, guid: 053a24cefdd30424684c6e5485a85543, type: 3}
+  m_PrefabInstance: {fileID: 4564849121154321475}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &9084244221922052744 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4704060294960727755, guid: 053a24cefdd30424684c6e5485a85543, type: 3}
@@ -31377,16 +31397,6 @@ AudioSource:
 --- !u!1 &5550982198152539377 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8237249680640991410, guid: 053a24cefdd30424684c6e5485a85543, type: 3}
-  m_PrefabInstance: {fileID: 4564849121154321475}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5041011560609061685 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8839685743528236918, guid: 053a24cefdd30424684c6e5485a85543, type: 3}
-  m_PrefabInstance: {fileID: 4564849121154321475}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &5155208120461576524 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 8706408538068092175, guid: 053a24cefdd30424684c6e5485a85543, type: 3}
   m_PrefabInstance: {fileID: 4564849121154321475}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4703605510092180967

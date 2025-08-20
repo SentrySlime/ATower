@@ -50,7 +50,7 @@ MonoBehaviour:
   damage: 100
   projectileSpeed: 60
   pierceObjects: 0
-  pierceAmount: 0
+  pierceAmount: 1
   isExplosive: 1
   explosiveRadius: 1
   explosiveDamage: 150
@@ -60,14 +60,20 @@ MonoBehaviour:
   nonHomingDuration: 0.1
   homingRange: 40
   target: {fileID: 0}
+  burning: 0
+  burningDamage: 1
+  burnChance: 0
   useGravity: 0
   gravityMagnitude: 1
   hitVFX: {fileID: 0}
   hitEnemyVFX: {fileID: 2512749170250154484, guid: acce0b4b09260c84eb6e5ddb1239880d, type: 3}
   lifeDuration: 8
   lifeTimer: 0
+  canDestroy: 1
+  playerStats: {fileID: 0}
   weaponParent: {fileID: 0}
   aMainSysteM: {fileID: 0}
+  explosionSystem: {fileID: 0}
   shootSystem: {fileID: 0}
 --- !u!135 &3201373492876456345
 SphereCollider:
@@ -78,7 +84,7 @@ SphereCollider:
   m_GameObject: {fileID: 3201373492876456356}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.17
   m_Center: {x: 0, y: 0, z: 0}

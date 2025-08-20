@@ -62,7 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosivePrefab: {fileID: 0}
   UseAdvancedCalculations: 1
-  damage: 15
+  damage: 20
   projectileSpeed: 35
   pierceObjects: 0
   pierceAmount: 0
@@ -75,6 +75,9 @@ MonoBehaviour:
   nonHomingDuration: 0.25
   homingRange: 45
   target: {fileID: 0}
+  burning: 0
+  burningDamage: 1
+  burnChance: 0
   useGravity: 0
   gravityMagnitude: 1
   hitVFX: {fileID: 0}
@@ -82,8 +85,10 @@ MonoBehaviour:
   lifeDuration: 16
   lifeTimer: 0
   canDestroy: 0
+  playerStats: {fileID: 0}
   weaponParent: {fileID: 0}
   aMainSysteM: {fileID: 0}
+  explosionSystem: {fileID: 0}
   shootSystem: {fileID: 0}
   enemy: {fileID: 0}
   enemyBase: {fileID: 0}

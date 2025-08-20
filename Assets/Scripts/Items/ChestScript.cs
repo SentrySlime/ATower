@@ -11,6 +11,7 @@ public class ChestScript : MonoBehaviour, IInteractInterface
 
     bool open = false;
 
+
     GameObject gameManager;
     LootSystem lootSystem;
     Inventory inventory;
@@ -50,7 +51,7 @@ public class ChestScript : MonoBehaviour, IInteractInterface
         if(coins)
             Instantiate(coins, spawnPos.position, Quaternion.identity).GetComponent<ParticleSystem>().trigger.AddCollider(player.GetComponent<Collider>());
         yield return new WaitForSeconds(0.1f);
-        lootSystem.DropWeapon(spawnPos.position);
+        //lootSystem.DropWeapon(spawnPos.position);
     }
 
 }
