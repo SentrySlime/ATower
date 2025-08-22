@@ -86,22 +86,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: open the chest
---- !u!111 &80595649935702150
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999584165306780505}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: -2337396785541882689, guid: a98f6de948fb80f48802ede2ff811292, type: 3}
-  m_Animations:
-  - {fileID: -2337396785541882689, guid: a98f6de948fb80f48802ede2ff811292, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1 &80595651630063724
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,6 +116,22 @@ Transform:
   m_Father: {fileID: 80595649910927186}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &80595649935702150
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999584165306780505}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: -2337396785541882689, guid: a98f6de948fb80f48802ede2ff811292, type: 3}
+  m_Animations:
+  - {fileID: -2337396785541882689, guid: a98f6de948fb80f48802ede2ff811292, type: 3}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &80595650360472755
 PrefabInstance:
   m_ObjectHideFlags: 0
