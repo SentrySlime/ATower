@@ -4,24 +4,32 @@ using UnityEngine;
 
 public class RarityChestScript : MonoBehaviour, IInteractInterface
 {
+    public GameObject weaponSpawnPos;
+    public GameObject goldSpawnPos;
 
-    public GameObject spawnPos;
+    [Header("Misc")]
+    public float chestOpenSpeed = 3;
+    public GameObject coins;
 
     [Header("Common")]
     public GameObject commonChest;
     public Animation commonAnimation;
+    public ParticleSystem commonPS;
 
-    [Header("Common")]
+    [Header("Rare")]
     public GameObject rareChest;
     public Animation rareAnimation;
+    public ParticleSystem rarePS;
 
-    [Header("Common")]
+    [Header("Epic")]
     public GameObject epicChest;
     public Animation epicAnimation;
+    public ParticleSystem epicPS;
 
-    [Header("Common")]
+    [Header("Legendary")]
     public GameObject legendaryChest;
     public Animation legendaryAnimation;
+    public ParticleSystem legendaryPS;
 
     bool open = false;
 
@@ -30,11 +38,14 @@ public class RarityChestScript : MonoBehaviour, IInteractInterface
     Inventory inventory;
     GameObject player;
 
+    [Header("Rarity")]
+    public bool randomRarity = true;
     public LootSystem.Rarity rarity;
 
     void Start()
     {
-        RandomizeChest();
+        if(randomRarity)
+            RandomizeChest();
 
         EnableCorrectChest();
 
@@ -53,13 +64,25 @@ public class RarityChestScript : MonoBehaviour, IInteractInterface
         open = true;
 
         if (rarity == LootSystem.Rarity.common)
+        {
             commonAnimation.Play();
+            commonPS.Play();
+        }
         else if (rarity == LootSystem.Rarity.rare)
+        {
             rareAnimation.Play();
+            rarePS.Play();
+        }
         else if (rarity == LootSystem.Rarity.epic)
+        {
             epicAnimation.Play();
+            epicPS.Play();
+        }
         else if (rarity == LootSystem.Rarity.legendary)
+        {
             legendaryAnimation.Play();
+            legendaryPS.Play();
+        }
 
 
         StartCoroutine(SpawnWeapon());
@@ -67,20 +90,34 @@ public class RarityChestScript : MonoBehaviour, IInteractInterface
 
     IEnumerator SpawnWeapon()
     {
-        yield return new WaitForSeconds(1.967f);
-        lootSystem.DropWeapon(spawnPos.transform.position, rarity);
+        yield return new WaitForSeconds(1.967f / chestOpenSpeed);
+        lootSystem.DropWeapon(weaponSpawnPos.transform.position, rarity);
+        if (coins)
+            Instantiate(coins, goldSpawnPos.transform.position, Quaternion.identity).GetComponent<ParticleSystem>().trigger.AddCollider(player.GetComponent<Collider>());
     }
 
     public void EnableCorrectChest()
     {
         if(rarity == LootSystem.Rarity.common)
+        {
             commonChest.SetActive(true);
+            commonAnimation["Plane.007|AS_CommonChestOpen"].speed = chestOpenSpeed;
+        }
         else if (rarity == LootSystem.Rarity.rare)
+        {
             rareChest.SetActive(true);
+            rareAnimation["Plane.001|AS_RareChestOpen"].speed = chestOpenSpeed;
+        }
         else if (rarity == LootSystem.Rarity.epic)
+        {
             epicChest.SetActive(true);
+            epicAnimation["Sphere|AS_EpicChestOpen"].speed = chestOpenSpeed;
+        }
         else if (rarity == LootSystem.Rarity.legendary)
+        {
             legendaryChest.SetActive(true);
+            legendaryAnimation["Sphere.001|AS_LegendaryChestOpen"].speed = chestOpenSpeed;
+        }
     }
 
     public void RandomizeChest()
@@ -97,5 +134,4 @@ public class RarityChestScript : MonoBehaviour, IInteractInterface
             rarity = LootSystem.Rarity.legendary;
 
     }
-
 }
