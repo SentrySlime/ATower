@@ -6,6 +6,7 @@ public class RarityChestScript : MonoBehaviour, IInteractInterface
 {
     public GameObject weaponSpawnPos;
     public GameObject goldSpawnPos;
+    public AudioSource audioSource;
 
     [Header("Misc")]
     public float chestOpenSpeed = 3;
@@ -15,21 +16,25 @@ public class RarityChestScript : MonoBehaviour, IInteractInterface
     public GameObject commonChest;
     public Animation commonAnimation;
     public ParticleSystem commonPS;
+    public AudioClip commonSFX;
 
     [Header("Rare")]
     public GameObject rareChest;
     public Animation rareAnimation;
     public ParticleSystem rarePS;
+    public AudioClip rareSFX;
 
     [Header("Epic")]
     public GameObject epicChest;
     public Animation epicAnimation;
     public ParticleSystem epicPS;
+    public AudioClip epicSFX;
 
     [Header("Legendary")]
     public GameObject legendaryChest;
     public Animation legendaryAnimation;
     public ParticleSystem legendaryPS;
+    public AudioClip legendarySFX;
 
     bool open = false;
 
@@ -66,24 +71,25 @@ public class RarityChestScript : MonoBehaviour, IInteractInterface
         if (rarity == LootSystem.Rarity.common)
         {
             commonAnimation.Play();
-            commonPS.Play();
+            audioSource.clip = commonSFX;
         }
         else if (rarity == LootSystem.Rarity.rare)
         {
             rareAnimation.Play();
-            rarePS.Play();
+            audioSource.clip = rareSFX;
         }
         else if (rarity == LootSystem.Rarity.epic)
         {
             epicAnimation.Play();
-            epicPS.Play();
+            audioSource.clip = epicSFX;
         }
         else if (rarity == LootSystem.Rarity.legendary)
         {
             legendaryAnimation.Play();
-            legendaryPS.Play();
+            audioSource.clip = legendarySFX;
         }
 
+        audioSource.Play();
 
         StartCoroutine(SpawnWeapon());
     }
@@ -101,21 +107,25 @@ public class RarityChestScript : MonoBehaviour, IInteractInterface
         if(rarity == LootSystem.Rarity.common)
         {
             commonChest.SetActive(true);
+            commonPS.Play();
             commonAnimation["Plane.007|AS_CommonChestOpen"].speed = chestOpenSpeed;
         }
         else if (rarity == LootSystem.Rarity.rare)
         {
             rareChest.SetActive(true);
+            rarePS.Play();
             rareAnimation["Plane.001|AS_RareChestOpen"].speed = chestOpenSpeed;
         }
         else if (rarity == LootSystem.Rarity.epic)
         {
             epicChest.SetActive(true);
+            epicPS.Play();
             epicAnimation["Sphere|AS_EpicChestOpen"].speed = chestOpenSpeed;
         }
         else if (rarity == LootSystem.Rarity.legendary)
         {
             legendaryChest.SetActive(true);
+            legendaryPS.Play();
             legendaryAnimation["Sphere.001|AS_LegendaryChestOpen"].speed = chestOpenSpeed;
         }
     }
