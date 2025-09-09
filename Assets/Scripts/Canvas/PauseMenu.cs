@@ -32,6 +32,7 @@ public class PauseMenu : MonoBehaviour
     public Image Pimage;
 
     [Header("ChildReferences")]
+    public CanvasGroup hudGroup;
     public CanvasGroup damageVignette;
     public CanvasGroup shieldVignette;
     public ItemShowCase itemShowCase;
@@ -105,6 +106,14 @@ public class PauseMenu : MonoBehaviour
                 itemShowCase.SetFirstItemDisplay();
                 
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            if (hudGroup.alpha == 1)
+                hudGroup.alpha = 0;
+            else if (hudGroup.alpha == 0)
+                hudGroup.alpha = 1;
         }
 
         //if (Input.GetKeyDown(KeyCode.L))

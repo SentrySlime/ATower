@@ -29642,6 +29642,7 @@ GameObject:
   - component: {fileID: 8001222628246456525}
   - component: {fileID: 8001222628246456524}
   - component: {fileID: 8045953499786299087}
+  - component: {fileID: 8002609687373907304}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Canvas
@@ -29765,6 +29766,7 @@ MonoBehaviour:
   PitemName: {fileID: 814777752}
   PitemDescription: {fileID: 151407298}
   Pimage: {fileID: 840818099}
+  hudGroup: {fileID: 8002609687373907304}
   damageVignette: {fileID: 8001222628662416273}
   shieldVignette: {fileID: 8001222628290347510}
   itemShowCase: {fileID: 7157930290766518639}
@@ -29782,6 +29784,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeOut: {fileID: 8001222628370638103}
+--- !u!225 &8002609687373907304
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8001222628246456527}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8001222628290347505
 GameObject:
   m_ObjectHideFlags: 0

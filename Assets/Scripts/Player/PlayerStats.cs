@@ -86,6 +86,7 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         StartLocomotion();
+        StartPlayerHP();
     }
 
     //
