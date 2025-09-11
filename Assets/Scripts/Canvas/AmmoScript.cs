@@ -94,6 +94,11 @@ public class AmmoScript : MonoBehaviour
     Vector2 flameCellSize = new Vector2(90f, 45f);
     Vector2 flameSpacing = new Vector2(0, -10f);
 
+    [Header("Cannonball")]
+    public Sprite cannonBallSprite;
+    public Vector2 cannonBallCellSize = new Vector2(90f, 45f);
+    public Vector2 cannonBallSpacing = new Vector2(0, -10f);
+
     [Header("Reference")]
     public Sprite ammoSprite;
     Vector2 cellSize;
@@ -311,6 +316,8 @@ public class AmmoScript : MonoBehaviour
             SetCellsAndSpacing(tommyGunSprite, tommyGunCellSize, tommyGunSpacing);
         if (weaponType == BaseWeapon.WeaponType.Flame)
             SetCellsAndSpacing(flameSprite, flameCellSize, flameSpacing);
+        if (weaponType == BaseWeapon.WeaponType.Canonball)
+            SetCellsAndSpacing(cannonBallSprite, cannonBallCellSize, cannonBallSpacing);
     }
 
     private void SetCellsAndSpacing(Sprite sprite, Vector2 cellsize, Vector2 spacing)

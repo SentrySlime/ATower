@@ -49,7 +49,8 @@ public class BaseWeapon : MonoBehaviour
         Scattergun,
         ShamanStaff,
         TommyGun,
-        Flame
+        Flame,
+        Canonball
     }
 
     public WeaponType type;
