@@ -68,26 +68,26 @@ public class RarityChestScript : MonoBehaviour, IInteractInterface
     {
         if (rarity == LootSystem.Rarity.common)
         {
-            commonChest.SetActive(true);
             commonPS.Play();
+            commonChest.SetActive(true);
             commonAnimation["Plane.007|AS_CommonChestOpen"].speed = chestOpenSpeed;
         }
         else if (rarity == LootSystem.Rarity.rare)
         {
-            rareChest.SetActive(true);
             rarePS.Play();
+            rareChest.SetActive(true);
             rareAnimation["Plane.001|AS_RareChestOpen"].speed = chestOpenSpeed;
         }
         else if (rarity == LootSystem.Rarity.epic)
         {
-            epicChest.SetActive(true);
             epicPS.Play();
+            epicChest.SetActive(true);
             epicAnimation["Sphere|AS_EpicChestOpen"].speed = chestOpenSpeed;
         }
         else if (rarity == LootSystem.Rarity.legendary)
         {
-            legendaryChest.SetActive(true);
             legendaryPS.Play();
+            legendaryChest.SetActive(true);
             legendaryAnimation["Sphere.001|AS_LegendaryChestOpen"].speed = chestOpenSpeed;
         }
     }

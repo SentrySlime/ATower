@@ -64,6 +64,36 @@ public class AmmoScript : MonoBehaviour
     Vector2 parasiteCellSize = new Vector2(90f, 45f);
     Vector2 parasiteSpacing = new Vector2(0, -10f);
 
+    [Header("EXGRevolver")]
+    public Sprite exgRevolverSprite;
+    Vector2 exgRevolverCellSize = new Vector2(90f, 45f);
+    Vector2 exgRevolverSpacing = new Vector2(0, -10f);
+
+    [Header("Nailgun")]
+    public Sprite nailgunSprite;
+    Vector2 nailgunCellSize = new Vector2(90f, 45f);
+    Vector2 nailgunSpacing = new Vector2(0, -10f);
+
+    [Header("Scattergun")]
+    public Sprite scattergunSprite;
+    Vector2 scattergunCellSize = new Vector2(90f, 45f);
+    Vector2 scattergunSpacing = new Vector2(0, -10f);
+
+    [Header("ShamanStaff")]
+    public Sprite shamanStaffSprite;
+    Vector2 shamanStaffCellSize = new Vector2(90f, 45f);
+    Vector2 shamanStaffSpacing = new Vector2(0, -10f);
+
+    [Header("TommyGun")]
+    public Sprite tommyGunSprite;
+    Vector2 tommyGunCellSize = new Vector2(90f, 45f);
+    Vector2 tommyGunSpacing = new Vector2(0, -10f);
+
+    [Header("Flame")]
+    public Sprite flameSprite;
+    Vector2 flameCellSize = new Vector2(90f, 45f);
+    Vector2 flameSpacing = new Vector2(0, -10f);
+
     [Header("Reference")]
     public Sprite ammoSprite;
     Vector2 cellSize;
@@ -268,6 +298,19 @@ public class AmmoScript : MonoBehaviour
             SetCellsAndSpacing(magicPistolSprite, magicPistolCellSize, magicPistolSpacing);
         if (weaponType == BaseWeapon.WeaponType.Parasite)
             SetCellsAndSpacing(parasiteSprite, parasiteCellSize, parasiteSpacing);
+
+        if (weaponType == BaseWeapon.WeaponType.EXGRevolver)
+            SetCellsAndSpacing(exgRevolverSprite, exgRevolverCellSize, exgRevolverSpacing);
+        if (weaponType == BaseWeapon.WeaponType.NailGun)
+            SetCellsAndSpacing(nailgunSprite, nailgunCellSize, nailgunSpacing);
+        if (weaponType == BaseWeapon.WeaponType.Scattergun)
+            SetCellsAndSpacing(scattergunSprite, scattergunCellSize, scattergunSpacing);
+        if (weaponType == BaseWeapon.WeaponType.ShamanStaff)
+            SetCellsAndSpacing(shamanStaffSprite, shamanStaffCellSize, shamanStaffSpacing);
+        if (weaponType == BaseWeapon.WeaponType.TommyGun)
+            SetCellsAndSpacing(tommyGunSprite, tommyGunCellSize, tommyGunSpacing);
+        if (weaponType == BaseWeapon.WeaponType.Flame)
+            SetCellsAndSpacing(flameSprite, flameCellSize, flameSpacing);
     }
 
     private void SetCellsAndSpacing(Sprite sprite, Vector2 cellsize, Vector2 spacing)

@@ -43,8 +43,13 @@ public class BaseWeapon : MonoBehaviour
         EnergyDark,
         EnergyRifle,
         MagicHandgun,
-        Parasite
-         
+        Parasite,
+        EXGRevolver,
+        NailGun,
+        Scattergun,
+        ShamanStaff,
+        TommyGun,
+        Flame
     }
 
     public WeaponType type;
