@@ -218,7 +218,7 @@ MonoBehaviour:
   goldCost: 1400
   weaponMesh: {fileID: -462981019419857548, guid: 2c613265f3db1814eb2556f919fab3be, type: 3}
   weaponMaterial: {fileID: 2100000, guid: 4b19f8be3efb60044b430563fb0a767e, type: 2}
-  type: 5
+  type: 15
   baseMaxAmmo: 0
   maxAmmo: 50
   currentAmmo: 50
@@ -236,8 +236,6 @@ MonoBehaviour:
   reloadTime: 3.5
   baseReloadAmount: 0
   reloadAmount: 1
-  baseDamage: 0
-  damage: 1
   baseFireRate: 0
   fireRate: 0.5
   recoilAmount: -6
@@ -260,9 +258,11 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
   explosionSystem: {fileID: 0}
+  shootSystem: {fileID: 0}
   player: {fileID: 0}
   playerStats: {fileID: 0}
   playerHealth: {fileID: 0}
+  upgraded: 0
   interuptReload: 0
   finishedReload: 0
   renderObjects:

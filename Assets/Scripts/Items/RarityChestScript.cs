@@ -41,6 +41,7 @@ public class RarityChestScript : MonoBehaviour, IInteractInterface
     public GameObject legendaryBeams;
 
     bool open = false;
+    bool randomized = false;
 
     GameObject gameManager;
     LootSystem lootSystem;
@@ -66,6 +67,8 @@ public class RarityChestScript : MonoBehaviour, IInteractInterface
 
     private void OnEnable()
     {
+        if (!randomized) return; 
+
         if (rarity == LootSystem.Rarity.common)
         {
             commonPS.Play();
@@ -91,6 +94,8 @@ public class RarityChestScript : MonoBehaviour, IInteractInterface
             legendaryAnimation["Sphere.001|AS_LegendaryChestOpen"].speed = chestOpenSpeed;
         }
     }
+
+    
 
     public void Interact()
     {
@@ -170,12 +175,14 @@ public class RarityChestScript : MonoBehaviour, IInteractInterface
 
         if(rarityChance <= 35)
             rarity = LootSystem.Rarity.common;
-        if (rarityChance <= 75 && rarityChance > 35)
+        else if (rarityChance <= 75 && rarityChance > 35)
             rarity = LootSystem.Rarity.rare;
-        if (rarityChance <= 95 && rarityChance > 75)
+        else if (rarityChance <= 95 && rarityChance > 75)
             rarity = LootSystem.Rarity.epic;
-        if (rarityChance <= 100 && rarityChance > 90)
+        else if (rarityChance <= 100 && rarityChance > 90)
             rarity = LootSystem.Rarity.legendary;
+
+        randomized = true;
 
     }
 

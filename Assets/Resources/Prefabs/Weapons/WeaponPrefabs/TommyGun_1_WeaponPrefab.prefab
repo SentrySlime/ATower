@@ -52,7 +52,6 @@ MonoBehaviour:
   moveAmount: 0
   lerpDuration: 0.1
   lerpBackDuration: 0.3
-  fireMode: 0
   rotating: 0
   targetPosition: {x: 0, y: 0, z: 0}
   reloadTimer: 0
@@ -5011,6 +5010,9 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
   explosionSystem: {fileID: 0}
+  firingMode: 0
+  burstDelay: 1
+  burstAmount: 1
   projectile: {fileID: 8458187518107989519, guid: c2867901090d3b948a65587f9dc6f3a2, type: 3}
   shotSpeed: 150
   shootAmount: 1
@@ -5036,6 +5038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseShootingLogic1: {fileID: 9042178775537694539}
+  baseShootingLogic2: {fileID: 0}
   aName: TommyGun
   aDescription: Old fashioned gun favoured by underground mobsters
   weaponIcon: {fileID: 21300000, guid: c8506a48b72168a4e94f1dab0194a5ca, type: 3}
@@ -5046,12 +5049,14 @@ MonoBehaviour:
   goldCost: 1400
   weaponMesh: {fileID: -5495902117074765545, guid: fa9df0705998e6742a1688caf3d6ae6e, type: 3}
   weaponMaterial: {fileID: 2100000, guid: 38224e385ad4e7a4c9638b9ad244711f, type: 2}
-  type: 1
+  type: 14
   baseMaxAmmo: 0
   maxAmmo: 400
   currentAmmo: 400
-  baseAmmoPerShot: 0
-  ammoPerShot: 1
+  baseAmmoPerShot1: 0
+  ammoPerShot1: 1
+  baseAmmoPerShot2: 0
+  ammoPerShot2: 1
   baseInfinteAmmo: 0
   infinteAmmo: 0
   reloadType: 0
@@ -5062,12 +5067,8 @@ MonoBehaviour:
   reloadTime: 3.6
   baseReloadAmount: 0
   reloadAmount: 1
-  baseDamage: 0
-  damage: 1
   baseFireRate: 0
   fireRate: 0.055
-  burstDelay: 1
-  burstAmount: 1
   recoilAmount: -1
   moveAmount: -0.1
   recoilX: -3
@@ -5081,7 +5082,6 @@ MonoBehaviour:
   currentMagazineText: {fileID: 0}
   ammoDivider: {fileID: 0}
   ammoFill: {fileID: 0}
-  firingMode: 0
   aimCamera: {fileID: 0}
   recoil: {fileID: 0}
   screenShake: {fileID: 0}
@@ -5089,9 +5089,11 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
   explosionSystem: {fileID: 0}
+  shootSystem: {fileID: 0}
   player: {fileID: 0}
   playerStats: {fileID: 0}
   playerHealth: {fileID: 0}
+  upgraded: 0
   interuptReload: 0
   finishedReload: 0
   renderObjects:
