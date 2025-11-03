@@ -116,6 +116,7 @@ public class ShootSystem : MonoBehaviour
     public void PestilentSwarm(Vector3 hitpoint, Vector3 hitDirection, Transform enemy)
     {
         GameObject swarm = Instantiate(pestilentSwarm, hitpoint, Quaternion.LookRotation(hitDirection), enemy);
+        print("Enemy" + enemy);
         enemy.GetComponent<PestilentSwarm>().AttachSwarm(swarm);
     }
 

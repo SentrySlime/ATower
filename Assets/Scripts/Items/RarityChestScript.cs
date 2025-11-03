@@ -177,7 +177,7 @@ public class RarityChestScript : MonoBehaviour, IInteractInterface
             rarity = LootSystem.Rarity.common;
         else if (rarityChance <= 75 && rarityChance > 35)
             rarity = LootSystem.Rarity.rare;
-        else if (rarityChance <= 95 && rarityChance > 75)
+        else if (rarityChance <= 90 && rarityChance > 75)
             rarity = LootSystem.Rarity.epic;
         else if (rarityChance <= 100 && rarityChance > 90)
             rarity = LootSystem.Rarity.legendary;

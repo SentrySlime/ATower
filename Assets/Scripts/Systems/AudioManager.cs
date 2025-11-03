@@ -23,15 +23,17 @@ public class AudioManager : MonoBehaviour
     float fadeDuration = 1.5f;
     private Coroutine currentFade;
 
+    private float musicVolume = 1;
+
     void Start()
     {
  
-        devilMusic.volume = 0f;
+        devilMusic.volume = musicVolume * 0f;
         
-        shopMusic.volume = 0f;
+        shopMusic.volume = musicVolume * 0f;
 
         if(blackSmithMusic)
-            blackSmithMusic.volume = 0f;
+            blackSmithMusic.volume = musicVolume * 0f;
 
         mainMusic.Play();
         devilMusic.Play();
@@ -40,6 +42,16 @@ public class AudioManager : MonoBehaviour
 
         if (blackSmithMusic)
             blackSmithMusic.Play();
+
+        
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            ToggleMusic();
+        }
     }
 
     public void TriggerMainMusic()
@@ -109,13 +121,33 @@ public class AudioManager : MonoBehaviour
         {
             time += Time.deltaTime;
             float t = time / fadeDuration;
-            fadeIn.volume = Mathf.Lerp(fadeInStart, 0.125f, t);
-            fadeOut.volume = Mathf.Lerp(fadeOutStart, 0f, t);
+            fadeIn.volume = Mathf.Lerp(fadeInStart, musicVolume * 0.125f, t);
+            fadeOut.volume = Mathf.Lerp(fadeOutStart, musicVolume * 0f, t);
             yield return null;
         }
 
-        fadeIn.volume = 0.125f;
-        fadeOut.volume = 0f;
+        fadeIn.volume = musicVolume * 0.125f;
+        fadeOut.volume = musicVolume * 0f;
+    }
+
+    private void ToggleMusic()
+    {
+        if (musicVolume == 1)
+            musicVolume = 0;
+        else
+            musicVolume = 1;
+
+        if(IsMainMusicPlaying)
+            mainMusic.volume = musicVolume * 0.125f;
+        else if (IsDevilMusicPlaying)
+            devilMusic.volume = musicVolume * 0.125f;
+        else if (IsShopMusicPlaying)
+            shopMusic.volume = musicVolume * 0.125f;
+        else if (IsBlacksmithMusicPlaying)
+            blackSmithMusic.volume = musicVolume * 0.125f;
+        else if (IsAmbiensPlaying)
+            ambiens.volume = musicVolume * 0.125f;
+
     }
 
 }

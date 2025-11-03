@@ -193,7 +193,8 @@ public class PlayerStats : MonoBehaviour
 
             weapon.maxAmmo = Mathf.FloorToInt(weapon.baseMaxAmmo + (weapon.baseMaxAmmo * maxAmmo));
 
-            //weapon.currentMagazine = weapon.maxMagazine;
+            
+            weapon.currentMagazine = weapon.maxMagazine;
 
             weapon.SetAmmoInfo();
 
