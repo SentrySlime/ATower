@@ -56,9 +56,9 @@ MonoBehaviour:
   explosiveDamage: 200
   explosiveImpactSFX: {fileID: 0}
   homing: 1
-  turnSpeed: 12
-  nonHomingDuration: 0.35
-  homingRange: 25
+  turnSpeed: 13
+  nonHomingDuration: 0.2
+  homingRange: 30
   target: {fileID: 0}
   burning: 1
   burningDamage: 10
@@ -70,6 +70,7 @@ MonoBehaviour:
   lifeDuration: 8
   lifeTimer: 0
   canDestroy: 1
+  playerStats: {fileID: 0}
   weaponParent: {fileID: 0}
   aMainSysteM: {fileID: 0}
   explosionSystem: {fileID: 0}

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class Spawner : MonoBehaviour, IStatusEffect
 {
 
     [SerializeField] private GameObject spawnling;
@@ -10,6 +10,12 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private ParticleSystem spawnPS1;
     [SerializeField] private ParticleSystem spawnPS2;
+
+    [HideInInspector] public bool frozen;
+    [HideInInspector] public bool burning;
+
+    float moveSpeed = 0;
+    float animatorSpeed = 0;
 
     private List<GameObject> spawnList = new List<GameObject>();
 
@@ -71,5 +77,33 @@ public class Spawner : MonoBehaviour
     public void DecreaseMinionCount ()
     {
         minionCount--;
+    }
+
+    public void Freeze()
+    {
+        if (animator)
+        {
+            animatorSpeed = animator.speed;
+            animator.speed = 0;
+        }
+
+        frozen = true;
+    }
+
+    public bool IsFrozen()
+    {
+        return frozen;
+    }
+
+    public void UnFreeze()
+    {
+        if (animator)
+            animator.speed = animatorSpeed;
+        frozen = false;
+    }
+
+    public void Burn()
+    {
+        throw new System.NotImplementedException();
     }
 }

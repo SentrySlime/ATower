@@ -7,7 +7,7 @@ public class ObeliskShard : MonoBehaviour
 
     public Vector3 defaultPosition;
 
-    float moveSpeed = 70f; 
+    public float moveSpeed = 70f; 
 
     private bool move = false;
 

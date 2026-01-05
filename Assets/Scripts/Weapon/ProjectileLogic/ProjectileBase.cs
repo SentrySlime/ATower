@@ -62,7 +62,7 @@ public class ProjectileBase : MonoBehaviour
     public float burningDamage = 1;
 
     [Tooltip("1 is equal to 1% chance to apply the status effect")]
-    [Range(0f, 100f)] public int burnChance = 0;
+    [Range(0f, 1000f)] public int burnChance = 0;
 
     //---------- Gravity ----------\\
     [Header("Gravity")]

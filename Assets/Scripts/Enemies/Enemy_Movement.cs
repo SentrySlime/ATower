@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy_Movement : MonoBehaviour, INoticePlayer
+public class Enemy_Movement : MonoBehaviour, INoticePlayer, IStatusEffect
 {
     Vector3 lastValidLocation;
     [HideInInspector] public AMainSystem aMainSystem;
@@ -40,10 +40,18 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
     float playerLookForTimer = 0;
     [HideInInspector] public float lineOfSightTimer = 0;
 
+    [Header("Status Effects")]
+    [HideInInspector] public bool frozen;
+    [HideInInspector] public bool burning;
+
     [Header("MISC")]
     public bool isAttacking = false;
     public float playerDistance = 0;
     [HideInInspector] public Vector3 directionToPlayer;
+
+    float moveSpeed = 0;
+    float animatorSpeed = 0;
+
 
     [Header("Base Attack Stuff")]
     public float attackRate = 2;
@@ -72,7 +80,7 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
 
     public void Update()
     {
-        if (!visionPoint) return;
+        if (!visionPoint || !playerTargetPoint || frozen) return;
         
         playerDistance = Vector3.Distance(visionPoint.position, playerTargetPoint.transform.position);
 
@@ -291,5 +299,41 @@ public class Enemy_Movement : MonoBehaviour, INoticePlayer
     {
         roam = false;
         foundPlayer = true;
+    }
+
+    public void Freeze()
+    {
+        if (animator)
+        {
+            animatorSpeed = animator.speed;
+            animator.speed = 0;
+        }
+
+        //Getting move speed then setting it
+        moveSpeed = agent.speed;
+        agent.speed = 0;
+        agent.isStopped = true;
+
+        frozen = true;
+    }
+
+    public bool IsFrozen()
+    {
+        return frozen;
+    }
+
+    public void UnFreeze()
+    {
+        // End effects here
+        if (animator)
+            animator.speed = animatorSpeed;
+        agent.isStopped = false;
+        agent.speed = moveSpeed;
+        frozen = false;
+    }
+
+    public void Burn()
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using static Kobold;
 
-public class Spawnling : MonoBehaviour
+public class Spawnling : MonoBehaviour, IStatusEffect
 {
     public NavMeshAgent agent;
     Vector3 lastValidLocation;
@@ -47,6 +47,13 @@ public class Spawnling : MonoBehaviour
 
     float movementTimer = 0f;
     public float noiseOffset;
+
+    [Header("Status Effects")]
+    [HideInInspector] public bool frozen;
+    [HideInInspector] public bool burning;
+
+    float moveSpeed = 0;
+    float animatorSpeed = 0;
 
     void Start()
     {
@@ -211,5 +218,41 @@ public class Spawnling : MonoBehaviour
             }
 
         }
+    }
+
+    public void Freeze()
+    {
+        if (animator)
+        {
+            animatorSpeed = animator.speed;
+            animator.speed = 0;
+        }
+
+        //Getting move speed then setting it
+        moveSpeed = agent.speed;
+        agent.speed = 0;
+        agent.isStopped = true;
+
+        frozen = true;
+    }
+
+    public bool IsFrozen()
+    {
+        return frozen; 
+    }
+
+    public void UnFreeze()
+    {
+        // End effects here
+        if (animator)
+            animator.speed = animatorSpeed;
+        agent.isStopped = false;
+        agent.speed = moveSpeed;
+        frozen = false;
+    }
+
+    public void Burn()
+    {
+        throw new System.NotImplementedException();
     }
 }

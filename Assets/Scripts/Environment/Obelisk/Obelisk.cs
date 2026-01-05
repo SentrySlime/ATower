@@ -34,7 +34,7 @@ public class Obelisk : MonoBehaviour, IInteractInterface
     [Header("Obelisk")]
     float currentRotation = 0;
     int rotationSpeedForward = 100;
-    float rotationSpeedBackwards = 2000;
+    float rotationSpeedBackwards = 1000;
 
     [Header("HolyMove")]
     public bool holyRotate = false;
@@ -42,7 +42,7 @@ public class Obelisk : MonoBehaviour, IInteractInterface
     private Vector3 startPosition;
 
     [Header("Shard")]
-    float currentShardRotation = 0;
+    float currentShardRotation = -720;
     bool hasCalledShards = false;
     public ObeliskShard[] obeliskShards;
 
@@ -117,7 +117,7 @@ public class Obelisk : MonoBehaviour, IInteractInterface
         StartCoroutine(CursedSFX());
         
 
-        rotationSpeedBackwards = Mathf.Max(currentRotation, 5f) * 8f;
+        //rotationSpeedBackwards = Mathf.Max(currentRotation, 5f) * 8f;
 
         if (currentRotation > 0)
         {
@@ -253,7 +253,7 @@ public class Obelisk : MonoBehaviour, IInteractInterface
 
         
         holyRotate = true;
-        curseManager.SpawnCurse(reward);
+        //curseManager.SpawnCurse(reward);
     }
 
 

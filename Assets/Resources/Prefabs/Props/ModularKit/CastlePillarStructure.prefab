@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8098822504935913270}
   - component: {fileID: 6305104767252431868}
   - component: {fileID: 6529482796549995631}
+  - component: {fileID: 4535578815918441999}
   m_Layer: 0
   m_Name: CastlePillarStructure
   m_TagString: Untagged
@@ -91,7 +92,21 @@ BoxCollider:
   m_GameObject: {fileID: 5512624821694603817}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 12.76, y: 40, z: 12.76}
   m_Center: {x: 0, y: 20, z: 0}
+--- !u!64 &4535578815918441999
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5512624821694603817}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6834681942841673989, guid: 12ad5b667440b614b8c80f85aaf5d32b, type: 3}

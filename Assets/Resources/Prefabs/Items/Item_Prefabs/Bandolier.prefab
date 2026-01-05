@@ -49,9 +49,11 @@ MonoBehaviour:
   itemMesh: {fileID: -2432737126924424369, guid: 449b57a9fa7e8e742aa3e2e9e2c1fd97, type: 3}
   itemMaterial: {fileID: 2100000, guid: 94f849593d1787d4ebad08d273a37d31, type: 2}
   goldCost: 500
+  interactSFX: {fileID: 0}
   type: 4
   isDevilItem: 0
-  maxHp: 0
+  addedHealth: 0
+  increasedHealth: 0
   oneMaxHP: 0
   hpOnHit: 0
   hpOnCritHit: 0
@@ -75,6 +77,9 @@ MonoBehaviour:
   canExplodeEnemies: 0
   moneyIsPower: 0
   hpIsPower: 0
+  chainLightningDamage: 0
+  crimsonDagger: 0
+  pestilentSwarm: 0
   ammoRefills: 0
   reloadAmount: 0
   maxMagazineSize: 0
@@ -85,6 +90,7 @@ MonoBehaviour:
   maxAmmo: 0
   bandolierEffect: 5
   fireBallChance: 0
+  chainLightningTargets: 0
   accuracy: 0
   increasedMoneyDrops: 0
   moneyIsHealth: 0

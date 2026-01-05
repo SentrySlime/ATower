@@ -4967,9 +4967,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 1856004530348900990}
-  ADSAccuracy: 4
-  HIPAccuracy: 8
-  damage: 0
+  ADSAccuracy: 3
+  HIPAccuracy: 6
+  damage: 55
   player: {fileID: 0}
   playerStats: {fileID: 0}
   baseWeapon: {fileID: 0}
@@ -4991,10 +4991,10 @@ MonoBehaviour:
   hitDistance: 0
   hitmarker: {fileID: 0}
   isShotgun: 1
-  shootAmount: 6
-  shotSize: 1
+  shootAmount: 8
+  shotSize: 1.25
   pierceAmount: 1
-  ShouldExplode: 1
+  ShouldExplode: 0
   explosiveDamage: 30
   explosiveRadius: 1
   weaponRange: 999
@@ -5047,11 +5047,11 @@ MonoBehaviour:
   maxMagazine: 4
   currentMagazine: 4
   baseReloadTime: 0
-  reloadTime: 2
+  reloadTime: 1.5
   baseReloadAmount: 0
   reloadAmount: 2
   baseFireRate: 0
-  fireRate: 0.5
+  fireRate: 0.3
   recoilAmount: -30
   moveAmount: -0.7
   recoilX: -25
@@ -5095,8 +5095,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 1856004530348900990}
   ADSAccuracy: 4
-  HIPAccuracy: 20
-  damage: 0
+  HIPAccuracy: 8
+  damage: 55
   player: {fileID: 0}
   playerStats: {fileID: 0}
   baseWeapon: {fileID: 0}
@@ -5118,10 +5118,10 @@ MonoBehaviour:
   hitDistance: 0
   hitmarker: {fileID: 0}
   isShotgun: 1
-  shootAmount: 24
-  shotSize: 1
+  shootAmount: 36
+  shotSize: 1.25
   pierceAmount: 1
-  ShouldExplode: 1
+  ShouldExplode: 0
   explosiveDamage: 20
   explosiveRadius: 1
   weaponRange: 999

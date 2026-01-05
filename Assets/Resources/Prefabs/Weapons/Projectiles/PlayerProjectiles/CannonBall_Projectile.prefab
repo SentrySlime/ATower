@@ -26130,13 +26130,16 @@ MonoBehaviour:
   pierceAmount: 1
   isExplosive: 1
   explosiveRadius: 6
-  explosiveDamage: 500
+  explosiveDamage: 300
   explosiveImpactSFX: {fileID: 0}
   homing: 0
   turnSpeed: 12
   nonHomingDuration: 0.35
   homingRange: 25
   target: {fileID: 0}
+  burning: 0
+  burningDamage: 1
+  burnChance: 0
   useGravity: 0
   gravityMagnitude: 1
   hitVFX: {fileID: 1879272669879180, guid: 52baafc6c69151e418a228e14e1bd356, type: 3}
@@ -26144,8 +26147,10 @@ MonoBehaviour:
   lifeDuration: 16
   lifeTimer: 0
   canDestroy: 1
+  playerStats: {fileID: 0}
   weaponParent: {fileID: 0}
   aMainSysteM: {fileID: 0}
+  explosionSystem: {fileID: 0}
   shootSystem: {fileID: 0}
 --- !u!135 &3201373492876456345
 SphereCollider:
@@ -26187,6 +26192,9 @@ MonoBehaviour:
   nonHomingDuration: 0.35
   homingRange: 25
   target: {fileID: 0}
+  burning: 0
+  burningDamage: 1
+  burnChance: 0
   useGravity: 0
   gravityMagnitude: 1
   hitVFX: {fileID: 0}
@@ -26194,8 +26202,10 @@ MonoBehaviour:
   lifeDuration: 16
   lifeTimer: 0
   canDestroy: 1
+  playerStats: {fileID: 0}
   weaponParent: {fileID: 0}
   aMainSysteM: {fileID: 0}
+  explosionSystem: {fileID: 0}
   shootSystem: {fileID: 0}
   fireRate: 0.3
   fireRateTimer: 0

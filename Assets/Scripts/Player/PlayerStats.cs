@@ -149,6 +149,7 @@ public class PlayerStats : MonoBehaviour
     {
 
         BaseWeapon weapon = weaponObj.transform.GetChild(0).GetComponent<BaseWeapon>();
+        int previousMaxAmmo = weapon.maxMagazine;
 
         weapon.maxMagazine = weapon.baseMaxMagazine + maxMagazineSize;
 
@@ -161,7 +162,8 @@ public class PlayerStats : MonoBehaviour
             weapon.maxMagazine = Mathf.Clamp(weapon.maxMagazine, 1, 999);
         }
 
-        weapon.currentMagazine = weapon.maxMagazine;
+        if (previousMaxAmmo != weapon.maxMagazine)
+            weapon.currentMagazine = weapon.maxMagazine;
 
         weapon.maxAmmo = Mathf.FloorToInt(weapon.baseMaxAmmo + (weapon.baseMaxAmmo * maxAmmo));
         weapon.currentAmmo = weapon.maxAmmo;
@@ -179,6 +181,8 @@ public class PlayerStats : MonoBehaviour
         {
             BaseWeapon weapon = inventory.heldWeapons[i].transform.GetChild(0).GetComponent<BaseWeapon>();
 
+            int previousMaxAmmo = weapon.maxMagazine;
+
             // Apply base and player bonus
             weapon.maxMagazine = weapon.baseMaxMagazine + maxMagazineSize;
             weapon.maxMagazine = Mathf.Clamp(weapon.maxMagazine, 1, 999);
@@ -186,16 +190,18 @@ public class PlayerStats : MonoBehaviour
             // Apply Bandolier effect
             if (bandolierEffect != 0)
             {
-                int additionalBullets = Mathf.FloorToInt((weapon.baseMaxMagazine / 15f) * bandolierEffect);
+                int magazineTiers = weapon.maxMagazine / 15; // integer division auto floors
+                int additionalBullets = magazineTiers * bandolierEffect;
+
                 weapon.maxMagazine += additionalBullets;
                 weapon.maxMagazine = Mathf.Clamp(weapon.maxMagazine, 1, 999);
             }
 
             weapon.maxAmmo = Mathf.FloorToInt(weapon.baseMaxAmmo + (weapon.baseMaxAmmo * maxAmmo));
 
-            
-            weapon.currentMagazine = weapon.maxMagazine;
-
+            if (previousMaxAmmo != weapon.maxMagazine)
+                weapon.currentMagazine = weapon.maxMagazine;
+               
             weapon.SetAmmoInfo();
 
             findAndEquipWeapons.SetWeapon(weaponSocket.equippedWeapon.transform.parent.gameObject);

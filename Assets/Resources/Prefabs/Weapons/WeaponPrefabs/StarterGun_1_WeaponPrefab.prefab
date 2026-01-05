@@ -4982,6 +4982,7 @@ MonoBehaviour:
   firingMode: 0
   burstDelay: 1
   burstAmount: 1
+  includeBreakable: 0
   lineRenderer: {fileID: 0}
   curve: 0
   lineDuration: 0.9
@@ -4992,9 +4993,11 @@ MonoBehaviour:
   shootAmount: 1
   shotSize: 1
   pierceAmount: 2
+  applyStatusEffects: {fileID: 0}
   ShouldExplode: 0
   explosiveDamage: 1
   explosiveRadius: 1
+  weaponRange: 999
   SFXList: []
   shootSFX: {fileID: 4964101775347663484, guid: 81804116d578ad2438d5dcf6d40c671e, type: 3}
   hitSFX: {fileID: 4964101775347663484, guid: b244e633c20fdda4895818242ba7786b, type: 3}

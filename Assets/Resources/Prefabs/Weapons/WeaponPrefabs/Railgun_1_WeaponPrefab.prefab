@@ -4975,6 +4975,8 @@ GameObject:
   - component: {fileID: 5779255679518579600}
   - component: {fileID: 6593228928422068517}
   - component: {fileID: 7947369351111584678}
+  - component: {fileID: 8014815015862751202}
+  - component: {fileID: 2783859194956213824}
   m_Layer: 0
   m_Name: Weapon_Body
   m_TagString: Untagged
@@ -5012,9 +5014,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 1856004530348900990}
-  ADSAccuracy: 1
-  HIPAccuracy: 1
-  damage: 150
+  ADSAccuracy: 0.1
+  HIPAccuracy: 0.1
+  damage: 6
   player: {fileID: 0}
   playerStats: {fileID: 0}
   baseWeapon: {fileID: 0}
@@ -5025,7 +5027,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   aMainSystem: {fileID: 0}
   explosionSystem: {fileID: 0}
-  firingMode: 1
+  firingMode: 0
   burstDelay: 1
   burstAmount: 1
   includeBreakable: 0
@@ -5038,7 +5040,8 @@ MonoBehaviour:
   isShotgun: 0
   shootAmount: 1
   shotSize: 1
-  pierceAmount: 6
+  pierceAmount: 3
+  applyStatusEffects: {fileID: 0}
   ShouldExplode: 0
   explosiveDamage: 1
   explosiveRadius: 1
@@ -5080,8 +5083,8 @@ MonoBehaviour:
   weaponMaterial: {fileID: 2100000, guid: 6dea99c80edba7244bbb029885073957, type: 2}
   type: 5
   baseMaxAmmo: 0
-  maxAmmo: 195
-  currentAmmo: 195
+  maxAmmo: 450
+  currentAmmo: 450
   baseAmmoPerShot1: 0
   ammoPerShot1: 1
   baseAmmoPerShot2: 0
@@ -5090,19 +5093,19 @@ MonoBehaviour:
   infinteAmmo: 0
   reloadType: 0
   baseMaxMagazine: 0
-  maxMagazine: 15
-  currentMagazine: 15
+  maxMagazine: 80
+  currentMagazine: 80
   baseReloadTime: 0
-  reloadTime: 6
+  reloadTime: 4
   baseReloadAmount: 0
   reloadAmount: 1
   baseFireRate: 0
-  fireRate: 0.3
-  recoilAmount: -3
-  moveAmount: -0.8
-  recoilX: -25
-  recoilY: 6
-  recoilZ: 0.8
+  fireRate: 0.05
+  recoilAmount: -2
+  moveAmount: -0.4
+  recoilX: -4
+  recoilY: 3
+  recoilZ: 0.2
   hipPos: {x: 0.914, y: -0.386, z: 1.93}
   adsPos: {x: -0.21, y: -0.44, z: 1.08}
   adsSpeed: 6
@@ -5129,6 +5132,35 @@ MonoBehaviour:
   - {fileID: 6015780298741021061}
   - {fileID: 6503401797055502000}
   - {fileID: 8378595537554814757}
+--- !u!114 &8014815015862751202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593228928422068522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea2d7b20492c9245ac7460c637e0e64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canBurn: 0
+  burningDamage: 1
+  burnChance: 0
+  canFreeze: 1
+  freezeChance: 101
+--- !u!114 &2783859194956213824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593228928422068522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d10cdab956fc40748be35b528bfdde70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6037166255301704000
 MonoBehaviour:
   m_ObjectHideFlags: 0

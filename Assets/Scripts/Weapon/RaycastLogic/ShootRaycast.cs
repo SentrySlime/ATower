@@ -34,6 +34,9 @@ public class ShootRaycast : BaseShootingLogic
     public float shotSize = 1;
     public int pierceAmount = 1;
 
+    [Header("Status Effects")]
+    public ApplyStatusEffects applyStatusEffects;
+
     [Header("Explosive")]
     public bool ShouldExplode = false;
     public int explosiveDamage = 1;
@@ -68,8 +71,13 @@ public class ShootRaycast : BaseShootingLogic
 
     public Animation mantleAnimation;
 
+    [Header("Misc")]
+
+    public IAdjustDamage adjustDamage;
+
     //---
-   
+
+
     private void Awake()
     {
         if (hits == null || hits.Length == 0)
@@ -77,6 +85,16 @@ public class ShootRaycast : BaseShootingLogic
 
         if(lineRenderer)
             lineRenderer.enabled = false;
+
+        if (TryGetComponent<ApplyStatusEffects>(out ApplyStatusEffects statusEffects))
+        {
+            applyStatusEffects = statusEffects;           
+        }
+
+        if (TryGetComponent<IAdjustDamage>(out IAdjustDamage adjustDMG))
+        {
+            adjustDamage = adjustDMG;
+        }
 
         //This layermask sends a single raycast and should basically only hit terrain
         //layermask = LayerMask.GetMask("Player", "Enemy", "Projectile", "Items", "Breakable", "Ignore Raycast");
@@ -405,9 +423,19 @@ public class ShootRaycast : BaseShootingLogic
 
         if (incomingObj.GetComponent<IDamageInterface>() != null)
         {
-            aMainSystem.DealDamage(incomingObj, damage, true, incomingWeakSpotShot);
-            
-            if(incomingWeakSpotShot)
+            float adjustedDMG = damage;
+
+            if (adjustDamage != null)
+            {
+                adjustedDMG = adjustDamage.AdjustDamage(adjustedDMG, incomingObj);
+            }
+
+            aMainSystem.DealDamage(incomingObj, adjustedDMG, true, incomingWeakSpotShot);
+
+            if(applyStatusEffects)
+                applyStatusEffects.InitiateEffect(incomingObj);
+
+            if (incomingWeakSpotShot)
             {
                 OnHit(incomingObj, incomingWeakSpotShot, hitPos);
                 OnWeakSpotHit(incomingObj, incomingWeakSpotShot, hitPos);

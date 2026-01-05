@@ -52,7 +52,7 @@ MonoBehaviour:
   recoilAmount: 0
   moveAmount: 0
   lerpDuration: 0.1
-  lerpBackDuration: 0.3
+  lerpBackDuration: 0.5
   rotating: 0
   targetPosition: {x: 0, y: 0, z: 0}
   reloadTimer: 0
@@ -4998,7 +4998,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 6108026898454012163}
   ADSAccuracy: 1
-  HIPAccuracy: 3
+  HIPAccuracy: 1
   damage: 100
   player: {fileID: 0}
   playerStats: {fileID: 0}
@@ -5013,6 +5013,7 @@ MonoBehaviour:
   firingMode: 1
   burstDelay: 1
   burstAmount: 1
+  includeBreakable: 0
   lineRenderer: {fileID: 0}
   curve: 0
   lineDuration: 0.9
@@ -5023,9 +5024,11 @@ MonoBehaviour:
   shootAmount: 1
   shotSize: 1
   pierceAmount: 4
+  applyStatusEffects: {fileID: 0}
   ShouldExplode: 0
   explosiveDamage: 1
   explosiveRadius: 1
+  weaponRange: 999
   SFXList: []
   shootSFX: {fileID: 4964101775347663484, guid: 0f2c1ad0607fd94458f7da48dad9c000, type: 3}
   hitSFX: {fileID: 4964101775347663484, guid: b244e633c20fdda4895818242ba7786b, type: 3}
@@ -5082,9 +5085,9 @@ MonoBehaviour:
   fireRate: 0.05
   recoilAmount: -35
   moveAmount: -0.2
-  recoilX: -11
-  recoilY: 2
-  recoilZ: 0.9
+  recoilX: -40
+  recoilY: 10
+  recoilZ: 2
   hipPos: {x: 0.574, y: -0.671, z: 1.417}
   adsPos: {x: -0.353, y: -0.509, z: 0.536}
   adsSpeed: 6

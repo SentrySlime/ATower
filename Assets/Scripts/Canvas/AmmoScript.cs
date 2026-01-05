@@ -86,8 +86,8 @@ public class AmmoScript : MonoBehaviour
 
     [Header("TommyGun")]
     public Sprite tommyGunSprite;
-    Vector2 tommyGunCellSize = new Vector2(90f, 45f);
-    Vector2 tommyGunSpacing = new Vector2(0, -10f);
+    Vector2 tommyGunCellSize = new Vector2(50f, 25f);
+    Vector2 tommyGunSpacing = new Vector2(0, -9f);
 
     [Header("Flame")]
     public Sprite flameSprite;
