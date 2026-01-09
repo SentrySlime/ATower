@@ -1189,7 +1189,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -17, y: 179.45003}
+  m_AnchoredPosition: {x: -17, y: 179.44998}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!225 &1734359996
@@ -7755,7 +7755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cfuStatus: PSXEffects v1.18.4 - version ahead?!
   sections: 01010100
-  customRes: {x: 256, y: 144}
+  customRes: {x: 192, y: 108}
   resolutionFactor: 10
   limitFramerate: 120
   skipFrames: 0
@@ -19316,15 +19316,16 @@ MonoBehaviour:
   energyRifleSprite: {fileID: 21300000, guid: 4ae2e9de3b3ef80438c16cc6f807207b, type: 3}
   magicPistolSprite: {fileID: 21300000, guid: 33deca891a209f44fbc32a38b53a817a, type: 3}
   parasiteSprite: {fileID: 21300000, guid: d13f922f4e6c92e43a778a42f2061678, type: 3}
-  exgRevolverSprite: {fileID: 0}
-  nailgunSprite: {fileID: 0}
-  scattergunSprite: {fileID: 0}
-  shamanStaffSprite: {fileID: 0}
-  tommyGunSprite: {fileID: 0}
-  flameSprite: {fileID: 0}
+  exgRevolverSprite: {fileID: 21300000, guid: bc10e7a9b1f1d0c4eaa8e2932d3c1f61, type: 3}
+  nailgunSprite: {fileID: 21300000, guid: c6f8c43ba758e4c4bac8f8951df1ab09, type: 3}
+  scattergunSprite: {fileID: 21300000, guid: 2e7c56aa02aa1734da1a7c60660078f5, type: 3}
+  shamanStaffSprite: {fileID: 21300000, guid: 6361d61ae514a1d4dac01104fe820bca, type: 3}
+  tommyGunSprite: {fileID: 21300000, guid: 20f05a8e404a32e4ebd45c542e82d4ee, type: 3}
+  flameSprite: {fileID: 21300000, guid: 2f07ddb8521cc7d408ab2dbacf68b262, type: 3}
   cannonBallSprite: {fileID: 21300000, guid: b6b3c721a5142784c90e79befe827d59, type: 3}
   cannonBallCellSize: {x: 50, y: 50}
   cannonBallSpacing: {x: 10, y: 1}
+  frostStaffSprite: {fileID: 21300000, guid: faca3b25f52b72a40bc6a7617c5ce940, type: 3}
   ammoSprite: {fileID: 21300000, guid: f93e70805910db04abc61115b6ea7e9a, type: 3}
   gridLayoutGroup: {fileID: 2742121257245300120}
   maxMagazine: 10
@@ -25732,7 +25733,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0, y: -0.000015258789}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &9093813414947266136

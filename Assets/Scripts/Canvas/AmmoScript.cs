@@ -81,8 +81,8 @@ public class AmmoScript : MonoBehaviour
 
     [Header("ShamanStaff")]
     public Sprite shamanStaffSprite;
-    Vector2 shamanStaffCellSize = new Vector2(90f, 45f);
-    Vector2 shamanStaffSpacing = new Vector2(0, -10f);
+    Vector2 shamanStaffCellSize = new Vector2(50, 25f);
+    Vector2 shamanStaffSpacing = new Vector2(0, -7f);
 
     [Header("TommyGun")]
     public Sprite tommyGunSprite;
@@ -96,8 +96,13 @@ public class AmmoScript : MonoBehaviour
 
     [Header("Cannonball")]
     public Sprite cannonBallSprite;
-    public Vector2 cannonBallCellSize = new Vector2(90f, 45f);
-    public Vector2 cannonBallSpacing = new Vector2(0, -10f);
+    Vector2 cannonBallCellSize = new Vector2(90f, 45f);
+    Vector2 cannonBallSpacing = new Vector2(0, -10f);
+
+    [Header("FrostStaff")]
+    public Sprite frostStaffSprite;
+    Vector2 frostStaffCellSize = new Vector2(50, 25f);
+    Vector2 frostStaffSpacing = new Vector2(0, -7f);
 
     [Header("Reference")]
     public Sprite ammoSprite;
@@ -318,6 +323,8 @@ public class AmmoScript : MonoBehaviour
             SetCellsAndSpacing(flameSprite, flameCellSize, flameSpacing);
         if (weaponType == BaseWeapon.WeaponType.Canonball)
             SetCellsAndSpacing(cannonBallSprite, cannonBallCellSize, cannonBallSpacing);
+        if (weaponType == BaseWeapon.WeaponType.FrostStaff)
+            SetCellsAndSpacing(frostStaffSprite, frostStaffCellSize, frostStaffSpacing);
     }
 
     private void SetCellsAndSpacing(Sprite sprite, Vector2 cellsize, Vector2 spacing)

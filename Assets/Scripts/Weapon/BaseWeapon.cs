@@ -50,7 +50,8 @@ public class BaseWeapon : MonoBehaviour
         ShamanStaff,
         TommyGun,
         Flame,
-        Canonball
+        Canonball,
+        FrostStaff
     }
 
     public WeaponType type;

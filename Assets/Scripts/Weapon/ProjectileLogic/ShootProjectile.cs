@@ -19,17 +19,17 @@ public class ShootProjectile : BaseShootingLogic
     public bool UseHorizontal = true;
     public bool UseVertical = true;
 
-    float minYOffset = 0;
-    float maxYOffset = 0;
+    [HideInInspector] public float minYOffset = 0;
+    [HideInInspector] public float maxYOffset = 0;
 
-    float minXoffset = 0;
-    float maxXoffset = 0;
+    [HideInInspector] public float minXoffset = 0;
+    [HideInInspector] public float maxXoffset = 0;
 
     List<AudioSource> SFXList = new List<AudioSource>();
     int soundCount;
 
-    GameObject raycastShootPoint;
-    LayerMask layerMask;
+    [HideInInspector] public GameObject raycastShootPoint;
+    [HideInInspector] public LayerMask layerMask;
     public GameObject shootSFX;
     public ParticleSystem muzzleFlash;
 
@@ -37,7 +37,8 @@ public class ShootProjectile : BaseShootingLogic
     public Animation mantleAnimation;
 
 
-    private void Awake()
+
+    public virtual void Awake()
     {
         layerMask = LayerMask.GetMask("Player", "Projectile");
         raycastShootPoint = GameObject.FindGameObjectWithTag("ShootPoint");
@@ -46,7 +47,13 @@ public class ShootProjectile : BaseShootingLogic
 
     public override void TriggerItem()
     {
+        PlayEffects();
 
+        FireProjectile();
+    }
+
+    public virtual void PlayEffects()
+    {
         #region NotShooting
         //Show casing jump out
         if (casingVFX != null)
@@ -75,11 +82,10 @@ public class ShootProjectile : BaseShootingLogic
             muzzleFlash.Play();
 
         #endregion
+    }
 
-
-
-
-
+    public virtual void FireProjectile()
+    {
         #region Shooting
 
         float tempADSAccuracy = ADSAccuracy + playerStats.accuracy;
@@ -129,7 +135,7 @@ public class ShootProjectile : BaseShootingLogic
             }
             for (int i = 0; i < shootAmount; i++)
             {
-                
+
 
                 #region RandomNumbers Accuracy
                 if (weaponSocket.adsProgress < 0.9)
@@ -165,38 +171,14 @@ public class ShootProjectile : BaseShootingLogic
 
                 #endregion
 
-
-
-
                 shootPoint.transform.Rotate(((minXoffset + maxXoffset)), ((minYOffset + maxYOffset)), 0);
-
-                //----
                 Instantiate(projectile, shootPoint.transform.position, shootPoint.transform.rotation).GetComponent<ProjectileBase>().weaponParent = baseWeapon;
-
-
-                //shotProjectile.AddForce(shotProjectile.transform.forward * shotSpeed, ForceMode.Impulse);
-
-                //if(raycastHit)
-                //{
-                //    shootPoint.transform.LookAt(shootDirection);
-                //}
-                //else
-                //{
-
-                //}
                 shootPoint.transform.localRotation = Quaternion.Euler(0, 0, 0);
-
-
-                //shootPoint.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
             }
 
         }
 
-
-
         #endregion
-
     }
-
 }

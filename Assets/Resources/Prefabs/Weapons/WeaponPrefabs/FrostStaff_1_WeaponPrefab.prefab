@@ -28993,7 +28993,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5779255679518579600}
-  - component: {fileID: 6593228928422068517}
+  - component: {fileID: 6606380606969956711}
   - component: {fileID: 7947369351111584678}
   - component: {fileID: 8014815015862751202}
   - component: {fileID: 2783859194956213824}
@@ -29012,7 +29012,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6593228928422068522}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.914, y: -0.386, z: 1.93}
+  m_LocalPosition: {x: 1.73, y: -0.34, z: 2.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1511345037940529037}
@@ -29021,7 +29021,7 @@ Transform:
   m_Father: {fileID: 1856004529439608098}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6593228928422068517
+--- !u!114 &6606380606969956711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -29030,13 +29030,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6593228928422068522}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90f64b5086b30334087b89dea5fa7b26, type: 3}
+  m_Script: {fileID: 11500000, guid: 95511a53b78bf1b458ad64362d5d5301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 1856004530348900990}
-  ADSAccuracy: 0.1
-  HIPAccuracy: 0.1
-  damage: 6
+  ADSAccuracy: 3
+  HIPAccuracy: 3
+  damage: 1
   player: {fileID: 0}
   playerStats: {fileID: 0}
   baseWeapon: {fileID: 0}
@@ -29050,31 +29050,25 @@ MonoBehaviour:
   firingMode: 0
   burstDelay: 1
   burstAmount: 1
-  includeBreakable: 0
-  lineRenderer: {fileID: 7921476482363610212, guid: 4064454daf2672d42969e4f25bd776d1, type: 3}
-  curve: 0
-  lineDuration: 0.9
-  lineTimer: 0
-  hitDistance: 0
-  hitmarker: {fileID: 0}
-  isShotgun: 0
-  shootAmount: 1
+  projectile: {fileID: 8458187518107989519, guid: efb863d3c9f9ae64598ab0f1487686ab, type: 3}
+  shotSpeed: 1
+  shootAmount: 4
   shotSize: 1
-  pierceAmount: 3
-  applyStatusEffects: {fileID: 0}
-  ShouldExplode: 0
-  explosiveDamage: 1
-  explosiveRadius: 1
-  weaponRange: 999
-  SFXList: []
+  pierceAmount: 1
+  isShotgun: 0
+  UseHorizontal: 1
+  UseVertical: 1
+  minYOffset: 0
+  maxYOffset: 0
+  minXoffset: 0
+  maxXoffset: 0
+  raycastShootPoint: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   shootSFX: {fileID: 4964101775347663484, guid: 394ff8fb76cc76443ae629d2e2889d5e, type: 3}
-  hitSFX: {fileID: 7201874395979686177, guid: fdb9a446e8307fb46b004bc9595a88ce, type: 3}
-  effectPosition: {fileID: 5502287252857412224}
-  shootEffect: {fileID: 6690620363720989446, guid: 5b534e38c7e9d954d85917289f11d90b, type: 3}
   muzzleFlash: {fileID: 2406149523056062768}
-  hitVFX: {fileID: 1879272669879180, guid: da7d34a7c7418a443a7fbe3a4f432cba, type: 3}
-  hitEnemyVFX: {fileID: 1879272669879180, guid: 89f44e1e0e520ac42bb8f6fa9cb7e7e8, type: 3}
-  casingVFX: {fileID: 1856004529903584604}
+  casingVFX: {fileID: 0}
   mantleAnimation: {fileID: 0}
 --- !u!114 &7947369351111584678
 MonoBehaviour:
@@ -29088,7 +29082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b77b6966dd49f5459da2b46c1c87a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseShootingLogic1: {fileID: 6593228928422068517}
+  baseShootingLogic1: {fileID: 6606380606969956711}
   baseShootingLogic2: {fileID: 0}
   aName: FrostStaff
   aDescription: Staff which controls the element of ice
@@ -29100,14 +29094,14 @@ MonoBehaviour:
   goldCost: 1750
   weaponMesh: {fileID: 2069094453483268168, guid: fdcd3ee41a4a7784395cb628ddba785e, type: 3}
   weaponMaterial: {fileID: 2100000, guid: 6435a45e1c2a70746b7409dfb9c8e7f3, type: 2}
-  type: 5
+  type: 17
   baseMaxAmmo: 0
   maxAmmo: 450
   currentAmmo: 450
   baseAmmoPerShot1: 0
   ammoPerShot1: 1
   baseAmmoPerShot2: 0
-  ammoPerShot2: 3
+  ammoPerShot2: 1
   baseInfinteAmmo: 0
   infinteAmmo: 0
   reloadType: 0
@@ -29119,14 +29113,14 @@ MonoBehaviour:
   baseReloadAmount: 0
   reloadAmount: 1
   baseFireRate: 0
-  fireRate: 0.05
-  recoilAmount: -2
-  moveAmount: -0.4
+  fireRate: 0.09
+  recoilAmount: 0
+  moveAmount: 0
   recoilX: -4
   recoilY: 3
   recoilZ: 0.2
-  hipPos: {x: 0.914, y: -0.386, z: 1.93}
-  adsPos: {x: -0.21, y: -0.44, z: 1.08}
+  hipPos: {x: 1.73, y: -0.34, z: 2.28}
+  adsPos: {x: 1.73, y: -0.34, z: 2.28}
   adsSpeed: 6
   maxAmmoText: {fileID: 0}
   currentAmmoText: {fileID: 0}
