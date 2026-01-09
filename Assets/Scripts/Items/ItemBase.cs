@@ -22,6 +22,7 @@ public class ItemBase : MonoBehaviour
         Defense,
         Movement,
         Damage,
+        Explosive,
         Ammo,
         WeaponSocket
     }
@@ -136,7 +137,23 @@ public class ItemBase : MonoBehaviour
 
     [Tooltip("1 point decides if we have it or not")]
     [Range(-1f, 1f)] public int pestilentSwarm = 0;
-    
+
+
+    #endregion
+
+    #region Explosive
+    [Tooltip("1 point is equal to 1% percent radius")]
+    [Range(-100, 200f)] public int increaseExplosiveRadius = 0;
+
+    [Tooltip("1 point is equal to 1 unity radius")]
+    [Range(-50, 50f)] public int addExplosiveRadius = 0;
+
+    [Tooltip("1 point is equal to 1% percent damage")]
+    [Range(-100, 200f)] public int increaseExplosiveDamage = 0;
+
+    [Tooltip("1 point is equal to 1 unity damage")]
+    [Range(-1000, 1000f)] public int addExplosiveDamage = 0;
+
 
     #endregion
 
@@ -250,8 +267,14 @@ public class ItemBase : MonoBehaviour
         playerStats.chainLightningDamage += chainLightningDamage;
         playerStats.crimsonDagger += crimsonDagger;
         playerStats.pestilentSwarm += pestilentSwarm;
-        
 
+        //Explosive ----
+        playerStats.increaseExplosiveDamage += increaseExplosiveDamage;
+        playerStats.addExplosiveDamage += addExplosiveDamage;
+
+
+        playerStats.increaseExplosiveRadius += increaseExplosiveRadius;
+        playerStats.addExplosiveRadius += addExplosiveRadius;
 
         //Ammo ---
         playerStats.ammoRefills += ammoRefills;
@@ -317,6 +340,12 @@ public class ItemBase : MonoBehaviour
         playerStats.crimsonDagger -= crimsonDagger;
         playerStats.pestilentSwarm -= pestilentSwarm;
 
+        //Explosive ----
+        playerStats.increaseExplosiveDamage -= increaseExplosiveDamage;
+        playerStats.addExplosiveDamage -= addExplosiveDamage;
+
+        playerStats.increaseExplosiveRadius -= increaseExplosiveRadius;
+        playerStats.addExplosiveRadius -= addExplosiveRadius;
 
         //Ammo
         playerStats.ammoRefills -= ammoRefills;

@@ -8,6 +8,7 @@ public class ItemBaseEditor : Editor
     private bool showDefense = true;
     private bool showMovement = true;
     private bool showDamage = true;
+    private bool showExplosive = true;
     private bool showAmmo = true;
     private bool showWeaponSocket = true;
     private bool showMisc = true;
@@ -44,6 +45,11 @@ public class ItemBaseEditor : Editor
         DrawFoldout("Damage", ref showDamage, new string[]
         {
             "damage", "increasedDamage", "critChance", "canExplodeEnemies", "moneyIsPower", "hpIsPower", "chainLightningDamage", "crimsonDagger", "pestilentSwarm"
+        });
+
+        DrawFoldout("Explosive", ref showExplosive, new string[]
+        {
+            "increaseExplosiveRadius", "addExplosiveRadius", "increaseExplosiveDamage", "addExplosiveDamage"
         });
 
         DrawFoldout("Ammo", ref showAmmo, new string[]

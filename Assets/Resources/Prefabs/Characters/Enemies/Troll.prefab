@@ -5884,6 +5884,8 @@ MonoBehaviour:
     m_Bits: 4251
   interactDistance_: 125
   lineOfSightTimer: 0
+  frozen: 0
+  burning: 0
   isAttacking: 0
   playerDistance: 0
   directionToPlayer: {x: 0, y: 0, z: 0}
@@ -5966,8 +5968,8 @@ MonoBehaviour:
   mainSystem: {fileID: 0}
   animator: {fileID: 0}
   statusEffectParticles: {fileID: 684397484}
-  stackDuration: 5
   baseFrequency: 1
+  activeStacks: []
 --- !u!114 &-5393836837660612398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6000,9 +6002,10 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   mainSystem: {fileID: 0}
   animator: {fileID: 0}
-  statusEffectParticles: {fileID: 8707884151759793366}
-  stackDuration: 5
+  statusEffectParticles: {fileID: 2383237929583249420}
   baseFrequency: 1
+  activeStacks: []
+  flashFrrezePS: {fileID: 4290015646774679248}
 --- !u!1 &4236415219618307164
 GameObject:
   m_ObjectHideFlags: 0
@@ -7303,6 +7306,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4236415218429465448}
     m_Modifications:
+    - target: {fileID: 1155030982215200704, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1155030982215200704, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1155030982215200704, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
+      propertyPath: ShapeModule.m_SkinnedMeshRenderer
+      value: 
+      objectReference: {fileID: 6163905241746104134}
+    - target: {fileID: 1643666425766943302, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1643666425766943302, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 1643666425766943302, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 3265149020087631168, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -7363,6 +7390,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: FreezePS
       objectReference: {fileID: 0}
+    - target: {fileID: 6216440018134980149, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 11.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216440018134980149, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 7622545702251856197, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 7622545702251856197, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.24
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
 --- !u!4 &2037222912007887500 stripped
@@ -7370,8 +7413,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3265149020087631168, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
   m_PrefabInstance: {fileID: 3536883484197775308}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &8707884151759793366 stripped
+--- !u!198 &2383237929583249420 stripped
 ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5317931705085496090, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1155030982215200704, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
+  m_PrefabInstance: {fileID: 3536883484197775308}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4290015646774679248 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 764690865704841500, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
   m_PrefabInstance: {fileID: 3536883484197775308}
   m_PrefabAsset: {fileID: 0}

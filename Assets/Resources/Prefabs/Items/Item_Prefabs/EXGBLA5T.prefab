@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2239080014955014833}
-  - component: {fileID: 4896651662935786341}
+  - component: {fileID: 9021466817150238066}
   m_Layer: 0
-  m_Name: Adrenaline Heart
+  m_Name: EXGBLA5T
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4896651662935786341
+--- !u!114 &9021466817150238066
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,17 +43,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c27a65a8f09c64eb7ec27436106a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Adrenaline Heart
-  itemDescription: Increased max health and trigger health regen for 4 seconds after
-    hitting an enemy
-  itemIcon: {fileID: 21300000, guid: a51bbeb30347c1f4c8cc9666b77e2293, type: 3}
-  itemMesh: {fileID: 9157310088157048165, guid: b6e7947926b761e4b8785b563df760d4, type: 3}
-  itemMaterial: {fileID: 2100000, guid: 17dca9c73a786374d9239f56721b286b, type: 2}
-  goldCost: 1200
+  itemName: EXGBLA5T
+  itemDescription: Explosions have a larger radius
+  itemIcon: {fileID: 21300000, guid: 18815b6786627dc4f82205dacaeab3f8, type: 3}
+  itemMesh: {fileID: -6775950880089891966, guid: d87d21465ce608a499a0e660f2c7e67f, type: 3}
+  itemMaterial: {fileID: 2100000, guid: 35dfd2ef8fa151d4a84caed0a05e0fd3, type: 2}
+  goldCost: 975
   interactSFX: {fileID: 0}
-  type: 0
+  type: 3
   isDevilItem: 0
-  addedHealth: 25
+  addedHealth: 0
   increasedHealth: 0
   oneMaxHP: 0
   hpOnHit: 0
@@ -61,7 +60,7 @@ MonoBehaviour:
   hpOnKill: 0
   hpOnEliteKill: 0
   helpingHand: 0
-  hpRegen: 1
+  hpRegen: 0
   hpRegenOnEnemyHit: 0
   healCap: 0
   canOverheal: 0
@@ -81,6 +80,10 @@ MonoBehaviour:
   chainLightningDamage: 0
   crimsonDagger: 0
   pestilentSwarm: 0
+  increaseExplosiveRadius: 1
+  addExplosiveRadius: 5
+  increaseExplosiveDamage: 0
+  addExplosiveDamage: 0
   ammoRefills: 0
   reloadAmount: 0
   maxMagazineSize: 0

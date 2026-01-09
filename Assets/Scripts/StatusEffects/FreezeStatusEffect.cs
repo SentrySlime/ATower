@@ -5,6 +5,8 @@ using UnityEngine;
 public class FreezeStatusEffect : StatusEffectBase
 {
 
+    public ParticleSystem flashFrrezePS;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +52,7 @@ public class FreezeStatusEffect : StatusEffectBase
     {
         if (statusEffectInterface == null) return;
 
+        flashFrrezePS.Play();
         statusEffectInterface.Freeze();
 
         //Getting animator speed then setting it

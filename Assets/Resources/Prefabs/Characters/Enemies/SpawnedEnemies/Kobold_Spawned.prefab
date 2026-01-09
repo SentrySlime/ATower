@@ -10422,9 +10422,10 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   mainSystem: {fileID: 0}
   animator: {fileID: 0}
-  statusEffectParticles: {fileID: 2454935150278057346}
+  statusEffectParticles: {fileID: 0}
   baseFrequency: 1
   activeStacks: []
+  flashFrrezePS: {fileID: 0}
 --- !u!1 &8483853150859067560
 GameObject:
   m_ObjectHideFlags: 0
@@ -31427,14 +31428,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9909e2ce6a318e4490e97d7e64ed7c0, type: 3}
---- !u!1 &523893863896294026 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e9909e2ce6a318e4490e97d7e64ed7c0, type: 3}
-  m_PrefabInstance: {fileID: 829884303009030107}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &868893586773243952 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e9909e2ce6a318e4490e97d7e64ed7c0, type: 3}
+  m_PrefabInstance: {fileID: 829884303009030107}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &523893863896294026 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e9909e2ce6a318e4490e97d7e64ed7c0, type: 3}
   m_PrefabInstance: {fileID: 829884303009030107}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &829884303111254651
@@ -31835,6 +31836,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8483853150859073278}
     m_Modifications:
+    - target: {fileID: 1155030982215200704, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
+      propertyPath: ShapeModule.m_SkinnedMeshRenderer
+      value: 
+      objectReference: {fileID: 8483853150859079300}
+    - target: {fileID: 1643666425766943302, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1643666425766943302, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1643666425766943302, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 3265149020087631168, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -31892,10 +31909,5 @@ PrefabInstance:
 --- !u!4 &5083609109799939032 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3265149020087631168, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
-  m_PrefabInstance: {fileID: 7772289602887947928}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &2454935150278057346 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5317931705085496090, guid: 91fe5041d79330f4688fb6c19b085b62, type: 3}
   m_PrefabInstance: {fileID: 7772289602887947928}
   m_PrefabAsset: {fileID: 0}

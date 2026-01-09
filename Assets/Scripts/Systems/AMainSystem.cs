@@ -15,7 +15,7 @@ public class AMainSystem : MonoBehaviour
 
     public GameObject player;
 
-    PlayerStats playerStats;
+    [HideInInspector] public PlayerStats playerStats;
     PlayerHealth playerHealth;
     HealthRegen healthRegen;
     Inventory inventory;

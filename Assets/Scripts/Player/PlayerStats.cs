@@ -46,6 +46,12 @@ public class PlayerStats : MonoBehaviour
     public int pestilentSwarm = 0;
 
     [Header("Ammo")]
+    public float increaseExplosiveRadius = 0;
+    public float addExplosiveRadius = 0;
+    public float increaseExplosiveDamage = 0;
+    public float addExplosiveDamage = 0;
+
+    [Header("Ammo")]
     public int ammoRefills = 0;
     public int reloadAmount = 0;
     public int maxMagazineSize = 0;
